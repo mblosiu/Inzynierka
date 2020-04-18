@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .forms import UserRegisterForm
-from pages import views as pages_views
-from .models import User
 
 # Create your views here.
 
