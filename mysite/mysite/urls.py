@@ -20,7 +20,9 @@ from pages import views as common_pages_views
 from users import views as user_views
 
 urlpatterns = [
-    path('', common_pages_views.homepage_view),
-    path('admin/', admin.site.urls),
-    path('register/', user_views.register_view),
+    path('', common_pages_views.homepage_view, name="home"),
+    path('admin/', admin.site.urls, name="admin"),
+    path('register/', user_views.register_view, name="register"),
+    path('login/', user_views.login_view, name="login"),
+    path('logout/', user_views.logout_view, name="logout"),
 ]
