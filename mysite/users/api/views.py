@@ -16,7 +16,6 @@ def urls_views(request):
 
 
 @permission_classes([])
-@authentication_classes([])
 class RegistrationView(APIView):
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
@@ -34,12 +33,14 @@ class RegistrationView(APIView):
         return Response(data)
 
 
+@permission_classes([IsAuthenticated])
 class LogoutView(APIView):
     def get(self, request):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
 
+@permission_classes([IsAuthenticated])
 class UserProfileView(APIView):
     def get(self, request):
         try:
