@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 
-from .serializers import RegistrationSerializer
+from .serializers import RegistrationSerializer, UserProfileSerializer
 from ..models import Account
 
 
@@ -17,7 +17,7 @@ def urls_views(request):
 
 @permission_classes([])
 @authentication_classes([])
-class Registration(APIView):
+class RegistrationView(APIView):
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
         data = {}
@@ -34,7 +34,17 @@ class Registration(APIView):
         return Response(data)
 
 
-class Logout(APIView):
-    def get(self, request, format=None):
+class LogoutView(APIView):
+    def get(self, request):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
+
+
+class UserProfileView(APIView):
+    def get(self, request):
+        try:
+            account = request.user
+        except Account.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserProfileSerializer(account)
+        return Response(serializer.data)
