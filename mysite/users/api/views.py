@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 
-from .serializers import RegistrationSerializer, UserProfileSerializer
+from .serializers import RegistrationSerializer, UserSerializer
 from ..models import Account
 
 
@@ -47,5 +47,37 @@ class UserProfileView(APIView):
             account = request.user
         except Account.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = UserProfileSerializer(account)
+        serializer = UserSerializer(account)
         return Response(serializer.data)
+
+    def post(self, request):
+        try:
+            account = request.user
+        except Account.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        response = {}
+        if request.data["email"] != "" and request.data["email"] != account.email:
+        #TODO: add unique validation
+            account.email = request.data["email"]
+            response["email"] = "error"
+        else:
+            response["email"] = "no changes"
+        if request.data["name"] != "" and request.data["name"] != account.name:
+            account.name = request.data["name"]
+            response["name"] = "updated"
+        else:
+            response["name"] = "no changes"
+        if request.data["surname"] != "" and request.data["surname"] != account.surname:
+            account.surname = request.data["surname"]
+            response["surname"] = "updated"
+        else:
+            response["surname"] = "no changes"
+        if request.data["sex"] != "" and request.data["sex"] != account.sex:
+            account.sex = request.data["sex"]
+            response["sex"] = "updated"
+        else:
+            response["sex"] = "no changes"
+        account.save()
+
+        return Response(response)

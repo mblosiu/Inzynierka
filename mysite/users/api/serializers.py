@@ -3,10 +3,10 @@ from rest_framework import serializers
 from ..models import Account
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['username', 'email', 'name', 'surname', 'birthday']
+        fields = ['username', 'email', 'name', 'surname', 'birthday', 'sex', ]
 
 
 class RegistrationSerializer(serializers.ModelSerializer):

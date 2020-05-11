@@ -50,6 +50,54 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
+    # physical features:
+    sex = models.CharField(max_length=30, null=True, blank=True)
+    hair_color = models.CharField(max_length=30, null=True, blank=True)
+    growth = models.IntegerField(null=True, blank=True)
+    weight = models.IntegerField(null=True, blank=True)
+    body_type = models.CharField(max_length=30, null=True, blank=True)
+    race_orgin = models.CharField(max_length=30, null=True, blank=True)
+
+    # character (scale 1-10)
+    Assertiveness = models.FloatField(null=True, blank=True)
+    Sincerity = models.FloatField(null=True, blank=True)
+    Empathy = models.FloatField(null=True, blank=True)
+    Communication = models.FloatField(null=True, blank=True)
+    Selflessness = models.FloatField(null=True, blank=True)
+    Honesty = models.FloatField(null=True, blank=True)
+    Scrupulousness = models.FloatField(null=True, blank=True)
+    Diligence = models.FloatField(null=True, blank=True)
+    Kindness = models.FloatField(null=True, blank=True)
+
+    # Habits:
+    is_smoking = models.CharField(max_length=30, null=True, blank=True)
+    is_drinking_alcohol = models.CharField(max_length=30, null=True, blank=True)
+    # never, sporadically, occasionally, moderately, often, addictively
+
+    # user partner preferences:
+    sex_preference = models.CharField(max_length=30, null=True, blank=True)
+    hair_color_blonde_preference = models.CharField(max_length=30, null=True, blank=True)
+    hair_color_brunette_preference = models.CharField(max_length=30, null=True, blank=True)
+    hair_color_red_preference = models.CharField(max_length=30, null=True, blank=True)
+    growth_preference = models.CharField(max_length=30, null=True, blank=True)
+    weight_preference = models.CharField(max_length=30, null=True, blank=True)
+    body_type_preference = models.CharField(max_length=30, null=True, blank=True)
+    race_orgin_preference = models.CharField(max_length=30, null=True, blank=True)
+
+    Assertiveness_preference = models.CharField(max_length=30, null=True, blank=True)
+    Sincerity_preference = models.CharField(max_length=30, null=True, blank=True)
+    Empathy_preference = models.CharField(max_length=30, null=True, blank=True)
+    Communication_preference = models.CharField(max_length=30, null=True, blank=True)
+    Selflessness_preference = models.CharField(max_length=30, null=True, blank=True)
+    Honesty_preference = models.CharField(max_length=30, null=True, blank=True)
+    Scrupulousness_preference = models.CharField(max_length=30, null=True, blank=True)
+    Diligence_preference = models.CharField(max_length=30, null=True, blank=True)
+    Kindness_preference = models.CharField(max_length=30, null=True, blank=True)
+
+    is_smoking_preference = models.CharField(max_length=30, null=True, blank=True)
+    is_drinking_alcohol_preference = models.CharField(max_length=30, null=True, blank=True)
+
+
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
@@ -65,3 +113,15 @@ class Account(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
+
+
+# user account - uwierzytelnianie, podstawowe informacje
+# user profile - wszystkie informacje o użytkowniku
+# user settings - ustawienia użytkownika
+
+
+class UserProfile(models.Model):
+    username = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.username
