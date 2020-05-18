@@ -25,19 +25,20 @@ class RegistrationView(APIView):
             data['response'] = 'successfully registered new user.'
             data['email'] = account.email
             data['username'] = account.username
-            data['name'] = account.name
-            data['surname'] = account.surname
             data['birthday'] = account.birthday
+            data['location'] = account.location
+#            data['name'] = account.name
+#            data['surname'] = account.surname
+
         else:
             data = serializer.errors
         return Response(data)
 
-
 @permission_classes([IsAuthenticated])
 class LogoutView(APIView):
     def get(self, request):
-        request.user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
+        if request.user.auth_token.delete():
+            return Response({"detail": "success"})
 
 
 @permission_classes([IsAuthenticated])

@@ -6,7 +6,7 @@ from ..models import Account
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['username', 'email', 'name', 'surname', 'birthday', 'sex', ]
+        fields = ['username', 'email', 'name', 'surname', 'birthday', 'sex', 'location']
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['username', 'email', 'name', 'surname', 'birthday', 'password', 'password2']
+        fields = ['username', 'email', 'location', 'name', 'surname', 'birthday', 'password', 'password2']
         extra_kwargs = {
             'password': {'write_only': True},
         }
@@ -23,8 +23,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         account = Account(
             email=self.validated_data['email'],
             username=self.validated_data['username'],
-            name=self.validated_data['name'],
-            surname=self.validated_data['surname'],
+#            name=self.validated_data['name'],
+ #           surname=self.validated_data['surname'],
+            location=self.validated_data['location'],
             birthday=self.validated_data['birthday'],
         )
         password = self.validated_data['password']
