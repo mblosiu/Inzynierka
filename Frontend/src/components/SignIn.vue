@@ -16,12 +16,13 @@
       </div>
       <form class="sign-up" action="#">
         <h2>Utwórz konto.</h2>
-        <div>Wypełnij formularz wymaganymi danymi.</div>
+        <div>Podaj wymagane dane</div>
         <input type="text" placeholder="Imię" />
-        <input type="number" placeholder="Wiek" />
-        <input type="text" placeholder="Miejscowość" />
         <input type="email" placeholder="Email" />
+        <input type="date" placeholder="Data urodzenia" />
+        <input type="text" placeholder="Miejscowość" />
         <input type="password" placeholder="Hasło" />
+        <input type="password2" placeholder="Powtórz hasło" />
         <button>Zarejestruj</button>
       </form>
       <form class="sign-in" action="#">
