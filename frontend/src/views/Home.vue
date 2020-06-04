@@ -1,17 +1,27 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Witamy w e-love" />
+    <h1>Witamy w e-love. <br /> Tu znajdziesz swą drugą połówkę!</h1>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+//import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
 };
+
 </script>
+
+<style scoped>
+
+h1 {
+  width: 30%;
+  margin-top: 7%;
+  margin-left: 5%;
+  float: left;
+  font-family: "Times New Roman", Times, serif;
+  text-align: left;
+}
+</style>
+

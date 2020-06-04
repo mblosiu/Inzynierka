@@ -1,31 +1,18 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Hasło</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Powtórz hasło</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" />
-          </div>
-          <button type="submit" class="btn btn-primary">Rejestruj</button>
-        </form>
-      </div>
-      <div class="col-md-3"></div>
-    </div>
+  <div class="register-form">
+    <form @submit.prevent="registerUser">
+      <label for="Name">Name</label> <br />
+      <input type="text" name="Name" id="Name" v-model="name"> <br />
+      <label for="el">Email</label> <br />
+      <input type="email" name="el" id="el" v-model="email"> <br />
+      <label for="ur">Username</label> <br />
+      <input type="text" name="ur" id="ur" v-model="username"> <br />
+      <label for="pwr">Password</label> <br />
+      <input type="password" name="pwr" id="pwr" v-model="password"> <br />
+      <label for="pass">Password Confirmation</label> <br />
+      <input type="password" name="pass" id="pass" v-model="confirm"> <br />
+      <button type="submit">Register</button> <br />
+    </form>
   </div>
 </template>
 
