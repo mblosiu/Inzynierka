@@ -37,7 +37,11 @@ class RegistrationView(APIView):
 class LogoutView(APIView):
     def get(self, request):
         if request.user.auth_token.delete():
-            return Response({"detail": "success"})
+            stat = status.HTTP_200_OK
+            return Response({"detail": "success"}, status=stat)
+        else:
+            stat = status.HTTP_400_BAD_REQUEST
+            return Response({"detail": "invalid token"}, status=stat)
 
 
 @permission_classes([IsAuthenticated])
