@@ -121,6 +121,7 @@ class UsersList(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 # TODO: filters
+
 @permission_classes([IsAuthenticated])
 class UsersListFilter(generics.ListCreateAPIView):
     serializer_class = UserSerializer
