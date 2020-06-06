@@ -41,7 +41,7 @@ class Account(AbstractBaseUser):
     username = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=30, default="")
     surname = models.CharField(max_length=30, default="")
-    birthday = models.DateField(auto_now=False, null=True, blank=True)
+    birthday = models.DateField(default=None)
     location = models.CharField(max_length=30, default="")
 
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
@@ -100,7 +100,7 @@ class Account(AbstractBaseUser):
 
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['email', 'location', 'birthday']
 
     objects = MyAccountManager()
 

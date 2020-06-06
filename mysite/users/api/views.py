@@ -27,12 +27,11 @@ class RegistrationView(APIView):
             data['username'] = account.username
             data['birthday'] = account.birthday
             data['location'] = account.location
-#            data['name'] = account.name
-#            data['surname'] = account.surname
-
+            stat = status.HTTP_201_CREATED
         else:
             data = serializer.errors
-        return Response(data)
+            stat = status.HTTP_400_BAD_REQUEST
+        return Response(data, status=stat)
 
 @permission_classes([IsAuthenticated])
 class LogoutView(APIView):
