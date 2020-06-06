@@ -43,7 +43,7 @@ class Account(AbstractBaseUser):
     name = models.CharField(max_length=30, default="")
     surname = models.CharField(max_length=30, default="")
     birthday = models.DateField(default=None, null=True)
-    location = models.CharField(max_length=30, default="", null=True)
+    location = models.CharField(max_length=30, default=None, null=True)
 
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)

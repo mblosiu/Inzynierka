@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
 
     # REST API
-    path('api/users/', include('users.api.urls', 'users_api'))
+    path('api/account/', include('users.api.urls', 'users_api'))
 ]
