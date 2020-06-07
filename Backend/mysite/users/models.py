@@ -16,6 +16,7 @@ class MyAccountManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
+            password=password,
             username=username,
         )
 
@@ -41,8 +42,8 @@ class Account(AbstractBaseUser):
     username = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=30, default="")
     surname = models.CharField(max_length=30, default="")
-    birthday = models.DateField(auto_now=False, null=True, blank=True)
-    location = models.CharField(max_length=30, default="")
+    birthday = models.DateField(default=None, null=True)
+    location = models.CharField(max_length=30, default=None, null=True)
 
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
@@ -119,10 +120,3 @@ class Account(AbstractBaseUser):
 # user account - uwierzytelnianie, podstawowe informacje
 # user profile - wszystkie informacje o użytkowniku
 # user settings - ustawienia użytkownika
-
-
-class UserProfile(models.Model):
-    username = models.CharField(max_length=30, unique=True)
-
-    def __str__(self):
-        return self.username

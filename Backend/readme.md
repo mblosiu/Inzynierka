@@ -1,2 +1,2 @@
-Python 3.6
+Python 3.8
 Django 3.0.5

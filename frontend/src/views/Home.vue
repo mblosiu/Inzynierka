@@ -6,7 +6,6 @@
 
 <script>
 // @ is an alias to /src
-//import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
 };
@@ -22,6 +21,7 @@ h1 {
   float: left;
   font-family: "Times New Roman", Times, serif;
   text-align: left;
+  color:lightskyblue;
 }
 </style>
 

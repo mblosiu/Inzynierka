@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
+from rest_framework import generics
 
 from .serializers import RegistrationSerializer, UserSerializer
 from ..models import Account
@@ -27,18 +28,22 @@ class RegistrationView(APIView):
             data['username'] = account.username
             data['birthday'] = account.birthday
             data['location'] = account.location
-#            data['name'] = account.name
-#            data['surname'] = account.surname
-
+            stat = status.HTTP_201_CREATED
         else:
             data = serializer.errors
-        return Response(data)
+            stat = status.HTTP_400_BAD_REQUEST
+        return Response(data, status=stat)
+
 
 @permission_classes([IsAuthenticated])
 class LogoutView(APIView):
     def get(self, request):
         if request.user.auth_token.delete():
-            return Response({"detail": "success"})
+            stat = status.HTTP_200_OK
+            return Response({"detail": "success"}, status=stat)
+        else:
+            stat = status.HTTP_400_BAD_REQUEST
+            return Response({"detail": "invalid token"}, status=stat)
 
 
 @permission_classes([IsAuthenticated])
@@ -58,27 +63,71 @@ class UserProfileView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
-        if request.data["email"] != "" and request.data["email"] != account.email:
-        #TODO: add unique validation
-            account.email = request.data["email"]
-            response["email"] = "error"
-        else:
-            response["email"] = "no changes"
-        if request.data["name"] != "" and request.data["name"] != account.name:
-            account.name = request.data["name"]
-            response["name"] = "updated"
-        else:
-            response["name"] = "no changes"
-        if request.data["surname"] != "" and request.data["surname"] != account.surname:
-            account.surname = request.data["surname"]
-            response["surname"] = "updated"
-        else:
-            response["surname"] = "no changes"
-        if request.data["sex"] != "" and request.data["sex"] != account.sex:
-            account.sex = request.data["sex"]
-            response["sex"] = "updated"
-        else:
-            response["sex"] = "no changes"
-        account.save()
 
-        return Response(response)
+        try:
+            if request.data["email"] != "" and request.data["email"] != account.email:
+                userlist = Account.objects.filter(email=request.data["email"])
+                if not userlist:
+                    account.email = request.data["email"]
+                    response["email"] = "updated"
+                else:
+                    response["email"] = "This email is occupied"
+            else:
+                response["email"] = "no changes"
+        except KeyError:
+            pass
+        try:
+            if request.data["name"] != account.name:
+                account.name = request.data["name"]
+                response["name"] = "updated"
+            else:
+                response["name"] = "no changes"
+        except KeyError:
+            pass
+        try:
+            if request.data["surname"] != "" and request.data["surname"] != account.surname:
+                account.surname = request.data["surname"]
+                response["surname"] = "updated"
+            else:
+                response["surname"] = "no changes"
+        except KeyError:
+            pass
+        try:
+            if request.data["sex"] != "" and request.data["sex"] != account.sex:
+                account.sex = request.data["sex"]
+                response["sex"] = "updated"
+            else:
+                response["sex"] = "no changes"
+        except KeyError:
+            pass
+
+        if response:
+            account.save()
+            stat = status.HTTP_200_OK
+        else:
+            response["detail"] = "request must contain user data"
+            stat = status.HTTP_400_BAD_REQUEST
+        return Response(response, status=stat)
+
+
+# all users list
+@permission_classes([IsAuthenticated])
+class UsersList(generics.ListCreateAPIView):
+    serializer_class = UserSerializer
+
+    def get(self, request):
+        queryset = Account.objects.all()
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+# TODO: filters
+# x
+@permission_classes([IsAuthenticated])
+class UsersListFilter(generics.ListCreateAPIView):
+    serializer_class = UserSerializer
+
+    def get(self, request):
+        location = request.data['location']
+        queryset = Account.objects.filter(location=location)
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data)

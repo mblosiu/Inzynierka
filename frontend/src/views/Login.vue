@@ -4,20 +4,14 @@
       <div class="col-md-3"></div>
       <div class="col-md-6">
         <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Hasło</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" />
-          </div>
-          <button type="submit" class="btn btn-primary">Zaloguj</button>
+          <p>
+          <label for="el"><h5>Email</h5></label> <br />
+          <input type="email" name="el" id="el" v-model="email"> <br /> <br />
+          </p>
+          <p>
+          <label for="pwr"><h5>Hasło</h5></label> <br />
+          <input type="password" name="pwr" id="pwr" v-model="password"> <br /> <br />
+          </p>
         </form>
       </div>
       <div class="col-md-3"></div>
@@ -26,7 +20,21 @@
 </template>
 
 <script>
-export default {};
+
+import axios from 'axios'
+
+export default {
+  name: 'Login',
+  components: {
+
+  },
+
+  methods: {
+    login() {
+      axios.post()
+    }
+  }
+}
 </script>
 
 <style>
