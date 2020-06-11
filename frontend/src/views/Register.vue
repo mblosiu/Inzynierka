@@ -20,20 +20,20 @@
         <br />
       </p>
       <p>
-        <label for="birthday">
-          <h5>Data urodzenia</h5>
-        </label>
-        <br />
-        <input type="date" name="birthday" id="birthday" v-model="birthday" />
-        <br />
-        <br />
-      </p>
-      <p>
         <label for="Location">
           <h5>Lokacja</h5>
         </label>
         <br />
         <input type="text" name="Location" id="Locatiom" v-model="location" />
+        <br />
+        <br />
+      </p>
+      <p>
+        <label for="birthday">
+          <h5>Data urodzenia</h5>
+        </label>
+        <br />
+        <input type="date" name="birthday" id="birthday" v-model="birthday" />
         <br />
         <br />
       </p>
@@ -93,7 +93,8 @@ export default {
       location: '',
       birthday: '',
       sex: '',
-      password: ''
+      password: '',
+      password2: ''
     };
   },
 
@@ -109,7 +110,8 @@ export default {
           location: this.location,
           birthday: this.birthday,
           sex: this.sex,
-          password: this.password
+          password: this.password,
+          password2: this.password2
         })
         .then(Response => console.log(Response))
         .catch(err => console.log(err));
