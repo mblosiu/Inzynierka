@@ -9,7 +9,7 @@
               <h5>Nazwa użytkownika</h5>
             </label>
             <br />
-            <input type="text" name="username" id="username" v-model="usernaeme" />
+            <input type="text" name="username" id="username" v-model="username" />
             <br />
             <br />
           </p>
@@ -50,13 +50,23 @@ export default {
   methods: {
     login() {
       axios.post("http://127.0.0.1:8000/api/account/login", {
-          email: this.username,
+          username: this.username,
           password: this.password
         })
-        .then(Response => console.log(Response))
-        .catch(err => console.log(err));
-        //tu pushnac do profilu usera
-        this.$router.push("/");
+        .then(Response =>{
+
+          this.token = Response.data.token
+          console.log(this.token)
+          localStorage.setItem('user-token', Response.data.token)
+        })
+        .catch(Error => {
+          console.log(Error)
+          localStorage.removeItem('user-token')
+        })
+        //tu pushnac na strone usera
+        this.$router.push("/userpage");
+        history.go()
+        //vm.$forceUpdate();
     }
   }
 };
