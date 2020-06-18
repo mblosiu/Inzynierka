@@ -49,24 +49,24 @@ export default {
 
   methods: {
     login() {
-      axios.post("http://127.0.0.1:8000/api/account/login", {
+      axios
+        .post("http://127.0.0.1:8000/api/account/login", {
           username: this.username,
           password: this.password
         })
-        .then(Response =>{
-
-          this.token = Response.data.token
-          console.log(this.token)
-          localStorage.setItem('user-token', Response.data.token)
+        .then(Response => {
+          this.token = Response.data.token;
+          console.log(this.token);
+          localStorage.setItem("user-token", Response.data.token);
         })
         .catch(Error => {
-          console.log(Error)
-          localStorage.removeItem('user-token')
-        })
-        //tu pushnac na strone usera
-        this.$router.push("/userpage");
-        history.go()
-        //vm.$forceUpdate();
+          console.log(Error);
+          localStorage.removeItem("user-token");
+        });
+      //tu pushnac na strone usera
+      this.$router.push("/userpage");
+      //history.go();
+      //vm.$forceUpdate();
     }
   }
 };

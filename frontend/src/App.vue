@@ -2,7 +2,7 @@
   <div class="images">
     <div id="app">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a v-if="user-token==null" class="navbar-brand" href="/">e-Love</a>
+        <a v-if="token==null" class="navbar-brand" href="/">e-Love</a>
         <a v-else class="navbar-brand" href="/userpage">e-Love</a>
         <button
           class="navbar-toggler"
