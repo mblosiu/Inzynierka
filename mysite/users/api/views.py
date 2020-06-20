@@ -100,6 +100,14 @@ class UserProfileView(APIView):
                 response["sex"] = "no changes"
         except KeyError:
             pass
+        try:
+            if request.data["description"] != "" and request.data["description"] != account.description:
+                account.description = request.data["description"]
+                response["description"] = "updated"
+            else:
+                response["description"] = "no changes"
+        except KeyError:
+            pass
 
         if response:
             account.save()
