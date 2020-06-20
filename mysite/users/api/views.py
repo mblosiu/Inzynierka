@@ -78,7 +78,7 @@ class UserProfileView(APIView):
             pass
         try:
             if request.data["name"] != account.name:
-                account.name = request.data["name"]
+                account.name = request.data["name"][0].upper() + request.data["name"][1:]
                 response["name"] = "updated"
             else:
                 response["name"] = "no changes"
@@ -86,7 +86,7 @@ class UserProfileView(APIView):
             pass
         try:
             if request.data["surname"] != "" and request.data["surname"] != account.surname:
-                account.surname = request.data["surname"]
+                account.surname = request.data["surname"][0].upper() + request.data["surname"][1:]
                 response["surname"] = "updated"
             else:
                 response["surname"] = "no changes"
