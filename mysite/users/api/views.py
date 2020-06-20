@@ -13,7 +13,7 @@ from ..models import Account
 
 def urls_views(request):
     return HttpResponse(
-        "<html><body>URLS:<br>/admin<br>/api/users<br>/api/users/register<br>/api/users/login<br><br><br><br></body></html>")
+        "<html><body>URLS:<br>/admin<br>/api/users<br>/api/account/register<br>/api/account/login<br><br><br><br></body></html>")
 
 
 @permission_classes([])
@@ -108,6 +108,30 @@ class UserProfileView(APIView):
             response["detail"] = "request must contain user data"
             stat = status.HTTP_400_BAD_REQUEST
         return Response(response, status=stat)
+
+
+class UserProfilePic(APIView):
+    def post(self, request):
+        try:
+            account = request.user
+        except Account.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        response = {}
+
+        file = request.data.get('profile_picture', None)
+
+        account.profile_picture = file
+
+        if file:
+            response["detail"] = "photo added successfuly"
+            account.save()
+            stat = status.HTTP_200_OK
+        else:
+            response["detail"] = "request must contain user data"
+            stat = status.HTTP_400_BAD_REQUEST
+        return Response(response, status=stat)
+
 
 
 # all users list
