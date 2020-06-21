@@ -16,5 +16,5 @@ urlpatterns = [
     path('properties', UserProfileView.as_view(), name="properties"),
     path('picture', UserProfilePic.as_view(), name='user-picture'),
     path('users', UserListView.as_view(), name='user-list'),
-    path('users/filter', UserListFilterView.as_view(), name='user-list'),
+    path('users/filters', UserListFilterView.as_view(), name='user-list'),
 ]
