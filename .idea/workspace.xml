@@ -27,7 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b6169d6-3446-4498-bfb2-71fc1440e6e1" name="Default Changelist" comment="Users list, users search, user filters">
-      <change beforePath="$PROJECT_DIR$/mysite/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592730610783</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Users list, users search, user filters">
+      <created>1592730813397</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1592730813397</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -227,10 +235,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="589" y="112" key="VCS.ChangeListViewerDialog/0.0.1536.824@0.0.1536.824" timestamp="1591452133217" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592730621240">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592730819467">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592730621240" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592730819467" />
     <state x="171" y="122" width="1200" height="584" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1591451882816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -168,6 +168,7 @@ class UserListView(generics.ListAPIView):
 @permission_classes([IsAuthenticated])
 class UserListFilterView(generics.ListAPIView):
     serializer_class = UserSerializer
+
     def get(self, request):
         queryset = Account.objects.all()
 
