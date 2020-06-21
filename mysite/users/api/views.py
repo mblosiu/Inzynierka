@@ -6,9 +6,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework import generics
-
+from rest_framework import filters
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import SearchFilter, OrderingFilter
 from .serializers import RegistrationSerializer, UserSerializer
 from ..models import Account
+from django.db.models import Q
 
 
 def urls_views(request):
@@ -117,6 +120,7 @@ class UserProfileView(APIView):
             stat = status.HTTP_400_BAD_REQUEST
         return Response(response, status=stat)
 
+
 @permission_classes([IsAuthenticated])
 class UserProfilePic(APIView):
     def post(self, request):
@@ -149,25 +153,34 @@ class UserProfilePic(APIView):
         return Response(response, status=stat)
 
 
-
-# all users list
+# USER LIST - SEARCHER
 @permission_classes([IsAuthenticated])
-class UsersList(generics.ListCreateAPIView):
+class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'surname', 'location', 'username']
+    # pagination_class = PageNumberPagination
+    filter_backends = (SearchFilter, OrderingFilter)
+    queryset = Account.objects.all()
 
+
+# USER LIST - FILTERS
+@permission_classes([IsAuthenticated])
+class UserListFilterView(generics.ListAPIView):
+    serializer_class = UserSerializer
     def get(self, request):
         queryset = Account.objects.all()
+
+        name = request.data.get('name', None)
+        surname = request.data.get('surname', None)
+        location = request.data.get('location', None)
+
+        if not name == None or name == '':
+            queryset = queryset.filter(name=name)
+        if not surname == None or surname == '':
+            queryset = queryset.filter(surname=surname)
+        if not location == None or location == '':
+            queryset = queryset.filter(location=location)
+
         serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-# TODO: filters
-
-@permission_classes([IsAuthenticated])
-class UsersListFilter(generics.ListCreateAPIView):
-    serializer_class = UserSerializer
-
-    def get(self, request):
-        location = request.data['location']
-        queryset = Account.objects.filter(location=location)
-        serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
