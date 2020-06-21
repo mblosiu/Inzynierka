@@ -117,7 +117,7 @@ class UserProfileView(APIView):
             stat = status.HTTP_400_BAD_REQUEST
         return Response(response, status=stat)
 
-
+@permission_classes([IsAuthenticated])
 class UserProfilePic(APIView):
     def post(self, request):
         try:
@@ -129,15 +129,23 @@ class UserProfilePic(APIView):
 
         file = request.data.get('profile_picture', None)
 
-        account.profile_picture = file
+        # validate content type
+        main, sub = file.content_type.split('/')
 
-        if file:
+        if not file:
+            response["detail"] = "request must contain user data"
+            stat = status.HTTP_400_BAD_REQUEST
+
+        elif not (main == 'image' and sub in ['jpeg', 'pjpeg', 'jpg', 'png']):
+            response["detail"] = "wrong data type"
+            stat = status.HTTP_400_BAD_REQUEST
+
+        else:
+            account.profile_picture = file
             response["detail"] = "photo added successfuly"
             account.save()
             stat = status.HTTP_200_OK
-        else:
-            response["detail"] = "request must contain user data"
-            stat = status.HTTP_400_BAD_REQUEST
+
         return Response(response, status=stat)
 
 
