@@ -57,7 +57,9 @@ export default {
         .then(Response => {
           this.token = Response.data.token;
           console.log(this.token);
+          console.log(Response);
           localStorage.setItem("user-token", Response.data.token);
+          localStorage.setItem("username", this.username);
         })
         .catch(Error => {
           console.log(Error);
@@ -66,7 +68,6 @@ export default {
       //tu pushnac na strone usera
       this.$router.push("/userpage");
       //history.go();
-      //vm.$forceUpdate();
     }
   }
 };

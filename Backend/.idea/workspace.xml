@@ -26,9 +26,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b6169d6-3446-4498-bfb2-71fc1440e6e1" name="Default Changelist" comment="test">
+    <list default="true" id="7b6169d6-3446-4498-bfb2-71fc1440e6e1" name="Default Changelist" comment="Users list, users search, user filters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +103,63 @@
       <option name="project" value="LOCAL" />
       <updated>1591453980402</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="new fields required for register">
+      <created>1591630893596</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1591630893596</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add user profile picture">
+      <created>1592674532910</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1592674532910</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add user profile picture">
+      <created>1592674541373</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1592674541373</updated>
+    </task>
+    <task id="LOCAL-00008" summary="name and surname lowercase correction to uppercase">
+      <created>1592683317737</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1592683317737</updated>
+    </task>
+    <task id="LOCAL-00009" summary="user description - create, edit">
+      <created>1592683757993</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1592683757993</updated>
+    </task>
+    <task id="LOCAL-00010" summary="profile picture - check format + added authentication">
+      <created>1592724492102</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1592724492102</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Users list, users search, user filters">
+      <created>1592730610783</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1592730610783</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Users list, users search, user filters">
+      <created>1592730813397</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1592730813397</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -151,7 +206,13 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="test" />
     <MESSAGE value="workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace" />
+    <MESSAGE value="new fields required for register" />
+    <MESSAGE value="add user profile picture" />
+    <MESSAGE value="name and surname lowercase correction to uppercase" />
+    <MESSAGE value="user description - create, edit" />
+    <MESSAGE value="profile picture - check format + added authentication" />
+    <MESSAGE value="Users list, users search, user filters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Users list, users search, user filters" />
   </component>
   <component name="WindowStateProjectService">
     <state x="657" y="277" key="#Notifications" timestamp="1591452055929">
@@ -174,13 +235,21 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="589" y="112" key="VCS.ChangeListViewerDialog/0.0.1536.824@0.0.1536.824" timestamp="1591452133217" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1591453987622">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592730819467">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591453987622" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592730819467" />
     <state x="171" y="122" width="1200" height="584" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1591451882816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="171" y="122" width="1200" height="584" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1591451882816" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592730560668">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1592730560668" />
+    <state x="481" y="205" key="git4idea.merge.GitPullDialog" timestamp="1592723741506">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="481" y="205" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592723741506" />
   </component>
 </project>
