@@ -1,82 +1,77 @@
 <template>
-  <div class="register-form">
-    <form @submit.prevent="register">
-      <p>
-        <label for="username">
-          <h5>Nazwa konta</h5>
-        </label>
-        <br />
-        <input type="text" name="username" id="username" v-model="username" />
-        <br />
-        <br />
-      </p>
-      <p>
-        <label for="email">
-          <h5>Email</h5>
-        </label>
-        <br />
-        <input type="email" name="email" id="email" v-model="email" />
-        <br />
-        <br />
-      </p>
-      <p>
-        <label for="Location">
-          <h5>Lokacja</h5>
-        </label>
-        <br />
-        <input type="text" name="Location" id="Locatiom" v-model="location" />
-        <br />
-        <br />
-      </p>
-      <p>
-        <label for="birthday">
-          <h5>Data urodzenia</h5>
-        </label>
-        <br />
-        <input type="date" name="birthday" id="birthday" v-model="birthday" />
-        <br />
-        <br />
-      </p>
-      <p>
-        <label for="sex">
-          <h5>Płeć</h5>
-        </label>
-        <br />
-        <select class="ml-2" name="Sex" id="Sex" v-model="sex">
-          <br />
-          <option>mężczyzna</option>
-          <option>kobieta</option>
-          <option>inna</option>
-        </select>
-      </p>
-      <p>
-        <label for="password">
-          <h5>Hasło</h5>
-        </label>
-        <br />
-        <input type="password" name="password" id="password" v-model="password" />
-        <br />
-        <br />
-      </p>
-      <p>
-        <label for="password2">
-          <h5>Powtórz hasło</h5>
-        </label>
-        <br />
-        <input type="password" name="password2" id="password2" v-model="password2" />
-        <br />
-        <br />
-        <br />
-      </p>
-      <p>
-        <input
-          v-on:click="register"
-          class="btn btn-outline-success"
-          type="submit"
-          value="Zarejestruj"
-        />
-      </p>
-    </form>
+  <div>
+    <br />
+    <div class="register-form d-flex justify-content-center">
+      <div class="card bg-dark text-white text-center p-3 rounded" style="max-width: 18rem;">
+        <div class="card-header">
+          <h5>Rejestracja</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text"></p>
+          <form @submit.prevent="register">
+            <p>
+              <label for="username">
+                Nazwa konta
+                <input type="text" name="username" id="username" v-model="username" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="email">
+                Email
+                <input type="email" name="email" id="email" v-model="email" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="Location">
+                Lokacja
+                <input type="text" name="Location" id="Locatiom" v-model="location" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="birthday">
+                Data urodzenia <input type="date" name="birthday" id="birthday" v-model="birthday" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="sex">
+                Płeć 
+                <select class="ml-2" name="Sex" id="Sex" v-model="sex">
+                <br />
+                <option>mężczyzna</option>
+                <option>kobieta</option>
+                <option>inna</option>
+              </select>
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="password">
+                Hasło <input type="password" name="password" id="password" v-model="password" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="password2">
+                Powtórz hasło <input type="password" name="password2" id="password2" v-model="password2" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <input
+                v-on:click="register"
+                class="btn btn-outline-success"
+                type="submit"
+                value="Zarejestruj"
+              />
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -88,20 +83,20 @@ export default {
   components: {},
   data() {
     return {
-      username: '',
-      email: '',
-      location: '',
-      birthday: '',
-      sex: '',
-      password: '',
-      password2: ''
+      username: "",
+      email: "",
+      location: "",
+      birthday: "",
+      sex: "",
+      password: "",
+      password2: ""
     };
   },
 
   methods: {
     register() {
       if (this.password !== this.password2) {
-        console.log('Podane hasła muszą być identyczne!');
+        console.log("Podane hasła muszą być identyczne!");
       }
       axios
         .post("http://127.0.0.1:8000/api/account/register", {

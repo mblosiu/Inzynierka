@@ -108,6 +108,6 @@ export default {
 }
 
 p{
-  text-align: left;
+ /* text-align: left;*/
 }
 </style>

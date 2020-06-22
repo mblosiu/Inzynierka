@@ -1,32 +1,43 @@
 <template>
   <div class="container">
+    <br />
     <div class="row">
       <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <form @submit.prevent="login">
-          <p>
-            <label for="username">
-              <h5>Nazwa użytkownika</h5>
-            </label>
-            <br />
-            <input type="text" name="username" id="username" v-model="username" />
-            <br />
-            <br />
-          </p>
-          <p>
-            <label for="password">
-              <h5>Hasło</h5>
-            </label>
-            <br />
-            <input type="password" name="password" id="password" v-model="password" />
-            <br />
-            <br />
-          </p>
-          <br />
-          <p>
-            <input v-on:click="login" class="btn btn-outline-success" type="submit" value="Zaloguj" />
-          </p>
-        </form>
+      <div class="col-md-6 d-flex justify-content-center">
+        <div
+          class="card bg-dark text-white text-center p-3"
+          style="width: 18rem;"
+          background="black"
+        >
+          <div class="card-body">
+            <h5 class="card-header">Logowanie</h5>
+            <br/>
+            <p class="card-text"></p>
+            <form @submit.prevent="login">
+              <p>
+                <label for="username">
+                  Nazwa użytkownika <input type="text" name="username" id="username" v-model="username" />
+                </label>
+                <br />
+              </p>
+              <p>
+                <label for="password">
+                  Hasło <input type="password" name="password" id="password" v-model="password" />
+                </label>
+                <br />
+              </p>
+              <br />
+              <p>
+                <input
+                  v-on:click="login"
+                  class="btn btn-outline-success"
+                  type="submit"
+                  value="Zaloguj"
+                />
+              </p>
+            </form>
+          </div>
+        </div>
       </div>
       <div class="col-md-3"></div>
     </div>
@@ -43,7 +54,8 @@ export default {
     return {
       username: "",
       password: "",
-      token: null
+      token: null,
+      status: null
     };
   },
 
@@ -55,9 +67,10 @@ export default {
           password: this.password
         })
         .then(Response => {
+          this.status = Response.data.status;
           this.token = Response.data.token;
           console.log(this.token);
-          console.log(Response);
+          console.log(this.status);
           localStorage.setItem("user-token", Response.data.token);
           localStorage.setItem("username", this.username);
         })
@@ -74,4 +87,5 @@ export default {
 </script>
 
 <style>
+
 </style>
