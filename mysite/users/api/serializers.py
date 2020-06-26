@@ -5,7 +5,10 @@ from ..models import Account
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['username', 'email', 'name', 'surname', 'birthday', 'sex', 'location', 'profile_picture', 'description']
+        fields = ['username', 'email', 'name', 'surname', 'birthday', 'sex', 'location', 'profile_picture',
+                  'description']
+
+
 class UserProfilePicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
@@ -17,24 +20,24 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['username', 'email', 'location', 'birthday', 'sex','password', 'password2']
+        fields = ['username', 'email', 'location', 'birthday', 'sex', 'password', 'password2']
         extra_kwargs = {
             'password': {'write_only': True},
         }
 
     def save(self):
         try:
-            if self.validated_data['location'] is "":
+            if self.validated_data['location'] == "":
                 raise serializers.ValidationError({'location': ['This field is required.']})
         except KeyError:
             raise serializers.ValidationError({'location': ['This field is required.']})
         try:
-            if self.validated_data['birthday'] is "":
+            if self.validated_data['birthday'] == "":
                 raise serializers.ValidationError({'birthday': ['This field is required.']})
         except KeyError:
             raise serializers.ValidationError({'birthday': ['This field is required.']})
         try:
-            if self.validated_data['sex'] is "":
+            if self.validated_data['sex'] == "":
                 raise serializers.ValidationError({'sex': ['This field is required.']})
         except KeyError:
             raise serializers.ValidationError({'sex': ['This field is required.']})

@@ -47,7 +47,6 @@ class Account(AbstractBaseUser):
     profile_picture = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
     description = models.CharField(max_length=200, default="")
 
-
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -102,7 +101,6 @@ class Account(AbstractBaseUser):
     is_smoking_preference = models.CharField(max_length=30, null=True, blank=True)
     is_drinking_alcohol_preference = models.CharField(max_length=30, null=True, blank=True)
 
-
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
@@ -118,7 +116,6 @@ class Account(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
-
 
 # user account - uwierzytelnianie, podstawowe informacje
 # user profile - wszystkie informacje o użytkowniku
