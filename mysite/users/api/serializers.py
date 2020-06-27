@@ -6,7 +6,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['username', 'email', 'name', 'surname', 'birthday', 'sex', 'location', 'profile_picture',
-                  'description']
+                  'description', 'hair_color', 'growth', 'weight', 'body_type', 'race_origin', 'is_smoking',
+                  'is_drinking_alcohol']
 
 
 class UserProfilePicSerializer(serializers.ModelSerializer):
@@ -26,33 +27,34 @@ class RegistrationSerializer(serializers.ModelSerializer):
         }
 
     def save(self):
-        try:
-            if self.validated_data['location'] == "":
-                raise serializers.ValidationError({'location': ['This field is required.']})
-        except KeyError:
-            raise serializers.ValidationError({'location': ['This field is required.']})
-        try:
-            if self.validated_data['birthday'] == "":
-                raise serializers.ValidationError({'birthday': ['This field is required.']})
-        except KeyError:
-            raise serializers.ValidationError({'birthday': ['This field is required.']})
-        try:
-            if self.validated_data['sex'] == "":
-                raise serializers.ValidationError({'sex': ['This field is required.']})
-        except KeyError:
-            raise serializers.ValidationError({'sex': ['This field is required.']})
+        username = self.validated_data.get('username')
+        email = self.validated_data.get('email')
+        location = self.validated_data.get('location')
+        birthday = self.validated_data.get('birthday')
+        sex = self.validated_data.get('sex')
 
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
-        if password != password2:
+
+        if username is None:
+            raise serializers.ValidationError({'username': ['This field is required.']})
+        elif email is None:
+            raise serializers.ValidationError({'email': ['This field is required.']})
+        elif location is None:
+            raise serializers.ValidationError({'location': ['This field is required.']})
+        elif birthday is None:
+            raise serializers.ValidationError({'birthday': ['This field is required.']})
+        elif sex is None:
+            raise serializers.ValidationError({'sex': ['This field is required.']})
+        elif password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
 
         account = Account(
-            email=self.validated_data['email'],
-            username=self.validated_data['username'],
-            location=self.validated_data['location'],
-            birthday=self.validated_data['birthday'],
-            sex=self.validated_data['sex'],
+            username=username,
+            email=email,
+            location=location,
+            birthday=birthday,
+            sex=sex,
         )
         account.set_password(password)
         account.save()

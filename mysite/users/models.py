@@ -7,8 +7,10 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 
+# ['email', 'location', 'birthday', 'sex']
+
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username, password=None):
+    def create_user(self, email, username, location, birthday, sex, password=None):
         if not email:
             raise ValueError('Users must have an email address')
         if not username:
@@ -18,17 +20,23 @@ class MyAccountManager(BaseUserManager):
             email=self.normalize_email(email),
             password=password,
             username=username,
+            location=location,
+            birthday=birthday,
+            sex=sex,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password):
+    def create_superuser(self, email, username, location, birthday, sex, password):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
             username=username,
+            location=location,
+            birthday=birthday,
+            sex=sex,
         )
         user.is_admin = True
         user.is_staff = True
@@ -40,12 +48,12 @@ class MyAccountManager(BaseUserManager):
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
-    name = models.CharField(max_length=30, default="")
-    surname = models.CharField(max_length=30, default="")
-    birthday = models.DateField(default=None, null=True)
-    location = models.CharField(max_length=30, default=None, null=True)
-    profile_picture = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
-    description = models.CharField(max_length=200, default="")
+    name = models.CharField(max_length=30, default=None)
+    surname = models.CharField(max_length=30, default=None)
+    birthday = models.DateField(null=True, default=None)
+    location = models.CharField(max_length=30, null=True, default=None)
+    profile_picture = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True, default=None)
+    description = models.CharField(max_length=200, default=None)
 
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
@@ -55,54 +63,54 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     # physical features:
-    sex = models.CharField(max_length=30, null=True, blank=True)
-    hair_color = models.CharField(max_length=30, null=True, blank=True)
-    growth = models.IntegerField(null=True, blank=True)
-    weight = models.IntegerField(null=True, blank=True)
-    body_type = models.CharField(max_length=30, null=True, blank=True)
-    race_orgin = models.CharField(max_length=30, null=True, blank=True)
+    sex = models.CharField(max_length=30, null=True, blank=True, default=None)
+    hair_color = models.CharField(max_length=30, null=True, blank=True, default=None)
+    growth = models.IntegerField(null=True, blank=True, default=None)
+    weight = models.IntegerField(null=True, blank=True, default=None)
+    body_type = models.CharField(max_length=30, null=True, blank=True, default=None)
+    race_origin = models.CharField(max_length=30, null=True, blank=True, default=None)
 
     # character (scale 1-10)
-    Assertiveness = models.FloatField(null=True, blank=True)
-    Sincerity = models.FloatField(null=True, blank=True)
-    Empathy = models.FloatField(null=True, blank=True)
-    Communication = models.FloatField(null=True, blank=True)
-    Selflessness = models.FloatField(null=True, blank=True)
-    Honesty = models.FloatField(null=True, blank=True)
-    Scrupulousness = models.FloatField(null=True, blank=True)
-    Diligence = models.FloatField(null=True, blank=True)
-    Kindness = models.FloatField(null=True, blank=True)
+    Assertiveness = models.FloatField(null=True, blank=True, default=None)
+    Sincerity = models.FloatField(null=True, blank=True, default=None)
+    Empathy = models.FloatField(null=True, blank=True, default=None)
+    Communication = models.FloatField(null=True, blank=True, default=None)
+    Selflessness = models.FloatField(null=True, blank=True, default=None)
+    Honesty = models.FloatField(null=True, blank=True, default=None)
+    Scrupulousness = models.FloatField(null=True, blank=True, default=None)
+    Diligence = models.FloatField(null=True, blank=True, default=None)
+    Kindness = models.FloatField(null=True, blank=True, default=None)
 
     # Habits:
-    is_smoking = models.CharField(max_length=30, null=True, blank=True)
-    is_drinking_alcohol = models.CharField(max_length=30, null=True, blank=True)
+    is_smoking = models.CharField(max_length=30, null=True, blank=True, default=None)
+    is_drinking_alcohol = models.CharField(max_length=30, null=True, blank=True, default=None)
     # never, sporadically, occasionally, moderately, often, addictively
 
     # user partner preferences:
-    sex_preference = models.CharField(max_length=30, null=True, blank=True)
-    hair_color_blonde_preference = models.CharField(max_length=30, null=True, blank=True)
-    hair_color_brunette_preference = models.CharField(max_length=30, null=True, blank=True)
-    hair_color_red_preference = models.CharField(max_length=30, null=True, blank=True)
-    growth_preference = models.CharField(max_length=30, null=True, blank=True)
-    weight_preference = models.CharField(max_length=30, null=True, blank=True)
-    body_type_preference = models.CharField(max_length=30, null=True, blank=True)
-    race_orgin_preference = models.CharField(max_length=30, null=True, blank=True)
+    sex_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    hair_color_blonde_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    hair_color_brunette_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    hair_color_red_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    growth_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    weight_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    body_type_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    race_orgin_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
 
-    Assertiveness_preference = models.CharField(max_length=30, null=True, blank=True)
-    Sincerity_preference = models.CharField(max_length=30, null=True, blank=True)
-    Empathy_preference = models.CharField(max_length=30, null=True, blank=True)
-    Communication_preference = models.CharField(max_length=30, null=True, blank=True)
-    Selflessness_preference = models.CharField(max_length=30, null=True, blank=True)
-    Honesty_preference = models.CharField(max_length=30, null=True, blank=True)
-    Scrupulousness_preference = models.CharField(max_length=30, null=True, blank=True)
-    Diligence_preference = models.CharField(max_length=30, null=True, blank=True)
-    Kindness_preference = models.CharField(max_length=30, null=True, blank=True)
+    Assertiveness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    Sincerity_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    Empathy_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    Communication_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    Selflessness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    Honesty_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    Scrupulousness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    Diligence_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    Kindness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
 
-    is_smoking_preference = models.CharField(max_length=30, null=True, blank=True)
-    is_drinking_alcohol_preference = models.CharField(max_length=30, null=True, blank=True)
+    is_smoking_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    is_drinking_alcohol_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['email', 'location', 'birthday', 'sex']
 
     objects = MyAccountManager()
 

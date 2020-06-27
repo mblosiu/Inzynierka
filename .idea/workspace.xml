@@ -26,11 +26,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a01a013-b856-4b65-93e0-68500d100d0c" name="Default Changelist" comment="">
+    <list default="true" id="9ad7491e-2ea3-424f-b14e-19c82aff9d49" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +47,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1dr0DsHE9llcFBRR2ARJCEiCqBy" />
+  <component name="ProjectId" id="1drBXnQpBhTGxzUd5hDq8JA22ox" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -62,11 +63,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4a01a013-b856-4b65-93e0-68500d100d0c" name="Default Changelist" comment="" />
-      <created>1593167787395</created>
+      <changelist id="9ad7491e-2ea3-424f-b14e-19c82aff9d49" name="Default Changelist" comment="" />
+      <created>1593173373647</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1593167787395</updated>
+      <updated>1593173373647</updated>
     </task>
     <servers />
   </component>
@@ -76,11 +77,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -100,17 +96,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593167840688">
+    <state x="656" y="161" key="SettingsEditor" timestamp="1593173750060">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593167840688" />
-    <state x="865" y="405" key="FileChooserDialogImpl" timestamp="1593168025068">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="865" y="405" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593168025068" />
-    <state x="763" y="177" key="SettingsEditor" timestamp="1593168199155">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="763" y="177" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593168199155" />
+    <state x="656" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593173750060" />
   </component>
 </project>
