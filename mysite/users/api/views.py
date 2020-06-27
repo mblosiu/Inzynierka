@@ -158,7 +158,9 @@ class UserProfilePic(APIView):
 class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ['name', 'surname', 'location', 'username']
+    search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
+                     'hair_color', 'body_type', 'race_origin', 'is_smoking',
+                     'is_drinking_alcohol']
     queryset = Account.objects.all()
 
 
@@ -182,21 +184,21 @@ class UserListFilterView(generics.ListAPIView):
         is_smoking = request.data.get('is_smoking', None)
         is_drinking_alcohol = request.data.get('is_drinking_alcohol', None)
 
-        if not(name is None or name == ''):
+        if not (name is None or name == ''):
             queryset = queryset.filter(name=name)
-        if not(surname is None or surname == ''):
+        if not (surname is None or surname == ''):
             queryset = queryset.filter(surname=surname)
         if not (location is None or location == ''):
             queryset = queryset.filter(location=location)
-        if not(sex is None or sex == ''):
+        if not (sex is None or sex == ''):
             queryset = queryset.filter(sex=sex)
-        if not(hair_color is None or hair_color == ''):
+        if not (hair_color is None or hair_color == ''):
             queryset = queryset.filter(hair_color=hair_color)
         if not (growth is None or growth == ''):
             queryset = queryset.filter(growth=growth)
-        if not(weight is None or weight == ''):
+        if not (weight is None or weight == ''):
             queryset = queryset.filter(weight=weight)
-        if not(body_type is None or body_type == ''):
+        if not (body_type is None or body_type == ''):
             queryset = queryset.filter(body_type=body_type)
         if not (race_origin is None or race_origin == ''):
             queryset = queryset.filter(race_origin=race_origin)
