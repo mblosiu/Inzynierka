@@ -47,6 +47,8 @@ class LogoutView(APIView):
 
 @permission_classes([IsAuthenticated])
 class UserProfileView(APIView):
+    serializer_class = UserSerializer
+
     def get(self, request):
         try:
             account = request.user
@@ -63,50 +65,101 @@ class UserProfileView(APIView):
 
         response = {}
 
-        try:
-            if request.data["email"] != "" and request.data["email"] != account.email:
-                userlist = Account.objects.filter(email=request.data["email"])
-                if not userlist:
-                    account.email = request.data["email"]
-                    response["email"] = "updated"
-                else:
-                    response["email"] = "This email is occupied"
+        email = request.data.get('email', None)
+        name = request.data.get('name', None)
+        surname = request.data.get('surname', None)
+        location = request.data.get('location', None)
+        sex = request.data.get('sex', None)
+        hair_color = request.data.get('hair_color', None)
+        growth = request.data.get('growth', None)
+        weight = request.data.get('weight', None)
+        body_type = request.data.get('body_type', None)
+        race_origin = request.data.get('race_origin', None)
+        is_smoking = request.data.get('is_smoking', None)
+        is_drinking_alcohol = request.data.get('is_drinking_alcohol', None)
+        description = request.data.get('description', None)
+
+        if email in [None, '', account.email]:
+            response["email"] = "no changes"
+        else:
+            userlist = Account.objects.filter(email=email)
+            if userlist:
+                response["email"] = "This email is occupied"
             else:
-                response["email"] = "no changes"
-        except KeyError:
-            pass
-        try:
-            if request.data["name"] != account.name:
-                account.name = request.data["name"][0].upper() + request.data["name"][1:]
-                response["name"] = "updated"
-            else:
-                response["name"] = "no changes"
-        except KeyError:
-            pass
-        try:
-            if request.data["surname"] != "" and request.data["surname"] != account.surname:
-                account.surname = request.data["surname"][0].upper() + request.data["surname"][1:]
-                response["surname"] = "updated"
-            else:
-                response["surname"] = "no changes"
-        except KeyError:
-            pass
-        try:
-            if request.data["sex"] != "" and request.data["sex"] != account.sex:
-                account.sex = request.data["sex"]
-                response["sex"] = "updated"
-            else:
-                response["sex"] = "no changes"
-        except KeyError:
-            pass
-        try:
-            if request.data["description"] != "" and request.data["description"] != account.description:
-                account.description = request.data["description"]
-                response["description"] = "updated"
-            else:
-                response["description"] = "no changes"
-        except KeyError:
-            pass
+                account.email = email
+                response["email"] = "updated"
+
+        if name in [None, '', account.name]:
+            response["name"] = "no changes"
+        else:
+            account.name = name.capitalize()
+            response["name"] = "updated"
+
+        if surname in [None, '', account.surname]:
+            response["surname"] = "no changes"
+        else:
+            account.surname = surname.capitalize()
+            response["surname"] = "updated"
+
+        if location in [None, '', account.location]:
+            response["location"] = "no changes"
+        else:
+            account.location = location.capitalize()
+            response["location"] = "updated"
+
+        if sex in [None, '', account.sex]:
+            response["sex"] = "no changes"
+        else:
+            account.sex = sex.capitalize()
+            response["sex"] = "updated"
+
+        if hair_color in [None, '', account.hair_color]:
+            response["hair_color"] = "no changes"
+        else:
+            account.hair_color = hair_color.capitalize()
+            response["hair_color"] = "updated"
+
+        if growth in [None, '', account.growth]:
+            response["growth"] = "no changes"
+        else:
+            account.growth = growth
+            response["growth"] = "updated"
+
+        if weight in [None, '', account.weight]:
+            response["weight"] = "no changes"
+        else:
+            account.weight = weight
+            response["weight"] = "updated"
+
+        if body_type in [None, '', account.body_type]:
+            response["body_type"] = "no changes"
+        else:
+            account.body_type = body_type.capitalize()
+            response["body_type"] = "updated"
+
+        if race_origin in [None, '', account.race_origin]:
+            response["race_origin"] = "no changes"
+        else:
+            account.race_origin = race_origin.capitalize()
+            response["race_origin"] = "updated"
+
+        if is_smoking in [None, '', account.is_smoking]:
+            response["is_smoking"] = "no changes"
+        else:
+            account.is_smoking = is_smoking.capitalize()
+            response["is_smoking"] = "updated"
+
+        if is_drinking_alcohol in [None, '', account.is_drinking_alcohol]:
+            response["is_drinking_alcohol"] = "no changes"
+        else:
+            account.is_drinking_alcohol = is_drinking_alcohol.capitalize()
+            response["is_drinking_alcohol"] = "updated"
+
+        if description in [None, '', account.description]:
+            response["description"] = "no changes"
+        else:
+            account.description = description
+            response["description"] = "updated"
 
         if response:
             account.save()
@@ -148,8 +201,9 @@ class UserProfilePic(APIView):
 
         return Response(response, status=stat)
 
+    # USER LIST - SEARCHER
 
-# USER LIST - SEARCHER
+
 @permission_classes([IsAuthenticated])
 class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer

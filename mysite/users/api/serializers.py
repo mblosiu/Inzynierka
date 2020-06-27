@@ -33,8 +33,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         birthday = self.validated_data.get('birthday')
         sex = self.validated_data.get('sex')
 
-        password = self.validated_data['password']
-        password2 = self.validated_data['password2']
+        password = self.validated_data.get('password')
+        password2 = self.validated_data.get('password2')
 
         if username is None:
             raise serializers.ValidationError({'username': ['This field is required.']})
