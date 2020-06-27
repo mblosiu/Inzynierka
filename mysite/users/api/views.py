@@ -1,17 +1,13 @@
 from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework import generics
-from rest_framework import filters
-from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .serializers import RegistrationSerializer, UserSerializer
 from ..models import Account
-from django.db.models import Q
 
 
 def urls_views(request):
