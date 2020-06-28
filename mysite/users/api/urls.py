@@ -1,10 +1,7 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
-from rest_framework.generics import ListCreateAPIView
 
-from users.models import Account
-from .serializers import UserSerializer
-from .views import urls_views, LogoutView, RegistrationView, UserProfileView, UserProfilePic, UserListView, \
+from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, UserListView, \
     UserListFilterView, RemoveUserAccountView
 
 app_name = 'account'

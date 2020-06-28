@@ -59,8 +59,6 @@ class RemoveUserAccountView(APIView):
 
 @permission_classes([IsAuthenticated])
 class UserProfileView(APIView):
-    serializer_class = UserSerializer
-
     def get(self, request):
         try:
             account = request.user
@@ -86,7 +84,6 @@ class UserProfileView(APIView):
         growth = request.data.get('growth', None)
         weight = request.data.get('weight', None)
         body_type = request.data.get('body_type', None)
-        race_origin = request.data.get('race_origin', None)
         is_smoking = request.data.get('is_smoking', None)
         is_drinking_alcohol = request.data.get('is_drinking_alcohol', None)
         description = request.data.get('description', None)
@@ -148,12 +145,6 @@ class UserProfileView(APIView):
         else:
             account.body_type = body_type.capitalize()
             response["body_type"] = "updated"
-
-        if race_origin in [None, '', account.race_origin]:
-            response["race_origin"] = "no changes"
-        else:
-            account.race_origin = race_origin.capitalize()
-            response["race_origin"] = "updated"
 
         if is_smoking in [None, '', account.is_smoking]:
             response["is_smoking"] = "no changes"
@@ -221,7 +212,7 @@ class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
-                     'hair_color', 'body_type', 'race_origin', 'is_smoking',
+                     'hair_color', 'body_type', 'is_smoking',
                      'is_drinking_alcohol']
     queryset = Account.objects.all()
 
@@ -242,7 +233,6 @@ class UserListFilterView(generics.ListAPIView):
         growth = request.data.get('growth', None)
         weight = request.data.get('weight', None)
         body_type = request.data.get('body_type', None)
-        race_origin = request.data.get('race_origin', None)
         is_smoking = request.data.get('is_smoking', None)
         is_drinking_alcohol = request.data.get('is_drinking_alcohol', None)
 
@@ -262,8 +252,6 @@ class UserListFilterView(generics.ListAPIView):
             queryset = queryset.filter(weight=weight)
         if not (body_type is None or body_type == ''):
             queryset = queryset.filter(body_type=body_type)
-        if not (race_origin is None or race_origin == ''):
-            queryset = queryset.filter(race_origin=race_origin)
         if not (is_smoking is None or is_smoking == ''):
             queryset = queryset.filter(is_smoking=is_smoking)
         if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):

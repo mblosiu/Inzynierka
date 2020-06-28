@@ -6,7 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['username', 'email', 'name', 'surname', 'birthday', 'sex', 'location', 'profile_picture',
-                  'description', 'hair_color', 'growth', 'weight', 'body_type', 'race_origin', 'is_smoking',
+                  'description', 'hair_color', 'growth', 'weight', 'body_type', 'is_smoking',
                   'is_drinking_alcohol']
 
 

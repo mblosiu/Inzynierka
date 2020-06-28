@@ -61,7 +61,6 @@ class Account(AbstractBaseUser):
     growth = models.IntegerField(null=True, blank=True, default=None)
     weight = models.IntegerField(null=True, blank=True, default=None)
     body_type = models.CharField(max_length=30, null=True, blank=True, default=None)
-    race_origin = models.CharField(max_length=30, null=True, blank=True, default=None)
 
     # character (scale 1-10)
     Assertiveness = models.FloatField(null=True, blank=True, default=None)
@@ -117,7 +116,3 @@ class Account(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
-
-# user account - uwierzytelnianie, podstawowe informacje
-# user profile - wszystkie informacje o użytkowniku
-# user settings - ustawienia użytkownika
