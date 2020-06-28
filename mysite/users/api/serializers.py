@@ -10,6 +10,20 @@ class UserSerializer(serializers.ModelSerializer):
                   'is_drinking_alcohol']
 
 
+class UserPreferencesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ['sex_preference', 'hair_color_blonde_preference', 'hair_color_brunette_preference',
+                  'hair_color_red_preference', 'growth_preference', 'weight_preference', 'body_type_preference',
+                  'is_smoking_preference', 'is_drinking_alcohol_preference']
+
+
+class UserSettingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ['']
+
+
 class UserProfilePicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account

@@ -2,6 +2,16 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
+class MatchingForm(models.Model):
+    sex_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    hair_color_blonde_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    hair_color_brunette_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    hair_color_red_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    growth_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    weight_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    body_type_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+
+
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, location, birthday, sex, password=None):
         if not email:
@@ -39,6 +49,10 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
+    matching_form = models.OneToOneField(MatchingForm, on_delete=models.CASCADE, null=True,
+                                         default=None)  # not used for now
+
+
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=30, null=True, default=None)
@@ -86,7 +100,6 @@ class Account(AbstractBaseUser):
     growth_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     weight_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     body_type_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
-    race_orgin_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
 
     Assertiveness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     Sincerity_preference = models.CharField(max_length=30, null=True, blank=True, default=None)

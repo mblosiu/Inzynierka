@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.filters import SearchFilter, OrderingFilter
-from .serializers import RegistrationSerializer, UserSerializer
+from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer
 from ..models import Account
 
 
@@ -163,6 +163,49 @@ class UserProfileView(APIView):
         else:
             account.description = description
             response["description"] = "updated"
+
+        if response:
+            account.save()
+            stat = status.HTTP_200_OK
+        else:
+            response["detail"] = "request must contain user data"
+            stat = status.HTTP_400_BAD_REQUEST
+        return Response(response, status=stat)
+
+
+@permission_classes([IsAuthenticated])
+class UserPreferencesView(APIView):
+    def get(self, request):
+        try:
+            account = request.user
+        except Account.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserPreferencesSerializer(account)
+        return Response(serializer.data)
+
+    def post(self, request):
+        try:
+            account = request.user
+        except Account.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        response = {}
+
+        sex_preference = request.data.get('sex_preference', None)
+        hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', None)
+        hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', None)
+        hair_color_red_preference = request.data.get('hair_color_red_preference', None)
+        growth_preference = request.data.get('growth_preference', None)
+        weight_preference = request.data.get('weight_preference', None)
+        body_type_preference = request.data.get('body_type_preference', None)
+        is_smoking_preference = request.data.get('is_smoking_preference', None)
+        is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', None)
+
+        if sex_preference in [None, '', account.sex_preference]:
+            response["sex_preference"] = "no changes"
+        else:
+            account.sex_preference = sex_preference.capitalize()
+            response["sex_preference"] = "updated"
 
         if response:
             account.save()
