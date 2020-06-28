@@ -41,12 +41,12 @@ class MyAccountManager(BaseUserManager):
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
-    name = models.CharField(max_length=30, default=None)
-    surname = models.CharField(max_length=30, default=None)
+    name = models.CharField(max_length=30, null=True, default=None)
+    surname = models.CharField(max_length=30, null=True, default=None)
     birthday = models.DateField(null=True, default=None)
     location = models.CharField(max_length=30, null=True, default=None)
     profile_picture = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True, default=None)
-    description = models.CharField(max_length=200, default=None)
+    description = models.CharField(max_length=200, null=True, default=None)
 
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
