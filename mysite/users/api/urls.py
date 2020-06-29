@@ -4,7 +4,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, UserListView, \
     UserListFilterView, RemoveUserAccountView, UserPreferencesView
 
-app_name = 'account'
+app_name = 'users'
 
 urlpatterns = [
     path('register', RegistrationView.as_view(), name="register"),

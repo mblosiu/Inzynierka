@@ -1,11 +1,12 @@
 from django.http import HttpResponse
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
 from rest_framework import generics
+from rest_framework import status
+from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer
 from ..models import User
 
@@ -36,7 +37,7 @@ class RegistrationView(APIView):
 
 @permission_classes([IsAuthenticated])
 class LogoutView(APIView):
-    def get(self, request):
+    def post(self, request):
         if request.user.auth_token.delete():
             stat = status.HTTP_200_OK
             return Response({"detail": "success"}, status=stat)
@@ -47,7 +48,7 @@ class LogoutView(APIView):
 
 @permission_classes([IsAuthenticated])
 class RemoveUserAccountView(APIView):
-    def get(self, request):
+    def post(self, request):
         if request.user.delete():
             # TODO : check password
             stat = status.HTTP_200_OK

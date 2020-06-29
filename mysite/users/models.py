@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.db import models
 
 
 class MatchingForm(models.Model):
@@ -15,10 +15,15 @@ class MatchingForm(models.Model):
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, location, birthday, sex, password=None):
         if not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError('Email is required')
         if not username:
-            raise ValueError('Users must have a username')
-
+            raise ValueError('Username is required')
+        if not location:
+            raise ValueError('Location is required')
+        if not birthday:
+            raise ValueError('Birthday is required')
+        if not sex:
+            raise ValueError('Sex is required')
         user = self.model(
             email=self.normalize_email(email),
             password=password,
