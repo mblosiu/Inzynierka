@@ -7,17 +7,12 @@ from rest_framework.test import APITestCase
 from mysite.users.models import User
 
 
-#Correct
-sys.path.append("/home/user/mysite")
 # Create your tests here.
 
 class RegistrationTestCase(APITestCase):
     def test_registration(self):
-
         data = {"username": "testcase", "email": "testcase@gmail.com", "location": "Polska", "birthday": "1996-06-20",
                 "sex": "male", "password": "password", "password2": "password"}
         response = self.client.post("/api/account/register/", data)
 
-
-
-        self.assertEqual(response.status_code,status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)

@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer
+from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer
 from ..models import User
 
 
@@ -48,7 +48,7 @@ class LogoutView(APIView):
 
 @permission_classes([IsAuthenticated])
 class RemoveUserAccountView(APIView):
-    def post(self, request):
+    def delete(self, request):
         if request.user.delete():
             # TODO : check password
             stat = status.HTTP_200_OK
@@ -68,7 +68,7 @@ class UserProfileView(APIView):
         serializer = UserSerializer(account)
         return Response(serializer.data)
 
-    def post(self, request):
+    def patch(self, request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -184,7 +184,7 @@ class UserPreferencesView(APIView):
         serializer = UserPreferencesSerializer(account)
         return Response(serializer.data)
 
-    def post(self, request):
+    def patch(self, request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -219,7 +219,15 @@ class UserPreferencesView(APIView):
 
 @permission_classes([IsAuthenticated])
 class UserProfilePic(APIView):
-    def post(self, request):
+    def get(self, request):
+        try:
+            account = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserProfilePicSerializer(account)
+        return Response(serializer.data)
+
+    def patch(self, request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -229,7 +237,6 @@ class UserProfilePic(APIView):
 
         file = request.data.get('profile_picture', None)
 
-        # validate content type
         main, sub = file.content_type.split('/')
 
         if not file:
