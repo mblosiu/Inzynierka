@@ -20,7 +20,7 @@
         </b-col>
         <b-col cols="3">
           <h1>O mnie:</h1>
-          <p>Imię: {{currentUser.name}}</p>
+          <p>Imię: {{currentUser}}</p>
           <p>Wiek:</p>
           <p>Płeć:</p>
           <p>Mieszkam w:</p>
@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      token: localStorage.getItem("user-token") || null,
+      //token: localStorage.getItem("user-token") || null,
       //username: localStorage.getItem("username") || null,
       profileImage: null
     };

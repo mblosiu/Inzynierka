@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a v-if="token==null" class="navbar-brand" href="/">e-Love</a>
+    <a v-if="currentUser=={}" class="navbar-brand" href="/">e-Love</a>
     <a v-else class="navbar-brand" href="/mainuser">e-Love</a>
     <button
       class="navbar-toggler"
@@ -14,7 +14,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div v-if="token==null" class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div v-if="currentUser=={}" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <router-link class="btn btn-outline-primary my-2 my-sm-0" to="/login">Logowanie</router-link>
@@ -40,6 +40,7 @@
 <script>
 
 //import axios from 'axios';
+//import { mapState } from 'vuex';
 
 export default {
     name: 'Header',
@@ -48,25 +49,17 @@ export default {
     },
     data() {
     return {
-      token: localStorage.getItem("user-token") || null
+      //token: localStorage.getItem("user-token") || null
+      //currentUser: window.localStorage.currentUser
     };
   },
   methods: {
     logoutUser() {
-      /*axios.get("http://127.0.0.1:8000/api/account/logout" ,{
-        token: this.token
-
-      })
-      .then(Response => console.log(Response))
-      .catch(err => console.log(err));
-      localStorage.removeItem("user-token");
-      this.token = null;
-      this.$router.push("/");
-      //history.go();*/
       this.$store.dispatch("logoutUser");
-      localStorage.removeItem("user-token");
-      this.token = null;
+      //localStorage.removeItem("user-token");
+      //this.token = null;
       this.$router.push("/");
+      history.go()
     }
   }
 

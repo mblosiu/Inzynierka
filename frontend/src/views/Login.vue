@@ -58,18 +58,26 @@ export default {
       username: "",
       password: "",
       token: null,
-      status: ""
+      status: "",
+      user: ""
     };
   },
 
   methods: {
     async loginUser() {
       let user = await this.$store.dispatch('loginUser', {username: this.username, password: this.password});
-      if(user.error){
+      console.log(user);
+      if(user.status=="200"){
+        this.$router.push("/mainuser");
+      } else {
+        console.log("error")
+      }
+      /*if(this.user.error){
         alert(user.error)
       } else {
           alert('Udane logowanie użytkownika' + user.name);
-      }
+          this.$router.push("/mainuser");
+      }*/
 
       /*Api()
         .post("/account/login", {
@@ -90,7 +98,7 @@ export default {
         });*/
       //this.$store.dispatch("loginUser", user);
       //tu pushnac na strone usera
-      this.$router.push("/mainuser");
+
       //history.go();
     }
   }

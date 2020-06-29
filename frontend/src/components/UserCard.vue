@@ -7,7 +7,7 @@
     class="mb-3"
   >
     <b-card-text>
-      {{currentUser.name}}
+      {{currentUser}}
       <br />Description
     </b-card-text>
     <button @click="getUser">getuser</button>
@@ -16,7 +16,7 @@
 
 <script>
 import Api from "../service/api";
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   name: "UserCard",
@@ -26,23 +26,22 @@ export default {
   },
   data() {
     return {
-      username: localStorage.getItem("username") || null,
       profileImage: null
+
     };
   },
   methods: {
     getUser() {
-      Api()
-        .get("/account/users")
-        .then(Response => {
-          console.log(Response);
-        })
-        .catch(Error => {
-          console.log(Error);
-        });
+      let currentUser = currentUser;
+      Api().post("/account/users", {currentUser}), {
+        headers: {
+          'Authorization': currentUser
+        }
+      }
     }
   }
 };
+
 </script>
 <style>
 </style>

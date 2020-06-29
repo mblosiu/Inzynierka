@@ -10,13 +10,17 @@
 
 <script>
 
-import Header from '@/components/Header.vue'
+import Header from '@/components/Header.vue';
+import { mapState} from 'vuex';
 
 export default {
   name: "App",
   components: {
     Header
   },
+  computed: {
+    ...mapState(['currentUser'])
+  }
 };
 </script>
 
@@ -29,7 +33,7 @@ export default {
 }
 
 #app {
-  height: 1400px;
+  height: 1200px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

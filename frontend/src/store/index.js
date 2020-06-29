@@ -33,21 +33,25 @@ export default new Vuex.Store({
       let user = JSON.parse(window.localStorage.currentUser);
       commit('SET_CURRENT_USER', user);
     },
+    //async getUser({commit}){
+    //  let response = await Api().post('account/users')
+    //},
     logoutUser({ commit }) {
       commit('LOGOUT_USER')
     },
     async loginUser({ commit }, {username, password}) {
       console.log("kk");
-      try {
+      //try {
         let response = await Api().post('/account/login', {username, password});
-        let user = response.data.data.attributes;
-        console.log(response.data)
+        let token = response.data;
+        let user = response//.data.attributes;
+        console.log(response)
 
-        commit('SET_CURRENT_USER', user);
+        commit('SET_CURRENT_USER', token);
         return user;
-      } catch {
+      /*} catch {
         return {error: "Hasło bądź nazwa użytkownika zawiera błędy!"}
-      }
+      }*/
     }
   },
   modules: {}
