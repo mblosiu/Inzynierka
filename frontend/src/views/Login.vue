@@ -45,7 +45,8 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import Api from "../service/api";
 
 export default {
   name: "Login",
@@ -55,22 +56,21 @@ export default {
       username: "",
       password: "",
       token: null,
-      status: null
+      status: ""
     };
   },
 
   methods: {
     login() {
-      axios
-        .post("http://127.0.0.1:8000/api/account/login", {
+      Api().post('/account/login', {
           username: this.username,
           password: this.password
         })
         .then(Response => {
-          this.status = Response.data.status;
+          this.status = Response.status;
           this.token = Response.data.token;
           console.log(this.token);
-          console.log(this.status);
+          console.log(Response.status);
           localStorage.setItem("user-token", Response.data.token);
           localStorage.setItem("username", this.username);
         })
@@ -79,7 +79,7 @@ export default {
           localStorage.removeItem("user-token");
         });
       //tu pushnac na strone usera
-      this.$router.push("/userpage");
+      this.$router.push("/mainuser");
       //history.go();
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div id="userpage">
+  <div id="mainuser">
     <br />
     <b-container class="bv-example-row" fluid>
       <b-row>
@@ -10,23 +10,13 @@
             <b-nav-item>Polubienia</b-nav-item>
             <b-nav-item>Wiadomości</b-nav-item>
             <b-nav-item>Kontakty</b-nav-item>
-            <b-nav-item>Galeria</b-nav-item>
+            <router-link to="userpage/gallery">Galeria</router-link>
             <b-nav-item>Ustawienia profilu</b-nav-item>
             <b-nav-item disabled>Premium</b-nav-item>
           </div>
         </b-col>
         <b-col cols="7">
-          <b-card
-            img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
-            img-alt="Card image"
-            img-left
-            class="mb-3"
-          >
-            <b-card-text>Opis usera <br />
-              Witam, jestem {{username}}
-
-            </b-card-text>
-          </b-card>
+          <UserCard />
         </b-col>
         <b-col cols="3">
           <h1>O mnie:</h1>
@@ -57,13 +47,19 @@
 
 
 <script>
+
+import UserCard from '../components/UserCard.vue'
+
 export default {
-  name: "UserPage",
-  components: {},
+  name: "MainUser",
+  components: {
+    UserCard
+  },
   data() {
     return {
       token: localStorage.getItem("user-token") || null,
-      username: localStorage.getItem("username") || null
+      username: localStorage.getItem("username") || null,
+      profileImage: null
     };
   },
   methods: {}
@@ -107,7 +103,4 @@ export default {
 
 }
 
-p{
- /* text-align: left;*/
-}
 </style>

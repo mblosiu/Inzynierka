@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
-import UserPage from "../views/UserPage.vue"
+import MainUser from "../views/MainUser.vue"
+import Gallery from "../views/Gallery.vue"
 
 Vue.use(VueRouter);
 
@@ -24,9 +25,14 @@ const routes = [
     component: Register
   },
   {
-    path: "/userpage",
-    name: "userpage",
-    component: UserPage
+    path: "/mainuser",
+    name: "mainuser",
+    component: MainUser
+  },
+  {
+    path: "/user/gallery",
+    name: "gallery",
+    component: Gallery
   },
   {
     path: "/about",

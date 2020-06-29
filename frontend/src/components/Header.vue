@@ -1,43 +1,46 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a v-if="token==null" class="navbar-brand" href="/">e-Love</a>
-        <a v-else class="navbar-brand" href="/userpage">e-Love</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <a v-if="token==null" class="navbar-brand" href="/">e-Love</a>
+    <a v-else class="navbar-brand" href="/userpage">e-Love</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div v-if="token==null" class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <router-link class="btn btn-outline-primary my-2 my-sm-0" to="/login">Logowanie</router-link>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <router-link
-              class="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-              to="/register"
-            >Rejestracja</router-link>
-          </form>
-        </div>
-        <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto"></ul>
-          <b-nav-form @submit.prevent="logout">
-            <b-button type="submit" size="sm" class="Primary">Wyloguj</b-button>
-          </b-nav-form>
-        </div>
-      </nav>
+    <div v-if="token==null" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <router-link class="btn btn-outline-primary my-2 my-sm-0" to="/login">Logowanie</router-link>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <router-link
+          class="btn btn-outline-success my-2 my-sm-0"
+          type="submit"
+          to="/register"
+        >Rejestracja</router-link>
+      </form>
+    </div>
+    <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto"></ul>
+      <b-nav-form @submit.prevent="logout">
+        <b-button type="submit" size="sm" class="Primary">Wyloguj</b-button>
+      </b-nav-form>
+    </div>
+  </nav>
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
     name: 'Header',
     components: {
@@ -50,10 +53,16 @@ export default {
   },
   methods: {
     logout() {
+      axios.get("http://127.0.0.1:8000/api/account/logout" ,{
+        token: this.token
+
+      })
+      .then(Response => console.log(Response))
+      .catch(err => console.log(err));
       localStorage.removeItem("user-token");
       this.token = null;
       this.$router.push("/");
-      history.go();
+      //history.go();
     }
   }
 
@@ -61,7 +70,6 @@ export default {
 </script>
 
 <style>
-
 #nav {
   padding: 30px;
 }
@@ -74,5 +82,4 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-
 </style>
