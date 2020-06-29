@@ -32,31 +32,34 @@
             </p>
             <p>
               <label for="birthday">
-                Data urodzenia <input type="date" name="birthday" id="birthday" v-model="birthday" />
+                Data urodzenia
+                <input type="date" name="birthday" id="birthday" v-model="birthday" />
               </label>
               <br />
             </p>
             <p>
               <label for="sex">
-                Płeć 
+                Płeć
                 <select class="ml-2" name="Sex" id="Sex" v-model="sex">
-                <br />
-                <option>mężczyzna</option>
-                <option>kobieta</option>
-                <option>inna</option>
-              </select>
+                  <br />
+                  <option>mężczyzna</option>
+                  <option>kobieta</option>
+                  <option>inna</option>
+                </select>
               </label>
               <br />
             </p>
             <p>
               <label for="password">
-                Hasło <input type="password" name="password" id="password" v-model="password" />
+                Hasło
+                <input type="password" name="password" id="password" v-model="password" />
               </label>
               <br />
             </p>
             <p>
               <label for="password2">
-                Powtórz hasło <input type="password" name="password2" id="password2" v-model="password2" />
+                Powtórz hasło
+                <input type="password" name="password2" id="password2" v-model="password2" />
               </label>
               <br />
             </p>
@@ -76,7 +79,8 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import Api from "../service/api";
 
 export default {
   name: "Register",
@@ -97,20 +101,22 @@ export default {
     register() {
       if (this.password !== this.password2) {
         console.log("Podane hasła muszą być identyczne!");
+        this.$router.push("/register");
+      } else {
+        Api()
+          .post("/account/register", {
+            username: this.username,
+            email: this.email,
+            location: this.location,
+            birthday: this.birthday,
+            sex: this.sex,
+            password: this.password,
+            password2: this.password2
+          })
+          .then(Response => console.log(Response))
+          .catch(err => console.log(err));
+        this.$router.push("/");
       }
-      axios
-        .post("http://127.0.0.1:8000/api/account/register", {
-          username: this.username,
-          email: this.email,
-          location: this.location,
-          birthday: this.birthday,
-          sex: this.sex,
-          password: this.password,
-          password2: this.password2
-        })
-        .then(Response => console.log(Response))
-        .catch(err => console.log(err));
-      this.$router.push("/");
     }
   }
 };

@@ -1,26 +1,36 @@
 <template>
-  <div id="mainuser">
+  <div id="userpage">
     <br />
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="2">
           <div>
-            <router-link to="mainuser/search">Szukaj osób</router-link>
+            <b-nav-item>Szukaj osób</b-nav-item>
             <b-nav-item>Dopasuj</b-nav-item>
             <b-nav-item>Polubienia</b-nav-item>
             <b-nav-item>Wiadomości</b-nav-item>
             <b-nav-item>Kontakty</b-nav-item>
-            <router-link to="mainuser/gallery">Galeria</router-link>
+            <router-link to="userpage/gallery">Galeria</router-link>
             <b-nav-item>Ustawienia profilu</b-nav-item>
             <b-nav-item disabled>Premium</b-nav-item>
           </div>
         </b-col>
         <b-col cols="7">
-          <UserCard />
+          <b-card v-if="profileImage==null"
+            img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
+            img-alt="Card image"
+            img-left
+            class="mb-3"
+          >
+            <b-card-text>Opis usera <br />
+              Witam, jestem {{username}}
+
+            </b-card-text>
+          </b-card>
         </b-col>
         <b-col cols="3">
           <h1>O mnie:</h1>
-          <p>Imię: {{currentUser.name}}</p>
+          <p>Imię: {{username}}</p>
           <p>Wiek:</p>
           <p>Płeć:</p>
           <p>Mieszkam w:</p>
@@ -48,21 +58,15 @@
 
 <script>
 
-import { mapState } from 'vuex'; 
-import UserCard from '../components/UserCard.vue'
+import Header from '@/components/Header.vue'
 
 export default {
-  name: "MainUser",
-  components: {
-    UserCard
-  },
-  computed: {
-    ...mapState(['currentUser'])
-  },
+  name: "UserPage",
+  components: {},
   data() {
     return {
       token: localStorage.getItem("user-token") || null,
-      //username: localStorage.getItem("username") || null,
+      username: localStorage.getItem("username") || null,
       profileImage: null
     };
   },
@@ -107,4 +111,7 @@ export default {
 
 }
 
+/*p{
+  text-align: left;
+}*/
 </style>

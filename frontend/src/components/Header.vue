@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a v-if="token==null" class="navbar-brand" href="/">e-Love</a>
-    <a v-else class="navbar-brand" href="/userpage">e-Love</a>
+    <a v-else class="navbar-brand" href="/mainuser">e-Love</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -30,7 +30,7 @@
     </div>
     <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto"></ul>
-      <b-nav-form @submit.prevent="logout">
+      <b-nav-form @submit.prevent="logoutUser">
         <b-button type="submit" size="sm" class="Primary">Wyloguj</b-button>
       </b-nav-form>
     </div>
@@ -39,7 +39,7 @@
 
 <script>
 
-import axios from 'axios';
+//import axios from 'axios';
 
 export default {
     name: 'Header',
@@ -52,8 +52,8 @@ export default {
     };
   },
   methods: {
-    logout() {
-      axios.get("http://127.0.0.1:8000/api/account/logout" ,{
+    logoutUser() {
+      /*axios.get("http://127.0.0.1:8000/api/account/logout" ,{
         token: this.token
 
       })
@@ -62,7 +62,11 @@ export default {
       localStorage.removeItem("user-token");
       this.token = null;
       this.$router.push("/");
-      //history.go();
+      //history.go();*/
+      this.$store.dispatch("logoutUser");
+      localStorage.removeItem("user-token");
+      this.token = null;
+      this.$router.push("/");
     }
   }
 

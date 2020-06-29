@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import MainUser from "../views/MainUser.vue"
 import Gallery from "../views/Gallery.vue"
+import Search from "../views/Search.vue"
 
 Vue.use(VueRouter);
 
@@ -30,7 +31,12 @@ const routes = [
     component: MainUser
   },
   {
-    path: "/user/gallery",
+    path: "/mainuser/search",
+    name: "search",
+    component: Search
+  },
+  {
+    path: "/mainuser/gallery",
     name: "gallery",
     component: Gallery
   },

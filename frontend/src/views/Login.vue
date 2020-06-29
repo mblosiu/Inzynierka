@@ -11,25 +11,27 @@
         >
           <div class="card-body">
             <h5 class="card-header">Logowanie</h5>
-            <br/>
+            <br />
             <p class="card-text"></p>
-            <form @submit.prevent="login">
+            <form @submit.prevent="loginUser">
               <p>
                 <label for="username">
-                  Nazwa użytkownika <input type="text" name="username" id="username" v-model="username" />
+                  Nazwa użytkownika
+                  <input type="text" name="username" id="username" v-model="username" />
                 </label>
                 <br />
               </p>
               <p>
                 <label for="password">
-                  Hasło <input type="password" name="password" id="password" v-model="password" />
+                  Hasło
+                  <input type="password" name="password" id="password" v-model="password" />
                 </label>
                 <br />
               </p>
               <br />
               <p>
                 <input
-                  v-on:click="login"
+                  v-on:click="loginUser"
                   class="btn btn-outline-success"
                   type="submit"
                   value="Zaloguj"
@@ -46,7 +48,7 @@
 
 <script>
 //import axios from "axios";
-import Api from "../service/api";
+//import Api from "../service/api";
 
 export default {
   name: "Login",
@@ -61,8 +63,16 @@ export default {
   },
 
   methods: {
-    login() {
-      Api().post('/account/login', {
+    async loginUser() {
+      let user = await this.$store.dispatch('loginUser', {username: this.username, password: this.password});
+      if(user.error){
+        alert(user.error)
+      } else {
+          alert('Udane logowanie użytkownika' + user.name);
+      }
+
+      /*Api()
+        .post("/account/login", {
           username: this.username,
           password: this.password
         })
@@ -72,12 +82,13 @@ export default {
           console.log(this.token);
           console.log(Response.status);
           localStorage.setItem("user-token", Response.data.token);
-          localStorage.setItem("username", this.username);
+          //localStorage.setItem("username", this.username);
         })
         .catch(Error => {
           console.log(Error);
           localStorage.removeItem("user-token");
-        });
+        });*/
+      //this.$store.dispatch("loginUser", user);
       //tu pushnac na strone usera
       this.$router.push("/mainuser");
       //history.go();
@@ -87,5 +98,4 @@ export default {
 </script>
 
 <style>
-
 </style>

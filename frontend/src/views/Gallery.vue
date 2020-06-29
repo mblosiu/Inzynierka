@@ -19,7 +19,7 @@
 
 <script>
 
-//import axios from "axios";
+//import Api from '../service/api';
 
 export default {
   name: "Gallery",
@@ -35,7 +35,7 @@ export default {
       uploadFile(){
           const fd = new FormData();
           fd.append('image', this.image, this.image.name)
-          /*axios.post('http://127.0.0.1:8000/api/')*/
+          //Api().get('')
           
       }
      

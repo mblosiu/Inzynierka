@@ -7,21 +7,23 @@
     class="mb-3"
   >
     <b-card-text>
-      {{username}}
-      <br />
-        Description
+      {{currentUser.name}}
+      <br />Description
     </b-card-text>
     <button @click="getUser">getuser</button>
   </b-card>
 </template>
 
 <script>
-
-import Api from "../service/api"
+import Api from "../service/api";
+import { mapState } from 'vuex';
 
 export default {
   name: "UserCard",
   components: {},
+  computed: {
+    ...mapState(["currentUser"])
+  },
   data() {
     return {
       username: localStorage.getItem("username") || null,
@@ -29,8 +31,9 @@ export default {
     };
   },
   methods: {
-    getUser(){
-      Api().get('/account/users')
+    getUser() {
+      Api()
+        .get("/account/users")
         .then(Response => {
           console.log(Response);
         })
@@ -38,8 +41,7 @@ export default {
           console.log(Error);
         });
     }
-    }
-
+  }
 };
 </script>
 <style>
