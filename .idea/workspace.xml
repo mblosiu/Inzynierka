@@ -26,16 +26,29 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ad7491e-2ea3-424f-b14e-19c82aff9d49" name="Default Changelist" comment="remove field 'race' from user model">
-      <change afterPath="$PROJECT_DIR$/mysite/users/migrations/0013_auto_20200628_1526.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/users/migrations/0014_auto_20200628_1526.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/users/migrations/0015_auto_20200628_1527.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/users/migrations/0016_auto_20200628_1535.py" afterDir="false" />
+    <list default="true" id="9ad7491e-2ea3-424f-b14e-19c82aff9d49" name="Default Changelist" comment="matching form - model  &#10;matching form - serializer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0002_auto_20200425_1205.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0003_auto_20200425_1205.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0004_auto_20200425_1217.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0005_auto_20200608_1642.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0006_account_profile_picture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0007_auto_20200627_0811.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0008_auto_20200627_0900.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0009_auto_20200627_0902.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0010_auto_20200628_1447.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0011_auto_20200628_1449.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0012_remove_account_race_origin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0013_auto_20200628_1526.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0014_auto_20200628_1526.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0015_auto_20200628_1527.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/migrations/0016_auto_20200628_1535.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593349461551</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="matching form - model  &#10;matching form - serializer">
+      <created>1593351641641</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1593351641641</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,16 +181,17 @@
     <MESSAGE value="UserProfileView - user can add and edit more info + recoded post method" />
     <MESSAGE value="RemoveUserAccountView - possibility to permanently remove account  &#10;Fix error 500" />
     <MESSAGE value="remove field 'race' from user model" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove field 'race' from user model" />
+    <MESSAGE value="matching form - model  &#10;matching form - serializer" />
+    <option name="LAST_COMMIT_MESSAGE" value="matching form - model  &#10;matching form - serializer" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="656" y="161" key="SettingsEditor" timestamp="1593346122636">
+    <state x="656" y="161" key="SettingsEditor" timestamp="1593408751434">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593346122636" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1593349469040">
+    <state x="656" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593408751434" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1593351647390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593349469040" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593351647390" />
   </component>
 </project>

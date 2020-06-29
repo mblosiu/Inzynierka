@@ -48,7 +48,7 @@ class MyAccountManager(BaseUserManager):
         return user
 
 
-class Account(AbstractBaseUser):
+class User(AbstractBaseUser):
     matching_form = models.OneToOneField(MatchingForm, on_delete=models.CASCADE, null=True,
                                          default=None)  # not used for now
 

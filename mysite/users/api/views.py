@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer
-from ..models import Account
+from ..models import User
 
 
 def urls_views(request):
@@ -62,7 +62,7 @@ class UserProfileView(APIView):
     def get(self, request):
         try:
             account = request.user
-        except Account.DoesNotExist:
+        except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserSerializer(account)
         return Response(serializer.data)
@@ -70,7 +70,7 @@ class UserProfileView(APIView):
     def post(self, request):
         try:
             account = request.user
-        except Account.DoesNotExist:
+        except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -91,7 +91,7 @@ class UserProfileView(APIView):
         if email in [None, '', account.email]:
             response["email"] = "no changes"
         else:
-            userlist = Account.objects.filter(email=email)
+            userlist = User.objects.filter(email=email)
             if userlist:
                 response["email"] = "This email is occupied"
             else:
@@ -178,7 +178,7 @@ class UserPreferencesView(APIView):
     def get(self, request):
         try:
             account = request.user
-        except Account.DoesNotExist:
+        except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserPreferencesSerializer(account)
         return Response(serializer.data)
@@ -186,7 +186,7 @@ class UserPreferencesView(APIView):
     def post(self, request):
         try:
             account = request.user
-        except Account.DoesNotExist:
+        except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -211,7 +211,7 @@ class UserPreferencesView(APIView):
             account.save()
             stat = status.HTTP_200_OK
         else:
-            response["detail"] = "request must contain user data"
+            response["detail"] = "request must contain user data to change"
             stat = status.HTTP_400_BAD_REQUEST
         return Response(response, status=stat)
 
@@ -221,7 +221,7 @@ class UserProfilePic(APIView):
     def post(self, request):
         try:
             account = request.user
-        except Account.DoesNotExist:
+        except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -257,7 +257,7 @@ class UserListView(generics.ListAPIView):
     search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
                      'hair_color', 'body_type', 'is_smoking',
                      'is_drinking_alcohol']
-    queryset = Account.objects.all()
+    queryset = User.objects.all()
 
 
 # USER LIST - FILTERS
@@ -266,7 +266,7 @@ class UserListFilterView(generics.ListAPIView):
     serializer_class = UserSerializer
 
     def get(self, request):
-        queryset = Account.objects.all()
+        queryset = User.objects.all()
 
         name = request.data.get('name', None)
         surname = request.data.get('surname', None)
