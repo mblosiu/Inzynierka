@@ -23,7 +23,7 @@ class RegistrationView(APIView):
         data = {}
         if serializer.is_valid():
             account = serializer.save()
-            data['response'] = 'successfully registered new user.'
+            data['detail'] = 'successfully registered new user.'
             data['email'] = account.email
             data['username'] = account.username
             data['birthday'] = account.birthday
@@ -49,7 +49,7 @@ class RemoveUserAccountView(APIView):
     def delete(self, request):
         if request.user.delete():
             # TODO : check password
-            return Response({"detail": "success"}, status=status.HTTP_200_OK)
+            return Response({"detail": "Account removed successfully"}, status=status.HTTP_200_OK)
         else:
             return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -169,7 +169,6 @@ class UserProfileView(APIView):
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 @permission_classes([IsAuthenticated])
 class UserPreferencesView(APIView):
     def get(self, request):
@@ -210,7 +209,6 @@ class UserPreferencesView(APIView):
         else:
             response["detail"] = "request must contain user data to change"
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
-
 
 
 @permission_classes([IsAuthenticated])

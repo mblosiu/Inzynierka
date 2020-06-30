@@ -57,7 +57,6 @@ class User(AbstractBaseUser):
     matching_form = models.OneToOneField(MatchingForm, on_delete=models.CASCADE, null=True,
                                          default=None)  # not used for now
 
-
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=30, null=True, default=None)
@@ -127,10 +126,8 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-    # For checking permissions. to keep it simple all admin have ALL permissons
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
-    # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
