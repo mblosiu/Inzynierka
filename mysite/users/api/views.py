@@ -39,11 +39,9 @@ class RegistrationView(APIView):
 class LogoutView(APIView):
     def post(self, request):
         if request.user.auth_token.delete():
-            stat = status.HTTP_200_OK
-            return Response({"detail": "success"}, status=stat)
+            return Response({"detail": "success"}, status=status.HTTP_200_OK)
         else:
-            stat = status.HTTP_400_BAD_REQUEST
-            return Response({"detail": "invalid token"}, status=stat)
+            return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @permission_classes([IsAuthenticated])
@@ -51,11 +49,9 @@ class RemoveUserAccountView(APIView):
     def delete(self, request):
         if request.user.delete():
             # TODO : check password
-            stat = status.HTTP_200_OK
-            return Response({"detail": "success"}, status=stat)
+            return Response({"detail": "success"}, status=status.HTTP_200_OK)
         else:
-            stat = status.HTTP_400_BAD_REQUEST
-            return Response({"detail": "invalid token"}, status=stat)
+            return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @permission_classes([IsAuthenticated])
@@ -66,7 +62,7 @@ class UserProfileView(APIView):
         except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserSerializer(account)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request):
         try:
@@ -167,11 +163,11 @@ class UserProfileView(APIView):
 
         if response:
             account.save()
-            stat = status.HTTP_200_OK
+            return Response(response, status=status.HTTP_200_OK)
         else:
             response["detail"] = "request must contain user data"
-            stat = status.HTTP_400_BAD_REQUEST
-        return Response(response, status=stat)
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @permission_classes([IsAuthenticated])
@@ -182,7 +178,7 @@ class UserPreferencesView(APIView):
         except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserPreferencesSerializer(account)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request):
         try:
@@ -210,11 +206,11 @@ class UserPreferencesView(APIView):
 
         if response:
             account.save()
-            stat = status.HTTP_200_OK
+            return Response(response, status=status.HTTP_200_OK)
         else:
             response["detail"] = "request must contain user data to change"
-            stat = status.HTTP_400_BAD_REQUEST
-        return Response(response, status=stat)
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @permission_classes([IsAuthenticated])
@@ -225,7 +221,7 @@ class UserProfilePic(APIView):
         except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserProfilePicSerializer(account)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request):
         try:
@@ -243,13 +239,13 @@ class UserProfilePic(APIView):
             response["detail"] = "request must contain user data"
             stat = status.HTTP_400_BAD_REQUEST
 
-        elif not (main == 'image' and sub in ['jpeg', 'pjpeg', 'jpg', 'png']):
+        elif not (main == 'image' and sub in ['jpeg', 'jpg', 'png']):
             response["detail"] = "wrong data type"
             stat = status.HTTP_400_BAD_REQUEST
 
         else:
             account.profile_picture = file
-            response["detail"] = "photo added successfuly"
+            response["detail"] = "photo added successfully"
             account.save()
             stat = status.HTTP_200_OK
 
