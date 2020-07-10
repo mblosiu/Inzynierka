@@ -11,11 +11,6 @@ from .serializers import RegistrationSerializer, UserSerializer, UserPreferences
 from ..models import User
 
 
-def urls_views(request):
-    return HttpResponse(
-        "<html><body>URLS:<br>/admin<br>/api/users<br>/api/account/register<br>/api/account/login<br><br><br><br></body></html>")
-
-
 @permission_classes([])
 class RegistrationView(APIView):
     def post(self, request):
