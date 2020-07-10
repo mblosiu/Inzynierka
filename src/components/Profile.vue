@@ -24,7 +24,7 @@ export default {
   methods: {
     getUserData() {
       axios
-        .get("http://127.0.0.1:8000/api/account/properties", {
+        .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token")
@@ -37,7 +37,7 @@ export default {
     },
     getUserPreferences() {
       axios
-        .get("http://127.0.0.1:8000/api/account/preferences", {
+        .get("http://127.0.0.1:8000/api/user/preferences", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token")

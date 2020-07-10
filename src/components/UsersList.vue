@@ -29,7 +29,7 @@ export default {
   methods: {
     getUsers() {
       axios
-        .get("http://127.0.0.1:8000/api/account/users", {
+        .get("http://127.0.0.1:8000/api/user/users", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token")

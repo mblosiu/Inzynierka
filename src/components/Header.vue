@@ -67,7 +67,7 @@ export default {
   methods: {
     login() {
       axios
-        .post("http://127.0.0.1:8000/api/account/login", {
+        .post("http://127.0.0.1:8000/api/user/login", {
           username: this.username,
           password: this.password
         })
@@ -87,12 +87,12 @@ export default {
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/account/logout", {}, config)
+        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
         .then(
           response => console.log(response),
           localStorage.removeItem("user-token"),
           (this.token = null),
-          this.$router.go()
+          this.$router.push("/")
         )
         .catch(errors => console.log(errors));
     },

@@ -6,7 +6,7 @@ import Register from '../components/Register.vue'
 import Profile from '../components/Profile.vue'
 import Settings from '../components/Settings.vue'
 import UsersList from '../components/UsersList.vue'
-import UsersListFilters from '../components/UsersListFilters.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -40,12 +40,6 @@ const routes = [
     name: 'Users',
     component: UsersList
   },
-  {
-    path: '/users/filters',
-    name: 'UsersFilters',
-    component: UsersListFilters
-  },
-
 ]
 
 const router = new VueRouter({
