@@ -1,8 +1,8 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 
-from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, UserListView, \
-    UserListFilterView, RemoveUserAccountView, UserPreferencesView
+from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, RemoveUserAccountView, \
+    UserPreferencesView, UserListView, SearchUserListView, FilterUserListView
 
 app_name = 'users'
 
@@ -15,5 +15,6 @@ urlpatterns = [
     path('preferences', UserPreferencesView.as_view(), name="preferences"),
     path('picture', UserProfilePic.as_view(), name='user-picture'),
     path('users', UserListView.as_view(), name='user-list'),
-    path('users/filters', UserListFilterView.as_view(), name='user-list-filters'),
+    path('users-filters', FilterUserListView.as_view(), name='user-list-filters'),
+    path('users-search', SearchUserListView.as_view(), name='user-list-filters'),
 ]

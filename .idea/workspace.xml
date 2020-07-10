@@ -26,11 +26,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ad7491e-2ea3-424f-b14e-19c82aff9d49" name="Default Changelist" comment="status">
+    <list default="true" id="7b6169d6-3446-4498-bfb2-71fc1440e6e1" name="Default Changelist" comment="usunięcie powtórzenia">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,16 +45,22 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1drBXnQpBhTGxzUd5hDq8JA22ox" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/mblosiu/Inzynierka.git" />
+      </set>
+    </option>
   </component>
+  <component name="ProjectId" id="1cwtJGSKeMERw7Gn9RnfGr6yAqE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ChangesTree.GroupingKeys" value="directory" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
@@ -65,98 +71,122 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9ad7491e-2ea3-424f-b14e-19c82aff9d49" name="Default Changelist" comment="" />
-      <created>1593173373647</created>
+      <changelist id="7b6169d6-3446-4498-bfb2-71fc1440e6e1" name="Default Changelist" comment="" />
+      <created>1591451409492</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1593173373647</updated>
+      <updated>1591451409492</updated>
     </task>
-    <task id="LOCAL-00001" summary="more search filters, handle exceptions improvement, default values for fields in Account model">
-      <created>1593241535257</created>
+    <task id="LOCAL-00001" summary="github test">
+      <created>1591451446608</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1593241535257</updated>
+      <updated>1591451446608</updated>
     </task>
-    <task id="LOCAL-00002" summary="search more fields">
-      <created>1593241795341</created>
+    <task id="LOCAL-00002" summary="gitignore">
+      <created>1591451931541</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1593241795341</updated>
+      <updated>1591451931541</updated>
     </task>
-    <task id="LOCAL-00003" summary="search more fields, remove unnecessary imports">
-      <created>1593241990553</created>
+    <task id="LOCAL-00003" summary="test">
+      <created>1591452713389</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1593241990553</updated>
+      <updated>1591452713389</updated>
     </task>
-    <task id="LOCAL-00004" summary="UserProfileView - user can add and edit more info + recoded post method">
-      <created>1593246872147</created>
+    <task id="LOCAL-00004" summary="workspace">
+      <created>1591453980402</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1593246872147</updated>
+      <updated>1591453980402</updated>
     </task>
-    <task id="LOCAL-00005" summary="RemoveUserAccountView - possibility to permanently remove account  &#10;Fix error 500">
-      <created>1593348978626</created>
+    <task id="LOCAL-00005" summary="new fields required for register">
+      <created>1591630893596</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1593348978626</updated>
+      <updated>1591630893596</updated>
     </task>
-    <task id="LOCAL-00006" summary="RemoveUserAccountView - possibility to permanently remove account  &#10;Fix error 500">
-      <created>1593348988048</created>
+    <task id="LOCAL-00006" summary="add user profile picture">
+      <created>1592674532910</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1593348988048</updated>
+      <updated>1592674532910</updated>
     </task>
-    <task id="LOCAL-00007" summary="remove field 'race' from user model">
-      <created>1593349461551</created>
+    <task id="LOCAL-00007" summary="add user profile picture">
+      <created>1592674541373</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1593349461551</updated>
+      <updated>1592674541373</updated>
     </task>
-    <task id="LOCAL-00008" summary="matching form - model  &#10;matching form - serializer">
-      <created>1593351641641</created>
+    <task id="LOCAL-00008" summary="name and surname lowercase correction to uppercase">
+      <created>1592683317737</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1593351641641</updated>
+      <updated>1592683317737</updated>
     </task>
-    <task id="LOCAL-00009" summary="change Account to User Class  &#10;remove migrations">
-      <created>1593442972227</created>
+    <task id="LOCAL-00009" summary="user description - create, edit">
+      <created>1592683757993</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1593442972227</updated>
+      <updated>1592683757993</updated>
     </task>
-    <task id="LOCAL-00010" summary="logout - GET to POST  &#10;remove account - GET to POST  &#10;format all files  &#10;tests - but not working">
-      <created>1593447906491</created>
+    <task id="LOCAL-00010" summary="profile picture - check format + added authentication">
+      <created>1592724492102</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1593447906491</updated>
+      <updated>1592724492102</updated>
     </task>
-    <task id="LOCAL-00011" summary="profile picture - GET method">
-      <created>1593450018404</created>
+    <task id="LOCAL-00011" summary="Users list, users search, user filters">
+      <created>1592730610783</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1593450018404</updated>
+      <updated>1592730610783</updated>
     </task>
-    <task id="LOCAL-00012" summary="status">
-      <created>1593496042587</created>
+    <task id="LOCAL-00012" summary="Users list, users search, user filters">
+      <created>1592730813397</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1593496042587</updated>
+      <updated>1592730813397</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="user list filters">
+      <created>1592732009749</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1592732009749</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fronted - backend integration">
+      <created>1592810309715</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1592810309715</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -164,6 +194,11 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -183,32 +218,66 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="more search filters, handle exceptions improvement, default values for fields in Account model" />
-    <MESSAGE value="search more fields" />
-    <MESSAGE value="search more fields, remove unnecessary imports" />
-    <MESSAGE value="UserProfileView - user can add and edit more info + recoded post method" />
-    <MESSAGE value="RemoveUserAccountView - possibility to permanently remove account  &#10;Fix error 500" />
-    <MESSAGE value="remove field 'race' from user model" />
-    <MESSAGE value="matching form - model  &#10;matching form - serializer" />
-    <MESSAGE value="change Account to User Class  &#10;remove migrations" />
-    <MESSAGE value="logout - GET to POST  &#10;remove account - GET to POST  &#10;format all files  &#10;tests - but not working" />
-    <MESSAGE value="profile picture - GET method" />
-    <MESSAGE value="status" />
-    <option name="LAST_COMMIT_MESSAGE" value="status" />
+    <MESSAGE value="github test" />
+    <MESSAGE value="gitignore" />
+    <MESSAGE value="test" />
+    <MESSAGE value="workspace" />
+    <MESSAGE value="new fields required for register" />
+    <MESSAGE value="add user profile picture" />
+    <MESSAGE value="name and surname lowercase correction to uppercase" />
+    <MESSAGE value="user description - create, edit" />
+    <MESSAGE value="profile picture - check format + added authentication" />
+    <MESSAGE value="Users list, users search, user filters" />
+    <MESSAGE value="user list filters" />
+    <MESSAGE value="fronted - backend integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="fronted - backend integration" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="813" y="80" key="CommitChangelistDialog2" timestamp="1593449948092">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="657" y="277" key="#Notifications" timestamp="1591452055929">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="813" y="80" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593449948092" />
-    <state x="656" y="161" key="SettingsEditor" timestamp="1593495557603">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="657" y="277" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1591452055929" />
+    <state x="171" y="122" width="1200" height="584" key="DiffContextDialog" timestamp="1591452190546">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="656" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593495557603" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1593496050994">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="171" y="122" width="1200" height="584" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1591452190546" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1594053418723">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593496050994" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1594053418723" />
+    <state x="564" y="279" key="Github.CreatePullRequestDialog" timestamp="1593890492593">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="564" y="279" key="Github.CreatePullRequestDialog/0.0.1536.824@0.0.1536.824" timestamp="1593890492593" />
+    <state x="561" y="135" key="RollbackChangesDialog" timestamp="1591451724118">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="561" y="135" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591451724118" />
+    <state x="231" y="64" key="SettingsEditor" timestamp="1592810695943">
+      <screen x="0" y="0" width="1280" height="920" />
+    </state>
+    <state x="231" y="64" key="SettingsEditor/0.0.1280.920@0.0.1280.920" timestamp="1592810695943" />
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591452679401" />
+    <state x="589" y="112" key="VCS.ChangeListViewerDialog" timestamp="1591452133217">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="589" y="112" key="VCS.ChangeListViewerDialog/0.0.1536.824@0.0.1536.824" timestamp="1591452133217" />
+    <state x="301" y="162" key="Vcs.Push.Dialog.v2" timestamp="1592810323086">
+      <screen x="0" y="0" width="1280" height="920" />
+    </state>
+    <state x="301" y="162" key="Vcs.Push.Dialog.v2/0.0.1280.920@0.0.1280.920" timestamp="1592810323086" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592732015131" />
+    <state x="171" y="122" width="1200" height="584" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1591451882816">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="171" y="122" width="1200" height="584" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1591451882816" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593890506094">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1593890506094" />
+    <state x="481" y="205" key="git4idea.merge.GitPullDialog" timestamp="1592723741506">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="481" y="205" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592723741506" />
   </component>
 </project>

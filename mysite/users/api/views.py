@@ -251,7 +251,64 @@ class UserProfilePic(APIView):
 
     # USER LIST - SEARCHER
 
+# USER LIST - SEARCH - NOT IN USE
+@permission_classes([IsAuthenticated])
+class SearchUserListView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
+                     'hair_color', 'body_type', 'is_smoking',
+                     'is_drinking_alcohol']
+    queryset = User.objects.all()
 
+
+# USER LIST - FILTERS - NOT IN USE
+@permission_classes([IsAuthenticated])
+class FilterUserListView(generics.ListAPIView):
+    serializer_class = UserSerializer
+
+    queryset = User.objects.all()
+
+    def get(self, request):
+        queryset = self.get_queryset()
+
+        name = request.data.get('name', None)
+        surname = request.data.get('surname', None)
+        location = request.data.get('location', None)
+        sex = request.data.get('sex', None)
+        hair_color = request.data.get('hair_color', None)
+        growth = request.data.get('growth', None)
+        weight = request.data.get('weight', None)
+        body_type = request.data.get('body_type', None)
+        is_smoking = request.data.get('is_smoking', None)
+        is_drinking_alcohol = request.data.get('is_drinking_alcohol', None)
+
+        if not (name is None or name == ''):
+            queryset = queryset.filter(name=name)
+        if not (surname is None or surname == ''):
+            queryset = queryset.filter(surname=surname)
+        if not (location is None or location == ''):
+            queryset = queryset.filter(location=location)
+        if not (sex is None or sex == ''):
+            queryset = queryset.filter(sex=sex)
+        if not (hair_color is None or hair_color == ''):
+            queryset = queryset.filter(hair_color=hair_color)
+        if not (growth is None or growth == ''):
+            queryset = queryset.filter(growth=growth)
+        if not (weight is None or weight == ''):
+            queryset = queryset.filter(weight=weight)
+        if not (body_type is None or body_type == ''):
+            queryset = queryset.filter(body_type=body_type)
+        if not (is_smoking is None or is_smoking == ''):
+            queryset = queryset.filter(is_smoking=is_smoking)
+        if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
+            queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
+
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# USER LIST - SEARCH AND FILTERS
 @permission_classes([IsAuthenticated])
 class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
@@ -261,14 +318,8 @@ class UserListView(generics.ListAPIView):
                      'is_drinking_alcohol']
     queryset = User.objects.all()
 
-
-# USER LIST - FILTERS
-@permission_classes([IsAuthenticated])
-class UserListFilterView(generics.ListAPIView):
-    serializer_class = UserSerializer
-
     def get(self, request):
-        queryset = User.objects.all()
+        queryset = self.filter_queryset(self.get_queryset())
 
         name = request.data.get('name', None)
         surname = request.data.get('surname', None)
