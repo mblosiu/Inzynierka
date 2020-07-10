@@ -246,6 +246,7 @@ class UserProfilePic(APIView):
 
     # USER LIST - SEARCHER
 
+
 # USER LIST - SEARCH - NOT IN USE
 @permission_classes([IsAuthenticated])
 class SearchUserListView(generics.ListAPIView):
