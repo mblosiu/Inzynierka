@@ -2,9 +2,9 @@
   <div class>
     <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{error_message}}</b-alert>
 
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand class="text-white" href="#">Tytuł strony</b-navbar-brand>
-
+    <b-navbar toggleable="lg" type="dark" variant="dark">
+      <b-navbar-brand class="text-white" href="/">e-love</b-navbar-brand>
+ 
       <b-nav-form @submit.prevent="search">
         <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
         <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
@@ -40,11 +40,11 @@
           />
           <b-button size="sm" class="my-2 my-sm-0" type="submit">Login</b-button>
         </b-nav-form>
-        <b-nav-form @submit.prevent="logout" v-if="token !== null">
-          <b-button type="submit" size="sm" class="my-2 ml-2">Logout</b-button>
-        </b-nav-form>
-        <b-nav-form @submit.prevent="register" v-if="token === null">
+        <b-nav-form @submit.prevent="register" v-if="token == null">
           <b-button :to="{name:'Register'}" type="button" size="sm" class="my-2 ml-2">Register</b-button>
+        </b-nav-form>
+        <b-nav-form @submit.prevent="logout" v-if="token != null">
+          <b-button type="submit" size="sm" class="my-2 ml-2">Logout</b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-navbar>
@@ -77,7 +77,7 @@ export default {
           (this.status = response.status),
             (this.token = response.data.token),
             localStorage.setItem("user-token", this.token);
-            if (response.status == 200) {
+          if (response.status == 200) {
             this.error_message = "";
             this.showDismissibleAlert = false;
           }
