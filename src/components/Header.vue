@@ -44,7 +44,7 @@
           <b-button :to="{name:'Register'}" type="button" size="sm" class="my-2 ml-2">Register</b-button>
         </b-nav-form>
         <b-nav-form @submit.prevent="logout" v-if="token != null">
-          <b-button type="submit" size="sm" class="my-2 ml-2">Logout</b-button>
+          <b-button size="sm" type="submit" class="my-2 ml-2">Logout</b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-navbar>
@@ -103,7 +103,7 @@ export default {
           response => console.log(response),
           localStorage.removeItem("user-token"),
           (this.token = null),
-          this.$router.push("/")
+          this.$router.push('/')
         )
         .catch(errors => console.log(errors));
     },

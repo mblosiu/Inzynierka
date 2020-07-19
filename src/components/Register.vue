@@ -2,7 +2,7 @@
   <div class>
     <h1>User Registration</h1>
 
-    <form id="formvideo" @submit.prevent="CreateUser">
+    <form id="formregister" @submit.prevent="CreateUser">
       <p>
         <label for="username">Username</label>
         <input class="ml-2" type="text" name="username" id="username1" v-model="username" />

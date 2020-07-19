@@ -40,7 +40,6 @@ export default {
 
 #nav {
   padding: 0px;
-  padding-bottom: 10px;
 }
 
 #nav a {
@@ -63,5 +62,6 @@ export default {
   padding: 0px;
   min-height: 70vh;
   padding-bottom: 10px;
+  padding-top: 10px;
 }
 </style>
