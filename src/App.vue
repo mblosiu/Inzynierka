@@ -58,7 +58,6 @@ export default {
   margin-right: 2cm;
   margin-top: 1cm;
   margin-bottom: 1cm;
-  border: 1px solid black;
 }
 
 #footer {
