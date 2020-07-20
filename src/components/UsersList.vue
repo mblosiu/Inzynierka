@@ -117,7 +117,12 @@ export default {
         .then(response => {
           console.log(response), (this.users = response.data);
         })
-        .catch(errors => console.log(errors));
+        .catch(errors => {
+          if (errors.response.status == 401) {
+            this.$router.push("/");
+          }
+          console.log(errors.status);
+        });
     },
     filterUsers() {
       this.users = [];
