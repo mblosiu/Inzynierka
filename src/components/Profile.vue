@@ -1,10 +1,11 @@
 <template>
   <div class>
+    <div v-if="token == null">{{$router.push('/')}}</div>
     <h1>Profile</h1>
     {{user_data.username}}
-    <br>
+    <br />
     {{user_data.sex}}
-    <br>
+    <br />
     {{user_data.location}}
   </div>
 </template>

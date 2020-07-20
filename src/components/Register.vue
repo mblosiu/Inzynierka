@@ -1,5 +1,6 @@
 <template>
   <div class>
+    <div v-if="token == null">{{$router.push('/')}}</div>
     <h1>User Registration</h1>
 
     <form id="formregister" @submit.prevent="CreateUser">
@@ -45,6 +46,7 @@ export default {
   components: {},
   data() {
     return {
+      token: localStorage.getItem("user-token"),
       username: null,
       password: null,
       password2: null,
@@ -67,9 +69,10 @@ export default {
           location: this.location,
           sex: this.sex
         })
-        .then(response => console.log(response))
+        .then(response => {
+          this.$router.push("/");
+        })
         .catch(errors => console.log(errors));
-      this.$router.push("/");
     }
   }
 };
