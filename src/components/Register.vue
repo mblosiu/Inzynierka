@@ -1,6 +1,5 @@
 <template>
   <div class>
-    <div v-if="token == null">{{$router.push('/')}}</div>
     <h1>User Registration</h1>
 
     <form id="formregister" @submit.prevent="CreateUser">

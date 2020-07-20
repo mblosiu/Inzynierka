@@ -4,7 +4,7 @@
 
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand class="text-white" href="/">e-love</b-navbar-brand>
- 
+
       <b-nav-form @submit.prevent="search">
         <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
         <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
@@ -74,12 +74,12 @@ export default {
           password: this.password
         })
         .then(response => {
-          (this.status = response.status),
-            (this.token = response.data.token),
-            localStorage.setItem("user-token", this.token);
+          (this.status = response.status), (this.token = response.data.token);
           if (response.status == 200) {
-            this.error_message = "";
-            this.showDismissibleAlert = false;
+            (this.error_message = ""),
+              (this.showDismissibleAlert = false),
+              this.$router.go(),
+              localStorage.setItem("user-token", this.token);
           }
         })
         .catch(errors => {
@@ -88,7 +88,6 @@ export default {
             this.showDismissibleAlert = true;
           }
         });
-      //this.$router.go()
     },
     logout() {
       let config = {
@@ -103,7 +102,7 @@ export default {
           response => console.log(response),
           localStorage.removeItem("user-token"),
           (this.token = null),
-          this.$router.go('/')
+          this.$router.go("/")
         )
         .catch(errors => console.log(errors));
     },

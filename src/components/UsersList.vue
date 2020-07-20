@@ -1,6 +1,5 @@
 <template>
   <div class>
-    <div v-if="token == null">{{$router.push('/')}}</div>
     <form id="filters" @submit.prevent="filterUsers">
       <table>
         <tr>

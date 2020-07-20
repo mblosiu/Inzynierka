@@ -51,4 +51,9 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Home' && !localStorage.getItem("user-token")) next({ name: 'Home' })
+  else next()
+})
+
 export default router

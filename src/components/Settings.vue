@@ -1,6 +1,5 @@
 <template>
   <div class>
-    <div v-if="token == null">{{$router.push('/')}}</div>
     <h1>Informations about you</h1>
     <form id="editUser" @submit.prevent="editUserData">
       <p>
