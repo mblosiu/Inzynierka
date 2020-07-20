@@ -59,9 +59,10 @@ export default {
 #content {
   background-color: whitesmoke;
   color: #343a40;
-  padding: 0px;
-  min-height: 70vh;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  min-height: 72vh;
+  margin-left: 2cm;
+  margin-right: 2cm;
+  margin-top: 1cm;
+  margin-bottom: 1cm;
 }
 </style>

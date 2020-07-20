@@ -1,44 +1,81 @@
 <template>
   <div class>
-    <div id="filters">
-      <form id="filter-form" @submit.prevent="filterUsers">
-        <div id="filter">
-          <b-form-select v-model="location" :options="options" size="sm" class="mt-3"></b-form-select>
-        </div>
-        <div id="filter">
-          <label for="birthday">birthday</label>
-          <input class="ml-2" type="text" name="birthday" id="birthday" v-model="birthday" />
-        </div>
-        <p>
-          <input type="submit" value="Submit" />
-        </p>
-      </form>
-    </div>
+    <form id="filters" @submit.prevent="filterUsers">
+      <table>
+        <tr>
+          <th>
+            <div id="filter">
+              <b-form-select
+                :options="sex_options"
+                class="ml-2"
+                id="sex"
+                v-model="sex"
+                size="sm"
+                value="sex"
+              ></b-form-select>
+            </div>
+          </th>
+          <th>
+            <div id="filter">
+              <b-form-select
+                :options="location_options"
+                class="ml-2"
+                id="location"
+                v-model="location"
+                size="sm"
+                value="location"
+              ></b-form-select>
+            </div>
+          </th>
+          <th>
+            <div id="filter">
+              <input
+                class="ml-2"
+                type="text"
+                name="birthday"
+                id="birthday"
+                v-model="birthday"
+                placeholder="birthday"
+              />
+            </div>
+          </th>
+          <th>
+            <div id="filter">
+              <input type="submit" value="Filtruj" />
+            </div>
+          </th>
+        </tr>
+      </table>
+    </form>
 
-    <h1>Lista potencjalnych partnerów</h1>
-    <div id="users-list">
-      <b-table striped hover :items="users" :fields="fields"></b-table>
-    </div>
+    <h1 id="title">Lista potencjalnych partnerów</h1>
 
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src alt="Card image cap" />
-      <div class="card-body">
-        <h5 class="card-title">Imie nazwisko</h5>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Lokalizacja</li>
-          <li class="list-group-item">Wiek</li>
-          <li class="list-group-item">Płeć</li>
-        </ul>
-      </div>
-      <p
-        class="card-text"
-      >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam. Quisque semper justo at risus.</p>
-
-      <div class="card-body">
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-      </div>
-    </div>
+    <table id="users-list">
+      <tr v-for="i in Math.ceil(users.length / 3)" v-bind:key="i">
+        <td v-for="user in users.slice((i - 1) * 3, i * 3)" v-bind:key="user.id">
+          <div class="card">
+            <img
+              class="card-img-top"
+              src="https://image.shutterstock.com/image-vector/avatar-vector-male-profile-gray-260nw-538707355.jpg"
+              alt="image alt"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{user.name}} {{user.surname}}</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Lokalizacja: {{user.location}}</li>
+                <li class="list-group-item">Wiek: {{user.birthday}}</li>
+                <li class="list-group-item">Płeć: {{user.sex}}</li>
+              </ul>
+            </div>
+            <div class="card-text">{{user.description}}</div>
+            <div class="card-body">
+              <a href="#" class="card-link">Go to profile</a>
+              <a href="#" class="card-link">Dodaj do ulubionych</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -54,7 +91,13 @@ export default {
       sex: null,
       location: null,
       users: [],
-      options: [
+      sex_options: [
+        { value: null, text: "Płeć" },
+        { value: "Male", text: "Mężczyzna" },
+        { value: "Female", text: "Kobieta" }
+      ],
+      location_options: [
+        { value: null, text: "Lokalizacja" },
         { value: "Poznań", text: "Poznań" },
         { value: "Placeholder", text: "Placeholder" }
       ],
@@ -102,12 +145,30 @@ export default {
 </script>
 
 <style scoped>
-#users-list {
-  margin-left: 100px;
-  margin-right: 100px;
+#filters {
+  margin: auto;
+  width: 50%;
 }
 
 #filter {
-  width: 100px;
+  margin: auto;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#title {
+  padding: 1cm;
+}
+
+.card {
+  min-width: 100%;
+  height: 700px;
+}
+
+td {
+  padding-left: 2.1cm;
+  padding-right: 2.1cm;
+  padding-bottom: 1cm;
 }
 </style>
