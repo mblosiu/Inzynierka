@@ -53,7 +53,9 @@ export default {
 #footer {
   background-color: #343a40;
   color: whitesmoke;
-  padding: 0px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 #content {
