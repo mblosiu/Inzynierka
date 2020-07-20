@@ -103,7 +103,7 @@ export default {
           response => console.log(response),
           localStorage.removeItem("user-token"),
           (this.token = null),
-          this.$router.push('/')
+          this.$router.go('/')
         )
         .catch(errors => console.log(errors));
     },
@@ -121,7 +121,6 @@ export default {
     },
     search() {
       console.log(this.searchText);
-      this.$store.dispatch("search", { text: this.searchText });
     }
   }
 };
