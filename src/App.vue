@@ -50,14 +50,6 @@ export default {
   color: #42b983;
 }
 
-#footer {
-  background-color: #343a40;
-  color: whitesmoke;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
 #content {
   background-color: whitesmoke;
   color: #343a40;
@@ -66,5 +58,13 @@ export default {
   margin-right: 2cm;
   margin-top: 1cm;
   margin-bottom: 1cm;
+  border: 1px solid black;
+}
+
+#footer {
+  background-color: #343a40;
+  color: whitesmoke;
+  bottom: 0;
+  width: 100%;
 }
 </style>
