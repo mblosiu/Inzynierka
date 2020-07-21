@@ -51,9 +51,20 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'Home' && !localStorage.getItem("user-token")) next({ name: 'Home' })
-  else next()
+  // LOGED OUT restrictions (not restricted: Home, Register, About)
+  //to.name !== 'Home' && to.name !== 'Register' && to.name !== 'About'
+  if (!['Home', 'Register', 'About'].includes(to.name) && !localStorage.getItem("user-token")) {
+    next({ name: 'Home' })
+  }
+  // LOGED IN restrictions
+  else if (['Register'].includes(to.name) && localStorage.getItem("user-token")) {
+    next({ name: 'Home' })
+  }
+  else {
+    next()
+  }
 })
 
 export default router
