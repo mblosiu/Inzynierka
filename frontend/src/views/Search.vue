@@ -12,13 +12,18 @@
         <br />
         <div>
           <p v-bind:key="user.id" v-for="user in users">
-            {{user.username}}
-            <br />
-            {{user.sex}}
-            <br />
-            {{user.location}}
-            <br />
-            <br />
+            <b-card
+              v-if="profileImage==null"
+              img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
+              img-alt="Card image"
+              img-left
+              class="mb-3"
+            >
+              <b-card-text>
+                <h1>{{user.username}}</h1>
+                <br />opis usera
+              </b-card-text>
+            </b-card>
           </p>
         </div>
       </div>
@@ -45,7 +50,8 @@ export default {
   },
   data() {
     return {
-      users: []
+      users: [],
+      profileImage: null
     };
   },
   methods: {
