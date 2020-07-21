@@ -18,7 +18,6 @@ export default {
   components: {},
   data() {
     return {
-      token: localStorage.getItem("user-token"),
       user_data: {},
       user_preferences: {}
     };

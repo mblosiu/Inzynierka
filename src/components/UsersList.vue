@@ -87,7 +87,6 @@ export default {
   components: {},
   data() {
     return {
-      token: localStorage.getItem("user-token"),
       birthday: null,
       sex: null,
       location: null,

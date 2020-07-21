@@ -1,5 +1,7 @@
 <template>
   <div class>
+    <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{error_message}}</b-alert>
+
     <h1>User Registration</h1>
 
     <form id="formregister" @submit.prevent="CreateUser">
@@ -45,7 +47,9 @@ export default {
   components: {},
   data() {
     return {
-      token: localStorage.getItem("user-token"),
+      showDismissibleAlert: false,
+      error_message: "",
+
       username: null,
       password: null,
       password2: null,
@@ -71,7 +75,24 @@ export default {
         .then(response => {
           this.$router.push("/");
         })
-        .catch(errors => console.log(errors));
+        .catch(errors => {
+          if(errors.response.data.username[0] == "user with this username already exists."){
+            (this.showDismissibleAlert = true), 
+            (this.error_message = "Nazwa użytkownika zajęta!");
+          }
+          if (errors.response.data.email[0] == "user with this email already exists.") {
+            (this.showDismissibleAlert = true), 
+            (this.error_message = "Już istnieje konto dla tego adresu email!");
+          }
+          if(this.password != this.password2){
+            (this.showDismissibleAlert = true), 
+            (this.error_message = "Hasła muszą do siebie pasować");
+          }
+          if(this.username == null || this.password == null || this.password2 == null || this.email == null || this.birthday==null||this.location==null||this.sex==null){
+            (this.showDismissibleAlert = true), 
+            (this.error_message = "Niektóre pola nie zostały wypełnione!");
+          }
+        });
     }
   }
 };

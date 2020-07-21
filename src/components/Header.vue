@@ -58,12 +58,12 @@ export default {
   components: {},
   data() {
     return {
+      token: localStorage.getItem("user-token") || null,
       username: "",
       password: "",
-      token: localStorage.getItem("user-token") || null,
       searchText: "",
       showDismissibleAlert: false,
-      error_message: "xd"
+      error_message: ""
     };
   },
   methods: {
@@ -74,12 +74,12 @@ export default {
           password: this.password
         })
         .then(response => {
-          (this.status = response.status), (this.token = response.data.token);
           if (response.status == 200) {
             (this.error_message = ""),
               (this.showDismissibleAlert = false),
-              this.$router.go(),
-              localStorage.setItem("user-token", this.token);
+              (this.token = response.data.token),
+              localStorage.setItem("user-token", response.data.token),
+              this.$router.go();
           }
         })
         .catch(errors => {
@@ -98,12 +98,13 @@ export default {
 
       axios
         .post("http://127.0.0.1:8000/api/user/logout", {}, config)
-        .then(
-          response => console.log(response),
-          localStorage.removeItem("user-token"),
-          (this.token = null),
-          this.$router.go("/")
-        )
+        .then(response => {
+          if (response.status == 200) {
+            localStorage.removeItem("user-token"),
+              (this.token = null),
+              this.$router.go("/");
+          }
+        })
         .catch(errors => console.log(errors));
     },
     register() {
