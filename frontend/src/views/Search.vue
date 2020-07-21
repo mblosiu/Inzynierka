@@ -20,7 +20,7 @@
               class="mb-3"
             >
               <b-card-text>
-                <h1>{{user.username}}</h1>
+                <h1>{{user.username}} ({{getAge(user.birthday)}})</h1>
                 <br />opis usera
               </b-card-text>
             </b-card>
@@ -51,8 +51,12 @@ export default {
   data() {
     return {
       users: [],
-      profileImage: null
-    };
+      profileImage: null,
+      today: new Date(),
+      birthDate: "",
+      age: "",
+      m: "",
+    }
   },
   methods: {
     getUsers() {
@@ -67,7 +71,18 @@ export default {
           console.log(response), (this.users = response.data);
         })
         .catch(errors => console.log(errors));
+    },
+    getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
     }
+
+    return age;
+}
   },
   created() {
     this.getUsers();
