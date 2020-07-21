@@ -1,6 +1,5 @@
 <template>
   <div class>
-  <!--  <div v-if="token == null">{{$router.push('/')}}</div> -->
     <h1>Profile</h1>
     {{user_data.username}}
     <br />
@@ -9,7 +8,6 @@
     {{user_data.location}}
   </div>
 </template>
-
 
 <script>
 import axios from "axios";
