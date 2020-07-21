@@ -167,6 +167,7 @@ export default {
 <style scoped>
 .profile {
   width: 300px;
+  min-height: 500px;
   margin-left: auto;
   margin-right: auto;
   border: 2px groove #343a40;
@@ -175,6 +176,7 @@ export default {
 }
 .preferences {
   width: 300px;
+  min-height: 500px;
   margin-left: auto;
   margin-right: auto;
   border: 2px groove #343a40;
@@ -183,6 +185,7 @@ export default {
 }
 .settings {
   width: 300px;
+  min-height: 500px;
   margin-left: auto;
   margin-right: auto;
   border: 2px groove #343a40;
@@ -193,6 +196,7 @@ table {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+  position: relative;
 }
 </style>
 
