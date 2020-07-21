@@ -13,11 +13,16 @@
             <h5 class="card-header">Logowanie</h5>
             <br />
             <p class="card-text"></p>
-            <form @submit.prevent="loginUser">
+            <form @submit.prevent="login">
               <p>
                 <label for="username">
                   Nazwa użytkownika
-                  <input type="text" name="username" id="username" v-model="username" />
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    v-model="username"
+                  />
                 </label>
                 <br />
               </p>
@@ -31,7 +36,7 @@
               <br />
               <p>
                 <input
-                  v-on:click="loginUser"
+                  v-on:click="login"
                   class="btn btn-outline-success"
                   type="submit"
                   value="Zaloguj"
@@ -47,7 +52,7 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 //import Api from "../service/api";
 
 export default {
@@ -57,49 +62,27 @@ export default {
     return {
       username: "",
       password: "",
-      token: null,
-      status: "",
-      user: ""
+      token: localStorage.getItem("user-token") || null,
+      //search: [],
+      errors: []
     };
   },
 
   methods: {
-    async loginUser() {
-      let user = await this.$store.dispatch('loginUser', {username: this.username, password: this.password});
-      console.log(user);
-      if(user.status=="200"){
-        this.$router.push("/mainuser");
-      } else {
-        console.log("error")
-      }
-      /*if(this.user.error){
-        alert(user.error)
-      } else {
-          alert('Udane logowanie użytkownika' + user.name);
-          this.$router.push("/mainuser");
-      }*/
-
-      /*Api()
-        .post("/account/login", {
+    login() {
+      axios
+        .post("http://127.0.0.1:8000/api/user/login", {
           username: this.username,
           password: this.password
         })
-        .then(Response => {
-          this.status = Response.status;
-          this.token = Response.data.token;
-          console.log(this.token);
-          console.log(Response.status);
-          localStorage.setItem("user-token", Response.data.token);
-          //localStorage.setItem("username", this.username);
+        .then(response => {
+          console.log(response),
+            (this.token = response.data.token),
+            localStorage.setItem("user-token", response.data.token);
+          this.$router.go();
         })
-        .catch(Error => {
-          console.log(Error);
-          localStorage.removeItem("user-token");
-        });*/
-      //this.$store.dispatch("loginUser", user);
-      //tu pushnac na strone usera
-
-      //history.go();
+        .catch(errors => console.log(errors));
+      this.$router.push("/mainuser");
     }
   }
 };

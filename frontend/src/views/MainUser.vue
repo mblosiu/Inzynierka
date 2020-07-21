@@ -6,30 +6,41 @@
         <b-col cols="2">
           <div>
             <router-link to="mainuser/search">Szukaj osób</router-link>
-            <b-nav-item>Dopasuj</b-nav-item>
-            <b-nav-item>Polubienia</b-nav-item>
-            <b-nav-item>Wiadomości</b-nav-item>
-            <b-nav-item>Kontakty</b-nav-item>
-            <router-link to="mainuser/gallery">Galeria</router-link>
-            <b-nav-item>Ustawienia profilu</b-nav-item>
+            <b-nav-item disabled>Dopasuj</b-nav-item>
+            <b-nav-item disabled>Polubienia</b-nav-item>
+            <b-nav-item disabled>Wiadomości</b-nav-item>
+            <b-nav-item disabled>Kontakty</b-nav-item>
+            <router-link to="mainuser/gallery">Galeria</router-link> <br />
+            <router-link to="mainuser/settings">Ustawienia profilu</router-link>
             <b-nav-item disabled>Premium</b-nav-item>
           </div>
         </b-col>
         <b-col cols="7">
-          <UserCard />
+          <b-card
+            v-if="profileImage==null"
+            img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
+            img-alt="Card image"
+            img-left
+            class="mb-3"
+          >
+            <b-card-text>
+              <h1>{{user_data.username}}</h1>
+              <br />Description
+            </b-card-text>
+          </b-card>
         </b-col>
         <b-col cols="3">
           <h1>O mnie:</h1>
-          <p>Imię: {{currentUser}}</p>
+          <p>Imię: {{user_data.username}}</p>
           <p>Wiek:</p>
-          <p>Płeć:</p>
-          <p>Mieszkam w:</p>
-          <p>Urodziny:</p>
+          <p>Płeć: {{user_data.sex}}</p>
+          <p>Mieszkam w: {{user_data.location}}</p>
+          <p>Urodziny: {{user_data.birthday}}</p>
           <p>Wygląd:</p>
           <br />
           <h4>Cechy charakteru:</h4>
-          <br /> 
-          <h1>Zainteresowania: </h1>
+          <br />
+          <h1>Zainteresowania:</h1>
           <p>Hobby:</p>
           <p>Muzyka:</p>
 
@@ -47,26 +58,64 @@
 
 
 <script>
-
-import { mapState } from 'vuex'; 
-import UserCard from '../components/UserCard.vue'
+//import { mapState } from 'vuex';
+//import UserCard from '../components/UserCard.vue'
+import axios from "axios";
 
 export default {
   name: "MainUser",
   components: {
-    UserCard
+    //UserCard
   },
-  computed: {
+  data() {
+    return {
+      user_data: {},
+      user_preferences: {}
+    };
+  },
+  methods: {
+    getUserData() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/properties", {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token")
+          }
+        })
+        .then(response => {
+          console.log(response), (this.user_data = response.data);
+        })
+        .catch(errors => console.log(errors));
+    },
+    getUserPreferences() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/preferences", {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token")
+          }
+        })
+        .then(response => {
+          console.log(response), (this.user_preferences = response.data);
+        })
+        .catch(errors => console.log(errors));
+    }
+  },
+  created() {
+    this.getUserData();
+    this.getUserPreferences();
+  }
+  /*computed: {
     ...mapState(['currentUser'])
   },
   data() {
     return {
-      //token: localStorage.getItem("user-token") || null,
-      //username: localStorage.getItem("username") || null,
+      token: localStorage.getItem("user-token") || null,
       profileImage: null
+  
     };
   },
-  methods: {}
+  methods: {}*/
 };
 </script>
 
@@ -78,7 +127,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
-  
 }
 
 #nav {
@@ -99,12 +147,10 @@ export default {
   object-fit: scale-down;
 }
 
-.card-text{
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.card-text {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
-  color:midnightblue;
-
+  color: midnightblue;
 }
-
 </style>

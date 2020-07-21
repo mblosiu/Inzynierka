@@ -45,7 +45,7 @@ export default new Vuex.Store({
         let response = await Api().post('/account/login', {username, password});
         let token = response.data;
         let user = response//.data.attributes;
-        console.log(response)
+        //console.log(response)
 
         commit('SET_CURRENT_USER', token);
         return user;

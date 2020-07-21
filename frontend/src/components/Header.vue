@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a v-if="currentUser=={}" class="navbar-brand" href="/">e-Love</a>
+    <a v-if="token == null" class="navbar-brand" href="/">e-Love</a>
     <a v-else class="navbar-brand" href="/mainuser">e-Love</a>
     <button
       class="navbar-toggler"
@@ -14,7 +14,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div v-if="currentUser=={}" class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div v-if="token == null" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <router-link class="btn btn-outline-primary my-2 my-sm-0" to="/login">Logowanie</router-link>
@@ -30,7 +30,7 @@
     </div>
     <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto"></ul>
-      <b-nav-form @submit.prevent="logoutUser">
+      <b-nav-form @submit.prevent="logout">
         <b-button type="submit" size="sm" class="Primary">Wyloguj</b-button>
       </b-nav-form>
     </div>
@@ -39,7 +39,7 @@
 
 <script>
 
-//import axios from 'axios';
+import axios from 'axios';
 //import { mapState } from 'vuex';
 
 export default {
@@ -47,20 +47,33 @@ export default {
     components: {
 
     },
+    /*computed: {
+      ...mapState(['currentUser'])
+    },*/
     data() {
     return {
-      //token: localStorage.getItem("user-token") || null
-      //currentUser: window.localStorage.currentUser
+      token: localStorage.getItem("user-token") || null
+      
     };
   },
   methods: {
-    logoutUser() {
-      this.$store.dispatch("logoutUser");
-      //localStorage.removeItem("user-token");
-      //this.token = null;
-      this.$router.push("/");
-      history.go()
-    }
+    logout() {
+      let config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token")
+        }
+      };
+
+      axios
+        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
+        .then(
+          response => console.log(response),
+          localStorage.removeItem("user-token"),
+          (this.token = null),
+          this.$router.push("/")
+        )
+        .catch(errors => console.log(errors));
+    },
   }
 
 }

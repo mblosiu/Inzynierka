@@ -6,6 +6,7 @@ import Register from "../views/Register.vue";
 import MainUser from "../views/MainUser.vue"
 import Gallery from "../views/Gallery.vue"
 import Search from "../views/Search.vue"
+import Settings from "../views/Settings.vue"
 
 Vue.use(VueRouter);
 
@@ -13,7 +14,17 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home/*,
+    beforeEnter( to, from, next){
+      let currentUser = JSON.parse(window.localStorage.currentUser);
+      if(currentUser!={}){
+        console.log("zalogowany")
+        next('/mainuser'); 
+      } else {
+        console.log("brakusera")
+        next('/');
+      }
+    }*/
   },
   {
     path: "/login",
@@ -39,6 +50,21 @@ const routes = [
     path: "/mainuser/gallery",
     name: "gallery",
     component: Gallery
+    /*beforeEnter( to, from, next){
+      let currentUser = JSON.parse(window.localStorage.currentUser);
+      if(currentUser!={}){
+        console.log("zalogowany")
+        next(); 
+      } else {
+        console.log("brakusera")
+        next('/');
+      }*/
+    
+  },
+  {
+    path: "/mainuser/settings",
+    name: "Settings",
+    component: Settings
   },
   {
     path: "/about",

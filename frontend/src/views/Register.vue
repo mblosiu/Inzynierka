@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
           <p class="card-text"></p>
-          <form @submit.prevent="register">
+          <form @submit.prevent="CreateUser">
             <p>
               <label for="username">
                 Nazwa konta
@@ -65,7 +65,7 @@
             </p>
             <p>
               <input
-                v-on:click="register"
+                v-on:click="CreateUser"
                 class="btn btn-outline-success"
                 type="submit"
                 value="Zarejestruj"
@@ -79,8 +79,8 @@
 </template>
 
 <script>
-//import axios from "axios";
-import Api from "../service/api";
+import axios from "axios";
+//import Api from "../service/api";
 
 export default {
   name: "Register",
@@ -98,25 +98,21 @@ export default {
   },
 
   methods: {
-    register() {
-      if (this.password !== this.password2) {
-        console.log("Podane hasła muszą być identyczne!");
-        this.$router.push("/register");
-      } else {
-        Api()
-          .post("/account/register", {
-            username: this.username,
-            email: this.email,
-            location: this.location,
-            birthday: this.birthday,
-            sex: this.sex,
-            password: this.password,
-            password2: this.password2
-          })
-          .then(Response => console.log(Response))
-          .catch(err => console.log(err));
-        this.$router.push("/");
-      }
+    CreateUser() {
+      console.log(this.username);
+      axios
+        .post("http://127.0.0.1:8000/api/user/register", {
+          username: this.username,
+          password: this.password,
+          password2: this.password2,
+          email: this.email,
+          birthday: this.birthday,
+          location: this.location,
+          sex: this.sex
+        })
+        .then(response => console.log(response))
+        .catch(errors => console.log(errors));
+      this.$router.push("/");
     }
   }
 };
