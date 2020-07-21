@@ -5,13 +5,13 @@
       <b-row>
         <b-col cols="2">
           <div>
-            <router-link to="mainuser/search">Szukaj osób</router-link>
+            <router-link to="users">Szukaj osób</router-link>
             <b-nav-item disabled>Dopasuj</b-nav-item>
             <b-nav-item disabled>Polubienia</b-nav-item>
             <b-nav-item disabled>Wiadomości</b-nav-item>
             <b-nav-item disabled>Kontakty</b-nav-item>
-            <router-link to="mainuser/gallery">Galeria</router-link> <br />
-            <router-link to="mainuser/settings">Ustawienia profilu</router-link>
+            <router-link to="gallery">Galeria</router-link> <br />
+            <router-link to="settings">Ustawienia profilu</router-link>
             <b-nav-item disabled>Premium</b-nav-item>
           </div>
         </b-col>
@@ -105,17 +105,6 @@ export default {
     this.getUserData();
     this.getUserPreferences();
   }
-  /*computed: {
-    ...mapState(['currentUser'])
-  },
-  data() {
-    return {
-      token: localStorage.getItem("user-token") || null,
-      profileImage: null
-  
-    };
-  },
-  methods: {}*/
 };
 </script>
 

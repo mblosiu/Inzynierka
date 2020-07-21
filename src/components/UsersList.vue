@@ -49,11 +49,24 @@
     </form>
 
     <h1 id="title">Lista potencjalnych partnerów</h1>
-
+    <div class="users-list" v-for="user in users" v-bind:key="user">
+    <b-card
+      v-if="profileImage==null"
+      img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
+      img-alt="Card image"
+      img-left
+      class="mb-3"
+    >
+      <b-card-text>
+        <h1>{{user.username}}</h1>
+        <br />Description
+      </b-card-text>
+    </b-card>
+    </div>
+    <!--
     <table id="users-list">
       <tr v-for="i in Math.ceil(users.length / 3)" v-bind:key="i">
         <td v-for="user in users.slice((i - 1) * 3, i * 3)" v-bind:key="user.id">
-
           <div class="card">
             <img
               class="card-img-top"
@@ -77,6 +90,7 @@
         </td>
       </tr>
     </table>
+    -->
   </div>
 </template>
 
@@ -165,13 +179,38 @@ export default {
 }
 
 .card {
-  min-width: 100%;
-  height: 700px;
+  margin: auto;
+  width: 80%;
+  height: 300px;
 }
 
 td {
   padding-left: 2.1cm;
   padding-right: 2.1cm;
   padding-bottom: 1cm;
+}
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+.card-img-left {
+  height: 300px;
+  object-fit: scale-down;
+}
+
+.card-text {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: left;
+  font-size: 20px;
+  color: midnightblue;
 }
 </style>
