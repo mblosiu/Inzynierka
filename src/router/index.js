@@ -6,6 +6,7 @@ import Register from '../components/Register.vue'
 import Profile from '../components/Profile.vue'
 import Settings from '../components/Settings.vue'
 import UsersList from '../components/UsersList.vue'
+import Gallery from '../components/Gallery.vue'
 
 Vue.use(VueRouter)
 
@@ -59,7 +60,15 @@ const routes = [
     name: 'Users',
     component: UsersList,
     meta: {
-      title: 'Lista użytkowników'
+      title: 'Users'
+    }
+  },  
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: Gallery,
+    meta: {
+      title: 'Galeria'
     }
   },
 ]

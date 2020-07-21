@@ -43,6 +43,7 @@
         <b-nav-form @submit.prevent="register" v-if="token == null">
           <b-button :to="{name:'Register'}" type="button" size="sm" class="my-2 ml-2">Register</b-button>
         </b-nav-form>
+
         <b-nav-form @submit.prevent="logout" v-if="token != null">
           <b-button size="sm" type="submit" class="my-2 ml-2">Logout</b-button>
         </b-nav-form>

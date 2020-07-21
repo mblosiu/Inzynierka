@@ -35,7 +35,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #343a40;
-  background-color: whitesmoke;
+  background-image: url("../public/img/ecouple3.jpg");
+
 }
 
 #nav {
@@ -51,7 +52,6 @@ export default {
 }
 
 #content {
-  background-color: whitesmoke;
   color: #343a40;
   min-height: 440px;
   margin-left: 2cm;

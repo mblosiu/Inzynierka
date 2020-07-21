@@ -53,6 +53,7 @@
     <table id="users-list">
       <tr v-for="i in Math.ceil(users.length / 3)" v-bind:key="i">
         <td v-for="user in users.slice((i - 1) * 3, i * 3)" v-bind:key="user.id">
+
           <div class="card">
             <img
               class="card-img-top"
