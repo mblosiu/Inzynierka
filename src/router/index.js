@@ -71,6 +71,18 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+  // LOGED OUT restrictions (not restricted: Home, Register, About)
+  //to.name !== 'Home' && to.name !== 'Register' && to.name !== 'About'
+  if (!['Home', 'Register', 'About'].includes(to.name) && !localStorage.getItem("user-token")) {
+    next({ name: 'Home' })
+  }
+  // LOGED IN restrictions
+  else if (['Register'].includes(to.name) && localStorage.getItem("user-token")) {
+    next({ name: 'Home' })
+  }
+  else {
+    next()
+  }
   // This goes through the matched routes from last to first, finding the closest route with a title.
   // eg. if we have /some/deep/nested/route and /some, /deep, and /nested have titles, nested's will be chosen.
   const nearestWithTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title);
@@ -103,21 +115,6 @@ router.beforeEach((to, from, next) => {
   })
     // Add the meta tags to the document head.
     .forEach(tag => document.head.appendChild(tag));
-
-
-
-  // LOGED OUT restrictions (not restricted: Home, Register, About)
-  //to.name !== 'Home' && to.name !== 'Register' && to.name !== 'About'
-  if (!['Home', 'Register', 'About'].includes(to.name) && !localStorage.getItem("user-token")) {
-    next({ name: 'Home' })
-  }
-  // LOGED IN restrictions
-  else if (['Register'].includes(to.name) && localStorage.getItem("user-token")) {
-    next({ name: 'Home' })
-  }
-  else {
-    next()
-  }
 })
 
 export default router

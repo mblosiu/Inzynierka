@@ -118,9 +118,6 @@ export default {
           console.log(response), (this.users = response.data);
         })
         .catch(errors => {
-          if (errors.response.status == 401) {
-            this.$router.push("/");
-          }
           console.log(errors.status);
         });
     },

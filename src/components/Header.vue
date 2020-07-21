@@ -3,7 +3,7 @@
     <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{error_message}}</b-alert>
 
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand class="text-white" href="/">e-love</b-navbar-brand>
+      <b-navbar-brand class="text-white" :to="{name:'Home'}">e-love</b-navbar-brand>
 
       <b-nav-form @submit.prevent="search">
         <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
@@ -102,7 +102,7 @@ export default {
           if (response.status == 200) {
             localStorage.removeItem("user-token"),
               (this.token = null),
-              this.$router.go("/");
+              this.$router.go();
           }
         })
         .catch(errors => console.log(errors));
