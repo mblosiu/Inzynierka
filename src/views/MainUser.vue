@@ -126,7 +126,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 #userpage {
   height: 1200px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
