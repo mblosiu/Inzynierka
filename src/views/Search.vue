@@ -50,18 +50,19 @@
 
     <h1 id="title">Lista potencjalnych partnerów</h1>
     <div class="users-list" v-for="user in users" v-bind:key="user">
-    <b-card
-      v-if="profileImage==null"
-      img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
-      img-alt="Card image"
-      img-left
-      class="mb-3"
-    >
-      <b-card-text>
-        <h1>{{user.username}} ({{getAge(user.birthday)}})</h1>
-        <br />Description
-      </b-card-text>
-    </b-card>
+      <b-card
+        v-if="profileImage==null"
+        img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
+        img-alt="Card image"
+        img-left
+        class="user-card"
+      >
+        <b-card-text>
+          <h1>{{user.username}} ({{getAge(user.birthday)}})</h1>
+          <br />Description
+        </b-card-text>
+      </b-card>
+      <br/>
     </div>
     <!--
     <table id="users-list">
@@ -114,14 +115,14 @@ export default {
       sex_options: [
         { value: null, text: "Płeć" },
         { value: "Male", text: "Mężczyzna" },
-        { value: "Female", text: "Kobieta" }
+        { value: "Female", text: "Kobieta" },
       ],
       location_options: [
         { value: null, text: "Lokalizacja" },
         { value: "Poznań", text: "Poznań" },
-        { value: "Placeholder", text: "Placeholder" }
+        { value: "Placeholder", text: "Placeholder" },
       ],
-      fields: ["location", "sex", "birthday"]
+      fields: ["location", "sex", "birthday"],
     };
   },
   methods: {
@@ -130,13 +131,13 @@ export default {
         .get("http://127.0.0.1:8000/api/user/users", {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token")
-          }
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response), (this.users = response.data);
         })
-        .catch(errors => console.log(errors));
+        .catch((errors) => console.log(errors));
     },
     getAge(dateString) {
       var today = new Date();
@@ -156,21 +157,21 @@ export default {
           data: {
             sex: this.sex,
             location: this.location,
-            birthday: this.birthday
+            birthday: this.birthday,
           },
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token")
-          }
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response), (this.users = response.data);
         })
-        .catch(errors => console.log(errors));
-    }
+        .catch((errors) => console.log(errors));
+    },
   },
   created() {
     this.getUsers();
-  }
+  },
 };
 </script>
 
@@ -216,6 +217,10 @@ td {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
-  color: midnightblue;
+  color: white;
+}
+.user-card {
+  background: #343a40;
+  color: white;
 }
 </style>
