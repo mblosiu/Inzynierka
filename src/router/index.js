@@ -3,9 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Register from '../components/Register.vue'
-import Profile from '../components/Profile.vue'
+import MainUser from '../components/MainUser.vue'
 import Settings from '../components/Settings.vue'
-import UsersList from '../components/UsersList.vue'
+import Search from '../components/Search.vue'
 import Gallery from '../components/Gallery.vue'
 
 Vue.use(VueRouter)
@@ -40,31 +40,32 @@ const routes = [
     }
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile,
+    path: '/mainuser',
+    name: 'MainUser',
+    component: MainUser,
     meta: {
-      title: 'Profil'
+      title: 'Mój profil'
     }
   },
   {
-    path: '/settings',
-    name: 'Settings',
+    path: "/mainuser/settings",
+    name: "Settings",
     component: Settings,
     meta: {
       title: 'Ustawienia'
     }
   },
   {
-    path: '/users',
-    name: 'Users',
-    component: UsersList,
+    path: "/mainuser/search",
+    name: "search",
+    component: Search,
     meta: {
-      title: 'Users'
+      title: 'Wyszukiwanie'
     }
+    
   },  
   {
-    path: '/gallery',
+    path: 'mainuser/gallery',
     name: 'Gallery',
     component: Gallery,
     meta: {

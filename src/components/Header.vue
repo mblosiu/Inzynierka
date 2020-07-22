@@ -3,22 +3,38 @@
     <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{error_message}}</b-alert>
 
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand class="text-white" :to="{name:'Home'}">e-love</b-navbar-brand>
+      <a v-if="token == null" class="navbar-brand" href="/">e-Love</a>
+      <a v-else class="navbar-brand" href="/mainuser">e-Love</a>
 
       <b-nav-form @submit.prevent="search">
         <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
-        <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
       </b-nav-form>
 
       <b-navbar-nav class="ml-auto">
         <b-nav-form @submit.prevent="users" v-if="token != null">
-          <b-button :to="{name:'Users'}" type="button" size="sm" class="my-2 ml-2">Look for partner</b-button>
+          <b-button
+          class="my-2 ml-2"
+          type="button"
+          size="sm"
+          to="/mainuser/search"
+        >Szukaj par</b-button>
         </b-nav-form>
         <b-nav-form @submit.prevent="profile" v-if="token != null">
-          <b-button :to="{name:'Profile'}" type="button" size="sm" class="my-2 ml-2">Profile</b-button>
+          <b-button
+          class="my-2 ml-2"
+          type="button"
+          size="sm"
+          to="/mainuser"
+        >Twój profil</b-button>
         </b-nav-form>
         <b-nav-form @submit.prevent="settings" v-if="token != null">
-          <b-button :to="{name:'Settings'}" type="button" size="sm" class="my-2 ml-2">Settings</b-button>
+          <b-button
+          class="my-2 ml-2 mr-2"
+          type="button"
+          size="sm"
+          to="/mainuser/settings"
+        >Ustawienia</b-button>
         </b-nav-form>
         <b-nav-form @submit.prevent="login" v-if="token==null">
           <b-form-input
@@ -38,14 +54,15 @@
             v-model="password"
             name="password"
           />
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Login</b-button>
+          <input v-on:click="login" class="btn btn-success mr-2" type="submit" value="Zaloguj" />
         </b-nav-form>
+
         <b-nav-form @submit.prevent="register" v-if="token == null">
-          <b-button :to="{name:'Register'}" type="button" size="sm" class="my-2 ml-2">Register</b-button>
+          <router-link class="btn btn-outline-warning" type="submit" to="/register">Rejestracja</router-link>
         </b-nav-form>
 
         <b-nav-form @submit.prevent="logout" v-if="token != null">
-          <b-button size="sm" type="submit" class="my-2 ml-2">Logout</b-button>
+            <b-button type="submit" size="sm" class="btn btn-danger mr-1">Wyloguj</b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-navbar>

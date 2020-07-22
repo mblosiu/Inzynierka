@@ -5,13 +5,14 @@
       <b-row>
         <b-col cols="2">
           <div>
-            <router-link to="users">Szukaj osób</router-link>
+            <router-link to="mainuser/search">Szukaj osób</router-link>
             <b-nav-item disabled>Dopasuj</b-nav-item>
             <b-nav-item disabled>Polubienia</b-nav-item>
             <b-nav-item disabled>Wiadomości</b-nav-item>
             <b-nav-item disabled>Kontakty</b-nav-item>
-            <router-link to="gallery">Galeria</router-link> <br />
-            <router-link to="settings">Ustawienia profilu</router-link>
+            <router-link to="mainuser/gallery">Galeria</router-link>
+            <br />
+            <router-link to="mainuser/settings">Ustawienia profilu</router-link>
             <b-nav-item disabled>Premium</b-nav-item>
           </div>
         </b-col>
@@ -24,7 +25,7 @@
             class="mb-3"
           >
             <b-card-text>
-              <h1>{{user_data.username}}</h1>
+              <h1>{{user_data.username}} ({{getAge(user_data.birthday)}})</h1>
               <br />Description
             </b-card-text>
           </b-card>
@@ -32,7 +33,7 @@
         <b-col cols="3">
           <h1>O mnie:</h1>
           <p>Imię: {{user_data.username}}</p>
-          <p>Wiek:</p>
+          <p>Wiek: {{getAge(user_data.birthday)}}</p>
           <p>Płeć: {{user_data.sex}}</p>
           <p>Mieszkam w: {{user_data.location}}</p>
           <p>Urodziny: {{user_data.birthday}}</p>
@@ -46,7 +47,7 @@
 
           <br />
           <h1>Szukam:</h1>
-          <p>Płeć:</p>
+          <p>Płeć: {{user_preferences.sex_preference}}</p>
           <p>Przedział wiekowy:</p>
           <p>Region:</p>
           <p></p>
@@ -70,7 +71,11 @@ export default {
   data() {
     return {
       user_data: {},
-      user_preferences: {}
+      user_preferences: {},
+      today: new Date(),
+      birthDate: "",
+      age: "",
+      m: ""
     };
   },
   methods: {
@@ -99,6 +104,17 @@ export default {
           console.log(response), (this.user_preferences = response.data);
         })
         .catch(errors => console.log(errors));
+    },
+    getAge(dateString) {
+      var today = new Date();
+      var birthDate = new Date(dateString);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age;
     }
   },
   created() {
@@ -109,7 +125,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
 #userpage {
   height: 1200px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -119,7 +135,7 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  padding: 5px;
 }
 
 #nav a {

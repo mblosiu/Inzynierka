@@ -1,64 +1,102 @@
 <template>
-  <div class>
-    <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{error_message}}</b-alert>
-
-    <h1>User Registration</h1>
-
-    <form id="formregister" @submit.prevent="CreateUser">
-      <p>
-        <label for="username">Username</label>
-        <input class="ml-2" type="text" name="username" id="username1" v-model="username" />
-      </p>
-      <p>
-        <label for="password">Password</label>
-        <input class="ml-2" type="text" name="password" id="password1" v-model="password" />
-      </p>
-      <p>
-        <label for="password2">password2</label>
-        <input class="ml-2" type="text" name="password2" id="password2" v-model="password2" />
-      </p>
-      <p>
-        <label for="email">email</label>
-        <input class="ml-2" type="text" name="email" id="email" v-model="email" />
-      </p>
-      <p>
-        <label for="birthday">birthday</label>
-        <input class="ml-2" type="text" name="birthday" id="birthday" v-model="birthday" />
-      </p>
-      <p>
-        <label for="location">location</label>
-        <input class="ml-2" type="text" name="location" id="location" v-model="location" />
-      </p>
-      <p>
-        <label for="sex">sex</label>
-        <input class="ml-2" type="text" name="sex" id="sex" v-model="sex" />
-      </p>
-      <p>
-        <input type="submit" value="Submit" />
-      </p>
-    </form>
+  <div>
+    <br />
+    <div class="register-form d-flex justify-content-center">
+      <div class="card bg-dark text-white text-center p-3 rounded" style="max-width: 18rem;">
+        <div class="card-header">
+          <h5>Rejestracja</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text"></p>
+          <form @submit.prevent="CreateUser">
+            <p>
+              <label for="username">
+                Nazwa konta
+                <input type="text" name="username" id="username" v-model="username" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="email">
+                Email
+                <input type="email" name="email" id="email" v-model="email" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="Location">
+                Lokacja
+                <input type="text" name="Location" id="Locatiom" v-model="location" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="birthday">
+                Data urodzenia
+                <input type="date" name="birthday" id="birthday" v-model="birthday" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="sex">
+                Płeć
+                <select class="ml-2" name="Sex" id="Sex" v-model="sex">
+                  <br />
+                  <option>mężczyzna</option>
+                  <option>kobieta</option>
+                  <option>inna</option>
+                </select>
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="password">
+                Hasło
+                <input type="password" name="password" id="password" v-model="password" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <label for="password2">
+                Powtórz hasło
+                <input type="password" name="password2" id="password2" v-model="password2" />
+              </label>
+              <br />
+            </p>
+            <p>
+              <input
+                v-on:click="CreateUser"
+                class="btn btn-outline-success"
+                type="submit"
+                value="Zarejestruj"
+              />
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+//import Api from "../service/api";
+
 export default {
-  name: "register",
+  name: "Register",
   components: {},
   data() {
     return {
-      showDismissibleAlert: false,
-      error_message: "",
-
-      username: null,
-      password: null,
-      password2: null,
-      email: null,
-      birthday: null,
-      location: null,
-      sex: null
+      username: "",
+      email: "",
+      location: "",
+      birthday: "",
+      sex: "",
+      password: "",
+      password2: ""
     };
   },
+
   methods: {
     CreateUser() {
       console.log(this.username);
@@ -72,28 +110,16 @@ export default {
           location: this.location,
           sex: this.sex
         })
-        .then(response => {
-          this.$router.push("/");
-        })
-        .catch(errors => {
-          if(errors.response.data.username[0] == "user with this username already exists."){
-            (this.showDismissibleAlert = true), 
-            (this.error_message = "Nazwa użytkownika zajęta!");
-          }
-          if (errors.response.data.email[0] == "user with this email already exists.") {
-            (this.showDismissibleAlert = true), 
-            (this.error_message = "Już istnieje konto dla tego adresu email!");
-          }
-          if(this.password != this.password2){
-            (this.showDismissibleAlert = true), 
-            (this.error_message = "Hasła muszą do siebie pasować");
-          }
-          if(this.username == null || this.password == null || this.password2 == null || this.email == null || this.birthday==null||this.location==null||this.sex==null){
-            (this.showDismissibleAlert = true), 
-            (this.error_message = "Niektóre pola nie zostały wypełnione!");
-          }
-        });
+        .then(response => console.log(response))
+        .catch(errors => console.log(errors));
+      this.$router.push("/");
     }
   }
 };
 </script>
+
+<style>
+h5 {
+  color: gold;
+}
+</style>
