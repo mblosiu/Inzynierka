@@ -183,8 +183,8 @@ export default {
 #filter {
   margin: auto;
   width: 100%;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 20px;
+
 }
 #title {
   padding: 1cm;
