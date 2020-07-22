@@ -1,7 +1,7 @@
 <template>
   <div id="search">
     <br />
-    <div class="row" style="height: 200px">
+    <div class="row">
       <div class="col-md-3 justify-content-center">
         <h1>Podaj kryteria i wyszukaj:</h1>
         <form id="filters" @submit.prevent="filterUsers">
