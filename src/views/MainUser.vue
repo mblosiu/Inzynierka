@@ -22,7 +22,7 @@
             img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
             img-alt="Card image"
             img-left
-            class="mb-3"
+            class="user-card"
           >
             <b-card-text>
               <h1>{{user_data.username}} ({{getAge(user_data.birthday)}})</h1>
@@ -157,6 +157,10 @@ export default {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
-  color: midnightblue;
+
+}
+.user-card {
+  background: #343a40;
+  color: white;
 }
 </style>
