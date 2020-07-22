@@ -1,73 +1,64 @@
 <template>
-  <div class="container">
-    <br />
-    <div class="row">
-      <div class="col-md-6 d-flex justify-content-center">
-        <div
-          class="card bg-dark text-white text-center p-3"
-          style="width: 18rem;"
-          background="black"
-        >
-          <div class="card-body">
-            <h5 class="card-header">Twoje dane</h5>
-            <br />
-            <form id="editUser" @submit.prevent="editUserData">
-              <p>
-                <label for="user_data.location">Miejsce zamieszkania</label>
-                <input
-                  class="ml-2"
-                  type="text"
-                  name="user_data.location"
-                  id="user_data.location"
-                  v-model="user_data.location"
-                  value="user_data.location"
-                />
-              </p>
-              <p>
-                <label for="user_data.sex">Płeć</label>
-                <input
-                  class="ml-2"
-                  type="text"
-                  name="user_data.sex"
-                  id="user_data.sex"
-                  v-model="user_data.sex"
-                  value="user_data.sex"
-                />
-              </p>
-              <p>
-                <input type="submit" value="Save" />
-              </p>
-            </form>
+  <div class>
+    <div class="container">
+      <div class="row">
+        <form class="profile" @submit.prevent="editUserData">
+          <p class="h4 text-center mb-4">Informacje o tobie</p>
+
+          <label for="user_name" class="white-text">Imie</label>
+          <input type="text" id="user_name" v-model="user_data.name" class="form-control" />
+
+          <label for="user_surname" class="grey-text">Nazwisko</label>
+          <input type="text" id="user_surname" v-model="user_data.surname" class="form-control" />
+
+          <label for="user_location" class="grey-text">Adres</label>
+          <input type="text" id="user_location" v-model="user_data.location" class="form-control" />
+
+          <label for="user_sex" class="grey-text">Płeć</label>
+          <b-form-select
+            class="form-control"
+            id="user_sex"
+            v-model="user_data.sex"
+            :options="sex_options"
+          ></b-form-select>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-secondary">Zapisz</button>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6 d-flex justify-content-center">
-        <div
-          class="card bg-dark text-white text-center p-3"
-          style="width: 18rem;"
-          background="black"
-        >
-          <div class="card-body">
-            <h5 class="card-header">Twoje preferencje</h5>
-            <br />
-            <form id="editUserPreferences" @submit.prevent="editUserPreferences">
-              <p>
-                <label for="user_preferences.sex_preference">Preferencja płci</label>
-                <input
-                  class="ml-2"
-                  type="text"
-                  name="user_preferences.sex_preference"
-                  id="user_preferences.sex_preference"
-                  v-model="user_preferences.sex_preference"
-                  value="user_preferences.sex_preference"
-                />
-              </p>
-              <p>
-                <input type="submit" value="Save" />
-              </p>
-            </form>
+        </form>
+
+        <form class="preferences" @submit.prevent="editUserPreferences">
+          <p class="h4 text-center mb-4">Twoje preferencje</p>
+
+          <label for="user_sex_preference" class="grey-text">Preferencje seksualne</label>
+          <b-form-select
+            class="form-control"
+            id="user_sex_preference"
+            v-model="user_preferences.sex_preference"
+            :options="sex_options"
+          ></b-form-select>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-secondary">Zapisz</button>
           </div>
-        </div>
+        </form>
+
+        <form class="settings" @submit.prevent="editUserSettings">
+          <p class="h4 text-center mb-4">Twoje ustawienia</p>
+
+          <label for="user_sex_preference" class="grey-text">Placeholder</label>
+          <b-form-select
+            class="form-control"
+            id="placeholder"
+            v-model="placeholder"
+            :options="sex_options"
+          ></b-form-select>
+
+          <label for="placeholder" class="grey-text">Placeholder</label>
+          <input type="text" id="placeholder" v-model="placeholder" class="form-control" />
+
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-secondary">Zapisz</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -81,8 +72,15 @@ export default {
   components: {},
   data() {
     return {
+      placeholder: null,
+      active: "",
       user_data: {},
-      user_preferences: {}
+      user_preferences: {},
+      sex_options: [
+        { value: null, text: "Wybierz płeć" },
+        { value: "Male", text: "Mężczyzna" },
+        { value: "Female", text: "Kobieta" },
+      ],
     };
   },
   methods: {
@@ -91,49 +89,54 @@ export default {
         .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token")
-          }
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response), (this.user_data = response.data);
         })
-        .catch(errors => console.log(errors));
+        .catch((errors) => console.log(errors));
     },
     editUserData() {
       let config = {
         headers: {
-          Authorization: "Token " + localStorage.getItem("user-token")
-        }
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
       };
       axios
         .patch(
           "http://127.0.0.1:8000/api/user/properties",
-          { location: this.user_data.location, sex: this.user_data.sex },
+          {
+            surname: this.user_data.surname,
+            name: this.user_data.name,
+            location: this.user_data.location,
+            sex: this.user_data.sex,
+          },
           config
         )
-        .then(response => {
+        .then((response) => {
           console.log(response);
         })
-        .catch(errors => console.log(errors));
+        .catch((errors) => console.log(errors));
     },
     getUserPreferences() {
       axios
         .get("http://127.0.0.1:8000/api/user/preferences", {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token")
-          }
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response), (this.user_preferences = response.data);
         })
-        .catch(errors => console.log(errors));
+        .catch((errors) => console.log(errors));
     },
     editUserPreferences() {
       let config = {
         headers: {
-          Authorization: "Token " + localStorage.getItem("user-token")
-        }
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
       };
       axios
         .patch(
@@ -141,15 +144,59 @@ export default {
           { sex_preference: this.user_preferences.sex_preference },
           config
         )
-        .then(response => {
+        .then((response) => {
           console.log(response);
         })
-        .catch(errors => console.log(errors));
-    }
+        .catch((errors) => console.log(errors));
+    },
+    getUserSettings() {},
+    editUserSetting() {},
   },
   created() {
     this.getUserData();
     this.getUserPreferences();
-  }
+    this.getUserSettings();
+  },
 };
 </script>
+
+<style scoped>
+.profile {
+  width: 300px;
+  min-height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+  padding: 0.5cm;
+  background: #343a40;
+  color: white;
+}
+.preferences {
+  width: 300px;
+  min-height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  border-radius: 25px;
+  padding: 0.5cm;
+  background: #343a40;
+  color: white;
+}
+.settings {
+  width: 300px;
+  min-height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+  padding: 0.5cm;
+  background: #343a40;
+  color: white;
+}
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  position: relative;
+}
+</style>
+
