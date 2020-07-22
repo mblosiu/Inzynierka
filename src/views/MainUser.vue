@@ -75,7 +75,8 @@ export default {
       today: new Date(),
       birthDate: "",
       age: "",
-      m: ""
+      m: "",
+      profileImage: null
     };
   },
   methods: {
@@ -125,7 +126,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
 #userpage {
   height: 1200px;
   font-family: Avenir, Helvetica, Arial, sans-serif;

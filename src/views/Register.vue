@@ -118,7 +118,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 h5 {
   color: gold;
 }

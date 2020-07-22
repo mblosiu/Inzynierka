@@ -63,7 +63,7 @@ export default {
 #footer {
   background-color: #343a40;
   color: whitesmoke;
-  bottom: 0;
+  bottom:0;
   width: 100%;
 }
 </style>

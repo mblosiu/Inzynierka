@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
-import Register from '../components/Register.vue'
-import MainUser from '../components/MainUser.vue'
-import Settings from '../components/Settings.vue'
-import Search from '../components/Search.vue'
-import Gallery from '../components/Gallery.vue'
+import Register from '../views/Register.vue'
+import MainUser from '../views/MainUser.vue'
+import Settings from '../views/Settings.vue'
+import Search from '../views/Search.vue'
+import Gallery from '../views/Gallery.vue'
 
 Vue.use(VueRouter)
 
@@ -65,7 +65,7 @@ const routes = [
     
   },  
   {
-    path: 'mainuser/gallery',
+    path: '/mainuser/gallery',
     name: 'Gallery',
     component: Gallery,
     meta: {
