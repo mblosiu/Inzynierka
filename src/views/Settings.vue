@@ -77,9 +77,10 @@ export default {
       user_data: {},
       user_preferences: {},
       sex_options: [
-        { value: null, text: "Wybierz płeć" },
+        { value: null, text: "" },
         { value: "Male", text: "Mężczyzna" },
         { value: "Female", text: "Kobieta" },
+        { value: "Other", text: "Inna" },
       ],
     };
   },

@@ -24,9 +24,20 @@
             img-left
             class="user-card"
           >
+            <b-card-title>
+              <h2>{{user_data.username}} ({{getAge(user_data.birthday)}})</h2>
+            </b-card-title>
             <b-card-text>
-              <h1>{{user_data.username}} ({{getAge(user_data.birthday)}})</h1>
-              <br />Description
+              <div v-if="user_data.description!=null">
+                <h3>{{user_data.description}}</h3>
+              </div>
+              <div v-else>
+              <div class="form-group" @submit.prevent="editUserData">
+                <label for="exampleFormControlTextarea1">Aktualnie nie posiadasz opisu. Napisz coś o sobie.</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <button type="submit" class="btn btn-secondary">Zapisz</button>
+              </div>
+              </div>
             </b-card-text>
           </b-card>
         </b-col>
@@ -62,7 +73,6 @@
 //import { mapState } from 'vuex';
 //import UserCard from '../components/UserCard.vue'
 import axios from "axios";
-
 export default {
   name: "MainUser",
   components: {
@@ -76,7 +86,7 @@ export default {
       birthDate: "",
       age: "",
       m: "",
-      profileImage: null
+      profileImage: null,
     };
   },
   methods: {
@@ -85,26 +95,45 @@ export default {
         .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token")
-          }
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response), (this.user_data = response.data);
         })
-        .catch(errors => console.log(errors));
+        .catch((errors) => console.log(errors));
     },
     getUserPreferences() {
       axios
         .get("http://127.0.0.1:8000/api/user/preferences", {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token")
-          }
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response), (this.user_preferences = response.data);
         })
-        .catch(errors => console.log(errors));
+        .catch((errors) => console.log(errors));
+    },
+    editUserData() {
+      let config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      axios
+        .patch(
+          "http://127.0.0.1:8000/api/user/properties",
+          {
+            description: this.user_data.description,
+          },
+          config
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((errors) => console.log(errors));
     },
     getAge(dateString) {
       var today = new Date();
@@ -114,14 +143,13 @@ export default {
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
       }
-
       return age;
-    }
+    },
   },
   created() {
     this.getUserData();
     this.getUserPreferences();
-  }
+  },
 };
 </script>
 
@@ -134,30 +162,24 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: white;
 }
-
 #nav {
   padding: 5px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-
 .card-img-left {
   height: 300px;
   object-fit: scale-down;
 }
-
 .card-text {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
-
 }
 .user-card {
   background: #343a40;

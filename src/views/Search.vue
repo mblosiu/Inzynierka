@@ -48,7 +48,7 @@
       </table>
     </form>
 
-    <h1 id="title">Lista potencjalnych partnerów</h1>
+    <h1 id="title">Wyniki wyszukiwania:</h1>
     <div class="users-list" v-for="user in users" v-bind:key="user">
       <b-card
         v-if="profileImage==null"
@@ -57,9 +57,11 @@
         img-left
         class="user-card"
       >
+        <b-card-title> <h2>{{user.username}} ({{getAge(user.birthday)}})</h2> </b-card-title>
         <b-card-text>
-          <h1>{{user.username}} ({{getAge(user.birthday)}})</h1>
-          <br />Description
+          <br />
+          <h3 v-if="user.description!=null"> {{user.description}}</h3>
+          <h3 v-else> Brak opisu.</h3>
         </b-card-text>
       </b-card>
       <br/>
@@ -112,6 +114,7 @@ export default {
       birthDate: "",
       age: "",
       m: "",
+      description: null,
       sex_options: [
         { value: null, text: "Płeć" },
         { value: "Male", text: "Mężczyzna" },
