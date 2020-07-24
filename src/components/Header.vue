@@ -12,30 +12,46 @@
       </b-nav-form>
 
       <b-navbar-nav class="ml-auto">
-        <b-nav-form @submit.prevent="users" v-if="token != null">
-          <b-button
-          class="my-2 ml-2"
-          type="button"
-          size="sm"
-          to="/mainuser/search"
-        >Szukaj par</b-button>
-        </b-nav-form>
         <b-nav-form @submit.prevent="profile" v-if="token != null">
-          <b-button
-          class="my-2 ml-2"
-          type="button"
-          size="sm"
-          to="/mainuser"
-        >Twój profil</b-button>
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
         </b-nav-form>
+
+        <b-nav-form @submit.prevent="users" v-if="token != null">
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/search">Szukaj par</b-button>
+        </b-nav-form>
+
+        <b-nav-form @submit.prevent="users" v-if="token != null">
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Dopasuj</b-button>
+          <b-nav-form @submit.prevent="users" v-if="token != null">
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Polubienia</b-button>
+          </b-nav-form>
+
+          <b-nav-form @submit.prevent="users" v-if="token != null">
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Wiadomości</b-button>
+          </b-nav-form>
+
+          <b-nav-form @submit.prevent="users" v-if="token != null">
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Kontakty</b-button>
+          </b-nav-form>
+
+          <b-nav-form @submit.prevent="users" v-if="token != null">
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/gallery">Galeria</b-button>
+          </b-nav-form>
+        </b-nav-form>
+
         <b-nav-form @submit.prevent="settings" v-if="token != null">
           <b-button
-          class="my-2 ml-2 mr-2"
-          type="button"
-          size="sm"
-          to="/mainuser/settings"
-        >Ustawienia</b-button>
+            class="my-2 ml-2 mr-1"
+            type="button"
+            size="sm"
+            to="/mainuser/settings"
+          >Ustawienia</b-button>
         </b-nav-form>
+
+        <b-nav-form @submit.prevent="users" v-if="token != null">
+          <b-button class="btn btn-warning mr-1" type="button" size="sm" to="/#">Premium</b-button>
+        </b-nav-form>
+
         <b-nav-form @submit.prevent="login" v-if="token==null">
           <b-form-input
             id="username"
@@ -62,7 +78,7 @@
         </b-nav-form>
 
         <b-nav-form @submit.prevent="logout" v-if="token != null">
-            <b-button type="submit" size="sm" class="btn btn-danger mr-1">Wyloguj</b-button>
+          <b-button type="submit" size="sm" class="btn btn-danger mr-1">Wyloguj</b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-navbar>
@@ -81,7 +97,7 @@ export default {
       password: "",
       searchText: "",
       showDismissibleAlert: false,
-      error_message: ""
+      error_message: "",
     };
   },
   methods: {
@@ -89,9 +105,9 @@ export default {
       axios
         .post("http://127.0.0.1:8000/api/user/login", {
           username: this.username,
-          password: this.password
+          password: this.password,
         })
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
             (this.error_message = ""),
               (this.showDismissibleAlert = false),
@@ -100,7 +116,7 @@ export default {
               this.$router.go();
           }
         })
-        .catch(errors => {
+        .catch((errors) => {
           if (errors.response.status != 200) {
             this.error_message = "Błędny login lub hasło!";
             this.showDismissibleAlert = true;
@@ -110,20 +126,20 @@ export default {
     logout() {
       let config = {
         headers: {
-          Authorization: "Token " + localStorage.getItem("user-token")
-        }
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
       };
 
       axios
         .post("http://127.0.0.1:8000/api/user/logout", {}, config)
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
             localStorage.removeItem("user-token"),
               (this.token = null),
               this.$router.go();
           }
         })
-        .catch(errors => console.log(errors));
+        .catch((errors) => console.log(errors));
     },
     register() {
       console.log("Router");
@@ -139,7 +155,7 @@ export default {
     },
     search() {
       console.log(this.searchText);
-    }
-  }
+    },
+  },
 };
 </script>
