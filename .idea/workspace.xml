@@ -19,10 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9e91678-bba1-47cc-bf11-f45bd193acc9" name="Default Changelist" comment="user listing - current user check">
+    <list default="true" id="e9e91678-bba1-47cc-bf11-f45bd193acc9" name="Default Changelist" comment="unit tests - all done, only logout test left">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595579755952</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="unit tests - all done, only logout test left">
+      <created>1595588817009</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1595588817009</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,7 +145,8 @@
     <MESSAGE value="New UserListView - list, filter, search, get user by pk" />
     <MESSAGE value="remove unnecessary functions" />
     <MESSAGE value="user listing - current user check" />
-    <option name="LAST_COMMIT_MESSAGE" value="user listing - current user check" />
+    <MESSAGE value="unit tests - all done, only logout test left" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit tests - all done, only logout test left" />
   </component>
   <component name="WindowStateProjectService">
     <state x="526" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594397194690">
@@ -147,9 +157,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1594394331224" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1594385375729">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1595588827507">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1594385375729" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1595588827507" />
   </component>
 </project>

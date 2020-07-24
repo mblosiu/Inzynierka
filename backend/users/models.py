@@ -63,7 +63,7 @@ class User(AbstractBaseUser):
     surname = models.CharField(max_length=30, null=True, default=None)
     birthday = models.DateField(null=True, default=None)
     location = models.CharField(max_length=30, null=True, default=None)
-    profile_picture = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True, default=None)
+    profile_picture = models.ImageField(upload_to='images', null=True, blank=True, default=None)
     description = models.CharField(max_length=200, null=True, default=None)
 
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
