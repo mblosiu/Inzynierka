@@ -12,7 +12,8 @@ from ..models import User
 
 @permission_classes([])
 class RegistrationView(APIView):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         serializer = RegistrationSerializer(data=request.data)
         data = {}
         if serializer.is_valid():
@@ -31,7 +32,8 @@ class RegistrationView(APIView):
 
 @permission_classes([IsAuthenticated])
 class LogoutView(APIView):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         if request.user.auth_token.delete():
             return Response({"detail": "success"}, status=status.HTTP_200_OK)
         else:
@@ -40,7 +42,8 @@ class LogoutView(APIView):
 
 @permission_classes([IsAuthenticated])
 class DeleteUserAccountView(APIView):
-    def delete(self, request):
+    @staticmethod
+    def delete(request):
         if request.user.delete():
             # TODO : check password
             return Response({"detail": "Account removed successfully"}, status=status.HTTP_200_OK)
@@ -50,7 +53,9 @@ class DeleteUserAccountView(APIView):
 
 @permission_classes([IsAuthenticated])
 class UserProfileView(APIView):
-    def get(self, request):
+
+    @staticmethod
+    def get(request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -58,7 +63,8 @@ class UserProfileView(APIView):
         serializer = UserSerializer(account)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def patch(self, request):
+    @staticmethod
+    def patch(request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -165,7 +171,9 @@ class UserProfileView(APIView):
 
 @permission_classes([IsAuthenticated])
 class UserPreferencesView(APIView):
-    def get(self, request):
+
+    @staticmethod
+    def get(request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -173,7 +181,8 @@ class UserPreferencesView(APIView):
         serializer = UserPreferencesSerializer(account)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def patch(self, request):
+    @staticmethod
+    def patch(request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -207,7 +216,8 @@ class UserPreferencesView(APIView):
 
 @permission_classes([IsAuthenticated])
 class UserProfilePic(APIView):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -215,7 +225,8 @@ class UserProfilePic(APIView):
         serializer = UserProfilePicSerializer(account)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def patch(self, request):
+    @staticmethod
+    def patch(request):
         try:
             account = request.user
         except User.DoesNotExist:
@@ -259,6 +270,8 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
+        queryset = queryset.exclude(pk=request.user.pk)
+
         name = request.query_params.get('name', None)
         surname = request.query_params.get('surname', None)
         location = request.query_params.get('location', None)
