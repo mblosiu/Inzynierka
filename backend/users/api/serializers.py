@@ -61,6 +61,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'birthday': ['This field is required.']})
         elif sex is None:
             raise serializers.ValidationError({'sex': ['This field is required.']})
+        elif password is None:
+            raise serializers.ValidationError({'password': 'This field is required.'})
         elif password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
 

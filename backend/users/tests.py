@@ -1,11 +1,7 @@
-from django.test import TestCase
-import json
-from django.urls import reverse
 from rest_framework import status
-from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
-from users.models import User
-from django.test import Client
+
+from .models import User
 
 
 # Create your tests here.

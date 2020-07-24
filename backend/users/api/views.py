@@ -1,9 +1,10 @@
-from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework import status
+from rest_framework import viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -13,6 +14,8 @@ from ..models import User
 
 @permission_classes([])
 class RegistrationView(APIView):
+    renderer_classes = [JSONRenderer]
+
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
         data = {}
@@ -304,9 +307,9 @@ class FilterUserListView(generics.ListAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# USER LIST - SEARCH AND FILTERS
+# USER LIST - SEARCH AND FILTERS - NOT IN USE
 @permission_classes([IsAuthenticated])
-class UserListView(generics.ListAPIView):
+class UserListView1(generics.ListAPIView):
     serializer_class = UserSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
@@ -327,6 +330,55 @@ class UserListView(generics.ListAPIView):
         body_type = request.data.get('body_type', None)
         is_smoking = request.data.get('is_smoking', None)
         is_drinking_alcohol = request.data.get('is_drinking_alcohol', None)
+
+        if not (name is None or name == ''):
+            queryset = queryset.filter(name=name)
+        if not (surname is None or surname == ''):
+            queryset = queryset.filter(surname=surname)
+        if not (location is None or location == ''):
+            queryset = queryset.filter(location=location)
+        if not (sex is None or sex == ''):
+            queryset = queryset.filter(sex=sex)
+        if not (hair_color is None or hair_color == ''):
+            queryset = queryset.filter(hair_color=hair_color)
+        if not (growth is None or growth == ''):
+            queryset = queryset.filter(growth=growth)
+        if not (weight is None or weight == ''):
+            queryset = queryset.filter(weight=weight)
+        if not (body_type is None or body_type == ''):
+            queryset = queryset.filter(body_type=body_type)
+        if not (is_smoking is None or is_smoking == ''):
+            queryset = queryset.filter(is_smoking=is_smoking)
+        if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
+            queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
+
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+# USER
+# LIST - SEARCH AND FILTERS
+# DETAIL
+@permission_classes([IsAuthenticated])
+class UserListView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = UserSerializer
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
+                     'hair_color', 'body_type', 'is_smoking',
+                     'is_drinking_alcohol']
+    queryset = User.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        name = request.query_params.get('name', None)
+        surname = request.query_params.get('surname', None)
+        location = request.query_params.get('location', None)
+        sex = request.query_params.get('sex', None)
+        hair_color = request.query_params.get('hair_color', None)
+        growth = request.query_params.get('growth', None)
+        weight = request.query_params.get('weight', None)
+        body_type = request.query_params.get('body_type', None)
+        is_smoking = request.query_params.get('is_smoking', None)
+        is_drinking_alcohol = request.query_params.get('is_drinking_alcohol', None)
 
         if not (name is None or name == ''):
             queryset = queryset.filter(name=name)
