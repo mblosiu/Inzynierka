@@ -1,19 +1,20 @@
 from rest_framework import serializers
 
-from ..models import User
+from ..models import User, Preferences, Settings
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'name', 'surname', 'birthday', 'sex', 'location', 'profile_picture',
-                  'description', 'hair_color', 'growth', 'weight', 'body_type', 'is_smoking',
-                  'is_drinking_alcohol']
+        fields = ['email', 'username', 'last_login', 'is_active', 'name', 'surname', 'birthday', 'location',
+                  'profile_picture', 'description', 'sex', 'hair_color', 'hair_length', 'growth', 'weight', 'body_type',
+                  'freckles', 'glasses', 'is_smoking', 'is_drinking_alcohol'
+                  ]
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Preferences
         fields = ['sex_preference', 'hair_color_blonde_preference', 'hair_color_brunette_preference',
                   'hair_color_red_preference', 'growth_preference', 'weight_preference', 'body_type_preference',
                   'is_smoking_preference', 'is_drinking_alcohol_preference']
@@ -21,8 +22,8 @@ class UserPreferencesSerializer(serializers.ModelSerializer):
 
 class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['']
+        model = Settings
+        fields = ['dark_theme']
 
 
 class UserProfilePicSerializer(serializers.ModelSerializer):
@@ -65,13 +66,20 @@ class RegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'password': 'This field is required.'})
         elif password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
-
+        p = Preferences()
+        p.save()
+        s = Settings(
+            dark_theme=False,
+        )
+        s.save()
         account = User(
             username=username,
             email=email,
             location=location,
             birthday=birthday,
             sex=sex,
+            preferences=p,
+            settings=s,
         )
         account.set_password(password)
         account.save()

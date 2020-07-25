@@ -6,8 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer
-from ..models import User
+from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
+    UserSettingsSerializer
+from ..models import User, Preferences, Settings
 
 
 @permission_classes([])
@@ -73,17 +74,17 @@ class UserProfileView(APIView):
         response = {}
 
         email = request.data.get('email', None)
-        name = request.data.get('name', None)
-        surname = request.data.get('surname', None)
-        location = request.data.get('location', None)
-        sex = request.data.get('sex', None)
-        hair_color = request.data.get('hair_color', None)
-        growth = request.data.get('growth', None)
-        weight = request.data.get('weight', None)
-        body_type = request.data.get('body_type', None)
-        is_smoking = request.data.get('is_smoking', None)
-        is_drinking_alcohol = request.data.get('is_drinking_alcohol', None)
-        description = request.data.get('description', None)
+        name = request.data.get('name', '').capitalize()
+        surname = request.data.get('surname', '').capitalize()
+        location = request.data.get('location', '').capitalize()
+        sex = request.data.get('sex', '').capitalize()
+        hair_color = request.data.get('hair_color', '').capitalize()
+        body_type = request.data.get('body_type', '').capitalize()
+        growth = request.data.get('growth', '')
+        weight = request.data.get('weight', '')
+        description = request.data.get('description', '')
+        is_smoking = request.data.get('is_smoking', False)
+        is_drinking_alcohol = request.data.get('is_drinking_alcohol', False)
 
         if email in [None, '', account.email]:
             response["email"] = "no changes"
@@ -95,34 +96,34 @@ class UserProfileView(APIView):
                 account.email = email
                 response["email"] = "updated"
 
-        if name in [None, '', account.name]:
+        if name in [account.name]:
             response["name"] = "no changes"
         else:
-            account.name = name.capitalize()
+            account.name = name
             response["name"] = "updated"
 
         if surname in [None, '', account.surname]:
             response["surname"] = "no changes"
         else:
-            account.surname = surname.capitalize()
+            account.surname = surname
             response["surname"] = "updated"
 
         if location in [None, '', account.location]:
             response["location"] = "no changes"
         else:
-            account.location = location.capitalize()
+            account.location = location
             response["location"] = "updated"
 
         if sex in [None, '', account.sex]:
             response["sex"] = "no changes"
         else:
-            account.sex = sex.capitalize()
+            account.sex = sex
             response["sex"] = "updated"
 
         if hair_color in [None, '', account.hair_color]:
             response["hair_color"] = "no changes"
         else:
-            account.hair_color = hair_color.capitalize()
+            account.hair_color = hair_color
             response["hair_color"] = "updated"
 
         if growth in [None, '', account.growth]:
@@ -140,19 +141,19 @@ class UserProfileView(APIView):
         if body_type in [None, '', account.body_type]:
             response["body_type"] = "no changes"
         else:
-            account.body_type = body_type.capitalize()
+            account.body_type = body_type
             response["body_type"] = "updated"
 
         if is_smoking in [None, '', account.is_smoking]:
             response["is_smoking"] = "no changes"
         else:
-            account.is_smoking = is_smoking.capitalize()
+            account.is_smoking = is_smoking
             response["is_smoking"] = "updated"
 
         if is_drinking_alcohol in [None, '', account.is_drinking_alcohol]:
             response["is_drinking_alcohol"] = "no changes"
         else:
-            account.is_drinking_alcohol = is_drinking_alcohol.capitalize()
+            account.is_drinking_alcohol = is_drinking_alcohol
             response["is_drinking_alcohol"] = "updated"
 
         if description in [None, '', account.description]:
@@ -166,51 +167,6 @@ class UserProfileView(APIView):
             return Response(response, status=status.HTTP_200_OK)
         else:
             response["detail"] = "request must contain user data"
-            return Response(response, status=status.HTTP_400_BAD_REQUEST)
-
-
-@permission_classes([IsAuthenticated])
-class UserPreferencesView(APIView):
-
-    @staticmethod
-    def get(request):
-        try:
-            account = request.user
-        except User.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = UserPreferencesSerializer(account)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @staticmethod
-    def patch(request):
-        try:
-            account = request.user
-        except User.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-        response = {}
-
-        sex_preference = request.data.get('sex_preference', None)
-        hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', None)
-        hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', None)
-        hair_color_red_preference = request.data.get('hair_color_red_preference', None)
-        growth_preference = request.data.get('growth_preference', None)
-        weight_preference = request.data.get('weight_preference', None)
-        body_type_preference = request.data.get('body_type_preference', None)
-        is_smoking_preference = request.data.get('is_smoking_preference', None)
-        is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', None)
-
-        if sex_preference in [None, '', account.sex_preference]:
-            response["sex_preference"] = "no changes"
-        else:
-            account.sex_preference = sex_preference.capitalize()
-            response["sex_preference"] = "updated"
-
-        if response:
-            account.save()
-            return Response(response, status=status.HTTP_200_OK)
-        else:
-            response["detail"] = "request must contain user data to change"
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -257,8 +213,6 @@ class UserProfilePic(APIView):
     # USER LIST - SEARCHER
 
 
-# USER LIST - SEARCH AND FILTERS
-# USER DETAIL
 @permission_classes([IsAuthenticated])
 class UserListView(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
@@ -305,4 +259,142 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
 
         serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class PreferencesView(APIView):
+    @staticmethod
+    def patch(request):
+        try:
+            account = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        try:
+            preferences = request.user.preferences
+        except Preferences.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        response = {}
+
+        sex_preference = request.data.get('sex_preference', '').capitalize()
+        hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', '').capitalize()
+        hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', '').capitalize()
+        hair_color_red_preference = request.data.get('hair_color_red_preference', '').capitalize()
+        growth_preference = request.data.get('growth_preference', '').capitalize()
+        weight_preference = request.data.get('weight_preference', '').capitalize()
+        body_type_preference = request.data.get('body_type_preference', '').capitalize()
+        is_smoking_preference = request.data.get('is_smoking_preference', '').capitalize()
+        is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', '').capitalize()
+
+        if sex_preference == preferences.sex_preference:
+            response["sex_preference"] = "no changes"
+        else:
+            preferences.sex_preference = sex_preference
+            response["sex_preference"] = "updated"
+
+        if hair_color_blonde_preference == preferences.hair_color_blonde_preference:
+            response["hair_color_blonde_preference"] = "no changes"
+        else:
+            preferences.hair_color_blonde_preference = hair_color_blonde_preference
+            response["hair_color_blonde_preference"] = "updated"
+
+        if hair_color_brunette_preference == preferences.hair_color_brunette_preference:
+            response["hair_color_brunette_preference"] = "no changes"
+        else:
+            preferences.hair_color_brunette_preference = hair_color_brunette_preference
+            response["hair_color_brunette_preference"] = "updated"
+
+        if hair_color_red_preference == preferences.hair_color_red_preference:
+            response["hair_color_red_preference"] = "no changes"
+        else:
+            preferences.hair_color_red_preference = hair_color_red_preference
+            response["hair_color_red_preference"] = "updated"
+
+        if growth_preference == preferences.growth_preference:
+            response["growth_preference"] = "no changes"
+        else:
+            preferences.growth_preference = growth_preference
+            response["growth_preference"] = "updated"
+
+        if weight_preference == preferences.weight_preference:
+            response["weight_preference"] = "no changes"
+        else:
+            preferences.weight_preference = weight_preference
+            response["weight_preference"] = "updated"
+
+        if body_type_preference == preferences.body_type_preference:
+            response["body_type_preference"] = "no changes"
+        else:
+            preferences.body_type_preference = body_type_preference
+            response["body_type_preference"] = "updated"
+
+        if is_smoking_preference == preferences.is_smoking_preference:
+            response["is_smoking_preference"] = "no changes"
+        else:
+            preferences.is_smoking_preference = is_smoking_preference
+            response["is_smoking_preference"] = "updated"
+
+        if is_drinking_alcohol_preference == preferences.is_drinking_alcohol_preference:
+            response["is_drinking_alcohol_preference"] = "no changes"
+        else:
+            preferences.is_drinking_alcohol_preference = is_drinking_alcohol_preference
+            response["is_drinking_alcohol_preference"] = "updated"
+
+        if response:
+            preferences.save()
+            account.save()
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response["detail"] = "request must contain user data"
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+    @staticmethod
+    def get(request):
+        try:
+            preferences = request.user.preferences
+        except Preferences.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserPreferencesSerializer(preferences)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class SettingsView(APIView):
+    @staticmethod
+    def patch(request):
+        try:
+            account = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        try:
+            settings = request.user.settings
+        except Settings.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        response = {}
+
+        dark_theme = request.data.get('dark_theme', False)
+
+        if dark_theme == settings.dark_theme:
+            response["dark_theme"] = "no changes"
+        else:
+            settings.dark_theme = dark_theme
+            response["dark_theme"] = "updated"
+
+        if response:
+            settings.save()
+            account.save()
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response["detail"] = "request must contain user data"
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+    @staticmethod
+    def get(request):
+        try:
+            settings = request.user.settings
+        except Settings.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserSettingsSerializer(settings)
         return Response(serializer.data, status=status.HTTP_200_OK)
