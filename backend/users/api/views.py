@@ -18,12 +18,10 @@ class RegistrationView(APIView):
         serializer = RegistrationSerializer(data=request.data)
         data = {}
         if serializer.is_valid():
-            account = serializer.save()
+            serializer.save()
+
             data['detail'] = 'successfully registered new user.'
-            data['email'] = account.email
-            data['username'] = account.username
-            data['birthday'] = account.birthday
-            data['location'] = account.location
+
             stat = status.HTTP_201_CREATED
         else:
             data = serializer.errors
@@ -72,7 +70,6 @@ class UserProfileView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
-
         email = request.data.get('email', None)
         name = request.data.get('name', '').capitalize()
         surname = request.data.get('surname', '').capitalize()
@@ -168,98 +165,6 @@ class UserProfileView(APIView):
         else:
             response["detail"] = "request must contain user data"
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
-
-
-@permission_classes([IsAuthenticated])
-class UserProfilePic(APIView):
-    @staticmethod
-    def get(request):
-        try:
-            account = request.user
-        except User.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = UserProfilePicSerializer(account)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @staticmethod
-    def patch(request):
-        try:
-            account = request.user
-        except User.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-        response = {}
-
-        file = request.data.get('profile_picture', None)
-
-        main, sub = file.content_type.split('/')
-
-        if not file:
-            response["detail"] = "request must contain user data"
-            stat = status.HTTP_400_BAD_REQUEST
-
-        elif not (main == 'image' and sub in ['jpeg', 'jpg', 'png']):
-            response["detail"] = "wrong data type"
-            stat = status.HTTP_400_BAD_REQUEST
-
-        else:
-            account.profile_picture = file
-            response["detail"] = "photo added successfully"
-            account.save()
-            stat = status.HTTP_200_OK
-
-        return Response(response, status=stat)
-
-    # USER LIST - SEARCHER
-
-
-@permission_classes([IsAuthenticated])
-class UserListView(viewsets.ReadOnlyModelViewSet):
-    serializer_class = UserSerializer
-    filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
-                     'hair_color', 'body_type', 'is_smoking',
-                     'is_drinking_alcohol']
-    queryset = User.objects.all()
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
-        queryset = queryset.exclude(pk=request.user.pk)
-
-        name = request.query_params.get('name', None)
-        surname = request.query_params.get('surname', None)
-        location = request.query_params.get('location', None)
-        sex = request.query_params.get('sex', None)
-        hair_color = request.query_params.get('hair_color', None)
-        growth = request.query_params.get('growth', None)
-        weight = request.query_params.get('weight', None)
-        body_type = request.query_params.get('body_type', None)
-        is_smoking = request.query_params.get('is_smoking', None)
-        is_drinking_alcohol = request.query_params.get('is_drinking_alcohol', None)
-
-        if not (name is None or name == ''):
-            queryset = queryset.filter(name=name)
-        if not (surname is None or surname == ''):
-            queryset = queryset.filter(surname=surname)
-        if not (location is None or location == ''):
-            queryset = queryset.filter(location=location)
-        if not (sex is None or sex == ''):
-            queryset = queryset.filter(sex=sex)
-        if not (hair_color is None or hair_color == ''):
-            queryset = queryset.filter(hair_color=hair_color)
-        if not (growth is None or growth == ''):
-            queryset = queryset.filter(growth=growth)
-        if not (weight is None or weight == ''):
-            queryset = queryset.filter(weight=weight)
-        if not (body_type is None or body_type == ''):
-            queryset = queryset.filter(body_type=body_type)
-        if not (is_smoking is None or is_smoking == ''):
-            queryset = queryset.filter(is_smoking=is_smoking)
-        if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
-            queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
-
-        serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])
@@ -397,4 +302,97 @@ class SettingsView(APIView):
         except Settings.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserSettingsSerializer(settings)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class UserProfilePic(APIView):
+    @staticmethod
+    def get(request):
+        try:
+            account = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserProfilePicSerializer(account)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def patch(request):
+        try:
+            account = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        response = {}
+
+        file = request.data.get('profile_picture', None)
+
+        main, sub = file.content_type.split('/')
+
+        if not file:
+            response["detail"] = "request must contain user data"
+            stat = status.HTTP_400_BAD_REQUEST
+
+        elif not (main == 'image' and sub in ['jpeg', 'jpg', 'png']):
+            response["detail"] = "wrong data type"
+            stat = status.HTTP_400_BAD_REQUEST
+
+        else:
+            account.profile_picture = file
+            response["detail"] = "photo added successfully"
+            account.save()
+            stat = status.HTTP_200_OK
+
+        return Response(response, status=stat)
+
+    # USER LIST - SEARCHER
+
+
+@permission_classes([IsAuthenticated])
+class UserListView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = UserSerializer
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
+                     'hair_color', 'body_type', 'is_smoking',
+                     'is_drinking_alcohol']
+    queryset = User.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = queryset.exclude(pk=request.user.pk)
+
+        name = request.query_params.get('name', None)
+        surname = request.query_params.get('surname', None)
+        location = request.query_params.get('location', None)
+        sex = request.query_params.get('sex', None)
+        hair_color = request.query_params.get('hair_color', None)
+        growth = request.query_params.get('growth', None)
+        weight = request.query_params.get('weight', None)
+        body_type = request.query_params.get('body_type', None)
+        is_smoking = request.query_params.get('is_smoking', None)
+        is_drinking_alcohol = request.query_params.get('is_drinking_alcohol', None)
+
+        if not (name is None or name == ''):
+            queryset = queryset.filter(name=name)
+        if not (surname is None or surname == ''):
+            queryset = queryset.filter(surname=surname)
+        if not (location is None or location == ''):
+            queryset = queryset.filter(location=location)
+        if not (sex is None or sex == ''):
+            queryset = queryset.filter(sex=sex)
+        if not (hair_color is None or hair_color == ''):
+            queryset = queryset.filter(hair_color=hair_color)
+        if not (growth is None or growth == ''):
+            queryset = queryset.filter(growth=growth)
+        if not (weight is None or weight == ''):
+            queryset = queryset.filter(weight=weight)
+        if not (body_type is None or body_type == ''):
+            queryset = queryset.filter(body_type=body_type)
+        if not (is_smoking is None or is_smoking == ''):
+            queryset = queryset.filter(is_smoking=is_smoking)
+        if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
+            queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
+
+        serializer = UserSerializer(queryset, many=True)
+
         return Response(serializer.data, status=status.HTTP_200_OK)

@@ -3,15 +3,6 @@ from rest_framework import serializers
 from ..models import User, Preferences, Settings
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['email', 'username', 'last_login', 'is_active', 'name', 'surname', 'birthday', 'location',
-                  'profile_picture', 'description', 'sex', 'hair_color', 'hair_length', 'growth', 'weight', 'body_type',
-                  'freckles', 'glasses', 'is_smoking', 'is_drinking_alcohol'
-                  ]
-
-
 class UserPreferencesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Preferences
@@ -24,6 +15,17 @@ class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Settings
         fields = ['dark_theme']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    preferences = UserPreferencesSerializer(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['pk', 'email', 'username', 'last_login', 'is_active', 'name', 'surname', 'birthday', 'location',
+                  'profile_picture', 'description', 'sex', 'hair_color', 'hair_length', 'growth', 'weight', 'body_type',
+                  'freckles', 'glasses', 'is_smoking', 'is_drinking_alcohol', 'preferences'
+                  ]
 
 
 class UserProfilePicSerializer(serializers.ModelSerializer):

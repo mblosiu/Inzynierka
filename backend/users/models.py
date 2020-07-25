@@ -79,6 +79,7 @@ class User(AbstractBaseUser):
 
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
+
     name = models.CharField(max_length=30, null=True, default=None)
     surname = models.CharField(max_length=30, null=True, default=None)
     birthday = models.DateField(null=True, default=None)
