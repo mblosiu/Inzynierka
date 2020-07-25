@@ -19,12 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9e91678-bba1-47cc-bf11-f45bd193acc9" name="Default Changelist" comment="add settings, preferences model, serializers, creating object on register">
+    <list default="true" id="e9e91678-bba1-47cc-bf11-f45bd193acc9" name="Default Changelist" comment="users serializer field for preferences">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595680878318</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="users serializer field for preferences">
+      <created>1595683792086</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1595683792086</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -162,7 +165,8 @@
     <MESSAGE value="unit tests - all done, only logout test left" />
     <MESSAGE value="user profile pic routing" />
     <MESSAGE value="add settings, preferences model, serializers, creating object on register" />
-    <option name="LAST_COMMIT_MESSAGE" value="add settings, preferences model, serializers, creating object on register" />
+    <MESSAGE value="users serializer field for preferences" />
+    <option name="LAST_COMMIT_MESSAGE" value="users serializer field for preferences" />
   </component>
   <component name="WindowStateProjectService">
     <state x="526" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594397194690">
