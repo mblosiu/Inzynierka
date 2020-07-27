@@ -142,8 +142,7 @@
             </div>
           </b-col>
 
-          
-          
+
         </b-col>
 
         <b-col cols="3">
@@ -157,9 +156,19 @@
               <li class="list-group-item">Wiek: {{getAge(user_data.birthday)}}</li>
               <li class="list-group-item">Mieszkam w: {{user_data.location}}</li>
               <li class="list-group-item">Urodziny: {{user_data.birthday}}</li>
-              <li class="list-group-item">Status:</li>
-              <li class="list-group-item">Papierosy:</li>
-              <li class="list-group-item">Alkohol:</li>
+              <li class="list-group-item">Status/zajęcie: dodać np ->uczeń/student/pracuję/emerytura/dumna madka</li>
+              <div v-if="user_data.is_smoking!=false">
+              <li class="list-group-item">Papierosy: nie palę </li>
+              </div>
+              <div v-else>
+              <li class="list-group-item">Papierosy: palę </li>
+              </div>
+              <div v-if="user_data.is_drinking_alcohol!=false">
+              <li class="list-group-item">Alkohol: nie piję </li>
+              </div>
+              <div v-else>
+              <li class="list-group-item">Alkohol: piję </li>
+              </div>
             </ul>
           </div>
 
@@ -170,9 +179,10 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Wzrost: {{user_data.growth}}</li>
               <li class="list-group-item">Waga: {{user_data.weight}}</li>
-              <li class="list-group-item">Włosy: {{user_data.hair_color}}</li>
-              <li class="list-group-item">Sylwetka: {{user_data.body_type}}</li>
-              <li class="list-group-item">Znaki szczególne:</li>
+              <li class="list-group-item">Włosy: {{user_data.hair_length}} {{user_data.hair_color}} +dziś farbują włosy więc można dodać kolor farbowany/nietypowy + brak koloru czarnego</li>
+              <li class="list-group-item">Kolor oczu: dodać</li>
+              <li class="list-group-item">Sylwetka: szczupła/gruba/wysportowana etc {{user_data.body_type}}</li>
+              <li class="list-group-item">Znaki szczególne: <p v-if="user_data.freckles!=false"> mam piegi</p> <p v-if="user_data.glasses!=false"> noszę okulary </p> +można dodać tatuaże/kolczyki</li>
               <li class="list-group-item"></li>
             </ul>
           </div>
@@ -182,28 +192,44 @@
               <h3>Cechy charakteru:</h3>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Jakas cecha</li>
+              <li class="list-group-item">Pewność siebie: {{user_data.assertiveness}}</li>
+              <li class="list-group-item">Szczerość: {{user_data.sincerity}}</li>
+              <li class="list-group-item">Empatia: {{user_data.empathy}}</li>
+              <li class="list-group-item">Komunikatywność: {{user_data.communication}}</li>
+              <li class="list-group-item">Bezinteresowność: {{user_data.selflessness}}</li>
+              <li class="list-group-item">Uczciwość: {{user_data.honesty}}</li>
+              <li class="list-group-item">Sumienność: {{user_data.scrupulousness}}</li>
+              <li class="list-group-item">Pracowitość: {{user_data.diligence}}</li>
+              <li class="list-group-item">Życzliwość: {{user_data.kindness}}</li>
+              <li class="list-group-item"> + romantyczność można dodać na razie</li>
             </ul>
           </div>
 
           <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
             <div class="card-header">
-              <h3>Zainteresowania:</h3>
+              <h3>Zainteresowania: dodać (raczej pola tekstowe)</h3>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Hobby:</li>
               <li class="list-group-item">Muzyka:</li>
+              <li class="list-group-item">Kuchnia:</li>
+              <li class="list-group-item">Ulubione miejsca:</li>
             </ul>
           </div>
 
           <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
             <div class="card-header">
-              <h3>Poszukiwany ideał:</h3>
+              <h3>Moje preferencje:</h3>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
-              <li class="list-group-item">Przedział wiekowy:</li>
-              <li class="list-group-item">ect</li>
+              <li class="list-group-item">Przedział wiekowy: todo</li>
+              <li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>
+              <li class="list-group-item">Sylwetka: {{user_preferences.body_type_preference}}</li>
+              <li class="list-group-item">Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
+              <li class="list-group-item">Kolor oczu: todo</li>
+              <li class="list-group-item">Znaki szczególne: <p v-if="user_preferences.freckles_preference!=false"> piegi</p> <p v-if="user_preferences.glasses_preference!=false"> okulary</p> +td tatuaże</li>
+              <li class="list-group-item">Idealne miejsce na randkę: ewentualnie można dodać</li>
             </ul>
           </div>
         </b-col>
