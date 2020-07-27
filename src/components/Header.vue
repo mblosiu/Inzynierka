@@ -132,14 +132,12 @@ export default {
 
       axios
         .post("http://127.0.0.1:8000/api/user/logout", {}, config)
-        .then((response) => {
-          if (response.status == 200) {
-            localStorage.removeItem("user-token"),
-              (this.token = null),
-              this.$router.go();
-          }
-        })
-        .catch((errors) => console.log(errors));
+        .then((response) => {})
+        .catch((errors) => {});
+      localStorage.removeItem("user-token"),
+        (this.token = null),
+        this.$router.go();
+      ł;
     },
     register() {
       console.log("Router");
