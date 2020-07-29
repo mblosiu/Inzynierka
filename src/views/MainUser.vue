@@ -2,7 +2,7 @@
   <div class="mainuser">
     <br />
     <b-container class="bv-example-row" fluid>
-      <b-row>        
+      <b-row>
         <b-col cols="8">
           <div v-if="user_data.profilePicture==null">
             <b-card
@@ -20,17 +20,15 @@
                 </div>
                 <div v-else>
                   <br />
-                  <div class="input-group input-group-lg" @submit.prevent="editUserData">
+                  <form class="description" @submit.prevent="editUserData">
+                    <!--<input type="text" id="user_name" v-model="user_data.name" class="form-control" />-->
                     <textarea
-                      class="form-control-lg"
-                      placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie!"
-                      maxlength="500"
-
-                      rows="3"
-                      aria-label="With textarea"
+                      v-model="user_data.description"
+                      placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie."
+                      class="form-control"
                     ></textarea>
                     <button type="submit" class="btn btn-secondary">Zapisz</button>
-                  </div>
+                  </form>
                 </div>
               </b-card-text>
             </b-card>
@@ -50,19 +48,20 @@
                   <h3>{{user_data.description}}</h3>
                 </div>
                 <div v-else>
-                  <div class="form-group" @submit.prevent="editUserData">
-                    <label
-                      for="exampleFormControlTextarea1"
-                    >Aktualnie nie posiadasz opisu. Napisz coś o sobie.</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <form class="description" @submit.prevent="editUserData">
+                    <!--<input type="text" id="user_name" v-model="user_data.name" class="form-control" />-->
+                    <textarea
+                      v-model="user_data.description"
+                      placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie."
+                    ></textarea>
                     <button type="submit" class="btn btn-secondary">Zapisz</button>
-                  </div>
+                  </form>
                 </div>
               </b-card-text>
             </b-card>
           </div>
           <br />
-          
+
           <b-col cols="4">
             <div
               class="nav flex-column nav-pills"
@@ -137,12 +136,10 @@
               >4</div>
             </div>
           </b-col>
-
-
         </b-col>
 
         <b-col cols="4">
-          <div class="card text-white bg-secondary mb-3" >
+          <div class="card text-white bg-secondary mb-3">
             <div class="card-header">
               <h3>O mnie:</h3>
             </div>
@@ -152,18 +149,34 @@
               <li class="list-group-item">Wiek: {{getAge(user_data.birthday)}}</li>
               <li class="list-group-item">Mieszkam w: {{user_data.location}}</li>
               <li class="list-group-item">Urodziny: {{user_data.birthday}}</li>
-              <li class="list-group-item">Status/zajęcie: dodać np ->uczeń/student/pracuję/emerytura/dumna madka</li>
-              <div v-if="user_data.is_smoking!=false">
-              <li class="list-group-item">Papierosy: nie palę </li>
+              <li
+                class="list-group-item"
+              >Status/zajęcie: dodać np ->uczeń/student/pracuję/emerytura/dumna madka</li>
+              <div smoking>
+              <div v-if="user_data.is_smoking===false">
+                <li class="list-group-item">Papierosy: nie palę</li>
+              </div>
+              <div v-else-if="user_data.is_smoking===sometimes">
+                <li class="list-group-item">Papierosy: okazyjnie</li>
+              </div>
+              <div v-else-if="user_data.is_smoking===true">
+                <li class="list-group-item">Papierosy: palę</li>
               </div>
               <div v-else>
-              <li class="list-group-item">Papierosy: palę </li>
+                <li class="list-group-item">Papierosy: {{user_data.is_smoking}} </li>
               </div>
-              <div v-if="user_data.is_drinking_alcohol!=false">
-              <li class="list-group-item">Alkohol: nie piję </li>
+              </div>
+              <div v-if="user_data.is_drinking_alcohol===false">
+                <li class="list-group-item">Alkohol: nie piję</li>
+              </div>
+              <div v-else-if="user_data.is_drinking_alcohol===sometimes">
+                <li class="list-group-item">Alkohol: okazyjnie</li>
+              </div>
+              <div v-else-if="user_data.is_drinking_alcohol===true">
+                <li class="list-group-item">Alkohol: piję</li>
               </div>
               <div v-else>
-              <li class="list-group-item">Alkohol: piję </li>
+                <li class="list-group-item">Alkohol: {{user_data.is_drinking_alcohol}} </li>
               </div>
             </ul>
           </div>
@@ -175,10 +188,18 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Wzrost: {{user_data.growth}}</li>
               <li class="list-group-item">Waga: {{user_data.weight}}</li>
-              <li class="list-group-item">Włosy: {{user_data.hair_length}} {{user_data.hair_color}} +dziś farbują włosy więc można dodać kolor farbowany/nietypowy + brak koloru czarnego</li>
+              <li
+                class="list-group-item"
+              >Włosy: {{user_data.hair_length}} {{user_data.hair_color}} +dziś farbują włosy więc można dodać kolor farbowany/nietypowy + brak koloru czarnego</li>
               <li class="list-group-item">Kolor oczu: dodać</li>
-              <li class="list-group-item">Sylwetka: szczupła/gruba/wysportowana etc {{user_data.body_type}}</li>
-              <li class="list-group-item">Znaki szczególne: <p v-if="user_data.freckles!=false"> mam piegi</p> <p v-if="user_data.glasses!=false"> noszę okulary </p> +można dodać tatuaże/kolczyki</li>
+              <li
+                class="list-group-item"
+              >Sylwetka: szczupła/gruba/wysportowana etc {{user_data.body_type}}</li>
+              <li class="list-group-item">
+                Znaki szczególne:
+                <p v-if="user_data.freckles!=false">mam piegi</p>
+                <p v-if="user_data.glasses!=false">noszę okulary</p>+można dodać tatuaże/kolczyki
+              </li>
               <li class="list-group-item"></li>
             </ul>
           </div>
@@ -197,7 +218,7 @@
               <li class="list-group-item">Sumienność: {{user_data.scrupulousness}}</li>
               <li class="list-group-item">Pracowitość: {{user_data.diligence}}</li>
               <li class="list-group-item">Życzliwość: {{user_data.kindness}}</li>
-              <li class="list-group-item"> + romantyczność można dodać na razie</li>
+              <li class="list-group-item">+ romantyczność można dodać na razie</li>
             </ul>
           </div>
 
@@ -222,9 +243,15 @@
               <li class="list-group-item">Przedział wiekowy: todo</li>
               <li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>
               <li class="list-group-item">Sylwetka: {{user_preferences.body_type_preference}}</li>
-              <li class="list-group-item">Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
+              <li
+                class="list-group-item"
+              >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
               <li class="list-group-item">Kolor oczu: todo</li>
-              <li class="list-group-item">Znaki szczególne: <p v-if="user_preferences.freckles_preference!=false"> piegi</p> <p v-if="user_preferences.glasses_preference!=false"> okulary</p> +td tatuaże</li>
+              <li class="list-group-item">
+                Znaki szczególne:
+                <p v-if="user_preferences.freckles_preference!=false">piegi</p>
+                <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
+              </li>
               <li class="list-group-item">Idealne miejsce na randkę: ewentualnie można dodać</li>
             </ul>
           </div>
@@ -338,7 +365,8 @@ export default {
   background: #343a40;
   color: white;
 }
-textarea.form-control-lg {
+textarea {
   height: 100%;
+  width: 100%;
 }
 </style>

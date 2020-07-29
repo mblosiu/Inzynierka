@@ -26,7 +26,7 @@
           <label for="is_smoking" class="grey-text">Papierosy</label>
           <b-form-select
             class="form-control"
-            id="user_smoking"
+            id="is_smoking"
             v-model="user_data.is_smoking"
             :options="smoking_options"
           ></b-form-select>
@@ -34,7 +34,7 @@
           <label for="is_drinking" class="grey-text">Alkohol</label>
           <b-form-select
             class="form-control"
-            id="user_drinking"
+            id="is_drinking_alcohol"
             v-model="user_data.is_drinking_alcohol"
             :options="alcohol_options"
           ></b-form-select>
@@ -48,10 +48,10 @@
           <p class="h4 text-center mb-4">Twój wygląd</p>
 
           <label for="user_name" class="white-text">Wzrost</label>
-          <input type="text" id="user_name" v-model="user_data.name" class="form-control" />
+          <input type="text" id="user_name" v-model="user_data.growth" class="form-control" />
 
           <label for="user_weight" class="white-text">Waga</label>
-          <input type="text" id="user_growth" v-model="user_data.growth" class="form-control" />
+          <input type="text" id="user_growth" v-model="user_data.weight" class="form-control" />
 
           <label for="body_type" class="grey-text">Sylwetka</label>
           <b-form-select
@@ -134,7 +134,7 @@ export default {
         { value: "Athletic", text: "Wysportowana" },
         { value: "Chubby", text: "Puszysta" },
       ],
-      eye_colour_options: [
+      eye_color_options: [
         { value: null, text: "" },
         { value: "Grey", text: "Szare" },
         { value: "Blue", text: "Niebieskie" },
@@ -222,6 +222,8 @@ export default {
             name: this.user_data.name,
             location: this.user_data.location,
             sex: this.user_data.sex,
+            is_smoking: this.user_data.is_smoking,
+            is_drinking_alcohol: this.user_data.is_drinking_alcohol
           },
           config
         )

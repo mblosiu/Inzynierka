@@ -50,6 +50,7 @@
 
     <h1 id="title">Wyniki wyszukiwania:</h1>
     <div class="users-list" v-for="user in users" v-bind:key="user">
+      <router-link :to="{ name: 'userprofile', params: {username: user.username}}">
       <b-card
         v-if="profileImage==null"
         img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
@@ -64,6 +65,7 @@
           <h3 v-else> Brak opisu.</h3>
         </b-card-text>
       </b-card>
+      </router-link>
       <br/>
     </div>
     <!--

@@ -7,6 +7,7 @@ import MainUser from '../views/MainUser.vue'
 import Settings from '../views/Settings.vue'
 import Search from '../views/Search.vue'
 import Gallery from '../views/Gallery.vue'
+import UserProfile from '../views/UserProfile.vue'
 
 Vue.use(VueRouter)
 
@@ -62,8 +63,13 @@ const routes = [
     meta: {
       title: 'Wyszukiwanie'
     }
-    
-  },  
+  }, 
+  {
+    path: '/mainuser/search/:username',
+    name: 'userprofile',
+    component: UserProfile,
+    params: true
+  }, 
   {
     path: '/mainuser/gallery',
     name: 'Gallery',
