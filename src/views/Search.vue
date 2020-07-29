@@ -1,5 +1,5 @@
 <template>
-  <div class>
+  <div class="page">
     <form id="filters" @submit.prevent="filterUsers">
       <table>
         <tr>
@@ -179,6 +179,11 @@ export default {
 </script>
 
 <style scoped>
+.page{
+  margin: auto;
+  width: 100%;
+}
+
 #filters {
   margin: auto;
   width: 50%;
@@ -201,16 +206,6 @@ td {
   padding-left: 2.1cm;
   padding-right: 2.1cm;
   padding-bottom: 1cm;
-}
-#nav {
-  padding: 30px;
-}
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 .card-img-left {
   height: 300px;
