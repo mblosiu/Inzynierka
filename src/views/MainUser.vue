@@ -139,7 +139,7 @@
         </b-col>
 
         <b-col cols="4">
-          <div class="card text-white bg-secondary mb-3">
+          <div class="card text-black bg-dark mb-3">
             <div class="card-header">
               <h3>O mnie:</h3>
             </div>
@@ -193,7 +193,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-secondary mb-3">
+          <div class="card text-black bg-dark mb-3">
             <div class="card-header">
               <h3>Wygląd:</h3>
             </div>
@@ -216,7 +216,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-secondary mb-3">
+          <div class="card text-black bg-dark mb-3">
             <div class="card-header">
               <h3>Cechy charakteru:</h3>
             </div>
@@ -234,7 +234,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-secondary mb-3">
+          <div class="card text-black bg-dark mb-3">
             <div class="card-header">
               <h3>Zainteresowania: dodać (raczej pola tekstowe)</h3>
             </div>
@@ -246,7 +246,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-secondary mb-3">
+          <div class="card text-black bg-dark mb-3">
             <div class="card-header">
               <h3>Moje preferencje:</h3>
             </div>
@@ -308,19 +308,6 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    getUserPreferences() {
-      axios
-        .get("http://127.0.0.1:8000/api/user/preferences", {
-          params: {},
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
-        .then((response) => {
-          console.log(response), (this.user_preferences = response.data);
-        })
-        .catch((errors) => console.log(errors));
-    },
     editUserData() {
       let config = {
         headers: {
@@ -353,13 +340,16 @@ export default {
   },
   created() {
     this.getUserData();
-    this.getUserPreferences();
   },
 };
 </script>
 
 
 <style scoped>
+.card-header{
+  color: white;
+
+}
 .mainuser {
   margin: auto;
   width: 100%;
