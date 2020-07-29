@@ -153,30 +153,42 @@
                 class="list-group-item"
               >Status/zajęcie: dodać np ->uczeń/student/pracuję/emerytura/dumna madka</li>
               <div smoking>
-              <div v-if="user_data.is_smoking===false">
-                <li class="list-group-item">Papierosy: nie palę</li>
+                <div v-if="user_data.is_smoking==0">
+                  <li class="list-group-item">Papierosy: nie palę</li>
+                </div>
+                <div v-else-if="user_data.is_smoking==1">
+                  <li class="list-group-item">Papierosy: okazjonalnie</li>
+                </div>
+                <div v-else-if="user_data.is_smoking==2">
+                  <li class="list-group-item">Papierosy: często</li>
+                </div>
+                <div v-else-if="user_data.is_smoking==3">
+                  <li class="list-group-item">Papierosy: codziennie</li>
+                </div>
+                <div v-else-if="user_data.is_smoking==4">
+                  <li class="list-group-item">Papierosy: nałogowo</li>
+                </div>
+                <div v-else>
+                  <li class="list-group-item">Papierosy: {{user_data.is_smoking}}</li>
+                </div>
               </div>
-              <div v-else-if="user_data.is_smoking===sometimes">
-                <li class="list-group-item">Papierosy: okazyjnie</li>
-              </div>
-              <div v-else-if="user_data.is_smoking===true">
-                <li class="list-group-item">Papierosy: palę</li>
-              </div>
-              <div v-else>
-                <li class="list-group-item">Papierosy: {{user_data.is_smoking}} </li>
-              </div>
-              </div>
-              <div v-if="user_data.is_drinking_alcohol===false">
+              <div v-if="user_data.is_drinking_alcohol==0">
                 <li class="list-group-item">Alkohol: nie piję</li>
               </div>
-              <div v-else-if="user_data.is_drinking_alcohol===sometimes">
-                <li class="list-group-item">Alkohol: okazyjnie</li>
+              <div v-else-if="user_data.is_drinking_alcohol==1">
+                <li class="list-group-item">Alkohol: okazjonalnie</li>
               </div>
-              <div v-else-if="user_data.is_drinking_alcohol===true">
-                <li class="list-group-item">Alkohol: piję</li>
+              <div v-else-if="user_data.is_drinking_alcohol==2">
+                <li class="list-group-item">Alkohol: często</li>
+              </div>
+              <div v-else-if="user_data.is_drinking_alcohol==3">
+                <li class="list-group-item">Alkohol: codziennie</li>
+              </div>
+              <div v-else-if="user_data.is_drinking_alcohol==4">
+                <li class="list-group-item">Alkohol: nałogowo</li>
               </div>
               <div v-else>
-                <li class="list-group-item">Alkohol: {{user_data.is_drinking_alcohol}} </li>
+                <li class="list-group-item">Alkohol: {{user_data.is_drinking_alcohol}}</li>
               </div>
             </ul>
           </div>
