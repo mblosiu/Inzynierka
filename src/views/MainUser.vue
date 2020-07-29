@@ -1,12 +1,8 @@
 <template>
-  <div id="mainuser">
+  <div class="mainuser">
     <br />
     <b-container class="bv-example-row" fluid>
-      <b-row>
-        <!--<b-col cols="2">
-        </b-col>
-        <b-col cols="1"></b-col>-->
-        <b-col cols="1"></b-col>
+      <b-row>        
         <b-col cols="8">
           <div v-if="user_data.profilePicture==null">
             <b-card
@@ -29,7 +25,7 @@
                       class="form-control-lg"
                       placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie!"
                       maxlength="500"
-                      style="min-width: 100%"
+
                       rows="3"
                       aria-label="With textarea"
                     ></textarea>
@@ -145,8 +141,8 @@
 
         </b-col>
 
-        <b-col cols="3">
-          <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
+        <b-col cols="4">
+          <div class="card text-white bg-secondary mb-3" >
             <div class="card-header">
               <h3>O mnie:</h3>
             </div>
@@ -172,7 +168,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
+          <div class="card text-white bg-secondary mb-3">
             <div class="card-header">
               <h3>Wygląd:</h3>
             </div>
@@ -187,7 +183,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
+          <div class="card text-white bg-secondary mb-3">
             <div class="card-header">
               <h3>Cechy charakteru:</h3>
             </div>
@@ -205,7 +201,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
+          <div class="card text-white bg-secondary mb-3">
             <div class="card-header">
               <h3>Zainteresowania: dodać (raczej pola tekstowe)</h3>
             </div>
@@ -217,7 +213,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
+          <div class="card text-white bg-secondary mb-3">
             <div class="card-header">
               <h3>Moje preferencje:</h3>
             </div>
@@ -325,22 +321,9 @@ export default {
 
 
 <style scoped>
-#userpage {
-  height: 1200px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: white;
-}
-#nav {
-  padding: 5px;
-}
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-#nav a.router-link-exact-active {
-  color: #42b983;
+.mainuser {
+  margin: auto;
+  width: 100%;
 }
 .card-img-left {
   height: 300px;
