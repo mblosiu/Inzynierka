@@ -251,7 +251,19 @@
               <h3>Moje preferencje:</h3>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
+              <div v-if="user_preferences.sex_preference==male">
+                <li class="list-group-item">Płeć: Mężczyzna</li>
+              </div>
+              <div v-else-if="user_preferences.sex_preference==female">
+                <li class="list-group-item">Płeć: Kobieta</li>
+              </div>
+              <div v-if="user_preferences.sex_preference==null">
+                <li class="list-group-item">Płeć: </li>
+              </div>
+              <div v-if="user_preferences.sex_preference==other">
+                <li class="list-group-item">Płeć: Inna</li>
+              </div>
+              
               <li class="list-group-item">Przedział wiekowy: todo</li>
               <li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>
               <li class="list-group-item">Sylwetka: {{user_preferences.body_type_preference}}</li>
@@ -308,6 +320,19 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    getUserPreferences() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/preferences", {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_preferences = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
     editUserData() {
       let config = {
         headers: {
@@ -340,6 +365,7 @@ export default {
   },
   created() {
     this.getUserData();
+    this.getUserPreferences();
   },
 };
 </script>
