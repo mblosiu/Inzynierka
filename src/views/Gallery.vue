@@ -1,47 +1,145 @@
 <template>
   <div id="gallery">
     <br />
-    <h1>Moje zdjęcia</h1>
-    <br />
     <b-container class="bv-example-row" fluid>
       <b-row>
-        <b-col cols="1"></b-col>
-        <b-col cols="10">
-          Dodaj zdjęcie: <input type="file" @change="selectFile"> <button @click="upload">Wrzuć</button>
-          <br />
-          {{image}}
+        <b-col cols="3">
+          <div v-if="user_data.profile_picture!=null">
+            <h5>Twoje aktualne zdjęcie profilowe.</h5>
+            <div class="text-center">
+              <img src="user_data.profile_picture" class="rounded" />
+              {{user_data.profile_picture}}
+            </div>
+            <br />
+            <div class="card" style="width: 21rem;">
+              <img class="card-img-top" src="../../public/img/add-image-icon2.png" alt="Card image cap" />
+              <div class="card-body">
+                <h5 class="card-title">Dodaj zdjęcie.</h5>
+                <form @submit.prevent="editUserData" enctype="multipart/form-data">
+
+                  <div class="field">
+                    <label for="file" class="label"> Upload file </label>
+                    
+                    <input
+                      type="file"
+                      ref="file"
+                      @change="selectFile"
+                      class="form-control"
+                      />
+                  </div>
+
+                  <div class="field">
+                    <button class="button is-info"> Wyślij </button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <h6>Brak zdjęcia profilowego. Wybierz ze swojej galerii lub prześlij nowe!</h6>
+            <br />
+            <div class="card" style="width: 21rem;">
+              <img class="card-img-top" src="../../public/img/add-image-icon2.png" alt="Card image cap" />
+              <div class="card-body">
+                <h5 class="card-title">Dodaj nowe zdjęcie.</h5>
+                <br/>
+                <form @submit.prevent="editUserData" enctype="multipart/form-data">
+
+                  <div class="field">
+                    <label for="file" class="label"> Upload file </label>
+                    <input
+                      type="file"
+                      ref="file"
+                      @change="selectFile"
+                      />
+                  </div>
+
+                  <div class="field">
+                    <button class="button is-info"> Wyślij </button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
         </b-col>
-        <b-col cols="1"></b-col>
+        <b-col cols="9">
+              <h1>Moje zdjęcia</h1>
+          <br />
+          <h4>Brak zdjęć.</h4>
+          <!--<div v-if="user_data.user_galerry!=null">
+
+          </div>
+          <div v-else>
+
+          </div>-->
+        </b-col>
+        <!--<b-col cols="1"></b-col>-->
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
-
-//import Api from '../service/api';
+import axios from 'axios';
 
 export default {
   name: "Gallery",
   data() {
     return {
-      image: null
-    }
+      user_data: {},
+      profile_picture: null,
+      file: null,
+    };
   },
   methods: {
-      selectFile(event) {
-          this.image = event.target.files[0]
-      },
-      uploadFile(){
-          const fd = new FormData();
-          fd.append('image', this.image, this.image.name)
-          //Api().get('')
-          
-      }
-     
-  }
+    selectFile() {
+      this.file=this.$refs.file.files[0];
+    },
+    editUserData() {
+      let config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      axios
+        .patch(
+          "http://127.0.0.1:8000/api/user/properties",
+          {
+            file: this.user_data.profile_picture,
+          },
+          config
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    getUserData() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/properties", {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_data = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
+  },
+  created() {
+    this.getUserData();
+  },
 };
 </script>
 
 <style>
+
+.card-img-top{
+  height: 300px;
+  width: 100px;
+}
 </style>

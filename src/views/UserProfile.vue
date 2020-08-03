@@ -32,8 +32,8 @@
             <br />
             <a class="nav-link" href="#">
             <svg
-              width="1em"
-              height="1em"
+              width="2em"
+              height="2em"
               viewBox="0 0 16 16"
               class="bi bi-person-plus-fill"
               fill="currentColor"
