@@ -51,22 +51,42 @@
     <h1 id="title">Wyniki wyszukiwania:</h1>
     <div class="users-list" v-for="user in users" v-bind:key="user">
       <router-link :to="{ name: 'userprofile', params: {username: user.username}}">
-      <b-card
-        v-if="profileImage==null"
-        img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
-        img-alt="Card image"
-        img-left
-        class="user-card"
-      >
-        <b-card-title> <h2>{{user.username}} ({{getAge(user.birthday)}})</h2> </b-card-title>
-        <b-card-text>
-          <br />
-          <h3 v-if="user.description!=null"> {{user.description}}</h3>
-          <h3 v-else> Brak opisu.</h3>
-        </b-card-text>
-      </b-card>
+        <div v-if="user.profile_picture==null">
+          <b-card
+            img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
+            img-alt="Card image"
+            img-left
+            class="user-card"
+          >
+            <b-card-title>
+              <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
+            </b-card-title>
+            <b-card-text>
+              <br />
+              <h3 v-if="user.description!=null">{{user.description}}</h3>
+              <h3 v-else>Brak opisu.</h3>
+            </b-card-text>
+          </b-card>
+        </div>
+        <div v-else>
+          <b-card
+            img-src="user.profile_picture"
+            img-alt="Card image"
+            img-left
+            class="user-card"
+          >
+            <b-card-title>
+              <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
+            </b-card-title>
+            <b-card-text>
+              <br />
+              <h3 v-if="user.description!=null">{{user.description}}</h3>
+              <h3 v-else>Brak opisu.</h3>
+            </b-card-text>
+          </b-card>
+        </div>
       </router-link>
-      <br/>
+      <br />
     </div>
     <!--
     <table id="users-list">
@@ -181,7 +201,7 @@ export default {
 </script>
 
 <style scoped>
-.page{
+.page {
   margin: auto;
   width: 100%;
 }
@@ -194,7 +214,6 @@ export default {
   margin: auto;
   width: 100%;
   padding-left: 20px;
-
 }
 #title {
   padding: 1cm;

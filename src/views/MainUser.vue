@@ -4,7 +4,7 @@
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="8">
-          <div v-if="user_data.profilePicture==null">
+          <div v-if="user_data.profile_picture==null">
             <b-card
               img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
               img-alt="Card image"
@@ -35,7 +35,7 @@
           </div>
           <div v-else>
             <b-card
-              img-src="user_data.profilePicture"
+              img-src="user_data.profile_picture"
               img-alt="Card image"
               img-left
               class="user-card"
@@ -263,7 +263,7 @@
               <div v-if="user_preferences.sex_preference==other">
                 <li class="list-group-item">Płeć: Inna</li>
               </div>
-              
+              <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
               <li class="list-group-item">Przedział wiekowy: todo</li>
               <li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>
               <li class="list-group-item">Sylwetka: {{user_preferences.body_type_preference}}</li>
@@ -277,6 +277,8 @@
                 <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
               </li>
               <li class="list-group-item">Idealne miejsce na randkę: ewentualnie można dodać</li>
+              <li class="list-group-item">Alkohol: {{user_preferences.is_drinking_alcohol_preference}}</li>
+              <li class="list-group-item">Papierosy: {{user_preferences.is_smoking_preference}}</li>
             </ul>
           </div>
         </b-col>
@@ -299,6 +301,7 @@ export default {
   data() {
     return {
       user_data: {},
+      profile_picture: null,
       user_preferences: {},
       today: new Date(),
       birthDate: "",

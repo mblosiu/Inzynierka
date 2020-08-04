@@ -7,7 +7,7 @@
           <div v-if="user_data.profile_picture!=null">
             <h5>Twoje aktualne zdjęcie profilowe.</h5>
             <div class="text-center">
-              <img src="user_data.profile_picture" class="rounded" />
+              <img :src="user_data.profile_picture" class="rounded" />
               {{user_data.profile_picture}}
             </div>
             <br />
@@ -18,7 +18,7 @@
                 <form @submit.prevent="editUserData" enctype="multipart/form-data">
 
                   <div class="field">
-                    <label for="file" class="label"> Upload file </label>
+                    <label for="file" class="label"> Wybierz zdjęcie </label>
                     
                     <input
                       type="file"
@@ -38,16 +38,19 @@
           </div>
           <div v-else>
             <h6>Brak zdjęcia profilowego. Wybierz ze swojej galerii lub prześlij nowe!</h6>
+            <button @click="showPic"> showPic </button>
             <br />
             <div class="card" style="width: 21rem;">
               <img class="card-img-top" src="../../public/img/add-image-icon2.png" alt="Card image cap" />
               <div class="card-body">
                 <h5 class="card-title">Dodaj nowe zdjęcie.</h5>
                 <br/>
-                <form @submit.prevent="editUserData" enctype="multipart/form-data">
+                <input type="file" accept="image/*" @change="onFileSelected">
+                <button @click="onUpload"> Wyślij </button>
+                <!--<form @submit.prevent="editUserData" enctype="multipart/form-data">
 
                   <div class="field">
-                    <label for="file" class="label"> Upload file </label>
+                    <label for="profile_picture" class="label"> Wybierz zdjęcie </label>
                     <input
                       type="file"
                       ref="file"
@@ -59,7 +62,7 @@
                     <button class="button is-info"> Wyślij </button>
                   </div>
 
-                </form>
+                </form>-->
               </div>
             </div>
           </div>
@@ -89,15 +92,22 @@ export default {
   data() {
     return {
       user_data: {},
-      profile_picture: null,
-      file: null,
+      selectedFile: null,
     };
   },
   methods: {
-    selectFile() {
+    /*selectFile() {
       this.file=this.$refs.file.files[0];
+    },*/
+    showPic(){
+      console.log(this.user_data.profile_picture)
     },
-    editUserData() {
+    onFileSelected(event){
+      this.selectedFile = event.target.files[0]
+    },
+    onUpload(){
+      const fd = new FormData();
+      fd.append('image', this.selectedFile, this.selectedFile.name)
       let config = {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -107,12 +117,13 @@ export default {
         .patch(
           "http://127.0.0.1:8000/api/user/properties",
           {
-            file: this.user_data.profile_picture,
+            profile_picture: fd
           },
           config
         )
         .then((response) => {
           console.log(response);
+          console.log(this.selectedFile)
         })
         .catch((errors) => console.log(errors));
     },

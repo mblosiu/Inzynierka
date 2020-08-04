@@ -48,7 +48,7 @@
                 d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
               />
             </svg>
-            Dodaj do znajomych</a>
+            Dodaj do grona znajomych</a>
             <br />
             <br />
             <a class="nav-link" href="#">
@@ -95,7 +95,7 @@
           </nav>
         </b-col>
         <b-col cols="6">
-          <div v-if="user.profilePicture==null">
+          <div v-if="user.profile_picture==null">
             <b-card
               img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
               img-alt="Card image"
@@ -118,7 +118,7 @@
           </div>
           <div v-else>
             <b-card
-              img-src="user_data.profilePicture"
+              img-src="user.profile_picture"
               img-alt="Card image"
               img-left
               class="user-card"
@@ -127,8 +127,8 @@
                 <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
               </b-card-title>
               <b-card-text>
-                <div v-if="user_data.description!=null">
-                  <h3>{{user_data.description}}</h3>
+                <div v-if="user.description!=null">
+                  <h3>{{user.description}}</h3>
                 </div>
                 <div v-else>
                   <h3>Brak opisu.</h3>
@@ -444,5 +444,8 @@ export default {
 .user-card {
   background: #343a40;
   color: white;
+}
+.card {
+  
 }
 </style>
