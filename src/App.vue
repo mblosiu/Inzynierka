@@ -22,8 +22,8 @@ export default {
   name: "",
   components: {
     Header,
-    Footer
-  }
+    Footer,
+  },
 };
 </script>
 
@@ -36,7 +36,6 @@ export default {
   text-align: center;
   color: #343a40;
   background-image: url("../public/img/ecouple3.jpg");
-
 }
 
 #nav {
@@ -53,7 +52,7 @@ export default {
 
 #content {
   color: #343a40;
-  min-height: 440px;
+  min-height: 100vh;
   margin-left: 2cm;
   margin-right: 2cm;
   margin-top: 1cm;
@@ -63,7 +62,7 @@ export default {
 #footer {
   background-color: #343a40;
   color: whitesmoke;
-  bottom:0;
+  bottom: 0;
   width: 100%;
 }
 </style>

@@ -49,7 +49,7 @@
     </form>
 
     <h1 id="title">Wyniki wyszukiwania:</h1>
-    <div class="users-list" v-for="user in users" v-bind:key="user">
+    <div class="users-list" v-for="user in users" v-bind:key="user.id">
       <router-link :to="{ name: 'userprofile', params: {username: user.username}}">
         <div v-if="user.profile_picture==null">
           <b-card
@@ -69,12 +69,7 @@
           </b-card>
         </div>
         <div v-else>
-          <b-card
-            img-src="user.profile_picture"
-            img-alt="Card image"
-            img-left
-            class="user-card"
-          >
+          <b-card img-src="user.profile_picture" img-alt="Card image" img-left class="user-card">
             <b-card-title>
               <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
             </b-card-title>

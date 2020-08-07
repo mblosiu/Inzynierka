@@ -110,7 +110,12 @@
           />
 
           <label for="user_weight" class="white-text">Waga</label>
-          <input type="text" id="user_growth" v-model="user_preferences.weight_preference" class="form-control" />
+          <input
+            type="text"
+            id="user_growth"
+            v-model="user_preferences.weight_preference"
+            class="form-control"
+          />
 
           <label for="body_type" class="grey-text">Sylwetka</label>
           <b-form-select

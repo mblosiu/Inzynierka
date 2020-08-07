@@ -162,45 +162,47 @@
                   </div>
                 </b-tab>
                 <b-tab title="Moje preferencje">
-                  
                   <div class="card text-black bg-dark mb-3">
-            <div class="card-header">
-              <h3>Moje preferencje:</h3>
-            </div>
-            <ul class="list-group list-group-flush">
-              <div v-if="user_preferences.sex_preference==male">
-                <li class="list-group-item">Płeć: Mężczyzna</li>
-              </div>
-              <div v-else-if="user_preferences.sex_preference==female">
-                <li class="list-group-item">Płeć: Kobieta</li>
-              </div>
-              <div v-if="user_preferences.sex_preference==null">
-                <li class="list-group-item">Płeć:</li>
-              </div>
-              <div v-if="user_preferences.sex_preference==other">
-                <li class="list-group-item">Płeć: Inna</li>
-              </div>
-              <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
-              <li class="list-group-item">Przedział wiekowy: todo</li>
-              <li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>
-              <li class="list-group-item">Sylwetka: {{user_preferences.body_type_preference}}</li>
-              <li
-                class="list-group-item"
-              >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
-              <li class="list-group-item">Kolor oczu: todo</li>
-              <li class="list-group-item">
-                Znaki szczególne:
-                <p v-if="user_preferences.freckles_preference!=false">piegi</p>
-                <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
-              </li>
-              <li class="list-group-item">Idealne miejsce na randkę: ewentualnie można dodać</li>
-              <li
-                class="list-group-item"
-              >Alkohol: {{user_preferences.is_drinking_alcohol_preference}}</li>
-              <li class="list-group-item">Papierosy: {{user_preferences.is_smoking_preference}}</li>
-            </ul>
-          </div>
-
+                    <div class="card-header">
+                      <h3>Moje preferencje:</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <div v-if="user_preferences.sex_preference=='male'">
+                        <li class="list-group-item">Płeć: Mężczyzna</li>
+                      </div>
+                      <div v-else-if="user_preferences.sex_preference=='female'">
+                        <li class="list-group-item">Płeć: Kobieta</li>
+                      </div>
+                      <div v-else-if="user_preferences.sex_preference==null">
+                        <li class="list-group-item">Płeć:</li>
+                      </div>
+                      <div v-else-if="user_preferences.sex_preference=='other'">
+                        <li class="list-group-item">Płeć: Inna</li>
+                      </div>
+                      <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
+                      <li class="list-group-item">Przedział wiekowy: todo</li>
+                      <li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Sylwetka: {{user_preferences.body_type_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
+                      <li class="list-group-item">Kolor oczu: todo</li>
+                      <li class="list-group-item">
+                        Znaki szczególne:
+                        <p v-if="user_preferences.freckles_preference!=false">piegi</p>
+                        <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
+                      </li>
+                      <li class="list-group-item">Idealne miejsce na randkę: ewentualnie można dodać</li>
+                      <li
+                        class="list-group-item"
+                      >Alkohol: {{user_preferences.is_drinking_alcohol_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Papierosy: {{user_preferences.is_smoking_preference}}</li>
+                    </ul>
+                  </div>
                 </b-tab>
                 <b-tab title="Cechy charakteru">
                   <div class="card text-black bg-dark mb-3">
