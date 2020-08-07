@@ -327,24 +327,26 @@ class UserProfilePic(APIView):
 
         file = request.data.get('profile_picture', None)
 
-        main, sub = file.content_type.split('/')
-
         if not file:
             response["detail"] = "request must contain user data"
             stat = status.HTTP_400_BAD_REQUEST
-
-        elif not (main == 'image' and sub in ['jpeg', 'jpg', 'png']):
-            response["detail"] = "wrong data type"
-            stat = status.HTTP_400_BAD_REQUEST
-
         else:
-            account.profile_picture = file
-            response["detail"] = "photo added successfully"
-            account.save()
-            stat = status.HTTP_200_OK
+            main, sub = file.content_type.split('/')
+            if not (sub in ['jpeg', 'jpg', 'png']):
+                response["detail"] = "wrong data type"
+                stat = status.HTTP_400_BAD_REQUEST
+            else:
+                account.profile_picture = file
+                response["detail"] = "photo added successfully"
+                account.save()
+                stat = status.HTTP_200_OK
 
         return Response(response, status=stat)
 
+    @staticmethod
+    def delete(request):
+        # TODO: DELETE PHOTO
+        return Response(status=status.HTTP_404_NOT_FOUND)
     # USER LIST - SEARCHER
 
 

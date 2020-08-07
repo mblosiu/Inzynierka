@@ -16,23 +16,28 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/Backend" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9e91678-bba1-47cc-bf11-f45bd193acc9" name="Default Changelist" comment="users serializer field for preferences">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Inzynierka.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Inzynierka.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -42,7 +47,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1eUY4oUo2bX2hDr5VPemPHGPnxw" />
+  <component name="ProjectId" id="1fmCwMJsUc3QCJlEb1t6r9fIRNB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -50,97 +55,21 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Admin\PycharmProjects\Inzynierka\backend\images\test" />
-    </key>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e9e91678-bba1-47cc-bf11-f45bd193acc9" name="Default Changelist" comment="" />
-      <created>1594377449836</created>
+      <changelist id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="" />
+      <created>1596814118859</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1594377449836</updated>
+      <updated>1596814118859</updated>
     </task>
-    <task id="LOCAL-00001" summary="unit tests - no module error fix">
-      <created>1594378458211</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1594378458211</updated>
-    </task>
-    <task id="LOCAL-00002" summary="reformat all files">
-      <created>1594378785886</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1594378785886</updated>
-    </task>
-    <task id="LOCAL-00003" summary="unit tests - setup, registration, login">
-      <created>1594385364994</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1594385364994</updated>
-    </task>
-    <task id="LOCAL-00004" summary="New UserListView - list, filter, search, get user by pk">
-      <created>1595577379508</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1595577379508</updated>
-    </task>
-    <task id="LOCAL-00005" summary="remove unnecessary functions">
-      <created>1595578443041</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1595578443041</updated>
-    </task>
-    <task id="LOCAL-00006" summary="user listing - current user check">
-      <created>1595579755952</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1595579755952</updated>
-    </task>
-    <task id="LOCAL-00007" summary="unit tests - all done, only logout test left">
-      <created>1595588817009</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1595588817009</updated>
-    </task>
-    <task id="LOCAL-00008" summary="user profile pic routing">
-      <created>1595591220847</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1595591220847</updated>
-    </task>
-    <task id="LOCAL-00009" summary="add settings, preferences model, serializers, creating object on register">
-      <created>1595680878318</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1595680878318</updated>
-    </task>
-    <task id="LOCAL-00010" summary="users serializer field for preferences">
-      <created>1595683792086</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1595683792086</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,42 +77,29 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Backend" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="unit tests - no module error fix" />
-    <MESSAGE value="reformat all files" />
-    <MESSAGE value="unit tests - setup, registration, login" />
-    <MESSAGE value="New UserListView - list, filter, search, get user by pk" />
-    <MESSAGE value="remove unnecessary functions" />
-    <MESSAGE value="user listing - current user check" />
-    <MESSAGE value="unit tests - all done, only logout test left" />
-    <MESSAGE value="user profile pic routing" />
-    <MESSAGE value="add settings, preferences model, serializers, creating object on register" />
-    <MESSAGE value="users serializer field for preferences" />
-    <option name="LAST_COMMIT_MESSAGE" value="users serializer field for preferences" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="526" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594397194690">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1596814289119">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="526" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1594397194690" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1594394331224">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1594394331224" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1595680895741">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1595680895741" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1595673479223">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1595673479223" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1596814289119" />
   </component>
 </project>
