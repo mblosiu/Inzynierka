@@ -52,7 +52,7 @@ export default {
 
 #content {
   color: #343a40;
-  min-height: 100vh;
+  min-height: 80vh;
   margin-left: 2cm;
   margin-right: 2cm;
   margin-top: 1cm;

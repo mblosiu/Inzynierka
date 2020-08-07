@@ -45,16 +45,10 @@
                 <h2>{{user_data.username}} ({{getAge(user_data.birthday)}})</h2>
               </b-card-title>
               <b-card-text>
-                <div v-if="user_data.description!=null">
-                  <h3>{{user_data.description}}</h3>
-                </div>
-                <div v-else>
+                <div>
                   <form class="description" @submit.prevent="editUserData">
                     <!--<input type="text" id="user_name" v-model="user_data.name" class="form-control" />-->
-                    <textarea
-                      v-model="user_data.description"
-                      placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie."
-                    ></textarea>
+                    <textarea v-model="user_data.description"></textarea>
                     <button type="submit" class="btn btn-secondary">Zapisz</button>
                   </form>
                 </div>
@@ -167,17 +161,17 @@
                       <h3>Moje preferencje:</h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <div v-if="user_preferences.sex_preference=='male'">
+                      <div v-if="user_preferences.sex_preference==male">
                         <li class="list-group-item">Płeć: Mężczyzna</li>
                       </div>
-                      <div v-else-if="user_preferences.sex_preference=='female'">
+                      <div v-else-if="user_preferences.sex_preference==female">
                         <li class="list-group-item">Płeć: Kobieta</li>
                       </div>
-                      <div v-else-if="user_preferences.sex_preference==null">
-                        <li class="list-group-item">Płeć:</li>
-                      </div>
-                      <div v-else-if="user_preferences.sex_preference=='other'">
+                      <div v-else-if="user_preferences.sex_preference==other">
                         <li class="list-group-item">Płeć: Inna</li>
+                      </div>
+                      <div v-else-if="user_preferences.sex_preference==null">
+                        <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
                       </div>
                       <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
                       <li class="list-group-item">Przedział wiekowy: todo</li>
