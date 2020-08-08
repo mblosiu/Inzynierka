@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div>
+      <img :src="getUrl(user_data.profile_picture)" />
+    </div>
     <div class="large-12 medium-12 small-12 cell">
       <label>
         File
@@ -16,6 +19,7 @@ export default {
   data() {
     return {
       file: "",
+      user_data: {},
     };
   },
 
@@ -40,6 +44,24 @@ export default {
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
     },
+    getUserPicture() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/picture", {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_data = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    getUrl(pic) {
+      return "http://127.0.0.1:8000" + pic;
+    },
+  },
+  created() {
+    this.getUserPicture();
   },
 };
 </script>
