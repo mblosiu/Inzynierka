@@ -52,7 +52,12 @@
     <div class="users-list" v-for="user in users" v-bind:key="user.id">
       <router-link :to="{ name: 'userprofile', params: {username: user.username}}">
         <div id="photo">
-          <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" img-left class="user-card">
+          <b-card
+            :img-src="getUrl(user.profile_picture)"
+            img-alt="Card image"
+            img-left
+            class="user-card"
+          >
             <b-card-title>
               <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
             </b-card-title>
@@ -130,9 +135,9 @@ export default {
   },
   methods: {
     getUsers() {
+
       axios
         .get("http://127.0.0.1:8000/api/user/users", {
-          params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
@@ -157,7 +162,7 @@ export default {
       this.users = [];
       axios
         .get("http://127.0.0.1:8000/api/user/users", {
-          data: {
+          params: {
             sex: this.sex,
             location: this.location,
             birthday: this.birthday,
