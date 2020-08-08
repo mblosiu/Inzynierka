@@ -5,38 +5,9 @@
       <b-row>
         <b-col cols="2"></b-col>
         <b-col cols="8">
-          <div v-if="user_data.profile_picture==null">
+          <div>
             <b-card
-              img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
-              img-alt="Card image"
-              img-left
-              class="user-card"
-            >
-              <b-card-title>
-                <h2>{{user_data.username}} ({{getAge(user_data.birthday)}})</h2>
-              </b-card-title>
-              <b-card-text>
-                <div v-if="user_data.description!=null">
-                  <h3>{{user_data.description}}</h3>
-                </div>
-                <div v-else>
-                  <br />
-                  <form class="description" @submit.prevent="editUserData">
-                    <!--<input type="text" id="user_name" v-model="user_data.name" class="form-control" />-->
-                    <textarea
-                      v-model="user_data.description"
-                      placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie."
-                      class="form-control"
-                    ></textarea>
-                    <button type="submit" class="btn btn-secondary">Zapisz</button>
-                  </form>
-                </div>
-              </b-card-text>
-            </b-card>
-          </div>
-          <div v-else>
-            <b-card
-              img-src="user_data.profile_picture"
+              :img-src="getUrl(user_data.profile_picture)"
               img-alt="Card image"
               img-left
               class="user-card"
@@ -306,6 +277,12 @@ export default {
         age--;
       }
       return age;
+    },
+    getUrl(pic) {
+      if (pic != null)
+        return "http://127.0.0.1:8000" + pic;
+      else
+        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
     },
   },
   created() {
