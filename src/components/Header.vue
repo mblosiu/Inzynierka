@@ -12,34 +12,34 @@
       </b-nav-form>
 
       <b-navbar-nav class="ml-auto">
-        <b-nav-form @submit.prevent="profile" v-if="token != null">
+        <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
         </b-nav-form>
 
-        <b-nav-form @submit.prevent="users" v-if="token != null">
+        <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/search">Szukaj par</b-button>
         </b-nav-form>
 
-        <b-nav-form @submit.prevent="users" v-if="token != null">
+        <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Dopasuj</b-button>
-          <b-nav-form @submit.prevent="users" v-if="token != null">
+          <b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Polubienia</b-button>
           </b-nav-form>
 
-          <b-nav-form @submit.prevent="users" v-if="token != null">
+          <b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Wiadomości</b-button>
           </b-nav-form>
 
-          <b-nav-form @submit.prevent="users" v-if="token != null">
+          <b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Kontakty</b-button>
           </b-nav-form>
 
-          <b-nav-form @submit.prevent="users" v-if="token != null">
+          <b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/gallery">Galeria</b-button>
           </b-nav-form>
         </b-nav-form>
 
-        <b-nav-form @submit.prevent="settings" v-if="token != null">
+        <b-nav-form v-if="token != null">
           <b-button
             class="my-2 ml-2 mr-1"
             type="button"
@@ -48,11 +48,11 @@
           >Ustawienia</b-button>
         </b-nav-form>
 
-        <b-nav-form @submit.prevent="users" v-if="token != null">
+        <b-nav-form v-if="token != null">
           <b-button class="btn btn-warning mr-1" type="button" size="sm" to="/#">Premium</b-button>
         </b-nav-form>
 
-        <b-nav-form @submit.prevent="login" v-if="token==null">
+        <b-nav-form v-if="token==null">
           <b-form-input
             id="username"
             size="sm"
@@ -138,18 +138,6 @@ export default {
         (this.token = null),
         this.$router.go();
       ł;
-    },
-    register() {
-      console.log("Router");
-    },
-    settings() {
-      console.log("Router");
-    },
-    profile() {
-      console.log("Router");
-    },
-    users() {
-      console.log("Router");
     },
     search() {
       console.log(this.searchText);
