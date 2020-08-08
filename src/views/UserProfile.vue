@@ -96,29 +96,8 @@
           </nav>
         </b-col>
         <b-col cols="8">
-          <div v-if="user.profile_picture==null">
-            <b-card
-              img-src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
-              img-alt="Card image"
-              img-left
-              class="user-card"
-            >
-              <b-card-title>
-                <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
-              </b-card-title>
-              <b-card-text>
-                <div v-if="user.description!=null">
-                  <h3>{{user.description}}</h3>
-                </div>
-                <div v-else>
-                  <br />
-                  <h3>Brak opisu.</h3>
-                </div>
-              </b-card-text>
-            </b-card>
-          </div>
-          <div v-else>
-            <b-card img-src="user.profile_picture" img-alt="Card image" img-left class="user-card">
+          <div>
+            <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" img-left class="user-card">
               <b-card-title>
                 <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
               </b-card-title>
@@ -351,6 +330,11 @@ export default {
         age--;
       }
       return age;
+    },
+    getUrl(pic) {
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      else
+        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
   },
   created() {
