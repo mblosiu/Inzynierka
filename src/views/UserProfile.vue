@@ -7,7 +7,7 @@
     <br />
     <b-container class="bv-example-row" fluid>
       <b-row>
-        <b-col cols="3">
+        <b-col cols="1">
           <nav class="nav flex-column">
             <a class="nav-link active" href="#">
               <svg
@@ -95,7 +95,7 @@
             </a>
           </nav>
         </b-col>
-        <b-col cols="8">
+        <b-col cols="10">
           <div>
             <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" img-left class="user-card">
               <b-card-title>
@@ -257,8 +257,7 @@
             </b-card>
           </div>
         </b-col>
-
-        <b-col cols="4"></b-col>
+        <b-col cols="1"></b-col>
       </b-row>
     </b-container>
   </div>

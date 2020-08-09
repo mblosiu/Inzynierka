@@ -1,76 +1,97 @@
 <template>
   <div class="page">
-    <form id="filters" @submit.prevent="getUsers">
-      <table>
-        <tr>
-          <th>
-            <div id="filter">
-              <b-form-select
-                :options="sex_options"
-                class="ml-2"
-                id="sex"
-                v-model="sex"
-                size="sm"
-                value="sex"
-              ></b-form-select>
-            </div>
-          </th>
-          <th>
-            <div id="filter">
-              <b-form-select
-                :options="location_options"
-                class="ml-2"
-                id="location"
-                v-model="location"
-                size="sm"
-                value="location"
-              ></b-form-select>
-            </div>
-          </th>
-          <th>
-            <div id="filter">
-              <input
-                class="ml-2"
-                type="text"
-                name="birthday"
-                id="birthday"
-                v-model="birthday"
-                placeholder="birthday"
-              />
-            </div>
-          </th>
-          <th>
-            <div id="filter">
-              <input type="submit" value="Filtruj" />
-            </div>
-          </th>
-        </tr>
-      </table>
-    </form>
-    <h1 id="title" v-if="searchText">Wyniki wyszukiwania dla frazy {{searchText}}:</h1>
-    <h1 id="title" v-else>Wyniki wyszukiwania:</h1>
-    <div class="users-list" v-for="user in users" v-bind:key="user.id">
-      <router-link :to="{ name: 'userprofile', params: {username: user.username}}">
-        <div id="photo">
-          <b-card
-            :img-src="getUrl(user.profile_picture)"
-            img-alt="Card image"
-            img-left
-            class="user-card"
-          >
-            <b-card-title>
-              <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
-            </b-card-title>
-            <b-card-text>
-              <br />
-              <h3 v-if="user.description!=null">{{user.description}}</h3>
-              <h3 v-else>Brak opisu.</h3>
-            </b-card-text>
-          </b-card>
-        </div>
-      </router-link>
-      <br />
-    </div>
+    <b-container class="bv-example-row" fluid>
+      <b-row>
+        <b-col cols="1"></b-col>
+        <b-col cols="10">
+          <form id="filters" @submit.prevent="getUsers">
+            <table>
+              <tr>
+                <th>
+                  <div id="filter">
+                    <b-form-select
+                      :options="sex_options"
+                      class="ml-2"
+                      id="sex"
+                      v-model="sex"
+                      size="sm"
+                      value="sex"
+                    ></b-form-select>
+                  </div>
+                </th>
+                <th>
+                  <div id="filter">
+                    <b-form-select
+                      :options="location_options"
+                      class="ml-2"
+                      id="location"
+                      v-model="location"
+                      size="sm"
+                      value="location"
+                    ></b-form-select>
+                  </div>
+                </th>
+                <th>
+                  <div id="filter">
+                    <input
+                      class="ml-2"
+                      type="text"
+                      name="birthday"
+                      id="birthday"
+                      v-model="birthday"
+                      placeholder="birthday"
+                    />
+                  </div>
+                </th>
+                <th>
+                  <div id="filter">
+                    <input type="submit" value="Filtruj" />
+                  </div>
+                </th>
+              </tr>
+            </table>
+          </form>
+        </b-col>
+        <b-col cols="1"></b-col>
+      </b-row>
+      <b-row>
+        <b-col cols="1"></b-col>
+        <b-col cols="10">
+          <h1 id="title" v-if="searchText">Wyniki wyszukiwania dla frazy {{searchText}}:</h1>
+          <h1 id="title" v-else>Wyniki wyszukiwania:</h1>
+        </b-col>
+        <b-col cols="1"></b-col>
+      </b-row>
+      <b-row>
+        <b-col cols="1"></b-col>
+        <b-col cols="10">
+          <div class="users-list" v-for="user in users" v-bind:key="user.id">
+            <router-link :to="{ name: 'userprofile', params: {username: user.username}}">
+              <div id="photo">
+                <b-card
+                  :img-src="getUrl(user.profile_picture)"
+                  img-alt="Card image"
+                  img-left
+                  class="user-card"
+                >
+                  <b-card-title>
+                    <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
+                  </b-card-title>
+                  <b-card-text>
+                    <br />
+                    <h3 v-if="user.description!=null">{{user.description}}</h3>
+                    <h3 v-else>Brak opisu.</h3>
+                  </b-card-text>
+                </b-card>
+              </div>
+            </router-link>
+            <br />
+          </div>
+        </b-col>
+        <b-col cols="1"></b-col>
+      </b-row>
+    </b-container>
+
     <!--
     <table id="users-list">
       <tr v-for="i in Math.ceil(users.length / 3)" v-bind:key="i">
@@ -187,7 +208,7 @@ export default {
 
 #filters {
   margin: auto;
-  width: 50%;
+  width: 100%;
 }
 #filter {
   margin: auto;
@@ -200,7 +221,7 @@ export default {
 }
 .card {
   margin: auto;
-  width: 80%;
+  width: 100%;
   height: 300px;
 }
 td {

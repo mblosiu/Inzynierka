@@ -3,8 +3,8 @@
     <br />
     <b-container class="bv-example-row" fluid>
       <b-row>
-        <b-col cols="2"></b-col>
-        <b-col cols="8">
+        <b-col cols="1"></b-col>
+        <b-col cols="10">
           <div>
             <b-card
               :img-src="getUrl(user_data.profile_picture)"
@@ -192,8 +192,7 @@
             </b-card>
           </div>
         </b-col>
-
-        <b-col cols="2"></b-col>
+        <b-col cols="1"></b-col>
       </b-row>
     </b-container>
   </div>

@@ -1,15 +1,29 @@
 <template>
-  <div class="container">
-    <div>
-      <img :src="getUrl(user_data.profile_picture)" />
-    </div>
-    <div class="large-12 medium-12 small-12 cell">
-      <label>
-        File
-        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-      </label>
-      <button v-on:click="submitFile()">Submit</button>
-    </div>
+  <div class="page">
+    <b-container class="bv-example-row" fluid>
+      <b-row>
+        <b-col cols="1"></b-col>
+        <b-col cols="10">
+          <div>
+            <img :src="getUrl(user_data.profile_picture)" />
+          </div>
+        </b-col>
+        <b-col cols="1"></b-col>
+      </b-row>
+      <b-row>
+        <b-col cols="1"></b-col>
+        <b-col cols="10">
+          <div class="large-12 medium-12 small-12 cell">
+            <label>
+              File
+              <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
+            </label>
+            <button v-on:click="submitFile()">Submit</button>
+          </div>
+        </b-col>
+        <b-col cols="1"></b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 

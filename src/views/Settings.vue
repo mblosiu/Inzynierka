@@ -1,176 +1,182 @@
 <template>
-  <div class>
-    <div class="container">
-      <div class="row">
-        <form class="profile" @submit.prevent="editUserData">
-          <p class="h4 text-center mb-4">Informacje o tobie</p>
+  <div class="page">
+    <b-container class="bv-example-row" fluid>
+      <b-row>
+        <b-col cols="1"></b-col>
+        <b-col cols="3">
+          <form class="profile" @submit.prevent="editUserData">
+            <p class="h4 text-center mb-4">Informacje o tobie</p>
 
-          <label for="user_name" class="white-text">Imię</label>
-          <input type="text" id="user_name" v-model="user_data.name" class="form-control" />
+            <label for="user_name" class="white-text">Imię</label>
+            <input type="text" id="user_name" v-model="user_data.name" class="form-control" />
 
-          <label for="user_surname" class="grey-text">Nazwisko</label>
-          <input type="text" id="user_surname" v-model="user_data.surname" class="form-control" />
+            <label for="user_surname" class="grey-text">Nazwisko</label>
+            <input type="text" id="user_surname" v-model="user_data.surname" class="form-control" />
 
-          <label for="user_location" class="grey-text">Adres</label>
-          <input type="text" id="user_location" v-model="user_data.location" class="form-control" />
+            <label for="user_location" class="grey-text">Adres</label>
+            <input type="text" id="user_location" v-model="user_data.location" class="form-control" />
 
-          <label for="user_sex" class="grey-text">Płeć</label>
-          <b-form-select
-            class="form-control"
-            id="user_sex"
-            v-model="user_data.sex"
-            :options="sex_options"
-          ></b-form-select>
-          <br />
+            <label for="user_sex" class="grey-text">Płeć</label>
+            <b-form-select
+              class="form-control"
+              id="user_sex"
+              v-model="user_data.sex"
+              :options="sex_options"
+            ></b-form-select>
+            <br />
 
-          <label for="is_smoking" class="grey-text">Papierosy</label>
-          <b-form-select
-            class="form-control"
-            id="is_smoking"
-            v-model="user_data.is_smoking"
-            :options="smoking_options"
-          ></b-form-select>
+            <label for="is_smoking" class="grey-text">Papierosy</label>
+            <b-form-select
+              class="form-control"
+              id="is_smoking"
+              v-model="user_data.is_smoking"
+              :options="smoking_options"
+            ></b-form-select>
 
-          <label for="is_drinking" class="grey-text">Alkohol</label>
-          <b-form-select
-            class="form-control"
-            id="is_drinking_alcohol"
-            v-model="user_data.is_drinking_alcohol"
-            :options="alcohol_options"
-          ></b-form-select>
+            <label for="is_drinking" class="grey-text">Alkohol</label>
+            <b-form-select
+              class="form-control"
+              id="is_drinking_alcohol"
+              v-model="user_data.is_drinking_alcohol"
+              :options="alcohol_options"
+            ></b-form-select>
 
-          <div class="text-center mt-4">
-            <button type="submit" class="btn btn-secondary">Zapisz</button>
-          </div>
-        </form>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-secondary">Zapisz</button>
+            </div>
+          </form>
+        </b-col>
+        <b-col cols="4">
+          <form class="settings" @submit.prevent="editUserData">
+            <p class="h4 text-center mb-4">Twój wygląd</p>
 
-        <form class="settings" @submit.prevent="editUserData">
-          <p class="h4 text-center mb-4">Twój wygląd</p>
+            <label for="user_name" class="white-text">Wzrost</label>
+            <input type="text" id="user_name" v-model="user_data.growth" class="form-control" />
 
-          <label for="user_name" class="white-text">Wzrost</label>
-          <input type="text" id="user_name" v-model="user_data.growth" class="form-control" />
+            <label for="user_weight" class="white-text">Waga</label>
+            <input type="text" id="user_growth" v-model="user_data.weight" class="form-control" />
 
-          <label for="user_weight" class="white-text">Waga</label>
-          <input type="text" id="user_growth" v-model="user_data.weight" class="form-control" />
+            <label for="hair_length" class="grey-text">Długość włosów</label>
+            <b-form-select
+              class="form-control"
+              id="hair_length"
+              v-model="user_data.hair_length"
+              :options="hair_length_options"
+            ></b-form-select>
 
-          <label for="hair_length" class="grey-text">Długość włosów</label>
-          <b-form-select
-            class="form-control"
-            id="hair_length"
-            v-model="user_data.hair_length"
-            :options="hair_length_options"
-          ></b-form-select>
+            <label for="hair_color" class="grey-text">Kolor włosów</label>
+            <b-form-select
+              class="form-control"
+              id="hair_color"
+              v-model="user_data.hair_color"
+              :options="hair_color_options"
+            ></b-form-select>
 
-          <label for="hair_color" class="grey-text">Kolor włosów</label>
-          <b-form-select
-            class="form-control"
-            id="hair_color"
-            v-model="user_data.hair_color"
-            :options="hair_color_options"
-          ></b-form-select>
+            <label for="body_type" class="grey-text">Sylwetka</label>
+            <b-form-select
+              class="form-control"
+              id="body_type"
+              v-model="user_data.body_type"
+              :options="body_type_options"
+            ></b-form-select>
 
-          <label for="body_type" class="grey-text">Sylwetka</label>
-          <b-form-select
-            class="form-control"
-            id="body_type"
-            v-model="user_data.body_type"
-            :options="body_type_options"
-          ></b-form-select>
+            <label for="eye_color" class="grey-text">Kolor oczu</label>
+            <b-form-select
+              class="form-control"
+              id="eye_colour"
+              v-model="user_data.eye_color"
+              :options="eye_color_options"
+            ></b-form-select>
 
-          <label for="eye_color" class="grey-text">Kolor oczu</label>
-          <b-form-select
-            class="form-control"
-            id="eye_colour"
-            v-model="user_data.eye_color"
-            :options="eye_color_options"
-          ></b-form-select>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-secondary">Zapisz</button>
+            </div>
+          </form>
+        </b-col>
+        <b-col cols="3">
+          <form class="preferences" @submit.prevent="editUserPreferences">
+            <p class="h4 text-center mb-4">Twoje preferencje</p>
 
-          <div class="text-center mt-4">
-            <button type="submit" class="btn btn-secondary">Zapisz</button>
-          </div>
-        </form>
+            <label for="user_sex_preference" class="grey-text">Płeć</label>
+            <b-form-select
+              class="form-control"
+              id="user_sex_preference"
+              v-model="user_preferences.sex_preference"
+              :options="sex_options"
+            ></b-form-select>
+            <br />
+            <label for="user_name" class="white-text">Wzrost</label>
+            <input
+              type="text"
+              id="user_name"
+              v-model="user_preferences.growth_preference"
+              class="form-control"
+            />
 
-        <form class="preferences" @submit.prevent="editUserPreferences">
-          <p class="h4 text-center mb-4">Twoje preferencje</p>
+            <label for="user_weight" class="white-text">Waga</label>
+            <input
+              type="text"
+              id="user_growth"
+              v-model="user_preferences.weight_preference"
+              class="form-control"
+            />
 
-          <label for="user_sex_preference" class="grey-text">Płeć</label>
-          <b-form-select
-            class="form-control"
-            id="user_sex_preference"
-            v-model="user_preferences.sex_preference"
-            :options="sex_options"
-          ></b-form-select>
-          <br />
-          <label for="user_name" class="white-text">Wzrost</label>
-          <input
-            type="text"
-            id="user_name"
-            v-model="user_preferences.growth_preference"
-            class="form-control"
-          />
+            <label for="body_type" class="grey-text">Sylwetka</label>
+            <b-form-select
+              class="form-control"
+              id="body_type"
+              v-model="user_preferences.body_type_preference"
+              :options="body_type_options"
+            ></b-form-select>
 
-          <label for="user_weight" class="white-text">Waga</label>
-          <input
-            type="text"
-            id="user_growth"
-            v-model="user_preferences.weight_preference"
-            class="form-control"
-          />
+            <label for="eye_color" class="grey-text">Kolor oczu</label>
+            <b-form-select
+              class="form-control"
+              id="eye_colour"
+              v-model="user_data.eye_color"
+              :options="eye_color_options"
+            ></b-form-select>
 
-          <label for="body_type" class="grey-text">Sylwetka</label>
-          <b-form-select
-            class="form-control"
-            id="body_type"
-            v-model="user_preferences.body_type_preference"
-            :options="body_type_options"
-          ></b-form-select>
+            <label for="hair_length" class="grey-text">Długość włosów</label>
+            <b-form-select
+              class="form-control"
+              id="hair_length"
+              v-model="user_data.hair_length"
+              :options="hair_length_options"
+            ></b-form-select>
 
-          <label for="eye_color" class="grey-text">Kolor oczu</label>
-          <b-form-select
-            class="form-control"
-            id="eye_colour"
-            v-model="user_data.eye_color"
-            :options="eye_color_options"
-          ></b-form-select>
+            <label for="hair_color" class="grey-text">Kolor włosów</label>
+            <b-form-select
+              class="form-control"
+              id="hair_color"
+              v-model="user_data.hair_color"
+              :options="hair_color_options"
+            ></b-form-select>
 
-          <label for="hair_length" class="grey-text">Długość włosów</label>
-          <b-form-select
-            class="form-control"
-            id="hair_length"
-            v-model="user_data.hair_length"
-            :options="hair_length_options"
-          ></b-form-select>
+            <label for="is_smoking" class="grey-text">Papierosy</label>
+            <b-form-select
+              class="form-control"
+              id="is_smoking"
+              v-model="user_data.is_smoking_preference"
+              :options="smoking_options"
+            ></b-form-select>
 
-          <label for="hair_color" class="grey-text">Kolor włosów</label>
-          <b-form-select
-            class="form-control"
-            id="hair_color"
-            v-model="user_data.hair_color"
-            :options="hair_color_options"
-          ></b-form-select>
+            <label for="is_drinking" class="grey-text">Alkohol</label>
+            <b-form-select
+              class="form-control"
+              id="is_drinking_alcohol"
+              v-model="user_data.is_drinking_alcohol_preference"
+              :options="alcohol_options"
+            ></b-form-select>
 
-          <label for="is_smoking" class="grey-text">Papierosy</label>
-          <b-form-select
-            class="form-control"
-            id="is_smoking"
-            v-model="user_data.is_smoking_preference"
-            :options="smoking_options"
-          ></b-form-select>
-
-          <label for="is_drinking" class="grey-text">Alkohol</label>
-          <b-form-select
-            class="form-control"
-            id="is_drinking_alcohol"
-            v-model="user_data.is_drinking_alcohol_preference"
-            :options="alcohol_options"
-          ></b-form-select>
-
-          <div class="text-center mt-4">
-            <button type="submit" class="btn btn-secondary">Zapisz</button>
-          </div>
-        </form>
-      </div>
-    </div>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-secondary">Zapisz</button>
+            </div>
+          </form>
+        </b-col>
+        <b-col cols="1"></b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
