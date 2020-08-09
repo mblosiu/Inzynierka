@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <form id="filters" @submit.prevent="filterUsers">
+    <form id="filters" @submit.prevent="getUsers">
       <table>
         <tr>
           <th>
@@ -47,8 +47,8 @@
         </tr>
       </table>
     </form>
-
-    <h1 id="title">Wyniki wyszukiwania:</h1>
+    <h1 id="title" v-if="searchText">Wyniki wyszukiwania dla frazy {{searchText}}:</h1>
+    <h1 id="title" v-else>Wyniki wyszukiwania:</h1>
     <div class="users-list" v-for="user in users" v-bind:key="user.id">
       <router-link :to="{ name: 'userprofile', params: {username: user.username}}">
         <div id="photo">
@@ -110,6 +110,7 @@ export default {
   components: {},
   data() {
     return {
+      searchText: null,
       birthday: null,
       sex: null,
       location: null,
@@ -135,34 +136,11 @@ export default {
   },
   methods: {
     getUsers() {
-
-      axios
-        .get("http://127.0.0.1:8000/api/user/users", {
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
-        .then((response) => {
-          console.log(response), (this.users = response.data);
-        })
-        .catch((errors) => console.log(errors));
-    },
-    getAge(dateString) {
-      var today = new Date();
-      var birthDate = new Date(dateString);
-      var age = today.getFullYear() - birthDate.getFullYear();
-      var m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-
-      return age;
-    },
-    filterUsers() {
       this.users = [];
       axios
         .get("http://127.0.0.1:8000/api/user/users", {
           params: {
+            search: localStorage.getItem("search-text"),
             sex: this.sex,
             location: this.location,
             birthday: this.birthday,
@@ -175,6 +153,19 @@ export default {
           console.log(response), (this.users = response.data);
         })
         .catch((errors) => console.log(errors));
+      this.searchText = localStorage.getItem("search-text");
+      localStorage.removeItem("search-text");
+    },
+    getAge(dateString) {
+      var today = new Date();
+      var birthDate = new Date(dateString);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age;
     },
     getUrl(pic) {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
@@ -205,6 +196,7 @@ export default {
 }
 #title {
   padding: 1cm;
+  color: white;
 }
 .card {
   margin: auto;

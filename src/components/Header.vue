@@ -140,7 +140,11 @@ export default {
       ł;
     },
     search() {
-      console.log(this.searchText);
+      localStorage.setItem("search-text", this.searchText)
+      if (this.$route.name == 'search')
+        this.$router.go()
+      else
+        this.$router.push({ name: 'search'})
     },
   },
 };
