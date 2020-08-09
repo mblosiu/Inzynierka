@@ -1,13 +1,9 @@
 <template>
   <div id="userprofile">
-    <!--<h1>profil usera o nicku:</h1>
-    <h2>{{this.$route.params.username}}</h2>
-    <br />
-    <h2> Miejscowość : {{user.location}}</h2>-->
     <br />
     <b-container class="bv-example-row" fluid>
       <b-row>
-        <b-col cols="1">
+        <b-col cols="2">
           <nav class="nav flex-column">
             <a class="nav-link active" href="#">
               <svg
@@ -95,9 +91,9 @@
             </a>
           </nav>
         </b-col>
-        <b-col cols="10">
+        <b-col cols="4">
           <div>
-            <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" img-left class="user-card">
+            <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" style="width: 27rem;" img-top class="user-card" alt="Card image cap">
               <b-card-title>
                 <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
               </b-card-title>
@@ -111,7 +107,8 @@
               </b-card-text>
             </b-card>
           </div>
-          <br />
+        </b-col>
+        <b-col cols="5">
 
           <div>
             <b-card no-body>
@@ -351,8 +348,8 @@ export default {
   margin: auto;
   width: 100%;
 }
-.card-img-left {
-  height: 300px;
+.card-img-top {
+  /*height: 300px;*/
   object-fit: scale-down;
 }
 .card-text {

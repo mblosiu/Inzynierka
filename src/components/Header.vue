@@ -52,7 +52,7 @@
           <b-button class="btn btn-warning mr-1" type="button" size="sm" to="/#">Premium</b-button>
         </b-nav-form>
 
-        <b-nav-form v-if="token==null">
+        <b-nav-form @submit.prevent="login" v-if="token==null">
           <b-form-input
             id="username"
             size="sm"
