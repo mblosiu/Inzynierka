@@ -6,22 +6,17 @@
         <a href="/about">O nas</a>
       </div>
       <div class="col-sm">
-        <a href="/regulamin">Regulamin</a>
-      </div>
-      <div class="col-sm">
         <a href="/kontakt">Kontakt</a>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm">Placeholder</div>
-      <div class="col-sm">Placeholder</div>
-      <div class="col-sm">Placeholder</div>
+      <div class="col-sm">
+        <a href="/regulamin">Regulamin</a>
+      </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm"></div>
       <div class="col-sm">
-        <center>copyright</center>
+        <center>©{{ new Date().getFullYear() }}</center>
       </div>
       <div class="col-sm"></div>
     </div>
