@@ -31,7 +31,7 @@
           <div>
             <b-card no-body>
               <b-tabs pills card vertical>
-                <b-tab title="o mnie" active>
+                <b-tab title="O mnie" active>
                   <div class="card text-black bg-dark mb-3">
                     <div class="card-header">
                       <h3>O mnie:</h3>

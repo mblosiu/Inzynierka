@@ -3,7 +3,80 @@
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="1"></b-col>
-        <b-col cols="3">
+        <b-col cols="10">
+          <form class="card" @submit.prevent="editUserData">
+            <b-tabs pills card horizontal>
+              <b-tab title="Podstawowe informacje" active>
+                <div class="card text-black bg-dark mb-3">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <label for="user_name" class="white-text">Imię</label>
+                      <input
+                        type="text"
+                        id="user_name"
+                        v-model="user_data.name"
+                        class="form-control"
+                      />
+                    </li>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+
+                  </ul>
+                </div>
+              </b-tab>
+              <b-tab title="Wygląd">
+                <div class="card text-black bg-dark mb-3">
+                  <ul class="list-group list-group-flush">
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                  </ul>
+                </div>
+              </b-tab>
+              <b-tab title="Zainteresowania">
+                <div class="card text-black bg-dark mb-3">
+                  <ul class="list-group list-group-flush">
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                  </ul>
+                </div>
+              </b-tab>
+              <b-tab title="Twoje preferencje">
+                <div class="card text-black bg-dark mb-3">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"></li>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                    <ul class="list-group-item"></ul>
+                  </ul>
+                </div>
+              </b-tab>
+            </b-tabs>
+
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-success">Zapisz</button>
+            </div>
+            <p></p>
+          </form>
+        </b-col>
+        <!--<b-col cols="3">
           <form class="profile" @submit.prevent="editUserData">
             <p class="h4 text-center mb-4">Informacje o tobie</p>
 
@@ -51,10 +124,10 @@
             <p class="h4 text-center mb-4">Twój wygląd</p>
 
             <label for="user_name" class="white-text">Wzrost</label>
-            <input type="text" id="user_name" v-model="user_data.growth" class="form-control" />
+            <input type="text" id="user_name" v-model="user_data.growth" class="form-control" placeholder="Wzrost w cm" />
 
             <label for="user_weight" class="white-text">Waga</label>
-            <input type="text" id="user_growth" v-model="user_data.weight" class="form-control" />
+            <input type="text" id="user_growth" v-model="user_data.weight" class="form-control" placeholder="Waga w kg" />
 
             <label for="hair_length" class="grey-text">Długość włosów</label>
             <b-form-select
@@ -173,7 +246,7 @@
               <button type="submit" class="btn btn-secondary">Zapisz</button>
             </div>
           </form>
-        </b-col>
+        </b-col>-->
         <b-col cols="1"></b-col>
       </b-row>
     </b-container>
