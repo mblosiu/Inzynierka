@@ -46,7 +46,7 @@
                       <li class="list-group-item">Urodziny: {{user_data.birthday}}</li>
                       <li
                         class="list-group-item"
-                      >Status/zajęcie: dodać np ->uczeń/student/pracuję/emerytura/dumna madka</li>
+                      >Status/zajęcie: </li>
                       <div smoking>
                         <div v-if="user_data.is_smoking==0">
                           <li class="list-group-item">Papierosy: nie palę</li>
