@@ -6,7 +6,7 @@ from ..models import User, Preferences, Settings
 class UserPreferencesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Preferences
-        fields = ['sex_preference', 'hair_color_blonde_preference', 'hair_color_brunette_preference',
+        fields = ['orientation', 'hair_color_blonde_preference', 'hair_color_brunette_preference',
                   'hair_color_red_preference', 'growth_preference', 'weight_preference', 'body_type_preference',
                   'is_smoking_preference', 'is_drinking_alcohol_preference']
 

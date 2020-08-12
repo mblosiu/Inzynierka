@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Preferences(models.Model):
-    sex_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    orientation = models.CharField(max_length=30, null=True, blank=True, default=None)
     hair_color_blonde_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     hair_color_brunette_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     hair_color_red_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
@@ -13,6 +13,8 @@ class Preferences(models.Model):
     freckles_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     glasses_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     hair_length_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    age_preference_min = models.IntegerField(null=True, blank=True, default=None)
+    age_preference_max = models.IntegerField(null=True, blank=True, default=None)
 
     is_smoking_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     is_drinking_alcohol_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
@@ -86,6 +88,10 @@ class User(AbstractBaseUser):
     location = models.CharField(max_length=30, null=True, default=None)
     profile_picture = models.ImageField(upload_to='images', null=True, blank=True, default=None)
     description = models.CharField(max_length=200, null=True, default=None)
+    status = models.CharField(max_length=30, null=True, default=None)
+    favourite_place = models.CharField(max_length=30, null=True, default=None)
+    passion = models.CharField(max_length=30, null=True, default=None)
+    education = models.CharField(max_length=30, null=True, default=None)
 
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
@@ -95,6 +101,7 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     # physical features:
+    eye_color = models.CharField(max_length=30, null=True, default=None)
     sex = models.CharField(max_length=30, null=True, blank=True, default=None)
     hair_color = models.CharField(max_length=30, null=True, blank=True, default=None)
     growth = models.IntegerField(null=True, blank=True, default=None)

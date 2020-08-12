@@ -182,7 +182,7 @@ class PreferencesView(APIView):
 
         response = {}
 
-        sex_preference = request.data.get('sex_preference', '').capitalize()
+        orientation = request.data.get('orientation', '').capitalize()
         hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', '').capitalize()
         hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', '').capitalize()
         hair_color_red_preference = request.data.get('hair_color_red_preference', '').capitalize()
@@ -192,11 +192,11 @@ class PreferencesView(APIView):
         is_smoking_preference = request.data.get('is_smoking_preference', '').capitalize()
         is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', '').capitalize()
 
-        if sex_preference == preferences.sex_preference:
-            response["sex_preference"] = "no changes"
+        if orientation == preferences.orientation:
+            response["orientation"] = "no changes"
         else:
-            preferences.sex_preference = sex_preference
-            response["sex_preference"] = "updated"
+            preferences.orientation = orientation
+            response["orientation"] = "updated"
 
         if hair_color_blonde_preference == preferences.hair_color_blonde_preference:
             response["hair_color_blonde_preference"] = "no changes"

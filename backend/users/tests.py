@@ -110,7 +110,7 @@ class UserViewTestCase(APITestCase):
 
         view = UserPreferencesView.as_view()
 
-        data = {"sex_preference": "Male"}
+        data = {"orientation": "Male"}
 
         request = factory.patch('/api/user/preferences', data)
 
