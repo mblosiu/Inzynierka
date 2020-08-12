@@ -110,8 +110,8 @@
                         <b-col cols="6">
                           <label for="user_name" class="white-text">Wzrost</label>
                           <input
-                            type="text"
-                            id="user_name"
+                            type="number"
+                            id="user_growth"
                             v-model="user_data.growth"
                             class="form-control"
                             placeholder="Wzrost w cm"
@@ -177,16 +177,41 @@
                         <br />
                         <b-col cols="12">
                           <label for="special_options" class="grey-text">Znaki szczególne</label>
-                          <br/>
-                          <input type="checkbox" id="glasses" value="okulary" v-model="special_options" />
+                          <br />
+                          <input
+                            type="checkbox"
+                            id="glasses"
+                            value="okulary"
+                            v-model="special_options"
+                          />
                           <label for="glasses">Okulary</label>
-                          <input type="checkbox" id="freckles" value="piegi" v-model="special_options" />
+                          <input
+                            type="checkbox"
+                            id="freckles"
+                            value="piegi"
+                            v-model="special_options"
+                          />
                           <label for="freckles">Piegi</label>
-                          <input type="checkbox" id="scars" value="blizny" v-model="special_options" />
+                          <input
+                            type="checkbox"
+                            id="scars"
+                            value="blizny"
+                            v-model="special_options"
+                          />
                           <label for="scars">Blizny</label>
-                          <input type="checkbox" id="body_piercing" value="body piercing" v-model="special_options" />
+                          <input
+                            type="checkbox"
+                            id="body_piercing"
+                            value="body piercing"
+                            v-model="special_options"
+                          />
                           <label for="body_piercing">Body piercing</label>
-                          <input type="checkbox" id="tattoos" value="tatuaże" v-model="special_options" />
+                          <input
+                            type="checkbox"
+                            id="tattoos"
+                            value="tatuaże"
+                            v-model="special_options"
+                          />
                           <label for="tattoos">Tatuaże</label>
                           <br />
                           <span>Zaznaczono: {{ special_options }}</span>
@@ -312,19 +337,19 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="user_name" class="white-text">Wzrost</label>
-                          <input
-                            type="text"
-                            id="user_name"
-                            v-model="user_preferences.growth_preference"
+                          <label for="user_body_type_preference" class="grey-text">Sylwetka</label>
+                          <b-form-select
                             class="form-control"
-                          />
+                            id="user_body_type_preference"
+                            v-model="user_preferences.body_type_preference"
+                            :options="body_type_options"
+                          ></b-form-select>
                         </b-col>
                         <b-col cols="6">
-                          <label for="user_weight" class="white-text">Waga</label>
+                          <label for="user_weight_preference" class="white-text">Waga</label>
                           <input
                             type="text"
-                            id="user_growth"
+                            id="user_weight_preference"
                             v-model="user_preferences.weight_preference"
                             class="form-control"
                           />
@@ -334,12 +359,12 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="body_type" class="grey-text">Sylwetka</label>
+                          <label for="user_education_preference" class="white-text">Edukacja</label>
                           <b-form-select
                             class="form-control"
-                            id="body_type"
-                            v-model="user_preferences.body_type_preference"
-                            :options="body_type_options"
+                            id="user_education_preference"
+                            v-model="user_preferences.education_preference"
+                            :options="education_options"
                           ></b-form-select>
                         </b-col>
                         <b-col cols="6">
@@ -658,14 +683,14 @@ export default {
         { value: "bardzo długie", text: "bardzo długie (do pasa+)" },
         { value: "łysy", text: "brak (łysy)" },
       ],
-      special_options: [], /*[
+      special_options: [] /*[
         { value: null, text: "" },
         { value: "piegi", text: "piegi" },
         { value: "okulary", text: "okulary" },
         { value: "blizny", text: "blizny" },
         { value: "tatuaże", text: "tatuaże" },
         { value: "body piercing", text: "body piercing" },
-      ],*/
+      ],*/,
       status_options: [
         { value: null, text: "" },
         { value: "uczeń", text: "uczeń" },

@@ -18,7 +18,6 @@
               <b-card-text>
                 <div>
                   <form class="description" @submit.prevent="editUserData">
-                    <!--<input type="text" id="user_name" v-model="user_data.name" class="form-control" />-->
                     <textarea v-model="user_data.description"></textarea>
                     <button type="submit" class="btn btn-secondary">Zapisz</button>
                   </form>
@@ -33,9 +32,6 @@
               <b-tabs pills card vertical>
                 <b-tab title="O mnie" active>
                   <div class="card text-black bg-dark mb-3">
-                    <div class="card-header">
-                      <h3>O mnie:</h3>
-                    </div>
                     <ul class="list-group list-group-flush">
                       <li
                         class="list-group-item"
@@ -44,9 +40,8 @@
                       <li class="list-group-item">Wiek: {{getAge(user_data.birthday)}}</li>
                       <li class="list-group-item">Mieszkam w: {{user_data.location}}</li>
                       <li class="list-group-item">Urodziny: {{user_data.birthday}}</li>
-                      <li
-                        class="list-group-item"
-                      >Status/zajęcie: </li>
+                      <li class="list-group-item">Status:</li>
+                      <li class="list-group-item">Wykształcenie:</li>
                       <div smoking>
                         <div v-if="user_data.is_smoking==0">
                           <li class="list-group-item">Papierosy: nie palę</li>
@@ -90,23 +85,18 @@
                 </b-tab>
                 <b-tab title="Mój wygląd">
                   <div class="card text-black bg-dark mb-3">
-                    <div class="card-header">
-                      <h3>Wygląd:</h3>
-                    </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Wzrost: {{user_data.growth}}</li>
                       <li class="list-group-item">Waga: {{user_data.weight}}</li>
                       <li
                         class="list-group-item"
-                      >Włosy: {{user_data.hair_length}} {{user_data.hair_color}} +dziś farbują włosy więc można dodać kolor farbowany/nietypowy</li>
-                      <li class="list-group-item">Kolor oczu: dodać</li>
-                      <li
-                        class="list-group-item"
-                      >Sylwetka: szczupła/gruba/wysportowana etc {{user_data.body_type}}</li>
+                      >Włosy: {{user_data.hair_length}} {{user_data.hair_color}}</li>
+                      <li class="list-group-item">Kolor oczu: {{user_data.eye_color}}</li>
+                      <li class="list-group-item">Sylwetka: {{user_data.body_type}}</li>
                       <li class="list-group-item">
                         Znaki szczególne:
                         <p v-if="user_data.freckles!=false">mam piegi</p>
-                        <p v-if="user_data.glasses!=false">noszę okulary</p>+można dodać tatuaże/kolczyki
+                        <p v-if="user_data.glasses!=false">noszę okulary</p>
                       </li>
                       <li class="list-group-item"></li>
                     </ul>
@@ -114,52 +104,53 @@
                 </b-tab>
                 <b-tab title="Zainteresowania">
                   <div class="card text-black bg-dark mb-3">
-                    <div class="card-header">
-                      <h3>Zainteresowania: dodać (raczej pola tekstowe)</h3>
-                    </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Rozrywka:</li>
-                      <li class="list-group-item">Sport:</li>
-                      <li class="list-group-item">Muzyka:</li>
-                      <li class="list-group-item">Kuchnia:</li>
-                      <li class="list-group-item">Ulubione miejsca:</li>
+                      <li class="list-group-item">Rozrywka i hobby: {{user_data.hobbies}}</li>
+                      <li class="list-group-item">Sport: {{user_data.sport}}</li>
+                      <li class="list-group-item">Muzyka: {{user_data.music}}</li>
+                      <li class="list-group-item">Kuchnia: {{user_data.cooking}}</li>
+                      <li class="list-group-item">Ulubione miejsce: {{user_data.favourite_place}}</li>
+                      <li class="list-group-item">Największa pasja: {{user_data.passion}}</li>
                     </ul>
                   </div>
                 </b-tab>
                 <b-tab title="Moje preferencje">
                   <div class="card text-black bg-dark mb-3">
-                    <div class="card-header">
-                      <h3>Moje preferencje:</h3>
-                    </div>
                     <ul class="list-group list-group-flush">
                       <div v-if="user_preferences.sex_preference==male">
-                        <li class="list-group-item">Płeć: Mężczyzna</li>
+                        <li class="list-group-item">Orientacja: Mężczyzna</li>
                       </div>
                       <div v-else-if="user_preferences.sex_preference==female">
-                        <li class="list-group-item">Płeć: Kobieta</li>
+                        <li class="list-group-item">Orientacja: Kobieta</li>
                       </div>
                       <div v-else-if="user_preferences.sex_preference==other">
-                        <li class="list-group-item">Płeć: Inna</li>
+                        <li class="list-group-item">Orientacja: Inna</li>
                       </div>
                       <div v-else-if="user_preferences.sex_preference==null">
-                        <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
+                        <li class="list-group-item">Orientacja: {{user_preferences.sex_preference}}</li>
                       </div>
-                      <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
-                      <li class="list-group-item">Przedział wiekowy: todo</li>
-                      <li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Przedział wiekowy: {{user_preferences.age_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Edukacja: {{user_preferences.education_preference}}</li>
+                      <!--<li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>-->
+                      <li class="list-group-item">Waga: {{user_preferences.weight_preference}}</li>
                       <li
                         class="list-group-item"
                       >Sylwetka: {{user_preferences.body_type_preference}}</li>
                       <li
                         class="list-group-item"
-                      >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
-                      <li class="list-group-item">Kolor oczu: todo</li>
+                      >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}),</li>
+                      <li
+                        class="list-group-item"
+                      >Kolor oczu: {{user_preferences.eye_color_preference}}</li>
                       <li class="list-group-item">
                         Znaki szczególne:
                         <p v-if="user_preferences.freckles_preference!=false">piegi</p>
                         <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
                       </li>
-                      <li class="list-group-item">Idealne miejsce na randkę: ewentualnie można dodać</li>
                       <li
                         class="list-group-item"
                       >Alkohol: {{user_preferences.is_drinking_alcohol_preference}}</li>
@@ -171,9 +162,6 @@
                 </b-tab>
                 <b-tab title="Cechy charakteru">
                   <div class="card text-black bg-dark mb-3">
-                    <div class="card-header">
-                      <h3>Cechy charakteru:</h3>
-                    </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Pewność siebie: {{user_data.assertiveness}}</li>
                       <li class="list-group-item">Szczerość: {{user_data.sincerity}}</li>
@@ -278,10 +266,9 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null)
-        return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
       else
-        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"
+        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
   },
   created() {

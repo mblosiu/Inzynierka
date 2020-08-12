@@ -93,7 +93,14 @@
         </b-col>
         <b-col cols="4">
           <div>
-            <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" style="width: 27rem;" img-top class="user-card" alt="Card image cap">
+            <b-card
+              :img-src="getUrl(user.profile_picture)"
+              img-alt="Card image"
+              style="width: 27rem;"
+              img-top
+              class="user-card"
+              alt="Card image cap"
+            >
               <b-card-title>
                 <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
               </b-card-title>
@@ -109,7 +116,6 @@
           </div>
         </b-col>
         <b-col cols="5">
-
           <div>
             <b-card no-body>
               <b-tabs pills card vertical>
@@ -124,9 +130,8 @@
                       <li class="list-group-item">Wiek: {{getAge(user.birthday)}}</li>
                       <li class="list-group-item">Mieszkam w: {{user.location}}</li>
                       <li class="list-group-item">Urodziny: {{user.birthday}}</li>
-                      <li
-                        class="list-group-item"
-                      >Status/zajęcie: dodać np ->uczeń/student/pracuję/emerytura/dumna madka</li>
+                      <li class="list-group-item">Status/zajęcie: {{user.status}}</li>
+                      <li class="list-group-item">Edukacja: {{user.education}}</li>
                       <div smoking>
                         <div v-if="user.is_smoking==0">
                           <li class="list-group-item">Papierosy: nie palę</li>
@@ -171,22 +176,18 @@
                 <b-tab title="Mój wygląd">
                   <div class="card text-black bg-dark mb-3">
                     <div class="card-header">
-                      <h3>Mój wygląd:</h3>
+                      <h3>Mój wygląd</h3>
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Wzrost: {{user.growth}}</li>
                       <li class="list-group-item">Waga: {{user.weight}}</li>
-                      <li
-                        class="list-group-item"
-                      >Włosy: {{user.hair_length}} {{user.hair_color}} +dziś farbują włosy więc można dodać kolor farbowany/nietypowy + brak koloru czarnego</li>
-                      <li class="list-group-item">Kolor oczu: dodać</li>
-                      <li
-                        class="list-group-item"
-                      >Sylwetka: szczupła/gruba/wysportowana etc {{user.body_type}}</li>
+                      <li class="list-group-item">Włosy: {{user.hair_length}} {{user.hair_color}}</li>
+                      <li class="list-group-item">Kolor oczu: {{user.eye_color}}</li>
+                      <li class="list-group-item">Sylwetka: {{user.body_type}}</li>
                       <li class="list-group-item">
-                        Znaki szczególne:
+                        Znaki szczególne
                         <p v-if="user.freckles!=false">mam piegi</p>
-                        <p v-if="user.glasses!=false">noszę okulary</p>+można dodać tatuaże/kolczyki
+                        <p v-if="user.glasses!=false">noszę okulary</p>
                       </li>
                       <li class="list-group-item"></li>
                     </ul>
@@ -195,14 +196,44 @@
                 <b-tab title="Zainteresowania">
                   <div class="card text-black bg-dark mb-3">
                     <div class="card-header">
-                      <h3>Zainteresowania: dodać (raczej pola tekstowe)</h3>
+                      <h3>Zainteresowania</h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Rozrywka:</li>
+                      <li class="list-group-item">Rozrywka i hobby:</li>
                       <li class="list-group-item">Sport:</li>
                       <li class="list-group-item">Muzyka:</li>
                       <li class="list-group-item">Kuchnia:</li>
-                      <li class="list-group-item">Ulubione miejsca:</li>
+                      <li class="list-group-item">Ulubione miejsce:</li>
+                      <li class="list-group-item">Największa pasja:</li>
+                    </ul>
+                  </div>
+                </b-tab>
+                <b-tab title="Moje preferencje">
+                  <div class="card text-black bg-dark mb-3">
+                    <div class="card-header">
+                      <h3>Moje preferencje:</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Orientacja: {{user_preferences.sex_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Przedział wiekowy: {{user_preferences.age_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Waga: {{user_preferences.weight_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Sylwetka: {{user_preferences.body_type_preference}}</li>
+                      <li
+                        class="list-group-item"
+                      >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
+                      <li class="list-group-item">Kolor oczu: todo</li>
+                      <li class="list-group-item">
+                        Znaki szczególne:
+                        <p v-if="user_preferences.freckles_preference!=false">piegi</p>
+                        <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
+                      </li>
+                      <li class="list-group-item">Edukacja: {{user_preferences.education_preference}}</li>
                     </ul>
                   </div>
                 </b-tab>
@@ -221,32 +252,7 @@
                       <li class="list-group-item">Sumienność: {{user.scrupulousness}}</li>
                       <li class="list-group-item">Pracowitość: {{user.diligence}}</li>
                       <li class="list-group-item">Życzliwość: {{user.kindness}}</li>
-                      <li class="list-group-item">+ romantyczność można dodać na razie</li>
-                    </ul>
-                  </div>
-                </b-tab>
-                <b-tab title="Moje preferencje">
-                  <div class="card text-black bg-dark mb-3">
-                    <div class="card-header">
-                      <h3>Moje preferencje:</h3>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Płeć: {{user_preferences.sex_preference}}</li>
-                      <li class="list-group-item">Przedział wiekowy: todo</li>
-                      <li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>
-                      <li
-                        class="list-group-item"
-                      >Sylwetka: {{user_preferences.body_type_preference}}</li>
-                      <li
-                        class="list-group-item"
-                      >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
-                      <li class="list-group-item">Kolor oczu: todo</li>
-                      <li class="list-group-item">
-                        Znaki szczególne:
-                        <p v-if="user_preferences.freckles_preference!=false">piegi</p>
-                        <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
-                      </li>
-                      <li class="list-group-item">Idealne miejsce na randkę: ewentualnie można dodać</li>
+                      <li class="list-group-item">+ romantyczność</li>
                     </ul>
                   </div>
                 </b-tab>
@@ -360,7 +366,5 @@ export default {
 .user-card {
   background: #343a40;
   color: white;
-}
-.card {
 }
 </style>
