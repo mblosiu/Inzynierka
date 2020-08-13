@@ -40,8 +40,8 @@
                       <li class="list-group-item">Wiek: {{getAge(user_data.birthday)}}</li>
                       <li class="list-group-item">Mieszkam w: {{user_data.location}}</li>
                       <li class="list-group-item">Urodziny: {{user_data.birthday}}</li>
-                      <li class="list-group-item">Status:</li>
-                      <li class="list-group-item">Wykształcenie:</li>
+                      <li class="list-group-item">Status: {{user_data.status}}</li>
+                      <li class="list-group-item">Wykształcenie:{{user_data.education}}</li>
                       <div smoking>
                         <div v-if="user_data.is_smoking==0">
                           <li class="list-group-item">Papierosy: nie palę</li>
@@ -117,39 +117,28 @@
                 <b-tab title="Moje preferencje">
                   <div class="card text-black bg-dark mb-3">
                     <ul class="list-group list-group-flush">
-                      <div v-if="user_preferences.sex_preference==male">
-                        <li class="list-group-item">Orientacja: Mężczyzna</li>
-                      </div>
-                      <div v-else-if="user_preferences.sex_preference==female">
-                        <li class="list-group-item">Orientacja: Kobieta</li>
-                      </div>
-                      <div v-else-if="user_preferences.sex_preference==other">
-                        <li class="list-group-item">Orientacja: Inna</li>
-                      </div>
-                      <div v-else-if="user_preferences.sex_preference==null">
-                        <li class="list-group-item">Orientacja: {{user_preferences.sex_preference}}</li>
-                      </div>
+                      <li class="list-group-item">Orientacja: {{user_preferences.orientation}}</li>
                       <li
                         class="list-group-item"
-                      >Przedział wiekowy: {{user_preferences.age_preference}}</li>
+                      >Przedział wiekowy: {{user_preferences.age_preference_min}} - {{user_preferences.age_preference_max}}</li>
                       <li
                         class="list-group-item"
                       >Edukacja: {{user_preferences.education_preference}}</li>
                       <!--<li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>-->
-                      <li class="list-group-item">Waga: {{user_preferences.weight_preference}}</li>
+                      <li class="list-group-item">Waga: do {{user_preferences.weight_preference}} kg</li>
                       <li
                         class="list-group-item"
                       >Sylwetka: {{user_preferences.body_type_preference}}</li>
                       <li
                         class="list-group-item"
-                      >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}),</li>
+                      >Włosy: </li>
                       <li
                         class="list-group-item"
                       >Kolor oczu: {{user_preferences.eye_color_preference}}</li>
                       <li class="list-group-item">
                         Znaki szczególne:
                         <p v-if="user_preferences.freckles_preference!=false">piegi</p>
-                        <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
+                        <p v-if="user_preferences.glasses_preference!=false">okulary</p>
                       </li>
                       <li
                         class="list-group-item"
@@ -189,13 +178,12 @@
 
 
 <script>
-//import { mapState } from 'vuex';
-//import UserCard from '../components/UserCard.vue'
+
 import axios from "axios";
 export default {
   name: "MainUser",
   components: {
-    //UserCard
+  
   },
   data() {
     return {
