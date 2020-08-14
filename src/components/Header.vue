@@ -73,9 +73,9 @@
           <input v-on:click="login" class="btn btn-success mr-2" type="submit" value="Zaloguj" />
         </b-nav-form>
 
-        <b-nav-form @submit.prevent="register" v-if="token == null">
+        <!--<b-nav-form @submit.prevent="register" v-if="token == null">
           <router-link class="btn btn-outline-warning" type="submit" to="/register">Rejestracja</router-link>
-        </b-nav-form>
+        </b-nav-form>-->
 
         <b-nav-form @submit.prevent="logout" v-if="token != null">
           <b-button type="submit" size="sm" class="btn btn-danger mr-1">Wyloguj</b-button>
@@ -113,7 +113,7 @@ export default {
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
               localStorage.setItem("user-token", response.data.token),
-              this.$router.go();
+              this.$router.push('mainuser');
           }
         })
         .catch((errors) => {

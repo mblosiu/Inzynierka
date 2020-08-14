@@ -8,6 +8,7 @@ import Settings from '../views/Settings.vue'
 import Search from '../views/Search.vue'
 import Gallery from '../views/Gallery.vue'
 import UserProfile from '../views/UserProfile.vue'
+import Regulations from '../views/Regulations.vue'
 
 Vue.use(VueRouter)
 
@@ -76,6 +77,14 @@ const routes = [
     component: Gallery,
     meta: {
       title: 'Galeria'
+    }
+  },
+  {
+    path: '/regulations',
+    name: 'Regulations',
+    component: Regulations,
+    meta: {
+      title: 'Regulamin'
     }
   },
 ]

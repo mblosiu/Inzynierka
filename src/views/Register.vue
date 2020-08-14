@@ -1,80 +1,99 @@
 <template>
   <div>
-    <br />
     <div class="register-form d-flex justify-content-center">
-      <div class="card bg-dark text-white text-center p-3 rounded" style="max-width: 18rem;">
-        <div class="card-header">
-          <h5>Rejestracja</h5>
-        </div>
-        <div class="card-body">
-          <p class="card-text"></p>
-          <form @submit.prevent="CreateUser">
-            <p>
-              <label for="username">
-                Nazwa konta
-                <input type="text" name="username" id="username" v-model="username" />
-              </label>
-              <br />
-            </p>
-            <p>
-              <label for="email">
-                Email
-                <input type="email" name="email" id="email" v-model="email" />
-              </label>
-              <br />
-            </p>
-            <p>
-              <label for="Location">
-                Lokacja
-                <input type="text" name="Location" id="Locatiom" v-model="location" />
-              </label>
-              <br />
-            </p>
-            <p>
-              <label for="birthday">
-                Data urodzenia
-                <input type="date" name="birthday" id="birthday" v-model="birthday" />
-              </label>
-              <br />
-            </p>
-            <p>
-              <label for="sex">
-                Płeć
-                <select class="ml-2" name="Sex" id="Sex" v-model="sex">
-                  <br />
-                  <option>mężczyzna</option>
-                  <option>kobieta</option>
-                  <option>inna</option>
-                </select>
-              </label>
-              <br />
-            </p>
-            <p>
-              <label for="password">
-                Hasło
-                <input type="password" name="password" id="password" v-model="password" />
-              </label>
-              <br />
-            </p>
-            <p>
-              <label for="password2">
-                Powtórz hasło
-                <input type="password" name="password2" id="password2" v-model="password2" />
-              </label>
-              <br />
-            </p>
-            <p>
-              <input
-                v-on:click="CreateUser"
-                class="btn btn-outline-success"
-                type="submit"
-                value="Zarejestruj"
-              />
-            </p>
-          </form>
-        </div>
-      </div>
+      <b-row class="row justify-content-md-center">
+        <b-col cols="1"></b-col>
+        <b-col cols="10" class="col align-self-center">
+          <div class="card text-black bg-secondary mb-3" style="width: 25rem;" fluid>
+            <form class="card" @submit.prevent="CreateUser">
+              <div class="card-header">
+                <h5>Rejestracja</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <b-row>
+                    <b-col cols="6">
+                      <label for="username">Nazwa konta</label>
+                      <input type="text" name="username" id="username" v-model="username" />
+                    </b-col>
+                    <b-col cols="6">
+                      <label for="email">Email</label>
+                      <input type="email" name="email" id="email" v-model="email" />
+                    </b-col>
+                  </b-row>
+                </li>
+
+                <li class="list-group-item">
+                  <b-row>
+                    <b-col cols="6">
+                      <label for="Location">Lokacja</label>
+                      <input type="text" name="Location" id="Locatiom" v-model="location" />
+                    </b-col>
+                    <b-col cols="6">
+                      <label for="birthday">Data urodzenia</label>
+                      <input type="date" name="birthday" id="birthday" v-model="birthday" />
+                    </b-col>
+                  </b-row>
+                </li>
+
+                <li class="list-group-item">
+                  <b-row>
+                    <b-col cols="6">
+                      <label for="password">Hasło</label>
+                      <input type="password" name="password" id="password" v-model="password" />
+                    </b-col>
+                    <b-col cols="6">
+                      <label for="sex">Płeć</label>
+                      <br />
+                      <select class="ml-2" name="Sex" id="Sex" v-model="sex">
+                        <br />
+                        <option>mężczyzna</option>
+                        <option>kobieta</option>
+                        <option>inna</option>
+                      </select>
+                    </b-col>
+                  </b-row>
+                </li>
+
+                <li class="list-group-item">
+                  <b-row>
+                    <b-col cols="6">
+                      <label for="password2">Powtórz hasło</label>
+                      <input type="password" name="password2" id="password2" v-model="password2" />
+                    </b-col>
+                    <b-col cols="6">
+                      <br />
+
+                      <label for="checkbox">
+                        Akceptuję
+                        <router-link to="/regulations">regulamin</router-link>
+                      </label>
+
+                      <br />
+                      <input type="checkbox" id="checkbox" v-model="checked" />
+                    </b-col>
+                  </b-row>
+                </li>
+              </ul>
+              <p>
+                <input
+                  v-on:click="CreateUser"
+                  class="btn btn-outline-success"
+                  type="submit"
+                  value="Zarejestruj"
+                />
+              </p>
+            </form>
+          </div>
+        </b-col>
+        <b-col cols="1"></b-col>
+      </b-row>
     </div>
+    <b-row>
+      <b-col cols="12">
+        <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{error_message}}</b-alert>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -93,28 +112,49 @@ export default {
       birthday: "",
       sex: "",
       password: "",
-      password2: ""
+      password2: "",
+      checked: false,
+      showDismissibleAlert: false,
+      error_message: "",
     };
   },
 
   methods: {
     CreateUser() {
-      console.log(this.username);
-      axios
-        .post("http://127.0.0.1:8000/api/user/register", {
-          username: this.username,
-          password: this.password,
-          password2: this.password2,
-          email: this.email,
-          birthday: this.birthday,
-          location: this.location,
-          sex: this.sex
-        })
-        .then(response => console.log(response))
-        .catch(errors => console.log(errors));
-      this.$router.push("/");
-    }
-  }
+      //console.log(this.username);
+      if (this.checked == false) {
+        this.error_message = "Musisz zaakceptować regulamin!";
+        this.showDismissibleAlert = true;
+      } else {
+        axios
+          .post("http://127.0.0.1:8000/api/user/register", {
+            username: this.username,
+            password: this.password,
+            password2: this.password2,
+            email: this.email,
+            birthday: this.birthday,
+            location: this.location,
+            sex: this.sex,
+          })
+          .then((response) => {
+            console.log(response);
+            if (response.status == 200) {
+              (this.error_message = ""), (this.showDismissibleAlert = false);
+            } /*else {
+            this.error_message = "Formularz zawiera błędy!";
+            this.showDismissibleAlert = true;
+          }*/
+          })
+          .catch((errors) => {
+            if (errors.response.status != 200) {
+              this.error_message = "Formularz zawiera błędy!";
+              this.showDismissibleAlert = true;
+            }
+          });
+        this.$router.push("/");
+      }
+    },
+  },
 };
 </script>
 
