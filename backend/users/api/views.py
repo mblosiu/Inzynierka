@@ -77,12 +77,7 @@ class UserProfileView(APIView):
         location = request.data.get('location', '').capitalize()
         sex = request.data.get('sex', '').capitalize()
         hair_color = request.data.get('hair_color', '').capitalize()
-
-
-        try:
-            body_type = request.data.get('body_type', '').capitalize()
-        except ValueError:
-            print("xd")
+        body_type = request.data.get('body_type', '').capitalize()
         growth = request.data.get('growth', '')
         weight = request.data.get('weight', '')
         description = request.data.get('description', '')
