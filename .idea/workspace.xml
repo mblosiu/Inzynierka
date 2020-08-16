@@ -26,14 +26,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac8f5f96-1a5b-48e3-b690-d6a58187f7b7" name="Default Changelist" comment="UserProfilePic - bad datatype handle">
-      <change beforePath="$PROJECT_DIR$/.idea/Inzynierka.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Inzynierka.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="ac8f5f96-1a5b-48e3-b690-d6a58187f7b7" name="Default Changelist" comment="serialization for new fields">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +74,21 @@
       <option name="project" value="LOCAL" />
       <updated>1596815170241</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="serialization for new fields">
+      <created>1597585250941</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1597585250941</updated>
+    </task>
+    <task id="LOCAL-00003" summary="serialization for new fields">
+      <created>1597585279282</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1597585279282</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -107,16 +117,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="UserProfilePic - bad datatype handle" />
-    <option name="LAST_COMMIT_MESSAGE" value="UserProfilePic - bad datatype handle" />
+    <MESSAGE value="serialization for new fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="serialization for new fields" />
   </component>
   <component name="WindowStateProjectService">
     <state x="461" y="165" key="SettingsEditor" timestamp="1596814289119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1596814289119" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1596815179165">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2" timestamp="1597585300360">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1597585300360" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596815179165" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596996734514">
       <screen x="0" y="0" width="1920" height="1040" />

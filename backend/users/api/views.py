@@ -72,12 +72,12 @@ class UserProfileView(APIView):
         response = {}
 
         email = request.data.get('email', None)
-        name = request.data.get('name', '').capitalize()
-        surname = request.data.get('surname', '').capitalize()
-        location = request.data.get('location', '').capitalize()
-        sex = request.data.get('sex', '').capitalize()
-        hair_color = request.data.get('hair_color', '').capitalize()
-        body_type = request.data.get('body_type', '').capitalize()
+        name = request.data.get('name', '')
+        surname = request.data.get('surname', '')
+        location = request.data.get('location', '')
+        sex = request.data.get('sex', '')
+        hair_color = request.data.get('hair_color', '')
+        body_type = request.data.get('body_type', '')
         growth = request.data.get('growth', '')
         weight = request.data.get('weight', '')
         description = request.data.get('description', '')
@@ -99,31 +99,31 @@ class UserProfileView(APIView):
         if name in [account.name]:
             response["name"] = "no changes"
         else:
-            account.name = name
+            account.name = name.capitalize()
             response["name"] = "updated"
 
         if surname in [None, '', account.surname]:
             response["surname"] = "no changes"
         else:
-            account.surname = surname
+            account.surname = surname.capitalize()
             response["surname"] = "updated"
 
         if location in [None, '', account.location]:
             response["location"] = "no changes"
         else:
-            account.location = location
+            account.location = location.capitalize()
             response["location"] = "updated"
 
         if sex in [None, '', account.sex]:
             response["sex"] = "no changes"
         else:
-            account.sex = sex
+            account.sex = sex.capitalize()
             response["sex"] = "updated"
 
         if hair_color in [None, '', account.hair_color]:
             response["hair_color"] = "no changes"
         else:
-            account.hair_color = hair_color
+            account.hair_color = hair_color.capitalize()
             response["hair_color"] = "updated"
 
         if growth in [None, '', account.growth]:
@@ -141,7 +141,7 @@ class UserProfileView(APIView):
         if body_type in [None, '', account.body_type]:
             response["body_type"] = "no changes"
         else:
-            account.body_type = body_type
+            account.body_type = body_type.capitalize()
             response["body_type"] = "updated"
 
         if is_smoking in [None, '', account.is_smoking]:
@@ -185,38 +185,38 @@ class PreferencesView(APIView):
 
         response = {}
 
-        orientation = request.data.get('orientation', '').capitalize()
-        hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', '').capitalize()
-        hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', '').capitalize()
-        hair_color_red_preference = request.data.get('hair_color_red_preference', '').capitalize()
-        growth_preference = request.data.get('growth_preference', '').capitalize()
-        weight_preference = request.data.get('weight_preference', '').capitalize()
-        body_type_preference = request.data.get('body_type_preference', '').capitalize()
-        is_smoking_preference = request.data.get('is_smoking_preference', '').capitalize()
-        is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', '').capitalize()
+        orientation = request.data.get('orientation', '')
+        hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', '')
+        hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', '')
+        hair_color_red_preference = request.data.get('hair_color_red_preference', '')
+        growth_preference = request.data.get('growth_preference', '')
+        weight_preference = request.data.get('weight_preference', '')
+        body_type_preference = request.data.get('body_type_preference', '')
+        is_smoking_preference = request.data.get('is_smoking_preference', '')
+        is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', '')
 
         if orientation == preferences.orientation:
             response["orientation"] = "no changes"
         else:
-            preferences.orientation = orientation
+            preferences.orientation = orientation.capitalize()
             response["orientation"] = "updated"
 
         if hair_color_blonde_preference == preferences.hair_color_blonde_preference:
             response["hair_color_blonde_preference"] = "no changes"
         else:
-            preferences.hair_color_blonde_preference = hair_color_blonde_preference
+            preferences.hair_color_blonde_preference = hair_color_blonde_preference.capitalize()
             response["hair_color_blonde_preference"] = "updated"
 
         if hair_color_brunette_preference == preferences.hair_color_brunette_preference:
             response["hair_color_brunette_preference"] = "no changes"
         else:
-            preferences.hair_color_brunette_preference = hair_color_brunette_preference
+            preferences.hair_color_brunette_preference = hair_color_brunette_preference.capitalize()
             response["hair_color_brunette_preference"] = "updated"
 
         if hair_color_red_preference == preferences.hair_color_red_preference:
             response["hair_color_red_preference"] = "no changes"
         else:
-            preferences.hair_color_red_preference = hair_color_red_preference
+            preferences.hair_color_red_preference = hair_color_red_preference.capitalize()
             response["hair_color_red_preference"] = "updated"
 
         if growth_preference == preferences.growth_preference:
@@ -234,19 +234,19 @@ class PreferencesView(APIView):
         if body_type_preference == preferences.body_type_preference:
             response["body_type_preference"] = "no changes"
         else:
-            preferences.body_type_preference = body_type_preference
+            preferences.body_type_preference = body_type_preference.capitalize()
             response["body_type_preference"] = "updated"
 
         if is_smoking_preference == preferences.is_smoking_preference:
             response["is_smoking_preference"] = "no changes"
         else:
-            preferences.is_smoking_preference = is_smoking_preference
+            preferences.is_smoking_preference = is_smoking_preference.capitalize()
             response["is_smoking_preference"] = "updated"
 
         if is_drinking_alcohol_preference == preferences.is_drinking_alcohol_preference:
             response["is_drinking_alcohol_preference"] = "no changes"
         else:
-            preferences.is_drinking_alcohol_preference = is_drinking_alcohol_preference
+            preferences.is_drinking_alcohol_preference = is_drinking_alcohol_preference.capitalize()
             response["is_drinking_alcohol_preference"] = "updated"
 
         if response:

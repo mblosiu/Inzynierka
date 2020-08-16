@@ -106,7 +106,7 @@ class User(AbstractBaseUser):
     hair_color = models.CharField(max_length=30, null=True, blank=True, default=None)
     growth = models.IntegerField(null=True, blank=True, default=None)
     weight = models.IntegerField(null=True, blank=True, default=None)
-    body_type = models.CharField(max_length=30, null=True, blank=True, default=None)
+    body_type = models.CharField(max_length=30, null=True, blank=True, default='')
     freckles = models.BooleanField(default=False)
     glasses = models.BooleanField(default=False)
     hair_length = models.CharField(max_length=30, null=True, blank=True, default=None)
