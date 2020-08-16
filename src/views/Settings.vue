@@ -304,7 +304,7 @@
                           <input
                             type="text"
                             id="favourite_place"
-                            v-model="user_data.user_favourite_place"
+                            v-model="user_data.favourite_place"
                             class="form-control"
                           />
                         </b-col>
@@ -338,7 +338,7 @@
                             <b-form-select
                               class="form-control"
                               id="orientation"
-                              v-model="user_preferences.sex_preference"
+                              v-model="user_preferences.orientation"
                               :options="orientation_options"
                             ></b-form-select>
                           </b-col>
@@ -419,7 +419,7 @@
                             <b-form-select
                               class="form-control"
                               id="hair_length_preference"
-                              v-model="user_preferences.hair_length"
+                              v-model="user_preferences.hair_length_preference"
                               :options="hair_length_options"
                             ></b-form-select>
                           </b-col>
@@ -506,68 +506,68 @@ export default {
       status: "",
       sex_options: [
         { value: null, text: "" },
-        { value: "mężczyzna", text: "mężczyzna" },
-        { value: "kobieta", text: "kobieta" },
-        { value: "inna", text: "inna" },
+        { value: "Mężczyzna", text: "mężczyzna" },
+        { value: "Kobieta", text: "kobieta" },
+        { value: "Inna", text: "inna" },
       ],
       orientation_options: [
         { value: null, text: "" },
-        { value: "hetero", text: "heteroseksualna" },
-        { value: "homo", text: "homoseksualna" },
-        { value: "bi", text: "biseksualna" },
+        { value: "Hetero", text: "heteroseksualna" },
+        { value: "Homo", text: "homoseksualna" },
+        { value: "Bi", text: "biseksualna" },
       ],
       body_type_options: [
         { value: null, text: "" },
-        { value: "normalna", text: "normalna" },
-        { value: "szczupła", text: "szczupła" },
-        { value: "wysportowana", text: "wysportowana" },
-        { value: "puszysta", text: "puszysta" },
+        { value: "Normalna", text: "normalna" },
+        { value: "Szczupła", text: "szczupła" },
+        { value: "Wysportowana", text: "wysportowana" },
+        { value: "Puszysta", text: "puszysta" },
       ],
       eye_color_options: [
         { value: null, text: "" },
-        { value: "szare", text: "szare" },
-        { value: "niebieskie", text: "niebieskie" },
-        { value: "brązowe", text: "brązowe" },
-        { value: "piwne", text: "piwne" },
-        { value: "szare", text: "zieone" },
+        { value: "Szare", text: "szare" },
+        { value: "Niebieskie", text: "niebieskie" },
+        { value: "Brązowe", text: "brązowe" },
+        { value: "Piwne", text: "piwne" },
+        { value: "Szare", text: "zieone" },
       ],
       hair_color_options: [
         { value: null, text: "" },
-        { value: "blond", text: "blond" },
-        { value: "ciemny blond", text: "ciemny blond" },
-        { value: "jasny blond", text: "jasny blond" },
-        { value: "brązowe", text: "brązowe" },
-        { value: "ciemny brąz", text: "ciemny brąz" },
-        { value: "jasny brąz", text: "jasny brąz" },
-        { value: "czarne", text: "czarne" },
-        { value: "siwe", text: "siwe" },
-        { value: "inny", text: "inny" },
+        { value: "Blond", text: "blond" },
+        { value: "Ciemny blond", text: "ciemny blond" },
+        { value: "Jasny blond", text: "jasny blond" },
+        { value: "Brązowe", text: "brązowe" },
+        { value: "Ciemny brąz", text: "ciemny brąz" },
+        { value: "Jasny brąz", text: "jasny brąz" },
+        { value: "Czarne", text: "czarne" },
+        { value: "Siwe", text: "siwe" },
+        { value: "Inny", text: "inny" },
       ],
       hair_length_options: [
         { value: null, text: "" },
-        { value: "bardzo krótkie", text: "bardzo krótkie" },
-        { value: "krótkie", text: "krótkie" },
-        { value: "średnie", text: "średnie (do barków)" },
-        { value: "dłuższe", text: "dłuższe (do łopatek)" },
-        { value: "długie", text: "długie" },
-        { value: "bardzo długie", text: "bardzo długie (do pasa+)" },
-        { value: "łysy", text: "brak (łysy)" },
+        { value: "Bardzo krótkie", text: "bardzo krótkie" },
+        { value: "Krótkie", text: "krótkie" },
+        { value: "Średnie", text: "średnie (do barków)" },
+        { value: "Dłuższe", text: "dłuższe (do łopatek)" },
+        { value: "Długie", text: "długie" },
+        { value: "Bardzo długie", text: "bardzo długie (do pasa+)" },
+        { value: "Łysy", text: "brak (łysy)" },
       ],
       status_options: [
         { value: null, text: "" },
-        { value: "uczeń", text: "uczeń" },
-        { value: "student", text: "student" },
-        { value: "pracuję", text: "pracuję" },
-        { value: "nie pracuję", text: "nie pracuję" },
-        { value: "emeryt", text: "emeryt" },
+        { value: "Uczeń", text: "uczeń" },
+        { value: "Student", text: "student" },
+        { value: "Pracuję", text: "pracuję" },
+        { value: "Nie pracuję", text: "nie pracuję" },
+        { value: "Emeryt", text: "emeryt" },
       ],
       education_options: [
         { value: null, text: "brak" },
-        { value: "podstawowe", text: "podstawowe" },
-        { value: "gimnazjalne", text: "gimnazjalne" },
-        { value: "zawodowe", text: "zawodowe" },
-        { value: "średnie", text: "średnie" },
-        { value: "wyższe", text: "wyższe" },
+        { value: "Podstawowe", text: "podstawowe" },
+        { value: "Gimnazjalne", text: "gimnazjalne" },
+        { value: "Zawodowe", text: "zawodowe" },
+        { value: "Średnie", text: "średnie" },
+        { value: "Wyższe", text: "wyższe" },
       ],
       smoking_options: [
         { value: null, text: "" },
@@ -622,9 +622,9 @@ export default {
             growth: this.user_data.growth,
             weight: this.user_data.weight,
             hair_length: this.user_data.hair_length,
-            //hair_color: this.user_data.hair_color,
+            hair_color: this.user_data.hair_color,
             eye_color: this.user_data.eye_color,
-            //body_type: this.user_data.body_type,
+            body_type: this.user_data.body_type,
             favourite_place: this.user_data.favourite_place,
             passion: this.user_data.passion,
           },
@@ -671,7 +671,7 @@ export default {
             weight_preference: this.user_preferences.weight_preference,
             hair_length_preference: this.user_preferences
               .hair_length_preference,
-            hair_color_preference: this.user_preferences.hair_color_preference,
+            //hair_color_preference: this.user_preferences.hair_color_preference,
           },
           config
         )

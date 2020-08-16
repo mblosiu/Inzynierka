@@ -124,7 +124,6 @@
                       <li
                         class="list-group-item"
                       >Edukacja: {{user_preferences.education_preference}}</li>
-                      <!--<li class="list-group-item">Wzrost: {{user_preferences.growth_preference}}</li>-->
                       <li class="list-group-item">Waga: do {{user_preferences.weight_preference}} kg</li>
                       <li
                         class="list-group-item"
@@ -142,10 +141,46 @@
                       </li>
                       <li
                         class="list-group-item"
-                      >Alkohol: {{user_preferences.is_drinking_alcohol_preference}}</li>
+                      >
+                        <div v-if="user_preferences.is_smoking_preference==0">
+                          <li class="list-group-item">Papierosy: nie pali</li>
+                        </div>
+                        <div v-else-if="user_preferences.is_smoking_preference==1">
+                          <li class="list-group-item">Papierosy: okazjonalnie</li>
+                        </div>
+                        <div v-else-if="user_preferences.is_smoking_preference==2">
+                          <li class="list-group-item">Papierosy: często</li>
+                        </div>
+                        <div v-else-if="user_preferences.is_smoking_preference==3">
+                          <li class="list-group-item">Papierosy: codziennie</li>
+                        </div>
+                        <div v-else-if="user_preferences.is_smoking_preference==4">
+                          <li class="list-group-item">Papierosy: nałogowo</li>
+                        </div>
+                        </li>
+
                       <li
                         class="list-group-item"
-                      >Papierosy: {{user_preferences.is_smoking_preference}}</li>
+                      >
+                      <div v-if="user_preferences.is_drinking_alcohol_preference==0">
+                        <li class="list-group-item">Alkohol: nie pije</li>
+                      </div>
+                      <div v-else-if="user_preferences.is_drinking_alcohol_preference==1">
+                        <li class="list-group-item">Alkohol: okazjonalnie</li>
+                      </div>
+                      <div v-else-if="user_preferences.is_drinking_alcohol_preference==2">
+                        <li class="list-group-item">Alkohol: często</li>
+                      </div>
+                      <div v-else-if="user_preferences.is_drinking_alcohol_preference==3">
+                        <li class="list-group-item">Alkohol: codziennie</li>
+                      </div>
+                      <div v-else-if="user_preferences.is_drinking_alcohol_preference==4">
+                        <li class="list-group-item">Alkohol: nałogowo</li>
+                      </div>
+                      <div v-else>
+                        <li class="list-group-item">Alkohol: {{user_data.is_drinking_alcohol}}</li>
+                      </div>
+                      </li>
                     </ul>
                   </div>
                 </b-tab>
