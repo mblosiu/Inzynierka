@@ -26,14 +26,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="UserProfilePic - bad datatype handle">
+    <list default="true" id="ac8f5f96-1a5b-48e3-b690-d6a58187f7b7" name="Default Changelist" comment="UserProfilePic - bad datatype handle">
+      <change beforePath="$PROJECT_DIR$/.idea/Inzynierka.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Inzynierka.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +65,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="" />
+      <changelist id="ac8f5f96-1a5b-48e3-b690-d6a58187f7b7" name="Default Changelist" comment="" />
       <created>1596814118859</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -122,5 +122,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596996734514" />
+    <state x="498" y="201" key="git4idea.merge.GitPullDialog" timestamp="1597480703131">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="201" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1597480703131" />
   </component>
 </project>

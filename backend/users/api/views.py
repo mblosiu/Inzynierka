@@ -70,18 +70,26 @@ class UserProfileView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
+
         email = request.data.get('email', None)
         name = request.data.get('name', '').capitalize()
         surname = request.data.get('surname', '').capitalize()
         location = request.data.get('location', '').capitalize()
         sex = request.data.get('sex', '').capitalize()
         hair_color = request.data.get('hair_color', '').capitalize()
-        body_type = request.data.get('body_type', '').capitalize()
+
+
+        try:
+            body_type = request.data.get('body_type', '').capitalize()
+        except ValueError:
+            print("xd")
         growth = request.data.get('growth', '')
         weight = request.data.get('weight', '')
         description = request.data.get('description', '')
         is_smoking = request.data.get('is_smoking', False)
         is_drinking_alcohol = request.data.get('is_drinking_alcohol', False)
+
+
 
         if email in [None, '', account.email]:
             response["email"] = "no changes"
