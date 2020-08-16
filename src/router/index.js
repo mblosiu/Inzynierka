@@ -103,7 +103,7 @@ router.beforeEach((to, from, next) => {
   }
   // LOGED IN restrictions
   else if (['Register'].includes(to.name) && localStorage.getItem("user-token")) {
-    next({ name: 'Home' })
+    next({ name: 'mainuser' })
   }
   else {
     next()

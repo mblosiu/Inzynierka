@@ -138,7 +138,7 @@ export default {
           })
           .then((response) => {
             console.log(response);
-            if (response.status == 200) {
+            if (response.status == 201) {
               (this.error_message = ""), (this.showDismissibleAlert = false);
             } /*else {
             this.error_message = "Formularz zawiera błędy!";
@@ -146,7 +146,7 @@ export default {
           }*/
           })
           .catch((errors) => {
-            if (errors.response.status != 200) {
+            if (errors.response.status != 201) {
               this.error_message = "Formularz zawiera błędy!";
               this.showDismissibleAlert = true;
             }

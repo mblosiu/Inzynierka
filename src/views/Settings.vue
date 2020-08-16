@@ -12,19 +12,19 @@
                     <li class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="user_name" class="white-text">Imię</label>
+                          <label for="name" class="white-text">Imię</label>
                           <input
                             type="text"
-                            id="user_name"
+                            id="name"
                             v-model="user_data.name"
                             class="form-control"
                           />
                         </b-col>
                         <b-col cols="6">
-                          <label for="user_surname" class="grey-text">Nazwisko</label>
+                          <label for="surname" class="grey-text">Nazwisko</label>
                           <input
                             type="text"
-                            id="user_surname"
+                            id="surname"
                             v-model="user_data.surname"
                             class="form-control"
                           />
@@ -34,19 +34,19 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="user_location" class="grey-text">Miejsce zamieszkania</label>
+                          <label for="location" class="grey-text">Miejsce zamieszkania</label>
                           <input
                             type="text"
-                            id="user_location"
+                            id="location"
                             v-model="user_data.location"
                             class="form-control"
                           />
                         </b-col>
                         <b-col cols="6">
-                          <label for="user_sex" class="grey-text">Płeć</label>
+                          <label for="sex" class="grey-text">Płeć</label>
                           <b-form-select
                             class="form-control"
-                            id="user_sex"
+                            id="sex"
                             v-model="user_data.sex"
                             :options="sex_options"
                           ></b-form-select>
@@ -69,7 +69,7 @@
                           <label for="is_drinking" class="grey-text">Alkohol</label>
                           <b-form-select
                             class="form-control"
-                            id="is_drinking_alcohol"
+                            id="is_drinking"
                             v-model="user_data.is_drinking_alcohol"
                             :options="alcohol_options"
                           ></b-form-select>
@@ -83,7 +83,7 @@
                           <label for="status" class="grey-text">Status</label>
                           <b-form-select
                             class="form-control"
-                            id="user_status"
+                            id="status"
                             v-model="user_data.status"
                             :options="status_options"
                           ></b-form-select>
@@ -92,7 +92,7 @@
                           <label for="education" class="grey-text">Edukacja</label>
                           <b-form-select
                             class="form-control"
-                            id="user_education"
+                            id="education"
                             v-model="user_data.education"
                             :options="education_options"
                           ></b-form-select>
@@ -113,20 +113,20 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="user_name" class="white-text">Wzrost</label>
+                          <label for="growth" class="white-text">Wzrost</label>
                           <input
                             type="number"
-                            id="user_growth"
+                            id="growth"
                             v-model="user_data.growth"
                             class="form-control"
                             placeholder="Wzrost w cm"
                           />
                         </b-col>
                         <b-col cols="6">
-                          <label for="user_weight" class="white-text">Waga</label>
+                          <label for="weight" class="white-text">Waga</label>
                           <input
                             type="text"
-                            id="user_growth"
+                            id="weight"
                             v-model="user_data.weight"
                             class="form-control"
                             placeholder="Waga w kg"
@@ -171,7 +171,7 @@
                           <label for="eye_color" class="grey-text">Kolor oczu</label>
                           <b-form-select
                             class="form-control"
-                            id="eye_colour"
+                            id="eye_color"
                             v-model="user_data.eye_color"
                             :options="eye_color_options"
                           ></b-form-select>
@@ -181,7 +181,7 @@
                       <b-row>
                         <br />
                         <b-col cols="12">
-                          <label for="special_options" class="grey-text">Znaki szczególne</label>
+                          <!--<label for="special_options" class="grey-text">Znaki szczególne</label>
                           <br />
                           <input
                             type="checkbox"
@@ -219,7 +219,7 @@
                           />
                           <label for="tattoos">Tatuaże</label>
                           <br />
-                          <span>Zaznaczono: {{ special_options }}</span>
+                          <span>Zaznaczono: {{ special_options }}</span>-->
                         </b-col>
                       </b-row>
                     </ul>
@@ -236,7 +236,7 @@
                   <ul class="list-group list-group-flush">
                     <ul class="list-group-item">
                       <b-row>
-                        <b-col cols="6">
+                        <!--<b-col cols="6">
                           <label for="entertainment" class="grey-text">Rozrywka i hobby:</label>
                           <br />
                           <input type="checkbox" id="jack" value="Shopping" v-model="checkedNames" />
@@ -265,23 +265,23 @@
                           <label for="john">Koszykówka</label>
                           <input type="checkbox" id="mike" value="Pływactwo" v-model="checkedNames" />
                           <label for="mike">Pływactwo</label>
-                        </b-col>
+                        </b-col>-->
                       </b-row>
                     </ul>
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="music" class="grey-text">Muzyka:</label>
+                          <!--<label for="music" class="grey-text">Muzyka:</label>
                           <br />
                           <input type="checkbox" id="jack" value="Rock" v-model="checkedNames" />
                           <label for="jack">Rock</label>
                           <input type="checkbox" id="john" value="Jazz" v-model="checkedNames" />
                           <label for="john">Jazz</label>
                           <input type="checkbox" id="mike" value="Pop" v-model="checkedNames" />
-                          <label for="mike">Pop</label>
+                          <label for="mike">Pop</label>-->
                         </b-col>
                         <b-col cols="6">
-                          <label for="cooking" class="grey-text">Kuchnia:</label>
+                          <!--<label for="cooking" class="grey-text">Kuchnia:</label>
                           <br />
                           <input type="checkbox" id="jack" value="Polska" v-model="checkedNames" />
                           <label for="jack">Polska</label>
@@ -293,26 +293,26 @@
                           />
                           <label for="john">Orientalna</label>
                           <input type="checkbox" id="mike" value="Studencka" v-model="checkedNames" />
-                          <label for="mike">Studencka</label>
+                          <label for="mike">Studencka</label>-->
                         </b-col>
                       </b-row>
                     </ul>
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="user_name" class="white-text">Ulubione miejsce:</label>
+                          <label for="favourite_place" class="white-text">Ulubione miejsce:</label>
                           <input
                             type="text"
-                            id="user_favourite_place"
+                            id="favourite_place"
                             v-model="user_data.user_favourite_place"
                             class="form-control"
                           />
                         </b-col>
                         <b-col cols="6">
-                          <label for="user_passion" class="white-text">Największa pasja:</label>
+                          <label for="passion" class="white-text">Największa pasja:</label>
                           <input
                             type="text"
-                            id="user_passion"
+                            id="passion"
                             v-model="user_data.passion"
                             class="form-control"
                           />
@@ -334,21 +334,21 @@
                       <ul class="list-group-item">
                         <b-row>
                           <b-col cols="6">
-                            <label for="user_sex_preference" class="grey-text">Orientacja</label>
+                            <label for="orientation" class="grey-text">Orientacja</label>
                             <b-form-select
                               class="form-control"
-                              id="user_sex_preference"
+                              id="orientation"
                               v-model="user_preferences.sex_preference"
                               :options="orientation_options"
                             ></b-form-select>
                           </b-col>
                           <b-col cols="6">
-                            <label for="user_weight" class="white-text">Przedział wiekowy</label>
+                            <label for="age_preference_min" class="white-text">Przedział wiekowy</label>
                             <b-row>
                               <b-col cols="6">
                                 <input
                                   type="number"
-                                  id="user_age_preference_min"
+                                  id="age_preference_min"
                                   placeholder="wiek minimalny"
                                   v-model="user_preferences.age_preference_min"
                                   class="form-control"
@@ -357,7 +357,7 @@
                               <b-col cols="6">
                                 <input
                                   type="number"
-                                  id="user_age_preference_max"
+                                  id="age_preference_max"
                                   placeholder="wiek maksymalny"
                                   v-model="user_preferences.age_preference_max"
                                   class="form-control"
@@ -370,19 +370,19 @@
                       <ul class="list-group-item">
                         <b-row>
                           <b-col cols="6">
-                            <label for="user_body_type_preference" class="grey-text">Sylwetka</label>
+                            <label for="body_type_preference" class="grey-text">Sylwetka</label>
                             <b-form-select
                               class="form-control"
-                              id="user_body_type_preference"
+                              id="body_type_preference"
                               v-model="user_preferences.body_type_preference"
                               :options="body_type_options"
                             ></b-form-select>
                           </b-col>
                           <b-col cols="6">
-                            <label for="user_weight_preference" class="white-text">Waga maks</label>
+                            <label for="weight_preference" class="white-text">Waga maks</label>
                             <input
                               type="number"
-                              id="user_weight_preference"
+                              id="weight_preference"
                               placeholder="maksymalna waga"
                               v-model="user_preferences.weight_preference"
                               class="form-control"
@@ -393,20 +393,20 @@
                       <ul class="list-group-item">
                         <b-row>
                           <b-col cols="6">
-                            <label for="user_education_preference" class="white-text">Edukacja</label>
+                            <label for="education_preference" class="white-text">Edukacja</label>
                             <b-form-select
                               class="form-control"
-                              id="user_education_preference"
+                              id="education_preference"
                               v-model="user_preferences.education_preference"
                               :options="education_options"
                             ></b-form-select>
                           </b-col>
                           <b-col cols="6">
-                            <label for="eye_color" class="grey-text">Kolor oczu</label>
+                            <label for="eye_color_preference" class="grey-text">Kolor oczu</label>
                             <b-form-select
                               class="form-control"
-                              id="eye_colour"
-                              v-model="user_data.eye_color"
+                              id="eye_color_preference"
+                              v-model="user_preferences.eye_color_preference"
                               :options="eye_color_options"
                             ></b-form-select>
                           </b-col>
@@ -415,20 +415,20 @@
                       <ul class="list-group-item">
                         <b-row>
                           <b-col cols="6">
-                            <label for="hair_length" class="grey-text">Długość włosów</label>
+                            <label for="hair_length_preference" class="grey-text">Długość włosów</label>
                             <b-form-select
                               class="form-control"
-                              id="hair_length"
-                              v-model="user_data.hair_length"
+                              id="hair_length_preference"
+                              v-model="user_preferences.hair_length"
                               :options="hair_length_options"
                             ></b-form-select>
                           </b-col>
                           <b-col cols="6">
-                            <label for="hair_color" class="grey-text">Kolor włosów</label>
+                            <label for="hair_color_preference" class="grey-text">Kolor włosów</label>
                             <b-form-select
                               class="form-control"
-                              id="hair_color"
-                              v-model="user_data.hair_color"
+                              id="hair_color_preference"
+                              v-model="user_preferences.hair_color_preference"
                               :options="hair_color_options"
                             ></b-form-select>
                           </b-col>
@@ -437,20 +437,20 @@
                       <ul class="list-group-item">
                         <b-row>
                           <b-col cols="6">
-                            <label for="is_smoking" class="grey-text">Papierosy</label>
+                            <label for="is_smoking_preference" class="grey-text">Papierosy</label>
                             <b-form-select
                               class="form-control"
-                              id="is_smoking"
-                              v-model="user_data.is_smoking_preference"
+                              id="is_smoking_preference"
+                              v-model="user_preferences.is_smoking_preference"
                               :options="smoking_options"
                             ></b-form-select>
                           </b-col>
                           <b-col cols="6">
-                            <label for="is_drinking" class="grey-text">Alkohol</label>
+                            <label for="is_drinking_preference" class="grey-text">Alkohol</label>
                             <b-form-select
                               class="form-control"
-                              id="is_drinking_alcohol"
-                              v-model="user_data.is_drinking_alcohol_preference"
+                              id="is_drinking_preference"
+                              v-model="user_preferences.is_drinking_alcohol_preference"
                               :options="alcohol_options"
                             ></b-form-select>
                           </b-col>
@@ -499,8 +499,11 @@ export default {
     return {
       placeholder: null,
       active: "",
+      checkedNames: [],
+      special_options: [],
       user_data: {},
       user_preferences: {},
+      status: "",
       sex_options: [
         { value: null, text: "" },
         { value: "mężczyzna", text: "mężczyzna" },
