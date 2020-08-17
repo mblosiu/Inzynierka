@@ -70,7 +70,7 @@
             v-model="password"
             name="password"
           />
-          <input v-on:click="login" class="btn btn-success mr-2" type="submit" value="Zaloguj" />
+          <b-button v-on:click="login" type="submit" size="sm" class="btn btn-success mr-2">Zaloguj</b-button>
         </b-nav-form>
 
         <!--<b-nav-form @submit.prevent="register" v-if="token == null">
@@ -113,7 +113,7 @@ export default {
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
               localStorage.setItem("user-token", response.data.token),
-              this.$router.push('mainuser');
+              this.$router.push("mainuser");
           }
         })
         .catch((errors) => {
@@ -140,11 +140,9 @@ export default {
       ł;
     },
     search() {
-      localStorage.setItem("search-text", this.searchText)
-      if (this.$route.name == 'search')
-        this.$router.go()
-      else
-        this.$router.push({ name: 'search'})
+      localStorage.setItem("search-text", this.searchText);
+      if (this.$route.name == "search") this.$router.go();
+      else this.$router.push({ name: "search" });
     },
   },
 };
