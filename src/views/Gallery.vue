@@ -51,8 +51,10 @@
         >
           <img :src="getUrl(image.image)" class="img-responsive" alt="image" />
           <p>
-            <button type="button" class="btn btn-primary">Ustaw jako profilowe</button>
-            <button type="button" class="btn btn-danger">Usuń zdjęcie</button>
+            <button type="button" class="btn btn-primary" v-on:click="setAsProfilePic(image.pk)">
+              Ustaw jako profilowe
+            </button>
+            <button type="button" class="btn btn-danger" v-on:click="deleteImage(image.pk)">Usuń zdjęcie</button>
           </p>
         </b-col>
         <b-col cols="1"></b-col>
@@ -75,9 +77,9 @@ export default {
   methods: {
     submitFile() {
       let formData = new FormData();
-      formData.append('profile_picture', this.file);
+      formData.append('image', this.file);
       axios
-        .patch('http://127.0.0.1:8000/api/user/picture', formData, {
+        .put('http://127.0.0.1:8000/api/user/images', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: 'Token ' + localStorage.getItem('user-token'),
@@ -89,21 +91,10 @@ export default {
         .catch(function() {
           console.log('FAILURE!!');
         });
+      this.$router.go();
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
-    },
-    getUserPicture() {
-      axios
-        .get('http://127.0.0.1:8000/api/user/profile-picture', {
-          headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
-          },
-        })
-        .then((response) => {
-          console.log(response), (this.user_data = response.data);
-        })
-        .catch((errors) => console.log(errors));
     },
     getUserImages() {
       axios
@@ -117,13 +108,39 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    deleteImage(pk) {
+      axios
+        .delete('http://127.0.0.1:8000/api/user/images', {
+          data: { pk: pk },
+          headers: {
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.images = response.data);
+        })
+        .catch((errors) => console.log(errors));
+      this.$router.go();
+    },
+    setAsProfilePic(pk) {},
     getUrl(pic) {
       if (pic != null) return 'http://127.0.0.1:8000' + pic;
       else return null;
     },
+    getUserPicture() {
+      axios
+        .get('http://127.0.0.1:8000/api/user/profile-picture', {
+          headers: {
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_data = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
   },
   created() {
-    this.getUserPicture();
     this.getUserImages();
   },
 };
