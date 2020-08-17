@@ -57,7 +57,7 @@
       <b-row>
         <b-col cols="1"></b-col>
         <b-col cols="10">
-          <h1 id="title" v-if="searchText">Wyniki wyszukiwania dla frazy {{searchText}}:</h1>
+          <h1 id="title" v-if="searchText">Wyniki wyszukiwania dla frazy {{ searchText }}:</h1>
           <h1 id="title" v-else>Wyniki wyszukiwania:</h1>
         </b-col>
         <b-col cols="1"></b-col>
@@ -66,20 +66,15 @@
         <b-col cols="1"></b-col>
         <b-col cols="10">
           <div class="users-list" v-for="user in users" v-bind:key="user.id">
-            <router-link :to="{ name: 'userprofile', params: {username: user.username}}">
+            <router-link :to="{ name: 'userprofile', params: { username: user.username } }">
               <div id="photo">
-                <b-card
-                  :img-src="getUrl(user.profile_picture)"
-                  img-alt="Card image"
-                  img-left
-                  class="user-card"
-                >
+                <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" img-left class="user-card">
                   <b-card-title>
-                    <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
+                    <h2>{{ user.username }} ({{ getAge(user.birthday) }})</h2>
                   </b-card-title>
                   <b-card-text>
                     <br />
-                    <h3 v-if="user.description!=null">{{user.description}}</h3>
+                    <h3 v-if="user.description != null">{{ user.description }}</h3>
                     <h3 v-else>Brak opisu.</h3>
                   </b-card-text>
                 </b-card>
@@ -123,11 +118,10 @@
   </div>
 </template>
 
-
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "UsersList",
+  name: 'UsersList',
   components: {},
   data() {
     return {
@@ -138,44 +132,44 @@ export default {
       users: [],
       profileImage: null,
       today: new Date(),
-      birthDate: "",
-      age: "",
-      m: "",
+      birthDate: '',
+      age: '',
+      m: '',
       description: null,
       sex_options: [
-        { value: null, text: "Płeć" },
-        { value: "Male", text: "Mężczyzna" },
-        { value: "Female", text: "Kobieta" },
+        { value: null, text: 'Płeć' },
+        { value: 'Male', text: 'Mężczyzna' },
+        { value: 'Female', text: 'Kobieta' },
       ],
       location_options: [
-        { value: null, text: "Lokalizacja" },
-        { value: "Poznań", text: "Poznań" },
-        { value: "Placeholder", text: "Placeholder" },
+        { value: null, text: 'Lokalizacja' },
+        { value: 'Poznań', text: 'Poznań' },
+        { value: 'Placeholder', text: 'Placeholder' },
       ],
-      fields: ["location", "sex", "birthday"],
+      fields: ['location', 'sex', 'birthday'],
     };
   },
   methods: {
     getUsers() {
       this.users = [];
       axios
-        .get("http://127.0.0.1:8000/api/user/users", {
+        .get('http://127.0.0.1:8000/api/user/users', {
           params: {
-            search: localStorage.getItem("search-text"),
+            search: localStorage.getItem('search-text'),
             sex: this.sex,
             location: this.location,
             birthday: this.birthday,
           },
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
         })
         .then((response) => {
           console.log(response), (this.users = response.data);
         })
         .catch((errors) => console.log(errors));
-      this.searchText = localStorage.getItem("search-text");
-      localStorage.removeItem("search-text");
+      this.searchText = localStorage.getItem('search-text');
+      localStorage.removeItem('search-text');
     },
     getAge(dateString) {
       var today = new Date();
@@ -189,9 +183,8 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
-      else
-        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+      if (pic != null) return 'http://127.0.0.1:8000' + pic;
+      else return 'https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png';
     },
   },
   created() {
@@ -234,7 +227,7 @@ td {
   object-fit: scale-down;
 }
 .card-text {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: left;
   font-size: 20px;
   color: white;
