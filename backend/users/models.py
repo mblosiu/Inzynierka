@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
-
 class Preferences(models.Model):
     orientation = models.CharField(max_length=30, null=True, blank=True, default=None)
     hair_color_blonde_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
@@ -86,7 +85,9 @@ class User(AbstractBaseUser):
     surname = models.CharField(max_length=30, null=True, default=None)
     birthday = models.DateField(null=True, default=None)
     location = models.CharField(max_length=30, null=True, default=None)
-    profile_picture = models.ImageField(upload_to='images', null=True, blank=True, default=None)
+   # profile_picture = models.ImageField(null=True, blank=True, default=None)
+    profile_picture = models.CharField(max_length=60, null=True, default=None)
+
     description = models.CharField(max_length=200, null=True, default=None)
     status = models.CharField(max_length=30, null=True, default=None)
     favourite_place = models.CharField(max_length=30, null=True, default=None)

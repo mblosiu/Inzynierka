@@ -17,8 +17,8 @@ urlpatterns = [
     path('properties', UserProfileView.as_view(), name="user-properties"),
     path('preferences', PreferencesView.as_view(), name="user-preferences"),
     path('settings', SettingsView.as_view(), name="user-settings"),
-    path('picture', UserProfilePic.as_view(), name='user-picture'),
-    path('addpic', UserImage.as_view(), name='addpic'),
+    path('profile-image', UserProfilePic.as_view(), name='profile-image'),
+    path('images', UserImage.as_view(), name='images'),
     path('users', user_list, name='user-list'),
     path('users/<int:pk>', user_detail, name='users-by-id'),
 ]

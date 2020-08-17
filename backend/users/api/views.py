@@ -307,7 +307,7 @@ class SettingsView(APIView):
 
 
 @permission_classes([IsAuthenticated])
-class UserProfilePic(APIView):
+class UserProfilePicOLD(APIView):
     @staticmethod
     def get(request):
         try:
@@ -349,6 +349,42 @@ class UserProfilePic(APIView):
         # TODO: DELETE PHOTO
         return Response(status=status.HTTP_404_NOT_FOUND)
     # USER LIST - SEARCHER
+
+
+@permission_classes([IsAuthenticated])
+class UserProfilePic(APIView):
+    @staticmethod
+    def patch(request):
+        try:
+            account = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        response = {}
+
+        profile_picture = request.data.get('profile_picture', False)
+
+        if profile_picture == account.profile_picture:
+            response["profile_picture"] = "no changes"
+        else:
+            account.profile_picture = profile_picture
+            response["profile_picture"] = "updated"
+
+        if response:
+            account.save()
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response["detail"] = "request must contain user data"
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+    @staticmethod
+    def get(request):
+        try:
+            user = request.user
+        except Settings.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserProfilePicSerializer(user.profile_picture)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])
