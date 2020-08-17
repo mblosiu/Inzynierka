@@ -4,6 +4,14 @@
       <b-row>
         <b-col cols="1"></b-col>
         <b-col cols="10">
+          <b-alert
+            :show="dismissCountDown"
+            dismissible
+            fade
+            variant="success"
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged"
+          > {{msg}}</b-alert>
           <div class="card text-black bg-white mb-3">
             <b-tabs pills card horizontal>
               <form class="card" @submit.prevent="editUserData">
@@ -492,6 +500,7 @@
 
 <script>
 import axios from "axios";
+import Alert from '@/components/Alert.vue';
 export default {
   name: "UsersProfile",
   components: {},
@@ -503,7 +512,9 @@ export default {
       special_options: [],
       user_data: {},
       user_preferences: {},
-      status: "",
+      msg: "",
+      dismissSecs: 5,
+      dismissCountDown: 0,
       sex_options: [
         { value: null, text: "" },
         { value: "Mężczyzna", text: "mężczyzna" },
@@ -588,6 +599,12 @@ export default {
     };
   },
   methods: {
+    countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showMsg() {
+        this.dismissCountDown = this.dismissSecs
+      },
     getUserData() {
       axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -631,6 +648,13 @@ export default {
           config
         )
         .then((response) => {
+          if (response.status == 200) {
+            this.showMsg(),
+            (this.msg = "Zapisano zmiany");
+          } else {
+            this.showMsg(),
+            (this.msg = "Formularz zawiera błędy");
+          }
           console.log(response);
         })
         .catch((errors) => console.log(errors));
@@ -668,7 +692,6 @@ export default {
             weight_preference: this.user_preferences.weight_preference,
             education_preference: this.user_preferences.education_preference,
             eye_color_preference: this.user_preferences.eye_color_preference,
-            weight_preference: this.user_preferences.weight_preference,
             hair_length_preference: this.user_preferences
               .hair_length_preference,
             //hair_color_preference: this.user_preferences.hair_color_preference,

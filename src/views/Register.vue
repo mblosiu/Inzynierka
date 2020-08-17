@@ -4,6 +4,14 @@
       <b-row class="row justify-content-md-center">
         <b-col cols="1"></b-col>
         <b-col cols="10" class="col align-self-center">
+          <b-alert
+            :show="dismissCountDown"
+            dismissible
+            fade
+            variant="danger"
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged"
+          > {{msg}}</b-alert>
           <div class="card text-black bg-secondary mb-3" style="width: 30rem;" fluid>
             <form class="card" @submit.prevent="CreateUser">
               <div class="card-header">
@@ -115,6 +123,9 @@ export default {
       sex: '',
       password: '',
       password2: '',
+      msg: "",
+      dismissSecs: 5,
+      dismissCountDown: 0,
       checked: false,
       showDismissibleAlert: false,
       error_message: '',
@@ -122,6 +133,12 @@ export default {
   },
 
   methods: {
+    countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showMsg() {
+        this.dismissCountDown = this.dismissSecs
+      },
     CreateUser() {
       //console.log(this.username);
       if (this.checked == false) {
@@ -140,20 +157,19 @@ export default {
           })
           .then((response) => {
             console.log(response);
-            if (response.status == 201) {
-              (this.error_message = ''), (this.showDismissibleAlert = false);
-            } /*else {
-            this.error_message = "Formularz zawiera błędy!";
-            this.showDismissibleAlert = true;
-          }*/
+            
           })
           .catch((errors) => {
-            if (errors.response.status != 201) {
-              this.error_message = 'Formularz zawiera błędy!';
-              this.showDismissibleAlert = true;
+            if (errors.response.status != 200) {
+            this.showMsg(),
+            (this.msg = "Formularz zawiera błędy");
+          }
+            //if (errors.response.status != 201) {
+              //this.error_message = 'Formularz zawiera błędy!';
+              //this.showDismissibleAlert = true;
             }
-          });
-        this.$router.push('/');
+          /*}*/);
+        //this.$router.push('/');
       }
     },
   },
