@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import User, Preferences, Settings
+from ..models import User, Preferences, Settings, Image
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
@@ -34,6 +34,12 @@ class UserProfilePicSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['profile_picture']
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ['pk', 'image', 'title']
 
 
 class RegistrationSerializer(serializers.ModelSerializer):

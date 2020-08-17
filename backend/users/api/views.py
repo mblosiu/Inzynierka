@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
-    UserSettingsSerializer
-from ..models import User, Preferences, Settings
+    UserSettingsSerializer, ImageSerializer
+from ..models import User, Preferences, Settings, Image
 
 
 @permission_classes([])
@@ -83,8 +83,6 @@ class UserProfileView(APIView):
         description = request.data.get('description', '')
         is_smoking = request.data.get('is_smoking', False)
         is_drinking_alcohol = request.data.get('is_drinking_alcohol', False)
-
-
 
         if email in [None, '', account.email]:
             response["email"] = "no changes"
@@ -353,6 +351,69 @@ class UserProfilePic(APIView):
     # USER LIST - SEARCHER
 
 
+@permission_classes([IsAuthenticated])
+class UserImage(APIView):
+    @staticmethod
+    def get(request):
+        try:
+            user = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        images = Image.objects.filter(user__pk=user.pk)
+
+        serializer = ImageSerializer(images, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def put(request):
+        try:
+            user = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        response = {}
+
+        file = request.data.get('image', None)
+
+        if not file:
+            response["detail"] = "request must contain image"
+            stat = status.HTTP_400_BAD_REQUEST
+        else:
+            main, sub = file.content_type.split('/')
+            if not (sub in ['jpeg', 'jpg', 'png']):
+                response["detail"] = "wrong data type"
+                stat = status.HTTP_400_BAD_REQUEST
+            else:
+                image = Image(
+                    user=user,
+                    image=file,
+                    title=main,
+                    alt=main,
+                )
+                image.save()
+                response["detail"] = "photo added successfully"
+                stat = status.HTTP_201_CREATED
+        return Response(response, status=stat)
+
+    @staticmethod
+    def delete(request):
+        try:
+            user = request.user
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        pk = request.data.get('pk', None)
+        image = Image.objects.filter(pk=pk, user__pk=user.pk)
+        if image.count() > 0:
+            image.delete()
+            return Response({"detail": "Image removed successfully"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "file not exists"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# USER LIST - SEARCHER
 @permission_classes([IsAuthenticated])
 class UserListView(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer

@@ -139,3 +139,14 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+def upload_to(instance, filename):
+    return '{0}/{1}'.format(instance.user.username, filename)
+
+
+class Image(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=upload_to, null=True, blank=True, default=None)
+    title = models.CharField(max_length=30, null=True, blank=True, default=None)
+    alt = models.CharField(max_length=30, null=True, blank=True, default=None)
