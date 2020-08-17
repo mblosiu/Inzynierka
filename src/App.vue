@@ -14,19 +14,17 @@
   </div>
 </template>
 
-
 <script>
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 export default {
-  name: "",
+  name: '',
   components: {
     Header,
     Footer,
   },
 };
 </script>
-
 
 <style>
 #app {
@@ -35,7 +33,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #343a40;
-  background-image: url("../public/img/ecouple3.jpg");
+  background-image: url('../public/img/ecouple3.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #nav {
@@ -51,8 +51,7 @@ export default {
 }
 
 #content {
-  color: #343a40;
-  min-height: 80vh;
+  min-height: 73.2vh;
   margin-left: 2cm;
   margin-right: 2cm;
   margin-top: 1cm;

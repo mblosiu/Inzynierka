@@ -4,7 +4,7 @@
       <b-row class="row justify-content-md-center">
         <b-col cols="1"></b-col>
         <b-col cols="10" class="col align-self-center">
-          <div class="card text-black bg-secondary mb-3" style="width: 25rem;" fluid>
+          <div class="card text-black bg-secondary mb-3" style="width: 30rem;" fluid>
             <form class="card" @submit.prevent="CreateUser">
               <div class="card-header">
                 <h5>Rejestracja</h5>
@@ -43,6 +43,15 @@
                       <input type="password" name="password" id="password" v-model="password" />
                     </b-col>
                     <b-col cols="6">
+                      <label for="password2">Powtórz hasło</label>
+                      <input type="password" name="password2" id="password2" v-model="password2" />
+                    </b-col>
+                  </b-row>
+                </li>
+
+                <li class="list-group-item">
+                  <b-row>
+                    <b-col cols="12">
                       <label for="sex">Płeć</label>
                       <br />
                       <select class="ml-2" name="Sex" id="Sex" v-model="sex">
@@ -54,35 +63,28 @@
                     </b-col>
                   </b-row>
                 </li>
-
                 <li class="list-group-item">
                   <b-row>
-                    <b-col cols="6">
-                      <label for="password2">Powtórz hasło</label>
-                      <input type="password" name="password2" id="password2" v-model="password2" />
-                    </b-col>
-                    <b-col cols="6">
+                    <b-col cols="12">
                       <br />
-
-                      <label for="checkbox">
-                        Akceptuję
-                        <router-link to="/regulations">regulamin</router-link>
-                      </label>
-
-                      <br />
+                      <label for="checkbox"> Akceptuję <router-link to="/regulations">regulamin</router-link></label>
                       <input type="checkbox" id="checkbox" v-model="checked" />
                     </b-col>
                   </b-row>
                 </li>
+                <li class="list-group-item">
+                  <b-row>
+                    <b-col cols="12">
+                      <input
+                        v-on:click="CreateUser"
+                        class="btn btn-outline-success"
+                        type="submit"
+                        value="Zarejestruj"
+                      />
+                    </b-col>
+                  </b-row>
+                </li>
               </ul>
-              <p>
-                <input
-                  v-on:click="CreateUser"
-                  class="btn btn-outline-success"
-                  type="submit"
-                  value="Zarejestruj"
-                />
-              </p>
             </form>
           </div>
         </b-col>
@@ -91,31 +93,31 @@
     </div>
     <b-row>
       <b-col cols="12">
-        <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{error_message}}</b-alert>
+        <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{ error_message }}</b-alert>
       </b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 //import Api from "../service/api";
 
 export default {
-  name: "Register",
+  name: 'Register',
   components: {},
   data() {
     return {
-      username: "",
-      email: "",
-      location: "",
-      birthday: "",
-      sex: "",
-      password: "",
-      password2: "",
+      username: '',
+      email: '',
+      location: '',
+      birthday: '',
+      sex: '',
+      password: '',
+      password2: '',
       checked: false,
       showDismissibleAlert: false,
-      error_message: "",
+      error_message: '',
     };
   },
 
@@ -123,11 +125,11 @@ export default {
     CreateUser() {
       //console.log(this.username);
       if (this.checked == false) {
-        this.error_message = "Musisz zaakceptować regulamin!";
+        this.error_message = 'Musisz zaakceptować regulamin!';
         this.showDismissibleAlert = true;
       } else {
         axios
-          .post("http://127.0.0.1:8000/api/user/register", {
+          .post('http://127.0.0.1:8000/api/user/register', {
             username: this.username,
             password: this.password,
             password2: this.password2,
@@ -139,7 +141,7 @@ export default {
           .then((response) => {
             console.log(response);
             if (response.status == 201) {
-              (this.error_message = ""), (this.showDismissibleAlert = false);
+              (this.error_message = ''), (this.showDismissibleAlert = false);
             } /*else {
             this.error_message = "Formularz zawiera błędy!";
             this.showDismissibleAlert = true;
@@ -147,11 +149,11 @@ export default {
           })
           .catch((errors) => {
             if (errors.response.status != 201) {
-              this.error_message = "Formularz zawiera błędy!";
+              this.error_message = 'Formularz zawiera błędy!';
               this.showDismissibleAlert = true;
             }
           });
-        this.$router.push("/");
+        this.$router.push('/');
       }
     },
   },
@@ -160,6 +162,9 @@ export default {
 
 <style scoped>
 h5 {
-  color: gold;
+  color: whitesmoke;
+}
+.card-header {
+  background-color: #343a40;
 }
 </style>
