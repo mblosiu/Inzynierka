@@ -51,7 +51,7 @@
         >
           <img :src="getUrl(image.image)" class="img-responsive" alt="image" />
           <p>
-            <button type="button" class="btn btn-primary" v-on:click="setAsProfilePic(image.pk)">
+            <button type="button" class="btn btn-primary" v-on:click="setAsProfilePic(image.image)">
               Ustaw jako profilowe
             </button>
             <button type="button" class="btn btn-danger" v-on:click="deleteImage(image.pk)">Usuń zdjęcie</button>
@@ -122,7 +122,25 @@ export default {
         .catch((errors) => console.log(errors));
       this.$router.go();
     },
-    setAsProfilePic(pk) {},
+    setAsProfilePic(pic) {
+      let config = {
+        headers: {
+          Authorization: 'Token ' + localStorage.getItem('user-token'),
+        },
+      };
+      axios
+        .patch(
+          'http://127.0.0.1:8000/api/user/profile-image',
+          {
+            profile_picture: pic,
+          },
+          config
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((errors) => console.log(errors));
+    },
     getUrl(pic) {
       if (pic != null) return 'http://127.0.0.1:8000' + pic;
       else return null;
