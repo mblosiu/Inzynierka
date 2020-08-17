@@ -1,15 +1,30 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <Header />
-    </div>
+    <div id="user" v-if="token != null">
+      <div id="nav">
+        <Header />
+      </div>
 
-    <div id="content">
-      <router-view />
-    </div>
+      <div id="content">
+        <router-view />
+      </div>
 
-    <div id="footer">
-      <Footer />
+      <div id="footer">
+        <Footer />
+      </div>
+    </div>
+    <div id="guest" v-if="token == null">
+      <div id="nav">
+        <Header />
+      </div>
+
+      <div id="content">
+        <router-view />
+      </div>
+
+      <div id="footer">
+        <Footer />
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +38,11 @@ export default {
     Header,
     Footer,
   },
+  data() {
+    return {
+      token: localStorage.getItem('user-token'),
+    };
+  },
 };
 </script>
 
@@ -33,7 +53,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #343a40;
-  background-image: url('../public/img/ecouple3.jpg');
+}
+#user {
+  background-image: url('../public/img/3.jpeg');
+  background-color: rgba(255, 255, 255, 0.4);
+  background-blend-mode: overlay;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#guest {
+  background-image: url('../public/img/2.jpeg');
+  background-color: rgba(255, 255, 255, 0.1);
+  background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-size: cover;
 }

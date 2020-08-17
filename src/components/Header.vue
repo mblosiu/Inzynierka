@@ -1,6 +1,6 @@
 <template>
   <div class>
-    <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{error_message}}</b-alert>
+    <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{ error_message }}</b-alert>
 
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <a v-if="token == null" class="navbar-brand" href="/">e-Love</a>
@@ -40,19 +40,14 @@
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
-          <b-button
-            class="my-2 ml-2 mr-1"
-            type="button"
-            size="sm"
-            to="/mainuser/settings"
-          >Ustawienia</b-button>
+          <b-button class="my-2 ml-2 mr-1" type="button" size="sm" to="/mainuser/settings">Ustawienia</b-button>
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
           <b-button class="btn btn-warning mr-1" type="button" size="sm" to="/#">Premium</b-button>
         </b-nav-form>
 
-        <b-nav-form @submit.prevent="login" v-if="token==null">
+        <b-nav-form @submit.prevent="login" v-if="token == null">
           <b-form-input
             id="username"
             size="sm"
@@ -86,39 +81,40 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "Header",
+  name: 'Header',
   components: {},
   data() {
     return {
-      token: localStorage.getItem("user-token") || null,
-      username: "",
-      password: "",
-      searchText: "",
+      token: localStorage.getItem('user-token') || null,
+      username: '',
+      password: '',
+      searchText: '',
       showDismissibleAlert: false,
-      error_message: "",
+      error_message: '',
     };
   },
   methods: {
     login() {
       axios
-        .post("http://127.0.0.1:8000/api/user/login", {
+        .post('http://127.0.0.1:8000/api/user/login', {
           username: this.username,
           password: this.password,
         })
         .then((response) => {
           if (response.status == 200) {
-            (this.error_message = ""),
+            (this.error_message = ''),
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
-              localStorage.setItem("user-token", response.data.token),
-              this.$router.push("mainuser");
+              localStorage.setItem('user-token', response.data.token),
+              this.$router.push('mainuser');
+            this.$router.go();
           }
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.error_message = "Błędny login lub hasło!";
+            this.error_message = 'Błędny login lub hasło!';
             this.showDismissibleAlert = true;
           }
         });
@@ -126,24 +122,27 @@ export default {
     logout() {
       let config = {
         headers: {
-          Authorization: "Token " + localStorage.getItem("user-token"),
+          Authorization: 'Token ' + localStorage.getItem('user-token'),
         },
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
+        .post('http://127.0.0.1:8000/api/user/logout', {}, config)
         .then((response) => {})
         .catch((errors) => {});
-      localStorage.removeItem("user-token"),
-        (this.token = null),
-        this.$router.go();
+      localStorage.removeItem('user-token'), (this.token = null), this.$router.go();
       ł;
     },
     search() {
-      localStorage.setItem("search-text", this.searchText);
-      if (this.$route.name == "search") this.$router.go();
-      else this.$router.push({ name: "search" });
+      localStorage.setItem('search-text', this.searchText);
+      if (this.$route.name == 'search') this.$router.go();
+      else this.$router.push({ name: 'search' });
     },
   },
 };
 </script>
+
+<style scoped>
+.navbar-brand {
+}
+</style>
