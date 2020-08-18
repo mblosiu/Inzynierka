@@ -115,6 +115,7 @@ export default {
       username: "",
       password: "",
       searchText: "",
+      msg: "",
       dismissSecs: 5,
       dismissCountDown: 0,
     };
@@ -163,7 +164,7 @@ export default {
       localStorage.removeItem("user-token"),
         (this.token = null),
         this.$router.go();
-      ł;
+      
     },
     search() {
       localStorage.setItem("search-text", this.searchText);

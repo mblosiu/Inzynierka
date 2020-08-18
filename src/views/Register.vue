@@ -183,7 +183,7 @@ export default {
           })
           .then((response) => {
             console.log(response);
-            if (response.status == 200) {
+            if (response.status == 201) {
               this.error_message = "Udało się!";
               this.showDismissibleAlert = true;
             }
@@ -193,6 +193,7 @@ export default {
               if (errors.response.status != 200) {
                 this.showMsg(), (this.msg = "Formularz zawiera błędy");
               }
+              console.log(errors);
               //if (errors.response.status != 201) {
               //this.error_message = 'Formularz zawiera błędy!';
               //this.showDismissibleAlert = true;
