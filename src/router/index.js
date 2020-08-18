@@ -98,7 +98,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // LOGED OUT restrictions (not restricted: Home, Register, About)
   //to.name !== 'Home' && to.name !== 'Register' && to.name !== 'About'
-  if (!['Home', 'Register', 'About', 'Regulations'].includes(to.name) && !localStorage.getItem("user-token")) {
+  if (!['Home', 'Register', 'About', 'Regulations', 'Contact'].includes(to.name) && !localStorage.getItem("user-token")) {
     next({ name: 'Home' })
   }
   // LOGED IN restrictions
