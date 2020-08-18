@@ -19,17 +19,17 @@
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
-          <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Dopasuj</b-button>
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/">Dopasuj</b-button>
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Polubienia</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Polubienia</b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Wiadomości</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Wiadomości</b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Kontakty</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Kontakty</b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">
@@ -135,8 +135,7 @@ export default {
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
               localStorage.setItem('user-token', response.data.token),
-              this.$router.go(),
-              this.$router.push('mainuser');
+              this.$router.go();
           }
         })
         .catch((errors) => {
