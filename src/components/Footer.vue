@@ -1,32 +1,34 @@
 <template>
-  <div class="container">
-    <br />
-    <div class="row">
-      <div class="col-sm">
-        <a href="/about">O nas</a>
+  <div class="footer">
+    <div class="container">
+      <br />
+      <div class="row">
+        <div class="col-sm">
+          <a href="/about">O nas</a>
+        </div>
+        <div class="col-sm">
+          <a href="/kontakt">Kontakt</a>
+        </div>
+        <div class="col-sm">
+          <a href="/regulamin">Regulamin</a>
+        </div>
       </div>
-      <div class="col-sm">
-        <a href="/kontakt">Kontakt</a>
+      <br />
+      <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+          <center>©{{ new Date().getFullYear() }}</center>
+        </div>
+        <div class="col-sm"></div>
       </div>
-      <div class="col-sm">
-        <a href="/regulamin">Regulamin</a>
-      </div>
+      <br />
     </div>
-    <br />
-    <div class="row">
-      <div class="col-sm"></div>
-      <div class="col-sm">
-        <center>©{{ new Date().getFullYear() }}</center>
-      </div>
-      <div class="col-sm"></div>
-    </div>
-    <br />
   </div>
 </template>
 
 <script>
 export default {
-  name: "Footer",
+  name: 'Footer',
   components: {},
 };
 </script>
@@ -39,5 +41,8 @@ a {
 a:hover {
   color: green;
   text-decoration: none;
+}
+.footer {
+  background-color: #41799c;
 }
 </style>

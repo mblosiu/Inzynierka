@@ -1,10 +1,10 @@
 <template>
   <div class>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar class="navbar" toggleable="lg">
       <a v-if="token == null" class="navbar-brand" href="/">e-Love</a>
       <a v-else class="navbar-brand" href="/mainuser">e-Love</a>
 
-      <b-nav-form @submit.prevent="search">
+      <b-nav-form @submit.prevent="search" v-if="token != null">
         <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
         <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
       </b-nav-form>
@@ -19,17 +19,17 @@
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
-          <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Dopasuj</b-button>
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/">Dopasuj</b-button>
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Polubienia</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Polubienia</b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Wiadomości</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Wiadomości</b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Kontakty</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Kontakty</b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">
@@ -38,26 +38,22 @@
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
-          <b-button
-            class="my-2 ml-2 mr-1"
-            type="button"
-            size="sm"
-            to="/mainuser/settings"
-          >Ustawienia</b-button>
+          <b-button class="my-2 ml-2 mr-1" type="button" size="sm" to="/mainuser/settings">Ustawienia</b-button>
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
           <b-button class="btn btn-warning mr-1" type="button" size="sm" to="/#">Premium</b-button>
         </b-nav-form>
-        <div v-if="token==null">
+        <div v-if="token == null">
           <b-alert
             :show="dismissCountDown"
             fade
             class="mr-sm-2"
             variant="danger"
-            @dismissed="dismissCountDown=0"
+            @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
-          >{{msg}}</b-alert>
+            >{{ msg }}</b-alert
+          >
         </div>
         <b-nav-form @submit.prevent="login" v-if="token == null">
           <b-form-input
@@ -105,17 +101,24 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "Header",
+  name: 'Header',
   components: {},
   data() {
     return {
+<<<<<<< HEAD
       token: localStorage.getItem("user-token") || null,
       username: "",
       password: "",
       searchText: "",
       msg: "",
+=======
+      token: localStorage.getItem('user-token') || null,
+      username: '',
+      password: '',
+      searchText: '',
+>>>>>>> 09ef162299c5384ee9ad668ffbcf5a5ce22bf9a7
       dismissSecs: 5,
       dismissCountDown: 0,
     };
@@ -130,59 +133,61 @@ export default {
     login() {
       //this.showMsg(), (this.msg = "Błędny login lub hasło!");
       axios
-        .post("http://127.0.0.1:8000/api/user/login", {
+        .post('http://127.0.0.1:8000/api/user/login', {
           username: this.username,
           password: this.password,
         })
         .then((response) => {
           if (response.status == 200) {
-            (this.error_message = ""),
+            (this.error_message = ''),
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
-              localStorage.setItem("user-token", response.data.token),
-              this.$router.push("mainuser");
-            this.$router.go();
+              localStorage.setItem('user-token', response.data.token),
+              this.$router.go();
           }
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg(), (this.msg = "Błędny login lub hasło!");
+            this.showMsg(), (this.msg = 'Błędny login lub hasło!');
           }
         });
     },
     logout() {
       let config = {
         headers: {
-          Authorization: "Token " + localStorage.getItem("user-token"),
+          Authorization: 'Token ' + localStorage.getItem('user-token'),
         },
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
+        .post('http://127.0.0.1:8000/api/user/logout', {}, config)
         .then((response) => {})
         .catch((errors) => {});
+<<<<<<< HEAD
       localStorage.removeItem("user-token"),
         (this.token = null),
         this.$router.go();
       
+=======
+      localStorage.removeItem('user-token'), (this.token = null), this.$router.go();
+>>>>>>> 09ef162299c5384ee9ad668ffbcf5a5ce22bf9a7
     },
     search() {
-      localStorage.setItem("search-text", this.searchText);
-      if (this.$route.name == "search") this.$router.go();
-      else this.$router.push({ name: "search" });
+      localStorage.setItem('search-text', this.searchText);
+      if (this.$route.name == 'search') this.$router.go();
+      else this.$router.push({ name: 'search' });
     },
   },
 };
 </script>
 
 <style scoped>
-.navbar-brand {
-}
-
 .alert {
- padding-block:inherit;
- margin-block:inherit;
- align-content: inherit;
+  padding-block: inherit;
+  margin-block: inherit;
+  align-content: inherit;
 }
-
+.navbar {
+  background-color: #344d72;
+}
 </style>
