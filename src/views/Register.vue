@@ -1,17 +1,23 @@
 <template>
   <div>
+    <b-row>
+      <b-col cols="1"></b-col>
+      <b-col cols="10">
+        <b-alert
+          :show="dismissCountDown"
+          dismissible
+          fade
+          variant="danger"
+          @dismissed="dismissCountDown=0"
+          @dismiss-count-down="countDownChanged"
+        >{{msg}}</b-alert>
+      </b-col>
+      <b-col cols="1"></b-col>
+    </b-row>
     <div class="register-form d-flex justify-content-center">
       <b-row class="row justify-content-md-center">
-        <b-col cols="1"></b-col>
-        <b-col cols="10" class="col align-self-center">
-          <b-alert
-            :show="dismissCountDown"
-            dismissible
-            fade
-            variant="danger"
-            @dismissed="dismissCountDown=0"
-            @dismiss-count-down="countDownChanged"
-          > {{msg}}</b-alert>
+        <b-alert v-model="showDismissibleAlert" variant="success" dismissible>{{ error_message }}</b-alert>
+        <b-col cols="12" class="col align-self-center">
           <div class="card text-black bg-secondary mb-3" style="width: 30rem;" fluid>
             <form class="card" @submit.prevent="CreateUser">
               <div class="card-header">
@@ -75,7 +81,10 @@
                   <b-row>
                     <b-col cols="12">
                       <br />
-                      <label for="checkbox"> Akceptuję <router-link to="/regulations">regulamin</router-link></label>
+                      <label for="checkbox">
+                        Akceptuję
+                        <router-link to="/regulations">regulamin</router-link>
+                      </label>
                       <input type="checkbox" id="checkbox" v-model="checked" />
                     </b-col>
                   </b-row>
@@ -96,57 +105,74 @@
             </form>
           </div>
         </b-col>
-        <b-col cols="1"></b-col>
+        <!--<b-col cols="1"></b-col>-->
       </b-row>
     </div>
     <b-row>
-      <b-col cols="12">
-        <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>{{ error_message }}</b-alert>
+      <b-col cols="1"></b-col>
+      <b-col cols="10">
+        <b-alert
+          :show="dismissCountDown2"
+          dismissible
+          fade
+          variant="danger"
+          @dismissed="dismissCountDown2=0"
+          @dismiss-count-down="countDownChanged2"
+        >{{msg2}}</b-alert>
       </b-col>
+      <b-col cols="1"></b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 //import Api from "../service/api";
 
 export default {
-  name: 'Register',
+  name: "Register",
   components: {},
   data() {
     return {
-      username: '',
-      email: '',
-      location: '',
-      birthday: '',
-      sex: '',
-      password: '',
-      password2: '',
+      username: "",
+      email: "",
+      location: "",
+      birthday: "",
+      sex: "",
+      password: "",
+      password2: "",
       msg: "",
+      msg2: "",
       dismissSecs: 5,
       dismissCountDown: 0,
+      dismissSecs2: 5,
+      dismissCountDown2: 0,
       checked: false,
       showDismissibleAlert: false,
-      error_message: '',
+      error_message: "",
     };
   },
 
   methods: {
     countDownChanged(dismissCountDown) {
-        this.dismissCountDown = dismissCountDown
-      },
-      showMsg() {
-        this.dismissCountDown = this.dismissSecs
-      },
+      this.dismissCountDown = dismissCountDown;
+    },
+    showMsg() {
+      this.dismissCountDown = this.dismissSecs;
+    },
+    countDownChanged2(dismissCountDown) {
+      this.dismissCountDown2 = dismissCountDown2;
+    },
+    showMsg2() {
+      this.dismissCountDown2 = this.dismissSecs2;
+    },
     CreateUser() {
       //console.log(this.username);
       if (this.checked == false) {
-        this.error_message = 'Musisz zaakceptować regulamin!';
-        this.showDismissibleAlert = true;
+        this.showMsg2(), (this.msg2 = "Musisz zaakceptować regulamin");
       } else {
         axios
-          .post('http://127.0.0.1:8000/api/user/register', {
+          .post("http://127.0.0.1:8000/api/user/register", {
             username: this.username,
             password: this.password,
             password2: this.password2,
@@ -157,18 +183,22 @@ export default {
           })
           .then((response) => {
             console.log(response);
-            
+            if (response.status == 200) {
+              this.error_message = "Udało się!";
+              this.showDismissibleAlert = true;
+            }
           })
-          .catch((errors) => {
-            if (errors.response.status != 200) {
-            this.showMsg(),
-            (this.msg = "Formularz zawiera błędy");
-          }
-            //if (errors.response.status != 201) {
+          .catch(
+            (errors) => {
+              if (errors.response.status != 200) {
+                this.showMsg(), (this.msg = "Formularz zawiera błędy");
+              }
+              //if (errors.response.status != 201) {
               //this.error_message = 'Formularz zawiera błędy!';
               //this.showDismissibleAlert = true;
             }
-          /*}*/);
+            /*}*/
+          );
         //this.$router.push('/');
       }
     },

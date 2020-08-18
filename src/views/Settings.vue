@@ -12,6 +12,14 @@
             @dismissed="dismissCountDown=0"
             @dismiss-count-down="countDownChanged"
           > {{msg}}</b-alert>
+          <b-alert
+            :show="dismissCountDown2"
+            dismissible
+            fade
+            variant="danger"
+            @dismissed="dismissCountDown2=0"
+            @dismiss-count-down="countDownChanged2"
+          > {{msg2}}</b-alert>
           <div class="card text-black bg-white mb-3">
             <b-tabs pills card horizontal>
               <form class="card" @submit.prevent="editUserData">
@@ -515,6 +523,9 @@ export default {
       msg: "",
       dismissSecs: 5,
       dismissCountDown: 0,
+      dismissSecs2: 5,
+      dismissCountDown2: 0,
+      msg2: "",
       sex_options: [
         { value: null, text: "" },
         { value: "Mężczyzna", text: "mężczyzna" },
@@ -605,6 +616,12 @@ export default {
       showMsg() {
         this.dismissCountDown = this.dismissSecs
       },
+      countDownChanged2(dismissCountDown2) {
+        this.dismissCountDown2 = dismissCountDown2
+      },
+      showMsg2() {
+        this.dismissCountDown2 = this.dismissSecs2
+      },
     getUserData() {
       axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -651,13 +668,17 @@ export default {
           if (response.status == 200) {
             this.showMsg(),
             (this.msg = "Zapisano zmiany");
-          } else {
-            this.showMsg(),
-            (this.msg = "Formularz zawiera błędy");
-          }
+          } 
           console.log(response);
         })
-        .catch((errors) => console.log(errors));
+        .catch((errors) => {
+              if (errors.response.status != 200) {
+                this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
+              }
+              console.log(errors);
+            }
+
+          );
     },
     getUserPreferences() {
       axios
