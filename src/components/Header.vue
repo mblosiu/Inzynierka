@@ -107,18 +107,10 @@ export default {
   components: {},
   data() {
     return {
-<<<<<<< HEAD
-      token: localStorage.getItem("user-token") || null,
-      username: "",
-      password: "",
-      searchText: "",
-      msg: "",
-=======
       token: localStorage.getItem('user-token') || null,
       username: '',
       password: '',
       searchText: '',
->>>>>>> 09ef162299c5384ee9ad668ffbcf5a5ce22bf9a7
       dismissSecs: 5,
       dismissCountDown: 0,
     };
@@ -163,14 +155,7 @@ export default {
         .post('http://127.0.0.1:8000/api/user/logout', {}, config)
         .then((response) => {})
         .catch((errors) => {});
-<<<<<<< HEAD
-      localStorage.removeItem("user-token"),
-        (this.token = null),
-        this.$router.go();
-      
-=======
       localStorage.removeItem('user-token'), (this.token = null), this.$router.go();
->>>>>>> 09ef162299c5384ee9ad668ffbcf5a5ce22bf9a7
     },
     search() {
       localStorage.setItem('search-text', this.searchText);
