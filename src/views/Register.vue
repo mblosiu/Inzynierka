@@ -1,25 +1,10 @@
 <template>
   <div>
-    <b-row>
-      <b-col cols="1"></b-col>
-      <b-col cols="10">
-        <b-alert
-          :show="dismissCountDown"
-          dismissible
-          fade
-          variant="danger"
-          @dismissed="dismissCountDown=0"
-          @dismiss-count-down="countDownChanged"
-        >{{msg}}</b-alert>
-      </b-col>
-      <b-col cols="1"></b-col>
-    </b-row>
     <div class="register-form d-flex justify-content-center">
       <b-row class="row justify-content-md-center">
-        <b-alert v-model="showDismissibleAlert" variant="success" dismissible>{{ error_message }}</b-alert>
         <b-col cols="12" class="col align-self-center">
           <div class="card text-black bg-secondary mb-3" style="width: 30rem;" fluid>
-            <form class="card" @submit.prevent="CreateUser">
+            <form class="card" @submit.prevent="createUser">
               <div class="card-header">
                 <h5>Rejestracja</h5>
               </div>
@@ -28,47 +13,67 @@
                   <b-row>
                     <b-col cols="6">
                       <label for="username">Nazwa konta</label>
-                      <input type="text" name="username" id="username" v-model="username" />
+                      <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        v-model="username"
+                        required
+                        pattern=".{4,}"
+                        title="Nazwa użytkownika musi się składać z minimum 4 znaków"
+                      />
                     </b-col>
                     <b-col cols="6">
                       <label for="email">Email</label>
-                      <input type="email" name="email" id="email" v-model="email" />
+                      <input type="email" name="email" id="email" v-model="email" required />
                     </b-col>
                   </b-row>
                 </li>
-
                 <li class="list-group-item">
                   <b-row>
                     <b-col cols="6">
                       <label for="Location">Lokacja</label>
-                      <input type="text" name="Location" id="Locatiom" v-model="location" />
+                      <input type="text" name="Location" id="Location" v-model="location" required />
                     </b-col>
                     <b-col cols="6">
                       <label for="birthday">Data urodzenia</label>
-                      <input type="date" name="birthday" id="birthday" v-model="birthday" />
+                      <input type="date" name="birthday" id="birthday" v-model="birthday" required />
                     </b-col>
                   </b-row>
                 </li>
-
                 <li class="list-group-item">
                   <b-row>
                     <b-col cols="6">
                       <label for="password">Hasło</label>
-                      <input type="password" name="password" id="password" v-model="password" />
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        v-model="password"
+                        required
+                        pattern=".{8,}"
+                        title="Nazwa użytkownika musi się składać z minimum 8 znaków"
+                      />
                     </b-col>
                     <b-col cols="6">
                       <label for="password2">Powtórz hasło</label>
-                      <input type="password" name="password2" id="password2" v-model="password2" />
+                      <input
+                        type="password"
+                        name="password2"
+                        id="password2"
+                        v-model="password2"
+                        required
+                        oninput='password2.setCustomValidity(password.value != password2.value ? "Hasła się różnią" : "")'
+                      />
                     </b-col>
                   </b-row>
                 </li>
-
                 <li class="list-group-item">
                   <b-row>
                     <b-col cols="12">
                       <label for="sex">Płeć</label>
                       <br />
-                      <select class="ml-2" name="Sex" id="Sex" v-model="sex">
+                      <select class="ml-2" name="Sex" id="Sex" v-model="sex" required>
                         <br />
                         <option>mężczyzna</option>
                         <option>kobieta</option>
@@ -85,19 +90,14 @@
                         Akceptuję
                         <router-link to="/regulations">regulamin</router-link>
                       </label>
-                      <input type="checkbox" id="checkbox" v-model="checked" />
+                      <input type="checkbox" id="checkbox" v-model="checked" required />
                     </b-col>
                   </b-row>
                 </li>
                 <li class="list-group-item">
                   <b-row>
                     <b-col cols="12">
-                      <input
-                        v-on:click="CreateUser"
-                        class="btn btn-outline-success"
-                        type="submit"
-                        value="Zarejestruj"
-                      />
+                      <input class="btn btn-outline-success" type="submit" value="Zarejestruj" />
                     </b-col>
                   </b-row>
                 </li>
@@ -105,54 +105,39 @@
             </form>
           </div>
         </b-col>
-        <!--<b-col cols="1"></b-col>-->
       </b-row>
     </div>
-    <b-row>
-      <b-col cols="1"></b-col>
-      <b-col cols="10">
-        <b-alert
-          :show="dismissCountDown2"
-          dismissible
-          fade
-          variant="danger"
-          @dismissed="dismissCountDown2=0"
-          @dismiss-count-down="countDownChanged2"
-        >{{msg2}}</b-alert>
-      </b-col>
-      <b-col cols="1"></b-col>
-    </b-row>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 //import Api from "../service/api";
 
 export default {
-  name: "Register",
+  name: 'Register',
   components: {},
   data() {
     return {
-      username: "",
-      email: "",
-      location: "",
-      birthday: "",
-      sex: "",
-      password: "",
-      password2: "",
-      msg: "",
-      msg2: "",
+      data: '',
+      username_exists: false,
+      email_exists: false,
+      username: '',
+      email: '',
+      location: '',
+      birthday: '',
+      sex: '',
+      password: '',
+      password2: '',
       dismissSecs: 5,
       dismissCountDown: 0,
       dismissSecs2: 5,
       dismissCountDown2: 0,
       checked: false,
       showDismissibleAlert: false,
-      error_message: "",
+      error_message: '',
     };
   },
-
   methods: {
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
@@ -166,41 +151,48 @@ export default {
     showMsg2() {
       this.dismissCountDown2 = this.dismissSecs2;
     },
-    CreateUser() {
-      //console.log(this.username);
-      if (this.checked == false) {
-        this.showMsg2(), (this.msg2 = "Musisz zaakceptować regulamin");
+    createUser() {
+      axios
+        .post('http://127.0.0.1:8000/api/user/register', {
+          username: this.username,
+          password: this.password,
+          password2: this.password2,
+          email: this.email,
+          birthday: this.birthday,
+          location: this.location,
+          sex: this.sex,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status == 201) {
+            this.error_message = 'Udało się!';
+            this.showDismissibleAlert = true;
+            this.$router.push('/');
+          }
+        })
+        .catch((errors) => {
+          if (errors.response.status != 200) {
+            this.showMsg(), (this.msg = 'Formularz zawiera błędy');
+          }
+          console.log(errors);
+        });
+    },
+    checkUsername() {
+      axios
+        .post('http://127.0.0.1:8000/api/user/validregister', {
+          username: this.username,
+          email: this.email,
+        })
+        .then((response) => {
+          console.log(response), (this.data = response.data);
+        })
+        .catch((errors) => console.log(errors));
+      if (this.data['username'] == 0) {
+        this.username_exists = true;
+        return true;
       } else {
-        axios
-          .post("http://127.0.0.1:8000/api/user/register", {
-            username: this.username,
-            password: this.password,
-            password2: this.password2,
-            email: this.email,
-            birthday: this.birthday,
-            location: this.location,
-            sex: this.sex,
-          })
-          .then((response) => {
-            console.log(response);
-            if (response.status == 201) {
-              this.error_message = "Udało się!";
-              this.showDismissibleAlert = true;
-            }
-          })
-          .catch(
-            (errors) => {
-              if (errors.response.status != 200) {
-                this.showMsg(), (this.msg = "Formularz zawiera błędy");
-              }
-              console.log(errors);
-              //if (errors.response.status != 201) {
-              //this.error_message = 'Formularz zawiera błędy!';
-              //this.showDismissibleAlert = true;
-            }
-            /*}*/
-          );
-        //this.$router.push('/');
+        this.username_exists = false;
+        return false;
       }
     },
   },
