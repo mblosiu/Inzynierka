@@ -4,7 +4,7 @@
       <b-row class="row justify-content-md-center">
         <b-col cols="12" class="col align-self-center">
           <div class="card text-black bg-secondary mb-3" style="width: 30rem;" fluid>
-            <form class="card" @submit.prevent="createUser">
+            <form class="card" @submit.prevent="createUser" @change="validate('username2', 'email')">
               <div class="card-header">
                 <h5>Rejestracja</h5>
               </div>
@@ -12,14 +12,14 @@
                 <li class="list-group-item">
                   <b-row>
                     <b-col cols="6">
-                      <label for="username">Nazwa konta</label>
+                      <label for="username2">Nazwa konta {{ username }}</label>
                       <input
                         type="text"
-                        name="username"
-                        id="username"
+                        name="username2"
+                        id="username2"
                         v-model="username"
                         required
-                        pattern=".{4,}"
+                        pattern="[a-zA-Z0-9]{4,}"
                         title="Nazwa użytkownika musi się składać z minimum 4 znaków"
                       />
                     </b-col>
@@ -120,8 +120,6 @@ export default {
   data() {
     return {
       data: '',
-      username_exists: false,
-      email_exists: false,
       username: '',
       email: '',
       location: '',
@@ -165,19 +163,14 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status == 201) {
-            this.error_message = 'Udało się!';
-            this.showDismissibleAlert = true;
             this.$router.push('/');
           }
         })
         .catch((errors) => {
-          if (errors.response.status != 200) {
-            this.showMsg(), (this.msg = 'Formularz zawiera błędy');
-          }
-          console.log(errors);
+          console.log(errors.response);
         });
     },
-    checkUsername() {
+    validate(inputID, inputID2) {
       axios
         .post('http://127.0.0.1:8000/api/user/validregister', {
           username: this.username,
@@ -187,12 +180,22 @@ export default {
           console.log(response), (this.data = response.data);
         })
         .catch((errors) => console.log(errors));
-      if (this.data['username'] == 0) {
-        this.username_exists = true;
-        return true;
+
+      var input = document.getElementById(inputID);
+      var input2 = document.getElementById(inputID2);
+      if (this.data['username'] != 'valid') {
+        input.setCustomValidity('Nazwa użytkownika zajęta');
+        input.reportValidity();
       } else {
-        this.username_exists = false;
-        return false;
+        input.setCustomValidity('');
+        input.reportValidity();
+      }
+      if (this.data['email'] != 'valid') {
+        input2.setCustomValidity('Email jest już w użyciu');
+        input2.reportValidity();
+      } else {
+        input2.setCustomValidity('');
+        input2.reportValidity();
       }
     },
   },
