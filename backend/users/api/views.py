@@ -498,3 +498,28 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         serializer = UserSerializer(queryset, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([])
+class ValidUsernameAndEmail(APIView):
+    @staticmethod
+    def post(request):
+        email = request.data.get('email', None)
+        username = request.data.get('username', None)
+
+        queryset = User.objects.filter(email=email)
+        queryset2 = User.objects.filter(username=username)
+
+        response = {}
+        print(queryset.count())
+        if queryset.count() > 0:
+            response["email"] = "exists"
+        else:
+            response["email"] = "valid"
+
+        if queryset2.count() > 0:
+            response["username"] = "exists"
+        else:
+            response["username"] = "valid"
+
+        return Response(response, status=status.HTTP_200_OK)

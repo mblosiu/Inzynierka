@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 
 from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, DeleteUserAccountView, \
-    UserListView, PreferencesView, SettingsView, UserImage
+    UserListView, PreferencesView, SettingsView, UserImage, ValidUsernameAndEmail
 
 app_name = 'users'
 
@@ -21,4 +21,6 @@ urlpatterns = [
     path('images', UserImage.as_view(), name='images'),
     path('users', user_list, name='user-list'),
     path('users/<int:pk>', user_detail, name='users-by-id'),
+    path('validregister', ValidUsernameAndEmail.as_view(), name='valid-register'),
+
 ]
