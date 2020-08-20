@@ -29,12 +29,12 @@
         <b-col cols="3">
           <br />
           <br />
-          <div class="card text-black bg-secondary mb-3" style="width: 19rem;">
-            <div class="card-body">
+          <div class="card text-black mb-3 rightside" style="width: 19rem;">
+            <div class="card-body no-background">
               <br />
-              <h3 class="card-title">Nie masz konta?</h3>
+              <h3 class="card-title no-background">Nie masz konta?</h3>
               <br />
-              <p class="card-text">Dołącz do społeczności e-love zakładając darmowe konto!</p>
+              <p class="card-text no-background">Dołącz do społeczności e-love zakładając darmowe konto!</p>
               <br />
               <a href="/register" class="btn btn-outline-warning">Zarejestruj się</a>
               <br />
@@ -65,9 +65,25 @@ text {
 }
 .leftside {
   background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 25px;
   padding: 20px;
   color: #ce4861;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #344d72;
+}
+.rightside {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  color: #ce4861;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #344d72;
+}
+.no-background {
+  background-color: rgba(0, 0, 0, 0);
+  border-style: none;
 }
 .text {
   text-align: justify;
