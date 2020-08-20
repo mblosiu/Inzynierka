@@ -1,8 +1,21 @@
 <template>
   <div class="page">
     <b-container class="bv-example-row" fluid>
-      <b-row>
+      <b-row flex>
         <b-col cols="2">
+          <b-row>
+            <b-col cols="5"></b-col>
+            <b-col cols="4">
+              <h1>Galeria</h1>
+            </b-col>
+            <b-col cols="3"></b-col>
+            <br />
+          </b-row>
+          <b-row>
+            <b-col cols="12">
+              <br />
+            </b-col>
+          </b-row>
           <div class="card text-white bg-secondary mb-5" style="width: 22rem; height: 20rem">
             <div class="card-body">
               <img
@@ -20,61 +33,59 @@
               </div>
             </div>
           </div>
+
+          <b-alert
+            :show="dismissCountDown"
+            fade
+            variant="success"
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged"
+          >{{msg}}</b-alert>
         </b-col>
         <b-col cols="1"></b-col>
-        <b-col cols="9" align-self="start">
+
+        <b-col cols="9" align-self="start" class="scroll">
           <b-row v-for="i in Math.ceil(images.length / 2)" v-bind:key="i">
             <b-col cols="1"></b-col>
             <b-col
               cols="5"
               v-for="image in images.slice((i - 1) * 2, i * 2)"
               v-bind:key="image.id"
-              style="padding-bottom:1cm;"
+              style="padding-bottom:2px;"
             >
-              <img :src="getUrl(image.image)" class="img-responsive" alt="image" />
-              <p>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  v-on:click="setAsProfilePic(image.image)"
-                >Ustaw jako profilowe</button>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  v-on:click="deleteImage(image.pk)"
-                >Usuń zdjęcie</button>
-              </p>
+              <div class="card bg-secondary mb-3" style="width: 377px; height: 285px">
+                <img
+                  :src="getUrl(image.image)"
+                  class="img-responsive rounded mx-auto d-block"
+                  alt="image"
+                />
+                <div class="card-body">
+                  <p>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      v-on:click="setAsProfilePic(image.image)"
+                    >Ustaw jako profilowe</button>
+
+                    <button
+                      type="button"
+                      class="btn btn-danger ml-2"
+                      v-on:click="deleteImage(image.pk)"
+                    >Usuń zdjęcie</button>
+                  </p>
+                </div>
+              </div>
             </b-col>
           </b-row>
         </b-col>
+
         <b-col cols="1"></b-col>
       </b-row>
-<!--
-      <b-row v-for="i in Math.ceil(images.length / 2)" v-bind:key="i">
-        <b-col cols="1"></b-col>
-        <b-col
-          cols="5"
-          v-for="image in images.slice((i - 1) * 2, i * 2)"
-          v-bind:key="image.id"
-          style="padding-bottom:1cm;"
-        >
-          <img :src="getUrl(image.image)" class="img-responsive" alt="image" />
-          <p>
-            <button
-              type="button"
-              class="btn btn-primary"
-              v-on:click="setAsProfilePic(image.image)"
-            >Ustaw jako profilowe</button>
-            <button
-              type="button"
-              class="btn btn-danger"
-              v-on:click="deleteImage(image.pk)"
-            >Usuń zdjęcie</button>
-          </p>
+      <b-row>
+        <b-col cols="12">
+          <p></p>
         </b-col>
-        <b-col cols="1"></b-col>
       </b-row>
-      -->
     </b-container>
   </div>
 </template>
@@ -87,10 +98,19 @@ export default {
       file: "",
       user_data: {},
       images: [],
+      msg: "",
+      dismissSecs: 5,
+      dismissCountDown: 0,
     };
   },
 
   methods: {
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showMsg() {
+      this.dismissCountDown = this.dismissSecs;
+    },
     submitFile() {
       let formData = new FormData();
       formData.append("image", this.file);
@@ -154,6 +174,9 @@ export default {
         )
         .then((response) => {
           console.log(response);
+          if (response.status == 200) {
+            this.showMsg(), (this.msg = "Zmieniono zdjęcie profilowe.");
+          }
         })
         .catch((errors) => console.log(errors));
     },
@@ -186,9 +209,14 @@ export default {
   height: 207px;
   object-fit: cover;
 }
-.card {
-  /*width: 500px;
-  height:276px;
-  object-fit: cover;*/
+.scroll {
+  height: 100%;
+  overflow-y: scroll;
+  height: 100vh;
+}
+.alert {
+  margin-left: 40px;
+  align-content: center;
+  width: 274px;
 }
 </style>

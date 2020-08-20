@@ -11,7 +11,7 @@
             variant="success"
             @dismissed="dismissCountDown=0"
             @dismiss-count-down="countDownChanged"
-          > {{msg}}</b-alert>
+          >{{msg}}</b-alert>
           <b-alert
             :show="dismissCountDown2"
             dismissible
@@ -19,7 +19,7 @@
             variant="danger"
             @dismissed="dismissCountDown2=0"
             @dismiss-count-down="countDownChanged2"
-          > {{msg2}}</b-alert>
+          >{{msg2}}</b-alert>
           <div class="card text-black bg-white mb-3">
             <b-tabs pills card horizontal>
               <form class="card" @submit.prevent="editUserData">
@@ -508,7 +508,7 @@
 
 <script>
 import axios from "axios";
-import Alert from '@/components/Alert.vue';
+import Alert from "@/components/Alert.vue";
 export default {
   name: "UsersProfile",
   components: {},
@@ -611,17 +611,17 @@ export default {
   },
   methods: {
     countDownChanged(dismissCountDown) {
-        this.dismissCountDown = dismissCountDown
-      },
-      showMsg() {
-        this.dismissCountDown = this.dismissSecs
-      },
-      countDownChanged2(dismissCountDown2) {
-        this.dismissCountDown2 = dismissCountDown2
-      },
-      showMsg2() {
-        this.dismissCountDown2 = this.dismissSecs2
-      },
+      this.dismissCountDown = dismissCountDown;
+    },
+    showMsg() {
+      this.dismissCountDown = this.dismissSecs;
+    },
+    countDownChanged2(dismissCountDown2) {
+      this.dismissCountDown2 = dismissCountDown2;
+    },
+    showMsg2() {
+      this.dismissCountDown2 = this.dismissSecs2;
+    },
     getUserData() {
       axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -666,19 +666,16 @@ export default {
         )
         .then((response) => {
           if (response.status == 200) {
-            this.showMsg(),
-            (this.msg = "Zapisano zmiany");
-          } 
+            this.showMsg(), (this.msg = "Zapisano zmiany");
+          }
           console.log(response);
         })
         .catch((errors) => {
-              if (errors.response.status != 200) {
-                this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
-              }
-              console.log(errors);
-            }
-
-          );
+          if (errors.response.status != 200) {
+            this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
+          }
+          console.log(errors);
+        });
     },
     getUserPreferences() {
       axios
