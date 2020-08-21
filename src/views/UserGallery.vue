@@ -2,48 +2,8 @@
   <div class="page">
     <b-container class="bv-example-row" fluid>
       <b-row flex>
-        <b-col cols="2">
-          <b-row>
-            <b-col cols="5"></b-col>
-            <b-col cols="4">
-              <h1>Galeria</h1>
-            </b-col>
-            <b-col cols="3"></b-col>
-            <br />
-          </b-row>
-          <b-row>
-            <b-col cols="12">
-              <br />
-            </b-col>
-          </b-row>
-          <div class="card text-white bg-secondary mb-5" style="width: 22rem; height: 20rem">
-            <div class="card-body">
-              <img
-                class="card-img-top"
-                src="../../public/img/add-image-icon.png"
-                alt="Card image cap"
-                style="width: 11rem; height: 11rem"
-              />
-              <h5 class="card-title">Dodaj nowe zdjęcie.</h5>
-              <div class="large-12 medium-12 small-12 cell">
-                <label>
-                  <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-                </label>
-                <button type="button" class="btn btn-success" v-on:click="submitFile()">Wyślij</button>
-              </div>
-            </div>
-          </div>
-
-          <b-alert
-            :show="dismissCountDown"
-            fade
-            variant="success"
-            @dismissed="dismissCountDown=0"
-            @dismiss-count-down="countDownChanged"
-          >{{msg}}</b-alert>
-        </b-col>
         <b-col cols="1"></b-col>
-        <b-col cols="9" align-self="start" class="scroll">
+        <b-col cols="10" align-self="start" class="scroll">
           <b-row v-for="i in Math.ceil(images.length / 2)" v-bind:key="i">
             <b-col cols="1"></b-col>
             <b-col
@@ -57,21 +17,7 @@
                   :src="getUrl(image.image)"
                   class="img-responsive rounded mx-auto d-block"
                   alt="image"
-                  @click="showModal(i)"
                 />
-
-                <b-modal :ref="'modal' + i" hide-footer title="Podgląd zdjęcia (image.name)" size="lg">
-                  <div class="d-block text-center">
-                  </div>
-                  <img
-                    :src="getUrl(image.image)"
-                    class="img-responsive rounded mx-auto d-block"
-                    alt="image"
-                    style="width:100%; height:100%"
-                  />
-                  <!--<b-btn class="mt-3" variant="outline-danger" block @click="hideModal(i)">Close Me</b-btn>-->
-                  <br/>
-                </b-modal>
                 <div class="card-body">
                   <p>
                     <button
@@ -89,18 +35,10 @@
                 </div>
               </div>
             </b-col>
-            <b-modal :id="'modal' + i" size="lg" title="Bootstrap-Vue">
-              <p clas="my-4">Hello from modal {{i}}!</p>
-            </b-modal>
           </b-row>
         </b-col>
 
         <b-col cols="1"></b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="12">
-          <p></p>
-        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -114,30 +52,10 @@ export default {
       file: "",
       user_data: {},
       images: [],
-      msg: "",
-      dismissSecs: 5,
-      dismissCountDown: 0,
-      //id: "",
     };
   },
 
   methods: {
-    modalId(i) {
-      return "modal" + i;
-    },
-    showModal(i) {
-      console.log(this.$refs["modal" + i][0]);
-      this.$refs["modal" + i][0].show();
-    },
-    hideModal(i) {
-      this.$refs["modal" + i][0].hide();
-    },
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
-    },
-    showMsg() {
-      this.dismissCountDown = this.dismissSecs;
-    },
     submitFile() {
       let formData = new FormData();
       formData.append("image", this.file);
@@ -168,7 +86,6 @@ export default {
         })
         .then((response) => {
           console.log(response), (this.images = response.data);
-          console.log(response.data);
         })
         .catch((errors) => console.log(errors));
     },
