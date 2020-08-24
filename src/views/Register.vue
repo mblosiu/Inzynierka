@@ -4,7 +4,7 @@
       <b-row class="row justify-content-md-center">
         <b-col cols="12" class="col align-self-center">
           <div class="card text-black bg-secondary mb-3" style="width: 30rem;" fluid>
-            <form class="card" @submit.prevent="createUser" @change="validate('username2', 'email')">
+            <form class="card" @submit.prevent="createUser">
               <div class="card-header">
                 <h5>Rejestracja</h5>
               </div>
