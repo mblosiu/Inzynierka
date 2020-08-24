@@ -488,7 +488,13 @@
                 </b-tab>
               </form>
               <b-tab title="Opis profilu">
-                <div class="card text-black bg-dark mb-3">do rozważenia</div>
+                <div class="card text-black bg-dark mb-3">
+                  <br/>
+                  <p>
+                    <br/>
+                    {{user_data.description}}
+                  </p>
+                </div>
               </b-tab>
               <b-tab title="Ustawienia prywatności">
                 <div
@@ -508,7 +514,7 @@
 
 <script>
 import axios from "axios";
-import Alert from "@/components/Alert.vue";
+//import Alert from "@/components/Alert.vue";
 export default {
   name: "UsersProfile",
   components: {},
@@ -712,14 +718,23 @@ export default {
             eye_color_preference: this.user_preferences.eye_color_preference,
             hair_length_preference: this.user_preferences
               .hair_length_preference,
-            //hair_color_preference: this.user_preferences.hair_color_preference,
+            hair_color_preference: this.user_preferences.hair_color_preference,
           },
           config
         )
         .then((response) => {
+          if (response.status == 200) {
+            this.showMsg(), (this.msg = "Zapisano zmiany");
+          }
           console.log(response);
         })
-        .catch((errors) => console.log(errors));
+        .catch((errors) => {
+        
+          if (errors.response.status != 200) {
+            this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
+          }
+          console.log(errors);
+        })
     },
     getUserSettings() {},
     editUserSetting() {},

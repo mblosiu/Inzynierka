@@ -60,7 +60,7 @@
                   @click="showModal(i)"
                 />
 
-                <b-modal :ref="'modal' + i" hide-footer title="Podgląd zdjęcia (image.name)" size="lg">
+                <b-modal :ref="'modal' + i" hide-footer title="Podgląd zdjęcia" size="lg">
                   <div class="d-block text-center">
                   </div>
                   <img
@@ -69,7 +69,6 @@
                     alt="image"
                     style="width:100%; height:100%"
                   />
-                  <!--<b-btn class="mt-3" variant="outline-danger" block @click="hideModal(i)">Close Me</b-btn>-->
                   <br/>
                 </b-modal>
                 <div class="card-body">
@@ -89,9 +88,6 @@
                 </div>
               </div>
             </b-col>
-            <b-modal :id="'modal' + i" size="lg" title="Bootstrap-Vue">
-              <p clas="my-4">Hello from modal {{i}}!</p>
-            </b-modal>
           </b-row>
         </b-col>
 

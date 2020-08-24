@@ -18,9 +18,19 @@
               <b-card-text>
                 <div>
                   <form class="description" @submit.prevent="editUserData">
-                    <textarea v-model="user_data.description"></textarea>
+                    <textarea
+                      v-model="user_data.description"
+                      placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie!"
+                    ></textarea>
                     <button type="submit" class="btn btn-secondary">Zapisz</button>
                   </form>
+                  <b-alert
+                    :show="dismissCountDown"
+                    fade
+                    variant="success"
+                    @dismissed="dismissCountDown=0"
+                    @dismiss-count-down="countDownChanged"
+                  >{{msg}}</b-alert>
                 </div>
               </b-card-text>
             </b-card>
@@ -128,9 +138,7 @@
                       <li
                         class="list-group-item"
                       >Sylwetka: {{user_preferences.body_type_preference}}</li>
-                      <li
-                        class="list-group-item"
-                      >Włosy: </li>
+                      <li class="list-group-item">Włosy:</li>
                       <li
                         class="list-group-item"
                       >Kolor oczu: {{user_preferences.eye_color_preference}}</li>
@@ -139,9 +147,7 @@
                         <p v-if="user_preferences.freckles_preference!=false">piegi</p>
                         <p v-if="user_preferences.glasses_preference!=false">okulary</p>
                       </li>
-                      <li
-                        class="list-group-item"
-                      >
+                      <li class="list-group-item">
                         <div v-if="user_preferences.is_smoking_preference==0">
                           <li class="list-group-item">Papierosy: nie pali</li>
                         </div>
@@ -157,29 +163,27 @@
                         <div v-else-if="user_preferences.is_smoking_preference==4">
                           <li class="list-group-item">Papierosy: nałogowo</li>
                         </div>
-                        </li>
+                      </li>
 
-                      <li
-                        class="list-group-item"
-                      >
-                      <div v-if="user_preferences.is_drinking_alcohol_preference==0">
-                        <li class="list-group-item">Alkohol: nie pije</li>
-                      </div>
-                      <div v-else-if="user_preferences.is_drinking_alcohol_preference==1">
-                        <li class="list-group-item">Alkohol: okazjonalnie</li>
-                      </div>
-                      <div v-else-if="user_preferences.is_drinking_alcohol_preference==2">
-                        <li class="list-group-item">Alkohol: często</li>
-                      </div>
-                      <div v-else-if="user_preferences.is_drinking_alcohol_preference==3">
-                        <li class="list-group-item">Alkohol: codziennie</li>
-                      </div>
-                      <div v-else-if="user_preferences.is_drinking_alcohol_preference==4">
-                        <li class="list-group-item">Alkohol: nałogowo</li>
-                      </div>
-                      <div v-else>
-                        <li class="list-group-item">Alkohol: {{user_data.is_drinking_alcohol}}</li>
-                      </div>
+                      <li class="list-group-item">
+                        <div v-if="user_preferences.is_drinking_alcohol_preference==0">
+                          <li class="list-group-item">Alkohol: nie pije</li>
+                        </div>
+                        <div v-else-if="user_preferences.is_drinking_alcohol_preference==1">
+                          <li class="list-group-item">Alkohol: okazjonalnie</li>
+                        </div>
+                        <div v-else-if="user_preferences.is_drinking_alcohol_preference==2">
+                          <li class="list-group-item">Alkohol: często</li>
+                        </div>
+                        <div v-else-if="user_preferences.is_drinking_alcohol_preference==3">
+                          <li class="list-group-item">Alkohol: codziennie</li>
+                        </div>
+                        <div v-else-if="user_preferences.is_drinking_alcohol_preference==4">
+                          <li class="list-group-item">Alkohol: nałogowo</li>
+                        </div>
+                        <div v-else>
+                          <li class="list-group-item">Alkohol: {{user_data.is_drinking_alcohol}}</li>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -196,7 +200,7 @@
                       <li class="list-group-item">Sumienność: {{user_data.scrupulousness}}</li>
                       <li class="list-group-item">Pracowitość: {{user_data.diligence}}</li>
                       <li class="list-group-item">Życzliwość: {{user_data.kindness}}</li>
-                      <li class="list-group-item">+ romantyczność można dodać na razie</li>
+                      <li class="list-group-item">Romantyczność: (?)</li>
                     </ul>
                   </div>
                 </b-tab>
@@ -213,13 +217,10 @@
 
 
 <script>
-
 import axios from "axios";
 export default {
   name: "MainUser",
-  components: {
-  
-  },
+  components: {},
   data() {
     return {
       user_data: {},
@@ -230,9 +231,18 @@ export default {
       age: "",
       m: "",
       description: [],
+      msg: "",
+      dismissSecs: 5,
+      dismissCountDown: 0,
     };
   },
   methods: {
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showMsg() {
+      this.dismissCountDown = this.dismissSecs;
+    },
     getUserData() {
       axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -275,6 +285,9 @@ export default {
         )
         .then((response) => {
           console.log(response);
+          if (response.status == 200) {
+            this.showMsg(), (this.msg = "Zaktualizowano opis profilu");
+          }
         })
         .catch((errors) => console.log(errors));
     },
@@ -326,5 +339,12 @@ export default {
 textarea {
   height: 100%;
   width: 100%;
+}
+.alert{
+  width: 265px;
+  margin-left: 500px;
+  padding-block: inherit;
+  margin-block: inherit;
+  align-content: inherit;
 }
 </style>
