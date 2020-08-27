@@ -448,6 +448,15 @@ class UserImage(APIView):
         else:
             return Response({"detail": "file not exists"}, status=status.HTTP_400_BAD_REQUEST)
 
+@permission_classes([IsAuthenticated])
+class ImageByUserId(viewsets.ReadOnlyModelViewSet):
+    @staticmethod
+    def retrieve(request, pk=None):
+        images = Image.objects.filter(user__pk=pk)
+
+        serializer = ImageSerializer(images, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 # USER LIST - SEARCHER
 @permission_classes([IsAuthenticated])
