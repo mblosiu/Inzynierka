@@ -4,179 +4,17 @@
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="2">
-          <b-sidebar
-            id="sidebar-footer"
-            aria-label="Sidebar with custom footer"
-            style="width:90%;"
-            no-header
-            shadow
-          >
+          <b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
             <template v-slot:footer="{ hide }">
               <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
                 <strong class="mr-auto"></strong>
                 <b-button size="sm" @click="hide">Zamknij</b-button>
               </div>
             </template>
-            <div class="p-3">
-              <h4 id="sidebar-no-header-title" style="text-align: start;">Panel akcji</h4>
-              <br />
-              <nav class="mb-3">
-                <b-nav vertical>
-                  <b-nav-item active href="#">
-                    <div class="icon">
-                      <svg
-                        width="2em"
-                        height="2em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-chat-right-dots"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"
-                        />
-                        <path
-                          d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-                        />
-                      </svg>
-                    </div>Wyślij wiadomość
-                  </b-nav-item>
-                  <p></p>
-                  <b-nav-item href="#link-1">
-                    <div class="icon">
-                      <svg
-                        width="2em"
-                        height="2em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-person-plus-fill"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
-                        />
-                      </svg>
-                    </div>Dodaj do grona znajomych
-                  </b-nav-item>
-                  <p></p>
-                  <b-nav-item v-b-modal.modal-lg>
-                    <div class="icon">
-                      <svg
-                        width="2em"
-                        height="2em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-images"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M12.002 4h-10a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10z"
-                        />
-                        <path
-                          d="M10.648 8.646a.5.5 0 0 1 .577-.093l1.777 1.947V14h-12v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"
-                        />
-                      </svg>
-                    </div>Zobacz galerię
-                  </b-nav-item>
-                  <b-modal id="modal-lg" size="lg" title="Galeria użytkownika">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                      <div class="carousel-inner">
-                        <div
-                          class="carousel-item active"
-                          v-for="image in images"
-                          v-bind:key="image.id"
-                          style="padding-bottom:2px;"
-                        >
-                          <img
-                            :src="getUrl(image.image)"
-                            class="img-responsive rounded mx-auto d-block"
-                            alt="image"
-                            style="width: 50%; height: 50%;"
-                          />
-                        </div>
-                        <!--div class="carousel-item active">
-                          <img class="d-block w-100" src="..." alt="First slide" />
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="..." alt="Second slide" />
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="..." alt="Third slide" />
-                        </div>-->
-                      </div>
-                      <a
-                        class="carousel-control-prev"
-                        href="#carouselExampleControls"
-                        role="button"
-                        data-slide="prev"
-                      >
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a
-                        class="carousel-control-next"
-                        href="#carouselExampleControls"
-                        role="button"
-                        data-slide="next"
-                      >
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </div>
-                  </b-modal>
-                  <p></p>
-                  <b-nav-item href="#link-3">
-                    <div class="icon">
-                      <svg
-                        width="2em"
-                        height="2em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-heart-fill"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                        />
-                      </svg>
-                    </div>Polub
-                  </b-nav-item>
-                  <p></p>
-                  <b-nav-item href="#link-4">
-                    <div class="icon">
-                      <svg
-                        width="2em"
-                        height="2em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-lock-fill"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
-                        />
-                      </svg>
-                    </div>Zablokuj użytkownika
-                  </b-nav-item>
-                  <p></p>
-                </b-nav>
-              </nav>
+            <div class="px-3 py-2">
+              <p>
+                Okienko chatu
+              </p>
             </div>
           </b-sidebar>
         </b-col>
@@ -202,8 +40,186 @@
                     <h3>Brak opisu.</h3>
                   </div>
                 </div>
-                <div>
-                  <b-button v-b-toggle.sidebar-footer>Więcej opcji</b-button>
+                <br />
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group mr-3 ml-3" role="group" aria-label="icons">
+                    <button
+                      v-b-toggle.sidebar-footer
+                      type="button"
+                      class="btn btn-secondary"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Wyślij wiadomość"
+                    >
+                      <svg
+                        color="lightblue"
+                        width="3em"
+                        height="3em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-chat-right-dots"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"
+                        />
+                        <path
+                          d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Zaproś do grona znajomych"
+                    >
+                      <svg
+                        color="blue"
+                        width="3em"
+                        height="3em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-person-plus-fill"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Zobacz galerię"
+                    >
+                      <div v-b-modal.modal-lg>
+                        <svg
+                          color="lightgreen"
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-images"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M12.002 4h-10a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10z"
+                          />
+                          <path
+                            d="M10.648 8.646a.5.5 0 0 1 .577-.093l1.777 1.947V14h-12v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"
+                          />
+                        </svg>
+                      </div>
+                    </button>
+                    <b-modal id="modal-lg" size="lg" title="Galeria użytkownika">
+                      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div
+                          class="carousel-inner"
+                          v-for="image in images"
+                          v-bind:key="image.id"
+                          style="padding-bottom:2px;"
+                        >
+                          <div class="carousel-item active">
+                            <img
+                              :src="getUrl(image.image)"
+                              class="img-responsive rounded mx-auto d-block"
+                              alt="image"
+                              style="width: 50%; height: 50%;"
+                            />
+                          </div>
+                          <!--div class="carousel-item active">
+                          <img class="d-block w-100" src="..." alt="First slide" />
+                        </div>
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="..." alt="Second slide" />
+                        </div>
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="..." alt="Third slide" />
+                          </div>-->
+                        </div>
+                        <a
+                          class="carousel-control-prev"
+                          href="#carouselExampleControls"
+                          role="button"
+                          data-slide="prev"
+                        >
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a
+                          class="carousel-control-next"
+                          href="#carouselExampleControls"
+                          role="button"
+                          data-slide="next"
+                        >
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                    </b-modal>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Polub"
+                    >
+                      <svg
+                        color="red"
+                        width="3em"
+                        height="3em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-heart-fill"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Zablokuj użytkownika"
+                    >
+                      <svg
+                        color="grey"
+                        width="3em"
+                        height="3em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-lock-fill"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </b-card-text>
             </b-card>
@@ -430,7 +446,7 @@ export default {
     },
     getUserImages() {
       axios
-        .get("http://127.0.0.1:8000/api/user/images", {
+        .get("http://127.0.0.1:8000/api/user/users/2/images", {
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
