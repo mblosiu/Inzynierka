@@ -21,15 +21,15 @@
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/">Dopasuj</b-button>
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Polubienia</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Polubienia <span class="badge badge-light">0</span></b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Wiadomości</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Wiadomości <span class="badge badge-light">0</span></b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Kontakty</b-button>
+            <b-button class="my-2 ml-2" type="button" size="sm" to="/">Kontakty <span class="badge badge-light">0</span></b-button>
           </b-nav-form>
 
           <b-nav-form v-if="token != null">

@@ -6,7 +6,7 @@
           <b-row>
             <b-col cols="5"></b-col>
             <b-col cols="4">
-              <h1>Galeria</h1>
+              <h1 class="display-4">Galeria</h1>
             </b-col>
             <b-col cols="3"></b-col>
             <br />

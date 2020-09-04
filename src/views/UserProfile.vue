@@ -12,9 +12,7 @@
               </div>
             </template>
             <div class="px-3 py-2">
-              <p>
-                Okienko chatu
-              </p>
+              <p>Okienko chatu</p>
             </div>
           </b-sidebar>
         </b-col>
@@ -102,7 +100,7 @@
                       data-placement="bottom"
                       title="Zobacz galerię"
                     >
-                      <div v-b-modal.modal-lg>
+                      <div id="show-btn" @click="$bvModal.show('bv-modal-example')">
                         <svg
                           color="lightgreen"
                           width="3em"
@@ -126,51 +124,57 @@
                         </svg>
                       </div>
                     </button>
-                    <b-modal id="modal-lg" size="lg" title="Galeria użytkownika">
-                      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div
-                          class="carousel-inner"
-                          v-for="image in images"
-                          v-bind:key="image.id"
-                          style="padding-bottom:2px;"
+                    <b-modal
+                      id="bv-modal-example"
+                      size="lg"
+                      title="Galeria użytkownika"
+                      hide-footer
+                    >
+                      <div>
+                        <b-carousel
+                          id="carousel-1"
+                          v-model="slide"
+                          controls
+                          indicators
+                          background="#ababab"
+                          img-width="100%"
+                          img-height="100%"
+                          style="text-shadow: 1px 1px 2px #333;"
+                          @sliding-start="onSlideStart"
+                          @sliding-end="onSlideEnd"
                         >
-                          <div class="carousel-item active">
-                            <img
-                              :src="getUrl(image.image)"
-                              class="img-responsive rounded mx-auto d-block"
-                              alt="image"
-                              style="width: 50%; height: 50%;"
-                            />
+                          <div
+                            v-for="image in images"
+                            v-bind:key="image.id"
+                            style="padding-bottom:2px;"
+                          >
+                            <b-carousel-slide :img-src="getUrl(image.image)">
+                              <!--<img :src="getUrl(image.image)" class="img-fluid" alt="Responsive image">-->
+                            </b-carousel-slide>
                           </div>
-                          <!--div class="carousel-item active">
-                          <img class="d-block w-100" src="..." alt="First slide" />
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="..." alt="Second slide" />
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="..." alt="Third slide" />
-                          </div>-->
-                        </div>
-                        <a
-                          class="carousel-control-prev"
-                          href="#carouselExampleControls"
-                          role="button"
-                          data-slide="prev"
-                        >
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a
-                          class="carousel-control-next"
-                          href="#carouselExampleControls"
-                          role="button"
-                          data-slide="next"
-                        >
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
+                        </b-carousel>
                       </div>
+                      <footer>
+                        <b-row>
+                          <b-col cols="10"></b-col>
+                          <b-col cols="2">
+                            <b-button
+                              class="mt-3"
+                              block
+                              @click="$bvModal.hide('bv-modal-example')"
+                            >Zamknij</b-button>
+                          </b-col>
+                        </b-row>
+                        <b-row>
+                          <b-col cols="1"></b-col>
+                          <b-col cols="10"></b-col>
+                        <div class="comments">
+                          <h2> Komentarze:</h2>
+                          <br />...
+                        </div>
+                        <b-col cols="1"></b-col>
+                        </b-row>
+                      </footer>
                     </b-modal>
                     <button
                       type="button"
@@ -467,6 +471,9 @@ export default {
     this.getUsers();
     this.getUserPreferences();
     this.getUserImages();
+  },
+  mounted() {
+    $(".carousel").carousel();
   },
 };
 </script>
