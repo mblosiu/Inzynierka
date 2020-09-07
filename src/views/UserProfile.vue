@@ -124,13 +124,8 @@
                         </svg>
                       </div>
                     </button>
-                    <b-modal
-                      id="bv-modal-example"
-                      size="lg"
-                      title="Galeria użytkownika"
-                      hide-footer
-                    >
-                      <div v-if="images!=[]">
+                    <b-modal id="bv-modal-example" size="lg" title="Galeria użytkownika" hide-footer>
+                      <div v-if="images != []">
                         <div>
                           <b-carousel
                             id="carousel-1"
@@ -144,11 +139,7 @@
                             @sliding-start="onSlideStart"
                             @sliding-end="onSlideEnd"
                           >
-                            <div
-                              v-for="image in images"
-                              v-bind:key="image.id"
-                              style="padding-bottom:2px;"
-                            >
+                            <div v-for="image in images" v-bind:key="image.id" style="padding-bottom:2px;">
                               <b-carousel-slide :img-src="getUrl(image.image)">
                                 <!--<img :src="getUrl(image.image)" class="img-fluid" alt="Responsive image">-->
                               </b-carousel-slide>
@@ -159,11 +150,7 @@
                           <b-row>
                             <b-col cols="10"></b-col>
                             <b-col cols="2">
-                              <b-button
-                                class="mt-3"
-                                block
-                                @click="$bvModal.hide('bv-modal-example')"
-                              >Zamknij</b-button>
+                              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Zamknij</b-button>
                             </b-col>
                           </b-row>
                           <b-row>
@@ -191,11 +178,7 @@
                           <b-row>
                             <b-col cols="10"></b-col>
                             <b-col cols="2">
-                              <b-button
-                                class="mt-3"
-                                block
-                                @click="$bvModal.hide('bv-modal-example')"
-                              >Zamknij</b-button>
+                              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Zamknij</b-button>
                             </b-col>
                           </b-row>
                         </footer>
@@ -239,13 +222,8 @@
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path
-                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
-                        />
+                        <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z" />
+                        <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
                       </svg>
                     </button>
                   </div>
@@ -264,9 +242,7 @@
                       <h3>O mnie:</h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li
-                        class="list-group-item"
-                      >Imię i nazwisko: {{ user.name }} {{ user.surname }}</li>
+                      <li class="list-group-item">Imię i nazwisko: {{ user.name }} {{ user.surname }}</li>
                       <li class="list-group-item">Płeć: {{ user.sex }}</li>
                       <li class="list-group-item">Wiek: {{ getAge(user.birthday) }}</li>
                       <li class="list-group-item">Mieszkam w: {{ user.location }}</li>
@@ -322,9 +298,7 @@
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Wzrost: {{ user.growth }}</li>
                       <li class="list-group-item">Waga: {{ user.weight }}</li>
-                      <li
-                        class="list-group-item"
-                      >Włosy: {{ user.hair_length }} {{ user.hair_color }}</li>
+                      <li class="list-group-item">Włosy: {{ user.hair_length }} {{ user.hair_color }}</li>
                       <li class="list-group-item">Kolor oczu: {{ user.eye_color }}</li>
                       <li class="list-group-item">Sylwetka: {{ user.body_type }}</li>
                       <li class="list-group-item">
@@ -358,29 +332,24 @@
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Orientacja: {{ user_preferences.sex_preference }}</li>
-                      <li
-                        class="list-group-item"
-                      >Przedział wiekowy: {{ user_preferences.age_preference }}</li>
+                      <li class="list-group-item">Przedział wiekowy: {{ user_preferences.age_preference }}</li>
                       <li class="list-group-item">Waga: {{ user_preferences.weight_preference }}</li>
-                      <li
-                        class="list-group-item"
-                      >Sylwetka: {{ user_preferences.body_type_preference }}</li>
+                      <li class="list-group-item">Sylwetka: {{ user_preferences.body_type_preference }}</li>
                       <li class="list-group-item">
                         Włosy: {{ user_preferences.hair_length_preference }}, blond: ({{
-                        user_preferences.hair_color_blonde_preference
+                          user_preferences.hair_color_blonde_preference
                         }}), brunatne: ({{ user_preferences.hair_color_brunette_preference }}), rude: ({{
-                        user_preferences.hair_color_red_preference
+                          user_preferences.hair_color_red_preference
                         }}), czarne: todo
                       </li>
                       <li class="list-group-item">Kolor oczu: todo</li>
                       <li class="list-group-item">
                         Znaki szczególne:
                         <p v-if="user_preferences.freckles_preference != false">piegi</p>
-                        <p v-if="user_preferences.glasses_preference != false">okulary</p>+td tatuaże
+                        <p v-if="user_preferences.glasses_preference != false">okulary</p>
+                        +td tatuaże
                       </li>
-                      <li
-                        class="list-group-item"
-                      >Edukacja: {{ user_preferences.education_preference }}</li>
+                      <li class="list-group-item">Edukacja: {{ user_preferences.education_preference }}</li>
                     </ul>
                   </div>
                 </b-tab>
@@ -414,7 +383,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   data() {
@@ -427,10 +396,10 @@ export default {
   methods: {
     getUsers() {
       axios
-        .get("http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk, {
+        .get('http://127.0.0.1:8000/api/user/users/' + this.$route.params.pk, {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
         })
         .then((response) => {
@@ -443,16 +412,11 @@ export default {
     },
     getUserImages() {
       axios
-        .get(
-          "http://127.0.0.1:8000/api/user/users/" +
-            this.$route.params.pk +
-            "/images",
-          {
-            headers: {
-              Authorization: "Token " + localStorage.getItem("user-token"),
-            },
-          }
-        )
+        .get('http://127.0.0.1:8000/api/user/users/' + this.$route.params.pk + '/images', {
+          headers: {
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
+          },
+        })
         .then((response) => {
           console.log(response), (this.images = response.data);
           console.log(response.data);
@@ -470,9 +434,8 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
-      else
-        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+      if (pic != null) return 'http://127.0.0.1:8000' + pic;
+      else return 'https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png';
     },
     onSlideStart() {},
     onSlideEnd() {},
@@ -483,7 +446,7 @@ export default {
     this.getUserImages();
   },
   mounted() {
-    $(".carousel").carousel();
+    $('.carousel').carousel();
   },
 };
 </script>
@@ -501,7 +464,7 @@ export default {
   object-fit: scale-down;
 }
 .card-text {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: left;
   font-size: 20px;
 }
