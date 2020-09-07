@@ -66,7 +66,7 @@
         <b-col cols="1"></b-col>
         <b-col cols="10">
           <div class="users-list" v-for="user in users" v-bind:key="user.id">
-            <router-link :to="{ name: 'userprofile', params: { username: user.username, pk: user.pk } }">
+            <router-link :to="{ name: 'userprofile', params: { pk: user.pk } }">
               <div id="photo">
                 <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" img-left class="user-card">
                   <b-card-title>

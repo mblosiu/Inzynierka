@@ -66,7 +66,7 @@ const routes = [
     }
   }, 
   {
-    path: '/mainuser/search/:username',
+    path: '/mainuser/search/:pk',
     name: 'userprofile',
     component: UserProfile,
     params: true
