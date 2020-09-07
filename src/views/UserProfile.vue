@@ -27,12 +27,12 @@
               alt="Card image cap"
             >
               <b-card-title>
-                <h2>{{user.username}} ({{getAge(user.birthday)}})</h2>
+                <h2>{{ user.username }} ({{ getAge(user.birthday) }})</h2>
               </b-card-title>
               <b-card-text>
                 <div>
-                  <div v-if="user.description!=null">
-                    <h3>{{user.description}}</h3>
+                  <div v-if="user.description != null">
+                    <h3>{{ user.description }}</h3>
                   </div>
                   <div v-else>
                     <h3>Brak opisu.</h3>
@@ -124,12 +124,7 @@
                         </svg>
                       </div>
                     </button>
-                    <b-modal
-                      id="bv-modal-example"
-                      size="lg"
-                      title="Galeria użytkownika"
-                      hide-footer
-                    >
+                    <b-modal id="bv-modal-example" size="lg" title="Galeria użytkownika" hide-footer>
                       <div>
                         <b-carousel
                           id="carousel-1"
@@ -143,11 +138,7 @@
                           @sliding-start="onSlideStart"
                           @sliding-end="onSlideEnd"
                         >
-                          <div
-                            v-for="image in images"
-                            v-bind:key="image.id"
-                            style="padding-bottom:2px;"
-                          >
+                          <div v-for="image in images" v-bind:key="image.id" style="padding-bottom:2px;">
                             <b-carousel-slide :img-src="getUrl(image.image)">
                               <!--<img :src="getUrl(image.image)" class="img-fluid" alt="Responsive image">-->
                             </b-carousel-slide>
@@ -158,21 +149,17 @@
                         <b-row>
                           <b-col cols="10"></b-col>
                           <b-col cols="2">
-                            <b-button
-                              class="mt-3"
-                              block
-                              @click="$bvModal.hide('bv-modal-example')"
-                            >Zamknij</b-button>
+                            <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Zamknij</b-button>
                           </b-col>
                         </b-row>
                         <b-row>
                           <b-col cols="1"></b-col>
                           <b-col cols="10"></b-col>
-                        <div class="comments">
-                          <h2> Komentarze:</h2>
-                          <br />...
-                        </div>
-                        <b-col cols="1"></b-col>
+                          <div class="comments">
+                            <h2>Komentarze:</h2>
+                            <br />...
+                          </div>
+                          <b-col cols="1"></b-col>
                         </b-row>
                       </footer>
                     </b-modal>
@@ -214,13 +201,8 @@
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path
-                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
-                        />
+                        <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z" />
+                        <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
                       </svg>
                     </button>
                   </div>
@@ -239,50 +221,50 @@
                       <h3>O mnie:</h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Imię i nazwisko: {{user.name}} {{user.surname}}</li>
-                      <li class="list-group-item">Płeć: {{user.sex}}</li>
-                      <li class="list-group-item">Wiek: {{getAge(user.birthday)}}</li>
-                      <li class="list-group-item">Mieszkam w: {{user.location}}</li>
-                      <li class="list-group-item">Urodziny: {{user.birthday}}</li>
-                      <li class="list-group-item">Status/zajęcie: {{user.status}}</li>
-                      <li class="list-group-item">Edukacja: {{user.education}}</li>
+                      <li class="list-group-item">Imię i nazwisko: {{ user.name }} {{ user.surname }}</li>
+                      <li class="list-group-item">Płeć: {{ user.sex }}</li>
+                      <li class="list-group-item">Wiek: {{ getAge(user.birthday) }}</li>
+                      <li class="list-group-item">Mieszkam w: {{ user.location }}</li>
+                      <li class="list-group-item">Urodziny: {{ user.birthday }}</li>
+                      <li class="list-group-item">Status/zajęcie: {{ user.status }}</li>
+                      <li class="list-group-item">Edukacja: {{ user.education }}</li>
                       <div smoking>
-                        <div v-if="user.is_smoking==0">
+                        <div v-if="user.is_smoking == 0">
                           <li class="list-group-item">Papierosy: nie palę</li>
                         </div>
-                        <div v-else-if="user.is_smoking==1">
+                        <div v-else-if="user.is_smoking == 1">
                           <li class="list-group-item">Papierosy: okazjonalnie</li>
                         </div>
-                        <div v-else-if="user.is_smoking==2">
+                        <div v-else-if="user.is_smoking == 2">
                           <li class="list-group-item">Papierosy: często</li>
                         </div>
-                        <div v-else-if="user.is_smoking==3">
+                        <div v-else-if="user.is_smoking == 3">
                           <li class="list-group-item">Papierosy: codziennie</li>
                         </div>
-                        <div v-else-if="user.is_smoking==4">
+                        <div v-else-if="user.is_smoking == 4">
                           <li class="list-group-item">Papierosy: nałogowo</li>
                         </div>
                         <div v-else>
-                          <li class="list-group-item">Papierosy: {{user.is_smoking}}</li>
+                          <li class="list-group-item">Papierosy: {{ user.is_smoking }}</li>
                         </div>
                       </div>
-                      <div v-if="user.is_drinking_alcohol==0">
+                      <div v-if="user.is_drinking_alcohol == 0">
                         <li class="list-group-item">Alkohol: nie piję</li>
                       </div>
-                      <div v-else-if="user.is_drinking_alcohol==1">
+                      <div v-else-if="user.is_drinking_alcohol == 1">
                         <li class="list-group-item">Alkohol: okazjonalnie</li>
                       </div>
-                      <div v-else-if="user.is_drinking_alcohol==2">
+                      <div v-else-if="user.is_drinking_alcohol == 2">
                         <li class="list-group-item">Alkohol: często</li>
                       </div>
-                      <div v-else-if="user.is_drinking_alcohol==3">
+                      <div v-else-if="user.is_drinking_alcohol == 3">
                         <li class="list-group-item">Alkohol: codziennie</li>
                       </div>
-                      <div v-else-if="user.is_drinking_alcohol==4">
+                      <div v-else-if="user.is_drinking_alcohol == 4">
                         <li class="list-group-item">Alkohol: nałogowo</li>
                       </div>
                       <div v-else>
-                        <li class="list-group-item">Alkohol: {{user.is_drinking_alcohol}}</li>
+                        <li class="list-group-item">Alkohol: {{ user.is_drinking_alcohol }}</li>
                       </div>
                     </ul>
                   </div>
@@ -293,15 +275,15 @@
                       <h3>Mój wygląd</h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Wzrost: {{user.growth}}</li>
-                      <li class="list-group-item">Waga: {{user.weight}}</li>
-                      <li class="list-group-item">Włosy: {{user.hair_length}} {{user.hair_color}}</li>
-                      <li class="list-group-item">Kolor oczu: {{user.eye_color}}</li>
-                      <li class="list-group-item">Sylwetka: {{user.body_type}}</li>
+                      <li class="list-group-item">Wzrost: {{ user.growth }}</li>
+                      <li class="list-group-item">Waga: {{ user.weight }}</li>
+                      <li class="list-group-item">Włosy: {{ user.hair_length }} {{ user.hair_color }}</li>
+                      <li class="list-group-item">Kolor oczu: {{ user.eye_color }}</li>
+                      <li class="list-group-item">Sylwetka: {{ user.body_type }}</li>
                       <li class="list-group-item">
                         Znaki szczególne
-                        <p v-if="user.freckles!=false">mam piegi</p>
-                        <p v-if="user.glasses!=false">noszę okulary</p>
+                        <p v-if="user.freckles != false">mam piegi</p>
+                        <p v-if="user.glasses != false">noszę okulary</p>
                       </li>
                       <li class="list-group-item"></li>
                     </ul>
@@ -328,26 +310,25 @@
                       <h3>Moje preferencje:</h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Orientacja: {{user_preferences.sex_preference}}</li>
-                      <li
-                        class="list-group-item"
-                      >Przedział wiekowy: {{user_preferences.age_preference}}</li>
-                      <li class="list-group-item">Waga: {{user_preferences.weight_preference}}</li>
-                      <li
-                        class="list-group-item"
-                      >Sylwetka: {{user_preferences.body_type_preference}}</li>
-                      <li
-                        class="list-group-item"
-                      >Włosy: {{user_preferences.hair_length_preference}}, blond: ({{user_preferences.hair_color_blonde_preference}}), brunatne: ({{user_preferences.hair_color_brunette_preference}}), rude: ({{user_preferences.hair_color_red_preference}}), czarne: todo</li>
+                      <li class="list-group-item">Orientacja: {{ user_preferences.sex_preference }}</li>
+                      <li class="list-group-item">Przedział wiekowy: {{ user_preferences.age_preference }}</li>
+                      <li class="list-group-item">Waga: {{ user_preferences.weight_preference }}</li>
+                      <li class="list-group-item">Sylwetka: {{ user_preferences.body_type_preference }}</li>
+                      <li class="list-group-item">
+                        Włosy: {{ user_preferences.hair_length_preference }}, blond: ({{
+                          user_preferences.hair_color_blonde_preference
+                        }}), brunatne: ({{ user_preferences.hair_color_brunette_preference }}), rude: ({{
+                          user_preferences.hair_color_red_preference
+                        }}), czarne: todo
+                      </li>
                       <li class="list-group-item">Kolor oczu: todo</li>
                       <li class="list-group-item">
                         Znaki szczególne:
-                        <p v-if="user_preferences.freckles_preference!=false">piegi</p>
-                        <p v-if="user_preferences.glasses_preference!=false">okulary</p>+td tatuaże
+                        <p v-if="user_preferences.freckles_preference != false">piegi</p>
+                        <p v-if="user_preferences.glasses_preference != false">okulary</p>
+                        +td tatuaże
                       </li>
-                      <li
-                        class="list-group-item"
-                      >Edukacja: {{user_preferences.education_preference}}</li>
+                      <li class="list-group-item">Edukacja: {{ user_preferences.education_preference }}</li>
                     </ul>
                   </div>
                 </b-tab>
@@ -357,15 +338,15 @@
                       <h3>Cechy charakteru:</h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Pewność siebie: {{user.assertiveness}}</li>
-                      <li class="list-group-item">Szczerość: {{user.sincerity}}</li>
-                      <li class="list-group-item">Empatia: {{user.empathy}}</li>
-                      <li class="list-group-item">Komunikatywność: {{user.communication}}</li>
-                      <li class="list-group-item">Bezinteresowność: {{user.selflessness}}</li>
-                      <li class="list-group-item">Uczciwość: {{user.honesty}}</li>
-                      <li class="list-group-item">Sumienność: {{user.scrupulousness}}</li>
-                      <li class="list-group-item">Pracowitość: {{user.diligence}}</li>
-                      <li class="list-group-item">Życzliwość: {{user.kindness}}</li>
+                      <li class="list-group-item">Pewność siebie: {{ user.assertiveness }}</li>
+                      <li class="list-group-item">Szczerość: {{ user.sincerity }}</li>
+                      <li class="list-group-item">Empatia: {{ user.empathy }}</li>
+                      <li class="list-group-item">Komunikatywność: {{ user.communication }}</li>
+                      <li class="list-group-item">Bezinteresowność: {{ user.selflessness }}</li>
+                      <li class="list-group-item">Uczciwość: {{ user.honesty }}</li>
+                      <li class="list-group-item">Sumienność: {{ user.scrupulousness }}</li>
+                      <li class="list-group-item">Pracowitość: {{ user.diligence }}</li>
+                      <li class="list-group-item">Życzliwość: {{ user.kindness }}</li>
                       <li class="list-group-item">+ romantyczność</li>
                     </ul>
                   </div>
@@ -381,60 +362,43 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   data() {
     return {
-      users: [],
+      user: [],
       user_preferences: {},
       images: [],
     };
   },
-  computed: {
-    user() {
-      return this.users.find(
-        (user) => user.username == this.$route.params.username
-      );
-    },
-  },
   methods: {
     getUsers() {
       axios
-        .get("http://127.0.0.1:8000/api/user/users", {
+        .get('http://127.0.0.1:8000/api/user/users/' + this.$route.params.pk, {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
         })
         .then((response) => {
-          console.log(response), (this.users = response.data);
+          console.log(response),
+            (this.user = response.data),
+            (this.user_preferences = this.user.preferences),
+            console.log(this.user_preferences);
         })
         .catch((errors) => console.log(errors));
     },
-    getUserData() {
+    getUserImages() {
       axios
-        .get("http://127.0.0.1:8000/api/user/properties", {
-          params: {},
+        .get('http://127.0.0.1:8000/api/user/users/' + this.$route.params.pk + '/images', {
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
         })
         .then((response) => {
-          console.log(response), (this.user_data = response.data);
-        })
-        .catch((errors) => console.log(errors));
-    },
-    getUserPreferences() {
-      axios
-        .get("http://127.0.0.1:8000/api/user/preferences", {
-          params: {},
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
-        .then((response) => {
-          console.log(response), (this.user_preferences = response.data);
+          console.log(response), (this.images = response.data);
+          console.log(response.data);
         })
         .catch((errors) => console.log(errors));
     },
@@ -448,32 +412,20 @@ export default {
       }
       return age;
     },
-    getUserImages() {
-      axios
-        .get("http://127.0.0.1:8000/api/user/users/2/images", {
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
-        .then((response) => {
-          console.log(response), (this.images = response.data);
-          console.log(response.data);
-        })
-        .catch((errors) => console.log(errors));
-    },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
-      else
-        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+      if (pic != null) return 'http://127.0.0.1:8000' + pic;
+      else return 'https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png';
     },
+    onSlideStart() {},
+    onSlideEnd() {},
+    slide() {},
   },
   created() {
     this.getUsers();
-    this.getUserPreferences();
     this.getUserImages();
   },
   mounted() {
-    $(".carousel").carousel();
+    $('.carousel').carousel();
   },
 };
 </script>
@@ -491,7 +443,7 @@ export default {
   object-fit: scale-down;
 }
 .card-text {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: left;
   font-size: 20px;
 }
