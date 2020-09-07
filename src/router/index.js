@@ -9,6 +9,7 @@ import Search from '../views/Search.vue'
 import Gallery from '../views/Gallery.vue'
 import UserProfile from '../views/UserProfile.vue'
 import Regulations from '../views/Regulations.vue'
+import Contact from '../views/Contact.vue'
 
 Vue.use(VueRouter)
 
@@ -18,20 +19,12 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      title: 'Home'
+      title: 'Home',
     }
   },
   {
     path: '/home',
     redirect: '/'
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: About,
-    meta: {
-      title: 'O nas'
-    }
   },
   {
     path: '/register',
@@ -69,7 +62,10 @@ const routes = [
     path: '/mainuser/search/:pk',
     name: 'userprofile',
     component: UserProfile,
-    params: true
+    params: true,
+    meta: {
+      title: 'Profil użytkownika'
+    }
   }, 
   {
     path: '/mainuser/gallery',
@@ -80,11 +76,27 @@ const routes = [
     }
   },
   {
-    path: '/regulations',
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: {
+      title: 'O nas'
+    }
+  },
+  {
+    path: '/regulamin',
     name: 'Regulations',
     component: Regulations,
     meta: {
       title: 'Regulamin'
+    }
+  },
+  {
+    path: '/kontakt',
+    name: 'Regulations',
+    component: Contact,
+    meta: {
+      title: 'Kontakt'
     }
   },
 ]
@@ -94,8 +106,7 @@ const router = new VueRouter({
   mode: 'history'
 })
 
-
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
   // LOGED OUT restrictions (not restricted: Home, Register, About)
   //to.name !== 'Home' && to.name !== 'Register' && to.name !== 'About'
   if (!['Home', 'Register', 'About', 'Regulations', 'Contact'].includes(to.name) && !localStorage.getItem("user-token")) {
@@ -140,6 +151,20 @@ router.beforeEach((to, from, next) => {
   })
     // Add the meta tags to the document head.
     .forEach(tag => document.head.appendChild(tag));
+}) */
+
+router.beforeEach((to, from, next) => {
+  if (!['Home', 'Register', 'About', 'Regulations', 'Contact'].includes(to.name) && !localStorage.getItem("user-token")) {
+    next({ name: 'Home' })
+  }
+  else if (['Register', 'Home'].includes(to.name) && localStorage.getItem("user-token")) {
+    next({ name: 'MainUser' })
+  }
+  else {
+    next()
+  }
+  document.title = to.meta.title
+  next()
 })
 
 export default router
