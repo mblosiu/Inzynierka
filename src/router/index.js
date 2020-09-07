@@ -93,7 +93,7 @@ const routes = [
   },
   {
     path: '/kontakt',
-    name: 'Regulations',
+    name: 'Contact',
     component: Contact,
     meta: {
       title: 'Kontakt'
