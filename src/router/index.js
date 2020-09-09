@@ -84,7 +84,7 @@ const routes = [
     }
   },
   {
-    path: '/regulamin',
+    path: '/regulations',
     name: 'Regulations',
     component: Regulations,
     meta: {
