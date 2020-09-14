@@ -489,9 +489,9 @@
               </form>
               <b-tab title="Opis profilu">
                 <div class="card text-black bg-dark mb-3">
-                  <br/>
+                  <br />
                   <p>
-                    <br/>
+                    <br />
                     {{user_data.description}}
                   </p>
                 </div>
@@ -501,6 +501,14 @@
                   class="card text-black bg-dark mb-3"
                 >funkcjonalności dot. funkcjonowania konta aż po jego usuwanie</div>
               </b-tab>
+              <b-alert
+                :show="dismissCountDown2"
+                dismissible
+                fade
+                variant="danger"
+                @dismissed="dismissCountDown2=0"
+                @dismiss-count-down="countDownChanged2"
+              >{{msg2}}</b-alert>
             </b-tabs>
             <p></p>
           </div>
@@ -729,12 +737,11 @@ export default {
           console.log(response);
         })
         .catch((errors) => {
-        
           if (errors.response.status != 200) {
             this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
           }
           console.log(errors);
-        })
+        });
     },
     getUserSettings() {},
     editUserSetting() {},

@@ -37,7 +37,7 @@
                         class="ml-2"
                         id="sex"
                         v-model="sex"
-                        size="sm"
+                        size="md"
                         value="sex"
                         placeholder="Płeć"
                       ></b-form-select>
@@ -50,7 +50,7 @@
                         class="ml-2"
                         id="location"
                         v-model="location"
-                        size="sm"
+                        size="md"
                         value="location"
                       ></b-form-select>
                     </div>
@@ -60,6 +60,7 @@
                       <b-form-input
                         type="number"
                         id="agemin"
+                        size="md"
                         placeholder="wiek min"
                         v-model="age_min"
                         class="form-control"
@@ -71,6 +72,7 @@
                       <input
                         type="number"
                         id="agemax"
+                        size="md"
                         placeholder="wiek maks"
                         v-model="age_max"
                         class="form-control"
@@ -89,7 +91,16 @@
                       />
                     </div>
                   </th>-->
-                  
+                  <th>
+                    <b-nav-form>
+                      <b-form-input
+                        size="md"
+                        class="mr-sm-2"
+                        placeholder="Nazwa użytkownika"
+                        v-model="searchText"
+                      ></b-form-input>
+                    </b-nav-form>
+                  </th>
                   <th>
                     <div id="filter">
                       <button type="submit" class="btn btn-primary float-right">Filtruj</button>
@@ -304,7 +315,7 @@ td {
   height: 100vh;
 }
 .navbar {
-  border-radius: 20px;
-  background-color: #344d72;
+  border-radius: 17px;
+  background: #344d72;
 }
 </style>

@@ -243,4 +243,9 @@ export default {
   align-content: center;
   width: 274px;
 }
+.card-body {
+  background: #344d72;
+  color: white;
+}
+
 </style>
