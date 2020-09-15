@@ -10,7 +10,7 @@
           <a href="/kontakt">Kontakt</a>
         </div>
         <div class="col-sm">
-          <a href="/regulamin">Regulamin</a>
+          <a href="/regulations">Regulamin</a>
         </div>
       </div>
       <br />

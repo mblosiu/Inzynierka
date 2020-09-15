@@ -2,16 +2,16 @@
   <div class="home">
     <b-container class="bv-example-row" fluid>
       <b-row>
-        <b-col cols="3"></b-col>
-        <b-col cols="5">
-          <h1>Witamy w e-love!</h1>
+        <b-col cols="4">
+          <h1>Witamy w e-love</h1>
         </b-col>
-        <b-col cols="4"></b-col>
+        <b-col cols="8"></b-col>
       </b-row>
       <br />
       <b-row>
-        <b-col class="leftside" cols="3">
-          <h2>Tu znajdziesz swoją drugą połówkę.</h2>
+        <b-col class="leftside" cols="4">
+          <h4>Tu znajdziesz swoją drugą połówkę!</h4>
+
           <br />
           <div class="text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et aliquet purus, ut facilisis ante. Phasellus
@@ -25,18 +25,20 @@
             quam id dui tincidunt, et pulvinar nibh vestibulum. Curabitur et lobortis massa, et fermentum diam.
           </div>
         </b-col>
-        <b-col cols="6"></b-col>
+        <b-col cols="5"></b-col>
         <b-col cols="3">
           <br />
-          <br />
+
           <div class="card text-black mb-3 rightside" style="width: 19rem;">
             <div class="card-body no-background">
               <br />
               <h3 class="card-title no-background">Nie masz konta?</h3>
               <br />
-              <p class="card-text no-background">Dołącz do społeczności e-love zakładając darmowe konto!</p>
+              <p
+                class="card-text no-background"
+              >Dołącz do społeczności e-love zakładając darmowe konto!</p>
               <br />
-              <a href="/register" class="btn btn-outline-warning">Zarejestruj się</a>
+              <a href="/register" class="btn-lg btn-warning">Zarejestruj się</a>
               <br />
             </div>
             <br />
@@ -52,7 +54,7 @@
 //import Register from "@/views/Register.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     //Register,
   },
@@ -66,20 +68,24 @@ text {
 .leftside {
   background-color: rgba(255, 255, 255, 0.3);
   padding: 20px;
-  color: #ce4861;
+  color: #812b3b;
   border-radius: 25px;
   border-style: solid;
   border-width: 1px;
-  border-color: #344d72;
+  border-color: #a89172;
+  background-color: #fdefddc0;
+  box-shadow: 1px 1px #a89172;
 }
 .rightside {
   background-color: rgba(255, 255, 255, 0.3);
   padding: 20px;
-  color: #ce4861;
+  color: #812b3b;
   border-radius: 25px;
   border-style: solid;
   border-width: 1px;
-  border-color: #344d72;
+  border-color: #a89172;
+  background-color: #fdefddc0;
+  box-shadow: 1px 1px #a89172;
 }
 .no-background {
   background-color: rgba(0, 0, 0, 0);
@@ -94,7 +100,8 @@ h2 {
   font-size: 20px;
 }
 h1 {
-  color: #ce4861;
+  color: #ad1717;
+  text-shadow: 1px 1px #ff0202;
 }
 .card text-black bg-secondary mb-3 {
   background-color: rgba(255, 255, 255, 0.3);

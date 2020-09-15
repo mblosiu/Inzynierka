@@ -1,8 +1,40 @@
 <template>
   <div class>
     <b-navbar class="navbar" toggleable="lg">
-      <a v-if="token == null" class="navbar-brand" href="/">e-Love</a>
-      <a v-else class="navbar-brand" href="/mainuser">e-Love</a>
+      <a v-if="token == null" class="navbar-brand" href="/">
+        e
+        <svg
+          width="0.85em"
+          height="0.85em"
+          viewBox="0 0 16 16"
+          class="bi bi-heart"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+          />
+        </svg>
+        Love
+      </a>
+      <a v-else class="navbar-brand" href="/mainuser">
+        e
+        <svg
+          width="0.85em"
+          height="0.85em"
+          viewBox="0 0 16 16"
+          class="bi bi-heart"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+          />
+        </svg>
+        Love
+      </a>
 
       <div v-if="token!=null" href="/mainuser">
         <b-avatar href="/mainuser" :src="getUrl(user_data.profile_picture)"></b-avatar>
@@ -78,14 +110,14 @@
             size="sm"
             class="mr-sm-2"
             v-model="username"
-            placeholder="username"
+            placeholder="nazwa użytkownika"
             name="username"
           />
           <b-form-input
             id="password"
             size="sm"
             class="mr-sm-2"
-            placeholder="password"
+            placeholder="hasło"
             type="password"
             v-model="password"
             name="password"
