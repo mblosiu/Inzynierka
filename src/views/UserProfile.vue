@@ -140,8 +140,9 @@
                             @sliding-end="onSlideEnd"
                           >
                             <div v-for="image in images" v-bind:key="image.id" style="padding-bottom:2px;">
+                              {{ getUrl(image.image) }}
                               <b-carousel-slide :img-src="getUrl(image.image)">
-                                <!--<img :src="getUrl(image.image)" class="img-fluid" alt="Responsive image">-->
+                                <!--<img :src="getUrl(image.image)" class="img-fluid" alt="Responsive image" />-->
                               </b-carousel-slide>
                             </div>
                           </b-carousel>
@@ -388,9 +389,9 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      user: [],
+      user: {},
       user_preferences: {},
-      images: [],
+      images: {},
     };
   },
   methods: {
@@ -403,10 +404,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response),
-            (this.user = response.data),
-            (this.user_preferences = this.user.preferences),
-            console.log(this.user_preferences);
+          console.log(response), (this.user = response.data), (this.user_preferences = this.user.preferences);
         })
         .catch((errors) => console.log(errors));
     },
@@ -418,8 +416,8 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response), (this.images = response.data);
-          console.log(response.data);
+          this.images = response.data;
+          console.log(this.images[0]);
         })
         .catch((errors) => console.log(errors));
     },
