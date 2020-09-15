@@ -130,6 +130,7 @@
                           <b-carousel
                             id="carousel-1"
                             v-model="slide"
+                            :interval="4000"
                             controls
                             indicators
                             background="#ababab"
@@ -140,10 +141,11 @@
                             @sliding-end="onSlideEnd"
                           >
                             <div v-for="image in images" v-bind:key="image.id" style="padding-bottom:2px;">
-                              {{ getUrl(image.image) }}
+                              
                               <b-carousel-slide :img-src="getUrl(image.image)">
-                                <!--<img :src="getUrl(image.image)" class="img-fluid" alt="Responsive image" />-->
+                                <!--{{ getUrl(image.image) }}-->
                               </b-carousel-slide>
+
                             </div>
                           </b-carousel>
                         </div>
@@ -385,7 +387,6 @@
 
 <script>
 import axios from 'axios';
-
 export default {
   data() {
     return {
@@ -437,7 +438,7 @@ export default {
     },
     onSlideStart() {},
     onSlideEnd() {},
-    slide() {},
+    //slide() {},
   },
   created() {
     this.getUsers();
