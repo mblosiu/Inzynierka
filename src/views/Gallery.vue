@@ -244,8 +244,11 @@ export default {
   width: 274px;
 }
 .card-body {
-  background: #344d72;
+  background: #8d1515;
   color: white;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #aa1d37;
 }
 
 </style>

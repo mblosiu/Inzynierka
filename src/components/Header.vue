@@ -125,10 +125,6 @@
           <b-button v-on:click="login" type="submit" size="sm" class="btn btn-success mr-2">Zaloguj</b-button>
         </b-nav-form>
 
-        <!--<b-nav-form @submit.prevent="register" v-if="token == null">
-          <router-link class="btn btn-outline-warning" type="submit" to="/register">Rejestracja</router-link>
-        </b-nav-form>-->
-
         <b-nav-form @submit.prevent="logout" v-if="token != null">
           <b-button type="submit" size="sm" class="btn btn-danger mr-1">Wyloguj</b-button>
         </b-nav-form>
@@ -189,7 +185,6 @@ export default {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
     },
     login() {
-      //this.showMsg(), (this.msg = "Błędny login lub hasło!");
       axios
         .post("http://127.0.0.1:8000/api/user/login", {
           username: this.username,
@@ -244,7 +239,7 @@ export default {
   align-content: inherit;
 }
 .navbar {
-  background-color: #344d72;
+  background-color: #ce3854a1;
 }
 .b-avatar {
   margin-left: 10px;

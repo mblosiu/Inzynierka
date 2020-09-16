@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="1"></b-col>
         <b-col cols="10">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light border border-dark">
+          <nav class="navbar navbar-expand-lg">
             <div
               data-toggle="tooltip"
               data-placement="right"
@@ -303,11 +303,14 @@ td {
   color: white;
 }
 .user-card {
-  background: #283c58;
+  background: #8d1515;
   color: white;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #aa1d37;
 }
 .user-card:hover {
-  background: #354f74;
+  background: #aa1a1a;
 }
 .scroll {
   height: 100%;
@@ -316,6 +319,9 @@ td {
 }
 .navbar {
   border-radius: 17px;
-  background: #344d72;
+  background-color: #db4460;
+}
+.title{
+
 }
 </style>
