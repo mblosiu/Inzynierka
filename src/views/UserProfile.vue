@@ -127,7 +127,7 @@
                     <b-modal
                       id="bv-modal-example"
                       size="lg"
-                      title="Galeria użytkownika"
+                      title="Galeria użytkownika" + {{user.username}}
                       hide-footer
                     >
                       <div v-if="images != []">
@@ -142,13 +142,11 @@
                             img-width="100%"
                             img-height="100%"
                             style="text-shadow: 1px 1px 2px #333;"
-                            @sliding-start="onSlideStart"
-                            @sliding-end="onSlideEnd"
                           >
                             <div
                               v-for="image in images"
                               v-bind:key="image.id"
-                              style="padding-bottom:2px;"
+                              style="padding-bottom:2px; img-height:50%;"
                             >
                               <b-carousel-slide :img-src="getUrl(image.image)"></b-carousel-slide>
                             </div>
@@ -465,8 +463,8 @@ export default {
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
-    onSlideStart() {},
-    onSlideEnd() {},
+    //onSlideStart() {},
+    //onSlideEnd() {},
     //slide() {},
   },
   created() {
@@ -519,7 +517,7 @@ export default {
 .card-header {
   background: #9e1d35;
 }
-.bvmodal {
+.bv-modal-example {
   background: #eb6767;
 }
 </style>

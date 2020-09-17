@@ -340,7 +340,7 @@
             </form>
             <form class="card" @submit.prevent="editUserPreferences">
               <b-tab title="Twoje preferencje">
-                <div class="card text-black bg-dark mb-3">
+                <div class="card text-black">
                   <ul class="list-group list-group-flush">
                     <ul class="list-group-item">
                       <b-row>
@@ -453,7 +453,7 @@
                             class="form-control"
                             id="is_smoking_preference"
                             v-model="user_preferences.is_smoking_preference"
-                            :options="smoking_options"
+                            :options="smoking_options2"
                           ></b-form-select>
                         </b-col>
                         <b-col cols="6">
@@ -462,15 +462,9 @@
                             class="form-control"
                             id="is_drinking_preference"
                             v-model="user_preferences.is_drinking_alcohol_preference"
-                            :options="alcohol_options"
+                            :options="alcohol_options2"
                           ></b-form-select>
                         </b-col>
-                      </b-row>
-                    </ul>
-                    <ul class="list-group-item">
-                      <b-row>
-                        <b-col cols="6"></b-col>
-                        <b-col cols="6"></b-col>
                       </b-row>
                     </ul>
                   </ul>
@@ -483,7 +477,7 @@
               </b-tab>
             </form>
             <b-tab title="Opis profilu">
-              <div class="card text-black bg-dark mb-3">
+              <div class="card text-black">
                 <br />
                 <p>
                   <br />
@@ -492,9 +486,7 @@
               </div>
             </b-tab>
             <b-tab title="Ustawienia prywatności">
-              <div
-                class="card text-black bg-dark mb-3"
-              >funkcjonalności dot. funkcjonowania konta aż po jego usuwanie</div>
+              <div class="card text-black">sprawy dot. funkcjonowania konta aż po jego usuwanie</div>
             </b-tab>
           </b-tabs>
           <p></p>
@@ -599,9 +591,25 @@ export default {
         { value: "3", text: "codziennie" },
         { value: "4", text: "nałogowo" },
       ],
+      smoking_options2: [
+        { value: null, text: "" },
+        { value: "0", text: "nie pali" },
+        { value: "1", text: "okazjonalnie" },
+        { value: "2", text: "często" },
+        { value: "3", text: "codziennie" },
+        { value: "4", text: "nałogowo" },
+      ],
       alcohol_options: [
         { value: null, text: "" },
         { value: "0", text: "nie piję" },
+        { value: "1", text: "okazjonalnie" },
+        { value: "2", text: "często" },
+        { value: "3", text: "codziennie" },
+        { value: "4", text: "nałogowo" },
+      ],
+      alcohol_options2: [
+        { value: null, text: "" },
+        { value: "0", text: "nie pije" },
         { value: "1", text: "okazjonalnie" },
         { value: "2", text: "często" },
         { value: "3", text: "codziennie" },
@@ -748,7 +756,7 @@ export default {
   margin-right: auto;
   border-radius: 25px;
   padding: 0.5cm;
-  background: #343a40;
+  background: #fadbdb;
   color: white;
 }
 .preferences {
@@ -759,7 +767,7 @@ export default {
 
   border-radius: 25px;
   padding: 0.5cm;
-  background: #343a40;
+  background: #fadbdb;
   color: white;
 }
 .settings {
@@ -769,7 +777,7 @@ export default {
   margin-right: auto;
   border-radius: 25px;
   padding: 0.5cm;
-  background: #343a40;
+  background: #fadbdb;
   color: white;
 }
 table {
@@ -788,10 +796,10 @@ table {
   border-width: 2px;
   border-color: #aa1d37;
 }
-.card{
+.card {
   background: #fadbdb;
 }
-.tab{
+.tab {
   background: #fadbdb;
 }
 </style>

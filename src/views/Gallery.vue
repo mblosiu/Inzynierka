@@ -237,6 +237,7 @@ export default {
   height: 100%;
   overflow-y: scroll;
   height: 100vh;
+  
 }
 .alert {
   margin-left: 40px;

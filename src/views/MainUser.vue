@@ -3,7 +3,7 @@
     <b-row>
       <b-col cols="2">
         <div class="nav">
-          <b-nav vertical class="w-11">
+          <b-nav vertical>
             <b-nav-item active>Active</b-nav-item>
             <b-nav-item>Link</b-nav-item>
             <b-nav-item>Another Link</b-nav-item>
@@ -31,12 +31,12 @@
                   ></textarea>
                   <button type="submit" class="btn btn-secondary">Zapisz</button>
                   <b-alert
-                  :show="dismissCountDown"
-                  fade
-                  variant="success"
-                  @dismissed="dismissCountDown=0"
-                  @dismiss-count-down="countDownChanged"
-                >{{msg}}</b-alert>
+                    :show="dismissCountDown"
+                    fade
+                    variant="success"
+                    @dismissed="dismissCountDown=0"
+                    @dismiss-count-down="countDownChanged"
+                  >{{msg}}</b-alert>
                 </form>
               </div>
             </b-card-text>
@@ -50,52 +50,150 @@
             <b-tab title="O mnie" active>
               <div class="card text-black bg-dark mb-3">
                 <ul class="list-group list-group-flush">
-                  <li
-                    class="list-group-item"
-                  >Imię i nazwisko: {{user_data.name}} {{user_data.surname}}</li>
-                  <li class="list-group-item">Płeć: {{user_data.sex}}</li>
-                  <li class="list-group-item">Wiek: {{getAge(user_data.birthday)}}</li>
-                  <li class="list-group-item">Mieszkam w: {{user_data.location}}</li>
-                  <li class="list-group-item">Urodziny: {{user_data.birthday}}</li>
-                  <li class="list-group-item">Status: {{user_data.status}}</li>
-                  <li class="list-group-item">Wykształcenie:{{user_data.education}}</li>
-                  <div smoking>
-                    <div v-if="user_data.is_smoking==0">
-                      <li class="list-group-item">Papierosy: nie palę</li>
+                  <li class="list-group-item">
+                    Imię i nazwisko:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.name}} {{user_data.surname}}</p>
                     </div>
-                    <div v-else-if="user_data.is_smoking==1">
-                      <li class="list-group-item">Papierosy: okazjonalnie</li>
+                  </li>
+                  <li class="list-group-item">
+                    Płeć:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.sex}}</p>
                     </div>
-                    <div v-else-if="user_data.is_smoking==2">
-                      <li class="list-group-item">Papierosy: często</li>
+                  </li>
+                  <li class="list-group-item">
+                    Wiek:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{getAge(user_data.birthday)}}</p>
                     </div>
-                    <div v-else-if="user_data.is_smoking==3">
-                      <li class="list-group-item">Papierosy: codziennie</li>
+                  </li>
+                  <li class="list-group-item">
+                    Mieszkam w:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.location}}</p>
                     </div>
-                    <div v-else-if="user_data.is_smoking==4">
-                      <li class="list-group-item">Papierosy: nałogowo</li>
+                  </li>
+                  <li class="list-group-item">
+                    Urodziny:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.birthday}}</p>
                     </div>
-                    <div v-else>
-                      <li class="list-group-item">Papierosy: {{user_data.is_smoking}}</li>
+                  </li>
+                  <li class="list-group-item">
+                    Status:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.status}}</p>
                     </div>
+                  </li>
+                  <li class="list-group-item">
+                    Wykształcenie:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.education}}</p>
+                    </div>
+                  </li>
+
+                  <!--<li class="list-group-item">
+                    <div class="oneline">
+                      <p class="font-weight-bold"></p>
+                    </div>
+                  </li>-->
+                  <div v-if="user_data.is_smoking==0">
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">nie palę</p>
+                      </div>
+                    </li>
                   </div>
-                  <div v-if="user_data.is_drinking_alcohol==0">
-                    <li class="list-group-item">Alkohol: nie piję</li>
+                  <div v-else-if="user_data.is_smoking==1">
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">okazjonalnie</p>
+                      </div>
+                    </li>
                   </div>
-                  <div v-else-if="user_data.is_drinking_alcohol==1">
-                    <li class="list-group-item">Alkohol: okazjonalnie</li>
+                  <div v-else-if="user_data.is_smoking==2">
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">często</p>
+                      </div>
+                    </li>
                   </div>
-                  <div v-else-if="user_data.is_drinking_alcohol==2">
-                    <li class="list-group-item">Alkohol: często</li>
+                  <div v-else-if="user_data.is_smoking==3">
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">codziennie</p>
+                      </div>
+                    </li>
                   </div>
-                  <div v-else-if="user_data.is_drinking_alcohol==3">
-                    <li class="list-group-item">Alkohol: codziennie</li>
-                  </div>
-                  <div v-else-if="user_data.is_drinking_alcohol==4">
-                    <li class="list-group-item">Alkohol: nałogowo</li>
+                  <div v-else-if="user_data.is_smoking==4">
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">nałogowo</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else>
-                    <li class="list-group-item">Alkohol: {{user_data.is_drinking_alcohol}}</li>
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">?</p>
+                      </div>
+                    </li>
+                  </div>
+
+                  <div v-if="user_data.is_drinking_alcohol==0">
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">nie piję</p>
+                      </div>
+                    </li>
+                  </div>
+                  <div v-else-if="user_data.is_drinking_alcohol==1">
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">okazjonalnie</p>
+                      </div>
+                    </li>
+                  </div>
+                  <div v-else-if="user_data.is_drinking_alcohol==2">
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">często</p>
+                      </div>
+                    </li>
+                  </div>
+                  <div v-else-if="user_data.is_drinking_alcohol==3">
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">codziennie</p>
+                      </div>
+                    </li>
+                  </div>
+                  <div v-else-if="user_data.is_drinking_alcohol==4">
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">nałogowo</p>
+                      </div>
+                    </li>
+                  </div>
+                  <div v-else>
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">?</p>
+                      </div>
+                    </li>
                   </div>
                 </ul>
               </div>
@@ -103,85 +201,255 @@
             <b-tab title="Mój wygląd">
               <div class="card text-black bg-dark mb-3">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Wzrost: {{user_data.growth}}</li>
-                  <li class="list-group-item">Waga: {{user_data.weight}}</li>
-                  <li
-                    class="list-group-item"
-                  >Włosy: {{user_data.hair_length}} {{user_data.hair_color}}</li>
-                  <li class="list-group-item">Kolor oczu: {{user_data.eye_color}}</li>
-                  <li class="list-group-item">Sylwetka: {{user_data.body_type}}</li>
+                  <li class="list-group-item">
+                    Wzrost:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.growth}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Waga:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.weight}}</p>
+                    </div>
+                  </li>
+
+                  <li class="list-group-item">
+                    Włosy:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.hair_length}} {{user_data.hair_color}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Kolor oczu:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.eye_color}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Sylwetka:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.body_type}}</p>
+                    </div>
+                  </li>
+
                   <li class="list-group-item">
                     Znaki szczególne:
-                    <p v-if="user_data.freckles!=false">mam piegi</p>
-                    <p v-if="user_data.glasses!=false">noszę okulary</p>
+                    <div class="oneline" v-if="user_data.freckles!=false">
+                      <p class="font-weight-bold">mam piegi</p>
+                    </div>
+                    <div class="oneline" v-if="user_data.glasses!=false">
+                      <p class="font-weight-bold">noszę okulary</p>
+                    </div>
                   </li>
-                  <li class="list-group-item"></li>
                 </ul>
               </div>
             </b-tab>
             <b-tab title="Zainteresowania">
               <div class="card text-black bg-dark mb-3">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Rozrywka i hobby: {{user_data.hobbies}}</li>
-                  <li class="list-group-item">Sport: {{user_data.sport}}</li>
-                  <li class="list-group-item">Muzyka: {{user_data.music}}</li>
-                  <li class="list-group-item">Kuchnia: {{user_data.cooking}}</li>
-                  <li class="list-group-item">Ulubione miejsce: {{user_data.favourite_place}}</li>
-                  <li class="list-group-item">Największa pasja: {{user_data.passion}}</li>
+                  <li class="list-group-item">
+                    Rozrywka i hobby:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.hobbies}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Sport:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.sport}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Muzyka:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.music}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Kuchnia:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.cooking}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Ulubione miejsce:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.favourite_place}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Największa pasja:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.passion}}</p>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </b-tab>
             <b-tab title="Moje preferencje">
-              <div class="card text-black bg-dark mb-3">
+              <div class="card text-black">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Orientacja: {{user_preferences.orientation}}</li>
-                  <li
+                  <li class="list-group-item">
+                    Orientacja:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_preferences.orientation}}</p>
+                    </div>
+                  </li>
+                  <!--<li
                     class="list-group-item"
-                  >Przedział wiekowy: {{user_preferences.age_preference_min}} - {{user_preferences.age_preference_max}}</li>
-                  <li class="list-group-item">Edukacja: {{user_preferences.education_preference}}</li>
-                  <li class="list-group-item">Waga: do {{user_preferences.weight_preference}} kg</li>
-                  <li class="list-group-item">Sylwetka: {{user_preferences.body_type_preference}}</li>
-                  <li class="list-group-item">Włosy:</li>
-                  <li class="list-group-item">Kolor oczu: {{user_preferences.eye_color_preference}}</li>
+                  >Przedział wiekowy: {{user_preferences.age_preference_min}} - {{user_preferences.age_preference_max}}</li>-->
+                  <li class="list-group-item">
+                    Przedział wiekowy:
+                    <div class="oneline" v-if="user_preferences.age_preference_min!=null">
+                      <p class="font-weight-bold">od {{user_preferences.age_preference_min}}</p>
+                    </div>
+                    <div class="oneline" v-if="user_preferences.age_preference_max!=null">
+                      <p class="font-weight-bold">do {{user_preferences.age_preference_max}}</p>
+                    </div>
+                  </li>
+
+                  <li class="list-group-item">
+                    Edukacja:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_preferences.education_preference}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Waga:
+                    <div class="oneline" v-if="user_preferences.weight_preference!=null">
+                      <p class="font-weight-bold">do {{user_preferences.weight_preference}} kg</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Sylwetka:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_preferences.body_type_preference}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Włosy:
+                    <div class="oneline">
+                      <p class="font-weight-bold"></p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Kolor oczu:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_preferences.eye_color_preference}}</p>
+                    </div>
+                  </li>
                   <li class="list-group-item">
                     Znaki szczególne:
-                    <p v-if="user_preferences.freckles_preference!=false">piegi</p>
-                    <p v-if="user_preferences.glasses_preference!=false">okulary</p>
+                    <div class="oneline" v-if="user_preferences.freckles_preference!=false">
+                      <p class="font-weight-bold">piegi</p>
+                    </div>
+                    <div class="oneline" v-if="user_preferences.glasses_preference!=false">
+                      <p>_</p>
+                    </div>
+                    <div class="oneline" v-if="user_preferences.glasses_preference!=false">
+                      <p class="font-weight-bold">okulary</p>
+                    </div>
                   </li>
 
                   <div v-if="user_preferences.is_smoking_preference==0">
-                    <li class="list-group-item">Papierosy: nie pali</li>
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">nie pali</p>
+                      </div>
+                    </li>
                   </div>
+
                   <div v-else-if="user_preferences.is_smoking_preference==1">
-                    <li class="list-group-item">Papierosy: okazjonalnie</li>
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">okazjonalnie</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else-if="user_preferences.is_smoking_preference==2">
-                    <li class="list-group-item">Papierosy: często</li>
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">często</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else-if="user_preferences.is_smoking_preference==3">
-                    <li class="list-group-item">Papierosy: codziennie</li>
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">codziennie</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else-if="user_preferences.is_smoking_preference==4">
-                    <li class="list-group-item">Papierosy: nałogowo</li>
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">nałogowo</p>
+                      </div>
+                    </li>
+                  </div>
+                  <div v-else>
+                    <li class="list-group-item">
+                      Papierosy:
+                      <div class="oneline">
+                        <p class="font-weight-bold">obojętne</p>
+                      </div>
+                    </li>
                   </div>
 
                   <div v-if="user_preferences.is_drinking_alcohol_preference==0">
-                    <li class="list-group-item">Alkohol: nie pije</li>
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">nie pije</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else-if="user_preferences.is_drinking_alcohol_preference==1">
-                    <li class="list-group-item">Alkohol: okazjonalnie</li>
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">okazjonalnie</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else-if="user_preferences.is_drinking_alcohol_preference==2">
-                    <li class="list-group-item">Alkohol: często</li>
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">często</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else-if="user_preferences.is_drinking_alcohol_preference==3">
-                    <li class="list-group-item">Alkohol: codziennie</li>
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">codziennie</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else-if="user_preferences.is_drinking_alcohol_preference==4">
-                    <li class="list-group-item">Alkohol: nałogowo</li>
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">nałogowo</p>
+                      </div>
+                    </li>
                   </div>
                   <div v-else>
                     <li class="list-group-item">Alkohol: {{user_data.is_drinking_alcohol}}</li>
+                    <li class="list-group-item">
+                      Alkohol:
+                      <div class="oneline">
+                        <p class="font-weight-bold">obojętnie</p>
+                      </div>
+                    </li>
                   </div>
                 </ul>
               </div>
@@ -189,23 +457,72 @@
             <b-tab title="Cechy charakteru">
               <div class="card text-black bg-dark mb-3">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Pewność siebie: {{user_data.assertiveness}}</li>
-                  <li class="list-group-item">Szczerość: {{user_data.sincerity}}</li>
-                  <li class="list-group-item">Empatia: {{user_data.empathy}}</li>
-                  <li class="list-group-item">Komunikatywność: {{user_data.communication}}</li>
-                  <li class="list-group-item">Bezinteresowność: {{user_data.selflessness}}</li>
-                  <li class="list-group-item">Uczciwość: {{user_data.honesty}}</li>
-                  <li class="list-group-item">Sumienność: {{user_data.scrupulousness}}</li>
-                  <li class="list-group-item">Pracowitość: {{user_data.diligence}}</li>
-                  <li class="list-group-item">Życzliwość: {{user_data.kindness}}</li>
-                  <li class="list-group-item">Romantyczność: (?)</li>
+                  <li class="list-group-item">
+                    Pewność siebie:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.assertiveness}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Szczerość:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.sincerity}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Empatia:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.empathy}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Komunikatywność:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.communication}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Bezinteresowność:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.selflessness}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Uczciwość:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.honesty}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Sumienność:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.scrupulousness}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Pracowitość:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.diligence}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Życzliwość:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{user_data.kindness}}</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    Romantyczność:
+                    <div class="oneline">
+                      <p class="font-weight-bold">(?)</p>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </b-tab>
           </b-tabs>
         </div>
       </b-col>
-      
     </b-row>
   </div>
 </template>
@@ -320,8 +637,8 @@ export default {
   width: 100%;
 }
 .card-img-top {
-  height: 300px;
-  object-fit:cover;
+  max-height: 400px;
+  object-fit: cover;
 }
 .card-text {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -363,5 +680,13 @@ textarea {
   width: 100%;
   padding-left: 0mm;
   margin-left: 0mm;
+}
+.oneline {
+  display: inline-block;
+}
+.h5 {
+}
+.h6 {
+  align-content: left;
 }
 </style>
