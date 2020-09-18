@@ -6,7 +6,7 @@ from ..models import User, Preferences, Settings, Image
 class UserPreferencesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Preferences
-        fields = ['orientation', 'hair_color_blonde_preference', 'hair_color_brunette_preference',
+        fields = ['hair_color_blonde_preference', 'hair_color_brunette_preference',
                   'hair_color_red_preference', 'growth_preference', 'weight_preference', 'body_type_preference',
                   'is_smoking_preference', 'is_drinking_alcohol_preference']
 
@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['pk', 'email', 'username', 'last_login', 'is_active', 'name', 'surname', 'birthday', 'location',
                   'profile_picture', 'description', 'sex', 'hair_color', 'hair_length', 'growth', 'weight', 'body_type',
                   'freckles', 'glasses', 'is_smoking', 'is_drinking_alcohol', 'eye_color', 'education', 'passion',
-                  'favourite_place', 'status', 'preferences', 'settings'
+                  'favourite_place', 'status', 'preferences', 'settings', 'orientation'
                   ]
 
 

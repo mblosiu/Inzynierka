@@ -83,6 +83,11 @@ class UserProfileView(APIView):
         description = request.data.get('description', '')
         is_smoking = request.data.get('is_smoking', False)
         is_drinking_alcohol = request.data.get('is_drinking_alcohol', False)
+        orientation = request.data.get('orientation', '')
+        eye_color = request.data.get('eye_color', '')
+        hair_length = request.data.get('hair_length', '')
+        status1 = request.data.get('status', '')
+        education = request.data.get('education', '')
 
         if email in [None, '', account.email]:
             response["email"] = "no changes"
@@ -117,7 +122,35 @@ class UserProfileView(APIView):
         else:
             account.sex = sex.capitalize()
             response["sex"] = "updated"
+        if orientation == account.orientation:
+            response["orientation"] = "no changes"
+        else:
+            account.orientation = orientation.capitalize()
+            response["orientation"] = "updated"
 
+        if status1 == account.status:
+            response["status"] = "no changes"
+        else:
+            account.status = status1.capitalize()
+            response["status"] = "updated"
+
+        if education == account.education:
+            response["education"] = "no changes"
+        else:
+            account.education = education.capitalize()
+            response["education"] = "updated"
+
+        if hair_length == account.hair_length:
+            response["hair_length"] = "no changes"
+        else:
+            account.hair_length = hair_length
+            response["hair_length"] = "updated"
+
+        if eye_color == account.eye_color:
+            response["eye_color"] = "no changes"
+        else:
+            account.eye_color = eye_color.capitalize()
+            response["eye_color"] = "updated"
         if hair_color in [None, '', account.hair_color]:
             response["hair_color"] = "no changes"
         else:
@@ -183,7 +216,6 @@ class PreferencesView(APIView):
 
         response = {}
 
-        orientation = request.data.get('orientation', '')
         hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', '')
         hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', '')
         hair_color_red_preference = request.data.get('hair_color_red_preference', '')
@@ -192,12 +224,6 @@ class PreferencesView(APIView):
         body_type_preference = request.data.get('body_type_preference', '')
         is_smoking_preference = request.data.get('is_smoking_preference', '')
         is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', '')
-
-        if orientation == preferences.orientation:
-            response["orientation"] = "no changes"
-        else:
-            preferences.orientation = orientation.capitalize()
-            response["orientation"] = "updated"
 
         if hair_color_blonde_preference == preferences.hair_color_blonde_preference:
             response["hair_color_blonde_preference"] = "no changes"
@@ -448,6 +474,7 @@ class UserImage(APIView):
         else:
             return Response({"detail": "file not exists"}, status=status.HTTP_400_BAD_REQUEST)
 
+
 @permission_classes([IsAuthenticated])
 class ImageByUserId(viewsets.ReadOnlyModelViewSet):
     @staticmethod
@@ -458,6 +485,7 @@ class ImageByUserId(viewsets.ReadOnlyModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 # USER LIST - SEARCHER
 @permission_classes([IsAuthenticated])
 class UserListView(viewsets.ReadOnlyModelViewSet):
@@ -467,6 +495,7 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
                      'hair_color', 'body_type', 'is_smoking',
                      'is_drinking_alcohol']
     queryset = User.objects.all()
+    queryset = User.objects.all()
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -474,29 +503,36 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
 
         name = request.query_params.get('name', None)
         surname = request.query_params.get('surname', None)
-        location = request.query_params.get('location', None)
+
         sex = request.query_params.get('sex', None)
+        location = request.query_params.get('location', None)
+        hair_length = request.query_params.get('hair_length', None)
         hair_color = request.query_params.get('hair_color', None)
         growth = request.query_params.get('growth', None)
-        weight = request.query_params.get('weight', None)
         body_type = request.query_params.get('body_type', None)
         is_smoking = request.query_params.get('is_smoking', None)
         is_drinking_alcohol = request.query_params.get('is_drinking_alcohol', None)
+        orientation = request.query_params.get('orientation', None)
+        eye_color = request.query_params.get('eye_color', None)
 
-        if not (name is None or name == ''):
-            queryset = queryset.filter(name=name)
-        if not (surname is None or surname == ''):
-            queryset = queryset.filter(surname=surname)
         if not (location is None or location == ''):
             queryset = queryset.filter(location=location)
         if not (sex is None or sex == ''):
             queryset = queryset.filter(sex=sex)
+        if not (orientation is None or orientation == ''):
+            queryset = queryset.filter(orientation=orientation)
+        if not (eye_color is None or eye_color == ''):
+            queryset = queryset.filter(eye_color=eye_color)
+        if not (name is None or name == ''):
+            queryset = queryset.filter(name=name)
+        if not (surname is None or surname == ''):
+            queryset = queryset.filter(surname=surname)
         if not (hair_color is None or hair_color == ''):
             queryset = queryset.filter(hair_color=hair_color)
         if not (growth is None or growth == ''):
             queryset = queryset.filter(growth=growth)
-        if not (weight is None or weight == ''):
-            queryset = queryset.filter(weight=weight)
+        if not (hair_length is None or hair_length == ''):
+            queryset = queryset.filter(hair_length=hair_length)
         if not (body_type is None or body_type == ''):
             queryset = queryset.filter(body_type=body_type)
         if not (is_smoking is None or is_smoking == ''):
