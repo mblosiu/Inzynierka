@@ -75,9 +75,9 @@
                       <br />
                       <select class="ml-2" name="Sex" id="Sex" v-model="sex" required>
                         <br />
-                        <option>mężczyzna</option>
-                        <option>kobieta</option>
-                        <option>inna</option>
+                        <option>Mężczyzna</option>
+                        <option>Kobieta</option>
+                        <option>Inna</option>
                       </select>
                     </b-col>
                   </b-row>
@@ -212,7 +212,7 @@ h5 {
 .card {
   background: #723434;
 }
-.list-group-item{
+.list-group-item {
   background: #fadbdb;
 }
 </style>
