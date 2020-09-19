@@ -113,6 +113,7 @@
 
                   <ul class="list-group-item">
                     <b-row>
+                      <b-col cols="3"></b-col>
                       <b-col cols="6">
                         <label for="status" class="grey-text">Orientacja</label>
                         <b-form-select
@@ -122,6 +123,7 @@
                           :options="orientation_options"
                         ></b-form-select>
                       </b-col>
+                      <b-col cols="3"></b-col>
                     </b-row>
                   </ul>
                 </ul>
@@ -358,27 +360,39 @@
                   <ul class="list-group list-group-flush">
                     <ul class="list-group-item">
                       <b-row>
-                        <b-col cols="6">
+                        <b-col cols="12">
                           <label for="age_preference_min" class="white-text">Przedział wiekowy</label>
                           <b-row>
-                            <b-col cols="6">
-                              <input
-                                type="number"
-                                id="age_preference_min"
-                                placeholder="wiek minimalny"
-                                v-model="user_preferences.age_preference_min"
-                                class="form-control"
-                              />
+                            <b-col cols="3"></b-col>
+                            <b-col cols="3">
+                              <div>
+                                <div
+                                  class="mt-2"
+                                >Wiek minimalny: {{ user_preferences.age_preference_min }}</div>
+                                <b-form-input
+                                  id="user_preferences.age_preference_min"
+                                  v-model="user_preferences.age_preference_min"
+                                  type="range"
+                                  min="18"
+                                  max="99"
+                                ></b-form-input>
+                              </div>
                             </b-col>
-                            <b-col cols="6">
-                              <input
-                                type="number"
-                                id="age_preference_max"
-                                placeholder="wiek maksymalny"
-                                v-model="user_preferences.age_preference_max"
-                                class="form-control"
-                              />
+                            <b-col cols="3">
+                              <div>
+                                <div
+                                  class="mt-2"
+                                >Wiek maksymalny: {{ user_preferences.age_preference_max }}</div>
+                                <b-form-input
+                                  id="age_preference_max"
+                                  v-model="user_preferences.age_preference_max"
+                                  type="range"
+                                  :min="user_preferences.age_preference_min"
+                                  max="100"
+                                ></b-form-input>
+                              </div>
                             </b-col>
+                            <b-col cols="3"></b-col>
                           </b-row>
                         </b-col>
                       </b-row>
@@ -395,14 +409,30 @@
                           ></b-form-select>
                         </b-col>
                         <b-col cols="6">
-                          <label for="weight_preference" class="white-text">Waga maks</label>
-                          <input
+                          <label
+                            for="weight_preference"
+                            class="white-text"
+                          >Waga maks: {{user_preferences.weight_preference}}</label>
+                          <b-row>
+                            <b-col cols="2"></b-col>
+                            <b-col cols="8">
+                              <b-form-input
+                                id="weight_preference"
+                                v-model="user_preferences.weight_preference"
+                                type="range"
+                                min="40"
+                                max="200"
+                              ></b-form-input>
+                            </b-col>
+                            <b-col cols="2"></b-col>
+                          </b-row>
+                          <!--<input
                             type="number"
                             id="weight_preference"
                             placeholder="maksymalna waga"
                             v-model="user_preferences.weight_preference"
                             class="form-control"
-                          />
+                          />-->
                         </b-col>
                       </b-row>
                     </ul>
@@ -543,6 +573,7 @@ export default {
       dismissCountDown: 0,
       dismissSecs2: 5,
       dismissCountDown2: 0,
+      calculated: 0,
       msg2: "",
       sex_options: [
         { value: null, text: "" },
@@ -794,6 +825,9 @@ export default {
     this.getUserPreferences();
     this.getUserSettings();
   },
+  computed() {
+    this.user_preferences.age_preference_min;
+  },
 };
 </script>
 
@@ -860,5 +894,8 @@ table {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
+}
+.range-1 {
+  background: brown;
 }
 </style>

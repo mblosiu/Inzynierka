@@ -121,6 +121,41 @@
                     </div>
                   </th>
                   <th>
+                    <b-row>
+                      <b-col cols="2"></b-col>
+                      <b-col cols="8">
+                        <div class="p-1 text-white text-i"><h6>Przedział wiekowy: {{ age_min }} - {{ age_max }}</h6></div>
+                      </b-col>
+                      <b-col cols="2"></b-col>
+                    </b-row>
+                    <b-row>
+                      <b-col cols="1"></b-col>
+                      <b-col cols="5">
+                        <div>
+                          <b-form-input
+                            id="age_min"
+                            v-model="age_min"
+                            type="range"
+                            min="18"
+                            max="99"
+                          ></b-form-input>
+                        </div>
+                      </b-col>
+                      <b-col cols="5">
+                        <div>
+                          <b-form-input
+                            id="age_max"
+                            v-model="age_max"
+                            type="range"
+                            :min="age_min"
+                            max="100"
+                          ></b-form-input>
+                        </div>
+                      </b-col>
+                      <b-col cols="1"></b-col>
+                    </b-row>
+                  </th>
+                  <!--<th>
                     <div id="filter">
                       <b-form-input
                         type="number"
@@ -143,7 +178,7 @@
                         class="form-control"
                       />
                     </div>
-                  </th>
+                  </th>-->
                   <!--<th>
                     <div id="filter">
                       <input
@@ -211,9 +246,9 @@
               <h1 id="title">Wyniki wyszukiwania dla frazy</h1>
             </div>
             <div class="oneline">
-            <h2>
-              <p class="font-italic text-primary">{{ searchText }}</p>
-            </h2>
+              <h2>
+                <p class="font-italic text-primary">{{ searchText }}</p>
+              </h2>
             </div>
           </div>
           <div v-else>
@@ -290,8 +325,8 @@ export default {
       today: new Date(),
       birthDate: "",
       age: "",
-      age_min: "",
-      age_max: "",
+      age_min: 18,
+      age_max: 100,
       m: "",
       description: null,
       sex_options: [
@@ -479,7 +514,10 @@ td {
   color: #ad1717;
   text-shadow: 1px 1px #ff0202;
 }
-.btn{
+.btn {
   border-radius: 12px;
+}
+.h6 {
+  color: rgb(255, 255, 255);
 }
 </style>
