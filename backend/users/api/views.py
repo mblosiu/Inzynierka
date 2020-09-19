@@ -2,13 +2,14 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
-    UserSettingsSerializer, ImageSerializer
-from ..models import User, Preferences, Settings, Image
+    UserSettingsSerializer, ImageSerializer, LikesSerializer
+from ..models import User, Preferences, Settings, Image, Like
 
 
 @permission_classes([])
@@ -495,7 +496,6 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
                      'hair_color', 'body_type', 'is_smoking',
                      'is_drinking_alcohol']
     queryset = User.objects.all()
-    queryset = User.objects.all()
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -568,3 +568,40 @@ class ValidUsernameAndEmail(APIView):
             response["username"] = "valid"
 
         return Response(response, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class LikesView(viewsets.ModelViewSet):
+    # zostałeś polubiony
+    def create_like(self, request):
+        value = request.data.get('value', None)
+        pk = request.data.get('pk', None)
+
+        current_user = get_object_or_404(User, pk=pk)
+        user = get_object_or_404(User, pk=request.user.pk)
+        response = {}
+
+        if value in ['0', '1']:
+            like = Like(
+                value=value,
+                liked=user,
+                liked_by=current_user
+            )
+            like.save()
+            response["detail"] = "success"
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response["detail"] = "failed"
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+    # kogo polubił user po pk
+    def get_are_liked(self, request, pk=None):
+        queryset = Like.objects.filter(liked_by__pk=pk)
+        serializer = LikesSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # lajki użytkownika po pk
+    def get_liked(self, request, pk=None):
+        queryset = Like.objects.filter(liked__pk=pk)
+        serializer = LikesSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

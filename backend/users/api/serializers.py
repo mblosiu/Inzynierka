@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import User, Preferences, Settings, Image
+from ..models import User, Preferences, Settings, Image, Like
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
@@ -94,3 +94,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
         account.set_password(password)
         account.save()
         return account
+
+
+class LikesSerializer(serializers.ModelSerializer):
+    liked = UserSerializer(read_only=True)
+    liked_by = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Like
+        fields = ['value', 'liked', 'liked_by']

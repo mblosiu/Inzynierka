@@ -2,13 +2,16 @@ from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 
 from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, DeleteUserAccountView, \
-    UserListView, PreferencesView, SettingsView, UserImage, ValidUsernameAndEmail, ImageByUserId
+    UserListView, PreferencesView, SettingsView, UserImage, ValidUsernameAndEmail, ImageByUserId, LikesView
 
 app_name = 'users'
 
 user_detail = UserListView.as_view({'get': 'retrieve'})
 user_list = UserListView.as_view({'get': 'list'})
 images_list = ImageByUserId.as_view({'get': 'retrieve'})
+create_like = LikesView.as_view({'post': 'create_like'})
+are_liked = LikesView.as_view({'get': 'get_are_liked'})
+liked = LikesView.as_view({'get': 'get_liked'})
 
 urlpatterns = [
     path('register', RegistrationView.as_view(), name="register"),
@@ -24,4 +27,8 @@ urlpatterns = [
     path('users/<int:pk>', user_detail, name='users-by-id'),
     path('users/<int:pk>/images', images_list, name='user-by-id-images'),
     path('validregister', ValidUsernameAndEmail.as_view(), name='valid-register'),
+
+    path('create-like', create_like, name='create-like'),
+    path('are-liked/<int:pk>', are_liked, name='are-liked'),
+    path('liked/<int:pk>', liked, name='liked'),
 ]

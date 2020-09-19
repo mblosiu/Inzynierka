@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
+
 class Preferences(models.Model):
     hair_color_blonde_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     hair_color_brunette_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
@@ -149,3 +150,9 @@ class Image(models.Model):
     image = models.ImageField(upload_to=upload_to, null=True, blank=True, default=None)
     title = models.CharField(max_length=30, null=True, blank=True, default=None)
     alt = models.CharField(max_length=30, null=True, blank=True, default=None)
+
+
+class Like(models.Model):
+    value = models.CharField(max_length=30, null=True, blank=True, default=None)
+    liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
+    liked_by = models.ForeignKey(User, related_name='liked_by', default=None, on_delete=models.CASCADE)
