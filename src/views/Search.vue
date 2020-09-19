@@ -8,14 +8,14 @@
             <div
               data-toggle="tooltip"
               data-placement="right"
-              title="Wyszukaj użytkowników za pomocą nałożonych filtrów, bądź konkretnego z nich po jego nazwie"
+              title="Wyszukaj użytkowników za pomocą nałożonych filtrów, bądź konkretnego z nich po nazwie"
             >
               <svg
                 width="2em"
                 height="2em"
                 viewBox="0 0 16 16"
                 class="bi bi-question-circle"
-                fill="currentColor"
+                fill="blue"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -171,6 +171,23 @@
                       <button type="submit" class="btn btn-primary float-right">Filtruj</button>
                     </div>
                   </th>
+                  <th>
+                    <a
+                      class="btn btn-primary ml-2 mr-2"
+                      data-toggle="collapse"
+                      href="#collapseExample"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="collapseExample"
+                    >Więcej filtrów</a>
+                  </th>
+                </tr>
+                <tr>
+                  <div class="collapse" id="collapseExample">
+                    <div
+                      class="card card-body"
+                    >Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
+                  </div>
                 </tr>
               </table>
             </form>
@@ -189,8 +206,19 @@
       <b-row>
         <b-col cols="1"></b-col>
         <b-col cols="10">
-          <h1 id="title" v-if="searchText">Wyniki wyszukiwania dla frazy {{ searchText }}:</h1>
-          <h1 id="title" v-else>Wyniki wyszukiwania:</h1>
+          <div v-if="searchText">
+            <div class="oneline">
+              <h1 id="title">Wyniki wyszukiwania dla frazy</h1>
+            </div>
+            <div class="oneline">
+            <h2>
+              <p class="font-italic text-primary">{{ searchText }}</p>
+            </h2>
+            </div>
+          </div>
+          <div v-else>
+            <h1 id="title">Wyniki wyszukiwania:</h1>
+          </div>
         </b-col>
         <b-col cols="1"></b-col>
       </b-row>
@@ -400,6 +428,8 @@ export default {
 #title {
   padding: 1cm;
   color: white;
+  color: #ad1717;
+  text-shadow: 1px 1px #000000;
 }
 .card {
   margin-bottom: 15px;
@@ -444,5 +474,12 @@ td {
 }
 .oneline {
   display: inline-block;
+}
+.h1 {
+  color: #ad1717;
+  text-shadow: 1px 1px #ff0202;
+}
+.btn{
+  border-radius: 12px;
 }
 </style>

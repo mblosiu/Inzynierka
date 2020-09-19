@@ -664,7 +664,6 @@
                       </li>
                     </div>
                     <div v-else>
-                      <li class="list-group-item">Alkohol: {{ user_data.is_drinking_alcohol }}</li>
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -738,7 +737,7 @@
                     <li class="list-group-item">
                       Romantyczność:
                       <div class="oneline">
-                        <p class="font-weight-bold">(?)</p>
+                        <p class="font-weight-bold"></p>
                       </div>
                     </li>
                   </ul>
