@@ -523,7 +523,6 @@
                           id="textarea-large"
                           size="lg"
                           v-model="user_data.description"
-                          :state="(user_data.description).length<=199"
                           maxlength="200"
                           rows="4"
                           placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie!"
