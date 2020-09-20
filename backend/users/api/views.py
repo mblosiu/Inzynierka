@@ -589,7 +589,7 @@ class LikesView(viewsets.ModelViewSet):
             )
             like.save()
             response["detail"] = "success"
-            return Response(response, status=status.HTTP_200_OK)
+            return Response(response, status=status.HTTP_201_CREATED)
         else:
             response["detail"] = "failed"
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
@@ -605,3 +605,11 @@ class LikesView(viewsets.ModelViewSet):
         queryset = Like.objects.filter(liked__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete_like(self, request):
+        pk = request.data.get('pk', None)
+
+        if get_object_or_404(User, pk=pk).delete():
+            return Response({"detail": "Like removed successfully"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)

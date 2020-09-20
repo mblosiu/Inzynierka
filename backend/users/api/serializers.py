@@ -102,4 +102,4 @@ class LikesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Like
-        fields = ['value', 'liked', 'liked_by']
+        fields = ['pk', 'value', 'liked', 'liked_by']

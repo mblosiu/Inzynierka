@@ -12,7 +12,7 @@ images_list = ImageByUserId.as_view({'get': 'retrieve'})
 create_like = LikesView.as_view({'post': 'create_like'})
 are_liked = LikesView.as_view({'get': 'get_are_liked'})
 liked = LikesView.as_view({'get': 'get_liked'})
-
+delete_like = LikesView.as_view({'delete': 'delete_like'})
 urlpatterns = [
     path('register', RegistrationView.as_view(), name="register"),
     path('login', obtain_auth_token, name="login"),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('validregister', ValidUsernameAndEmail.as_view(), name='valid-register'),
 
     path('create-like', create_like, name='create-like'),
+    path('delete-like', delete_like, name='delete-like'),
     path('are-liked/<int:pk>', are_liked, name='are-liked'),
     path('liked/<int:pk>', liked, name='liked'),
 ]
