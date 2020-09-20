@@ -1,11 +1,7 @@
 <template>
   <div class>
     <b-navbar class="navbar" toggleable="lg">
-<<<<<<< HEAD
       <a v-if="token == null" id="logo" class="navbar-brand" href="/">
-=======
-      <a id="logo" v-if="token == null" class="navbar-brand" href="/">
->>>>>>> 01b6c16214278b16726c731bb4aa86562b0fd159
         e
         <svg
           width="0.85em"
