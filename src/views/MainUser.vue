@@ -616,7 +616,7 @@ export default {
   width: 100%;
 }
 .card-img-top {
-  max-height: 400px;
+  max-height: 600px;
   object-fit: cover;
 }
 .card-text {
@@ -625,7 +625,7 @@ export default {
   font-size: 20px;
 }
 .user-card {
-  height: 700px;
+  height: 825px;
   background: #e9bac2;
   color: white;
   padding: 2px;
