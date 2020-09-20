@@ -760,7 +760,7 @@ export default {
       axios
         .post('http://127.0.0.1:8000/api/user/create-like', { value: 'like', pk: 2 }, config)
         .then((response) => {
-          console.log(response); //, (this.liked_user = response.data);
+          console.log(response);
         })
         .catch((errors) => console.log(errors));
     },

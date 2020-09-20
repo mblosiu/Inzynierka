@@ -11,7 +11,10 @@
           fill="red"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+          <path
+            fill-rule="evenodd"
+            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+          />
         </svg>
         Love
       </a>
@@ -25,7 +28,10 @@
           fill="red"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+          <path
+            fill-rule="evenodd"
+            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+          />
         </svg>
         Love
       </a>
@@ -41,13 +47,14 @@
           <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
           <b-dropdown-item href="/#">Premium</b-dropdown-item>
         </b-dropdown>-->
-
-        <b-dropdown id="dropdown" text="Dropdown1" variant="own" size="md" class="ml-2 mr-2">
-          <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
-          <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
-          <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
-          <b-dropdown-item href="/#">Premium</b-dropdown-item>
-        </b-dropdown>
+        <div id="dropdown" v-if="token != null">
+          <b-dropdown id="dropdown" text="Dropdown1" variant="own" size="md" class="ml-2 mr-2">
+            <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
+            <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
+            <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
+            <b-dropdown-item href="/#">Premium</b-dropdown-item>
+          </b-dropdown>
+        </div>
 
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
@@ -60,25 +67,47 @@
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm">Dopasuj</b-button>
           <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm">
+            <b-button class="my-2 ml-2" type="button" size="sm" v-b-modal.modal-scrollable>
               Polubienia
               <span class="badge badge-light">0</span>
             </b-button>
-          </b-nav-form>
+            <b-modal id="modal-scrollable" scrollable title="Polubienia" hide-footer>
+              <b-row>
+                <b-col cols="6">
+                  <b-row>
+                    <b-col cols="12">
+                      <h5>Ulubieni:</h5>
+                      
+                    </b-col>
+                  </b-row>
+                </b-col>
 
-          <b-nav-form v-if="token != null">
+                <b-col cols="6">
+                  <b-row>
+                    <b-col cols="12">
+                      <h5>Lubią mnie:</h5>
+                      
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+            </b-modal>
+          </b-nav-form>
+          <!-- zbedny button -->
+          <!--<b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm">
               Wiadomości
               <span class="badge badge-light">0</span>
             </b-button>
-          </b-nav-form>
+          </b-nav-form>-->
 
-          <b-nav-form v-if="token != null">
+          <!-- zbedny button -->
+          <!--<b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm">
               Kontakty
               <span class="badge badge-light">0</span>
             </b-button>
-          </b-nav-form>
+          </b-nav-form>-->
 
           <b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/gallery">Galeria</b-button>
@@ -88,10 +117,10 @@
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/settings">Ustawienia</b-button>
         </b-nav-form>
-
-        <b-nav-form v-if="token != null">
+        <!-- zbedny button -->
+        <!--<b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Premium</b-button>
-        </b-nav-form>
+        </b-nav-form>-->
         <div v-if="token == null">
           <b-alert
             :show="dismissCountDown"
@@ -100,8 +129,7 @@
             variant="danger"
             @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
-            >{{ msg }}</b-alert
-          >
+          >{{ msg }}</b-alert>
         </div>
         <b-nav-form @submit.prevent="login" v-if="token == null">
           <b-form-input
@@ -145,19 +173,21 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'Header',
+  name: "Header",
   components: {},
   data() {
     return {
-      token: localStorage.getItem('user-token') || null,
-      username: '',
-      password: '',
-      searchText: '',
+      token: localStorage.getItem("user-token") || null,
+      username: "",
+      password: "",
+      searchText: "",
       dismissSecs: 5,
       dismissCountDown: 0,
       user_data: {},
+      user_likes: [],
+      user_liking: [],
     };
   },
   methods: {
@@ -169,10 +199,10 @@ export default {
     },
     getUserData() {
       axios
-        .get('http://127.0.0.1:8000/api/user/properties', {
+        .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -180,51 +210,82 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    getUserLikes() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/liked/" + user_data.pk, {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_likes = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    getUserLiking() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/are-liked/" + user_data.pk, {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_liking = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
+
     getUrl(pic) {
-      if (pic != null) return 'http://127.0.0.1:8000' + pic;
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
     },
     login() {
       axios
-        .post('http://127.0.0.1:8000/api/user/login', {
+        .post("http://127.0.0.1:8000/api/user/login", {
           username: this.username,
           password: this.password,
         })
         .then((response) => {
           if (response.status == 200) {
-            (this.error_message = ''),
+            (this.error_message = ""),
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
-              localStorage.setItem('user-token', response.data.token),
+              localStorage.setItem("user-token", response.data.token),
               this.$router.go();
           }
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg(), (this.msg = 'Błędny login lub hasło!');
+            this.showMsg(), (this.msg = "Błędny login lub hasło!");
           }
         });
     },
     logout() {
       let config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
 
       axios
-        .post('http://127.0.0.1:8000/api/user/logout', {}, config)
+        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
         .then((response) => {})
         .catch((errors) => {});
-      localStorage.removeItem('user-token'), (this.token = null), this.$router.go();
+      localStorage.removeItem("user-token"),
+        (this.token = null),
+        this.$router.go();
     },
     search() {
-      localStorage.setItem('search-text', this.searchText);
-      if (this.$route.name == 'search') this.$router.go();
-      else this.$router.push({ name: 'search' });
+      localStorage.setItem("search-text", this.searchText);
+      if (this.$route.name == "search") this.$router.go();
+      else this.$router.push({ name: "search" });
     },
   },
   created() {
     this.getUserData();
+    this.getUserLikes();
+    this.getUserLiking();
   },
 };
 </script>
