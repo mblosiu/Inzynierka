@@ -43,15 +43,13 @@
         <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
         <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
       </b-nav-form>-->
-
+      <b-dropdown class="my-dropdown" text="Lista 1" size="sm">
+        <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
+        <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
+        <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
+        <b-dropdown-item href="/#">Premium</b-dropdown-item>
+      </b-dropdown>
       <b-navbar-nav class="ml-auto">
-        <b-dropdown text="Lista 1" size="sm">
-          <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
-          <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
-          <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
-          <b-dropdown-item href="/#">Premium</b-dropdown-item>
-        </b-dropdown>
-
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
         </b-nav-form>
@@ -274,19 +272,19 @@ export default {
   color: #501c4c;
   font-weight: 600;
 }
-/*
-.btn {
+.my-dropdown .dropdown-menu {
   background-color: #cdb7c0;
   color: #501c4c;
+  font-weight: 600;
 }
-.router-link-exact-active {
-  background-color: blue;
-  color: white;
-}
-
-.btn:hover {
+.my-dropdown .dropdown-menu .dropdown-item {
   background-color: #cdb7c0;
-  color: white;
+  color: #501c4c;
+  font-weight: 600;
 }
-*/
+#__BVID__8__BV_toggle_ {
+  background-color: #cdb7c0 !important;
+  color: #501c4c !important;
+  font-weight: 600 !important;
+}
 </style>
