@@ -26,10 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="likes - value">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/urls.py" afterDir="false" />
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="likes - delete">
       <change beforePath="$PROJECT_DIR$/backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600604654107</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="likes - delete">
+      <created>1600612193540</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1600612193540</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,18 +216,19 @@
     <MESSAGE value="filters and settings" />
     <MESSAGE value="likes" />
     <MESSAGE value="likes - value" />
-    <option name="LAST_COMMIT_MESSAGE" value="likes - value" />
+    <MESSAGE value="likes - delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="likes - delete" />
   </component>
   <component name="WindowStateProjectService">
     <state x="461" y="165" key="SettingsEditor" timestamp="1597650063992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1597650063992" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1600604664055">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1600612200416">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1597585300360" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600604664055" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600612200416" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597649782822">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

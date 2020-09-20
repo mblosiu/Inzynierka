@@ -609,7 +609,7 @@ class LikesView(viewsets.ModelViewSet):
     def delete_like(self, request):
         pk = request.data.get('pk', None)
 
-        if get_object_or_404(User, pk=pk).delete():
+        if get_object_or_404(Like, pk=pk).delete():
             return Response({"detail": "Like removed successfully"}, status=status.HTTP_200_OK)
         else:
             return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
