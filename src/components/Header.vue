@@ -39,7 +39,6 @@
         <b-avatar href="/mainuser" :src="getUrl(user_data.profile_picture)"></b-avatar>
         {{ user_data.username }}
       </div>
-<<<<<<< HEAD
 
       <b-navbar-nav class="ml-auto">
         <!--<b-dropdown text="Lista 1" size="sm">
@@ -62,19 +61,6 @@
           <b-dropdown-item href="/#">Premium</b-dropdown-item>
         </b-dropdown>
 
-=======
-      <!--<b-nav-form @submit.prevent="search" v-if="token != null">
-        <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
-        <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
-      </b-nav-form>-->
-      <b-dropdown class="my-dropdown" text="Lista 1" size="sm">
-        <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
-        <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
-        <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
-        <b-dropdown-item href="/#">Premium</b-dropdown-item>
-      </b-dropdown>
-      <b-navbar-nav class="ml-auto">
->>>>>>> 1c8b14cc9b1a2ab28bf39ee60d668f692b667e9d
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
         </b-nav-form>
@@ -303,7 +289,6 @@ export default {
   position: flex;
   margin-block: 5px;
 }
-<<<<<<< HEAD
 .dropdown:hover {
   background-color: #0275d8 !important;
   color: #ffffff !important;
@@ -314,9 +299,6 @@ export default {
 
 /*
 .btn {
-=======
-.my-dropdown .dropdown-menu {
->>>>>>> 1c8b14cc9b1a2ab28bf39ee60d668f692b667e9d
   background-color: #cdb7c0;
   color: #501c4c;
   font-weight: 600;
@@ -331,4 +313,5 @@ export default {
   color: #501c4c !important;
   font-weight: 600 !important;
 }
+*/
 </style>
