@@ -39,13 +39,22 @@
         <b-avatar href="/mainuser" :src="getUrl(user_data.profile_picture)"></b-avatar>
         {{ user_data.username }}
       </div>
-      <!--<b-nav-form @submit.prevent="search" v-if="token != null">
-        <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
-        <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
-      </b-nav-form>-->
 
       <b-navbar-nav class="ml-auto">
-        <b-dropdown text="Lista 1" size="sm">
+        <!--<b-dropdown text="Lista 1" size="sm">
+          <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
+          <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
+          <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
+          <b-dropdown-item href="/#">Premium</b-dropdown-item>
+        </b-dropdown>-->
+
+        <b-dropdown
+          id="dropdown"
+          text="Dropdown1"
+          variant="btn-secondary"
+          size="md"
+          class="ml-2 mr-2"
+        >
           <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
           <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
           <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
@@ -251,6 +260,7 @@ export default {
   color: #501c4c;
   font-weight: 600;
 }
+
 .btn-secondary:hover,
 .btn-secondary:active {
   background-color: #0275d8;
@@ -267,14 +277,26 @@ export default {
   color: whitesmoke;
   font-weight: 600;
 }
-#dropdown1 {
+.dropdown {
   border: solid 1px rgba(82, 82, 82, 100);
-  border-radius: 4px;
-  background: blue;
-  background-color: #cdb7c0;
-  color: #501c4c;
+  border-radius: 5px;
+  background: blue !important;
+  background-color: #cdb7c0 !important;
+  color: #501c4c !important;
   font-weight: 600;
+  width: 160px;
+  height: 35px;
+  position: flex;
+  margin-block: 5px;
 }
+.dropdown:hover {
+  background-color: #0275d8 !important;
+  color: #ffffff !important;
+}
+.dropdown-text {
+  color: #501c4c !important;
+}
+
 /*
 .btn {
   background-color: #cdb7c0;
