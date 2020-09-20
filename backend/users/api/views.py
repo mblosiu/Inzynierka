@@ -580,8 +580,8 @@ class LikesView(viewsets.ModelViewSet):
         current_user = get_object_or_404(User, pk=pk)
         user = get_object_or_404(User, pk=request.user.pk)
         response = {}
-
-        if value in ['0', '1']:
+        print(1)
+        if value in ['like', 'dislike']:
             like = Like(
                 value=value,
                 liked=user,
