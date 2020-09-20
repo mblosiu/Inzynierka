@@ -13,7 +13,7 @@
       </b-col>
       <b-col cols="5">
         <div>
-          <b-card :img-src="getUrl(user_data.profile_picture)" img-alt="Card image" img-top class="user-card">
+          <b-card class="user-card" :img-src="getUrl(user_data.profile_picture)" img-top>
             <b-card-title>
               <div class="oneline">
                 <h2>
@@ -616,8 +616,9 @@ export default {
   width: 100%;
 }
 .card-img-top {
-  max-height: 600px;
-  object-fit: cover;
+  object-fit: scale-down;
+  width: auto;
+  max-height: 400px;
 }
 .card-text {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -625,7 +626,7 @@ export default {
   font-size: 20px;
 }
 .user-card {
-  height: 825px;
+  height: 700px;
   background: #e9bac2;
   color: white;
   padding: 2px;
