@@ -4,7 +4,6 @@
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="2">
-          
           <b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
             <template v-slot:footer="{ hide }">
               <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
@@ -140,9 +139,9 @@
                     >
                       <div v-if="images != []">
                         <div>
+                          <!--v-model="slide"-->
                           <b-carousel
                             id="carousel-1"
-                            v-model="slide"
                             :interval="40000"
                             controls
                             indicators
@@ -762,13 +761,27 @@ export default {
       user: {},
       user_preferences: {},
       images: {},
-      like: false,
+      like: "like",
       heartcolor: "pink",
+      liked_user: {},
     };
   },
   methods: {
     likeUser() {
       this.heartcolor = "red";
+      axios
+        .post("http://127.0.0.1:8000/api/user/create-like", {
+          value: this.like,
+          pk: this.$route.params.pk,
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response); //, (this.liked_user = response.data);
+        })
+        .catch((errors) => console.log(errors));
     },
     getUserData() {
       axios
@@ -841,7 +854,7 @@ export default {
     this.getUserData();
   },
   mounted() {
-    $(".carousel").carousel();
+    //$(".carousel").carousel();
   },
 };
 </script>
