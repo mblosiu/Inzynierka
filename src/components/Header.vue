@@ -1,19 +1,23 @@
 <template>
   <div class>
     <b-navbar class="navbar" toggleable="lg">
+<<<<<<< HEAD
+      <a v-if="token == null" id="logo" class="navbar-brand" href="/">
+=======
       <a id="logo" v-if="token == null" class="navbar-brand" href="/">
+>>>>>>> 01b6c16214278b16726c731bb4aa86562b0fd159
         e
         <svg
           width="0.85em"
           height="0.85em"
           viewBox="0 0 16 16"
-          class="bi bi-heart"
-          fill="currentColor"
+          class="bi bi-heart-fill"
+          fill="red"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             fill-rule="evenodd"
-            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
           />
         </svg>
         Love
@@ -24,13 +28,13 @@
           width="0.85em"
           height="0.85em"
           viewBox="0 0 16 16"
-          class="bi bi-heart"
-          fill="currentColor"
+          class="bi bi-heart-fill"
+          fill="red"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             fill-rule="evenodd"
-            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
           />
         </svg>
         Love
@@ -101,8 +105,7 @@
             variant="danger"
             @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
-            >{{ msg }}</b-alert
-          >
+          >{{ msg }}</b-alert>
         </div>
         <b-nav-form @submit.prevent="login" v-if="token == null">
           <b-form-input
@@ -146,16 +149,16 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'Header',
+  name: "Header",
   components: {},
   data() {
     return {
-      token: localStorage.getItem('user-token') || null,
-      username: '',
-      password: '',
-      searchText: '',
+      token: localStorage.getItem("user-token") || null,
+      username: "",
+      password: "",
+      searchText: "",
       dismissSecs: 5,
       dismissCountDown: 0,
       user_data: {},
@@ -170,10 +173,10 @@ export default {
     },
     getUserData() {
       axios
-        .get('http://127.0.0.1:8000/api/user/properties', {
+        .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -182,46 +185,48 @@ export default {
         .catch((errors) => console.log(errors));
     },
     getUrl(pic) {
-      if (pic != null) return 'http://127.0.0.1:8000' + pic;
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
     },
     login() {
       axios
-        .post('http://127.0.0.1:8000/api/user/login', {
+        .post("http://127.0.0.1:8000/api/user/login", {
           username: this.username,
           password: this.password,
         })
         .then((response) => {
           if (response.status == 200) {
-            (this.error_message = ''),
+            (this.error_message = ""),
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
-              localStorage.setItem('user-token', response.data.token),
+              localStorage.setItem("user-token", response.data.token),
               this.$router.go();
           }
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg(), (this.msg = 'Błędny login lub hasło!');
+            this.showMsg(), (this.msg = "Błędny login lub hasło!");
           }
         });
     },
     logout() {
       let config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
 
       axios
-        .post('http://127.0.0.1:8000/api/user/logout', {}, config)
+        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
         .then((response) => {})
         .catch((errors) => {});
-      localStorage.removeItem('user-token'), (this.token = null), this.$router.go();
+      localStorage.removeItem("user-token"),
+        (this.token = null),
+        this.$router.go();
     },
     search() {
-      localStorage.setItem('search-text', this.searchText);
-      if (this.$route.name == 'search') this.$router.go();
-      else this.$router.push({ name: 'search' });
+      localStorage.setItem("search-text", this.searchText);
+      if (this.$route.name == "search") this.$router.go();
+      else this.$router.push({ name: "search" });
     },
   },
   created() {
@@ -232,8 +237,8 @@ export default {
 
 <style scoped>
 .alert {
-  padding-block: inherit;
-  margin-block: inherit;
+  padding-block: 5px;
+  margin-block: 5px;
   align-content: inherit;
 }
 .navbar {
