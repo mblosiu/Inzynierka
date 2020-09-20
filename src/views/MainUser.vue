@@ -625,6 +625,7 @@ export default {
   font-size: 20px;
 }
 .user-card {
+  height: 700px;
   background: #e9bac2;
   color: white;
   padding: 2px;
@@ -649,6 +650,9 @@ textarea {
   background: white;
 }
 .tabs {
+  height: 700px;
+  width: 100%;
+  margin-left: 0;
   background: #e9bac2;
   border-radius: 12px;
   border-style: solid;
@@ -657,10 +661,8 @@ textarea {
 }
 .nav {
   background: #e9bac2;
-  height: 100%;
+  height: 700px;
   width: 100%;
-  padding-left: 0mm;
-  margin-left: 0mm;
   border-radius: 12px;
   border-style: solid;
   border-width: 1px;

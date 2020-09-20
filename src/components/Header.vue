@@ -1,7 +1,11 @@
 <template>
   <div class>
     <b-navbar class="navbar" toggleable="lg">
+<<<<<<< HEAD
       <a v-if="token == null" id="logo" class="navbar-brand" href="/">
+=======
+      <a id="logo" v-if="token == null" class="navbar-brand" href="/">
+>>>>>>> 01b6c16214278b16726c731bb4aa86562b0fd159
         e
         <svg
           width="0.85em"
@@ -35,7 +39,6 @@
         </svg>
         Love
       </a>
-
       <div id="logo" v-if="token != null" href="/mainuser">
         <b-avatar href="/mainuser" :src="getUrl(user_data.profile_picture)"></b-avatar>
         {{ user_data.username }}
@@ -46,6 +49,13 @@
       </b-nav-form>-->
 
       <b-navbar-nav class="ml-auto">
+        <b-dropdown text="Lista 1" size="sm">
+          <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
+          <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
+          <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
+          <b-dropdown-item href="/#">Premium</b-dropdown-item>
+        </b-dropdown>
+
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
         </b-nav-form>
@@ -259,6 +269,14 @@ export default {
 }
 #logo {
   color: whitesmoke;
+  font-weight: 600;
+}
+#dropdown1 {
+  border: solid 1px rgba(82, 82, 82, 100);
+  border-radius: 4px;
+  background: blue;
+  background-color: #cdb7c0;
+  color: #501c4c;
   font-weight: 600;
 }
 /*

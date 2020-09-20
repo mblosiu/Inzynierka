@@ -36,7 +36,7 @@
               <br />
               <p class="card-text no-background">Dołącz do społeczności e-love zakładając darmowe konto!</p>
               <br />
-              <a href="/register" class="btn-lg btn-warning">Zarejestruj się</a>
+              <a href="/register" class="btn-lg">Zarejestruj się</a>
               <br />
             </div>
             <br />
@@ -108,5 +108,15 @@ h1 {
 .card text-black bg-secondary mb-3 {
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 25px;
+}
+.btn-lg {
+  background-color: #cdb7c0;
+  color: #501c4c;
+  font-weight: 600;
+}
+.btn-lg:hover {
+  background-color: #0275d8;
+  color: white;
+  font-weight: 600;
 }
 </style>

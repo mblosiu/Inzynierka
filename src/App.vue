@@ -70,21 +70,23 @@ export default {
 }
 
 #nav {
-  padding: 0px;
+  top: 0px;
 }
 
 #content {
   min-height: 73.2vh;
   margin-left: 2cm;
   margin-right: 2cm;
-  margin-top: 1cm;
-  margin-bottom: 1cm;
+  margin-top: 2cm;
+  margin-bottom: 2cm;
 }
 
 #footer {
-  background-color: #343a40;
   color: whitesmoke;
   bottom: 0;
   width: 100%;
+}
+#footer a:hover {
+  color: #0275d8;
 }
 </style>
