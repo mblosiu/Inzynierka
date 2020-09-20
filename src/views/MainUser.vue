@@ -437,7 +437,7 @@
                 </ul>
               </div>
             </b-tab>
-            <b-tab title="Cechy charakteru">
+            <b-tab title="Cechy charakteru" disabled>
               <div class="card text-black bg-dark mb-3">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
@@ -616,9 +616,10 @@ export default {
   width: 100%;
 }
 .card-img-top {
-  object-fit: scale-down;
+  object-fit: cover;
   width: auto;
   max-height: 400px;
+  border-radius: 10px;
 }
 .card-text {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -627,13 +628,14 @@ export default {
 }
 .user-card {
   height: 700px;
-  background: #e9bac2;
+  background: #be3636;
   color: white;
   padding: 2px;
   border-radius: 12px;
   border-style: solid;
   border-width: 2px;
   border-color: #9a3f66;
+  object-fit:scale-down;
 }
 textarea {
   height: 100%;
@@ -654,14 +656,14 @@ textarea {
   height: 700px;
   width: 100%;
   margin-left: 0;
-  background: #e9bac2;
+  background: #ecb2b2d5;
   border-radius: 12px;
   border-style: solid;
   border-width: 2px;
   border-color: #9a3f66;
 }
 .nav {
-  background: #e9bac2;
+  background: #ecb2b2d5;
   height: 700px;
   width: 100%;
   border-radius: 12px;
