@@ -4,6 +4,7 @@
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="2">
+          
           <b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
             <template v-slot:footer="{ hide }">
               <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
@@ -14,6 +15,8 @@
             <div class="px-3 py-2">
               <p>Okienko chatu</p>
             </div>
+            <p>{{user_data.username}} :</p>
+            <p>{{user.username}} :</p>
           </b-sidebar>
         </b-col>
         <b-col cols="4">
@@ -80,7 +83,7 @@
                       title="Zaproś do grona znajomych"
                     >
                       <svg
-                        color="blue"
+                        color="lightblue"
                         width="3em"
                         height="3em"
                         viewBox="0 0 16 16"
@@ -107,7 +110,7 @@
                     >
                       <div id="show-btn" @click="$bvModal.show('bv-modal-example')">
                         <svg
-                          color="lightgreen"
+                          color="lightblue"
                           width="3em"
                           height="3em"
                           viewBox="0 0 16 16"
@@ -203,15 +206,17 @@
                         </footer>
                       </div>
                     </b-modal>
+
                     <button
                       type="button"
+                      v-on:click="likeUser"
                       class="btn btn-secondary"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="Polub"
                     >
                       <svg
-                        color="red"
+                        :color="this.heartcolor"
                         width="3em"
                         height="3em"
                         viewBox="0 0 16 16"
@@ -225,6 +230,7 @@
                         />
                       </svg>
                     </button>
+
                     <button
                       type="button"
                       class="btn btn-secondary"
@@ -308,11 +314,6 @@
                       </div>
                     </li>
 
-                    <!--<li class="list-group-item">
-                    <div class="oneline">
-                      <p class="font-weight-bold"></p>
-                    </div>
-                    </li>-->
                     <div v-if="user.is_smoking == 0">
                       <li class="list-group-item">
                         Papierosy:
@@ -674,7 +675,7 @@
                   </ul>
                 </div>
               </b-tab>
-              <b-tab title="Cechy charakteru">
+              <b-tab title="Cechy charakteru" disabled>
                 <div class="card text-black bg-dark mb-3">
                   <div class="card-header">
                     <h3>Cechy charakteru:</h3>
@@ -757,12 +758,31 @@ import axios from "axios";
 export default {
   data() {
     return {
+      user_data: {},
       user: {},
       user_preferences: {},
       images: {},
+      like: false,
+      heartcolor: "pink",
     };
   },
   methods: {
+    likeUser() {
+      this.heartcolor = "red";
+    },
+    getUserData() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/properties", {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_data = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
     getUsers() {
       axios
         .get("http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk, {
@@ -818,6 +838,7 @@ export default {
   created() {
     this.getUsers();
     this.getUserImages();
+    this.getUserData();
   },
   mounted() {
     $(".carousel").carousel();
