@@ -34,9 +34,7 @@
               <br />
               <h3 class="card-title no-background">Nie masz konta?</h3>
               <br />
-              <p
-                class="card-text no-background"
-              >Dołącz do społeczności e-love zakładając darmowe konto!</p>
+              <p class="card-text no-background">Dołącz do społeczności e-love zakładając darmowe konto!</p>
               <br />
               <a href="/register" class="btn-lg btn-warning">Zarejestruj się</a>
               <br />
@@ -54,7 +52,7 @@
 //import Register from "@/views/Register.vue";
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     //Register,
   },
@@ -72,9 +70,11 @@ text {
   border-radius: 25px;
   border-style: solid;
   border-width: 1px;
+  /*
   border-color: #a89172;
   background-color: #fdefddc0;
   box-shadow: 1px 1px #a89172;
+  */
 }
 .rightside {
   background-color: rgba(255, 255, 255, 0.3);
@@ -83,9 +83,11 @@ text {
   border-radius: 25px;
   border-style: solid;
   border-width: 1px;
+  /*
   border-color: #a89172;
   background-color: #fdefddc0;
   box-shadow: 1px 1px #a89172;
+  */
 }
 .no-background {
   background-color: rgba(0, 0, 0, 0);

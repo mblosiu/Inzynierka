@@ -13,12 +13,7 @@
       </b-col>
       <b-col cols="5">
         <div>
-          <b-card
-            :img-src="getUrl(user_data.profile_picture)"
-            img-alt="Card image"
-            img-top
-            class="user-card"
-          >
+          <b-card :img-src="getUrl(user_data.profile_picture)" img-alt="Card image" img-top class="user-card">
             <b-card-title>
               <div class="oneline">
                 <h2>
@@ -29,7 +24,9 @@
               ({{ getAge(user_data.birthday) }})
             </b-card-title>
             <b-card-text>
-              <h4 v-if="user_data.description!=null"><p class="font-italic">{{user_data.description}}</p></h4>
+              <h4 v-if="user_data.description != null">
+                <p class="font-italic">{{ user_data.description }}</p>
+              </h4>
               <h4 v-else><p class="font-italic">Brak opisu.</p></h4>
             </b-card-text>
           </b-card>
@@ -209,9 +206,7 @@
                   <li class="list-group-item">
                     Włosy:
                     <div class="oneline">
-                      <p
-                        class="font-weight-bold"
-                      >{{ user_data.hair_length }} {{ user_data.hair_color }}</p>
+                      <p class="font-weight-bold">{{ user_data.hair_length }} {{ user_data.hair_color }}</p>
                     </div>
                   </li>
                   <li class="list-group-item">
@@ -284,7 +279,6 @@
             <b-tab title="Moje preferencje">
               <div class="card text-black">
                 <ul class="list-group list-group-flush">
-                  
                   <!--<li
                     class="list-group-item"
                   >Przedział wiekowy: {{user_preferences.age_preference_min}} - {{user_preferences.age_preference_max}}</li>-->
@@ -517,9 +511,9 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "MainUser",
+  name: 'MainUser',
   components: {},
   data() {
     return {
@@ -527,11 +521,11 @@ export default {
       profile_picture: null,
       user_preferences: {},
       today: new Date(),
-      birthDate: "",
-      age: "",
-      m: "",
+      birthDate: '',
+      age: '',
+      m: '',
       description: [],
-      msg: "",
+      msg: '',
       dismissSecs: 5,
       dismissCountDown: 0,
     };
@@ -545,10 +539,10 @@ export default {
     },
     getUserData() {
       axios
-        .get("http://127.0.0.1:8000/api/user/properties", {
+        .get('http://127.0.0.1:8000/api/user/properties', {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
         })
         .then((response) => {
@@ -558,10 +552,10 @@ export default {
     },
     getUserPreferences() {
       axios
-        .get("http://127.0.0.1:8000/api/user/preferences", {
+        .get('http://127.0.0.1:8000/api/user/preferences', {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
         })
         .then((response) => {
@@ -572,12 +566,12 @@ export default {
     editUserData() {
       let config = {
         headers: {
-          Authorization: "Token " + localStorage.getItem("user-token"),
+          Authorization: 'Token ' + localStorage.getItem('user-token'),
         },
       };
       axios
         .patch(
-          "http://127.0.0.1:8000/api/user/properties",
+          'http://127.0.0.1:8000/api/user/properties',
           {
             description: this.user_data.description,
           },
@@ -586,7 +580,7 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status == 200) {
-            this.showMsg(), (this.msg = "Zaktualizowano opis profilu");
+            this.showMsg(), (this.msg = 'Zaktualizowano opis profilu');
           }
         })
         .catch((errors) => console.log(errors));
@@ -602,9 +596,8 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
-      else
-        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+      if (pic != null) return 'http://127.0.0.1:8000' + pic;
+      else return 'https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png';
     },
   },
   created() {
@@ -627,21 +620,23 @@ export default {
   object-fit: cover;
 }
 .card-text {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: left;
   font-size: 20px;
 }
 .user-card {
-  background: #8d1515;
+  background: #e9bac2;
   color: white;
+  padding: 2px;
+  border-radius: 12px;
   border-style: solid;
   border-width: 2px;
-  border-color: #aa1d37;
+  border-color: #9a3f66;
 }
 textarea {
   height: 100%;
   width: 100%;
-  background-color: #ffc5c5;
+  background-color: #e9bac2;
 }
 .alert {
   width: 265px;
@@ -651,21 +646,25 @@ textarea {
   align-content: inherit;
 }
 .list-group-item {
-  background: #fadbdb;
+  background: white;
 }
 .tabs {
-  background: #eb6767;
+  background: #e9bac2;
   border-radius: 12px;
   border-style: solid;
   border-width: 2px;
-  border-color: #aa1d37;
+  border-color: #9a3f66;
 }
 .nav {
-  background: #eb6767;
+  background: #e9bac2;
   height: 100%;
   width: 100%;
   padding-left: 0mm;
   margin-left: 0mm;
+  border-radius: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #9a3f66;
 }
 .oneline {
   display: inline-block;

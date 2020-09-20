@@ -18,10 +18,7 @@
                 fill="blue"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                />
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                 <path
                   d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
                 />
@@ -124,7 +121,9 @@
                     <b-row>
                       <b-col cols="2"></b-col>
                       <b-col cols="8">
-                        <div class="p-1 text-white text-i"><h6>Przedział wiekowy: {{ age_min }} - {{ age_max }}</h6></div>
+                        <div class="p-1 text-white text-i">
+                          <h6>Przedział wiekowy: {{ age_min }} - {{ age_max }}</h6>
+                        </div>
                       </b-col>
                       <b-col cols="2"></b-col>
                     </b-row>
@@ -132,13 +131,7 @@
                       <b-col cols="1"></b-col>
                       <b-col cols="5">
                         <div>
-                          <b-form-input
-                            id="age_min"
-                            v-model="age_min"
-                            type="range"
-                            min="18"
-                            max="99"
-                          ></b-form-input>
+                          <b-form-input id="age_min" v-model="age_min" type="range" min="18" max="99"></b-form-input>
                         </div>
                       </b-col>
                       <b-col cols="5">
@@ -214,14 +207,16 @@
                       role="button"
                       aria-expanded="false"
                       aria-controls="collapseExample"
-                    >Więcej filtrów</a>
+                      >Więcej filtrów</a
+                    >
                   </th>
                 </tr>
                 <tr>
                   <div class="collapse" id="collapseExample">
-                    <div
-                      class="card card-body"
-                    >Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
+                    <div class="card card-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                      Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
                   </div>
                 </tr>
               </table>
@@ -260,20 +255,10 @@
       <b-row>
         <b-col cols="12" align-self="start" class="scroll">
           <b-row v-for="i in Math.ceil(users.length / 2)" v-bind:key="i">
-            <b-col
-              cols="6"
-              v-for="user in users.slice((i - 1) * 2, i * 2)"
-              v-bind:key="user.id"
-              style="ml-5 mr-5"
-            >
+            <b-col cols="6" v-for="user in users.slice((i - 1) * 2, i * 2)" v-bind:key="user.id" style="ml-5 mr-5">
               <router-link :to="{ name: 'userprofile', params: { pk: user.pk } }">
                 <div cardbox>
-                  <b-card
-                    :img-src="getUrl(user.profile_picture)"
-                    img-alt="Card image"
-                    img-left
-                    class="user-card"
-                  >
+                  <b-card :img-src="getUrl(user.profile_picture)" img-alt="Card image" img-left class="user-card">
                     <b-card-title>
                       <div class="oneline">
                         <h2>
@@ -284,8 +269,8 @@
                     </b-card-title>
 
                     <b-card-text>
-                      <h4 v-if="user.description!=null">
-                        <p class="font-italic">{{user.description}}</p>
+                      <h4 v-if="user.description != null">
+                        <p class="font-italic">{{ user.description }}</p>
                       </h4>
                       <h4 v-else>
                         <p class="font-italic">Brak opisu.</p>
@@ -304,9 +289,9 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "UsersList",
+  name: 'UsersList',
   components: {},
   data() {
     return {
@@ -323,84 +308,84 @@ export default {
       profileImage: null,
       is_smoking: null,
       today: new Date(),
-      birthDate: "",
-      age: "",
+      birthDate: '',
+      age: '',
       age_min: 18,
       age_max: 100,
-      m: "",
+      m: '',
       description: null,
       sex_options: [
-        { value: null, text: "płeć" },
-        { value: "Mężczyzna", text: "mężczyzna" },
-        { value: "Kobieta", text: "kobieta" },
-        { value: "Inna", text: "inna" },
+        { value: null, text: 'płeć' },
+        { value: 'Mężczyzna', text: 'mężczyzna' },
+        { value: 'Kobieta', text: 'kobieta' },
+        { value: 'Inna', text: 'inna' },
       ],
       orientation_options: [
-        { value: null, text: "orientacja" },
-        { value: "Hetero", text: "heteroseksualna" },
-        { value: "Homo", text: "homoseksualna" },
-        { value: "Bi", text: "biseksualna" },
+        { value: null, text: 'orientacja' },
+        { value: 'Hetero', text: 'heteroseksualna' },
+        { value: 'Homo', text: 'homoseksualna' },
+        { value: 'Bi', text: 'biseksualna' },
       ],
       location_options: [
-        { value: null, text: "lokalizacja" },
-        { value: "Poznań", text: "Poznań" },
-        { value: "Warszawa", text: "Warszawa" },
+        { value: null, text: 'lokalizacja' },
+        { value: 'Poznań', text: 'Poznań' },
+        { value: 'Warszawa', text: 'Warszawa' },
       ],
       body_type_options: [
-        { value: null, text: "Sylwetka" },
-        { value: "Normalna", text: "normalna" },
-        { value: "Szczupła", text: "szczupła" },
-        { value: "Wysportowana", text: "wysportowana" },
-        { value: "Puszysta", text: "puszysta" },
+        { value: null, text: 'Sylwetka' },
+        { value: 'Normalna', text: 'normalna' },
+        { value: 'Szczupła', text: 'szczupła' },
+        { value: 'Wysportowana', text: 'wysportowana' },
+        { value: 'Puszysta', text: 'puszysta' },
       ],
       eye_color_options: [
-        { value: null, text: "Kolor oczu" },
-        { value: "Szare", text: "szare" },
-        { value: "Niebieskie", text: "niebieskie" },
-        { value: "Brązowe", text: "brązowe" },
-        { value: "Piwne", text: "piwne" },
-        { value: "Szare", text: "zieone" },
+        { value: null, text: 'Kolor oczu' },
+        { value: 'Szare', text: 'szare' },
+        { value: 'Niebieskie', text: 'niebieskie' },
+        { value: 'Brązowe', text: 'brązowe' },
+        { value: 'Piwne', text: 'piwne' },
+        { value: 'Szare', text: 'zieone' },
       ],
       hair_color_options: [
-        { value: null, text: "Kolor włosów" },
-        { value: "Blond", text: "blond" },
-        { value: "Ciemny blond", text: "ciemny blond" },
-        { value: "Jasny blond", text: "jasny blond" },
-        { value: "Brązowe", text: "brązowe" },
-        { value: "Ciemny brąz", text: "ciemny brąz" },
-        { value: "Jasny brąz", text: "jasny brąz" },
-        { value: "Czarne", text: "czarne" },
-        { value: "Siwe", text: "siwe" },
-        { value: "Inny", text: "inny" },
+        { value: null, text: 'Kolor włosów' },
+        { value: 'Blond', text: 'blond' },
+        { value: 'Ciemny blond', text: 'ciemny blond' },
+        { value: 'Jasny blond', text: 'jasny blond' },
+        { value: 'Brązowe', text: 'brązowe' },
+        { value: 'Ciemny brąz', text: 'ciemny brąz' },
+        { value: 'Jasny brąz', text: 'jasny brąz' },
+        { value: 'Czarne', text: 'czarne' },
+        { value: 'Siwe', text: 'siwe' },
+        { value: 'Inny', text: 'inny' },
       ],
       hair_length_options: [
-        { value: null, text: "Długość włosów" },
-        { value: "Bardzo krótkie", text: "bardzo krótkie" },
-        { value: "Krótkie", text: "krótkie" },
-        { value: "Średnie", text: "średnie (do barków)" },
-        { value: "Dłuższe", text: "dłuższe (do łopatek)" },
-        { value: "Długie", text: "długie" },
-        { value: "Bardzo długie", text: "bardzo długie (do pasa+)" },
-        { value: "Łysy", text: "brak (łysy)" },
+        { value: null, text: 'Długość włosów' },
+        { value: 'Bardzo krótkie', text: 'bardzo krótkie' },
+        { value: 'Krótkie', text: 'krótkie' },
+        { value: 'Średnie', text: 'średnie (do barków)' },
+        { value: 'Dłuższe', text: 'dłuższe (do łopatek)' },
+        { value: 'Długie', text: 'długie' },
+        { value: 'Bardzo długie', text: 'bardzo długie (do pasa+)' },
+        { value: 'Łysy', text: 'brak (łysy)' },
       ],
       smoking_options: [
-        { value: null, text: "" },
-        { value: "0", text: "nie palę" },
-        { value: "1", text: "okazjonalnie" },
-        { value: "2", text: "często" },
-        { value: "3", text: "codziennie" },
-        { value: "4", text: "nałogowo" },
+        { value: null, text: '' },
+        { value: '0', text: 'nie palę' },
+        { value: '1', text: 'okazjonalnie' },
+        { value: '2', text: 'często' },
+        { value: '3', text: 'codziennie' },
+        { value: '4', text: 'nałogowo' },
       ],
-      fields: ["location", "sex", "birthday"],
+      fields: ['location', 'sex', 'birthday'],
     };
   },
   methods: {
     getUsers() {
       this.users = [];
       axios
-        .get("http://127.0.0.1:8000/api/user/users", {
+        .get('http://127.0.0.1:8000/api/user/users', {
           params: {
-            search: localStorage.getItem("search-text"),
+            search: localStorage.getItem('search-text'),
             sex: this.sex,
             location: this.location,
             birthday: this.birthday,
@@ -412,15 +397,15 @@ export default {
             orientation: this.orientation,
           },
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
         })
         .then((response) => {
           console.log(response), (this.users = response.data);
         })
         .catch((errors) => console.log(errors));
-      this.searchText = localStorage.getItem("search-text");
-      localStorage.removeItem("search-text");
+      this.searchText = localStorage.getItem('search-text');
+      localStorage.removeItem('search-text');
     },
     getAge(dateString) {
       var today = new Date();
@@ -434,9 +419,8 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
-      else
-        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+      if (pic != null) return 'http://127.0.0.1:8000' + pic;
+      else return 'https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png';
     },
   },
   created() {
@@ -483,7 +467,7 @@ td {
   max-width: 300px;
 }
 .card-text {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: left;
   font-size: 5px;
   color: white;

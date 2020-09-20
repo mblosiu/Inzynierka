@@ -73,14 +73,6 @@ export default {
   padding: 0px;
 }
 
-#nav a {
-  color: whitesmoke;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
 #content {
   min-height: 73.2vh;
   margin-left: 2cm;

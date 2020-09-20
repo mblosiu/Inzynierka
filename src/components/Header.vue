@@ -18,7 +18,7 @@
         </svg>
         Love
       </a>
-      <a v-else class="navbar-brand" href="/mainuser">
+      <a id="logo" v-else class="navbar-brand" href="/mainuser">
         e
         <svg
           width="0.85em"
@@ -36,9 +36,9 @@
         Love
       </a>
 
-      <div v-if="token!=null" href="/mainuser">
+      <div id="logo" v-if="token != null" href="/mainuser">
         <b-avatar href="/mainuser" :src="getUrl(user_data.profile_picture)"></b-avatar>
-        {{user_data.username}}
+        {{ user_data.username }}
       </div>
       <!--<b-nav-form @submit.prevent="search" v-if="token != null">
         <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="searchText"></b-form-input>
@@ -83,16 +83,11 @@
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
-          <b-button
-            class="my-2 ml-2 mr-1"
-            type="button"
-            size="sm"
-            to="/mainuser/settings"
-          >Ustawienia</b-button>
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/settings">Ustawienia</b-button>
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
-          <b-button class="btn btn-warning mr-1" type="button" size="sm" to="/#">Premium</b-button>
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Premium</b-button>
         </b-nav-form>
         <div v-if="token == null">
           <b-alert
@@ -102,7 +97,8 @@
             variant="danger"
             @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
-          >{{ msg }}</b-alert>
+            >{{ msg }}</b-alert
+          >
         </div>
         <b-nav-form @submit.prevent="login" v-if="token == null">
           <b-form-input
@@ -122,11 +118,11 @@
             v-model="password"
             name="password"
           />
-          <b-button v-on:click="login" type="submit" size="sm" class="btn btn-success mr-2">Zaloguj</b-button>
+          <b-button v-on:click="login" type="submit" size="sm" class="my-2 ml-2">Zaloguj</b-button>
         </b-nav-form>
 
         <b-nav-form @submit.prevent="logout" v-if="token != null">
-          <b-button type="submit" size="sm" class="btn btn-danger mr-1">Wyloguj</b-button>
+          <b-button type="submit" size="sm" class="my-2 ml-2">Wyloguj</b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-navbar>
@@ -146,16 +142,16 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "Header",
+  name: 'Header',
   components: {},
   data() {
     return {
-      token: localStorage.getItem("user-token") || null,
-      username: "",
-      password: "",
-      searchText: "",
+      token: localStorage.getItem('user-token') || null,
+      username: '',
+      password: '',
+      searchText: '',
       dismissSecs: 5,
       dismissCountDown: 0,
       user_data: {},
@@ -170,10 +166,10 @@ export default {
     },
     getUserData() {
       axios
-        .get("http://127.0.0.1:8000/api/user/properties", {
+        .get('http://127.0.0.1:8000/api/user/properties', {
           params: {},
           headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
         })
         .then((response) => {
@@ -182,48 +178,46 @@ export default {
         .catch((errors) => console.log(errors));
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return 'http://127.0.0.1:8000' + pic;
     },
     login() {
       axios
-        .post("http://127.0.0.1:8000/api/user/login", {
+        .post('http://127.0.0.1:8000/api/user/login', {
           username: this.username,
           password: this.password,
         })
         .then((response) => {
           if (response.status == 200) {
-            (this.error_message = ""),
+            (this.error_message = ''),
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
-              localStorage.setItem("user-token", response.data.token),
+              localStorage.setItem('user-token', response.data.token),
               this.$router.go();
           }
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg(), (this.msg = "Błędny login lub hasło!");
+            this.showMsg(), (this.msg = 'Błędny login lub hasło!');
           }
         });
     },
     logout() {
       let config = {
         headers: {
-          Authorization: "Token " + localStorage.getItem("user-token"),
+          Authorization: 'Token ' + localStorage.getItem('user-token'),
         },
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
+        .post('http://127.0.0.1:8000/api/user/logout', {}, config)
         .then((response) => {})
         .catch((errors) => {});
-      localStorage.removeItem("user-token"),
-        (this.token = null),
-        this.$router.go();
+      localStorage.removeItem('user-token'), (this.token = null), this.$router.go();
     },
     search() {
-      localStorage.setItem("search-text", this.searchText);
-      if (this.$route.name == "search") this.$router.go();
-      else this.$router.push({ name: "search" });
+      localStorage.setItem('search-text', this.searchText);
+      if (this.$route.name == 'search') this.$router.go();
+      else this.$router.push({ name: 'search' });
     },
   },
   created() {
@@ -239,9 +233,46 @@ export default {
   align-content: inherit;
 }
 .navbar {
-  background-color: #ce3854a1;
+  background-color: #9a3f66;
+  /*background-color: #ce3854a1;*/
 }
 .b-avatar {
   margin-left: 10px;
 }
+.btn-secondary {
+  background-color: #cdb7c0;
+  color: #501c4c;
+  font-weight: 600;
+}
+.btn-secondary:hover,
+.btn-secondary:active {
+  background-color: #0275d8;
+  color: white;
+  font-weight: 600;
+}
+
+#nav a.router-link-exact-active {
+  background-color: #0275d8;
+  color: white;
+  font-weight: 600;
+}
+#logo {
+  color: whitesmoke;
+  font-weight: 600;
+}
+/*
+.btn {
+  background-color: #cdb7c0;
+  color: #501c4c;
+}
+.router-link-exact-active {
+  background-color: blue;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #cdb7c0;
+  color: white;
+}
+*/
 </style>

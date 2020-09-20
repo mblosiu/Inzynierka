@@ -43,6 +43,6 @@ a:hover {
   text-decoration: none;
 }
 .footer {
-  background-color: #ce3854bd;
+  background-color: #9a3f66;
 }
 </style>
