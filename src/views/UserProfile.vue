@@ -758,7 +758,7 @@ export default {
       };
 
       axios
-        .post('http://127.0.0.1:8000/api/user/create-like', { value: 'like', pk: 2 }, config)
+        .post('http://127.0.0.1:8000/api/user/create-like', { value: 'like', pk: this.$route.params.pk }, config)
         .then((response) => {
           console.log(response);
         })

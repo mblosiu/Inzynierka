@@ -395,6 +395,8 @@ export default {
             body_type: this.body_type,
             is_smoking: this.is_smoking,
             orientation: this.orientation,
+            age_preference_min: this.age_min,
+            age_preference_max: this.age_max,
           },
           headers: {
             Authorization: 'Token ' + localStorage.getItem('user-token'),
