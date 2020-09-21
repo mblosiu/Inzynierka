@@ -34,13 +34,24 @@
         {{ user_data.username }}
       </div>
 
+      <b-nav-form id="search" @submit.prevent="search" v-if="token != null">
+        <b-form-input
+          id="search-input"
+          size="sm"
+          class="mr-sm-2"
+          v-model="searchText"
+          placeholder="wyszukaj użytkownika"
+          name="search"
+        />
+      </b-nav-form>
+
       <b-navbar-nav class="ml-auto">
         <!--<b-dropdown text="Lista 1" size="sm">
           <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
           <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
           <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
           <b-dropdown-item href="/#">Premium</b-dropdown-item>
-        </b-dropdown>-->
+        </b-dropdown>
         <div id="dropdown" v-if="token != null">
           <b-dropdown id="dropdown" text="Dropdown1" variant="own" size="md" class="ml-2 mr-2">
             <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
@@ -49,7 +60,7 @@
             <b-dropdown-item href="/#">Premium</b-dropdown-item>
           </b-dropdown>
         </div>
-
+-->
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
         </b-nav-form>
@@ -341,4 +352,8 @@ export default {
   font-weight: 600 !important;
 }
 */
+#search {
+  margin-left: 30px;
+  margin-right: 10px;
+}
 </style>

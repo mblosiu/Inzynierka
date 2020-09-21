@@ -149,7 +149,7 @@
                     </b-row>
                   </th>
                   <!--<th>
-                    <div id="filter">
+                    <div id="filter" v-if="more_filters == true">
                       <b-form-input
                         type="number"
                         id="agemin"
@@ -161,7 +161,7 @@
                     </div>
                   </th>
                   <th>
-                    <div id="filter">
+                    <div id="filter" v-if="more_filters == true">
                       <input
                         type="number"
                         id="agemax"
@@ -173,7 +173,7 @@
                     </div>
                   </th>-->
                   <!--<th>
-                    <div id="filter">
+                    <div id="filter" v-if="more_filters == true">
                       <input
                         class="ml-2"
                         type="text"
@@ -200,15 +200,20 @@
                     </div>
                   </th>
                   <th>
-                    <a
-                      class="btn btn-primary ml-2 mr-2"
-                      data-toggle="collapse"
-                      href="#collapseExample"
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="collapseExample"
-                      >Więcej filtrów</a
+                    <button
+                      v-if="more_filters == false"
+                      v-on:click="more_filters = true"
+                      class="btn btn-primary float-right"
                     >
+                      Więcej filtrów
+                    </button>
+                    <button
+                      v-if="more_filters == true"
+                      v-on:click="more_filters = false"
+                      class="btn btn-primary float-right"
+                    >
+                      Ukryj filtry
+                    </button>
                   </th>
                 </tr>
                 <tr>
@@ -295,6 +300,7 @@ export default {
   components: {},
   data() {
     return {
+      more_filters: false,
       searchText: null,
       birthday: null,
       sex: null,
