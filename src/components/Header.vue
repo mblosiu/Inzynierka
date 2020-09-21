@@ -68,55 +68,51 @@
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/search">Szukaj par</b-button>
         </b-nav-form>
-
+        <!-- 
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm">Dopasuj</b-button>
-          <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" v-b-modal.modal-scrollable>
-              Polubienia
-              <span class="badge badge-light">{{ user_likes.length }}</span>
-            </b-button>
-            <b-modal id="modal-scrollable" scrollable title="Polubienia" hide-footer>
-              <b-row>
-                <b-col cols="6">
-                  <b-row>
-                    <b-col cols="12">
-                      <h5>Polubiłeś: {{ user_liking.length }}</h5>
-                    </b-col>
-                  </b-row>
-                </b-col>
-
-                <b-col cols="6">
-                  <b-row>
-                    <b-col cols="12">
-                      <h5>Lubią mnie: {{ user_likes.length }}</h5>
-                    </b-col>
-                  </b-row>
-                </b-col>
-              </b-row>
-            </b-modal>
-          </b-nav-form>
-          <!-- zbedny button -->
-          <!--<b-nav-form v-if="token != null">
+        </b-nav-form>
+        <b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm">
               Wiadomości
               <span class="badge badge-light">0</span>
             </b-button>
-          </b-nav-form>-->
-
-          <!-- zbedny button -->
-          <!--<b-nav-form v-if="token != null">
+          </b-nav-form>
+          <b-nav-form v-if="token != null">
             <b-button class="my-2 ml-2" type="button" size="sm">
               Kontakty
               <span class="badge badge-light">0</span>
             </b-button>
-          </b-nav-form>-->
-
-          <b-nav-form v-if="token != null">
-            <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/gallery">Galeria</b-button>
           </b-nav-form>
+        -->
+        <b-nav-form v-if="token != null">
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/gallery">Galeria</b-button>
         </b-nav-form>
+        <b-nav-form v-if="token != null">
+          <b-button class="my-2 ml-2" type="button" size="sm" v-b-modal.modal-scrollable>
+            Polubienia
+            <span class="badge badge-light">{{ user_likes.length }}</span>
+          </b-button>
+          <b-modal id="modal-scrollable" scrollable title="Polubienia" hide-footer>
+            <b-row>
+              <b-col cols="6">
+                <b-row>
+                  <b-col cols="12">
+                    <h5>Polubiłeś: {{ user_liking.length }}</h5>
+                  </b-col>
+                </b-row>
+              </b-col>
 
+              <b-col cols="6">
+                <b-row>
+                  <b-col cols="12">
+                    <h5>Lubią mnie: {{ user_likes.length }}</h5>
+                  </b-col>
+                </b-row>
+              </b-col>
+            </b-row>
+          </b-modal>
+        </b-nav-form>
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/settings">Ustawienia</b-button>
         </b-nav-form>
@@ -202,7 +198,19 @@ export default {
     showMsg() {
       this.dismissCountDown = this.dismissSecs;
     },
-
+    getUserData() {
+      axios
+        .get('http://127.0.0.1:8000/api/user/properties', {
+          params: {},
+          headers: {
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_data = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
     getUserLikes() {
       console.log(this.user_data['pk']);
       axios
@@ -274,6 +282,7 @@ export default {
     },
   },
   created() {
+    this.getUserData();
     this.getUserLikes();
     this.getUserLiking();
   },
