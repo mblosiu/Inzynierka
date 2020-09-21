@@ -64,7 +64,7 @@ text {
   text-align: left;
 }
 .leftside {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color:rgba(250, 234, 182, 0.733);
   padding: 20px;
   color: #812b3b;
   border-radius: 25px;
@@ -77,7 +77,7 @@ text {
   */
 }
 .rightside {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(250, 234, 182, 0.733);
   padding: 20px;
   color: #812b3b;
   border-radius: 25px;

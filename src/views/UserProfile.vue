@@ -850,7 +850,7 @@ export default {
   font-size: 20px;
 }
 .user-card {
-  background: #8d1515;
+  background: #a01818;
   color: white;
 }
 .b-sidebar {
@@ -863,14 +863,14 @@ export default {
   background: #fadbdb;
 }
 .tabs {
-  background: #eb6767;
+  background: #ff9292d5;
   border-radius: 12px;
   border-style: solid;
   border-width: 2px;
   border-color: #aa1d37;
 }
 .card-header {
-  background: #9e1d35;
+  background: #df4040;
 }
 .oneline {
   display: inline-block;
