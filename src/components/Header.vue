@@ -214,7 +214,7 @@ export default {
         .catch((errors) => console.log(errors));
     },
     getUserLikes() {
-      console.log(this.user_data['pk']);
+      //console.log(this.user_data['pk']);
       axios
         .get('http://127.0.0.1:8000/api/user/get-user-are-liked', {
           params: {},

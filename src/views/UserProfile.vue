@@ -205,7 +205,7 @@
                         </footer>
                       </div>
                     </b-modal>
-                    <div v-if="liked==false">
+                    <div v-if="false==isUserLiked()">
                       <button
                         type="button"
                         v-on:click="likeUser"
@@ -790,14 +790,14 @@ export default {
       like: "like",
       //heartcolor: "grey",
       liked_user: {},
-      user_likes: {},
+      user_likes: [],
       liked: false,
     };
   },
   methods: {
     likeUser() {
       //this.heartcolor = "red";
-      this.liked = true;
+      //this.liked = true;
       const config = {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -818,7 +818,7 @@ export default {
     },
     dislikeUser() {
       //this.heartcolor = "pink";
-      like = false;
+      //like = false;
       const config = {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -838,7 +838,7 @@ export default {
       this.$router.go();
     },
     getUserLikes() {
-      //console.log(this.user_data['pk']);
+      //console.log(this.user_data['pk']); 
       axios
         .get(
           "http://127.0.0.1:8000/api/user/get-users-are-liked/" +
@@ -857,13 +857,27 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    isUserLiked(){
-      if(true==(user_likes.includes(user.pk))){
+    isUserLiked() {
+      console.log(this.user_likes.length)
+      //console.log("isuserliked 1");
+      //console.log((this.user_likes).filter(pk => this.user_likes.pk === this.$route.params.pk))
+      /*if(true==(user_likes.includes(user.pk))){
         liked = true;
 
       }else{
         liked = false;
+      }*/
+      for (var i = 0; i < this.user_likes.length; i++) {
+        if (this.user_likes[i].pk == this.$route.params.pk) {
+          console.log("polajkowany");
+          return true;
+          break;
+        }
+        console.log("nie polajkowany");
+        return false;
+        
       }
+      //console.log(this.liked);
     },
     getUserData() {
       axios
