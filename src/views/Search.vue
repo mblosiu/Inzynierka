@@ -40,71 +40,7 @@
                       ></b-form-select>
                     </div>
                   </th>
-                  <!--<th>
-                    <div id="filter">
-                      <b-form-select
-                        :options="orientation_options"
-                        class="ml-2"
-                        id="orientation"
-                        v-model="orientation"
-                        size="md"
-                        value="orientation"
-                        placeholder="Orientacja"
-                      ></b-form-select>
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter">
-                      <b-form-select
-                        :options="hair_color_options"
-                        class="ml-2"
-                        id="hair_color"
-                        v-model="hair_color"
-                        size="md"
-                        value="hair_color"
-                        placeholder="Kolor włosów"
-                      ></b-form-select>
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter">
-                      <b-form-select
-                        :options="hair_length_options"
-                        class="ml-2"
-                        id="hair_length"
-                        v-model="hair_length"
-                        size="md"
-                        value="hair_length"
-                        placeholder="Długość włosów"
-                      ></b-form-select>
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter">
-                      <b-form-select
-                        :options="eye_color_options"
-                        class="ml-2"
-                        id="eye_color"
-                        v-model="eye_color"
-                        size="md"
-                        value="eye_color"
-                        placeholder="Kolor oczu"
-                      ></b-form-select>
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter">
-                      <b-form-select
-                        :options="body_type_options"
-                        class="ml-2"
-                        id="body_type"
-                        v-model="body_type"
-                        size="md"
-                        value="body_type"
-                        placeholder="Sylwetka"
-                      ></b-form-select>
-                    </div>
-                  </th>-->
+                  <!---->
                   <th>
                     <div id="filter">
                       <b-form-select
@@ -185,14 +121,69 @@
                     </div>
                   </th>-->
                   <th>
-                    <b-nav-form>
-                      <b-form-input
+                    <div id="filter">
+                      <b-form-select
+                        :options="orientation_options"
+                        class="ml-2"
+                        id="orientation"
+                        v-model="orientation"
                         size="md"
-                        class="mr-sm-2"
-                        placeholder="Nazwa użytkownika"
-                        v-model="searchText"
-                      ></b-form-input>
-                    </b-nav-form>
+                        value="orientation"
+                        placeholder="Orientacja"
+                      ></b-form-select>
+                    </div>
+                  </th>
+                  <th>
+                    <div id="filter" v-if="more_filters == true">
+                      <b-form-select
+                        :options="hair_color_options"
+                        class="ml-2"
+                        id="hair_color"
+                        v-model="hair_color"
+                        size="md"
+                        value="hair_color"
+                        placeholder="Kolor włosów"
+                      ></b-form-select>
+                    </div>
+                  </th>
+                  <th>
+                    <div id="filter" v-if="more_filters == true">
+                      <b-form-select
+                        :options="hair_length_options"
+                        class="ml-2"
+                        id="hair_length"
+                        v-model="hair_length"
+                        size="md"
+                        value="hair_length"
+                        placeholder="Długość włosów"
+                      ></b-form-select>
+                    </div>
+                  </th>
+                  <th>
+                    <div id="filter" v-if="more_filters == true">
+                      <b-form-select
+                        :options="eye_color_options"
+                        class="ml-2"
+                        id="eye_color"
+                        v-model="eye_color"
+                        size="md"
+                        value="eye_color"
+                        placeholder="Kolor oczu"
+                      ></b-form-select>
+                    </div>
+                  </th>
+                  <th>
+                    <div id="filter" v-if="more_filters == true">
+                      <b-form-select
+                        :options="body_type_options"
+                        class="ml-2"
+                        id="body_type"
+                        v-model="body_type"
+                        size="md"
+                        value="body_type"
+                        placeholder="Sylwetka"
+                      ></b-form-select>
+                    </div>
                   </th>
                   <th>
                     <div id="filter">

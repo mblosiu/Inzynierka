@@ -617,6 +617,7 @@ export default {
 }
 .card-img-top {
   object-fit: cover;
+  /*object-fit: scale-down;*/
   width: auto;
   max-height: 400px;
   border-radius: 10px;
@@ -635,7 +636,7 @@ export default {
   border-style: solid;
   border-width: 2px;
   border-color: #9a3f66;
-  object-fit:scale-down;
+  object-fit: scale-down;
 }
 textarea {
   height: 100%;

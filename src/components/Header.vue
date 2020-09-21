@@ -63,13 +63,12 @@
             {{ user_data.username }}
           </a>
         </b-nav-form>
+        <b-nav-form v-if="token != null">
+          <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/search">Szukaj par</b-button>
+        </b-nav-form>
         <!--
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
-        </b-nav-form>
-
-        <b-nav-form v-if="token != null">
-          <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/search">Szukaj par</b-button>
         </b-nav-form>
 
         <b-nav-form v-if="token != null">
