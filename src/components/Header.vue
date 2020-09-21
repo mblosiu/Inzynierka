@@ -213,6 +213,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //to jest routing aby dostać lajki które otrzymał przeglądany user
     getUserLikes() {
       //console.log(this.user_data['pk']);
       axios
@@ -227,6 +228,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //to jest routing do lajków które curent user rozdał
     getUserLiking() {
       axios
         .get('http://127.0.0.1:8000/api/user/get-user-liked', {

@@ -11,8 +11,7 @@
             variant="success"
             @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
-            >{{ msg }}</b-alert
-          >
+          >{{ msg }}</b-alert>
           <b-alert
             :show="dismissCountDown2"
             dismissible
@@ -20,8 +19,7 @@
             variant="danger"
             @dismissed="dismissCountDown2 = 0"
             @dismiss-count-down="countDownChanged2"
-            >{{ msg2 }}</b-alert
-          >
+          >{{ msg2 }}</b-alert>
 
           <b-tabs pills card horizontal>
             <form class="card" @submit.prevent="editUserData">
@@ -35,7 +33,12 @@
                       </b-col>
                       <b-col cols="6">
                         <label for="surname" class="grey-text">Nazwisko</label>
-                        <input type="text" id="surname" v-model="user_data.surname" class="form-control" />
+                        <input
+                          type="text"
+                          id="surname"
+                          v-model="user_data.surname"
+                          class="form-control"
+                        />
                       </b-col>
                     </b-row>
                   </li>
@@ -43,7 +46,12 @@
                     <b-row>
                       <b-col cols="6">
                         <label for="location" class="grey-text">Miejsce zamieszkania</label>
-                        <input type="text" id="location" v-model="user_data.location" class="form-control" />
+                        <input
+                          type="text"
+                          id="location"
+                          v-model="user_data.location"
+                          class="form-control"
+                        />
                       </b-col>
                       <b-col cols="6">
                         <label for="sex" class="grey-text">Płeć</label>
@@ -329,7 +337,12 @@
                       </b-col>
                       <b-col cols="6">
                         <label for="passion" class="white-text">Największa pasja:</label>
-                        <input type="text" id="passion" v-model="user_data.passion" class="form-control" />
+                        <input
+                          type="text"
+                          id="passion"
+                          v-model="user_data.passion"
+                          class="form-control"
+                        />
                       </b-col>
                     </b-row>
                   </ul>
@@ -353,19 +366,23 @@
                             <b-col cols="3"></b-col>
                             <b-col cols="3">
                               <div>
-                                <div class="mt-2">Wiek minimalny: {{ user_preferences.age_preference_min }}</div>
+                                <div
+                                  class="mt-2"
+                                >Wiek minimalny: {{ user_preferences.age_preference_min }}</div>
                                 <b-form-input
                                   id="user_preferences.age_preference_min"
                                   v-model="user_preferences.age_preference_min"
                                   type="range"
                                   min="18"
-                                  max="99"
+                                  :max="user_preferences.age_preference_max"
                                 ></b-form-input>
                               </div>
                             </b-col>
                             <b-col cols="3">
                               <div>
-                                <div class="mt-2">Wiek maksymalny: {{ user_preferences.age_preference_max }}</div>
+                                <div
+                                  class="mt-2"
+                                >Wiek maksymalny: {{ user_preferences.age_preference_max }}</div>
                                 <b-form-input
                                   id="age_preference_max"
                                   v-model="user_preferences.age_preference_max"
@@ -392,9 +409,10 @@
                           ></b-form-select>
                         </b-col>
                         <b-col cols="6">
-                          <label for="weight_preference" class="white-text"
-                            >Waga maks: {{ user_preferences.weight_preference }}</label
-                          >
+                          <label
+                            for="weight_preference"
+                            class="white-text"
+                          >Waga maks: {{ user_preferences.weight_preference }}</label>
                           <b-row>
                             <b-col cols="2"></b-col>
                             <b-col cols="8">
@@ -524,7 +542,52 @@
               </div>
             </b-tab>
             <b-tab title="Ustawienia prywatności">
-              <div class="card text-black">sprawy dot. funkcjonowania konta aż po jego usuwanie</div>
+              <ul class="list-group list-group-flush">
+                <ul class="list-group-item">
+                  <b-row>
+                    <b-col cols="6"></b-col>
+                    <b-col cols="6"></b-col>
+                  </b-row>
+                </ul>
+                <ul class="list-group-item">
+                  <b-row>
+                    <b-col cols="4"></b-col>
+                    <b-col cols="4">
+                      <b-button
+                        variant="danger"
+                        size="lg"
+                        @click="$bvModal.show('modal-scoped')"
+                      >Usuń konto</b-button>
+                      <b-modal id="modal-scoped">
+                        <template v-slot:modal-header="{ close }">
+                          <!-- Emulate built in modal header close button action -->
+
+                          <h5>Czy jesteś pewien?</h5>
+                        </template>
+
+                        <h6>Czy na pewno chcesz usunąć swoje konto z portalu e-Love? Konto zostanie usunięte bezpowrotnie!</h6>
+
+                        <template v-slot:modal-footer="{cancel}">
+                          <b-button
+                            size="md"
+                            variant="secondary"
+                            class="mr-20 ml-20"
+                            @click="cancel()"
+                          >Nie</b-button>
+                          <b-button size="md" variant="danger" @click="deleteAccount">Tak</b-button>
+                        </template>
+                      </b-modal>
+                    </b-col>
+                    <b-col cols="4"></b-col>
+                  </b-row>
+                </ul>
+                <ul class="list-group-item">
+                  <b-row>
+                    <b-col cols="6">{{boxtwo}}</b-col>
+                    <b-col cols="6"></b-col>
+                  </b-row>
+                </ul>
+              </ul>
             </b-tab>
           </b-tabs>
           <p></p>
@@ -536,126 +599,138 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'UsersProfile',
+  name: "UsersProfile",
   components: {},
   data() {
     return {
       placeholder: null,
-      active: '',
+      active: "",
       checkedNames: [],
       special_options: [],
       user_data: {},
       user_preferences: {},
-      msg: '',
+      msg: "",
       dismissSecs: 5,
       dismissCountDown: 0,
       dismissSecs2: 5,
       dismissCountDown2: 0,
       calculated: 0,
-      msg2: '',
+      msg2: "",
+      boxtwo: "",
       sex_options: [
-        { value: null, text: '' },
-        { value: 'Mężczyzna', text: 'mężczyzna' },
-        { value: 'Kobieta', text: 'kobieta' },
-        { value: 'Inna', text: 'inna' },
+        { value: null, text: "" },
+        { value: "Mężczyzna", text: "mężczyzna" },
+        { value: "Kobieta", text: "kobieta" },
+        { value: "Inna", text: "inna" },
       ],
       orientation_options: [
-        { value: null, text: '' },
-        { value: 'Hetero', text: 'heteroseksualna' },
-        { value: 'Homo', text: 'homoseksualna' },
-        { value: 'Bi', text: 'biseksualna' },
+        { value: null, text: "" },
+        { value: "Hetero", text: "heteroseksualna" },
+        { value: "Homo", text: "homoseksualna" },
+        { value: "Bi", text: "biseksualna" },
       ],
       body_type_options: [
-        { value: null, text: '' },
-        { value: 'Normalna', text: 'normalna' },
-        { value: 'Szczupła', text: 'szczupła' },
-        { value: 'Wysportowana', text: 'wysportowana' },
-        { value: 'Puszysta', text: 'puszysta' },
+        { value: null, text: "" },
+        { value: "Normalna", text: "normalna" },
+        { value: "Szczupła", text: "szczupła" },
+        { value: "Wysportowana", text: "wysportowana" },
+        { value: "Puszysta", text: "puszysta" },
       ],
       eye_color_options: [
-        { value: null, text: '' },
-        { value: 'Szare', text: 'szare' },
-        { value: 'Niebieskie', text: 'niebieskie' },
-        { value: 'Brązowe', text: 'brązowe' },
-        { value: 'Piwne', text: 'piwne' },
-        { value: 'Szare', text: 'zieone' },
+        { value: null, text: "" },
+        { value: "Szare", text: "szare" },
+        { value: "Niebieskie", text: "niebieskie" },
+        { value: "Brązowe", text: "brązowe" },
+        { value: "Piwne", text: "piwne" },
+        { value: "Szare", text: "zieone" },
       ],
       hair_color_options: [
-        { value: null, text: '' },
-        { value: 'Blond', text: 'blond' },
-        { value: 'Ciemny blond', text: 'ciemny blond' },
-        { value: 'Jasny blond', text: 'jasny blond' },
-        { value: 'Brązowe', text: 'brązowe' },
-        { value: 'Ciemny brąz', text: 'ciemny brąz' },
-        { value: 'Jasny brąz', text: 'jasny brąz' },
-        { value: 'Czarne', text: 'czarne' },
-        { value: 'Siwe', text: 'siwe' },
-        { value: 'Inny', text: 'inny' },
+        { value: null, text: "" },
+        { value: "Blond", text: "blond" },
+        { value: "Ciemny blond", text: "ciemny blond" },
+        { value: "Jasny blond", text: "jasny blond" },
+        { value: "Brązowe", text: "brązowe" },
+        { value: "Ciemny brąz", text: "ciemny brąz" },
+        { value: "Jasny brąz", text: "jasny brąz" },
+        { value: "Czarne", text: "czarne" },
+        { value: "Siwe", text: "siwe" },
+        { value: "Inny", text: "inny" },
       ],
       hair_length_options: [
-        { value: null, text: '' },
-        { value: 'Bardzo krótkie', text: 'bardzo krótkie' },
-        { value: 'Krótkie', text: 'krótkie' },
-        { value: 'Średnie', text: 'średnie (do barków)' },
-        { value: 'Dłuższe', text: 'dłuższe (do łopatek)' },
-        { value: 'Długie', text: 'długie' },
-        { value: 'Bardzo długie', text: 'bardzo długie (do pasa+)' },
-        { value: 'Łysy', text: 'brak (łysy)' },
+        { value: null, text: "" },
+        { value: "Bardzo krótkie", text: "bardzo krótkie" },
+        { value: "Krótkie", text: "krótkie" },
+        { value: "Średnie", text: "średnie (do barków)" },
+        { value: "Dłuższe", text: "dłuższe (do łopatek)" },
+        { value: "Długie", text: "długie" },
+        { value: "Bardzo długie", text: "bardzo długie (do pasa+)" },
+        { value: "Łysy", text: "brak (łysy)" },
       ],
       status_options: [
-        { value: null, text: '' },
-        { value: 'Uczeń', text: 'uczeń' },
-        { value: 'Student', text: 'student' },
-        { value: 'Pracuję', text: 'pracuję' },
-        { value: 'Nie pracuję', text: 'nie pracuję' },
-        { value: 'Emeryt', text: 'emeryt' },
+        { value: null, text: "" },
+        { value: "Uczeń", text: "uczeń" },
+        { value: "Student", text: "student" },
+        { value: "Pracuję", text: "pracuję" },
+        { value: "Nie pracuję", text: "nie pracuję" },
+        { value: "Emeryt", text: "emeryt" },
       ],
       education_options: [
-        { value: null, text: 'brak' },
-        { value: 'Podstawowe', text: 'podstawowe' },
-        { value: 'Gimnazjalne', text: 'gimnazjalne' },
-        { value: 'Zawodowe', text: 'zawodowe' },
-        { value: 'Średnie', text: 'średnie' },
-        { value: 'Wyższe', text: 'wyższe' },
+        { value: null, text: "brak" },
+        { value: "Podstawowe", text: "podstawowe" },
+        { value: "Gimnazjalne", text: "gimnazjalne" },
+        { value: "Zawodowe", text: "zawodowe" },
+        { value: "Średnie", text: "średnie" },
+        { value: "Wyższe", text: "wyższe" },
       ],
       smoking_options: [
-        { value: null, text: '' },
-        { value: '0', text: 'nie palę' },
-        { value: '1', text: 'okazjonalnie' },
-        { value: '2', text: 'często' },
-        { value: '3', text: 'codziennie' },
-        { value: '4', text: 'nałogowo' },
+        { value: null, text: "" },
+        { value: "0", text: "nie palę" },
+        { value: "1", text: "okazjonalnie" },
+        { value: "2", text: "często" },
+        { value: "3", text: "codziennie" },
+        { value: "4", text: "nałogowo" },
       ],
       smoking_options2: [
-        { value: null, text: '' },
-        { value: '0', text: 'nie pali' },
-        { value: '1', text: 'okazjonalnie' },
-        { value: '2', text: 'często' },
-        { value: '3', text: 'codziennie' },
-        { value: '4', text: 'nałogowo' },
+        { value: null, text: "" },
+        { value: "0", text: "nie pali" },
+        { value: "1", text: "okazjonalnie" },
+        { value: "2", text: "często" },
+        { value: "3", text: "codziennie" },
+        { value: "4", text: "nałogowo" },
       ],
       alcohol_options: [
-        { value: null, text: '' },
-        { value: '0', text: 'nie piję' },
-        { value: '1', text: 'okazjonalnie' },
-        { value: '2', text: 'często' },
-        { value: '3', text: 'codziennie' },
-        { value: '4', text: 'nałogowo' },
+        { value: null, text: "" },
+        { value: "0", text: "nie piję" },
+        { value: "1", text: "okazjonalnie" },
+        { value: "2", text: "często" },
+        { value: "3", text: "codziennie" },
+        { value: "4", text: "nałogowo" },
       ],
       alcohol_options2: [
-        { value: null, text: '' },
-        { value: '0', text: 'nie pije' },
-        { value: '1', text: 'okazjonalnie' },
-        { value: '2', text: 'często' },
-        { value: '3', text: 'codziennie' },
-        { value: '4', text: 'nałogowo' },
+        { value: null, text: "" },
+        { value: "0", text: "nie pije" },
+        { value: "1", text: "okazjonalnie" },
+        { value: "2", text: "często" },
+        { value: "3", text: "codziennie" },
+        { value: "4", text: "nałogowo" },
       ],
     };
   },
   methods: {
+    deleteAccount() {
+      console.log("usuwanie konta");
+      axios.delete("http://127.0.0.1:8000/api/user/delete", {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      });
+      localStorage.removeItem("user-token")
+      this.$router.go();
+    },
+
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
@@ -670,10 +745,10 @@ export default {
     },
     getUserData() {
       axios
-        .get('http://127.0.0.1:8000/api/user/properties', {
+        .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -684,12 +759,12 @@ export default {
     editUserData() {
       let config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
       axios
         .patch(
-          'http://127.0.0.1:8000/api/user/properties',
+          "http://127.0.0.1:8000/api/user/properties",
           {
             surname: this.user_data.surname,
             name: this.user_data.name,
@@ -713,13 +788,13 @@ export default {
         )
         .then((response) => {
           if (response.status == 200) {
-            this.showMsg(), (this.msg = 'Zapisano zmiany');
+            this.showMsg(), (this.msg = "Zapisano zmiany");
           }
           console.log(response);
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg2(), (this.msg2 = 'Formularz zawiera błędy');
+            this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
           }
           console.log(errors);
         });
@@ -727,12 +802,12 @@ export default {
     editUserDescription() {
       let config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
       axios
         .patch(
-          'http://127.0.0.1:8000/api/user/properties',
+          "http://127.0.0.1:8000/api/user/properties",
           {
             description: this.user_data.description,
           },
@@ -741,17 +816,17 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status == 200) {
-            this.showMsg(), (this.msg = 'Zaktualizowano opis profilu');
+            this.showMsg(), (this.msg = "Zaktualizowano opis profilu");
           }
         })
         .catch((errors) => console.log(errors));
     },
     getUserPreferences() {
       axios
-        .get('http://127.0.0.1:8000/api/user/preferences', {
+        .get("http://127.0.0.1:8000/api/user/preferences", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -762,15 +837,16 @@ export default {
     editUserPreferences() {
       let config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
       axios
         .patch(
-          'http://127.0.0.1:8000/api/user/preferences',
+          "http://127.0.0.1:8000/api/user/preferences",
           {
             orientation: this.user_preferences.orientation,
-            is_drinking_alcohol_preference: this.user_preferences.is_drinking_alcohol_preference,
+            is_drinking_alcohol_preference: this.user_preferences
+              .is_drinking_alcohol_preference,
             is_smoking_preference: this.user_preferences.is_smoking_preference,
             age_preference_min: this.user_preferences.age_preference_min,
             age_preference_max: this.user_preferences.age_preference_max,
@@ -778,20 +854,21 @@ export default {
             weight_preference: this.user_preferences.weight_preference,
             education_preference: this.user_preferences.education_preference,
             eye_color_preference: this.user_preferences.eye_color_preference,
-            hair_length_preference: this.user_preferences.hair_length_preference,
+            hair_length_preference: this.user_preferences
+              .hair_length_preference,
             hair_color_preference: this.user_preferences.hair_color_preference,
           },
           config
         )
         .then((response) => {
           if (response.status == 200) {
-            this.showMsg(), (this.msg = 'Zapisano zmiany');
+            this.showMsg(), (this.msg = "Zapisano zmiany");
           }
           console.log(response);
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg2(), (this.msg2 = 'Formularz zawiera błędy');
+            this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
           }
           console.log(errors);
         });
@@ -803,9 +880,6 @@ export default {
     this.getUserData();
     this.getUserPreferences();
     this.getUserSettings();
-  },
-  computed() {
-    this.user_preferences.age_preference_min;
   },
 };
 </script>
@@ -870,13 +944,11 @@ table {
   background-color: #e9bac2;
 }
 .card-text {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
 }
-.range-1 {
-  background: brown;
-}
+
 .nav-link {
   color: white;
 }

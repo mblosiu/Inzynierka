@@ -833,10 +833,10 @@ export default {
       var liked = false;
       for (var i = 0; i < this.user_likes.length; i++) {
         if (this.user_likes[i].liked_by['pk'] == this.$route.params.pk) {
-          liked = true;
+          return true;
         }
       }
-      return liked;
+      return false;
     },
     getLikePK() {
       var pk = -1;

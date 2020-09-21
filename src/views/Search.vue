@@ -67,7 +67,7 @@
                       <b-col cols="1"></b-col>
                       <b-col cols="5">
                         <div>
-                          <b-form-input id="age_min" v-model="age_min" type="range" min="18" max="99"></b-form-input>
+                          <b-form-input id="age_min" v-model="age_min" type="range" min="18" :max="age_max"></b-form-input>
                         </div>
                       </b-col>
                       <b-col cols="5">
