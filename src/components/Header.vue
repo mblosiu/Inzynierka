@@ -29,10 +29,6 @@
         </svg>
         Love
       </a>
-      <div id="logo" v-if="token != null" href="/mainuser">
-        <b-avatar href="/mainuser" :src="getUrl(user_data.profile_picture)"></b-avatar>
-        {{ user_data.username }}
-      </div>
 
       <b-nav-form id="search" @submit.prevent="search" v-if="token != null">
         <b-form-input
@@ -61,6 +57,11 @@
           </b-dropdown>
         </div>
 -->
+        <b-nav-form id="logo" v-if="token != null" href="/mainuser">
+          <b-avatar href="/mainuser" :src="getUrl(user_data.profile_picture)"></b-avatar>
+          <div style="margin-left:5px;">{{ user_data.username }}</div>
+        </b-nav-form>
+        <!--
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser">Twój profil</b-button>
         </b-nav-form>
@@ -68,7 +69,7 @@
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm" to="/mainuser/search">Szukaj par</b-button>
         </b-nav-form>
-        <!-- 
+
         <b-nav-form v-if="token != null">
           <b-button class="my-2 ml-2" type="button" size="sm">Dopasuj</b-button>
         </b-nav-form>
