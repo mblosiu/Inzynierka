@@ -765,7 +765,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    dislikeUser(){
+    dislikeUser() {
       this.heartcolor = 'pink';
       const config = {
         headers: {
@@ -774,7 +774,7 @@ export default {
       };
 
       axios
-        .delete('http://127.0.0.1:8000/api/user/delete-like', {pk: this.$route.params.pk }, config)
+        .delete('http://127.0.0.1:8000/api/user/delete-like', { pk: this.$route.params.pk }, config)
         .then((response) => {
           console.log(response);
         })
@@ -783,7 +783,7 @@ export default {
     getUserLikes() {
       //console.log(this.user_data['pk']);
       axios
-        .get('http://127.0.0.1:8000/api/user/get-user-are-liked', {
+        .get('http://127.0.0.1:8000/api/user/get-users-are-liked/' + this.$route.params.pk, {
           params: {},
           headers: {
             Authorization: 'Token ' + localStorage.getItem('user-token'),
