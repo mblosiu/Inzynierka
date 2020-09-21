@@ -57,7 +57,7 @@
           </b-dropdown>
         </div>
 -->
-        <b-nav-form id="logo" v-if="token != null">
+        <b-nav-form id="logo" class="ml-2 mr-2" v-if="token != null">
           <a href="/mainuser" style="color:white;">
             <b-avatar :src="getUrl(user_data.profile_picture)"></b-avatar>
             {{ user_data.username }}
@@ -298,7 +298,7 @@ export default {
   align-content: inherit;
 }
 .navbar {
-  background-color: #9a3f66;
+  background-color: #9a3f66c2;
   /*background-color: #ce3854a1;*/
 }
 .b-avatar {
@@ -308,6 +308,7 @@ export default {
   background-color: #cdb7c0;
   color: #501c4c;
   font-weight: 600;
+  border-radius: 8px;
 }
 
 .btn-secondary:hover,

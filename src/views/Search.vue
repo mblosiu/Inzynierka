@@ -194,26 +194,26 @@
                     <button
                       v-if="more_filters == false"
                       v-on:click="more_filters = true"
-                      class="btn btn-primary float-right"
+                      class="btn btn-primary float-right ml-2"
                     >
-                      Więcej filtrów
+                      Więcej
                     </button>
                     <button
                       v-if="more_filters == true"
                       v-on:click="more_filters = false"
-                      class="btn btn-primary float-right"
+                      class="btn btn-primary float-right ml-2"
                     >
-                      Ukryj filtry
+                      Ukryj
                     </button>
                   </th>
                 </tr>
                 <tr>
-                  <div class="collapse" id="collapseExample">
+                  <!--<div class="collapse" id="collapseExample">
                     <div class="card card-body">
                       Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
                       Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                     </div>
-                  </div>
+                  </div>-->
                 </tr>
               </table>
             </form>
@@ -264,7 +264,8 @@
                       ({{ getAge(user.birthday) }})
                     </b-card-title>
 
-                    <b-card-text>
+                    <b-card-text flex>
+                      
                       <h4 v-if="user.description != null">
                         <p class="font-italic">{{ user.description }}</p>
                       </h4>
@@ -470,6 +471,7 @@ td {
   text-align: left;
   font-size: 5px;
   color: white;
+  width: 375px;
 }
 .user-card {
   background: #8d1515;
@@ -502,5 +504,9 @@ td {
 }
 .h6 {
   color: rgb(255, 255, 255);
+}
+.cardbox{
+  width: 200px;
+  height: 500px;
 }
 </style>
