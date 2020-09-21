@@ -791,6 +791,7 @@ export default {
         .post('http://127.0.0.1:8000/api/user/create-like', { value: 'like', pk: this.$route.params.pk }, config)
         .then((response) => {
           console.log(response);
+          this.$router.go();
         })
         .catch((errors) => console.log(errors));
       //this.$router.go();
@@ -805,14 +806,14 @@ export default {
             Authorization: 'Token ' + localStorage.getItem('user-token'),
           },
           data: {
-            pk: this.$route.params.pk,
+            pk: this.getLikePK(),
           },
         })
         .then((response) => {
           console.log(response);
+          this.$router.go();
         })
         .catch((errors) => console.log(errors));
-      this.$router.go();
     },
     getUserLikes() {
       //console.log(this.user_data['pk']);
@@ -836,6 +837,15 @@ export default {
         }
       }
       return liked;
+    },
+    getLikePK() {
+      var pk = -1;
+      for (var i = 0; i < this.user_likes.length; i++) {
+        if (this.user_likes[i].liked_by['pk'] == this.$route.params.pk) {
+          pk = this.user_likes[i].pk;
+        }
+      }
+      return pk;
     },
     getUserData() {
       axios
