@@ -33,8 +33,8 @@ urlpatterns = [
 
     path('create-like', create_like, name='create-like'),
     path('delete-like', delete_like, name='delete-like'),
-    path('get-users-are-liked', get_users_are_liked, name='are-liked1'),
-    path('get-users-liked', get_users_liked, name='get_users_liked1'),
+    path('get-users-are-liked/<int:pk>', get_users_are_liked, name='are-liked1'),
+    path('get-users-liked/<int:pk>', get_users_liked, name='get_users_liked1'),
     path('get-user-are-liked', get_user_are_liked, name='are-liked2'),
     path('get-user-liked', get_user_liked, name='get_users_liked2'),
 ]
