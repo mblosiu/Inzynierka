@@ -157,6 +157,7 @@ class Like(models.Model):
     liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
     liked_by = models.ForeignKey(User, related_name='liked_by', default=None, on_delete=models.CASCADE)
 
+
 class Hobby(models.Model):
     name = models.CharField(max_length=30, null=True, blank=True, default=None)
     user = models.ManyToManyField(User)

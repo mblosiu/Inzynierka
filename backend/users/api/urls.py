@@ -10,9 +10,12 @@ user_detail = UserListView.as_view({'get': 'retrieve'})
 user_list = UserListView.as_view({'get': 'list'})
 images_list = ImageByUserId.as_view({'get': 'retrieve'})
 create_like = LikesView.as_view({'post': 'create_like'})
-are_liked = LikesView.as_view({'get': 'get_are_liked'})
-liked = LikesView.as_view({'get': 'get_liked'})
 delete_like = LikesView.as_view({'delete': 'delete_like'})
+get_users_are_liked = LikesView.as_view({'get': 'get_users_are_liked'})
+get_users_liked = LikesView.as_view({'get': 'get_users_liked'})
+get_user_are_liked = LikesView.as_view({'get': 'get_user_are_liked'})
+get_user_liked = LikesView.as_view({'get': 'get_user_liked'})
+
 urlpatterns = [
     path('register', RegistrationView.as_view(), name="register"),
     path('login', obtain_auth_token, name="login"),
@@ -30,6 +33,8 @@ urlpatterns = [
 
     path('create-like', create_like, name='create-like'),
     path('delete-like', delete_like, name='delete-like'),
-    path('are-liked/<int:pk>', are_liked, name='are-liked'),
-    path('liked/<int:pk>', liked, name='liked'),
+    path('get-users-are-liked', get_users_are_liked, name='are-liked1'),
+    path('get-users-liked', get_users_liked, name='get_users_liked1'),
+    path('get-user-are-liked', get_user_are_liked, name='are-liked2'),
+    path('get-user-liked', get_user_liked, name='get_users_liked2'),
 ]

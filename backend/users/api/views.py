@@ -594,18 +594,6 @@ class LikesView(viewsets.ModelViewSet):
             response["detail"] = "failed"
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-    # kogo polubił user po pk
-    def get_are_liked(self, request, pk=None):
-        queryset = Like.objects.filter(liked_by__pk=pk)
-        serializer = LikesSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    # lajki użytkownika po pk
-    def get_liked(self, request, pk=None):
-        queryset = Like.objects.filter(liked__pk=pk)
-        serializer = LikesSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
     def delete_like(self, request):
         pk = request.data.get('pk', None)
 
@@ -613,3 +601,29 @@ class LikesView(viewsets.ModelViewSet):
             return Response({"detail": "Like removed successfully"}, status=status.HTTP_200_OK)
         else:
             return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+
+    # kogo polubił user po pk - userprofile
+    def get_users_are_liked(self, request, pk=None):
+        queryset = Like.objects.filter(liked_by__pk=pk)
+        serializer = LikesSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # lajki użytkownika po pk - userprofile
+    def get_users_liked(self, request, pk=None):
+        queryset = Like.objects.filter(liked__pk=pk)
+        serializer = LikesSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # kogo polubił user po pk - mainuser
+    def get_user_are_liked(self, request):
+        pk = request.user.pk
+        queryset = Like.objects.filter(liked_by__pk=pk)
+        serializer = LikesSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # lajki użytkownika po pk - mainuser
+    def get_user_liked(self, request):
+        pk = request.user.pk
+        queryset = Like.objects.filter(liked__pk=pk)
+        serializer = LikesSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
