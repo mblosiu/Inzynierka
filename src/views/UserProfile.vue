@@ -746,6 +746,7 @@ export default {
       like: 'like',
       heartcolor: 'pink',
       liked_user: {},
+      user_likes: [],
     };
   },
   methods: {
@@ -761,6 +762,35 @@ export default {
         .post('http://127.0.0.1:8000/api/user/create-like', { value: 'like', pk: this.$route.params.pk }, config)
         .then((response) => {
           console.log(response);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    dislikeUser(){
+      this.heartcolor = 'pink';
+      const config = {
+        headers: {
+          Authorization: 'Token ' + localStorage.getItem('user-token'),
+        },
+      };
+
+      axios
+        .delete('http://127.0.0.1:8000/api/user/delete-like', {pk: this.$route.params.pk }, config)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    getUserLikes() {
+      //console.log(this.user_data['pk']);
+      axios
+        .get('http://127.0.0.1:8000/api/user/get-user-are-liked', {
+          params: {},
+          headers: {
+            Authorization: 'Token ' + localStorage.getItem('user-token'),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.user_likes = response.data), console.log(this.user_likes);
         })
         .catch((errors) => console.log(errors));
     },
@@ -825,6 +855,7 @@ export default {
     this.getUsers();
     this.getUserImages();
     this.getUserData();
+    this.getUserLikes();
   },
   mounted() {
     //$(".carousel").carousel();
