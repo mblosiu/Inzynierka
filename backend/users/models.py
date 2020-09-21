@@ -84,6 +84,7 @@ class User(AbstractBaseUser):
     name = models.CharField(max_length=30, null=True, default=None)
     surname = models.CharField(max_length=30, null=True, default=None)
     birthday = models.DateField(null=True, default=None)
+    age = models.IntegerField(null=True, default=None)
     location = models.CharField(max_length=30, null=True, default=None)
     profile_picture = models.CharField(max_length=60, null=True, default=None)
 

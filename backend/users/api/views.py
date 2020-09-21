@@ -225,6 +225,20 @@ class PreferencesView(APIView):
         body_type_preference = request.data.get('body_type_preference', '')
         is_smoking_preference = request.data.get('is_smoking_preference', '')
         is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', '')
+        age_preference_min = request.data.get('age_preference_min', '')
+        age_preference_max = request.data.get('age_preference_max', '')
+
+        if age_preference_min == str(preferences.age_preference_min) or age_preference_min is None:
+            response["age_preference_min"] = "no changes"
+        else:
+            preferences.age_preference_min = int(age_preference_min)
+            response["age_preference_min"] = "updated"
+
+        if age_preference_max == str(preferences.age_preference_max) or age_preference_min is None:
+            response["age_preference_max"] = "no changes"
+        else:
+            preferences.age_preference_max = int(age_preference_max)
+            response["age_preference_max"] = "updated"
 
         if hair_color_blonde_preference == preferences.hair_color_blonde_preference:
             response["hair_color_blonde_preference"] = "no changes"
@@ -514,6 +528,8 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         is_drinking_alcohol = request.query_params.get('is_drinking_alcohol', None)
         orientation = request.query_params.get('orientation', None)
         eye_color = request.query_params.get('eye_color', None)
+        age_preference_min = request.query_params.get('age_preference_min', None)
+        age_preference_max = request.query_params.get('age_preference_max', None)
 
         if not (location is None or location == ''):
             queryset = queryset.filter(location=location)
@@ -521,6 +537,10 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(sex=sex)
         if not (orientation is None or orientation == ''):
             queryset = queryset.filter(orientation=orientation)
+        if not (age_preference_min is None or age_preference_min == ''):
+            queryset = queryset.filter(age__gte=int(age_preference_min))
+        if not (age_preference_max is None or age_preference_max == ''):
+            queryset = queryset.filter(age__lte=int(age_preference_max))
         if not (eye_color is None or eye_color == ''):
             queryset = queryset.filter(eye_color=eye_color)
         if not (name is None or name == ''):

@@ -1,3 +1,4 @@
+from datetime import datetime
 from rest_framework import serializers
 
 from ..models import User, Preferences, Settings, Image, Like
@@ -8,7 +9,7 @@ class UserPreferencesSerializer(serializers.ModelSerializer):
         model = Preferences
         fields = ['hair_color_blonde_preference', 'hair_color_brunette_preference',
                   'hair_color_red_preference', 'growth_preference', 'weight_preference', 'body_type_preference',
-                  'is_smoking_preference', 'is_drinking_alcohol_preference']
+                  'is_smoking_preference', 'is_drinking_alcohol_preference','age_preference_max','age_preference_min']
 
 
 class UserSettingsSerializer(serializers.ModelSerializer):
@@ -90,6 +91,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             sex=sex,
             preferences=p,
             settings=s,
+            age=int(datetime.today().strftime('%Y')) - int(birthday.strftime("%Y")),
         )
         account.set_password(password)
         account.save()
