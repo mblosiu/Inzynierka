@@ -131,7 +131,12 @@
                         </svg>
                       </div>
                     </button>
-                    <b-modal id="bv-modal-example" size="lg" title="Galeria użytkownika" hide-footer>
+                    <b-modal
+                      id="bv-modal-example"
+                      size="lg"
+                      title="Galeria użytkownika"
+                      hide-footer
+                    >
                       <div v-if="images != []">
                         <div>
                           <!--v-model="slide"-->
@@ -158,7 +163,11 @@
                           <b-row>
                             <b-col cols="10"></b-col>
                             <b-col cols="2">
-                              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Zamknij</b-button>
+                              <b-button
+                                class="mt-3"
+                                block
+                                @click="$bvModal.hide('bv-modal-example')"
+                              >Zamknij</b-button>
                             </b-col>
                           </b-row>
                           <b-row>
@@ -186,36 +195,66 @@
                           <b-row>
                             <b-col cols="10"></b-col>
                             <b-col cols="2">
-                              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Zamknij</b-button>
+                              <b-button
+                                class="mt-3"
+                                block
+                                @click="$bvModal.hide('bv-modal-example')"
+                              >Zamknij</b-button>
                             </b-col>
                           </b-row>
                         </footer>
                       </div>
                     </b-modal>
-
-                    <button
-                      type="button"
-                      v-on:click="likeUser"
-                      class="btn btn-secondary"
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      title="Polub"
-                    >
-                      <svg
-                        :color="this.heartcolor"
-                        width="3em"
-                        height="3em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-heart-fill"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
+                    <div v-if="liked==false">
+                      <button
+                        type="button"
+                        v-on:click="likeUser"
+                        class="btn btn-secondary"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Polub"
                       >
-                        <path
-                          fill-rule="evenodd"
-                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          color="pink"
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-heart-fill"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div v-else>
+                      <button
+                        type="button"
+                        v-on:click="dislikeUser"
+                        class="btn btn-secondary"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Usuń polubienie"
+                      >
+                        <svg
+                          color="red"
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-heart-fill"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
 
                     <button
                       type="button"
@@ -233,8 +272,13 @@
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z" />
-                        <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
+                        <path
+                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
+                        />
                       </svg>
                     </button>
                   </div>
@@ -735,7 +779,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
@@ -743,63 +787,90 @@ export default {
       user: {},
       user_preferences: {},
       images: {},
-      like: 'like',
-      heartcolor: 'pink',
+      like: "like",
+      //heartcolor: "grey",
       liked_user: {},
-      user_likes: [],
+      user_likes: {},
+      liked: false,
     };
   },
   methods: {
     likeUser() {
-      this.heartcolor = 'red';
+      //this.heartcolor = "red";
+      this.liked = true;
       const config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
 
       axios
-        .post('http://127.0.0.1:8000/api/user/create-like', { value: 'like', pk: this.$route.params.pk }, config)
+        .post(
+          "http://127.0.0.1:8000/api/user/create-like",
+          { value: "like", pk: this.$route.params.pk },
+          config
+        )
         .then((response) => {
           console.log(response);
         })
         .catch((errors) => console.log(errors));
+      //this.$router.go();
     },
     dislikeUser() {
-      this.heartcolor = 'pink';
+      //this.heartcolor = "pink";
+      like = false;
       const config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
 
       axios
-        .delete('http://127.0.0.1:8000/api/user/delete-like', { pk: this.$route.params.pk }, config)
+        .delete(
+          "http://127.0.0.1:8000/api/user/delete-like",
+          { pk: this.$route.params.pk },
+          config
+        )
         .then((response) => {
           console.log(response);
         })
         .catch((errors) => console.log(errors));
+      this.$router.go();
     },
     getUserLikes() {
       //console.log(this.user_data['pk']);
       axios
-        .get('http://127.0.0.1:8000/api/user/get-users-are-liked/' + this.$route.params.pk, {
-          params: {},
-          headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
-          },
-        })
+        .get(
+          "http://127.0.0.1:8000/api/user/get-users-are-liked/" +
+            this.$route.params.pk,
+          {
+            params: {},
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
         .then((response) => {
-          console.log(response), (this.user_likes = response.data), console.log(this.user_likes);
+          console.log(response),
+            (this.user_likes = response.data),
+            console.log(this.user_likes);
         })
         .catch((errors) => console.log(errors));
     },
+    isUserLiked(){
+      if(true==(user_likes.includes(user.pk))){
+        liked = true;
+
+      }else{
+        liked = false;
+      }
+    },
     getUserData() {
       axios
-        .get('http://127.0.0.1:8000/api/user/properties', {
+        .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -809,24 +880,31 @@ export default {
     },
     getUsers() {
       axios
-        .get('http://127.0.0.1:8000/api/user/users/' + this.$route.params.pk, {
+        .get("http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk, {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
-          console.log(response), (this.user = response.data), (this.user_preferences = this.user.preferences);
+          console.log(response),
+            (this.user = response.data),
+            (this.user_preferences = this.user.preferences);
         })
         .catch((errors) => console.log(errors));
     },
     getUserImages() {
       axios
-        .get('http://127.0.0.1:8000/api/user/users/' + this.$route.params.pk + '/images', {
-          headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
-          },
-        })
+        .get(
+          "http://127.0.0.1:8000/api/user/users/" +
+            this.$route.params.pk +
+            "/images",
+          {
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
         .then((response) => {
           this.images = response.data;
           console.log(this.images[0]);
@@ -844,8 +922,9 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return 'http://127.0.0.1:8000' + pic;
-      else return 'https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png';
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      else
+        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
     //onSlideStart() {},
     //onSlideEnd() {},
@@ -876,7 +955,7 @@ export default {
   object-fit: scale-down;
 }
 .card-text {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
 }
