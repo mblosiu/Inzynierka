@@ -57,9 +57,11 @@
           </b-dropdown>
         </div>
 -->
-        <b-nav-form id="logo" v-if="token != null" href="/mainuser">
-          <b-avatar href="/mainuser" :src="getUrl(user_data.profile_picture)"></b-avatar>
-          <div style="margin-left:5px;">{{ user_data.username }}</div>
+        <b-nav-form id="logo" v-if="token != null">
+          <a href="/mainuser" style="color:white;">
+            <b-avatar :src="getUrl(user_data.profile_picture)"></b-avatar>
+            {{ user_data.username }}
+          </a>
         </b-nav-form>
         <!--
         <b-nav-form v-if="token != null">
