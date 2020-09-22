@@ -207,10 +207,11 @@ h5 {
   color: whitesmoke;
 }
 .card-header {
-  background: #ce3854;
+  background: #ca5387d8;
 }
 .card {
   background: #723434;
+  border-radius:5px;
 }
 .list-group-item {
   background: #fadbdb;
