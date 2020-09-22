@@ -429,13 +429,13 @@
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                       Wzrost:
-                      <div class="oneline" v-if="user.growth!=null">
+                      <div class="oneline" v-if="user.growth != null">
                         <p class="font-weight-bold">{{ user.growth }} cm</p>
                       </div>
                     </li>
                     <li class="list-group-item">
                       Waga:
-                      <div class="oneline" v-if="user.weight!=null">
+                      <div class="oneline" v-if="user.weight != null">
                         <p class="font-weight-bold">{{ user.weight }} kg</p>
                       </div>
                     </li>

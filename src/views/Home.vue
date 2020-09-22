@@ -13,16 +13,24 @@
           <h4>Tu znajdziesz swoją drugą połówkę!</h4>
           <br />
           <div class="text">
-            Jeśli szukasz miłości, życiowego partnera, lub po prostu osoby, z którą można porozmawiać na wspólne tematy to dobrze trafiłeś. Serwis e-Love skierowany jest do każdego użytkownika bez względu na wiek, czy rodzaj zawieranych relacji.
-            <br />W dzisiejszych czasach samotność jest bardzo częstym problemem i dotyka ludzi z każdego przedziału wiekowego. Poza faktem iż samotność sama w sobie jest przykrym uczuciem, należy dodać, że jak donoszą najnowsze badania, długotrwałe jej doświadczanie bardzo niekorzystnie wpływa na nasze zdrowie. <br/>
-            Nasz portal jest stale rozwijany i powiększa się nie tylko o nowe funkcjonalności ale i nowych użytkowników. Zapraszamy do darmowej rejestracji!
+            Jeśli szukasz miłości, życiowego partnera, lub po prostu osoby, z którą można porozmawiać na wspólne tematy
+            to dobrze trafiłeś. Serwis e-Love skierowany jest do każdego użytkownika bez względu na wiek, czy rodzaj
+            zawieranych relacji.
+            <br />W dzisiejszych czasach samotność jest bardzo częstym problemem i dotyka ludzi z każdego przedziału
+            wiekowego. Poza faktem iż samotność sama w sobie jest przykrym uczuciem, należy dodać, że jak donoszą
+            najnowsze badania, długotrwałe jej doświadczanie bardzo niekorzystnie wpływa na nasze zdrowie. <br />
+            Nasz portal jest stale rozwijany i powiększa się nie tylko o nowe funkcjonalności ale i nowych użytkowników.
+            Zapraszamy do darmowej rejestracji!
             <br />
           </div>
           <br />
 
           <p></p>
           <blockquote class="blockquote text-right">
-            <h6>"Każdy powinien mieć kogoś, z kim mógłby szczerze pomówić, bo choćby człowiek był nie wiadomo jak dzielny, czasami czuje się bardzo samotny."</h6>
+            <h6>
+              "Każdy powinien mieć kogoś, z kim mógłby szczerze pomówić, bo choćby człowiek był nie wiadomo jak dzielny,
+              czasami czuje się bardzo samotny."
+            </h6>
             <footer class="blockquote-footer">
               Ernest Hemingway
               <cite title="Source Title">"Komu bije dzwon"</cite>
@@ -39,13 +47,11 @@
               <h3 class="card-title no-background">Nie masz konta?</h3>
               <br />
               <h6>
-                <p
-                  class="card-text no-background"
-                >Dołącz do społeczności e-love zakładając darmowe konto!</p>
+                <p class="card-text no-background">Dołącz do społeczności e-love zakładając darmowe konto!</p>
               </h6>
               <br />
-              <b-button variant="warning" size="lg" href="/register">Zarejestruj się</b-button>
-              <!--<a href="/register" class="btn-lg">Zarejestruj się</a>-->
+              <!--<b-button variant="warning" size="lg" href="/register">Zarejestruj się</b-button>-->
+              <a href="/register" class="btn-lg">Zarejestruj się</a>
               <br />
             </div>
             <br />
@@ -61,7 +67,7 @@
 //import Register from "@/views/Register.vue";
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     //Register,
   },
@@ -73,7 +79,7 @@ text {
   text-align: left;
 }
 .leftside {
-  background-color: rgba(252, 198, 225, 0.795);
+  background-color: rgba(252, 198, 225, 0.8);
   padding: 20px;
   color: #812b3b;
   border-color: blueviolet;
@@ -87,7 +93,7 @@ text {
   */
 }
 .rightside {
-  background-color: rgba(255, 172, 213, 0.795);
+  background-color: rgba(252, 198, 225, 0.8);
   padding: 20px;
   color: #812b3b;
   border-color: blueviolet;
@@ -95,6 +101,7 @@ text {
   border-style: solid;
   border-width: 1px;
 }
+/*
 .rightside:hover {
   background-color: rgba(255, 172, 213, 0.795);
   padding: 20px;
@@ -104,6 +111,7 @@ text {
   border-style: solid;
   border-width: 1px;
 }
+*/
 .no-background {
   background-color: rgba(0, 0, 0, 0);
   border-style: none;
@@ -124,7 +132,18 @@ h1 {
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 25px;
 }
-
+.btn-lg {
+  background-color: #cdb7c0;
+  color: #501c4c;
+  font-weight: 600;
+  border: grey 1px solid;
+}
+.btn-lg:hover {
+  background-color: #0275d8;
+  color: white;
+  font-weight: 600;
+}
+/*
 .btn-lg:hover {
   background-color: #ffd000;
   color: rgb(204, 0, 0);
@@ -132,4 +151,5 @@ h1 {
   border-style: solid;
   border-width: 1px;
 }
+*/
 </style>
