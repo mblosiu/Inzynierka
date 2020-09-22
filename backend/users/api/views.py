@@ -532,29 +532,29 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         age_preference_max = request.query_params.get('age_preference_max', None)
 
         if not (location is None or location == ''):
-            queryset = queryset.filter(location=location)
+            queryset = queryset.filter(location=location.capitalize())
         if not (sex is None or sex == ''):
-            queryset = queryset.filter(sex=sex)
+            queryset = queryset.filter(sex=sex.capitalize())
         if not (orientation is None or orientation == ''):
-            queryset = queryset.filter(orientation=orientation)
+            queryset = queryset.filter(orientation=orientation.capitalize())
         if not (age_preference_min is None or age_preference_min == ''):
             queryset = queryset.filter(age__gte=int(age_preference_min))
         if not (age_preference_max is None or age_preference_max == ''):
             queryset = queryset.filter(age__lte=int(age_preference_max))
         if not (eye_color is None or eye_color == ''):
-            queryset = queryset.filter(eye_color=eye_color)
+            queryset = queryset.filter(eye_color=eye_color.capitalize())
         if not (name is None or name == ''):
-            queryset = queryset.filter(name=name)
+            queryset = queryset.filter(name=name.capitalize())
         if not (surname is None or surname == ''):
-            queryset = queryset.filter(surname=surname)
+            queryset = queryset.filter(surname=surname.capitalize())
         if not (hair_color is None or hair_color == ''):
-            queryset = queryset.filter(hair_color=hair_color)
+            queryset = queryset.filter(hair_color=hair_color.capitalize())
         if not (growth is None or growth == ''):
             queryset = queryset.filter(growth=growth)
         if not (hair_length is None or hair_length == ''):
             queryset = queryset.filter(hair_length=hair_length)
         if not (body_type is None or body_type == ''):
-            queryset = queryset.filter(body_type=body_type)
+            queryset = queryset.filter(body_type=body_type.capitalize())
         if not (is_smoking is None or is_smoking == ''):
             queryset = queryset.filter(is_smoking=is_smoking)
         if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
