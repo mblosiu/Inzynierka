@@ -11,7 +11,10 @@
           fill="red"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+          <path
+            fill-rule="evenodd"
+            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+          />
         </svg>
         Love
       </a>
@@ -25,7 +28,10 @@
           fill="red"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+          <path
+            fill-rule="evenodd"
+            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+          />
         </svg>
         Love
       </a>
@@ -56,7 +62,7 @@
             <b-dropdown-item href="/#">Premium</b-dropdown-item>
           </b-dropdown>
         </div>
--->
+        -->
         <b-nav-form id="logo" class="ml-2 mr-2" v-if="token != null">
           <a href="/mainuser" style="color:white;">
             <b-avatar :src="getUrl(user_data.profile_picture)"></b-avatar>
@@ -100,7 +106,24 @@
               <b-col cols="6">
                 <b-row>
                   <b-col cols="12">
-                    <h5>Polubiłeś: {{ user_liking.length }}</h5>
+                    <h5>Polubieni: {{ user_likings.length }}</h5>
+                    <b-list-group style="max-width: 300px;">
+                      
+                      <div v-for="user_liking in user_likings" v-bind:key="user_liking.pk">
+                        <router-link :to="{ name: 'userprofile', params: { pk: user_liking.liked_by.pk } }">
+                        <b-list-group-item class="d-flex align-items-center">
+                          <b-avatar
+                            rounded
+                            variant="info"
+                            :src="getUrl(user_liking.liked_by.profile_picture)"
+                            class="mr-3"
+                            size="3rem"
+                          ></b-avatar>
+                          <span class="mr-auto">{{user_liking.liked_by.username}}</span>
+                        </b-list-group-item>
+                        </router-link>
+                      </div>
+                    </b-list-group>
                   </b-col>
                 </b-row>
               </b-col>
@@ -109,6 +132,22 @@
                 <b-row>
                   <b-col cols="12">
                     <h5>Lubią mnie: {{ user_likes.length }}</h5>
+                    <b-list-group style="max-width: 300px;">
+                      <div v-for="user_like in user_likes" v-bind:key="user_like.pk">
+                        <router-link :to="{ name: 'userprofile', params: { pk: user_like.liked.pk } }">
+                        <b-list-group-item class="d-flex align-items-center">
+                          <b-avatar
+                            rounded
+                            variant="info"
+                            :src="getUrl(user_like.liked.profile_picture)"
+                            class="mr-3"
+                            size="3rem"
+                          ></b-avatar>
+                          <span class="mr-auto">{{user_like.liked.username}}</span>
+                        </b-list-group-item>
+                        </router-link>
+                      </div>
+                    </b-list-group>
                   </b-col>
                 </b-row>
               </b-col>
@@ -130,8 +169,7 @@
             variant="danger"
             @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
-            >{{ msg }}</b-alert
-          >
+          >{{ msg }}</b-alert>
         </div>
         <b-nav-form @submit.prevent="login" v-if="token == null">
           <b-form-input
@@ -175,22 +213,22 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'Header',
+  name: "Header",
   components: {},
   data() {
     return {
-      token: localStorage.getItem('user-token') || null,
-      username: '',
-      password: '',
-      searchText: '',
+      token: localStorage.getItem("user-token") || null,
+      username: "",
+      password: "",
+      searchText: "",
       pk: 0,
       dismissSecs: 5,
       dismissCountDown: 0,
       user_data: {},
       user_likes: [],
-      user_liking: [],
+      user_likings: [],
     };
   },
   methods: {
@@ -202,10 +240,10 @@ export default {
     },
     getUserData() {
       axios
-        .get('http://127.0.0.1:8000/api/user/properties', {
+        .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -217,72 +255,83 @@ export default {
     getUserLikes() {
       //console.log(this.user_data['pk']);
       axios
-        .get('http://127.0.0.1:8000/api/user/get-user-are-liked', {
+        .get("http://127.0.0.1:8000/api/user/get-user-are-liked", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
-          console.log(response), (this.user_likes = response.data);
+          console.log(response),
+            (this.user_likes = response.data),
+            console.log(this.user_likes);
         })
         .catch((errors) => console.log(errors));
     },
-    //to jest routing do lajków które curent user rozdał
+    //to jest routing do lajków które current user rozdał
     getUserLiking() {
       axios
-        .get('http://127.0.0.1:8000/api/user/get-user-liked', {
+        .get("http://127.0.0.1:8000/api/user/get-user-liked", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
-          console.log(response), (this.user_liking = response.data);
+          console.log(response),
+            (this.user_likings = response.data),
+            console.log(this.user_likings);
         })
         .catch((errors) => console.log(errors));
     },
     getUrl(pic) {
-      if (pic != null) return 'http://127.0.0.1:8000' + pic;
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
     },
     login() {
       axios
-        .post('http://127.0.0.1:8000/api/user/login', {
+        .post("http://127.0.0.1:8000/api/user/login", {
           username: this.username,
           password: this.password,
         })
         .then((response) => {
           if (response.status == 200) {
-            (this.error_message = ''),
+            (this.error_message = ""),
               (this.showDismissibleAlert = false),
               (this.token = response.data.token),
-              localStorage.setItem('user-token', response.data.token),
+              localStorage.setItem("user-token", response.data.token),
               this.$router.go();
           }
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg(), (this.msg = 'Błędny login lub hasło!');
+            this.showMsg(), (this.msg = "Błędny login lub hasło!");
           }
         });
     },
     logout() {
       let config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
 
       axios
-        .post('http://127.0.0.1:8000/api/user/logout', {}, config)
+        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
         .then((response) => {})
         .catch((errors) => {});
-      localStorage.removeItem('user-token'), (this.token = null), this.$router.go();
+      localStorage.removeItem("user-token"),
+        (this.token = null),
+        this.$router.go();
     },
     search() {
-      localStorage.setItem('search-text', this.searchText);
-      if (this.$route.name == 'search') this.$router.go();
-      else this.$router.push({ name: 'search' });
+      localStorage.setItem("search-text", this.searchText);
+      if (this.$route.name == "search") this.$router.go();
+      else this.$router.push({ name: "search" });
+    },
+    getUrl(pic) {
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      else
+        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
   },
   created() {
@@ -347,6 +396,9 @@ export default {
 }
 .dropdown-text {
   color: #501c4c !important;
+}
+.list-group-item {
+  border-radius: 12px;
 }
 
 /*

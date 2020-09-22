@@ -4,23 +4,6 @@
       <b-row>
         <b-col cols="1"></b-col>
         <b-col cols="10">
-          <b-alert
-            :show="dismissCountDown"
-            dismissible
-            fade
-            variant="success"
-            @dismissed="dismissCountDown = 0"
-            @dismiss-count-down="countDownChanged"
-          >{{ msg }}</b-alert>
-          <b-alert
-            :show="dismissCountDown2"
-            dismissible
-            fade
-            variant="danger"
-            @dismissed="dismissCountDown2 = 0"
-            @dismiss-count-down="countDownChanged2"
-          >{{ msg2 }}</b-alert>
-
           <b-tabs pills card horizontal>
             <form class="card" @submit.prevent="editUserData">
               <b-tab title="Podstawowe informacje" active>
@@ -591,6 +574,22 @@
             </b-tab>
           </b-tabs>
           <p></p>
+          <b-alert
+            :show="dismissCountDown"
+            dismissible
+            fade
+            variant="success"
+            @dismissed="dismissCountDown = 0"
+            @dismiss-count-down="countDownChanged"
+          >{{ msg }}</b-alert>
+          <b-alert
+            :show="dismissCountDown2"
+            dismissible
+            fade
+            variant="danger"
+            @dismissed="dismissCountDown2 = 0"
+            @dismiss-count-down="countDownChanged2"
+          >{{ msg2 }}</b-alert>
         </b-col>
         <b-col cols="1"></b-col>
       </b-row>
@@ -613,9 +612,9 @@ export default {
       user_data: {},
       user_preferences: {},
       msg: "",
-      dismissSecs: 5,
+      dismissSecs: 3,
       dismissCountDown: 0,
-      dismissSecs2: 5,
+      dismissSecs2: 3,
       dismissCountDown2: 0,
       calculated: 0,
       msg2: "",
@@ -727,7 +726,7 @@ export default {
           Authorization: "Token " + localStorage.getItem("user-token"),
         },
       });
-      localStorage.removeItem("user-token")
+      localStorage.removeItem("user-token");
       this.$router.go();
     },
 

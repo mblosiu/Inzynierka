@@ -1,6 +1,6 @@
 <template>
   <div id="userprofile">
-    polubiony: {{ isUserLiked() }}
+    <!--polubiony: {{ isUserLiked() }}-->
     <br />
     <b-container class="bv-example-row" fluid>
       <b-row>
@@ -13,10 +13,9 @@
               </div>
             </template>
             <div class="px-3 py-2">
-              <p>Okienko chatu</p>
+              <h3>Okienko chatu</h3>
             </div>
-            <p>{{ user_data.username }} :</p>
-            <p>{{ user.username }} :</p>
+            <p>Początek rozmowy między {{ user_data.username }} a {{ user.username }}</p>
           </b-sidebar>
         </b-col>
         <b-col cols="4">
@@ -166,7 +165,7 @@
                             <b-col cols="1"></b-col>
                             <b-col cols="10"></b-col>
                             <div class="comments">
-                              <h2>Komentarze:</h2>
+                              <!--<h2>Komentarze:</h2>-->
                               <br />
                             </div>
                             <b-col cols="1"></b-col>
@@ -366,7 +365,7 @@
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
-                          <p class="font-weight-bold">?</p>
+                          <p class="font-weight-bold"></p>
                         </div>
                       </li>
                     </div>
@@ -415,7 +414,7 @@
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
-                          <p class="font-weight-bold">?</p>
+                          <p class="font-weight-bold"></p>
                         </div>
                       </li>
                     </div>
@@ -430,14 +429,14 @@
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                       Wzrost:
-                      <div class="oneline">
-                        <p class="font-weight-bold">{{ user.growth }}</p>
+                      <div class="oneline" v-if="user.growth!=null">
+                        <p class="font-weight-bold">{{ user.growth }} cm</p>
                       </div>
                     </li>
                     <li class="list-group-item">
                       Waga:
-                      <div class="oneline">
-                        <p class="font-weight-bold">{{ user.weight }}</p>
+                      <div class="oneline" v-if="user.weight!=null">
+                        <p class="font-weight-bold">{{ user.weight }} kg</p>
                       </div>
                     </li>
 
@@ -460,7 +459,7 @@
                       </div>
                     </li>
 
-                    <li class="list-group-item">
+                    <!--<li class="list-group-item">
                       Znaki szczególne:
                       <div class="oneline" v-if="user.freckles != false">
                         <p class="font-weight-bold">mam piegi</p>
@@ -468,7 +467,7 @@
                       <div class="oneline" v-if="user.glasses != false">
                         <p class="font-weight-bold">noszę okulary</p>
                       </div>
-                    </li>
+                    </li>-->
                   </ul>
                 </div>
               </b-tab>
@@ -535,16 +534,16 @@
                         <p class="font-weight-bold">od {{ user_preferences.age_preference_min }}</p>
                       </div>
                       <div class="oneline" v-if="user_preferences.age_preference_max != null">
-                        <p class="font-weight-bold">do {{ user_preferences.age_preference_max }}</p>
+                        <p class="font-weight-bold">do {{ user_preferences.age_preference_max }} lat</p>
                       </div>
                     </li>
 
-                    <li class="list-group-item">
+                    <!--<li class="list-group-item">
                       Edukacja:
                       <div class="oneline">
                         <p class="font-weight-bold">{{ user_preferences.education_preference }}</p>
                       </div>
-                    </li>
+                    </li>-->
                     <li class="list-group-item">
                       Waga:
                       <div class="oneline" v-if="user_preferences.weight_preference != null">
@@ -557,7 +556,7 @@
                         <p class="font-weight-bold">{{ user_preferences.body_type_preference }}</p>
                       </div>
                     </li>
-                    <li class="list-group-item">
+                    <!--<li class="list-group-item">
                       Włosy:
                       <div class="oneline">
                         <p class="font-weight-bold"></p>
@@ -580,7 +579,7 @@
                       <div class="oneline" v-if="user_preferences.glasses_preference != false">
                         <p class="font-weight-bold">okulary</p>
                       </div>
-                    </li>
+                    </li>-->
 
                     <div v-if="user_preferences.is_smoking_preference == 0">
                       <li class="list-group-item">
@@ -937,8 +936,9 @@ export default {
   background: #a01818;
   color: white;
 }
-.b-sidebar {
+.sidebar {
   width: 300px;
+  background-color: #a01818;
 }
 .svg {
   align-content: flex-start;

@@ -6,17 +6,20 @@
           <b-row>
             <b-col cols="5"></b-col>
             <b-col cols="4">
-              <h1 class="display-4">Galeria</h1>
+              <!--<h1 class="display-4">Galeria</h1>-->
             </b-col>
             <b-col cols="3"></b-col>
-            <br />
+            
           </b-row>
           <b-row>
             <b-col cols="12">
-              <br />
+              
             </b-col>
           </b-row>
-          <div class="card text-white bg-secondary mb-5" style="width: 22rem; height: 20rem">
+          <div class="card text-white bg-secondary mb-5" style="width: 20rem; height: 29rem">
+            <div class="card-header">
+              <h1 class="display-4">Galeria</h1>
+            </div>
             <div class="card-body">
               <img
                 class="card-img-top"
@@ -24,6 +27,7 @@
                 alt="Card image cap"
                 style="width: 11rem; height: 11rem"
               />
+              <p></p>
               <h5 class="card-title">Dodaj nowe zdjęcie.</h5>
               <div class="large-12 medium-12 small-12 cell">
                 <label>
@@ -44,6 +48,7 @@
         </b-col>
         <b-col cols="1"></b-col>
         <b-col cols="9" align-self="start" class="scroll">
+          <br/>
           <b-row v-for="i in Math.ceil(images.length / 2)" v-bind:key="i">
             <b-col cols="1"></b-col>
             <b-col
@@ -61,15 +66,14 @@
                 />
 
                 <b-modal :ref="'modal' + i" hide-footer title="Podgląd zdjęcia" size="lg">
-                  <div class="d-block text-center">
-                  </div>
+                  <div class="d-block text-center"></div>
                   <img
                     :src="getUrl(image.image)"
                     class="img-responsive rounded mx-auto d-block"
                     alt="image"
                     style="width:100%; height:100%"
                   />
-                  <br/>
+                  <br />
                 </b-modal>
                 <div class="card-body">
                   <p>
@@ -237,19 +241,26 @@ export default {
   height: 100%;
   overflow-y: scroll;
   height: 100vh;
-  
+  background:rgba(241, 55, 55, 0.123);
+  border-radius:12px;
 }
 .alert {
-  margin-left: 40px;
+  margin-left: 30px;
   align-content: center;
   width: 274px;
 }
 .card-body {
-  background: #8d1515;
+  background: #c02e2e;
   color: white;
   border-style: solid;
   border-width: 2px;
   border-color: #aa1d37;
 }
-
+.card-header {
+  background: #ad1b1b;
+  color: white;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #aa1d37;
+}
 </style>

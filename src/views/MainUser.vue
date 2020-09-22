@@ -1,15 +1,15 @@
 <template>
   <div class="container-fluid">
     <b-row>
-      <b-col cols="2">
-        <div class="nav">
+      <b-col cols="1">
+        <!--<div class="nav">
           <b-nav vertical>
             <b-nav-item active>Active</b-nav-item>
             <b-nav-item>Link</b-nav-item>
             <b-nav-item>Another Link</b-nav-item>
             <b-nav-item disabled>Disabled</b-nav-item>
           </b-nav>
-        </div>
+        </div>-->
       </b-col>
       <b-col cols="5">
         <div>
@@ -20,14 +20,15 @@
                   <p class="font-weight-bold">{{ user_data.username }}</p>
                 </h2>
               </div>
-
               ({{ getAge(user_data.birthday) }})
             </b-card-title>
             <b-card-text>
               <h4 v-if="user_data.description != null">
                 <p class="font-italic">{{ user_data.description }}</p>
               </h4>
-              <h4 v-else><p class="font-italic">Brak opisu.</p></h4>
+              <h4 v-else>
+                <p class="font-italic">Brak opisu.</p>
+              </h4>
             </b-card-text>
           </b-card>
         </div>
@@ -131,7 +132,7 @@
                     <li class="list-group-item">
                       Papierosy:
                       <div class="oneline">
-                        <p class="font-weight-bold">?</p>
+                        <p class="font-weight-bold"></p>
                       </div>
                     </li>
                   </div>
@@ -180,10 +181,16 @@
                     <li class="list-group-item">
                       Alkohol:
                       <div class="oneline">
-                        <p class="font-weight-bold">?</p>
+                        <p class="font-weight-bold"></p>
                       </div>
                     </li>
                   </div>
+                  <!--<li class="list-group-item">
+                    Ostatnie logowanie:
+                    <div class="oneline">
+                      <p class="font-weight-bold">{{ user_data.last_login }}</p>
+                    </div>
+                  </li>-->
                 </ul>
               </div>
             </b-tab>
@@ -192,21 +199,23 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
                     Wzrost:
-                    <div class="oneline">
-                      <p class="font-weight-bold">{{ user_data.growth }}</p>
+                    <div class="oneline" v-if="user_data.growth!=null">
+                      <p class="font-weight-bold">{{ user_data.growth }} cm</p>
                     </div>
                   </li>
                   <li class="list-group-item">
                     Waga:
-                    <div class="oneline">
-                      <p class="font-weight-bold">{{ user_data.weight }}</p>
+                    <div class="oneline" v-if="user_data.weight!=null">
+                      <p class="font-weight-bold">{{ user_data.weight }} kg</p>
                     </div>
                   </li>
 
                   <li class="list-group-item">
                     Włosy:
                     <div class="oneline">
-                      <p class="font-weight-bold">{{ user_data.hair_length }} {{ user_data.hair_color }}</p>
+                      <p
+                        class="font-weight-bold"
+                      >{{ user_data.hair_length }} {{ user_data.hair_color }}</p>
                     </div>
                   </li>
                   <li class="list-group-item">
@@ -222,7 +231,7 @@
                     </div>
                   </li>
 
-                  <li class="list-group-item">
+                  <!--<li class="list-group-item">
                     Znaki szczególne:
                     <div class="oneline" v-if="user_data.freckles != false">
                       <p class="font-weight-bold">mam piegi</p>
@@ -230,7 +239,7 @@
                     <div class="oneline" v-if="user_data.glasses != false">
                       <p class="font-weight-bold">noszę okulary</p>
                     </div>
-                  </li>
+                  </li>-->
                 </ul>
               </div>
             </b-tab>
@@ -287,17 +296,18 @@
                     <div class="oneline" v-if="user_preferences.age_preference_min != null">
                       <p class="font-weight-bold">od {{ user_preferences.age_preference_min }}</p>
                     </div>
+
                     <div class="oneline" v-if="user_preferences.age_preference_max != null">
                       <p class="font-weight-bold">do {{ user_preferences.age_preference_max }}</p>
                     </div>
                   </li>
 
-                  <li class="list-group-item">
+                  <!--<li class="list-group-item">
                     Edukacja:
                     <div class="oneline">
                       <p class="font-weight-bold">{{ user_preferences.education_preference }}</p>
                     </div>
-                  </li>
+                  </li>-->
                   <li class="list-group-item">
                     Waga:
                     <div class="oneline" v-if="user_preferences.weight_preference != null">
@@ -310,7 +320,7 @@
                       <p class="font-weight-bold">{{ user_preferences.body_type_preference }}</p>
                     </div>
                   </li>
-                  <li class="list-group-item">
+                  <!--<li class="list-group-item">
                     Włosy:
                     <div class="oneline">
                       <p class="font-weight-bold"></p>
@@ -321,8 +331,8 @@
                     <div class="oneline">
                       <p class="font-weight-bold">{{ user_preferences.eye_color_preference }}</p>
                     </div>
-                  </li>
-                  <li class="list-group-item">
+                  </li>-->
+                  <!--<li class="list-group-item">
                     Znaki szczególne:
                     <div class="oneline" v-if="user_preferences.freckles_preference != false">
                       <p class="font-weight-bold">piegi</p>
@@ -333,7 +343,7 @@
                     <div class="oneline" v-if="user_preferences.glasses_preference != false">
                       <p class="font-weight-bold">okulary</p>
                     </div>
-                  </li>
+                  </li>-->
 
                   <div v-if="user_preferences.is_smoking_preference == 0">
                     <li class="list-group-item">
@@ -426,7 +436,6 @@
                     </li>
                   </div>
                   <div v-else>
-                    <li class="list-group-item">Alkohol: {{ user_data.is_drinking_alcohol }}</li>
                     <li class="list-group-item">
                       Alkohol:
                       <div class="oneline">
@@ -506,14 +515,15 @@
           </b-tabs>
         </div>
       </b-col>
+      <b-col cols="1"></b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'MainUser',
+  name: "MainUser",
   components: {},
   data() {
     return {
@@ -521,13 +531,14 @@ export default {
       profile_picture: null,
       user_preferences: {},
       today: new Date(),
-      birthDate: '',
-      age: '',
-      m: '',
+      birthDate: "",
+      age: "",
+      m: "",
       description: [],
-      msg: '',
+      msg: "",
       dismissSecs: 5,
       dismissCountDown: 0,
+      whitespace: " ",
     };
   },
   methods: {
@@ -539,10 +550,10 @@ export default {
     },
     getUserData() {
       axios
-        .get('http://127.0.0.1:8000/api/user/properties', {
+        .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -552,10 +563,10 @@ export default {
     },
     getUserPreferences() {
       axios
-        .get('http://127.0.0.1:8000/api/user/preferences', {
+        .get("http://127.0.0.1:8000/api/user/preferences", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -566,12 +577,12 @@ export default {
     editUserData() {
       let config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
       axios
         .patch(
-          'http://127.0.0.1:8000/api/user/properties',
+          "http://127.0.0.1:8000/api/user/properties",
           {
             description: this.user_data.description,
           },
@@ -580,7 +591,7 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status == 200) {
-            this.showMsg(), (this.msg = 'Zaktualizowano opis profilu');
+            this.showMsg(), (this.msg = "Zaktualizowano opis profilu");
           }
         })
         .catch((errors) => console.log(errors));
@@ -596,8 +607,9 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return 'http://127.0.0.1:8000' + pic;
-      else return 'https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png';
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      else
+        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
   },
   created() {
@@ -623,7 +635,7 @@ export default {
   border-radius: 10px;
 }
 .card-text {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
 }
