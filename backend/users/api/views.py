@@ -11,7 +11,7 @@ from .serializers import RegistrationSerializer, UserSerializer, UserPreferences
     UserSettingsSerializer, ImageSerializer, LikesSerializer
 from ..models import User, Preferences, Settings, Image, Like
 
-
+#test
 @permission_classes([])
 class RegistrationView(APIView):
     @staticmethod
