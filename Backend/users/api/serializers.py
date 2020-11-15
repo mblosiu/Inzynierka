@@ -15,7 +15,7 @@ class UserPreferencesSerializer(serializers.ModelSerializer):
 class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Settings
-        fields = ['dark_theme']
+        fields = ['dark_theme', 'profile_privacy', 'messages_settings']
 
 
 class UserSerializer(serializers.ModelSerializer):
