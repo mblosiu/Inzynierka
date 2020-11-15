@@ -322,12 +322,24 @@ class SettingsView(APIView):
         response = {}
 
         dark_theme = request.data.get('dark_theme', False)
+        profile_privacy = request.data.get('profile_privacy', False)
+        messages_settings = request.data.get('messages_settings', False)
 
         if dark_theme == settings.dark_theme:
             response["dark_theme"] = "no changes"
         else:
             settings.dark_theme = dark_theme
             response["dark_theme"] = "updated"
+        if profile_privacy == settings.profile_privacy:
+            response["profile_privacy"] = "no changes"
+        else:
+            settings.profile_privacy = profile_privacy
+            response["profile_privacy"] = "updated"
+        if messages_settings == settings.messages_settings:
+            response["messages_settings"] = "no changes"
+        else:
+            settings.messages_settings = messages_settings
+            response["messages_settings"] = "updated"
 
         if response:
             settings.save()

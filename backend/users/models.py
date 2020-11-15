@@ -31,7 +31,10 @@ class Preferences(models.Model):
 
 class Settings(models.Model):
     dark_theme = models.BooleanField(default=True)
-
+    # public, private, only womans, only mans
+    profile_privacy = Kindness_preference = models.CharField(max_length=30, null=True, blank=True, default="public")
+    # everybody, nobody, friends only, only womans, only mans
+    messages_settings = models.CharField(max_length=30, null=True, blank=True, default="everybody")
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, location, birthday, sex, password=None):
