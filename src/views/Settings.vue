@@ -12,7 +12,12 @@
                     <b-row>
                       <b-col cols="6">
                         <label for="name" class="white-text">Imię</label>
-                        <input type="text" id="name" v-model="user_data.name" class="form-control" />
+                        <input
+                          type="text"
+                          id="name"
+                          v-model="user_data.name"
+                          class="form-control"
+                        />
                       </b-col>
                       <b-col cols="6">
                         <label for="surname" class="grey-text">Nazwisko</label>
@@ -28,7 +33,9 @@
                   <ul class="list-group-item">
                     <b-row>
                       <b-col cols="6">
-                        <label for="location" class="grey-text">Miejsce zamieszkania</label>
+                        <label for="location" class="grey-text"
+                          >Miejsce zamieszkania</label
+                        >
                         <input
                           type="text"
                           id="location"
@@ -51,7 +58,9 @@
                   <ul class="list-group-item">
                     <b-row>
                       <b-col cols="6">
-                        <label for="is_smoking" class="grey-text">Papierosy</label>
+                        <label for="is_smoking" class="grey-text"
+                          >Papierosy</label
+                        >
                         <b-form-select
                           class="form-control"
                           id="is_smoking"
@@ -60,7 +69,9 @@
                         ></b-form-select>
                       </b-col>
                       <b-col cols="6">
-                        <label for="is_drinking" class="grey-text">Alkohol</label>
+                        <label for="is_drinking" class="grey-text"
+                          >Alkohol</label
+                        >
                         <b-form-select
                           class="form-control"
                           id="is_drinking"
@@ -83,7 +94,9 @@
                         ></b-form-select>
                       </b-col>
                       <b-col cols="6">
-                        <label for="education" class="grey-text">Edukacja</label>
+                        <label for="education" class="grey-text"
+                          >Edukacja</label
+                        >
                         <b-form-select
                           class="form-control"
                           id="education"
@@ -147,7 +160,9 @@
                   <ul class="list-group-item">
                     <b-row>
                       <b-col cols="6">
-                        <label for="hair_length" class="grey-text">Długość włosów</label>
+                        <label for="hair_length" class="grey-text"
+                          >Długość włosów</label
+                        >
                         <b-form-select
                           class="form-control"
                           id="hair_length"
@@ -156,7 +171,9 @@
                         ></b-form-select>
                       </b-col>
                       <b-col cols="6">
-                        <label for="hair_color" class="grey-text">Kolor włosów</label>
+                        <label for="hair_color" class="grey-text"
+                          >Kolor włosów</label
+                        >
                         <b-form-select
                           class="form-control"
                           id="hair_color"
@@ -169,7 +186,9 @@
                   <ul class="list-group-item">
                     <b-row>
                       <b-col cols="6">
-                        <label for="body_type" class="grey-text">Sylwetka</label>
+                        <label for="body_type" class="grey-text"
+                          >Sylwetka</label
+                        >
                         <b-form-select
                           class="form-control"
                           id="body_type"
@@ -178,7 +197,9 @@
                         ></b-form-select>
                       </b-col>
                       <b-col cols="6">
-                        <label for="eye_color" class="grey-text">Kolor oczu</label>
+                        <label for="eye_color" class="grey-text"
+                          >Kolor oczu</label
+                        >
                         <b-form-select
                           class="form-control"
                           id="eye_color"
@@ -310,7 +331,9 @@
                   <ul class="list-group-item">
                     <b-row>
                       <b-col cols="6">
-                        <label for="favourite_place" class="white-text">Ulubione miejsce:</label>
+                        <label for="favourite_place" class="white-text"
+                          >Ulubione miejsce:</label
+                        >
                         <input
                           type="text"
                           id="favourite_place"
@@ -319,7 +342,9 @@
                         />
                       </b-col>
                       <b-col cols="6">
-                        <label for="passion" class="white-text">Największa pasja:</label>
+                        <label for="passion" class="white-text"
+                          >Największa pasja:</label
+                        >
                         <input
                           type="text"
                           id="passion"
@@ -344,14 +369,17 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="12">
-                          <label for="age_preference_min" class="white-text">Przedział wiekowy</label>
+                          <label for="age_preference_min" class="white-text"
+                            >Przedział wiekowy</label
+                          >
                           <b-row>
                             <b-col cols="3"></b-col>
                             <b-col cols="3">
                               <div>
-                                <div
-                                  class="mt-2"
-                                >Wiek minimalny: {{ user_preferences.age_preference_min }}</div>
+                                <div class="mt-2">
+                                  Wiek minimalny:
+                                  {{ user_preferences.age_preference_min }}
+                                </div>
                                 <b-form-input
                                   id="user_preferences.age_preference_min"
                                   v-model="user_preferences.age_preference_min"
@@ -363,9 +391,10 @@
                             </b-col>
                             <b-col cols="3">
                               <div>
-                                <div
-                                  class="mt-2"
-                                >Wiek maksymalny: {{ user_preferences.age_preference_max }}</div>
+                                <div class="mt-2">
+                                  Wiek maksymalny:
+                                  {{ user_preferences.age_preference_max }}
+                                </div>
                                 <b-form-input
                                   id="age_preference_max"
                                   v-model="user_preferences.age_preference_max"
@@ -383,7 +412,9 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="body_type_preference" class="grey-text">Sylwetka</label>
+                          <label for="body_type_preference" class="grey-text"
+                            >Sylwetka</label
+                          >
                           <b-form-select
                             class="form-control"
                             id="body_type_preference"
@@ -392,10 +423,10 @@
                           ></b-form-select>
                         </b-col>
                         <b-col cols="6">
-                          <label
-                            for="weight_preference"
-                            class="white-text"
-                          >Waga maks: {{ user_preferences.weight_preference }}</label>
+                          <label for="weight_preference" class="white-text"
+                            >Waga maks:
+                            {{ user_preferences.weight_preference }}</label
+                          >
                           <b-row>
                             <b-col cols="2"></b-col>
                             <b-col cols="8">
@@ -422,7 +453,9 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="education_preference" class="white-text">Edukacja</label>
+                          <label for="education_preference" class="white-text"
+                            >Edukacja</label
+                          >
                           <b-form-select
                             class="form-control"
                             id="education_preference"
@@ -431,7 +464,9 @@
                           ></b-form-select>
                         </b-col>
                         <b-col cols="6">
-                          <label for="eye_color_preference" class="grey-text">Kolor oczu</label>
+                          <label for="eye_color_preference" class="grey-text"
+                            >Kolor oczu</label
+                          >
                           <b-form-select
                             class="form-control"
                             id="eye_color_preference"
@@ -444,7 +479,9 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="hair_length_preference" class="grey-text">Długość włosów</label>
+                          <label for="hair_length_preference" class="grey-text"
+                            >Długość włosów</label
+                          >
                           <b-form-select
                             class="form-control"
                             id="hair_length_preference"
@@ -453,7 +490,9 @@
                           ></b-form-select>
                         </b-col>
                         <b-col cols="6">
-                          <label for="hair_color_preference" class="grey-text">Kolor włosów</label>
+                          <label for="hair_color_preference" class="grey-text"
+                            >Kolor włosów</label
+                          >
                           <b-form-select
                             class="form-control"
                             id="hair_color_preference"
@@ -466,7 +505,9 @@
                     <ul class="list-group-item">
                       <b-row>
                         <b-col cols="6">
-                          <label for="is_smoking_preference" class="grey-text">Papierosy</label>
+                          <label for="is_smoking_preference" class="grey-text"
+                            >Papierosy</label
+                          >
                           <b-form-select
                             class="form-control"
                             id="is_smoking_preference"
@@ -475,11 +516,15 @@
                           ></b-form-select>
                         </b-col>
                         <b-col cols="6">
-                          <label for="is_drinking_preference" class="grey-text">Alkohol</label>
+                          <label for="is_drinking_preference" class="grey-text"
+                            >Alkohol</label
+                          >
                           <b-form-select
                             class="form-control"
                             id="is_drinking_preference"
-                            v-model="user_preferences.is_drinking_alcohol_preference"
+                            v-model="
+                              user_preferences.is_drinking_alcohol_preference
+                            "
                             :options="alcohol_options2"
                           ></b-form-select>
                         </b-col>
@@ -488,7 +533,9 @@
                   </ul>
 
                   <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-success">Zapisz</button>
+                    <button type="submit" class="btn btn-success">
+                      Zapisz
+                    </button>
                   </div>
                   <p></p>
                 </div>
@@ -498,7 +545,10 @@
               <div class="card text-black">
                 <br />
                 <b-card-text>
-                  <form class="description" @submit.prevent="editUserDescription">
+                  <form
+                    class="description"
+                    @submit.prevent="editUserDescription"
+                  >
                     <b-row class="mt-2">
                       <b-col cols="2"></b-col>
                       <b-col sm="8">
@@ -517,7 +567,9 @@
                       <b-col cols="2"></b-col>
                     </b-row>
                     <div class="text-center mt-4">
-                      <button type="submit" class="btn btn-success">Zapisz</button>
+                      <button type="submit" class="btn btn-success">
+                        Zapisz
+                      </button>
                       <p></p>
                     </div>
                   </form>
@@ -526,6 +578,44 @@
             </b-tab>
             <b-tab title="Ustawienia prywatności">
               <ul class="list-group list-group-flush">
+                <ul class="list-group-item">
+                  <b-row>
+                    <b-col cols="6">
+                      <!--<select v-model="selected">
+                        <option
+                          v-for="option in options"
+                          v-bind:value="option.value"
+                        >
+                          {{ option.text }}
+                        </option>
+                      </select>
+
+                      <span>Otrzymywanie wiadomości: {{ selected }}</span>-->
+                      <select v-model="selected">
+                        <option
+                          v-for="option in options"
+                          v-bind:value="option.value"
+                        >
+                          {{ option.text }}
+                        </option>
+                      </select>
+                      <span>Selected: {{ selected }}</span>
+                    </b-col>
+                    <b-col cols="6"></b-col>
+                  </b-row>
+                </ul>
+                <ul class="list-group-item">
+                  <b-row>
+                    <b-col cols="6"></b-col>
+                    <b-col cols="6"></b-col>
+                  </b-row>
+                </ul>
+                <ul class="list-group-item">
+                  <b-row>
+                    <b-col cols="6"></b-col>
+                    <b-col cols="6"></b-col>
+                  </b-row>
+                </ul>
                 <ul class="list-group-item">
                   <b-row>
                     <b-col cols="6"></b-col>
@@ -540,24 +630,32 @@
                         variant="danger"
                         size="lg"
                         @click="$bvModal.show('modal-scoped')"
-                      >Usuń konto</b-button>
+                        >Usuń konto</b-button
+                      >
                       <b-modal id="modal-scoped">
                         <template v-slot:modal-header="{ close }">
-                          <!-- Emulate built in modal header close button action -->
-
                           <h5>Czy jesteś pewien?</h5>
                         </template>
 
-                        <h6>Czy na pewno chcesz usunąć swoje konto z portalu e-Love? Konto zostanie usunięte bezpowrotnie!</h6>
+                        <h6>
+                          Czy na pewno chcesz usunąć swoje konto z portalu
+                          e-Love? Konto zostanie usunięte bezpowrotnie!
+                        </h6>
 
-                        <template v-slot:modal-footer="{cancel}">
+                        <template v-slot:modal-footer="{ cancel }">
                           <b-button
                             size="md"
                             variant="secondary"
                             class="mr-20 ml-20"
                             @click="cancel()"
-                          >Nie</b-button>
-                          <b-button size="md" variant="danger" @click="deleteAccount">Tak</b-button>
+                            >Nie</b-button
+                          >
+                          <b-button
+                            size="md"
+                            variant="danger"
+                            @click="deleteAccount"
+                            >Tak</b-button
+                          >
                         </template>
                       </b-modal>
                     </b-col>
@@ -566,7 +664,7 @@
                 </ul>
                 <ul class="list-group-item">
                   <b-row>
-                    <b-col cols="6">{{boxtwo}}</b-col>
+                    <b-col cols="6">{{ boxtwo }}</b-col>
                     <b-col cols="6"></b-col>
                   </b-row>
                 </ul>
@@ -581,7 +679,8 @@
             variant="success"
             @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
-          >{{ msg }}</b-alert>
+            >{{ msg }}</b-alert
+          >
           <b-alert
             :show="dismissCountDown2"
             dismissible
@@ -589,7 +688,8 @@
             variant="danger"
             @dismissed="dismissCountDown2 = 0"
             @dismiss-count-down="countDownChanged2"
-          >{{ msg2 }}</b-alert>
+            >{{ msg2 }}</b-alert
+          >
         </b-col>
         <b-col cols="1"></b-col>
       </b-row>
@@ -619,6 +719,19 @@ export default {
       calculated: 0,
       msg2: "",
       boxtwo: "",
+      selected: "A",
+      options: [
+        { text: "One", value: "A" },
+        { text: "Two", value: "B" },
+        { text: "Three", value: "C" },
+      ],
+      //selected: "od wszystich",
+      /*options: [
+        { value: "all", text: "od wszystkich" },
+        { value: "diffsex", text: "od płci przeciwnej" },
+        { value: "friends", text: "od znajomych" },
+        { value: "off", text: "od nikogo" },
+      ],*/
       sex_options: [
         { value: null, text: "" },
         { value: "Mężczyzna", text: "mężczyzna" },
