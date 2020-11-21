@@ -577,98 +577,187 @@
               </div>
             </b-tab>
             <b-tab title="Ustawienia prywatności">
-              <ul class="list-group list-group-flush">
-                <ul class="list-group-item">
-                  <b-row>
-                    <b-col cols="6">
-                      <!--<select v-model="selected">
-                        <option
-                          v-for="option in options"
-                          v-bind:value="option.value"
-                        >
-                          {{ option.text }}
-                        </option>
-                      </select>
-
-                      <span>Otrzymywanie wiadomości: {{ selected }}</span>-->
-                      <select v-model="selected">
-                        <option
-                          v-for="option in options"
-                          v-bind:value="option.value"
-                        >
-                          {{ option.text }}
-                        </option>
-                      </select>
-                      <span>Selected: {{ selected }}</span>
-                    </b-col>
-                    <b-col cols="6"></b-col>
-                  </b-row>
-                </ul>
-                <ul class="list-group-item">
-                  <b-row>
-                    <b-col cols="6"></b-col>
-                    <b-col cols="6"></b-col>
-                  </b-row>
-                </ul>
-                <ul class="list-group-item">
-                  <b-row>
-                    <b-col cols="6"></b-col>
-                    <b-col cols="6"></b-col>
-                  </b-row>
-                </ul>
-                <ul class="list-group-item">
-                  <b-row>
-                    <b-col cols="6"></b-col>
-                    <b-col cols="6"></b-col>
-                  </b-row>
-                </ul>
-                <ul class="list-group-item">
-                  <b-row>
-                    <b-col cols="4"></b-col>
-                    <b-col cols="4">
-                      <b-button
-                        variant="danger"
-                        size="lg"
-                        @click="$bvModal.show('modal-scoped')"
-                        >Usuń konto</b-button
+              <form class="card" @submit.prevent="editUserPrivate">
+                <ul class="list-group list-group-flush">
+                  <ul class="list-group-item">
+                    <b-row>
+                      <b-col cols="6">
+                        <!--<span
+                        >Otrzymywanie wiadomości:
+                        </span
                       >
-                      <b-modal id="modal-scoped">
-                        <template v-slot:modal-header="{ close }">
-                          <h5>Czy jesteś pewien?</h5>
-                        </template>
+                      <select v-model="msg_option">
+                        <option
+                          v-for="msgoption in msgoptions"
+                          v-bind:value="msgoption.value"
+                        >
+                          {{ msgoption.text }}
+                        </option>
+                      </select>-->
+                        <label for="msg_option" class="grey-text"
+                          >Otrzymywanie wiadomości:</label
+                        >
+                        <b-form-select
+                          class="form-control"
+                          id="msg_option"
+                          v-model="msg_option"
+                          :options="msgoptions"
+                        ></b-form-select>
+                      </b-col>
+                      <b-col cols="6">
+                        <label for="comm_option" class="grey-text"
+                          >Otrzymywanie komentarzy:</label
+                        >
+                        <b-form-select
+                          class="form-control"
+                          id="comm_option"
+                          v-model="comm_option"
+                          :options="msgoptions"
+                        ></b-form-select>
+                      </b-col>
+                    </b-row>
+                  </ul>
+                  <ul class="list-group-item">
+                    <b-row>
+                      <b-col cols="6">
+                        <!--<span
+                        >Kto może mnie wyszukać:
+                        </span
+                      >
+                      <select v-model="search_option">
+                        <option
+                          v-for="searchoption in searchoptions"
+                          v-bind:value="searchoption.value"
+                        >
+                          {{ searchoption.text }}
+                        </option>
+                      </select>-->
+                        <label for="search_option" class="grey-text"
+                          >Kto może mnie wyszukać:</label
+                        >
+                        <b-form-select
+                          class="form-control"
+                          id="search_option"
+                          v-model="search_option"
+                          :options="searchoptions"
+                        ></b-form-select>
+                      </b-col>
+                      <b-col cols="6">
+                        <strong>Otrzymywanie powiadomień:</strong><br />
+                        <b-form-checkbox
+                          id="new_likes"
+                          v-model="new_likes"
+                          name="checkbox-1"
+                          value="true"
+                          unchecked-value="false"
+                        >
+                          Polubienia od innych użytkowników
+                        </b-form-checkbox>
+                        <b-form-checkbox
+                          id="new_messages"
+                          v-model="new_messages"
+                          name="checkbox-1"
+                          value="true"
+                          unchecked-value="false"
+                        >
+                          Wiadomości prywatne
+                        </b-form-checkbox>
+                        <b-form-checkbox
+                          id="new_comments"
+                          v-model="new_comments"
+                          name="checkbox-1"
+                          value="true"
+                          unchecked-value="false"
+                        >
+                          Komentarze pod moimi zdjęciami
+                        </b-form-checkbox>
+                      </b-col>
+                    </b-row>
+                  </ul>
+                  <ul class="list-group-item">
+                    <b-row>
+                      <b-col cols="6">
+                        <b-form-checkbox
+                          id="hideage"
+                          v-model="hideage"
+                          name="checkbox-1"
+                          value="true"
+                          unchecked-value="false"
+                        >
+                          Ukryj mój wiek dla innych użytkowników
+                        </b-form-checkbox>
+                      </b-col>
+                      <b-col cols="6">
+                        <b-row>
+                          <b-col cols="4"></b-col>
+                          <b-col cols="4">
+                            <b-button
+                              v-b-modal.modal-blacklist
+                              variant="dark"
+                              size="md"
+                              >Czarna lista</b-button
+                            >
+                            <b-modal
+                              id="modal-blacklist"
+                              scrollable
+                              title="Czarna lista"
+                            >
+                              <p class="my-4" v-for="i in 20" :key="i">
+                                Niemiła osoba nr {{ i }}
+                              </p>
+                            </b-modal>
+                          </b-col>
+                          <b-col cols="4"></b-col>
+                        </b-row>
+                      </b-col>
+                    </b-row>
+                  </ul>
+                  <ul class="list-group-item">
+                    <b-row>
+                      <b-col cols="4"></b-col>
+                      <b-col cols="4">
+                        <b-button
+                          variant="danger"
+                          size="lg"
+                          @click="$bvModal.show('modal-scoped')"
+                          >Usuń konto</b-button
+                        >
+                        <b-modal id="modal-scoped">
+                          <template v-slot:modal-header="{ close }">
+                            <h5>Czy jesteś pewien?</h5>
+                          </template>
 
-                        <h6>
-                          Czy na pewno chcesz usunąć swoje konto z portalu
-                          e-Love? Konto zostanie usunięte bezpowrotnie!
-                        </h6>
+                          <h6>
+                            Czy na pewno chcesz usunąć swoje konto z portalu
+                            e-Love? Konto zostanie usunięte bezpowrotnie!
+                          </h6>
 
-                        <template v-slot:modal-footer="{ cancel }">
-                          <b-button
-                            size="md"
-                            variant="secondary"
-                            class="mr-20 ml-20"
-                            @click="cancel()"
-                            >Nie</b-button
-                          >
-                          <b-button
-                            size="md"
-                            variant="danger"
-                            @click="deleteAccount"
-                            >Tak</b-button
-                          >
-                        </template>
-                      </b-modal>
-                    </b-col>
-                    <b-col cols="4"></b-col>
-                  </b-row>
+                          <template v-slot:modal-footer="{ cancel }">
+                            <b-button
+                              size="md"
+                              variant="secondary"
+                              class="mr-20 ml-20"
+                              @click="cancel()"
+                              >Nie</b-button
+                            >
+                            <b-button
+                              size="md"
+                              variant="danger"
+                              @click="deleteAccount"
+                              >Tak</b-button
+                            >
+                          </template>
+                        </b-modal>
+                      </b-col>
+                      <b-col cols="4"></b-col>
+                    </b-row>
+                  </ul>
                 </ul>
-                <ul class="list-group-item">
-                  <b-row>
-                    <b-col cols="6">{{ boxtwo }}</b-col>
-                    <b-col cols="6"></b-col>
-                  </b-row>
-                </ul>
-              </ul>
+                <div class="text-center mt-4">
+                  <button type="submit" class="btn btn-success">Zapisz</button>
+                </div>
+                <p></p>
+              </form>
             </b-tab>
           </b-tabs>
           <p></p>
@@ -718,20 +807,32 @@ export default {
       dismissCountDown2: 0,
       calculated: 0,
       msg2: "",
-      boxtwo: "",
-      selected: "A",
-      options: [
-        { text: "One", value: "A" },
-        { text: "Two", value: "B" },
-        { text: "Three", value: "C" },
+      hideage: false,
+      msg_option: "od wszystkich",
+      msgoptions: [
+        { text: "od wszystkich", value: "od wszystkich" },
+        { text: "od płci przeciwnej", value: "od płci przeciwnej" },
+        { text: "od znajomych", value: "od znajomych" },
+        { text: "od nikogo", value: "od nikogo" },
       ],
-      //selected: "od wszystich",
-      /*options: [
-        { value: "all", text: "od wszystkich" },
-        { value: "diffsex", text: "od płci przeciwnej" },
-        { value: "friends", text: "od znajomych" },
-        { value: "off", text: "od nikogo" },
+      comm_option: "od wszystkich",
+      search_option: "wszyscy",
+      searchoptions: [
+        { text: "wszyscy", value: "wszyscy" },
+        { text: "płeć przeciwna", value: "płeć przeciwna" },
+        { text: "ukrycie konta", value: "ukrycie konta" },
+      ],
+      new_likes: true,
+      new_messages: true,
+      new_comments: true,
+      user_blacklist: [],
+      /*commptions: [
+        { text: "od wszystkich", value: "od wszystkich" },
+        { text: "od płci przeciwnej", value: "od płci przeciwnej" },
+        { text: "od znajomych", value: "od znajomych" },
+        { text: "od nikogo", value: "od nikogo" },
       ],*/
+
       sex_options: [
         { value: null, text: "" },
         { value: "Mężczyzna", text: "mężczyzna" },
@@ -932,6 +1033,9 @@ export default {
           }
         })
         .catch((errors) => console.log(errors));
+    },
+    editUserPrivate() {
+      this.showMsg(), (this.msg = "Zapisano zmiany");
     },
     getUserPreferences() {
       axios
