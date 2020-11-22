@@ -9,13 +9,13 @@ class UserPreferencesSerializer(serializers.ModelSerializer):
         model = Preferences
         fields = ['hair_color_blonde_preference', 'hair_color_brunette_preference',
                   'hair_color_red_preference', 'growth_preference', 'weight_preference', 'body_type_preference',
-                  'is_smoking_preference', 'is_drinking_alcohol_preference','age_preference_max','age_preference_min']
+                  'is_smoking_preference', 'is_drinking_alcohol_preference', 'age_preference_max', 'age_preference_min']
 
 
 class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Settings
-        fields = ['dark_theme', 'profile_privacy', 'messages_settings']
+        fields = ['dark_theme', 'messages_privacy', 'search_privacy', 'comments_privacy']
 
 
 class UserSerializer(serializers.ModelSerializer):

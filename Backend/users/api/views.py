@@ -11,7 +11,7 @@ from .serializers import RegistrationSerializer, UserSerializer, UserPreferences
     UserSettingsSerializer, ImageSerializer, LikesSerializer
 from ..models import User, Preferences, Settings, Image, Like
 
-#test
+
 @permission_classes([])
 class RegistrationView(APIView):
     @staticmethod
@@ -320,26 +320,34 @@ class SettingsView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
-
         dark_theme = request.data.get('dark_theme', False)
-        profile_privacy = request.data.get('profile_privacy', False)
-        messages_settings = request.data.get('messages_settings', False)
+        messages_privacy = request.data.get('messages_privacy', False)
+        search_privacy = request.data.get('search_privacy', False)
+        comments_privacy = request.data.get('comments_privacy', False)
 
         if dark_theme == settings.dark_theme:
             response["dark_theme"] = "no changes"
         else:
             settings.dark_theme = dark_theme
             response["dark_theme"] = "updated"
-        if profile_privacy == settings.profile_privacy:
-            response["profile_privacy"] = "no changes"
+
+        if messages_privacy == settings.messages_privacy:
+            response["messages_privacy"] = "no changes"
         else:
-            settings.profile_privacy = profile_privacy
-            response["profile_privacy"] = "updated"
-        if messages_settings == settings.messages_settings:
-            response["messages_settings"] = "no changes"
+            settings.messages_privacy = messages_privacy
+            response["messages_privacy"] = "updated"
+
+        if search_privacy == settings.search_privacy:
+            response["search_privacy"] = "no changes"
         else:
-            settings.messages_settings = messages_settings
-            response["messages_settings"] = "updated"
+            settings.search_privacy = search_privacy
+            response["search_privacy"] = "updated"
+
+        if comments_privacy == settings.comments_privacy:
+            response["comments_privacy"] = "no changes"
+        else:
+            settings.comments_privacy = comments_privacy
+            response["comments_privacy"] = "updated"
 
         if response:
             settings.save()
