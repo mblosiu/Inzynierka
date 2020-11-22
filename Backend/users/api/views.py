@@ -534,10 +534,10 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         queryset = queryset.exclude(pk=request.user.pk)
+        queryset = queryset.exclude(settings__search_privacy='nobody')
 
         name = request.query_params.get('name', None)
         surname = request.query_params.get('surname', None)
-
         sex = request.query_params.get('sex', None)
         location = request.query_params.get('location', None)
         hair_length = request.query_params.get('hair_length', None)

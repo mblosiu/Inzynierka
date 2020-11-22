@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['pk', 'email', 'username', 'last_login', 'is_active', 'name', 'surname', 'birthday', 'location',
                   'profile_picture', 'description', 'sex', 'hair_color', 'hair_length', 'growth', 'weight', 'body_type',
                   'freckles', 'glasses', 'is_smoking', 'is_drinking_alcohol', 'eye_color', 'education', 'passion',
-                  'favourite_place', 'status', 'preferences', 'settings', 'orientation'
+                  'favourite_place', 'status', 'orientation', 'preferences', 'settings'
                   ]
 
 
