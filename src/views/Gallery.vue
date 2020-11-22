@@ -62,10 +62,10 @@
                   :src="getUrl(image.image)"
                   class="img-responsive rounded mx-auto d-block"
                   alt="image"
-                  @click="showModal(i)"
+                  @click="showModal(image.image)"
                 />
 
-                <b-modal :ref="'modal' + i" hide-footer title="Podgląd zdjęcia" size="lg">
+                <b-modal :ref="'modal' + image.image" hide-footer title="Podgląd zdjęcia" size="lg">
                   <div class="d-block text-center"></div>
                   <img
                     :src="getUrl(image.image)"
