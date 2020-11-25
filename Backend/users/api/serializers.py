@@ -37,7 +37,7 @@ class BlackListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlackList
-        fields = ['owner', 'blacklisted']
+        fields = ['pk', 'owner', 'blacklisted']
 
 
 class UserProfilePicSerializer(serializers.ModelSerializer):

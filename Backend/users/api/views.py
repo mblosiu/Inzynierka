@@ -3,13 +3,14 @@ from rest_framework import viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404
+from django.shortcuts import get_list_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
-    UserSettingsSerializer, ImageSerializer, LikesSerializer
-from ..models import User, Preferences, Settings, Image, Like
+    UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer
+from ..models import User, Preferences, Settings, Image, Like, BlackList
 
 
 @permission_classes([])
@@ -666,4 +667,34 @@ class LikesView(viewsets.ModelViewSet):
         pk = request.user.pk
         queryset = Like.objects.filter(liked__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class BlackListView(APIView):
+    def post(self, request):
+        response = {}
+        pk = request.data.get('pk', None)
+
+        if int(pk) == int(request.user.pk):
+            return Response({"detail": "can't block yourself"}, status=status.HTTP_400_BAD_REQUEST)
+        blacklist = BlackList.objects.filter(blacklisting=request.user.pk, blacklisted=pk)
+
+        if blacklist.count() > 0:
+            response["detail"] = "already blocked"
+            stat = status.HTTP_400_BAD_REQUEST
+        else:
+            response["detail"] = "user blocked"
+            blacklist = BlackList(
+                blacklisting=request.user,
+                blacklisted=get_object_or_404(User, pk=pk)
+            )
+            blacklist.save()
+            stat = status.HTTP_201_CREATED
+        return Response(response, status=stat)
+
+    def get(self, request):
+        pk = request.data.get('pk', None)
+        queryset = get_list_or_404(BlackList, blacklisting__pk=pk)
+        serializer = BlackListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

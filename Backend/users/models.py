@@ -150,8 +150,10 @@ def upload_to(instance, filename):
 
 
 class BlackList(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    blacklisted = models.ForeignKey(User, related_name='black_listed', default=None, on_delete=models.CASCADE)
+    blacklisting = models.ForeignKey(User, related_name='blacklisting', default=None,
+                                     on_delete=models.CASCADE)
+    blacklisted = models.ForeignKey(User, related_name='blacklisted', default=None,
+                                    on_delete=models.CASCADE)
 
 
 class Image(models.Model):
@@ -163,8 +165,8 @@ class Image(models.Model):
 
 class Like(models.Model):
     value = models.CharField(max_length=30, null=True, blank=True, default=None)
-    liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
     liked_by = models.ForeignKey(User, related_name='liked_by', default=None, on_delete=models.CASCADE)
+    liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
 
 
 class Hobby(models.Model):
