@@ -5,9 +5,16 @@
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="2">
-          <b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
+          <b-sidebar
+            id="sidebar-footer"
+            aria-label="Okno chatu"
+            no-header
+            shadow
+          >
             <template v-slot:footer="{ hide }">
-              <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
+              <div
+                class="d-flex bg-dark text-light align-items-center px-3 py-2"
+              >
                 <strong class="mr-auto"></strong>
                 <b-button size="sm" @click="hide">Zamknij</b-button>
               </div>
@@ -15,7 +22,10 @@
             <div class="px-3 py-2">
               <h3>Okienko chatu</h3>
             </div>
-            <p>Początek rozmowy między {{ user_data.username }} a {{ user.username }}</p>
+            <p>
+              Początek rozmowy między {{ user_data.username }} a
+              {{ user.username }}
+            </p>
           </b-sidebar>
         </b-col>
         <b-col cols="4">
@@ -23,7 +33,7 @@
             <b-card
               :img-src="getUrl(user.profile_picture)"
               img-alt="Card image"
-              style="width: 27rem;"
+              style="width: 27rem"
               img-top
               class="user-card"
               alt="Card image cap"
@@ -46,8 +56,16 @@
                   </h4>
                 </div>
                 <br />
-                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                  <div class="btn-group mr-3 ml-3" role="group" aria-label="icons">
+                <div
+                  class="btn-toolbar"
+                  role="toolbar"
+                  aria-label="Toolbar with button groups"
+                >
+                  <div
+                    class="btn-group mr-3 ml-3"
+                    role="group"
+                    aria-label="icons"
+                  >
                     <button
                       v-b-toggle.sidebar-footer
                       type="button"
@@ -107,7 +125,10 @@
                       data-placement="bottom"
                       title="Zobacz galerię"
                     >
-                      <div id="show-btn" @click="$bvModal.show('bv-modal-example')">
+                      <div
+                        id="show-btn"
+                        @click="$bvModal.show('bv-modal-example')"
+                      >
                         <svg
                           color="lightblue"
                           width="3em"
@@ -131,7 +152,12 @@
                         </svg>
                       </div>
                     </button>
-                    <b-modal id="bv-modal-example" size="lg" title="Galeria użytkownika" hide-footer>
+                    <b-modal
+                      id="bv-modal-example"
+                      size="lg"
+                      title="Galeria użytkownika"
+                      hide-footer
+                    >
                       <div v-if="images != []">
                         <div>
                           <!--v-model="slide"-->
@@ -143,14 +169,16 @@
                             background="#ababab"
                             img-width="100%"
                             img-height="100%"
-                            style="text-shadow: 1px 1px 2px #333;"
+                            style="text-shadow: 1px 1px 2px #333"
                           >
                             <div
                               v-for="image in images"
                               v-bind:key="image.id"
-                              style="padding-bottom:2px; img-height:50%;"
+                              style="padding-bottom: 2px; img-height: 50%"
                             >
-                              <b-carousel-slide :img-src="getUrl(image.image)"></b-carousel-slide>
+                              <b-carousel-slide
+                                :img-src="getUrl(image.image)"
+                              ></b-carousel-slide>
                             </div>
                           </b-carousel>
                         </div>
@@ -158,7 +186,12 @@
                           <b-row>
                             <b-col cols="10"></b-col>
                             <b-col cols="2">
-                              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Zamknij</b-button>
+                              <b-button
+                                class="mt-3"
+                                block
+                                @click="$bvModal.hide('bv-modal-example')"
+                                >Zamknij</b-button
+                              >
                             </b-col>
                           </b-row>
                           <b-row>
@@ -178,7 +211,10 @@
                             <b-col cols="1"></b-col>
                             <b-col cols="10"></b-col>
                             <div class="comments">
-                              <h2>Użytkownik nie posiada w swojej galerii żadnego zdjęcia :(</h2>
+                              <h2>
+                                Użytkownik nie posiada w swojej galerii żadnego
+                                zdjęcia :(
+                              </h2>
                               <br />
                             </div>
                             <b-col cols="1"></b-col>
@@ -186,7 +222,12 @@
                           <b-row>
                             <b-col cols="10"></b-col>
                             <b-col cols="2">
-                              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Zamknij</b-button>
+                              <b-button
+                                class="mt-3"
+                                block
+                                @click="$bvModal.hide('bv-modal-example')"
+                                >Zamknij</b-button
+                              >
                             </b-col>
                           </b-row>
                         </footer>
@@ -259,8 +300,13 @@
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z" />
-                        <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
+                        <path
+                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
+                        />
                       </svg>
                     </button>
                   </div>
@@ -281,7 +327,9 @@
                     <li class="list-group-item">
                       Imię i nazwisko:
                       <div class="oneline">
-                        <p class="font-weight-bold">{{ user.name }} {{ user.surname }}</p>
+                        <p class="font-weight-bold">
+                          {{ user.name }} {{ user.surname }}
+                        </p>
                       </div>
                     </li>
                     <li class="list-group-item">
@@ -293,7 +341,9 @@
                     <li class="list-group-item">
                       Wiek:
                       <div class="oneline">
-                        <p class="font-weight-bold">{{ getAge(user.birthday) }}</p>
+                        <p class="font-weight-bold">
+                          {{ getAge(user.birthday) }}
+                        </p>
                       </div>
                     </li>
                     <li class="list-group-item">
@@ -443,7 +493,9 @@
                     <li class="list-group-item">
                       Włosy:
                       <div class="oneline">
-                        <p class="font-weight-bold">{{ user.hair_length }} {{ user.hair_color }}</p>
+                        <p class="font-weight-bold">
+                          {{ user.hair_length }} {{ user.hair_color }}
+                        </p>
                       </div>
                     </li>
                     <li class="list-group-item">
@@ -504,7 +556,9 @@
                     <li class="list-group-item">
                       Ulubione miejsce:
                       <div class="oneline">
-                        <p class="font-weight-bold">{{ user.favourite_place }}</p>
+                        <p class="font-weight-bold">
+                          {{ user.favourite_place }}
+                        </p>
                       </div>
                     </li>
                     <li class="list-group-item">
@@ -530,11 +584,21 @@
                     </li>
                     <li class="list-group-item">
                       Przedział wiekowy:
-                      <div class="oneline" v-if="user_preferences.age_preference_min != null">
-                        <p class="font-weight-bold">od {{ user_preferences.age_preference_min }}</p>
+                      <div
+                        class="oneline"
+                        v-if="user_preferences.age_preference_min != null"
+                      >
+                        <p class="font-weight-bold">
+                          od {{ user_preferences.age_preference_min }}
+                        </p>
                       </div>
-                      <div class="oneline" v-if="user_preferences.age_preference_max != null">
-                        <p class="font-weight-bold">do {{ user_preferences.age_preference_max }} lat</p>
+                      <div
+                        class="oneline"
+                        v-if="user_preferences.age_preference_max != null"
+                      >
+                        <p class="font-weight-bold">
+                          do {{ user_preferences.age_preference_max }} lat
+                        </p>
                       </div>
                     </li>
 
@@ -546,14 +610,21 @@
                     </li>-->
                     <li class="list-group-item">
                       Waga:
-                      <div class="oneline" v-if="user_preferences.weight_preference != null">
-                        <p class="font-weight-bold">do {{ user_preferences.weight_preference }} kg</p>
+                      <div
+                        class="oneline"
+                        v-if="user_preferences.weight_preference != null"
+                      >
+                        <p class="font-weight-bold">
+                          do {{ user_preferences.weight_preference }} kg
+                        </p>
                       </div>
                     </li>
                     <li class="list-group-item">
                       Sylwetka:
                       <div class="oneline">
-                        <p class="font-weight-bold">{{ user_preferences.body_type_preference }}</p>
+                        <p class="font-weight-bold">
+                          {{ user_preferences.body_type_preference }}
+                        </p>
                       </div>
                     </li>
                     <!--<li class="list-group-item">
@@ -590,7 +661,9 @@
                       </li>
                     </div>
 
-                    <div v-else-if="user_preferences.is_smoking_preference == 1">
+                    <div
+                      v-else-if="user_preferences.is_smoking_preference == 1"
+                    >
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -598,7 +671,9 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_smoking_preference == 2">
+                    <div
+                      v-else-if="user_preferences.is_smoking_preference == 2"
+                    >
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -606,7 +681,9 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_smoking_preference == 3">
+                    <div
+                      v-else-if="user_preferences.is_smoking_preference == 3"
+                    >
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -614,7 +691,9 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_smoking_preference == 4">
+                    <div
+                      v-else-if="user_preferences.is_smoking_preference == 4"
+                    >
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -631,7 +710,11 @@
                       </li>
                     </div>
 
-                    <div v-if="user_preferences.is_drinking_alcohol_preference == 0">
+                    <div
+                      v-if="
+                        user_preferences.is_drinking_alcohol_preference == 0
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -639,7 +722,11 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 1">
+                    <div
+                      v-else-if="
+                        user_preferences.is_drinking_alcohol_preference == 1
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -647,7 +734,11 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 2">
+                    <div
+                      v-else-if="
+                        user_preferences.is_drinking_alcohol_preference == 2
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -655,7 +746,11 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 3">
+                    <div
+                      v-else-if="
+                        user_preferences.is_drinking_alcohol_preference == 3
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -663,7 +758,11 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 4">
+                    <div
+                      v-else-if="
+                        user_preferences.is_drinking_alcohol_preference == 4
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -727,7 +826,9 @@
                     <li class="list-group-item">
                       Sumienność:
                       <div class="oneline">
-                        <p class="font-weight-bold">{{ user.scrupulousness }}</p>
+                        <p class="font-weight-bold">
+                          {{ user.scrupulousness }}
+                        </p>
                       </div>
                     </li>
                     <li class="list-group-item">
@@ -761,7 +862,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
@@ -769,7 +870,7 @@ export default {
       user: {},
       user_preferences: {},
       images: {},
-      like: 'like',
+      like: "like",
       //heartcolor: "grey",
       liked_user: {},
       user_likes: [],
@@ -782,12 +883,16 @@ export default {
       //this.liked = true;
       const config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
 
       axios
-        .post('http://127.0.0.1:8000/api/user/create-like', { value: 'like', pk: this.$route.params.pk }, config)
+        .post(
+          "http://127.0.0.1:8000/api/user/create-like",
+          { value: "like", pk: this.$route.params.pk },
+          config
+        )
         .then((response) => {
           console.log(response);
           this.$router.go();
@@ -795,14 +900,15 @@ export default {
         .catch((errors) => console.log(errors));
       //this.$router.go();
     },
+
     dislikeUser() {
       //this.heartcolor = "pink";
       //like = false;
       const config = {};
       axios
-        .delete('http://127.0.0.1:8000/api/user/delete-like', {
+        .delete("http://127.0.0.1:8000/api/user/delete-like", {
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
           data: {
             pk: this.getLikePK(),
@@ -817,21 +923,27 @@ export default {
     getUserLikes() {
       //console.log(this.user_data['pk']);
       axios
-        .get('http://127.0.0.1:8000/api/user/get-users-are-liked/' + this.$route.params.pk, {
-          params: {},
-          headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
-          },
-        })
+        .get(
+          "http://127.0.0.1:8000/api/user/get-users-are-liked/" +
+            this.$route.params.pk,
+          {
+            params: {},
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
         .then((response) => {
-          console.log(response), (this.user_likes = response.data), console.log(this.user_likes);
+          console.log(response),
+            (this.user_likes = response.data),
+            console.log(this.user_likes);
         })
         .catch((errors) => console.log(errors));
     },
     isUserLiked() {
       var liked = false;
       for (var i = 0; i < this.user_likes.length; i++) {
-        if (this.user_likes[i].liked_by['pk'] == this.$route.params.pk) {
+        if (this.user_likes[i].liked_by["pk"] == this.$route.params.pk) {
           return true;
         }
       }
@@ -840,18 +952,34 @@ export default {
     getLikePK() {
       var pk = -1;
       for (var i = 0; i < this.user_likes.length; i++) {
-        if (this.user_likes[i].liked_by['pk'] == this.$route.params.pk) {
+        if (this.user_likes[i].liked_by["pk"] == this.$route.params.pk) {
           pk = this.user_likes[i].pk;
         }
       }
       return pk;
     },
+    blockUser() {
+      const config = {
+        headers: {
+          Authorization: 'Token ' + localStorage.getItem('user-token'),
+        },
+      };
+
+      axios
+        .post('http://127.0.0.1:8000/api/user/create-like', { value: 'block', pk: this.$route.params.pk }, config)
+        .then((response) => {
+          console.log(response);
+          this.$router.go();
+        })
+        .catch((errors) => console.log(errors));
+      //this.$router.go();
+    },
     getUserData() {
       axios
-        .get('http://127.0.0.1:8000/api/user/properties', {
+        .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
@@ -861,24 +989,31 @@ export default {
     },
     getUsers() {
       axios
-        .get('http://127.0.0.1:8000/api/user/users/' + this.$route.params.pk, {
+        .get("http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk, {
           params: {},
           headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
+            Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
-          console.log(response), (this.user = response.data), (this.user_preferences = this.user.preferences);
+          console.log(response),
+            (this.user = response.data),
+            (this.user_preferences = this.user.preferences);
         })
         .catch((errors) => console.log(errors));
     },
     getUserImages() {
       axios
-        .get('http://127.0.0.1:8000/api/user/users/' + this.$route.params.pk + '/images', {
-          headers: {
-            Authorization: 'Token ' + localStorage.getItem('user-token'),
-          },
-        })
+        .get(
+          "http://127.0.0.1:8000/api/user/users/" +
+            this.$route.params.pk +
+            "/images",
+          {
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
         .then((response) => {
           this.images = response.data;
           console.log(this.images[0]);
@@ -896,8 +1031,9 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return 'http://127.0.0.1:8000' + pic;
-      else return 'https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png';
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      else
+        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
     //onSlideStart() {},
     //onSlideEnd() {},
@@ -928,7 +1064,7 @@ export default {
   object-fit: scale-down;
 }
 .card-text {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
   font-size: 20px;
 }
