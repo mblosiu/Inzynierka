@@ -29,11 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="profile privacy - search">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="black list - model, serializer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606044942004</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="black list - model, serializer">
+      <created>1606290624476</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1606290624476</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -392,46 +397,34 @@
     <MESSAGE value="fix" />
     <MESSAGE value="profile privacy - new fields set, get" />
     <MESSAGE value="profile privacy - search" />
-    <option name="LAST_COMMIT_MESSAGE" value="profile privacy - search" />
+    <MESSAGE value="black list - model, serializer" />
+    <option name="LAST_COMMIT_MESSAGE" value="black list - model, serializer" />
   </component>
   <component name="WindowStateProjectService">
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1605514451115">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605514451115" />
-    <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1606063264530">
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1606311808022">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606063264530" />
-    <state width="1899" height="281" key="GridCell.Tab.0.center" timestamp="1606063264530">
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606311808022" />
+    <state width="1899" height="281" key="GridCell.Tab.0.center" timestamp="1606311808022">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606063264530" />
-    <state width="1899" height="281" key="GridCell.Tab.0.left" timestamp="1606063264530">
+    <state width="1899" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606311808022" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left" timestamp="1606311808022">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606063264530" />
-    <state width="1899" height="281" key="GridCell.Tab.0.right" timestamp="1606063264530">
+    <state width="1899" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606311808022" />
+    <state width="1899" height="281" key="GridCell.Tab.0.right" timestamp="1606311808022">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606063264530" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1597650063992">
+    <state width="1899" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606311808022" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606316557488">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1597650063992" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606044947085">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1597585300360" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606044947085" />
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597649782822">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1597649782822" />
-    <state x="498" y="201" key="git4idea.merge.GitPullDialog" timestamp="1597480703131">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="498" y="201" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1597480703131" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606316557488" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597656229036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
