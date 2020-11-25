@@ -693,6 +693,12 @@ class BlackListView(APIView):
             stat = status.HTTP_201_CREATED
         return Response(response, status=stat)
 
+    def delete(self, request):
+        pk = request.data.get('pk', None)
+        blacklist = get_object_or_404(BlackList, blacklisting__pk=request.user.pk, blacklisted__pk=pk)
+        blacklist.delete()
+        return Response(status=status.HTTP_200_OK)
+
     def get(self, request):
         pk = request.data.get('pk', None)
         queryset = get_list_or_404(BlackList, blacklisting__pk=pk)
