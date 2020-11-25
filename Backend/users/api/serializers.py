@@ -1,7 +1,7 @@
 from datetime import datetime
 from rest_framework import serializers
 
-from ..models import User, Preferences, Settings, Image, Like
+from ..models import User, Preferences, Settings, Image, Like, BlackList
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
@@ -29,6 +29,15 @@ class UserSerializer(serializers.ModelSerializer):
                   'freckles', 'glasses', 'is_smoking', 'is_drinking_alcohol', 'eye_color', 'education', 'passion',
                   'favourite_place', 'status', 'orientation', 'preferences', 'settings'
                   ]
+
+
+class BlackListSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(read_only=True)
+    blacklisted = UserSerializer(read_only=True)
+
+    class Meta:
+        model = BlackList
+        fields = ['owner', 'blacklisted']
 
 
 class UserProfilePicSerializer(serializers.ModelSerializer):

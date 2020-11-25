@@ -149,6 +149,11 @@ def upload_to(instance, filename):
     return '{0}/{1}'.format(instance.user.username, filename)
 
 
+class BlackList(models.Model):
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    blacklisted = models.ForeignKey(User, related_name='black_listed', default=None, on_delete=models.CASCADE)
+
+
 class Image(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=upload_to, null=True, blank=True, default=None)
