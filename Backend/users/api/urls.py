@@ -3,7 +3,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, DeleteUserAccountView, \
     UserListView, PreferencesView, SettingsView, UserImage, ValidUsernameAndEmail, ImageByUserId, LikesView, \
-    BlackListView
+    BlackListView, FriendListView
 
 app_name = 'users'
 
@@ -16,10 +16,6 @@ get_users_are_liked = LikesView.as_view({'get': 'get_users_are_liked'})
 get_users_liked = LikesView.as_view({'get': 'get_users_liked'})
 get_user_are_liked = LikesView.as_view({'get': 'get_user_are_liked'})
 get_user_liked = LikesView.as_view({'get': 'get_user_liked'})
-
-#block_user = BlackListView.as_view({'post': 'block_user'})
-#unblock_user = BlackListView.as_view({'delete': 'unblock_user'})
-#get_blacklist = BlackListView.as_view({'get': 'get_blacklist'})
 
 urlpatterns = [
     path('register', RegistrationView.as_view(), name="register"),
@@ -42,7 +38,6 @@ urlpatterns = [
     path('get-users-liked/<int:pk>', get_users_liked, name='get_users_liked1'),
     path('get-user-are-liked', get_user_are_liked, name='are-liked2'),
     path('get-user-liked', get_user_liked, name='get_users_liked2'),
-    #path('block-user', block_user, name='block-user'),
-    #path('unblock-user', unblock_user, name='unblock-user'),
-    path('blacklist', BlackListView.as_view(), name='blacklist')
+    path('blacklist', BlackListView.as_view(), name='blacklist'),
+    #path('friendlist', FriendListView.as_view(), name='friendlist')
 ]
