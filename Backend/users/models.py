@@ -154,13 +154,15 @@ class FriendsList(models.Model):
                              on_delete=models.CASCADE)
     friend = models.ForeignKey(User, related_name='friend', default=None,
                                on_delete=models.CASCADE)
+    objects = models.Manager()
 
 
 class BlackList(models.Model):
     user = models.ForeignKey(User, related_name='blacklisting', default=None,
-                                     on_delete=models.CASCADE)
+                             on_delete=models.CASCADE)
     blacklisted = models.ForeignKey(User, related_name='blacklisted', default=None,
                                     on_delete=models.CASCADE)
+    objects = models.Manager()
 
 
 class Image(models.Model):
@@ -169,13 +171,19 @@ class Image(models.Model):
     title = models.CharField(max_length=30, null=True, blank=True, default=None)
     alt = models.CharField(max_length=30, null=True, blank=True, default=None)
 
+    objects = models.Manager()
+
 
 class Like(models.Model):
     value = models.CharField(max_length=30, null=True, blank=True, default=None)
     liked_by = models.ForeignKey(User, related_name='liked_by', default=None, on_delete=models.CASCADE)
     liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
 
+    objects = models.Manager()
+
 
 class Hobby(models.Model):
     name = models.CharField(max_length=30, null=True, blank=True, default=None)
     user = models.ManyToManyField(User)
+
+    objects = models.Manager()

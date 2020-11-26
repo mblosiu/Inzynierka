@@ -39,5 +39,5 @@ urlpatterns = [
     path('get-user-are-liked', get_user_are_liked, name='are-liked2'),
     path('get-user-liked', get_user_liked, name='get_users_liked2'),
     path('blacklist', BlackListView.as_view(), name='blacklist'),
-    #path('friendlist', FriendListView.as_view(), name='friendlist')
+    path('friendlist', FriendListView.as_view(), name='friendlist')
 ]

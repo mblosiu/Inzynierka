@@ -5,12 +5,13 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_list_or_404
 from django.db.models import Lookup
 from django.db.models import Field
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer
-from ..models import User, Preferences, Settings, Image, Like, BlackList, FriendsList
+from ..models import User, Image, Like, BlackList, FriendsList
 
 
 @Field.register_lookup
@@ -70,7 +71,7 @@ class UserProfileView(APIView):
     def get(request):
         try:
             account = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserSerializer(account)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -79,7 +80,7 @@ class UserProfileView(APIView):
     def patch(request):
         try:
             account = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -220,11 +221,11 @@ class PreferencesView(APIView):
     def patch(request):
         try:
             account = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         try:
             preferences = request.user.preferences
-        except Preferences.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -312,7 +313,7 @@ class PreferencesView(APIView):
     def get(request):
         try:
             preferences = request.user.preferences
-        except Preferences.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserPreferencesSerializer(preferences)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -324,11 +325,11 @@ class SettingsView(APIView):
     def patch(request):
         try:
             account = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         try:
             settings = request.user.settings
-        except Settings.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -373,7 +374,7 @@ class SettingsView(APIView):
     def get(request):
         try:
             settings = request.user.settings
-        except Settings.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserSettingsSerializer(settings)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -385,7 +386,7 @@ class UserProfilePicOLD(APIView):
     def get(request):
         try:
             account = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserProfilePicSerializer(account)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -394,7 +395,7 @@ class UserProfilePicOLD(APIView):
     def patch(request):
         try:
             account = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -418,7 +419,7 @@ class UserProfilePicOLD(APIView):
         return Response(response, status=stat)
 
     @staticmethod
-    def delete(request):
+    def delete():
         # TODO: DELETE PHOTO
         return Response(status=status.HTTP_404_NOT_FOUND)
     # USER LIST - SEARCHER
@@ -430,7 +431,7 @@ class UserProfilePic(APIView):
     def patch(request):
         try:
             account = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -454,7 +455,7 @@ class UserProfilePic(APIView):
     def get(request):
         try:
             user = request.user
-        except Settings.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserProfilePicSerializer(user.profile_picture)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -466,7 +467,7 @@ class UserImage(APIView):
     def get(request):
         try:
             user = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         images = Image.objects.filter(user__pk=user.pk)
@@ -479,7 +480,7 @@ class UserImage(APIView):
     def put(request):
         try:
             user = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
@@ -510,7 +511,7 @@ class UserImage(APIView):
     def delete(request):
         try:
             user = request.user
-        except User.DoesNotExist:
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         pk = request.data.get('pk', None)
@@ -600,7 +601,8 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
 
 @permission_classes([])
 class ValidUsernameAndEmail(APIView):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         email = request.data.get('email', None)
         username = request.data.get('username', None)
 
@@ -625,7 +627,8 @@ class ValidUsernameAndEmail(APIView):
 @permission_classes([IsAuthenticated])
 class LikesView(viewsets.ModelViewSet):
     # zostałeś polubiony
-    def create_like(self, request):
+    @staticmethod
+    def create_like(request):
         value = request.data.get('value', None)
         pk = request.data.get('pk', None)
 
@@ -646,7 +649,8 @@ class LikesView(viewsets.ModelViewSet):
             response["detail"] = "failed"
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete_like(self, request):
+    @staticmethod
+    def delete_like(request):
         pk = request.data.get('pk', None)
 
         if get_object_or_404(Like, pk=pk).delete():
@@ -655,26 +659,30 @@ class LikesView(viewsets.ModelViewSet):
             return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
 
     # kogo polubił user po pk - userprofile
-    def get_users_are_liked(self, request, pk=None):
+    @staticmethod
+    def get_users_are_liked(pk=None):
         queryset = Like.objects.filter(liked_by__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # lajki użytkownika po pk - userprofile
-    def get_users_liked(self, request, pk=None):
+    @staticmethod
+    def get_users_liked(pk=None):
         queryset = Like.objects.filter(liked__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # kogo polubił user po pk - mainuser
-    def get_user_are_liked(self, request):
+    @staticmethod
+    def get_user_are_liked(request):
         pk = request.user.pk
         queryset = Like.objects.filter(liked_by__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # lajki użytkownika po pk - mainuser
-    def get_user_liked(self, request):
+    @staticmethod
+    def get_user_liked(request):
         pk = request.user.pk
         queryset = Like.objects.filter(liked__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
@@ -683,7 +691,8 @@ class LikesView(viewsets.ModelViewSet):
 
 @permission_classes([IsAuthenticated])
 class BlackListView(APIView):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         response = {}
         pk = request.data.get('pk', None)
 
@@ -704,24 +713,28 @@ class BlackListView(APIView):
             stat = status.HTTP_201_CREATED
         return Response(response, status=stat)
 
-    def delete(self, request):
+    @staticmethod
+    def delete(request):
         pk = request.data.get('pk', None)
         blacklist = get_object_or_404(BlackList, user__pk=request.user.pk, blacklisted__pk=pk)
-        blacklist.delete()
-        return Response(status=status.HTTP_200_OK)
 
-    def get(self, request):
+        if blacklist.delete():
+            return Response({"detail": "success"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+
+    @staticmethod
+    def get(request):
         pk = request.data.get('pk', None)
         queryset = get_list_or_404(BlackList, user__pk=pk)
         serializer = BlackListSerializer(queryset, many=True)
-        response = {"detail": "success"}
-        return Response(response, status=status.HTTP_200_OK)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])
 class FriendListView(APIView):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         response = {}
         pk = request.data.get('pk', None)
 
@@ -742,14 +755,17 @@ class FriendListView(APIView):
             stat = status.HTTP_201_CREATED
         return Response(response, status=stat)
 
-    def delete(self, request):
+    @staticmethod
+    def delete(request):
         pk = request.data.get('pk', None)
         friendlist = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk)
-        friendlist.delete()
-        response = {"detail": "success"}
-        return Response(response, status=status.HTTP_200_OK)
+        if friendlist.delete():
+            return Response({"detail": "success"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         pk = request.data.get('pk', None)
         queryset = get_list_or_404(FriendsList, user__pk=pk)
         serializer = FriendListSerializer(queryset, many=True)

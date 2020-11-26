@@ -31,10 +31,6 @@
   <component name="ChangeListManager">
     <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="friend list, search fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
   </component>
   <component name="RunManager" selected="Python.views">
     <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -382,7 +378,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606381621236</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="friend list, search fix">
+      <created>1606383378260</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1606383378260</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -455,9 +458,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606316723769" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606381633796">
+    <state x="922" y="249" key="SettingsEditor" timestamp="1606392058039">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606381633796" />
+    <state x="922" y="249" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606392058039" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606383386385">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606383386385" />
   </component>
 </project>
