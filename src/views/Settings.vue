@@ -956,6 +956,28 @@ export default {
     showMsg2() {
       this.dismissCountDown2 = this.dismissSecs2;
     },
+    getUserBlacklist() {
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/user/blacklist" /*+
+            this.$route.params.pk*/,
+          {
+            params: {},
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response),
+            (this.user_blacklist = response.data),
+            console.log(this.user_blacklist);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    unblockUser(pk){
+
+    },
     getUserData() {
       axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -1096,6 +1118,7 @@ export default {
     this.getUserData();
     this.getUserPreferences();
     this.getUserSettings();
+    this.getUserBlacklist();
   },
 };
 </script>

@@ -1,6 +1,9 @@
 <template>
   <div id="userprofile">
-    <!--polubiony: {{ isUserLiked() }}-->
+    <!--polubiony: {{ isUserLiked() }}
+    user.data - user przeglądający
+    user - user podglądany
+    -->
     <br />
     <b-container class="bv-example-row" fluid>
       <b-row>
@@ -243,7 +246,7 @@
                         title="Polub"
                       >
                         <svg
-                          color="pink"
+                          color="lightblue"
                           width="3em"
                           height="3em"
                           viewBox="0 0 16 16"
@@ -286,13 +289,14 @@
 
                     <button
                       type="button"
+                      v-on:click="blockUser()"
                       class="btn btn-secondary"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="Zablokuj użytkownika"
                     >
                       <svg
-                        color="grey"
+                        color="lightblue"
                         width="3em"
                         height="3em"
                         viewBox="0 0 16 16"
@@ -871,16 +875,15 @@ export default {
       user_preferences: {},
       images: {},
       like: "like",
-      //heartcolor: "grey",
       liked_user: {},
       user_likes: [],
       liked: false,
+      blocked: false,
+      user_blacklist: [],
     };
   },
   methods: {
     likeUser() {
-      //this.heartcolor = "red";
-      //this.liked = true;
       const config = {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -898,12 +901,9 @@ export default {
           this.$router.go();
         })
         .catch((errors) => console.log(errors));
-      //this.$router.go();
     },
 
     dislikeUser() {
-      //this.heartcolor = "pink";
-      //like = false;
       const config = {};
       axios
         .delete("http://127.0.0.1:8000/api/user/delete-like", {
@@ -961,19 +961,42 @@ export default {
     blockUser() {
       const config = {
         headers: {
-          Authorization: 'Token ' + localStorage.getItem('user-token'),
+          Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
 
       axios
-        .post('http://127.0.0.1:8000/api/user/create-like', { value: 'block', pk: this.$route.params.pk }, config)
+        .post(
+          "http://127.0.0.1:8000/api/user/blacklist",
+          { pk: this.$route.params.pk },
+          config
+        )
         .then((response) => {
           console.log(response);
           this.$router.go();
         })
         .catch((errors) => console.log(errors));
-      //this.$router.go();
     },
+    getUserBlacklist() {
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/user/blacklist" /*+
+            this.$route.params.pk*/,
+          {
+            params: {},
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response),
+            (this.user_blacklist = response.data),
+            console.log(this.user_blacklist);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    isUserBlocked() {},
     getUserData() {
       axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -1044,6 +1067,7 @@ export default {
     this.getUserImages();
     this.getUserData();
     this.getUserLikes();
+    this.getUserBlacklist();
   },
   mounted() {
     //$(".carousel").carousel();
