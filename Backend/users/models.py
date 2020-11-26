@@ -149,8 +149,15 @@ def upload_to(instance, filename):
     return '{0}/{1}'.format(instance.user.username, filename)
 
 
+class FriendsList(models.Model):
+    user = models.ForeignKey(User, related_name='user', default=None,
+                             on_delete=models.CASCADE)
+    friend = models.ForeignKey(User, related_name='friend', default=None,
+                               on_delete=models.CASCADE)
+
+
 class BlackList(models.Model):
-    blacklisting = models.ForeignKey(User, related_name='blacklisting', default=None,
+    user = models.ForeignKey(User, related_name='blacklisting', default=None,
                                      on_delete=models.CASCADE)
     blacklisted = models.ForeignKey(User, related_name='blacklisted', default=None,
                                     on_delete=models.CASCADE)

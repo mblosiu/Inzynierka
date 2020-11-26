@@ -1,16 +1,27 @@
-from rest_framework import status
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404
-from django.shortcuts import get_list_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from django.shortcuts import get_list_or_404
+from django.db.models import Lookup
+from django.db.models import Field
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
-    UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer
-from ..models import User, Preferences, Settings, Image, Like, BlackList
+    UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer
+from ..models import User, Preferences, Settings, Image, Like, BlackList, FriendsList
+
+
+@Field.register_lookup
+class NotEqual(Lookup):
+    lookup_name = 'ne'
+
+    def as_sql(self, compiler, connection):
+        lhs, lhs_params = self.process_lhs(compiler, connection)
+        rhs, rhs_params = self.process_rhs(compiler, connection)
+        params = lhs_params + rhs_params
+        return '%s <> %s' % (lhs, rhs), params
 
 
 @permission_classes([])
@@ -536,6 +547,7 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         queryset = self.filter_queryset(self.get_queryset())
         queryset = queryset.exclude(pk=request.user.pk)
         queryset = queryset.exclude(settings__search_privacy='nobody')
+        queryset = queryset.exclude(settings__search_privacy='diffrent_sex', sex__ne=request.user.sex)
 
         name = request.query_params.get('name', None)
         surname = request.query_params.get('surname', None)
@@ -588,8 +600,7 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
 
 @permission_classes([])
 class ValidUsernameAndEmail(APIView):
-    @staticmethod
-    def post(request):
+    def post(self, request):
         email = request.data.get('email', None)
         username = request.data.get('username', None)
 
@@ -678,7 +689,7 @@ class BlackListView(APIView):
 
         if int(pk) == int(request.user.pk):
             return Response({"detail": "can't block yourself"}, status=status.HTTP_400_BAD_REQUEST)
-        blacklist = BlackList.objects.filter(blacklisting=request.user.pk, blacklisted=pk)
+        blacklist = BlackList.objects.filter(user=request.user.pk, blacklisted=pk)
 
         if blacklist.count() > 0:
             response["detail"] = "already blocked"
@@ -686,7 +697,7 @@ class BlackListView(APIView):
         else:
             response["detail"] = "user blocked"
             blacklist = BlackList(
-                blacklisting=request.user,
+                user=request.user,
                 blacklisted=get_object_or_404(User, pk=pk)
             )
             blacklist.save()
@@ -695,12 +706,51 @@ class BlackListView(APIView):
 
     def delete(self, request):
         pk = request.data.get('pk', None)
-        blacklist = get_object_or_404(BlackList, blacklisting__pk=request.user.pk, blacklisted__pk=pk)
+        blacklist = get_object_or_404(BlackList, user__pk=request.user.pk, blacklisted__pk=pk)
         blacklist.delete()
         return Response(status=status.HTTP_200_OK)
 
     def get(self, request):
         pk = request.data.get('pk', None)
-        queryset = get_list_or_404(BlackList, blacklisting__pk=pk)
+        queryset = get_list_or_404(BlackList, user__pk=pk)
         serializer = BlackListSerializer(queryset, many=True)
+        response = {"detail": "success"}
+        return Response(response, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class FriendListView(APIView):
+    def post(self, request):
+        response = {}
+        pk = request.data.get('pk', None)
+
+        if int(pk) == int(request.user.pk):
+            return Response({"detail": "can't add to contacts yourself"}, status=status.HTTP_400_BAD_REQUEST)
+        friendlist = FriendsList.objects.filter(user=request.user.pk, friend=pk)
+
+        if friendlist.count() > 0:
+            response["detail"] = "already on friendlist"
+            stat = status.HTTP_400_BAD_REQUEST
+        else:
+            response["detail"] = "user added to friendlist"
+            friendlist = FriendsList(
+                user=request.user,
+                friend=get_object_or_404(User, pk=pk)
+            )
+            friendlist.save()
+            stat = status.HTTP_201_CREATED
+        return Response(response, status=stat)
+
+    def delete(self, request):
+        pk = request.data.get('pk', None)
+        friendlist = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk)
+        friendlist.delete()
+        response = {"detail": "success"}
+        return Response(response, status=status.HTTP_200_OK)
+
+    def get(self, request):
+        pk = request.data.get('pk', None)
+        queryset = get_list_or_404(FriendsList, user__pk=pk)
+        serializer = FriendListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

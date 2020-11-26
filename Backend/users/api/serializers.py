@@ -32,12 +32,21 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BlackListSerializer(serializers.ModelSerializer):
-    owner = UserSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
     blacklisted = UserSerializer(read_only=True)
 
     class Meta:
         model = BlackList
-        fields = ['pk', 'blacklisting', 'blacklisted']
+        fields = ['pk', 'user', 'blacklisted']
+
+
+class FriendListSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    friend = UserSerializer(read_only=True)
+
+    class Meta:
+        model = BlackList
+        fields = ['pk', 'user', 'friend']
 
 
 class UserProfilePicSerializer(serializers.ModelSerializer):
