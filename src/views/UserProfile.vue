@@ -972,24 +972,27 @@ export default {
           config
         )
         .then((response) => {
+          console.log("blocked");
           console.log(response);
           this.$router.go();
         })
         .catch((errors) => console.log(errors));
     },
     getUserBlacklist() {
+      console.log("getblacklist")
       axios
         .get(
           "http://127.0.0.1:8000/api/user/blacklist" /*+
-            this.$route.params.pk*/,
+            this.$route.params.pk */,
           {
-            params: {},
+            params: {pk: user_data.pk},
             headers: {
               Authorization: "Token " + localStorage.getItem("user-token"),
             },
           }
         )
         .then((response) => {
+          console.log("userblacklist:")
           console.log(response),
             (this.user_blacklist = response.data),
             console.log(this.user_blacklist);
@@ -1058,9 +1061,7 @@ export default {
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
-    //onSlideStart() {},
-    //onSlideEnd() {},
-    //slide() {},
+
   },
   created() {
     this.getUsers();
