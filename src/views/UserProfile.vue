@@ -27,7 +27,7 @@
             </div>
             <p>
               Początek rozmowy między {{ user_data.username }} a
-              {{ user.username }}
+              {{ user.username }} 
             </p>
           </b-sidebar>
         </b-col>
@@ -879,10 +879,57 @@ export default {
       user_likes: [],
       liked: false,
       blocked: false,
-      user_blacklist: [],
+      user_blacklist: []
     };
   },
   methods: {
+    getUserData() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/properties", {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          //console.log("current_user_data:")
+          console.log(response), (this.user_data = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    getUsers() {
+      axios
+        .get("http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk, {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response),
+            (this.user = response.data),
+            (this.user_preferences = this.user.preferences);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    getUserImages() {
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/user/users/" +
+            this.$route.params.pk +
+            "/images",
+          {
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
+        .then((response) => {
+          this.images = response.data;
+          console.log(this.images[0]);
+        })
+        .catch((errors) => console.log(errors));
+    },
     likeUser() {
       const config = {
         headers: {
@@ -982,10 +1029,10 @@ export default {
       console.log("getblacklist")
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/blacklist" /*+
-            this.$route.params.pk */,
+          "http://127.0.0.1:8000/api/user/blacklist",
+          {pk: this.user_data.pk},
           {
-            params: {pk: user_data.pk},
+            params: {/*pk: this.user_data.pk*/},
             headers: {
               Authorization: "Token " + localStorage.getItem("user-token"),
             },
@@ -999,53 +1046,16 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    isUserBlocked() {},
-    getUserData() {
-      axios
-        .get("http://127.0.0.1:8000/api/user/properties", {
-          params: {},
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
-        .then((response) => {
-          console.log(response), (this.user_data = response.data);
-        })
-        .catch((errors) => console.log(errors));
+    isUserBlocked() {
+      var blocked = false;
+      for (var i = 0; i < this.user_blacklist.length; i++) {
+        if (this.user_blacklist[i].pk == this.$route.params.pk) {
+          return true;
+        }
+      }
+      return false;
     },
-    getUsers() {
-      axios
-        .get("http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk, {
-          params: {},
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
-        .then((response) => {
-          console.log(response),
-            (this.user = response.data),
-            (this.user_preferences = this.user.preferences);
-        })
-        .catch((errors) => console.log(errors));
-    },
-    getUserImages() {
-      axios
-        .get(
-          "http://127.0.0.1:8000/api/user/users/" +
-            this.$route.params.pk +
-            "/images",
-          {
-            headers: {
-              Authorization: "Token " + localStorage.getItem("user-token"),
-            },
-          }
-        )
-        .then((response) => {
-          this.images = response.data;
-          console.log(this.images[0]);
-        })
-        .catch((errors) => console.log(errors));
-    },
+    
     getAge(dateString) {
       var today = new Date();
       var birthDate = new Date(dateString);
