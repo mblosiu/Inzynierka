@@ -679,7 +679,7 @@ class BlackListView(APIView):
 
     @staticmethod
     def get(request):
-        pk = request.data.get('pk', None)
+        pk = request.query_params.get('pk', None)
         queryset = get_list_or_404(BlackList, user__pk=pk)
         serializer = BlackListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
