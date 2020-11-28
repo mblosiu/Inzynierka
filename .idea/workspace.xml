@@ -29,10 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="optymalizacja">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -394,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606410840965</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="fix">
+      <created>1606552985558</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1606552985558</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -437,7 +443,6 @@
     <MESSAGE value="likes - delete fix" />
     <MESSAGE value="user age filter" />
     <MESSAGE value="user liked pk" />
-    <MESSAGE value="fix" />
     <MESSAGE value="profile privacy - new fields set, get" />
     <MESSAGE value="profile privacy - search" />
     <MESSAGE value="black list - model, serializer" />
@@ -445,7 +450,8 @@
     <MESSAGE value="black list - delete" />
     <MESSAGE value="friend list, search fix" />
     <MESSAGE value="optymalizacja" />
-    <option name="LAST_COMMIT_MESSAGE" value="optymalizacja" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="698" y="344" key="#Notifications" timestamp="1606471800972">
@@ -476,9 +482,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="922" y="249" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606392058039" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606410850764">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606552992066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606410850764" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606552992066" />
   </component>
 </project>

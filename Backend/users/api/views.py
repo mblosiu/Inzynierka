@@ -66,7 +66,6 @@ class DeleteUserAccountView(APIView):
 
 @permission_classes([IsAuthenticated])
 class UserProfileView(APIView):
-
     @staticmethod
     def get(request):
         try:
@@ -381,51 +380,6 @@ class SettingsView(APIView):
 
 
 @permission_classes([IsAuthenticated])
-class UserProfilePicOLD(APIView):
-    @staticmethod
-    def get(request):
-        try:
-            account = request.user
-        except ObjectDoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = UserProfilePicSerializer(account)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @staticmethod
-    def patch(request):
-        try:
-            account = request.user
-        except ObjectDoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-        response = {}
-
-        file = request.data.get('profile_picture', None)
-
-        if not file:
-            response["detail"] = "request must contain user data"
-            stat = status.HTTP_400_BAD_REQUEST
-        else:
-            main, sub = file.content_type.split('/')
-            if not (sub in ['jpeg', 'jpg', 'png']):
-                response["detail"] = "wrong data type"
-                stat = status.HTTP_400_BAD_REQUEST
-            else:
-                account.profile_picture = file
-                response["detail"] = "photo added successfully"
-                account.save()
-                stat = status.HTTP_200_OK
-
-        return Response(response, status=stat)
-
-    @staticmethod
-    def delete():
-        # TODO: DELETE PHOTO
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    # USER LIST - SEARCHER
-
-
-@permission_classes([IsAuthenticated])
 class UserProfilePic(APIView):
     @staticmethod
     def patch(request):
@@ -660,14 +614,14 @@ class LikesView(viewsets.ModelViewSet):
 
     # kogo polubił user po pk - userprofile
     @staticmethod
-    def get_users_are_liked(pk=None):
+    def get_users_are_liked(request, pk=None):
         queryset = Like.objects.filter(liked_by__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # lajki użytkownika po pk - userprofile
     @staticmethod
-    def get_users_liked(pk=None):
+    def get_users_liked(request, pk=None):
         queryset = Like.objects.filter(liked__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
