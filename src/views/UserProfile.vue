@@ -27,7 +27,7 @@
             </div>
             <p>
               Początek rozmowy między {{ user_data.username }} a
-              {{ user.username }} 
+              {{ user.username }}
             </p>
           </b-sidebar>
         </b-col>
@@ -879,7 +879,7 @@ export default {
       user_likes: [],
       liked: false,
       blocked: false,
-      user_blacklist: []
+      user_blacklist: [],
     };
   },
   methods: {
@@ -1021,25 +1021,32 @@ export default {
         .then((response) => {
           console.log("blocked");
           console.log(response);
-          this.$router.go();
+          this.$router.go(-1);
         })
         .catch((errors) => console.log(errors));
     },
-    getUserBlacklist() {
-      console.log("getblacklist")
+    /*getUserBlacklist() {
+      const config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      console.log("getblacklist");
+      console.log(this.user_data.pk);
       axios
         .get(
           "http://127.0.0.1:8000/api/user/blacklist",
-          {pk: this.user_data.pk},
+
           {
-            params: {/*pk: this.user_data.pk*/},
+            params: { pk: this.user_data.pk },
             headers: {
               Authorization: "Token " + localStorage.getItem("user-token"),
             },
           }
         )
         .then((response) => {
-          console.log("userblacklist:")
+          console.log("userblacklist:");
+          
           console.log(response),
             (this.user_blacklist = response.data),
             console.log(this.user_blacklist);
@@ -1054,8 +1061,8 @@ export default {
         }
       }
       return false;
-    },
-    
+    },*/
+
     getAge(dateString) {
       var today = new Date();
       var birthDate = new Date(dateString);
@@ -1071,7 +1078,6 @@ export default {
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
-
   },
   created() {
     this.getUsers();
