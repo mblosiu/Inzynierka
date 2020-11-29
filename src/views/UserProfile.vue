@@ -287,6 +287,7 @@
                       </button>
                     </div>
 
+                    <div v-if="isUserLiked() == false">
                     <button
                       type="button"
                       v-on:click="blockUser()"
@@ -313,10 +314,41 @@
                         />
                       </svg>
                     </button>
+                    </div>
+                    <div v-else>
+                      <button
+                      type="button"                     
+                      class="btn btn-secondary"
+                      @click="toast('b-toaster-bottom-right', 'danger')"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Nie możesz zablokować polubionego użytkownika."
+                    >
+                      <svg
+                        color="gray"
+                        width="3em"
+                        height="3em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-lock-fill"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
+                        />
+                      </svg>
+                    </button>
+                    
+                    </div>
                   </div>
                 </div>
               </b-card-text>
             </b-card>
+
           </div>
         </b-col>
         <b-col cols="5">
@@ -968,7 +1000,6 @@ export default {
         .catch((errors) => console.log(errors));
     },
     getUserLikes() {
-      //console.log(this.user_data['pk']);
       axios
         .get(
           "http://127.0.0.1:8000/api/user/get-users-are-liked/" +
@@ -1025,43 +1056,6 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    /*getUserBlacklist() {
-      const config = {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("user-token"),
-        },
-      };
-      console.log("getblacklist");
-      console.log(this.user_data.pk);
-      axios
-        .get(
-          "http://127.0.0.1:8000/api/user/blacklist",
-
-          {
-            params: { pk: this.user_data.pk },
-            headers: {
-              Authorization: "Token " + localStorage.getItem("user-token"),
-            },
-          }
-        )
-        .then((response) => {
-          console.log("userblacklist:");
-          
-          console.log(response),
-            (this.user_blacklist = response.data),
-            console.log(this.user_blacklist);
-        })
-        .catch((errors) => console.log(errors));
-    },
-    isUserBlocked() {
-      var blocked = false;
-      for (var i = 0; i < this.user_blacklist.length; i++) {
-        if (this.user_blacklist[i].pk == this.$route.params.pk) {
-          return true;
-        }
-      }
-      return false;
-    },*/
 
     getAge(dateString) {
       var today = new Date();
@@ -1073,6 +1067,14 @@ export default {
       }
       return age;
     },
+    toast(toaster, variant=null) {
+        this.$bvToast.toast(`Nie możesz zablokować polubionego użytkownika.`, {
+          title: `Uwaga!`,
+          toaster: toaster,
+          solid: true,
+          variant: variant
+        })
+      },
     getUrl(pic) {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
       else

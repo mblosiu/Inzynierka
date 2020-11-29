@@ -582,18 +582,6 @@
                   <ul class="list-group-item">
                     <b-row>
                       <b-col cols="6">
-                        <!--<span
-                        >Otrzymywanie wiadomości:
-                        </span
-                      >
-                      <select v-model="msg_option">
-                        <option
-                          v-for="msgoption in msgoptions"
-                          v-bind:value="msgoption.value"
-                        >
-                          {{ msgoption.text }}
-                        </option>
-                      </select>-->
                         <label for="msg_option" class="grey-text"
                           >Otrzymywanie wiadomości:</label
                         >
@@ -620,18 +608,6 @@
                   <ul class="list-group-item">
                     <b-row>
                       <b-col cols="6">
-                        <!--<span
-                        >Kto może mnie wyszukać:
-                        </span
-                      >
-                      <select v-model="search_option">
-                        <option
-                          v-for="searchoption in searchoptions"
-                          v-bind:value="searchoption.value"
-                        >
-                          {{ searchoption.text }}
-                        </option>
-                      </select>-->
                         <label for="search_option" class="grey-text"
                           >Kto może mnie wyszukać:</label
                         >
@@ -702,10 +678,47 @@
                               id="modal-blacklist"
                               scrollable
                               title="Czarna lista"
+                              hide-footer
                             >
-                              <p class="my-4" v-for="i in 20" :key="i">
-                                Niemiła osoba nr {{ i }}
-                              </p>
+                              <h5> Zablokowani: {{blacklisted_users.length}}</h5>
+                              <b-list-group style="max-width: 470px">
+                                <div
+                                  class="my-3"
+                                  v-for="blacklisted_user in blacklisted_users"
+                                  v-bind:key="blacklisted_user.pk"
+                                >
+                                  <b-list-group-item
+                                    class="d-flex align-items-center"
+                                  >
+                                    <b-avatar
+                                      rounded
+                                      :src="
+                                        getUrl(
+                                          blacklisted_user.blacklisted
+                                            .profile_picture
+                                        )
+                                      "
+                                      class="mr-3"
+                                      size="4rem"
+                                    ></b-avatar>
+                                    <span class="mr-auto"
+                                      ><strong>{{
+                                        blacklisted_user.blacklisted.username
+                                      }}</strong>
+                                    </span>
+                                    <b-button
+                                      squared
+                                      variant="outline-success"
+                                      @click="
+                                        unblockUser(
+                                          blacklisted_user.blacklisted.pk
+                                        )
+                                      "
+                                      >Odblokuj</b-button
+                                    >
+                                  </b-list-group-item>
+                                </div>
+                              </b-list-group>
                             </b-modal>
                           </b-col>
                           <b-col cols="4"></b-col>
@@ -826,13 +839,7 @@ export default {
       new_likes: true,
       new_messages: true,
       new_comments: true,
-      user_blacklist: [],
-      /*commptions: [
-        { text: "od wszystkich", value: "od wszystkich" },
-        { text: "od płci przeciwnej", value: "od płci przeciwnej" },
-        { text: "od znajomych", value: "od znajomych" },
-        { text: "od nikogo", value: "od nikogo" },
-      ],*/
+      blacklisted_users: [],
 
       sex_options: [
         { value: null, text: "" },
@@ -957,21 +964,14 @@ export default {
     showMsg2() {
       this.dismissCountDown2 = this.dismissSecs2;
     },
-    async getUserBlacklist() {
-      const user_pk = await this.user_data.pk;
-      const config = {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("user-token"),
-        },
-      };
+    getUserBlacklist() {
       console.log("getblacklist");
-      console.log(this.user_data.pk);
       axios
         .get(
           "http://127.0.0.1:8000/api/user/blacklist",
 
           {
-            params: { pk: user_pk/*this.user_data.pk*/ },
+            params: { pk: this.user_data.pk },
             headers: {
               Authorization: "Token " + localStorage.getItem("user-token"),
             },
@@ -980,13 +980,34 @@ export default {
         .then((response) => {
           console.log("userblacklist:");
           console.log(response),
-            (this.user_blacklist = response.data),
-            console.log(this.user_blacklist);
+            (this.blacklisted_users =
+              response.data); /*,
+            console.log(this.blacklisted_users);*/
         })
         .catch((errors) => console.log(errors));
     },
-    unblockUser(pk){
+    unblockUser(pk) {
+      console.log("unblockUser");
+      console.log(pk);
+      axios
+        .delete(
+          "http://127.0.0.1:8000/api/user/blacklist",
 
+          {
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+            data: {
+              pk: pk,
+            },
+          }
+        )
+        .then((response) => {
+          console.log("unblocked:");
+          console.log(response);
+        })
+        .catch((errors) => console.log(errors));
+        this.$router.go();
     },
     getUserData() {
       axios
@@ -1121,6 +1142,11 @@ export default {
           console.log(errors);
         });
     },
+    getUrl(pic) {
+      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      else
+        return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+    },
     getUserSettings() {},
     editUserSetting() {},
   },
@@ -1128,6 +1154,9 @@ export default {
     this.getUserData();
     this.getUserPreferences();
     this.getUserSettings();
+    this.getUserBlacklist();
+  },
+  computed() {
     this.getUserBlacklist();
   },
 };
