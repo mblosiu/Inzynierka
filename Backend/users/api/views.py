@@ -487,7 +487,6 @@ class ImageByUserId(viewsets.ReadOnlyModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
 # USER LIST - SEARCHER
 @permission_classes([IsAuthenticated])
 class UserListView(viewsets.ReadOnlyModelViewSet):
@@ -501,8 +500,16 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         queryset = queryset.exclude(pk=request.user.pk)
+        # jeżeli user ma zablokowaną widoczność
         queryset = queryset.exclude(settings__search_privacy='nobody')
+        # jeżeli user chce być wyświetlany tylko przez inną płeć
         queryset = queryset.exclude(settings__search_privacy='diffrent_sex', sex__ne=request.user.sex)
+        # jeżeli user jest na mojej black liście to go nie widzę
+        blacklist = BlackList.objects.filter(user__pk=request.user.pk).values_list("blacklisted", flat=True)
+        queryset = queryset.exclude(pk__in=blacklist)
+        # jeżeli user mnie zablokował to ja go nie widzę
+        blacklist = BlackList.objects.filter(blacklisted__pk=request.user.pk).values_list("user", flat=True)
+        queryset = queryset.exclude(pk__in=blacklist)
 
         name = request.query_params.get('name', None)
         surname = request.query_params.get('surname', None)
