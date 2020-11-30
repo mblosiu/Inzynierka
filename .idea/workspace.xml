@@ -29,7 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="add query_params for blacklist">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="list filter - black list">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -413,7 +413,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606561196751</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="list filter - black list">
+      <created>1606658980711</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1606658980711</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -441,7 +448,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UserProfilePic - bad datatype handle" />
     <MESSAGE value="serialization for new fields" />
     <MESSAGE value="nothing special" />
     <MESSAGE value="user gallery - Image model, serialization, view, url" />
@@ -466,7 +472,8 @@
     <MESSAGE value="fix" />
     <MESSAGE value="fix2" />
     <MESSAGE value="add query_params for blacklist" />
-    <option name="LAST_COMMIT_MESSAGE" value="add query_params for blacklist" />
+    <MESSAGE value="list filter - black list" />
+    <option name="LAST_COMMIT_MESSAGE" value="list filter - black list" />
   </component>
   <component name="WindowStateProjectService">
     <state x="698" y="344" key="#Notifications" timestamp="1606471800972">
@@ -497,9 +504,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="922" y="249" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606392058039" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606561203957">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606658983883">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606561203957" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606658983883" />
   </component>
 </project>
