@@ -149,6 +149,22 @@ def upload_to(instance, filename):
     return '{0}/{1}'.format(instance.user.username, filename)
 
 
+class Image(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=upload_to, null=True, blank=True, default=None)
+    title = models.CharField(max_length=30, null=True, blank=True, default=None)
+    alt = models.CharField(max_length=30, null=True, blank=True, default=None)
+
+    objects = models.Manager()
+
+
+class Hobby(models.Model):
+    name = models.CharField(max_length=30, null=True, blank=True, default=None)
+    user = models.ManyToManyField(User)
+
+    objects = models.Manager()
+
+
 class FriendsList(models.Model):
     user = models.ForeignKey(User, related_name='user', default=None,
                              on_delete=models.CASCADE)
@@ -165,25 +181,9 @@ class BlackList(models.Model):
     objects = models.Manager()
 
 
-class Image(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=upload_to, null=True, blank=True, default=None)
-    title = models.CharField(max_length=30, null=True, blank=True, default=None)
-    alt = models.CharField(max_length=30, null=True, blank=True, default=None)
-
-    objects = models.Manager()
-
-
 class Like(models.Model):
     value = models.CharField(max_length=30, null=True, blank=True, default=None)
     liked_by = models.ForeignKey(User, related_name='liked_by', default=None, on_delete=models.CASCADE)
     liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
-
-    objects = models.Manager()
-
-
-class Hobby(models.Model):
-    name = models.CharField(max_length=30, null=True, blank=True, default=None)
-    user = models.ManyToManyField(User)
 
     objects = models.Manager()

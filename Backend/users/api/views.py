@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_list_or_404
 from django.db.models import Lookup
 from django.db.models import Field
+from django.db.models import Q
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer
 from ..models import User, Image, Like, BlackList, FriendsList
@@ -85,22 +86,22 @@ class UserProfileView(APIView):
         response = {}
 
         email = request.data.get('email', None)
-        name = request.data.get('name', '')
-        surname = request.data.get('surname', '')
-        location = request.data.get('location', '')
-        sex = request.data.get('sex', '')
-        hair_color = request.data.get('hair_color', '')
-        body_type = request.data.get('body_type', '')
-        growth = request.data.get('growth', '')
-        weight = request.data.get('weight', '')
-        description = request.data.get('description', '')
-        is_smoking = request.data.get('is_smoking', False)
-        is_drinking_alcohol = request.data.get('is_drinking_alcohol', False)
-        orientation = request.data.get('orientation', '')
-        eye_color = request.data.get('eye_color', '')
-        hair_length = request.data.get('hair_length', '')
-        status1 = request.data.get('status', '')
-        education = request.data.get('education', '')
+        name = request.data.get('name', None)
+        surname = request.data.get('surname', None)
+        location = request.data.get('location', None)
+        sex = request.data.get('sex', None)
+        hair_color = request.data.get('hair_color', None)
+        body_type = request.data.get('body_type', None)
+        growth = request.data.get('growth', None)
+        weight = request.data.get('weight', None)
+        description = request.data.get('description', None)
+        is_smoking = request.data.get('is_smoking', None)
+        is_drinking_alcohol = request.data.get('is_drinking_alcohol', None)
+        orientation = request.data.get('orientation', None)
+        eye_color = request.data.get('eye_color', None)
+        hair_length = request.data.get('hair_length', None)
+        status1 = request.data.get('status', None)
+        education = request.data.get('education', None)
 
         if email in [None, '', account.email]:
             response["email"] = "no changes"
@@ -112,95 +113,97 @@ class UserProfileView(APIView):
                 account.email = email
                 response["email"] = "updated"
 
-        if name in [account.name]:
+        if name == account.name or name is None:
             response["name"] = "no changes"
         else:
             account.name = name.capitalize()
             response["name"] = "updated"
 
-        if surname in [None, '', account.surname]:
+        if surname == account.surname or surname is None:
             response["surname"] = "no changes"
         else:
             account.surname = surname.capitalize()
             response["surname"] = "updated"
 
-        if location in [None, '', account.location]:
+        if location == account.location or location is None:
             response["location"] = "no changes"
         else:
             account.location = location.capitalize()
             response["location"] = "updated"
 
-        if sex in [None, '', account.sex]:
+        if sex == account.sex or sex is None:
             response["sex"] = "no changes"
         else:
             account.sex = sex.capitalize()
             response["sex"] = "updated"
-        if orientation == account.orientation:
+
+        if orientation == account.orientation or orientation is None:
             response["orientation"] = "no changes"
         else:
             account.orientation = orientation.capitalize()
             response["orientation"] = "updated"
 
-        if status1 == account.status:
+        if status1 == account.status or status1 is None:
             response["status"] = "no changes"
         else:
             account.status = status1.capitalize()
             response["status"] = "updated"
 
-        if education == account.education:
+        if education == account.education or education is None:
             response["education"] = "no changes"
         else:
             account.education = education.capitalize()
             response["education"] = "updated"
 
-        if hair_length == account.hair_length:
+        if hair_length == account.hair_length or hair_length is None:
             response["hair_length"] = "no changes"
         else:
             account.hair_length = hair_length
             response["hair_length"] = "updated"
 
-        if eye_color == account.eye_color:
+        if eye_color == account.eye_color or eye_color is None:
             response["eye_color"] = "no changes"
         else:
             account.eye_color = eye_color.capitalize()
             response["eye_color"] = "updated"
-        if hair_color in [None, '', account.hair_color]:
+
+        if hair_color == account.hair_color or hair_color is None:
             response["hair_color"] = "no changes"
         else:
             account.hair_color = hair_color.capitalize()
             response["hair_color"] = "updated"
 
-        if growth in [None, '', account.growth]:
+        if growth == account.growth or growth is None:
             response["growth"] = "no changes"
         else:
             account.growth = growth
             response["growth"] = "updated"
 
-        if weight in [None, '', account.weight]:
+        if weight == account.weight or weight is None:
             response["weight"] = "no changes"
         else:
             account.weight = weight
             response["weight"] = "updated"
 
-        if body_type in [None, '', account.body_type]:
+        if body_type == account.body_type or body_type is None:
             response["body_type"] = "no changes"
         else:
             account.body_type = body_type.capitalize()
             response["body_type"] = "updated"
 
-        if is_smoking in [None, '', account.is_smoking]:
+        if is_smoking == account.is_smoking or is_smoking is None:
             response["is_smoking"] = "no changes"
         else:
             account.is_smoking = is_smoking
             response["is_smoking"] = "updated"
 
-        if is_drinking_alcohol in [None, '', account.is_drinking_alcohol]:
+        if is_drinking_alcohol == account.is_drinking_alcohol or is_drinking_alcohol is None:
             response["is_drinking_alcohol"] = "no changes"
         else:
             account.is_drinking_alcohol = is_drinking_alcohol
             response["is_drinking_alcohol"] = "updated"
 
-        if description in [None, '', account.description]:
+        if description == account.description or description is None:
             response["description"] = "no changes"
         else:
             account.description = description
@@ -229,16 +232,16 @@ class PreferencesView(APIView):
 
         response = {}
 
-        hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', '')
-        hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', '')
-        hair_color_red_preference = request.data.get('hair_color_red_preference', '')
-        growth_preference = request.data.get('growth_preference', '')
-        weight_preference = request.data.get('weight_preference', '')
-        body_type_preference = request.data.get('body_type_preference', '')
-        is_smoking_preference = request.data.get('is_smoking_preference', '')
-        is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', '')
-        age_preference_min = request.data.get('age_preference_min', '')
-        age_preference_max = request.data.get('age_preference_max', '')
+        hair_color_blonde_preference = request.data.get('hair_color_blonde_preference', None)
+        hair_color_brunette_preference = request.data.get('hair_color_brunette_preference', None)
+        hair_color_red_preference = request.data.get('hair_color_red_preference', None)
+        growth_preference = request.data.get('growth_preference', None)
+        weight_preference = request.data.get('weight_preference', None)
+        body_type_preference = request.data.get('body_type_preference', None)
+        is_smoking_preference = request.data.get('is_smoking_preference', None)
+        is_drinking_alcohol_preference = request.data.get('is_drinking_alcohol_preference', None)
+        age_preference_min = request.data.get('age_preference_min', None)
+        age_preference_max = request.data.get('age_preference_max', None)
 
         if age_preference_min == str(preferences.age_preference_min) or age_preference_min is None:
             response["age_preference_min"] = "no changes"
@@ -246,55 +249,55 @@ class PreferencesView(APIView):
             preferences.age_preference_min = int(age_preference_min)
             response["age_preference_min"] = "updated"
 
-        if age_preference_max == str(preferences.age_preference_max) or age_preference_min is None:
+        if age_preference_max == str(preferences.age_preference_max) or age_preference_max is None:
             response["age_preference_max"] = "no changes"
         else:
             preferences.age_preference_max = int(age_preference_max)
             response["age_preference_max"] = "updated"
 
-        if hair_color_blonde_preference == preferences.hair_color_blonde_preference:
+        if hair_color_blonde_preference == preferences.hair_color_blonde_preference or hair_color_blonde_preference is None:
             response["hair_color_blonde_preference"] = "no changes"
         else:
             preferences.hair_color_blonde_preference = hair_color_blonde_preference.capitalize()
             response["hair_color_blonde_preference"] = "updated"
 
-        if hair_color_brunette_preference == preferences.hair_color_brunette_preference:
+        if hair_color_brunette_preference == preferences.hair_color_brunette_preference or hair_color_brunette_preference is None:
             response["hair_color_brunette_preference"] = "no changes"
         else:
             preferences.hair_color_brunette_preference = hair_color_brunette_preference.capitalize()
             response["hair_color_brunette_preference"] = "updated"
 
-        if hair_color_red_preference == preferences.hair_color_red_preference:
+        if hair_color_red_preference == preferences.hair_color_red_preference or hair_color_red_preference is None:
             response["hair_color_red_preference"] = "no changes"
         else:
             preferences.hair_color_red_preference = hair_color_red_preference.capitalize()
             response["hair_color_red_preference"] = "updated"
 
-        if growth_preference == preferences.growth_preference:
+        if growth_preference == preferences.growth_preference or growth_preference is None:
             response["growth_preference"] = "no changes"
         else:
             preferences.growth_preference = growth_preference
             response["growth_preference"] = "updated"
 
-        if weight_preference == preferences.weight_preference:
+        if weight_preference == preferences.weight_preference or weight_preference is None:
             response["weight_preference"] = "no changes"
         else:
             preferences.weight_preference = weight_preference
             response["weight_preference"] = "updated"
 
-        if body_type_preference == preferences.body_type_preference:
+        if body_type_preference == preferences.body_type_preference or body_type_preference is None:
             response["body_type_preference"] = "no changes"
         else:
             preferences.body_type_preference = body_type_preference.capitalize()
             response["body_type_preference"] = "updated"
 
-        if is_smoking_preference == preferences.is_smoking_preference:
+        if is_smoking_preference == preferences.is_smoking_preference or is_smoking_preference is None:
             response["is_smoking_preference"] = "no changes"
         else:
             preferences.is_smoking_preference = is_smoking_preference.capitalize()
             response["is_smoking_preference"] = "updated"
 
-        if is_drinking_alcohol_preference == preferences.is_drinking_alcohol_preference:
+        if is_drinking_alcohol_preference == preferences.is_drinking_alcohol_preference or is_drinking_alcohol_preference is None:
             response["is_drinking_alcohol_preference"] = "no changes"
         else:
             preferences.is_drinking_alcohol_preference = is_drinking_alcohol_preference.capitalize()
@@ -332,30 +335,30 @@ class SettingsView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         response = {}
-        dark_theme = request.data.get('dark_theme', False)
-        messages_privacy = request.data.get('messages_privacy', False)
-        search_privacy = request.data.get('search_privacy', False)
-        comments_privacy = request.data.get('comments_privacy', False)
+        dark_theme = request.data.get('dark_theme', None)
+        messages_privacy = request.data.get('messages_privacy', None)
+        search_privacy = request.data.get('search_privacy', None)
+        comments_privacy = request.data.get('comments_privacy', None)
 
-        if dark_theme == settings.dark_theme:
+        if dark_theme == settings.dark_theme or dark_theme is None:
             response["dark_theme"] = "no changes"
         else:
             settings.dark_theme = dark_theme
             response["dark_theme"] = "updated"
 
-        if messages_privacy == settings.messages_privacy:
+        if messages_privacy == settings.messages_privacy or messages_privacy is None:
             response["messages_privacy"] = "no changes"
         else:
             settings.messages_privacy = messages_privacy
             response["messages_privacy"] = "updated"
 
-        if search_privacy == settings.search_privacy:
+        if search_privacy == settings.search_privacy or search_privacy is None:
             response["search_privacy"] = "no changes"
         else:
             settings.search_privacy = search_privacy
             response["search_privacy"] = "updated"
 
-        if comments_privacy == settings.comments_privacy:
+        if comments_privacy == settings.comments_privacy or comments_privacy is None:
             response["comments_privacy"] = "no changes"
         else:
             settings.comments_privacy = comments_privacy
@@ -390,9 +393,9 @@ class UserProfilePic(APIView):
 
         response = {}
 
-        profile_picture = request.data.get('profile_picture', False)
+        profile_picture = request.data.get('profile_picture', None)
 
-        if profile_picture == account.profile_picture:
+        if profile_picture == account.profile_picture or profile_picture is None:
             response["profile_picture"] = "no changes"
         else:
             account.profile_picture = profile_picture
@@ -487,6 +490,7 @@ class ImageByUserId(viewsets.ReadOnlyModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 # USER LIST - SEARCHER
 @permission_classes([IsAuthenticated])
 class UserListView(viewsets.ReadOnlyModelViewSet):
@@ -502,6 +506,15 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         queryset = queryset.exclude(pk=request.user.pk)
         # jeżeli user ma zablokowaną widoczność
         queryset = queryset.exclude(settings__search_privacy='nobody')
+
+        # TODO: sprawdzić czy działa konkatenacja oraz warunek not in (~Q)
+        # jeżeli user ma ustawione friends only
+        friendlist1 = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
+        friendlist2 = FriendsList.objects.filter(friend__pk=request.user.pk).values_list("user", flat=True)
+        for x in friendlist2:
+            friendlist1.append(x)
+        queryset = queryset.exclude(~Q(pk__in=friendlist2), settings__search_privacy="friends")
+
         # jeżeli user chce być wyświetlany tylko przez inną płeć
         queryset = queryset.exclude(settings__search_privacy='diffrent_sex', sex__ne=request.user.sex)
         # jeżeli user jest na mojej black liście to go nie widzę
