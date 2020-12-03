@@ -504,21 +504,21 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         queryset = queryset.exclude(pk=request.user.pk)
+
         # jeżeli user ma zablokowaną widoczność
         queryset = queryset.exclude(settings__search_privacy='nobody')
 
-        # TODO: sprawdzić czy działa konkatenacja oraz warunek not in (~Q)
         # jeżeli user ma ustawione friends only
-        friendlist1 = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
-        friendlist2 = FriendsList.objects.filter(friend__pk=request.user.pk).values_list("user", flat=True)
-        friendlist = friendlist1 | friendlist2
+        friendlist = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
         queryset = queryset.exclude(~Q(pk__in=friendlist), settings__search_privacy="friends")
 
         # jeżeli user chce być wyświetlany tylko przez inną płeć
         queryset = queryset.exclude(settings__search_privacy='diffrent_sex', sex__ne=request.user.sex)
+
         # jeżeli user jest na mojej black liście to go nie widzę
         blacklist = BlackList.objects.filter(user__pk=request.user.pk).values_list("blacklisted", flat=True)
         queryset = queryset.exclude(pk__in=blacklist)
+
         # jeżeli user mnie zablokował to ja go nie widzę
         blacklist = BlackList.objects.filter(blacklisted__pk=request.user.pk).values_list("user", flat=True)
         queryset = queryset.exclude(pk__in=blacklist)
