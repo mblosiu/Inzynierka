@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from rest_framework import serializers
 
 from ..models import User, Preferences, Settings, Image, Like, BlackList, FriendsList
@@ -40,7 +41,7 @@ class UserProfilePicSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ['pk', 'image', 'title']
+        fields = ['pk', 'image', 'title', 'alt']
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
