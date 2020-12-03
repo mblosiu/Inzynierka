@@ -142,7 +142,7 @@ export default {
       let formData = new FormData();
       formData.append("image", this.file);
       axios
-        .put("http://127.0.0.1:8000/api/user/images", formData, {
+        .post("http://127.0.0.1:8000/api/user/images", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: "Token " + localStorage.getItem("user-token"),
