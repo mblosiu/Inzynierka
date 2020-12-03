@@ -166,10 +166,12 @@ class Hobby(models.Model):
 
 
 class FriendsList(models.Model):
+    status = models.CharField(max_length=30, null=True, blank=True, default=None)
     user = models.ForeignKey(User, related_name='user', default=None,
                              on_delete=models.CASCADE)
     friend = models.ForeignKey(User, related_name='friend', default=None,
                                on_delete=models.CASCADE)
+
     objects = models.Manager()
 
 
@@ -178,6 +180,7 @@ class BlackList(models.Model):
                              on_delete=models.CASCADE)
     blacklisted = models.ForeignKey(User, related_name='blacklisted', default=None,
                                     on_delete=models.CASCADE)
+
     objects = models.Manager()
 
 

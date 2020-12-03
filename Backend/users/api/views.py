@@ -511,9 +511,8 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         # jeżeli user ma ustawione friends only
         friendlist1 = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
         friendlist2 = FriendsList.objects.filter(friend__pk=request.user.pk).values_list("user", flat=True)
-        for x in friendlist2:
-            friendlist1.append(x)
-        queryset = queryset.exclude(~Q(pk__in=friendlist2), settings__search_privacy="friends")
+        friendlist = friendlist1 | friendlist2
+        queryset = queryset.exclude(~Q(pk__in=friendlist), settings__search_privacy="friends")
 
         # jeżeli user chce być wyświetlany tylko przez inną płeć
         queryset = queryset.exclude(settings__search_privacy='diffrent_sex', sex__ne=request.user.sex)
@@ -714,33 +713,67 @@ class FriendListView(APIView):
 
         if int(pk) == int(request.user.pk):
             return Response({"detail": "can't add to contacts yourself"}, status=status.HTTP_400_BAD_REQUEST)
-        friendlist = FriendsList.objects.filter(user=request.user.pk, friend=pk)
 
-        if friendlist.count() > 0:
+        friendlist1 = FriendsList.objects.filter(user=request.user.pk, friend=pk)
+        friendlist2 = FriendsList.objects.filter(user=pk, friend=request.user.pk)
+
+        if friendlist1.count() > 0 or friendlist2.count() > 0:
             response["detail"] = "already on friendlist"
             stat = status.HTTP_400_BAD_REQUEST
         else:
             response["detail"] = "user added to friendlist"
-            friendlist = FriendsList(
+            friendlist1 = FriendsList(
+                status='waiting',
                 user=request.user,
-                friend=get_object_or_404(User, pk=pk)
+                friend=get_object_or_404(User, pk=pk),
             )
-            friendlist.save()
+            friendlist2 = FriendsList(
+                status='waiting for your accept',
+                user=get_object_or_404(User, pk=pk),
+                friend=request.user,
+            )
+            friendlist1.save()
+            friendlist2.save()
             stat = status.HTTP_201_CREATED
+
+        return Response(response, status=stat)
+
+    @staticmethod
+    def patch(request):
+        pk = request.data.get("pk")
+
+        friendlist1 = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk,
+                                        status="waiting for your accept")
+        friendlist2 = get_object_or_404(FriendsList, user__pk=pk, friend__pk=request.user.pk, status='waiting')
+
+        stat = status.HTTP_200_OK
+        response = {"detail": "success"}
+
+        friendlist1.status = "accepted"
+        friendlist2.status = "accepted"
+        friendlist1.save()
+        friendlist2.save()
+
         return Response(response, status=stat)
 
     @staticmethod
     def delete(request):
         pk = request.data.get('pk', None)
-        friendlist = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk)
-        if friendlist.delete():
+
+        friendlist1 = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk)
+
+        friendlist2 = get_object_or_404(FriendsList, user__pk=pk, friend__pk=request.user.pk)
+
+        if friendlist1.delete() and friendlist2.delete():
             return Response({"detail": "success"}, status=status.HTTP_200_OK)
         else:
-            return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
     @staticmethod
     def get(request):
         pk = request.query_params.get('pk', None)
-        queryset = get_list_or_404(FriendsList, user__pk=pk)
+
+        queryset = FriendsList.objects.filter(user__pk=pk)
+
         serializer = FriendListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

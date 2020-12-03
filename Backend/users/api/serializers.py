@@ -1,7 +1,7 @@
 from datetime import datetime
 from rest_framework import serializers
 
-from ..models import User, Preferences, Settings, Image, Like, BlackList
+from ..models import User, Preferences, Settings, Image, Like, BlackList, FriendsList
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
@@ -29,24 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
                   'freckles', 'glasses', 'is_smoking', 'is_drinking_alcohol', 'eye_color', 'education', 'passion',
                   'favourite_place', 'status', 'orientation', 'preferences', 'settings'
                   ]
-
-
-class BlackListSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    blacklisted = UserSerializer(read_only=True)
-
-    class Meta:
-        model = BlackList
-        fields = ['pk', 'user', 'blacklisted']
-
-
-class FriendListSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    friend = UserSerializer(read_only=True)
-
-    class Meta:
-        model = BlackList
-        fields = ['pk', 'user', 'friend']
 
 
 class UserProfilePicSerializer(serializers.ModelSerializer):
@@ -123,3 +105,21 @@ class LikesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = ['pk', 'value', 'liked', 'liked_by']
+
+
+class BlackListSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    blacklisted = UserSerializer(read_only=True)
+
+    class Meta:
+        model = BlackList
+        fields = ['pk', 'user', 'blacklisted']
+
+
+class FriendListSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    friend = UserSerializer(read_only=True)
+
+    class Meta:
+        model = FriendsList
+        fields = ['pk', 'status', 'user', 'friend']
