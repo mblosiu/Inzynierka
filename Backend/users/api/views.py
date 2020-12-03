@@ -1,3 +1,8 @@
+import random
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Lookup, Field, Q
+from django.shortcuts import get_list_or_404
 from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -5,11 +10,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import get_list_or_404
-from django.db.models import Lookup
-from django.db.models import Field
-from django.db.models import Q
+
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer
 from ..models import User, Image, Like, BlackList, FriendsList
@@ -434,7 +435,7 @@ class UserImage(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
-    def put(request):
+    def post(request):
         try:
             user = request.user
         except ObjectDoesNotExist:
@@ -503,9 +504,10 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
+        # nie można wyszukać samego siebie
         queryset = queryset.exclude(pk=request.user.pk)
 
-        # jeżeli user ma zablokowaną widoczność
+        # jeżeli user ma zablokowaną widoczność profilu
         queryset = queryset.exclude(settings__search_privacy='nobody')
 
         # jeżeli user ma ustawione friends only
@@ -568,6 +570,86 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
 
         serializer = UserSerializer(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class RandomPair(APIView):
+    @staticmethod
+    def get(request):
+        queryset = User.objects.all()
+        # nie można wyszukać samego siebie
+        queryset = queryset.exclude(pk=request.user.pk)
+
+        # jeżeli user ma zablokowaną widoczność profilu
+        queryset = queryset.exclude(settings__search_privacy='nobody')
+
+        # jeżeli user chce być wyświetlany tylko przez płeć przeciwną
+        queryset = queryset.exclude(settings__search_privacy='diffrent sex', sex__ne=request.user.sex)
+
+        # jeżeli user chce być wyświetlany tylko przez taką samą płeć
+        queryset = queryset.exclude(settings__search_privacy='same sex', sex=request.user.sex)
+
+        # jeżeli user ma ustawione friends only
+        friendlist = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
+        queryset = queryset.exclude(~Q(pk__in=friendlist), settings__search_privacy="friends")
+
+        # jeżeli user jest na mojej black liście to go nie widzę
+        blacklist = BlackList.objects.filter(user__pk=request.user.pk).values_list("blacklisted", flat=True)
+        queryset = queryset.exclude(pk__in=blacklist)
+
+        # jeżeli user mnie zablokował to ja go nie widzę
+        blacklist = BlackList.objects.filter(blacklisted__pk=request.user.pk).values_list("user", flat=True)
+        queryset = queryset.exclude(pk__in=blacklist)
+
+        name = request.user.name
+        surname = request.user.surname
+        sex = request.user.sex
+        location = request.user.location
+        hair_length = request.user.hair_length
+        hair_color = request.user.hair_color
+        growth = request.user.growth
+        body_type = request.user.body_type
+        is_smoking = request.user.is_smoking
+        is_drinking_alcohol = request.user.is_drinking_alcohol
+        orientation = request.user.orientation
+        eye_color = request.user.eye_color
+        age_preference_min = request.user.preferences.age_preference_min
+        age_preference_max = request.user.preferences.age_preference_max
+
+        if not (location is None or location == ''):
+            queryset = queryset.filter(location=location.capitalize())
+        if not (sex is None or sex == ''):
+            queryset = queryset.filter(sex=sex.capitalize())
+        if not (orientation is None or orientation == ''):
+            queryset = queryset.filter(orientation=orientation.capitalize())
+        if not (age_preference_min is None or age_preference_min == ''):
+            queryset = queryset.filter(age__gte=int(age_preference_min))
+        if not (age_preference_max is None or age_preference_max == ''):
+            queryset = queryset.filter(age__lte=int(age_preference_max))
+        if not (eye_color is None or eye_color == ''):
+            queryset = queryset.filter(eye_color=eye_color.capitalize())
+        if not (name is None or name == ''):
+            queryset = queryset.filter(name=name.capitalize())
+        if not (surname is None or surname == ''):
+            queryset = queryset.filter(surname=surname.capitalize())
+        if not (hair_color is None or hair_color == ''):
+            queryset = queryset.filter(hair_color=hair_color.capitalize())
+        if not (growth is None or growth == ''):
+            queryset = queryset.filter(growth=growth)
+        if not (hair_length is None or hair_length == ''):
+            queryset = queryset.filter(hair_length=hair_length)
+        if not (body_type is None or body_type == ''):
+            queryset = queryset.filter(body_type=body_type.capitalize())
+        if not (is_smoking is None or is_smoking == ''):
+            queryset = queryset.filter(is_smoking=is_smoking)
+        if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
+            queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
+
+        x = random.randint(0, queryset.count() - 1)
+
+        serializer = UserSerializer(queryset[x])
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -777,3 +859,11 @@ class FriendListView(APIView):
 
         serializer = FriendListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+# RandomPair
+# todo: alkohol i pety ustawić jako cyfrę i dać wyszukiwanie ge
+# todo: UserImage put zamienić na post
+
+# ctrl + shift + O - formatowanie importów
+# ctrl + alt + L - formatowanie kodu
+# Ctrl+Shift+NumPad - zwiń wszystko
