@@ -97,6 +97,7 @@
                     </button>
                     <button
                       type="button"
+                      v-on:click="inviteUser()"
                       class="btn btn-secondary"
                       data-toggle="tooltip"
                       data-placement="bottom"
@@ -1079,6 +1080,27 @@ export default {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+    },
+    inviteUser() {
+      console.log("invite user")
+      const config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/user/friendlist",
+          { pk: this.$route.params.pk },
+          config
+        )
+        .then((response) => {
+          console.log("invited");
+          console.log(response);
+          //this.$router.go();
+        })
+        .catch((errors) => console.log(errors));
     },
   },
   created() {

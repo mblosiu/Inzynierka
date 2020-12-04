@@ -70,6 +70,7 @@
           </a>
         </b-nav-form>
         <b-button
+          @click="getUserFriends()"
           v-if="token != null"
           class="my-2 ml-2"
           type="button"
@@ -80,8 +81,35 @@
           <span class="badge badge-light">0</span>
         </b-button>
         <b-sidebar id="friendslist" title="Znajomi:" right shadow>
-          <div class="px-3 py-2">
-            
+          <div class="px-1 py-1">
+            <div
+              v-for="user_friend in user_friends"
+              v-bind:key="user_friend.friend.pk"
+            >
+              <b-list-group-item
+                class="d-flex align-items-right"
+                v-if="user_friend.status == 'accepted'"
+              >
+                <router-link
+                  :to="{
+                    name: 'userprofile',
+                    params: { pk: user_friend.friend.pk },
+                  }"
+                >
+                  <span class="mr-5"
+                    ><strong>{{ user_friend.friend.username }}</strong></span
+                  >
+                  <b-avatar
+                    badge
+                    badge-variant="info"
+                    variant="info"
+                    :src="getUrl(user_friend.friend.profile_picture)"
+                    class="ml-5 mr-1"
+                    size="4rem"
+                  ></b-avatar>
+                </router-link>
+              </b-list-group-item>
+            </div>
           </div>
         </b-sidebar>
         <b-nav-form v-if="token != null">
@@ -185,6 +213,7 @@
             type="button"
             size="sm"
             v-b-modal.notifications
+            @click="getUserFriends()"
           >
             Powiadomienia
             <span class="badge badge-light">0</span>
@@ -192,7 +221,7 @@
           <b-modal
             id="notifications"
             scrollable
-            size="lg"
+            size="xl"
             title="Powiadomienia"
             hide-footer
           >
@@ -200,23 +229,93 @@
               <b-col cols="4">
                 <b-row>
                   <b-col cols="12">
-                    <h5>Nowi znajomi:</h5>
-                    <b-list-group style="max-width: 300px"> </b-list-group>
+                    <h5>Otrzymane zaproszenia:</h5>
+                    <div
+                      v-for="user_friend in user_friends"
+                      v-bind:key="user_friend.friend.pk"
+                    >
+                      <b-list-group-item
+                        class="d-flex align-items-center"
+                        v-if="user_friend.status == 'waiting for your accept'"
+                      >
+                        <router-link
+                          :to="{
+                            name: 'userprofile',
+                            params: { pk: user_friend.friend.pk },
+                          }"
+                        >
+                          <b-avatar
+                            rounded
+                            variant="info"
+                            :src="getUrl(user_friend.friend.profile_picture)"
+                            class="mr-3"
+                            size="3rem"
+                          ></b-avatar>
+                          <span class="mr-auto"
+                            ><strong>{{
+                              user_friend.friend.username
+                            }}</strong></span
+                          >
+                        </router-link>
+                        <b-button
+                          class="ml-5 mr-1"
+                          size="sm"
+                          variant="success"
+                          @click="acceptUser(user_friend.friend.pk)"
+                          >Akceptuj</b-button
+                        >
+                        <b-button
+                          class="ml-1"
+                          size="sm"
+                          variant="danger"
+                          @click="rejectUser(user_friend.friend.pk)"
+                          >Odrzuć</b-button
+                        >
+                      </b-list-group-item>
+                    </div>
                   </b-col>
                 </b-row>
               </b-col>
               <b-col cols="4">
                 <b-row>
                   <b-col cols="12">
-                    <h5>Coś</h5>
-                    <b-list-group style="max-width: 300px"> </b-list-group>
+                    <h5>Wysłane zaproszenia:</h5>
+                    <div
+                      v-for="user_friend in user_friends"
+                      v-bind:key="user_friend.friend.pk"
+                    >
+                      <b-list-group-item
+                        class="d-flex align-items-center"
+                        v-if="user_friend.status == 'waiting'"
+                      >
+                        <router-link
+                          :to="{
+                            name: 'userprofile',
+                            params: { pk: user_friend.friend.pk },
+                          }"
+                        >
+                          <b-avatar
+                            rounded
+                            variant="info"
+                            :src="getUrl(user_friend.friend.profile_picture)"
+                            class="mr-3"
+                            size="3rem"
+                          ></b-avatar>
+                          <span class="mr-auto"
+                            ><strong>{{
+                              user_friend.friend.username
+                            }}</strong></span
+                          >
+                        </router-link>
+                      </b-list-group-item>
+                    </div>
                   </b-col>
                 </b-row>
               </b-col>
               <b-col cols="4">
                 <b-row>
                   <b-col cols="12">
-                    <h5>Coś jeszcz</h5>
+                    <h5>Wiadomości:</h5>
                     <b-list-group style="max-width: 300px"> </b-list-group>
                   </b-col>
                 </b-row>
@@ -308,6 +407,7 @@ export default {
       user_data: {},
       user_likes: [],
       user_likings: [],
+      user_friends: [],
     };
   },
   methods: {
@@ -411,6 +511,70 @@ export default {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+    },
+    getUserFriends() {
+      //console.log("getFriends");
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/user/friendlist",
+
+          {
+            params: { pk: this.user_data.pk },
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
+        .then((response) => {
+          //console.log("userfriendlist:");
+          console.log(response), (this.user_friends = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    acceptUser(pk) {
+      console.log("acceptuser");
+      console.log(pk);
+      let config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      axios
+        .patch(
+          "http://127.0.0.1:8000/api/user/friendlist",
+          {
+            pk: pk,
+          },
+          config
+        )
+        .then((response) => {
+          console.log("user accepted");
+          console.log(response);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    rejectUser(pk) {
+      console.log("rejectUser");
+      console.log(pk);
+      axios
+        .delete(
+          "http://127.0.0.1:8000/api/user/friendlist",
+
+          {
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+            data: {
+              pk: pk,
+            },
+          }
+        )
+        .then((response) => {
+          console.log("rejected:");
+          console.log(response);
+        })
+        .catch((errors) => console.log(errors));
+      this.$router.go();
     },
   },
   created() {
