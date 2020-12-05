@@ -565,9 +565,11 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         if not (body_type is None or body_type == ''):
             queryset = queryset.filter(body_type=body_type.capitalize())
         if not (is_smoking is None or is_smoking == ''):
-            queryset = queryset.filter(is_smoking__lte=int(is_smoking))
+            if is_smoking.isdecimal():
+                queryset = queryset.filter(is_smoking__lte=int(is_smoking))
         if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
-            queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
+            if is_drinking_alcohol.isdecimal():
+                queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
         serializer = UserSerializer(queryset, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
