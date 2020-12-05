@@ -28,13 +28,17 @@ class Preferences(models.Model):
     Diligence_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     Kindness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
 
+    objects = models.Manager()
+
 
 class Settings(models.Model):
     dark_theme = models.BooleanField(default=True)
-    # public, private, only womans, only mans
-    profile_privacy = models.CharField(max_length=30, null=True, blank=True, default="public")
-    # everybody, nobody, friends only, only womans, only mans
-    messages_settings = models.CharField(max_length=30, null=True, blank=True, default="everybody")
+    messages_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
+    search_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
+    comments_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
+
+    objects = models.Manager()
+
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, location, birthday, sex, password=None):
@@ -155,13 +159,38 @@ class Image(models.Model):
     title = models.CharField(max_length=30, null=True, blank=True, default=None)
     alt = models.CharField(max_length=30, null=True, blank=True, default=None)
 
-
-class Like(models.Model):
-    value = models.CharField(max_length=30, null=True, blank=True, default=None)
-    liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
-    liked_by = models.ForeignKey(User, related_name='liked_by', default=None, on_delete=models.CASCADE)
+    objects = models.Manager()
 
 
 class Hobby(models.Model):
     name = models.CharField(max_length=30, null=True, blank=True, default=None)
     user = models.ManyToManyField(User)
+
+    objects = models.Manager()
+
+
+class FriendsList(models.Model):
+    status = models.CharField(max_length=30, null=True, blank=True, default=None)
+    user = models.ForeignKey(User, related_name='user', default=None,
+                             on_delete=models.CASCADE)
+    friend = models.ForeignKey(User, related_name='friend', default=None,
+                               on_delete=models.CASCADE)
+
+    objects = models.Manager()
+
+
+class BlackList(models.Model):
+    user = models.ForeignKey(User, related_name='blacklisting', default=None,
+                             on_delete=models.CASCADE)
+    blacklisted = models.ForeignKey(User, related_name='blacklisted', default=None,
+                                    on_delete=models.CASCADE)
+
+    objects = models.Manager()
+
+
+class Like(models.Model):
+    value = models.CharField(max_length=30, null=True, blank=True, default=None)
+    liked_by = models.ForeignKey(User, related_name='liked_by', default=None, on_delete=models.CASCADE)
+    liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
+
+    objects = models.Manager()

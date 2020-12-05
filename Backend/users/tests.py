@@ -8,7 +8,7 @@ from rest_framework.test import APITestCase
 from rest_framework.test import force_authenticate
 
 from .api.urls import user_detail, user_list
-from .api.views import RegistrationView, UserProfileView, UserPreferencesView, DeleteUserAccountView, UserProfilePic
+from .api.views import RegistrationView, UserProfileView, PreferencesView, DeleteUserAccountView, UserProfilePic
 from .models import User
 
 
@@ -108,7 +108,7 @@ class UserViewTestCase(APITestCase):
 
         user = User.objects.get(username='testcase1')
 
-        view = UserPreferencesView.as_view()
+        view = PreferencesView.as_view()
 
         data = {"orientation": "Male"}
 
@@ -125,7 +125,7 @@ class UserViewTestCase(APITestCase):
 
         user = User.objects.get(username='testcase1')
 
-        view = UserPreferencesView.as_view()
+        view = PreferencesView.as_view()
 
         request = factory.get('/api/user/preferences')
 

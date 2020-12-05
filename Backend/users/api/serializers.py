@@ -1,7 +1,8 @@
 from datetime import datetime
+
 from rest_framework import serializers
 
-from ..models import User, Preferences, Settings, Image, Like
+from ..models import User, Preferences, Settings, Image, Like, BlackList, FriendsList
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
@@ -9,13 +10,13 @@ class UserPreferencesSerializer(serializers.ModelSerializer):
         model = Preferences
         fields = ['hair_color_blonde_preference', 'hair_color_brunette_preference',
                   'hair_color_red_preference', 'growth_preference', 'weight_preference', 'body_type_preference',
-                  'is_smoking_preference', 'is_drinking_alcohol_preference','age_preference_max','age_preference_min']
+                  'is_smoking_preference', 'is_drinking_alcohol_preference', 'age_preference_max', 'age_preference_min']
 
 
 class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Settings
-        fields = ['dark_theme', 'profile_privacy', 'messages_settings']
+        fields = ['dark_theme', 'messages_privacy', 'search_privacy', 'comments_privacy']
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -27,7 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['pk', 'email', 'username', 'last_login', 'is_active', 'name', 'surname', 'birthday', 'location',
                   'profile_picture', 'description', 'sex', 'hair_color', 'hair_length', 'growth', 'weight', 'body_type',
                   'freckles', 'glasses', 'is_smoking', 'is_drinking_alcohol', 'eye_color', 'education', 'passion',
-                  'favourite_place', 'status', 'preferences', 'settings', 'orientation'
+                  'favourite_place', 'status', 'orientation', 'preferences', 'settings'
                   ]
 
 
@@ -40,7 +41,7 @@ class UserProfilePicSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ['pk', 'image', 'title']
+        fields = ['pk', 'image', 'title', 'alt']
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -105,3 +106,21 @@ class LikesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = ['pk', 'value', 'liked', 'liked_by']
+
+
+class BlackListSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    blacklisted = UserSerializer(read_only=True)
+
+    class Meta:
+        model = BlackList
+        fields = ['pk', 'user', 'blacklisted']
+
+
+class FriendListSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    friend = UserSerializer(read_only=True)
+
+    class Meta:
+        model = FriendsList
+        fields = ['pk', 'status', 'user', 'friend']
