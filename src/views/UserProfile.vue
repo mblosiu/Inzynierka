@@ -97,7 +97,10 @@
                     </button>
                     <button
                       type="button"
-                      v-on:click="inviteUser()"
+                      v-on:click="
+                        inviteUser();
+                        toast2('b-toaster-bottom-right', 'info');
+                      "
                       class="btn btn-secondary"
                       data-toggle="tooltip"
                       data-placement="bottom"
@@ -289,67 +292,65 @@
                     </div>
 
                     <div v-if="isUserLiked() == false">
-                    <button
-                      type="button"
-                      v-on:click="blockUser()"
-                      class="btn btn-secondary"
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      title="Zablokuj użytkownika"
-                    >
-                      <svg
-                        color="lightblue"
-                        width="3em"
-                        height="3em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-lock-fill"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
+                      <button
+                        type="button"
+                        v-on:click="blockUser()"
+                        class="btn btn-secondary"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Zablokuj użytkownika"
                       >
-                        <path
-                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          color="lightblue"
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-lock-fill"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
+                          />
+                        </svg>
+                      </button>
                     </div>
                     <div v-else>
                       <button
-                      type="button"                     
-                      class="btn btn-secondary"
-                      @click="toast('b-toaster-bottom-right', 'danger')"
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      title="Nie możesz zablokować polubionego użytkownika."
-                    >
-                      <svg
-                        color="gray"
-                        width="3em"
-                        height="3em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-lock-fill"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
+                        type="button"
+                        class="btn btn-secondary"
+                        @click="toast('b-toaster-bottom-right', 'danger')"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Nie możesz zablokować polubionego użytkownika."
                       >
-                        <path
-                          d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
-                        />
-                      </svg>
-                    </button>
-                    
+                        <svg
+                          color="gray"
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-lock-fill"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"
+                          />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </div>
               </b-card-text>
             </b-card>
-
           </div>
         </b-col>
         <b-col cols="5">
@@ -913,6 +914,8 @@ export default {
       liked: false,
       blocked: false,
       user_blacklist: [],
+      user_friendlist: [],
+      user_friends: [],
     };
   },
   methods: {
@@ -1068,21 +1071,39 @@ export default {
       }
       return age;
     },
-    toast(toaster, variant=null) {
-        this.$bvToast.toast(`Nie możesz zablokować polubionego użytkownika.`, {
+    toast(toaster, variant = null) {
+      this.$bvToast.toast(`Nie możesz zablokować polubionego użytkownika.`, {
+        title: `Uwaga!`,
+        toaster: toaster,
+        solid: true,
+        variant: variant,
+      });
+    },
+    toast2(toaster, variant = null) {
+      this.$bvToast.toast(`Wysłano zaproszenie do grona znajomych.`, {
+        toaster: toaster,
+        solid: true,
+        variant: variant,
+      });
+    },
+    toast3(toaster, variant = null) {
+      this.$bvToast.toast(
+        `Aby zablokować użytkownika, najpierw usuń go z grona znajomych.`,
+        {
           title: `Uwaga!`,
           toaster: toaster,
           solid: true,
-          variant: variant
-        })
-      },
+          variant: variant,
+        }
+      );
+    },
     getUrl(pic) {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
     inviteUser() {
-      console.log("invite user")
+      console.log("invite user");
       const config = {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1102,17 +1123,50 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    getUserFriends() {
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/user/friendlist",
+
+          {
+            params: { pk: this.user_data.pk },
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
+        .then((response) => {
+          console.log("userfriendlist:");
+          console.log(response), (this.user_friendlist = response.data);
+        })
+        .catch((errors) => console.log(errors));
+      console.log("friendslenth");
+      console.log(this.user_friendlist.length);
+      for (var i = 0; i < this.user_friends.length; i++) {
+        if (
+          this.user_friends[i].status == "accepted" &&
+          this.user_friends[i].friend.pk == this.$route.params.pk
+        ) {
+          console.log("friend:true");
+          return true;
+        }
+      }
+      console.log("friend:false");
+      return false;
+    },
   },
   created() {
     this.getUsers();
     this.getUserImages();
     this.getUserData();
     this.getUserLikes();
-    this.getUserBlacklist();
+    this.getUserFriends();
+    //this.getUserBlacklist();
   },
   mounted() {
     //$(".carousel").carousel();
   },
+  computed() {},
 };
 </script>
 
