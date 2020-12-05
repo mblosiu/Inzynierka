@@ -82,6 +82,8 @@ class MyAccountManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    verified = models.BooleanField(default=False)
+
     preferences = models.OneToOneField(Preferences, on_delete=models.CASCADE, null=True, default=None)
     settings = models.OneToOneField(Settings, on_delete=models.CASCADE, null=True, default=None)
 
