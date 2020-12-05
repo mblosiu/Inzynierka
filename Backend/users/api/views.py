@@ -100,11 +100,15 @@ class LogoutView(APIView):
 class DeleteUserAccountView(APIView):
     @staticmethod
     def delete(request):
+        password = request.data.get('password')
+
+        if not request.user.check_password(password):
+            return Response({"detail": "wrong password"}, status=status.HTTP_400_BAD_REQUEST)
+
         if request.user.delete():
-            # TODO : check password
             return Response({"detail": "Account removed successfully"}, status=status.HTTP_200_OK)
         else:
-            return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # zmień hasło

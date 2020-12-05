@@ -29,20 +29,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="change representation of preferences fix">
-      <change afterPath="$PROJECT_DIR$/Backend/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0020_blacklist.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0021_auto_20201126_0934.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0022_friendslist_accepted.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0023_auto_20201203_1425.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/users/templates/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/test/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/test/test.txt" afterDir="false" />
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="change-password, restore-password, account-verify, sending mails">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -507,7 +495,21 @@
       <option name="project" value="LOCAL" />
       <updated>1607158843981</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="change-password, restore-password, account-verify, sending mails">
+      <created>1607183280523</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1607183280523</updated>
+    </task>
+    <task id="LOCAL-00046" summary="change-password, restore-password, account-verify, sending mails">
+      <created>1607184290634</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1607184290634</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -535,7 +537,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="get users photos list" />
     <MESSAGE value="filters and settings" />
     <MESSAGE value="likes" />
     <MESSAGE value="likes - value" />
@@ -560,6 +561,7 @@
     <MESSAGE value="friendlist filter update" />
     <MESSAGE value="RandomPair, UserImage POST instead of PUT, fixes" />
     <MESSAGE value="change representation of preferences" />
-    <option name="LAST_COMMIT_MESSAGE" value="change representation of preferences" />
+    <MESSAGE value="change-password, restore-password, account-verify, sending mails" />
+    <option name="LAST_COMMIT_MESSAGE" value="change-password, restore-password, account-verify, sending mails" />
   </component>
 </project>
