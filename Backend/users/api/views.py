@@ -565,10 +565,9 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         if not (body_type is None or body_type == ''):
             queryset = queryset.filter(body_type=body_type.capitalize())
         if not (is_smoking is None or is_smoking == ''):
-            queryset = queryset.filter(is_smoking=is_smoking)
+            queryset = queryset.filter(is_smoking__lte=int(is_smoking))
         if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
-            queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
-
+            queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
         serializer = UserSerializer(queryset, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -581,6 +580,11 @@ class RandomPair(APIView):
         queryset = User.objects.all()
         # nie można wyszukać samego siebie
         queryset = queryset.exclude(pk=request.user.pk)
+
+        # todo: sprawdzić czy działa
+        # blokuje userów uprzednio odrzuconych lub polubionych
+        likes = Like.objects.filter(pk=request.user.pk).values_list("liked", flat=True)
+        queryset = queryset.exclude(pk__in=likes)
 
         # jeżeli user ma zablokowaną widoczność profilu
         queryset = queryset.exclude(settings__search_privacy='nobody')
@@ -690,7 +694,6 @@ class LikesView(viewsets.ModelViewSet):
         current_user = get_object_or_404(User, pk=pk)
         user = get_object_or_404(User, pk=request.user.pk)
         response = {}
-        print(1)
         if value in ['like', 'dislike']:
             like = Like(
                 value=value,
@@ -860,10 +863,11 @@ class FriendListView(APIView):
         serializer = FriendListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-# RandomPair
-# todo: alkohol i pety ustawić jako cyfrę i dać wyszukiwanie ge
-# todo: UserImage put zamienić na post
+# todo: alkohol i pety ustawić jako cyfrę i dać wyszukiwanie ge - zrobione
+# todo: dodać dislike na froncie
+# dodałem objects = models.Manager() do settings i Preferences
+# UserImage - put zostało zmienione na post
 
 # ctrl + shift + O - formatowanie importów
 # ctrl + alt + L - formatowanie kodu
-# Ctrl+Shift+NumPad - zwiń wszystko
+# ctrl + shift + - - zwiń wszystko

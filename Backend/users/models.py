@@ -28,12 +28,16 @@ class Preferences(models.Model):
     Diligence_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     Kindness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
 
+    objects = models.Manager()
+
 
 class Settings(models.Model):
     dark_theme = models.BooleanField(default=True)
     messages_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
     search_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
     comments_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
+
+    objects = models.Manager()
 
 
 class MyAccountManager(BaseUserManager):
