@@ -29,19 +29,36 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="change representation of preferences">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="change representation of preferences fix">
+      <change afterPath="$PROJECT_DIR$/Backend/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0020_blacklist.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0021_auto_20201126_0934.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0022_friendslist_accepted.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0023_auto_20201203_1425.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/templates/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/test/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/test/test.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/master" />
-  </component>
-  <component name="Git.Pull.Settings">
-    <option name="BRANCH" value="Backend" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -57,10 +74,24 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/users/templates/mail/registration" />
     <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mateusz\Desktop\Inzynierka\backend\users\templates\mail\registration" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mateusz\Desktop\Inzynierka\backend\users\templates\mail" />
+      <recent name="C:\Users\Mateusz\Desktop\Inzynierka\backend\users\templates\test" />
+      <recent name="C:\Users\Mateusz\Desktop\Inzynierka\backend\users\api" />
+      <recent name="C:\Users\Mateusz\Desktop\Inzynierka\backend\users\templates" />
+      <recent name="C:\Users\Mateusz\Desktop\Inzynierka\backend\users" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.views">
     <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">

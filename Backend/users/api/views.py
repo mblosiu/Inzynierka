@@ -1,8 +1,11 @@
 import random
+import string
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.db.models import Lookup, Field, Q
 from django.shortcuts import get_list_or_404
+from django.template.loader import render_to_string
 from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -14,6 +17,21 @@ from rest_framework.views import APIView
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer
 from ..models import User, Image, Like, BlackList, FriendsList
+
+SENDER_EMAIL = 'noreply.elove@gmail.com'
+LETTERS = string.ascii_letters
+NUMBERS = string.digits
+
+
+def password_generator(length):
+    printable = f'{LETTERS}{NUMBERS}'
+
+    printable = list(printable)
+    random.shuffle(printable)
+
+    random_password = random.choices(printable, k=length)
+    random_password = ''.join(random_password)
+    return random_password
 
 
 @Field.register_lookup
@@ -27,22 +45,45 @@ class NotEqual(Lookup):
         return '%s <> %s' % (lhs, rhs), params
 
 
+# wysyła maila przy rejestracji
 @permission_classes([])
 class RegistrationView(APIView):
     @staticmethod
     def post(request):
         serializer = RegistrationSerializer(data=request.data)
         data = {}
-        if serializer.is_valid():
-            serializer.save()
-
-            data['detail'] = 'successfully registered new user.'
-
-            stat = status.HTTP_201_CREATED
-        else:
+        if not serializer.is_valid():
             data = serializer.errors
-            stat = status.HTTP_400_BAD_REQUEST
-        return Response(data, status=stat)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+        data['detail'] = 'successfully registered new user.'
+
+        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        send_mail("subject", msg_plain, SENDER_EMAIL, [serializer.data.get("email")], fail_silently=False,
+                  html_message=msg_html)
+
+        serializer.save()
+
+        return Response(data, status=status.HTTP_201_CREATED)
+
+
+# po kliknięciu w mailu weryfikuje konto
+@permission_classes([])
+class VerifyAccountView(APIView):
+    @staticmethod
+    def patch(request):
+        email = request.data.get('email')
+
+        user = get_object_or_404(email=email)
+
+        if user.verified:
+            return Response({'detail': 'already verified'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.verified = True
+        user.save()
+
+        return Response({'detail': 'account verified successfully'}, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])
@@ -64,6 +105,50 @@ class DeleteUserAccountView(APIView):
             return Response({"detail": "Account removed successfully"}, status=status.HTTP_200_OK)
         else:
             return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# zmień hasło
+@permission_classes([IsAuthenticated])
+class ChangePasswordView(APIView):
+    @staticmethod
+    def patch(request):
+        user = get_object_or_404(pk=request.user.pk)
+        password1 = request.data.get('password1')
+        password2 = request.data.get('password2')
+        new_password = request.data.get('new_password')
+
+        if not password1 == password2:
+            return Response({'detail': 'passwords does not match'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not user.check_password(password1):
+            return Response({'detail': 'wrong password'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(new_password)
+        user.save()
+
+        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        send_mail("subject", msg_plain, SENDER_EMAIL, [user.email], fail_silently=False, html_message=msg_html)
+
+        return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
+
+
+# zmień hasło i wyślij na maila
+@permission_classes([])
+class RestorePasswordView(APIView):
+    @staticmethod
+    def patch(request):
+        email = request.data.get('email')
+        user = get_object_or_404(email=email)
+
+        new_password = password_generator(8)
+        user.set_password(new_password)
+
+        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        send_mail("subject", msg_plain, SENDER_EMAIL, [user.email], fail_silently=False, html_message=msg_html)
+
+        return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])
@@ -864,6 +949,19 @@ class FriendListView(APIView):
 
         serializer = FriendListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([])
+class TemplateSendMail(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+
+        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+
+        send_mail("subject", msg_plain, SENDER_EMAIL, [email], fail_silently=False, html_message=msg_html)
+
+        return Response({'detail': 'success'}, status=status.HTTP_200_OK)
 
 # todo: alkohol i pety ustawić jako cyfrę i dać wyszukiwanie ge - zrobione
 # todo: dodać dislike na froncie

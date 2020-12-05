@@ -3,7 +3,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, DeleteUserAccountView, \
     UserListView, PreferencesView, SettingsView, UserImage, ValidUsernameAndEmail, ImageByUserId, LikesView, \
-    BlackListView, FriendListView, RandomPair
+    BlackListView, FriendListView, RandomPair, ChangePasswordView, RestorePasswordView, VerifyAccountView
 
 app_name = 'users'
 
@@ -41,4 +41,8 @@ urlpatterns = [
     path('blacklist', BlackListView.as_view(), name='blacklist'),
     path('friendlist', FriendListView.as_view(), name='friendlist'),
     path('random-pair', RandomPair.as_view(), name='random-pair'),
+
+    path('change-password', ChangePasswordView.as_view(), name='change-password'),
+    path('restore-password', RestorePasswordView.as_view(), name='restore-password'),
+    path('account-verify', VerifyAccountView.as_view(), name='account-verify'),
 ]
