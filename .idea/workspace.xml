@@ -29,11 +29,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="RandomPair, UserImage POST instead of PUT, fixes">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="change representation of preferences">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -472,7 +469,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607016518348</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="change representation of preferences">
+      <created>1607158843981</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1607158843981</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -500,7 +504,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1" />
     <MESSAGE value="get users photos list" />
     <MESSAGE value="filters and settings" />
     <MESSAGE value="likes" />
@@ -525,44 +528,7 @@
     <MESSAGE value="friendlist - new logic" />
     <MESSAGE value="friendlist filter update" />
     <MESSAGE value="RandomPair, UserImage POST instead of PUT, fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="RandomPair, UserImage POST instead of PUT, fixes" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="698" y="344" key="#Notifications" timestamp="1606471800972">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="698" y="344" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1606471800972" />
-    <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606916246681">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1606916246681" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1605514451115">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605514451115" />
-    <state width="1199" height="278" key="GridCell.Tab.0.bottom" timestamp="1606561147505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1199" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606561147505" />
-    <state width="1199" height="278" key="GridCell.Tab.0.center" timestamp="1606561147505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1199" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606561147505" />
-    <state width="1199" height="278" key="GridCell.Tab.0.left" timestamp="1606561147505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1199" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606561147505" />
-    <state width="1199" height="278" key="GridCell.Tab.0.right" timestamp="1606561147505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1199" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606561147505" />
-    <state x="922" y="249" key="SettingsEditor" timestamp="1606392058039">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="922" y="249" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606392058039" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1607016519752">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607016519752" />
+    <MESSAGE value="change representation of preferences" />
+    <option name="LAST_COMMIT_MESSAGE" value="change representation of preferences" />
   </component>
 </project>
