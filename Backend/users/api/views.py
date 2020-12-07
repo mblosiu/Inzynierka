@@ -284,14 +284,21 @@ class UserProfileView(APIView):
         if is_smoking == account.is_smoking or is_smoking is None:
             response["is_smoking"] = "no changes"
         else:
-            account.is_smoking = is_smoking
-            response["is_smoking"] = "updated"
+            if is_smoking.isdecimal():
+                account.is_smoking = int(is_smoking)
+                response["is_smoking"] = "updated"
+            else:
+                response["is_smoking"] = "no changes"
 
         if is_drinking_alcohol == account.is_drinking_alcohol or is_drinking_alcohol is None:
             response["is_drinking_alcohol"] = "no changes"
         else:
-            account.is_drinking_alcohol = is_drinking_alcohol
-            response["is_drinking_alcohol"] = "updated"
+            if is_drinking_alcohol.isdecimal():
+                account.is_drinking_alcohol = int(is_drinking_alcohol)
+                response["is_drinking_alcohol"] = "updated"
+            else:
+                account.is_drinking_alcohol = int(is_drinking_alcohol)
+                response["is_drinking_alcohol"] = "no changes"
 
         if description == account.description or description is None:
             response["description"] = "no changes"
@@ -698,18 +705,16 @@ class RandomPair(APIView):
         blacklist = BlackList.objects.filter(blacklisted__pk=request.user.pk).values_list("user", flat=True)
         queryset = queryset.exclude(pk__in=blacklist)
 
-        name = request.user.name
-        surname = request.user.surname
-        sex = request.user.sex
-        location = request.user.location
-        hair_length = request.user.hair_length
-        hair_color = request.user.hair_color
-        growth = request.user.growth
-        body_type = request.user.body_type
-        is_smoking = request.user.is_smoking
-        is_drinking_alcohol = request.user.is_drinking_alcohol
-        orientation = request.user.orientation
-        eye_color = request.user.eye_color
+        sex = request.user.preferences.sex
+        location = request.user.preferences.location
+        hair_length = request.user.preferences.hair_length
+        hair_color = request.user.preferences.hair_color
+        growth = request.user.preferences.growth
+        body_type = request.user.preferences.body_type
+        is_smoking = request.user.preferences.is_smoking
+        is_drinking_alcohol = request.user.preferences.is_drinking_alcohol
+        orientation = request.user.preferences.orientation
+        eye_color = request.user.preferences.eye_color
         age_preference_min = request.user.preferences.age_preference_min
         age_preference_max = request.user.preferences.age_preference_max
 
@@ -720,15 +725,13 @@ class RandomPair(APIView):
         if not (orientation is None or orientation == ''):
             queryset = queryset.filter(orientation=orientation.capitalize())
         if not (age_preference_min is None or age_preference_min == ''):
-            queryset = queryset.filter(age__gte=int(age_preference_min))
+            if age_preference_min.isdecimal():
+                queryset = queryset.filter(age__gte=int(age_preference_min))
         if not (age_preference_max is None or age_preference_max == ''):
-            queryset = queryset.filter(age__lte=int(age_preference_max))
+            if age_preference_min.isdecimal():
+                queryset = queryset.filter(age__lte=int(age_preference_max))
         if not (eye_color is None or eye_color == ''):
             queryset = queryset.filter(eye_color=eye_color.capitalize())
-        if not (name is None or name == ''):
-            queryset = queryset.filter(name=name.capitalize())
-        if not (surname is None or surname == ''):
-            queryset = queryset.filter(surname=surname.capitalize())
         if not (hair_color is None or hair_color == ''):
             queryset = queryset.filter(hair_color=hair_color.capitalize())
         if not (growth is None or growth == ''):
@@ -969,8 +972,7 @@ class TemplateSendMail(APIView):
 
         return Response({'detail': 'success'}, status=status.HTTP_200_OK)
 
-# todo: alkohol i pety ustawić jako integer i dać wyszukiwanie ge - zrobione
-# todo: dodać dislike na froncie
+# alkohol i papierosy zostały zmienione na int + filter lte
 # dodałem objects = models.Manager() do settings i Preferences
 # UserImage - put zostało zmienione na post
 
