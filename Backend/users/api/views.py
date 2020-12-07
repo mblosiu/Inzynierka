@@ -705,47 +705,38 @@ class RandomPair(APIView):
         blacklist = BlackList.objects.filter(blacklisted__pk=request.user.pk).values_list("user", flat=True)
         queryset = queryset.exclude(pk__in=blacklist)
 
-        sex = request.user.preferences.sex
-        location = request.user.preferences.location
-        hair_length = request.user.preferences.hair_length
-        hair_color = request.user.preferences.hair_color
-        growth = request.user.preferences.growth
-        body_type = request.user.preferences.body_type
-        is_smoking = request.user.preferences.is_smoking
-        is_drinking_alcohol = request.user.preferences.is_drinking_alcohol
-        orientation = request.user.preferences.orientation
-        eye_color = request.user.preferences.eye_color
+        # todo: filters
+
+        orientation = request.user.orientation
+        hair_color_blonde_preference = request.user.preferences.hair_color_blonde_preference
+        hair_color_brunette_preference = request.user.preferences.hair_color_brunette_preference
+        hair_color_red_preference = request.user.preferences.hair_color_red_preference
+        growth_preference = request.user.preferences.growth_preference
+        weight_preference = request.user.preferences.weight_preference
+        body_type_preference = request.user.preferences.body_type_preference
+        freckles_preference = request.user.preferences.freckles_preference
+        glasses_preference = request.user.preferences.glasses_preference
+        hair_length_preference = request.user.preferences.hair_length_preference
+        is_smoking_preference = request.user.preferences.is_smoking_preference
+        is_drinking_alcohol_preference = request.user.preferences.is_drinking_alcohol_preference
         age_preference_min = request.user.preferences.age_preference_min
         age_preference_max = request.user.preferences.age_preference_max
 
-        if not (location is None or location == ''):
-            queryset = queryset.filter(location=location.capitalize())
-        if not (sex is None or sex == ''):
-            queryset = queryset.filter(sex=sex.capitalize())
-        if not (orientation is None or orientation == ''):
-            queryset = queryset.filter(orientation=orientation.capitalize())
         if not (age_preference_min is None or age_preference_min == ''):
             if age_preference_min.isdecimal():
                 queryset = queryset.filter(age__gte=int(age_preference_min))
+
         if not (age_preference_max is None or age_preference_max == ''):
             if age_preference_min.isdecimal():
                 queryset = queryset.filter(age__lte=int(age_preference_max))
-        if not (eye_color is None or eye_color == ''):
-            queryset = queryset.filter(eye_color=eye_color.capitalize())
-        if not (hair_color is None or hair_color == ''):
-            queryset = queryset.filter(hair_color=hair_color.capitalize())
-        if not (growth is None or growth == ''):
-            queryset = queryset.filter(growth=growth)
-        if not (hair_length is None or hair_length == ''):
-            queryset = queryset.filter(hair_length=hair_length)
-        if not (body_type is None or body_type == ''):
-            queryset = queryset.filter(body_type=body_type.capitalize())
-        if not (is_smoking is None or is_smoking == ''):
-            if is_smoking.isdecimal():
-                queryset = queryset.filter(is_smoking__lte=int(is_smoking))
-        if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
-            if is_drinking_alcohol.isdecimal():
-                queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
+
+        if not (is_smoking_preference is None or is_smoking_preference == ''):
+            if is_smoking_preference.isdecimal():
+                queryset = queryset.filter(is_smoking__lte=int(is_smoking_preference))
+
+        if not (is_drinking_alcohol_preference is None or is_drinking_alcohol_preference == ''):
+            if is_drinking_alcohol_preference.isdecimal():
+                queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol_preference))
 
         x = random.randint(0, queryset.count() - 1)
 
