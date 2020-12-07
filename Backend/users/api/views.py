@@ -73,7 +73,7 @@ class VerifyAccountView(APIView):
     def patch(request):
         email = request.data.get('email')
 
-        user = get_object_or_404(email=email)
+        user = get_object_or_404(User, email=email)
 
         if user.verified:
             return Response({'detail': 'already verified'}, status=status.HTTP_400_BAD_REQUEST)
@@ -965,7 +965,7 @@ class TemplateSendMail(APIView):
         msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
         msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
 
-        send_mail("subject", msg_plain, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=msg_html)
+        send_mail("subject", msg_plain, EMAIL_SENDER, [email], fail_silently=False, html_message=msg_html)
 
         return Response({'detail': 'success'}, status=status.HTTP_200_OK)
 
