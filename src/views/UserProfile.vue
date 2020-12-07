@@ -76,6 +76,7 @@
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="Wyślij wiadomość"
+                      v-on:click="getUserFriends()"
                     >
                       <svg
                         color="lightblue"
@@ -962,7 +963,7 @@ export default {
         )
         .then((response) => {
           this.images = response.data;
-          console.log(this.images[0]);
+          //console.log(this.images[0]);
         })
         .catch((errors) => console.log(errors));
     },
@@ -1119,11 +1120,11 @@ export default {
         .then((response) => {
           console.log("invited");
           console.log(response);
-          //this.$router.go();
+          this.$router.go();
         })
         .catch((errors) => console.log(errors));
     },
-    getUserFriends() {
+    async getUserFriends() {
       axios
         .get(
           "http://127.0.0.1:8000/api/user/friendlist",
@@ -1141,18 +1142,25 @@ export default {
         })
         .catch((errors) => console.log(errors));
       console.log("friendslenth");
-      console.log(this.user_friendlist.length);
-      for (var i = 0; i < this.user_friends.length; i++) {
+      var friends = this.user_friendlist.filter(function(element) { if (element.status == "accepted" ) {console.log(element.friend.pk); return element.friend.pk}});
+      if ((this.$route.params.pk) in friends){
+        console.log("true");
+      } else {
+        console.log("false");
+      }
+      //console.log(friends);
+      //console.log(friends.length);
+      /*for (var i = 0; i < this.friends.length; i++) {
         if (
-          this.user_friends[i].status == "accepted" &&
-          this.user_friends[i].friend.pk == this.$route.params.pk
+          
+          this.friends[i].pk == this.$route.params.pk
         ) {
           console.log("friend:true");
           return true;
         }
       }
       console.log("friend:false");
-      return false;
+      return false;*/
     },
   },
   created() {
@@ -1166,7 +1174,7 @@ export default {
   mounted() {
     //$(".carousel").carousel();
   },
-  computed() {},
+  //computed() {},
 };
 </script>
 
