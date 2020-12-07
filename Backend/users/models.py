@@ -15,8 +15,8 @@ class Preferences(models.Model):
     age_preference_min = models.IntegerField(null=True, blank=True, default=None)
     age_preference_max = models.IntegerField(null=True, blank=True, default=None)
 
-    is_smoking_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
-    is_drinking_alcohol_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    is_smoking_preference = models.IntegerField(max_length=30, null=True, blank=True, default=None)
+    is_drinking_alcohol_preference = models.IntegerField(max_length=30, null=True, blank=True, default=None)
 
     Assertiveness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     Sincerity_preference = models.CharField(max_length=30, null=True, blank=True, default=None)

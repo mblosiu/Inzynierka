@@ -738,9 +738,11 @@ class RandomPair(APIView):
         if not (body_type is None or body_type == ''):
             queryset = queryset.filter(body_type=body_type.capitalize())
         if not (is_smoking is None or is_smoking == ''):
-            queryset = queryset.filter(is_smoking=is_smoking)
+            if is_smoking.isdecimal():
+                queryset = queryset.filter(is_smoking__lte=int(is_smoking))
         if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
-            queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
+            if is_drinking_alcohol.isdecimal():
+                queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
 
         x = random.randint(0, queryset.count() - 1)
 

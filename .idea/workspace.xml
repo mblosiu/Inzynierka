@@ -29,7 +29,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="change-password, restore-password, account-verify, sending mails">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="delete account - check password">
+      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0024_user_verified.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -509,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607184290634</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="delete account - check password">
+      <created>1607184800737</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1607184800737</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -537,7 +545,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="filters and settings" />
     <MESSAGE value="likes" />
     <MESSAGE value="likes - value" />
     <MESSAGE value="likes - delete" />
@@ -562,6 +569,7 @@
     <MESSAGE value="RandomPair, UserImage POST instead of PUT, fixes" />
     <MESSAGE value="change representation of preferences" />
     <MESSAGE value="change-password, restore-password, account-verify, sending mails" />
-    <option name="LAST_COMMIT_MESSAGE" value="change-password, restore-password, account-verify, sending mails" />
+    <MESSAGE value="delete account - check password" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete account - check password" />
   </component>
 </project>
