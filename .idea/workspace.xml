@@ -29,8 +29,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="fix">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="RandomPair - filters">
+      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0026_auto_20201207_1817.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,13 +189,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00004" summary="nothing special">
-      <created>1597649807608</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1597649807608</updated>
     </task>
     <task id="LOCAL-00005" summary="user gallery - Image model, serialization, view, url">
       <created>1597661694593</created>
@@ -530,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607359293646</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="RandomPair - filters">
+      <created>1607360225793</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1607360225793</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -558,7 +561,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="likes" />
     <MESSAGE value="likes - value" />
     <MESSAGE value="likes - delete" />
     <MESSAGE value="likes - delete fix" />
@@ -583,6 +585,7 @@
     <MESSAGE value="change-password, restore-password, account-verify, sending mails" />
     <MESSAGE value="delete account - check password" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="RandomPair - filters" />
+    <option name="LAST_COMMIT_MESSAGE" value="RandomPair - filters" />
   </component>
 </project>
