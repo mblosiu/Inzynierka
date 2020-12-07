@@ -18,13 +18,11 @@ from .serializers import RegistrationSerializer, UserSerializer, UserPreferences
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer
 from ..models import User, Image, Like, BlackList, FriendsList
 
-SENDER_EMAIL = 'noreply.elove@gmail.com'
-LETTERS = string.ascii_letters
-NUMBERS = string.digits
+EMAIL_SENDER = 'noreply.elove@gmail.com'
 
 
 def password_generator(length):
-    printable = f'{LETTERS}{NUMBERS}'
+    printable = f'{string.ascii_letters}{string.digits}'
 
     printable = list(printable)
     random.shuffle(printable)
@@ -60,7 +58,7 @@ class RegistrationView(APIView):
 
         msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
         msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
-        send_mail("subject", msg_plain, SENDER_EMAIL, [serializer.data.get("email")], fail_silently=False,
+        send_mail("subject", msg_plain, EMAIL_SENDER, [serializer.data.get("email")], fail_silently=False,
                   html_message=msg_html)
 
         serializer.save()
@@ -116,7 +114,7 @@ class DeleteUserAccountView(APIView):
 class ChangePasswordView(APIView):
     @staticmethod
     def patch(request):
-        user = get_object_or_404(pk=request.user.pk)
+        user = get_object_or_404(User, pk=request.user.pk)
         password1 = request.data.get('password1')
         password2 = request.data.get('password2')
         new_password = request.data.get('new_password')
@@ -132,7 +130,8 @@ class ChangePasswordView(APIView):
 
         msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
         msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
-        send_mail("subject", msg_plain, SENDER_EMAIL, [user.email], fail_silently=False, html_message=msg_html)
+        send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
+                  html_message=msg_html)
 
         return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
 
@@ -143,14 +142,15 @@ class RestorePasswordView(APIView):
     @staticmethod
     def patch(request):
         email = request.data.get('email')
-        user = get_object_or_404(email=email)
+        user = get_object_or_404(User, email=email)
 
         new_password = password_generator(8)
         user.set_password(new_password)
 
         msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
         msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
-        send_mail("subject", msg_plain, SENDER_EMAIL, [user.email], fail_silently=False, html_message=msg_html)
+        send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
+                  html_message=msg_html)
 
         return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
 
@@ -965,11 +965,11 @@ class TemplateSendMail(APIView):
         msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
         msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
 
-        send_mail("subject", msg_plain, SENDER_EMAIL, [email], fail_silently=False, html_message=msg_html)
+        send_mail("subject", msg_plain, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=msg_html)
 
         return Response({'detail': 'success'}, status=status.HTTP_200_OK)
 
-# todo: alkohol i pety ustawić jako cyfrę i dać wyszukiwanie ge - zrobione
+# todo: alkohol i pety ustawić jako integer i dać wyszukiwanie ge - zrobione
 # todo: dodać dislike na froncie
 # dodałem objects = models.Manager() do settings i Preferences
 # UserImage - put zostało zmienione na post

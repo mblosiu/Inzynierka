@@ -29,8 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="delete account - check password">
-      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0024_user_verified.py" afterDir="false" />
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -517,7 +516,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607184800737</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="fix">
+      <created>1607346126376</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1607346126376</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -558,7 +564,6 @@
     <MESSAGE value="black list - delete" />
     <MESSAGE value="friend list, search fix" />
     <MESSAGE value="optymalizacja" />
-    <MESSAGE value="fix" />
     <MESSAGE value="fix2" />
     <MESSAGE value="add query_params for blacklist" />
     <MESSAGE value="list filter - black list" />
@@ -570,6 +575,7 @@
     <MESSAGE value="change representation of preferences" />
     <MESSAGE value="change-password, restore-password, account-verify, sending mails" />
     <MESSAGE value="delete account - check password" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete account - check password" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>
