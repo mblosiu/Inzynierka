@@ -76,7 +76,6 @@
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="Wyślij wiadomość"
-                      v-on:click="getUserFriends()"
                     >
                       <svg
                         color="lightblue"
@@ -917,6 +916,8 @@ export default {
       user_blacklist: [],
       user_friendlist: [],
       user_friends: [],
+      friends: [],
+      userpk: this.$route.params.pk,
     };
   },
   methods: {
@@ -1024,6 +1025,8 @@ export default {
         .catch((errors) => console.log(errors));
     },
     isUserLiked() {
+      //console.log("isUserLiked");
+      //console.log(this.$route.params.pk);
       var liked = false;
       for (var i = 0; i < this.user_likes.length; i++) {
         if (this.user_likes[i].liked_by["pk"] == this.$route.params.pk) {
@@ -1124,7 +1127,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    async getUserFriends() {
+    getUserFriends() {
       axios
         .get(
           "http://127.0.0.1:8000/api/user/friendlist",
@@ -1141,15 +1144,25 @@ export default {
           console.log(response), (this.user_friendlist = response.data);
         })
         .catch((errors) => console.log(errors));
-      console.log("friendslenth");
-      var friends = this.user_friendlist.filter(function(element) { if (element.status == "accepted" ) {console.log(element.friend.pk); return element.friend.pk}});
-      if ((this.$route.params.pk) in friends){
+      // do sprawdzenia przerzucanie danych z headera
+    },
+    userStatus() {
+      console.log("userstatus");
+      var friends = this.user_friendlist.filter(function (element) {
+        if (element.status == "accepted") {
+          console.log("accepted");
+          console.log(element.friend.pk);
+
+          //console.log(this.userpk);
+          return element.friend.pk;
+        }
+      });
+      /*if (this.$route.params.pk in friends) {
         console.log("true");
       } else {
         console.log("false");
-      }
-      //console.log(friends);
-      //console.log(friends.length);
+      }*/
+      //console.log(this.friends);
       /*for (var i = 0; i < this.friends.length; i++) {
         if (
           
@@ -1174,7 +1187,18 @@ export default {
   mounted() {
     //$(".carousel").carousel();
   },
-  //computed() {},
+  /*computed() {
+    var friends = this.user_friendlist.filter(function (element) {
+        if (element.status == "accepted") {
+          console.log("accepted");
+          console.log(element.friend.pk);
+          
+          console.log(this.$route.params.pk);
+          return element.friend.pk;
+        }
+      });
+
+  },*/
 };
 </script>
 
