@@ -8,16 +8,9 @@
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="2">
-          <b-sidebar
-            id="sidebar-footer"
-            aria-label="Okno chatu"
-            no-header
-            shadow
-          >
+          <b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
             <template v-slot:footer="{ hide }">
-              <div
-                class="d-flex bg-dark text-light align-items-center px-3 py-2"
-              >
+              <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
                 <strong class="mr-auto"></strong>
                 <b-button size="sm" @click="hide">Zamknij</b-button>
               </div>
@@ -64,11 +57,7 @@
                   role="toolbar"
                   aria-label="Toolbar with button groups"
                 >
-                  <div
-                    class="btn-group mr-3 ml-3"
-                    role="group"
-                    aria-label="icons"
-                  >
+                  <div class="btn-group mr-3 ml-3" role="group" aria-label="icons">
                     <button
                       v-b-toggle.sidebar-footer
                       type="button"
@@ -132,10 +121,7 @@
                       data-placement="bottom"
                       title="Zobacz galerię"
                     >
-                      <div
-                        id="show-btn"
-                        @click="$bvModal.show('bv-modal-example')"
-                      >
+                      <div id="show-btn" @click="$bvModal.show('bv-modal-example')">
                         <svg
                           color="lightblue"
                           width="3em"
@@ -219,8 +205,7 @@
                             <b-col cols="10"></b-col>
                             <div class="comments">
                               <h2>
-                                Użytkownik nie posiada w swojej galerii żadnego
-                                zdjęcia :(
+                                Użytkownik nie posiada w swojej galerii żadnego zdjęcia :(
                               </h2>
                               <br />
                             </div>
@@ -365,9 +350,7 @@
                     <li class="list-group-item">
                       Imię i nazwisko:
                       <div class="oneline">
-                        <p class="font-weight-bold">
-                          {{ user.name }} {{ user.surname }}
-                        </p>
+                        <p class="font-weight-bold">{{ user.name }} {{ user.surname }}</p>
                       </div>
                     </li>
                     <li class="list-group-item">
@@ -699,9 +682,7 @@
                       </li>
                     </div>
 
-                    <div
-                      v-else-if="user_preferences.is_smoking_preference == 1"
-                    >
+                    <div v-else-if="user_preferences.is_smoking_preference == 1">
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -709,9 +690,7 @@
                         </div>
                       </li>
                     </div>
-                    <div
-                      v-else-if="user_preferences.is_smoking_preference == 2"
-                    >
+                    <div v-else-if="user_preferences.is_smoking_preference == 2">
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -719,9 +698,7 @@
                         </div>
                       </li>
                     </div>
-                    <div
-                      v-else-if="user_preferences.is_smoking_preference == 3"
-                    >
+                    <div v-else-if="user_preferences.is_smoking_preference == 3">
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -729,9 +706,7 @@
                         </div>
                       </li>
                     </div>
-                    <div
-                      v-else-if="user_preferences.is_smoking_preference == 4"
-                    >
+                    <div v-else-if="user_preferences.is_smoking_preference == 4">
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -748,11 +723,7 @@
                       </li>
                     </div>
 
-                    <div
-                      v-if="
-                        user_preferences.is_drinking_alcohol_preference == 0
-                      "
-                    >
+                    <div v-if="user_preferences.is_drinking_alcohol_preference == 0">
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -760,11 +731,7 @@
                         </div>
                       </li>
                     </div>
-                    <div
-                      v-else-if="
-                        user_preferences.is_drinking_alcohol_preference == 1
-                      "
-                    >
+                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 1">
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -772,11 +739,7 @@
                         </div>
                       </li>
                     </div>
-                    <div
-                      v-else-if="
-                        user_preferences.is_drinking_alcohol_preference == 2
-                      "
-                    >
+                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 2">
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -784,11 +747,7 @@
                         </div>
                       </li>
                     </div>
-                    <div
-                      v-else-if="
-                        user_preferences.is_drinking_alcohol_preference == 3
-                      "
-                    >
+                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 3">
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -796,11 +755,7 @@
                         </div>
                       </li>
                     </div>
-                    <div
-                      v-else-if="
-                        user_preferences.is_drinking_alcohol_preference == 4
-                      "
-                    >
+                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 4">
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -953,9 +908,7 @@ export default {
     getUserImages() {
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/users/" +
-            this.$route.params.pk +
-            "/images",
+          "http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk + "/images",
           {
             headers: {
               Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1008,8 +961,7 @@ export default {
     getUserLikes() {
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/get-users-are-liked/" +
-            this.$route.params.pk,
+          "http://127.0.0.1:8000/api/user/get-users-are-liked/" + this.$route.params.pk,
           {
             params: {},
             headers: {
@@ -1127,7 +1079,9 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    getUserFriends() {
+    async getUserFriends() {
+      console.log("getUserFriends");
+      console.log(this.user_data.pk);
       axios
         .get(
           "http://127.0.0.1:8000/api/user/friendlist",
@@ -1176,29 +1130,18 @@ export default {
       return false;*/
     },
   },
-  created() {
+  async created() {
     this.getUsers();
     this.getUserImages();
-    this.getUserData();
+    await this.getUserData();
     this.getUserLikes();
     this.getUserFriends();
     //this.getUserBlacklist();
   },
   mounted() {
-    //$(".carousel").carousel();
+    this.getUserFriends();
   },
-  /*computed() {
-    var friends = this.user_friendlist.filter(function (element) {
-        if (element.status == "accepted") {
-          console.log("accepted");
-          console.log(element.friend.pk);
-          
-          console.log(this.$route.params.pk);
-          return element.friend.pk;
-        }
-      });
-
-  },*/
+  //computed() {},
 };
 </script>
 
