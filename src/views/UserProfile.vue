@@ -8,9 +8,16 @@
     <b-container class="bv-example-row" fluid>
       <b-row>
         <b-col cols="2">
-          <b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
+          <b-sidebar
+            id="sidebar-footer"
+            aria-label="Okno chatu"
+            no-header
+            shadow
+          >
             <template v-slot:footer="{ hide }">
-              <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
+              <div
+                class="d-flex bg-dark text-light align-items-center px-3 py-2"
+              >
                 <strong class="mr-auto"></strong>
                 <b-button size="sm" @click="hide">Zamknij</b-button>
               </div>
@@ -57,7 +64,11 @@
                   role="toolbar"
                   aria-label="Toolbar with button groups"
                 >
-                  <div class="btn-group mr-3 ml-3" role="group" aria-label="icons">
+                  <div
+                    class="btn-group mr-3 ml-3"
+                    role="group"
+                    aria-label="icons"
+                  >
                     <button
                       v-b-toggle.sidebar-footer
                       type="button"
@@ -84,36 +95,86 @@
                         />
                       </svg>
                     </button>
-                    <button
-                      type="button"
-                      v-on:click="
-                        inviteUser();
-                        toast2('b-toaster-bottom-right', 'info');
-                      "
-                      class="btn btn-secondary"
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      title="Zaproś do grona znajomych"
-                    >
-                      <svg
-                        color="lightblue"
-                        width="3em"
-                        height="3em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-person-plus-fill"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
+                    <div v-if="userStatus() == 'none'">
+                      <button
+                        type="button"
+                        v-on:click="
+                          inviteUser();
+                          toast2('b-toaster-bottom-right', 'info');
+                        "
+                        class="btn btn-secondary"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Zaproś do grona znajomych"
                       >
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          color="lightblue"
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-person-plus-fill"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div v-else-if="userStatus() == 'friend'">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Usuń z grona znajomych"
+                      >
+                        <svg
+                          color="lightgreen"
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-person-check-fill"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm9.854-2.854a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div v-else-if="userStatus() == 'waiting'">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Oczekiwanie na akceptację"
+                      >
+                        <svg
+                          color="lightblue"
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-person-check"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zm4.854-7.85a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                     <button
                       type="button"
                       class="btn btn-secondary"
@@ -121,7 +182,10 @@
                       data-placement="bottom"
                       title="Zobacz galerię"
                     >
-                      <div id="show-btn" @click="$bvModal.show('bv-modal-example')">
+                      <div
+                        id="show-btn"
+                        @click="$bvModal.show('bv-modal-example')"
+                      >
                         <svg
                           color="lightblue"
                           width="3em"
@@ -205,7 +269,8 @@
                             <b-col cols="10"></b-col>
                             <div class="comments">
                               <h2>
-                                Użytkownik nie posiada w swojej galerii żadnego zdjęcia :(
+                                Użytkownik nie posiada w swojej galerii żadnego
+                                zdjęcia :(
                               </h2>
                               <br />
                             </div>
@@ -350,7 +415,9 @@
                     <li class="list-group-item">
                       Imię i nazwisko:
                       <div class="oneline">
-                        <p class="font-weight-bold">{{ user.name }} {{ user.surname }}</p>
+                        <p class="font-weight-bold">
+                          {{ user.name }} {{ user.surname }}
+                        </p>
                       </div>
                     </li>
                     <li class="list-group-item">
@@ -682,7 +749,9 @@
                       </li>
                     </div>
 
-                    <div v-else-if="user_preferences.is_smoking_preference == 1">
+                    <div
+                      v-else-if="user_preferences.is_smoking_preference == 1"
+                    >
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -690,7 +759,9 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_smoking_preference == 2">
+                    <div
+                      v-else-if="user_preferences.is_smoking_preference == 2"
+                    >
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -698,7 +769,9 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_smoking_preference == 3">
+                    <div
+                      v-else-if="user_preferences.is_smoking_preference == 3"
+                    >
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -706,7 +779,9 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_smoking_preference == 4">
+                    <div
+                      v-else-if="user_preferences.is_smoking_preference == 4"
+                    >
                       <li class="list-group-item">
                         Papierosy:
                         <div class="oneline">
@@ -723,7 +798,11 @@
                       </li>
                     </div>
 
-                    <div v-if="user_preferences.is_drinking_alcohol_preference == 0">
+                    <div
+                      v-if="
+                        user_preferences.is_drinking_alcohol_preference == 0
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -731,7 +810,11 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 1">
+                    <div
+                      v-else-if="
+                        user_preferences.is_drinking_alcohol_preference == 1
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -739,7 +822,11 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 2">
+                    <div
+                      v-else-if="
+                        user_preferences.is_drinking_alcohol_preference == 2
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -747,7 +834,11 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 3">
+                    <div
+                      v-else-if="
+                        user_preferences.is_drinking_alcohol_preference == 3
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -755,7 +846,11 @@
                         </div>
                       </li>
                     </div>
-                    <div v-else-if="user_preferences.is_drinking_alcohol_preference == 4">
+                    <div
+                      v-else-if="
+                        user_preferences.is_drinking_alcohol_preference == 4
+                      "
+                    >
                       <li class="list-group-item">
                         Alkohol:
                         <div class="oneline">
@@ -872,12 +967,12 @@ export default {
       user_friendlist: [],
       user_friends: [],
       friends: [],
-      userpk: this.$route.params.pk,
+      userPk: "",
     };
   },
   methods: {
     getUserData() {
-      axios
+      return axios
         .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
@@ -889,9 +984,10 @@ export default {
           console.log(response), (this.user_data = response.data);
         })
         .catch((errors) => console.log(errors));
+      //return this.user.data.pk;
     },
-    getUsers() {
-      axios
+    async getUsers() {
+      return axios
         .get("http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk, {
           params: {},
           headers: {
@@ -908,7 +1004,9 @@ export default {
     getUserImages() {
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk + "/images",
+          "http://127.0.0.1:8000/api/user/users/" +
+            this.$route.params.pk +
+            "/images",
           {
             headers: {
               Authorization: "Token " + localStorage.getItem("user-token"),
@@ -961,7 +1059,8 @@ export default {
     getUserLikes() {
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/get-users-are-liked/" + this.$route.params.pk,
+          "http://127.0.0.1:8000/api/user/get-users-are-liked/" +
+            this.$route.params.pk,
           {
             params: {},
             headers: {
@@ -977,8 +1076,6 @@ export default {
         .catch((errors) => console.log(errors));
     },
     isUserLiked() {
-      //console.log("isUserLiked");
-      //console.log(this.$route.params.pk);
       var liked = false;
       for (var i = 0; i < this.user_likes.length; i++) {
         if (this.user_likes[i].liked_by["pk"] == this.$route.params.pk) {
@@ -1042,7 +1139,7 @@ export default {
         variant: variant,
       });
     },
-    toast3(toaster, variant = null) {
+    /*toast3(toaster, variant = null) {
       this.$bvToast.toast(
         `Aby zablokować użytkownika, najpierw usuń go z grona znajomych.`,
         {
@@ -1052,7 +1149,7 @@ export default {
           variant: variant,
         }
       );
-    },
+    },*/
     getUrl(pic) {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
       else
@@ -1080,6 +1177,7 @@ export default {
         .catch((errors) => console.log(errors));
     },
     async getUserFriends() {
+      await this.getUserData();
       console.log("getUserFriends");
       console.log(this.user_data.pk);
       axios
@@ -1098,42 +1196,35 @@ export default {
           console.log(response), (this.user_friendlist = response.data);
         })
         .catch((errors) => console.log(errors));
-      // do sprawdzenia przerzucanie danych z headera
     },
     userStatus() {
-      console.log("userstatus");
-      var friends = this.user_friendlist.filter(function (element) {
-        if (element.status == "accepted") {
-          console.log("accepted");
-          console.log(element.friend.pk);
-
-          //console.log(this.userpk);
-          return element.friend.pk;
-        }
-      });
-      /*if (this.$route.params.pk in friends) {
-        console.log("true");
-      } else {
-        console.log("false");
-      }*/
-      //console.log(this.friends);
-      /*for (var i = 0; i < this.friends.length; i++) {
+      console.log("userStatus");
+      var status = "none";
+      for (var i = 0; i < this.user_friendlist.length; i++) {
         if (
-          
-          this.friends[i].pk == this.$route.params.pk
+          this.user_friendlist[i].status == "accepted" &&
+          this.user_friendlist[i].friend.pk == this.user.pk
         ) {
-          console.log("friend:true");
-          return true;
+          status = "friend";
+          console.log("friend");
+          return status;
+        } else if (
+          (this.user_friendlist[i].status == "waiting for your accept") &&
+          this.user_friendlist[i].friend.pk == this.user.pk
+        ) {
+          status = "waiting";
+          console.log("waiting");
+          return status;
         }
       }
-      console.log("friend:false");
-      return false;*/
+      console.log("none");
+      return status;
     },
   },
-  async created() {
+  created() {
     this.getUsers();
     this.getUserImages();
-    await this.getUserData();
+    this.getUserData();
     this.getUserLikes();
     this.getUserFriends();
     //this.getUserBlacklist();

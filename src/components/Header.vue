@@ -96,17 +96,17 @@
                     params: { pk: user_friend.friend.pk },
                   }"
                 >
-                  <span class="mr-5"
-                    ><strong>{{ user_friend.friend.username }}</strong></span
-                  >
                   <b-avatar
                     badge
-                    badge-variant="info"
+                    badge-variant="dark"
                     variant="info"
                     :src="getUrl(user_friend.friend.profile_picture)"
-                    class="ml-5 mr-1"
+                    class="ml-1 mr-1"
                     size="4rem"
                   ></b-avatar>
+                  <span class="ml-2"
+                    ><strong>{{ user_friend.friend.username }}</strong></span
+                  >
                 </router-link>
               </b-list-group-item>
             </div>

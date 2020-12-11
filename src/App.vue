@@ -55,8 +55,8 @@ export default {
   color: #343a40;
 }
 #user {
-  background-image: url('../public/img/3.jpeg');
-  background-color: rgba(255, 255, 255, 0.5);
+  /*background-image: url('../public/img/3.jpeg');*/
+  background-color: rgba(255, 146, 231, 0.5);
   background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-size: cover;
