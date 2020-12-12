@@ -942,7 +942,7 @@ export default {
   },
   methods: {
     deleteAccount() {
-      console.log("usuwanie konta");
+      //console.log("usuwanie konta");
       axios.delete("http://127.0.0.1:8000/api/user/delete", {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -965,7 +965,7 @@ export default {
       this.dismissCountDown2 = this.dismissSecs2;
     },
     getUserBlacklist() {
-      console.log("getblacklist");
+      //console.log("getblacklist");
       axios
         .get(
           "http://127.0.0.1:8000/api/user/blacklist",
@@ -978,7 +978,7 @@ export default {
           }
         )
         .then((response) => {
-          console.log("userblacklist:");
+          //console.log("userblacklist:");
           console.log(response),
             (this.blacklisted_users =
               response.data); /*,
@@ -987,8 +987,8 @@ export default {
         .catch((errors) => console.log(errors));
     },
     unblockUser(pk) {
-      console.log("unblockUser");
-      console.log(pk);
+      //console.log("unblockUser");
+      //console.log(pk);
       axios
         .delete(
           "http://127.0.0.1:8000/api/user/blacklist",
@@ -1003,8 +1003,8 @@ export default {
           }
         )
         .then((response) => {
-          console.log("unblocked:");
-          console.log(response);
+          //console.log("unblocked:");
+          //console.log(response);
         })
         .catch((errors) => console.log(errors));
         this.$router.go();
@@ -1156,9 +1156,7 @@ export default {
     this.getUserSettings();
     this.getUserBlacklist();
   },
-  computed() {
-    this.getUserBlacklist();
-  },
+  //computed() {},
 };
 </script>
 

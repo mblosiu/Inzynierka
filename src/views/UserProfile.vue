@@ -100,7 +100,11 @@
                         type="button"
                         v-on:click="
                           inviteUser();
-                          toast2('b-toaster-bottom-right', 'info');
+                          toast(
+                            'b-toaster-bottom-right',
+                            'info',
+                            'Wysłano zaproszenie do grona znajomych.'
+                          );
                         "
                         class="btn btn-secondary"
                         data-toggle="tooltip"
@@ -134,6 +138,7 @@
                         data-toggle="tooltip"
                         data-placement="bottom"
                         title="Usuń z grona znajomych"
+                        v-on:click="removeFriend(user.pk)"
                       >
                         <svg
                           color="lightgreen"
@@ -182,10 +187,7 @@
                       data-placement="bottom"
                       title="Zobacz galerię"
                     >
-                      <div
-                        id="show-btn"
-                        @click="$bvModal.show('bv-modal-example')"
-                      >
+                      <div id="show-btn" @click="$bvModal.show('user_gallery')">
                         <svg
                           color="lightblue"
                           width="3em"
@@ -210,7 +212,7 @@
                       </div>
                     </button>
                     <b-modal
-                      id="bv-modal-example"
+                      id="user_gallery"
                       size="lg"
                       title="Galeria użytkownika"
                       hide-footer
@@ -373,7 +375,13 @@
                       <button
                         type="button"
                         class="btn btn-secondary"
-                        @click="toast('b-toaster-bottom-right', 'danger')"
+                        @click="
+                          toast(
+                            'b-toaster-bottom-right',
+                            'danger',
+                            'Nie możesz zablokować polubionego użytkownika.'
+                          )
+                        "
                         data-toggle="tooltip"
                         data-placement="bottom"
                         title="Nie możesz zablokować polubionego użytkownika."
@@ -967,7 +975,7 @@ export default {
       user_friendlist: [],
       user_friends: [],
       friends: [],
-      userPk: "",
+      //userPk: "",
     };
   },
   methods: {
@@ -1037,6 +1045,7 @@ export default {
           this.$router.go();
         })
         .catch((errors) => console.log(errors));
+      //this.$forceUpdate();
     },
 
     dislikeUser() {
@@ -1099,7 +1108,9 @@ export default {
           Authorization: "Token " + localStorage.getItem("user-token"),
         },
       };
-
+      if (this.userStatus() == "waiting" || this.userStatus() == "friend") {
+        this.removeFriend(this.user.pk);
+      }
       axios
         .post(
           "http://127.0.0.1:8000/api/user/blacklist",
@@ -1124,39 +1135,21 @@ export default {
       }
       return age;
     },
-    toast(toaster, variant = null) {
-      this.$bvToast.toast(`Nie możesz zablokować polubionego użytkownika.`, {
-        title: `Uwaga!`,
+    toast(toaster, variant = null, msg) {
+      this.$bvToast.toast(msg, {
+        title: `Info`,
         toaster: toaster,
         solid: true,
         variant: variant,
       });
     },
-    toast2(toaster, variant = null) {
-      this.$bvToast.toast(`Wysłano zaproszenie do grona znajomych.`, {
-        toaster: toaster,
-        solid: true,
-        variant: variant,
-      });
-    },
-    /*toast3(toaster, variant = null) {
-      this.$bvToast.toast(
-        `Aby zablokować użytkownika, najpierw usuń go z grona znajomych.`,
-        {
-          title: `Uwaga!`,
-          toaster: toaster,
-          solid: true,
-          variant: variant,
-        }
-      );
-    },*/
     getUrl(pic) {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
     inviteUser() {
-      console.log("invite user");
+      //console.log("invite user");
       const config = {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1170,15 +1163,50 @@ export default {
           config
         )
         .then((response) => {
-          console.log("invited");
+          //console.log("invited");
           console.log(response);
-          this.$router.go();
+          //this.$router.go();
+        })
+        .catch((errors) => {
+          if (errors.response.status == 400) {
+            this.toast(
+              "b-toaster-bottom-right",
+              "danger",
+              "Użytkownik już jest na liście zaproszonych! Czekaj na akceptację."
+            );
+          }
+          //console.log(errors)
+        });
+    },
+    removeFriend(pk) {
+      //console.log("removeFriend");
+      //console.log(pk);
+      axios
+        .delete(
+          "http://127.0.0.1:8000/api/user/friendlist",
+
+          {
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+            data: {
+              pk: pk,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
         })
         .catch((errors) => console.log(errors));
+      //this.$router.go();
+      this.toast(
+        "b-toaster-bottom-right",
+        "info",
+        "Usunięto z grona znajomych."
+      );
     },
     async getUserFriends() {
       await this.getUserData();
-      console.log("getUserFriends");
       console.log(this.user_data.pk);
       axios
         .get(
@@ -1192,13 +1220,11 @@ export default {
           }
         )
         .then((response) => {
-          console.log("userfriendlist:");
           console.log(response), (this.user_friendlist = response.data);
         })
         .catch((errors) => console.log(errors));
     },
     userStatus() {
-      console.log("userStatus");
       var status = "none";
       for (var i = 0; i < this.user_friendlist.length; i++) {
         if (
@@ -1206,14 +1232,13 @@ export default {
           this.user_friendlist[i].friend.pk == this.user.pk
         ) {
           status = "friend";
-          console.log("friend");
           return status;
         } else if (
-          (this.user_friendlist[i].status == "waiting for your accept") &&
+          this.user_friendlist[i].status == "waiting for your accept" &&
           this.user_friendlist[i].friend.pk == this.user.pk
         ) {
           status = "waiting";
-          console.log("waiting");
+
           return status;
         }
       }

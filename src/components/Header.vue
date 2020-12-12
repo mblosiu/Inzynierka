@@ -78,9 +78,10 @@
           v-b-toggle.friendslist
         >
           Znajomi
-          <span class="badge badge-light">0</span>
+          <span class="badge badge-light"></span>
         </b-button>
         <b-sidebar id="friendslist" title="Znajomi:" right shadow>
+         
           <div class="px-1 py-1">
             <div
               v-for="user_friend in user_friends"
@@ -408,6 +409,9 @@ export default {
       user_likes: [],
       user_likings: [],
       user_friends: [],
+      //myFriends: 0,
+      usersWaiting: 0,
+      newMessages: 0,
     };
   },
   methods: {
@@ -418,7 +422,7 @@ export default {
       this.dismissCountDown = this.dismissSecs;
     },
     getUserData() {
-      axios
+      return axios
         .get("http://127.0.0.1:8000/api/user/properties", {
           params: {},
           headers: {
@@ -512,9 +516,10 @@ export default {
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
-    getUserFriends() {
+    async getUserFriends() {
+      await this.getUserData();
       //console.log("getFriends");
-      axios
+      return axios
         .get(
           "http://127.0.0.1:8000/api/user/friendlist",
 
@@ -530,10 +535,29 @@ export default {
           console.log(response), (this.user_friends = response.data);
         })
         .catch((errors) => console.log(errors));
+        
+    },
+    friendsCounter(){
+      //await this.getUserFriends();
+      var myFriends = 0;
+      /*this.myFriends = this.user_friends.filter(element => element.status == 'friend');
+      console.log(this.myFriends.length);*/
+      console.log("getfriends for");
+        /*for (var i = 0; i < this.user_friends.length; i++) {
+          console.log("for");
+        if (
+          this.user_friends[i].status == "accepted") {
+          this.myFriends= this.myFriends + 1;
+        }/* else if (
+          this.user_friendlist[i].status == "waiting for your accept") {
+          this.usersWaiting = this.usersWaiting + 1;
+        }*/
+      //}
+      //return myFriends;
     },
     acceptUser(pk) {
-      console.log("acceptuser");
-      console.log(pk);
+      //console.log("acceptuser");
+      //console.log(pk);
       let config = {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -548,14 +572,14 @@ export default {
           config
         )
         .then((response) => {
-          console.log("user accepted");
+          //console.log("user accepted");
           console.log(response);
         })
         .catch((errors) => console.log(errors));
     },
     rejectUser(pk) {
-      console.log("rejectUser");
-      console.log(pk);
+      //console.log("rejectUser");
+      //console.log(pk);
       axios
         .delete(
           "http://127.0.0.1:8000/api/user/friendlist",
@@ -570,11 +594,12 @@ export default {
           }
         )
         .then((response) => {
-          console.log("rejected:");
+          //console.log("rejected:");
           console.log(response);
         })
         .catch((errors) => console.log(errors));
       this.$router.go();
+      //this.$forceUpdate();
     },
   },
   created() {
