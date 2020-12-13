@@ -163,6 +163,11 @@
                         data-toggle="tooltip"
                         data-placement="bottom"
                         title="Oczekiwanie na akceptację"
+                        v-on:click="toast(
+                            'b-toaster-bottom-right',
+                            'info',
+                            'Użytkownik czeka na akceptację w twoich powiadomieniach!'
+                          )"
                       >
                         <svg
                           color="lightblue"

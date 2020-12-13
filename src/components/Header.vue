@@ -78,10 +78,9 @@
           v-b-toggle.friendslist
         >
           Znajomi
-          <span class="badge badge-light"></span>
+          <span class="badge badge-light">{{ usersFriends.length }}</span>
         </b-button>
         <b-sidebar id="friendslist" title="Znajomi:" right shadow>
-         
           <div class="px-1 py-1">
             <div
               v-for="user_friend in user_friends"
@@ -217,7 +216,9 @@
             @click="getUserFriends()"
           >
             Powiadomienia
-            <span class="badge badge-light">0</span>
+            <span class="badge badge-light">{{
+              usersWaiting.length + newMessages
+            }}</span>
           </b-button>
           <b-modal
             id="notifications"
@@ -409,7 +410,7 @@ export default {
       user_likes: [],
       user_likings: [],
       user_friends: [],
-      //myFriends: 0,
+      usersFriends: 0,
       usersWaiting: 0,
       newMessages: 0,
     };
@@ -532,18 +533,31 @@ export default {
         )
         .then((response) => {
           //console.log("userfriendlist:");
-          console.log(response), (this.user_friends = response.data);
+          console.log(response),
+            (this.user_friends =
+              response.data) /*, console.log(this.usersFriends = response.data.filter(element => element.status == 'friend'))*/;
+          this.usersFriends = this.user_friends.filter((element) => {
+            return element.status == "accepted";
+          });
+          this.usersWaiting = this.user_friends.filter((element) => {
+            return element.status == "waiting for your accept";
+          });
         })
         .catch((errors) => console.log(errors));
-        
     },
-    friendsCounter(){
-      //await this.getUserFriends();
-      var myFriends = 0;
+    async counter() {
+      await this.getUserFriends();
+      console.log("onlyfriends");
+      var onlyFriends = this.user_friends.filter((element) => {
+        return element.status == "friend";
+      });
+      console.log(onlyFriends);
+      this.usersFriends = onlyFriends.length;
+      //var myFriends = 0;
       /*this.myFriends = this.user_friends.filter(element => element.status == 'friend');
       console.log(this.myFriends.length);*/
-      console.log("getfriends for");
-        /*for (var i = 0; i < this.user_friends.length; i++) {
+      //console.log("getfriends for");
+      /*for (var i = 0; i < this.user_friends.length; i++) {
           console.log("for");
         if (
           this.user_friends[i].status == "accepted") {
@@ -604,7 +618,10 @@ export default {
   },
   created() {
     if (this.token != null) {
-      this.getUserData(), this.getUserLikes(), this.getUserLiking();
+      this.getUserData(),
+        this.getUserLikes(),
+        this.getUserLiking(),
+        this.getUserFriends();
     }
   },
 };
