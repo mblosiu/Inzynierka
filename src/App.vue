@@ -68,11 +68,9 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 #nav {
   top: 0px;
 }
-
 #content {
   min-height: 73.2vh;
   margin-left: 2cm;
@@ -80,7 +78,6 @@ export default {
   margin-top: 2cm;
   margin-bottom: 2cm;
 }
-
 #footer {
   color: whitesmoke;
   bottom: 0;
