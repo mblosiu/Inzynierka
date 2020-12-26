@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <b-container class="bv-example-row" fluid>
+    <v-container>
       <b-row>
         <b-col cols="1"></b-col>
         <b-col cols="10">
@@ -304,7 +304,7 @@
           <br />
         </b-col>
       </b-row>
-    </b-container>
+    </v-container>
   </div>
 </template>
 

@@ -58,7 +58,6 @@
             color="purple darken-4"
             data-toggle="tooltip"
             title="Znajomi"
-            v-b-toggle.friendslist
             x-large
             class="ml-2 mr-2"
             @click="friendlist = !friendlist"
@@ -112,7 +111,7 @@
         </v-badge>
       </b-nav-form>
 
-      <b-sidebar id="friendslist" title="Znajomi:" right shadow>
+      <!--<b-sidebar id="friendslist" title="Znajomi:" right shadow>
         <div class="px-1 py-1">
           <div
             v-for="user_friend in user_friends"
@@ -143,7 +142,7 @@
             </b-list-group-item>
           </div>
         </div>
-      </b-sidebar>
+      </b-sidebar>-->
       <!--<b-nav-form v-if="token != null">
         <b-button
           class="my-2 ml-2"
@@ -527,7 +526,38 @@
     </v-navigation-drawer>
 
     <v-navigation-drawer v-model="friendlist" absolute right temporary>
-      <div class="px-1 py-1">
+
+        <!--<v-list class="d-flex flex-row mb-6 purple lighten-2"
+         v-for="user_friend in user_friends"
+          v-bind:key="user_friend.friend.pk"
+          
+        >
+        <v-list-tile >
+          
+          
+          <v-list-tile-content class="purple lighten-2">
+             <router-link
+              :to="{
+                name: 'userprofile',
+                params: { pk: user_friend.friend.pk },
+              }"
+            >
+              <b-avatar
+                badge
+                badge-variant="dark"
+                variant="info"
+                :src="getUrl(user_friend.friend.profile_picture)"
+                class="ml-1 mr-1"
+                size="4rem"
+              ></b-avatar>
+              <span class="ml-2"
+                ><strong>{{ user_friend.friend.username }}</strong></span
+              >
+            </router-link>
+          </v-list-tile-content>
+          
+        </v-list-tile>
+      </v-list>-->
         <div
           v-for="user_friend in user_friends"
           v-bind:key="user_friend.friend.pk"
@@ -556,7 +586,7 @@
             </router-link>
           </b-list-group-item>
         </div>
-      </div>
+      
     </v-navigation-drawer>
   </nav>
 </template>
