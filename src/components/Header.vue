@@ -1,42 +1,37 @@
 <template>
-  <div class>
-    <b-navbar class="navbar" toggleable="lg">
+  <nav>
+    <v-toolbar app clipped-left dense color="purple">
+      <v-btn
+        color="purple"
+        depressed
+        v-if="token != null"
+        @click="drawer = !drawer"
+        class="mr-3"
+      >
+        <v-app-bar-nav-icon> </v-app-bar-nav-icon>
+        <b-avatar :src="getUrl(user_data.profile_picture)"></b-avatar>
+      </v-btn>
       <a v-if="token == null" id="logo" class="navbar-brand" href="/">
         e
-        <svg
-          width="0.85em"
-          height="0.85em"
-          viewBox="0 0 16 16"
-          class="bi bi-heart-fill"
-          fill="red"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-          />
-        </svg>
+
+        <v-icon color="red">mdi-heart</v-icon>
+
         Love
       </a>
       <a id="logo" v-else class="navbar-brand" href="/mainuser">
         e
-        <svg
-          width="0.85em"
-          height="0.85em"
-          viewBox="0 0 16 16"
-          class="bi bi-heart-fill"
-          fill="red"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-          />
-        </svg>
+
+        <v-icon color="red">mdi-heart</v-icon>
+
         Love
       </a>
 
+      <b-nav-form id="logo" class="ml-1 mr-2" v-if="token != null">
+      </b-nav-form>
       <b-nav-form id="search" @submit.prevent="search" v-if="token != null">
+        <v-btn icon large>
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
         <b-form-input
           id="search-input"
           size="sm"
@@ -47,349 +42,523 @@
         />
       </b-nav-form>
 
-      <b-navbar-nav class="ml-auto">
-        <!--<b-dropdown text="Lista 1" size="sm">
-          <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
-          <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
-          <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
-          <b-dropdown-item href="/#">Premium</b-dropdown-item>
-        </b-dropdown>
-        <div id="dropdown" v-if="token != null">
-          <b-dropdown id="dropdown" text="Dropdown1" variant="own" size="md" class="ml-2 mr-2">
-            <b-dropdown-item href="/mainuser">Twój profil</b-dropdown-item>
-            <b-dropdown-item href="/mainuser/gallery">Galeria</b-dropdown-item>
-            <b-dropdown-item href="/mainuser/settings">Ustawienia</b-dropdown-item>
-            <b-dropdown-item href="/#">Premium</b-dropdown-item>
-          </b-dropdown>
+      <v-spacer></v-spacer>
+
+      <b-nav-form v-if="token != null">
+        <v-badge
+          overlap
+          offset-x="25"
+          offset-y="27"
+          bottom
+          color="green"
+          :content="usersFriends.length"
+        >
+          <v-btn
+            icon
+            color="purple darken-4"
+            data-toggle="tooltip"
+            title="Znajomi"
+            v-b-toggle.friendslist
+            x-large
+            class="ml-2 mr-2"
+            @click="friendlist = !friendlist"
+          >
+            <v-icon>mdi-account-group</v-icon>
+          </v-btn>
+        </v-badge>
+      </b-nav-form>
+      <b-nav-form v-if="token != null">
+        <v-badge
+          overlap
+          offset-x="25"
+          offset-y="27"
+          bottom
+          color="blue"
+          :content="usersWaiting.length"
+        >
+          <v-btn
+            icon
+            color="purple darken-4"
+            data-toggle="tooltip"
+            title="Zaproszenia do znajomych"
+            v-b-modal.notifications
+            x-large
+            class="ml-2 mr-2"
+          >
+            <v-icon>mdi-account-plus</v-icon>
+          </v-btn>
+        </v-badge>
+      </b-nav-form>
+      <b-nav-form v-if="token != null">
+        <v-badge
+          overlap
+          offset-x="25"
+          offset-y="27"
+          bottom
+          color="blue"
+          content="0"
+        >
+          <v-btn
+            icon
+            color="purple darken-4"
+            data-toggle="tooltip"
+            title="Nowe wiadomości"
+            v-b-modal.notifications
+            x-large
+            class="ml-2 mr-2"
+          >
+            <v-icon>mdi-message-text</v-icon>
+          </v-btn>
+        </v-badge>
+      </b-nav-form>
+
+      <b-sidebar id="friendslist" title="Znajomi:" right shadow>
+        <div class="px-1 py-1">
+          <div
+            v-for="user_friend in user_friends"
+            v-bind:key="user_friend.friend.pk"
+          >
+            <b-list-group-item
+              class="d-flex align-items-right"
+              v-if="user_friend.status == 'accepted'"
+            >
+              <router-link
+                :to="{
+                  name: 'userprofile',
+                  params: { pk: user_friend.friend.pk },
+                }"
+              >
+                <b-avatar
+                  badge
+                  badge-variant="dark"
+                  variant="info"
+                  :src="getUrl(user_friend.friend.profile_picture)"
+                  class="ml-1 mr-1"
+                  size="4rem"
+                ></b-avatar>
+                <span class="ml-2"
+                  ><strong>{{ user_friend.friend.username }}</strong></span
+                >
+              </router-link>
+            </b-list-group-item>
+          </div>
         </div>
-        -->
-        <b-nav-form id="logo" class="ml-2 mr-2" v-if="token != null">
-          <a href="/mainuser" style="color: white">
-            <b-avatar :src="getUrl(user_data.profile_picture)"></b-avatar>
-            {{ user_data.username }}
-          </a>
-        </b-nav-form>
+      </b-sidebar>
+      <!--<b-nav-form v-if="token != null">
         <b-button
-          @click="getUserFriends()"
-          v-if="token != null"
           class="my-2 ml-2"
           type="button"
           size="sm"
-          v-b-toggle.friendslist
+          to="/mainuser/search"
+          >Szukaj par</b-button
         >
-          Znajomi
-          <span class="badge badge-light">{{ usersFriends.length }}</span>
-        </b-button>
-        <b-sidebar id="friendslist" title="Znajomi:" right shadow>
-          <div class="px-1 py-1">
-            <div
-              v-for="user_friend in user_friends"
-              v-bind:key="user_friend.friend.pk"
-            >
-              <b-list-group-item
-                class="d-flex align-items-right"
-                v-if="user_friend.status == 'accepted'"
-              >
-                <router-link
-                  :to="{
-                    name: 'userprofile',
-                    params: { pk: user_friend.friend.pk },
-                  }"
-                >
-                  <b-avatar
-                    badge
-                    badge-variant="dark"
-                    variant="info"
-                    :src="getUrl(user_friend.friend.profile_picture)"
-                    class="ml-1 mr-1"
-                    size="4rem"
-                  ></b-avatar>
-                  <span class="ml-2"
-                    ><strong>{{ user_friend.friend.username }}</strong></span
+      </b-nav-form>
+      <b-nav-form v-if="token != null">
+        <b-button
+          class="my-2 ml-2"
+          type="button"
+          size="sm"
+          to="/mainuser/gallery"
+          >Galeria</b-button
+        >
+      </b-nav-form>-->
+
+      <b-nav-form v-if="token != null">
+        <v-badge
+          overlap
+          offset-x="25"
+          offset-y="27"
+          bottom
+          color="green"
+          :content="user_likes.length"
+        >
+          <v-btn
+            icon
+            color="red lighten"
+            data-toggle="tooltip"
+            title="Polubienia"
+            x-large
+            v-b-modal.likes
+            class="ml-2 mr-2"
+          >
+            <v-icon>mdi-heart</v-icon>
+          </v-btn>
+        </v-badge>
+
+        <b-modal id="likes" scrollable title="Polubienia" hide-footer>
+          <b-row>
+            <b-col cols="6">
+              <b-row>
+                <b-col cols="12">
+                  <h5>Polubieni: {{ user_likings.length }}</h5>
+                  <b-list-group style="max-width: 300px">
+                    <div
+                      v-for="user_liking in user_likings"
+                      v-bind:key="user_liking.pk"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'userprofile',
+                          params: { pk: user_liking.liked_by.pk },
+                        }"
+                      >
+                        <b-list-group-item class="d-flex align-items-center">
+                          <b-avatar
+                            rounded
+                            variant="info"
+                            :src="getUrl(user_liking.liked_by.profile_picture)"
+                            class="mr-3"
+                            size="3rem"
+                          ></b-avatar>
+                          <span class="mr-auto">{{
+                            user_liking.liked_by.username
+                          }}</span>
+                        </b-list-group-item>
+                      </router-link>
+                    </div>
+                  </b-list-group>
+                </b-col>
+              </b-row>
+            </b-col>
+
+            <b-col cols="6">
+              <b-row>
+                <b-col cols="12">
+                  <h5>Lubią mnie: {{ user_likes.length }}</h5>
+                  <b-list-group style="max-width: 300px">
+                    <div
+                      v-for="user_like in user_likes"
+                      v-bind:key="user_like.pk"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'userprofile',
+                          params: { pk: user_like.liked.pk },
+                        }"
+                      >
+                        <b-list-group-item class="d-flex align-items-center">
+                          <b-avatar
+                            rounded
+                            variant="info"
+                            :src="getUrl(user_like.liked.profile_picture)"
+                            class="mr-3"
+                            size="3rem"
+                          ></b-avatar>
+                          <span class="mr-auto">{{
+                            user_like.liked.username
+                          }}</span>
+                        </b-list-group-item>
+                      </router-link>
+                    </div>
+                  </b-list-group>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+        </b-modal>
+        <!--<b-button
+          class="my-2 ml-2"
+          type="button"
+          size="sm"
+          v-b-modal.notifications
+          @click="getUserFriends()"
+        >
+          Powiadomienia
+          <span class="badge badge-light">{{
+            usersWaiting.length + newMessages
+          }}</span>
+        </b-button>-->
+        <b-modal
+          id="notifications"
+          scrollable
+          size="xl"
+          title="Powiadomienia"
+          hide-footer
+        >
+          <b-row>
+            <b-col cols="4">
+              <b-row>
+                <b-col cols="12">
+                  <h5>Otrzymane zaproszenia:</h5>
+                  <div
+                    v-for="user_friend in user_friends"
+                    v-bind:key="user_friend.friend.pk"
                   >
-                </router-link>
-              </b-list-group-item>
-            </div>
-          </div>
-        </b-sidebar>
-        <b-nav-form v-if="token != null">
-          <b-button
-            class="my-2 ml-2"
-            type="button"
-            size="sm"
-            to="/mainuser/search"
-            >Szukaj par</b-button
-          >
-        </b-nav-form>
-        <b-nav-form v-if="token != null">
-          <b-button
-            class="my-2 ml-2"
-            type="button"
-            size="sm"
-            to="/mainuser/gallery"
-            >Galeria</b-button
-          >
-        </b-nav-form>
-        <b-nav-form v-if="token != null">
-          <b-button class="my-2 ml-2" type="button" size="sm" v-b-modal.likes>
-            Polubienia
-            <span class="badge badge-light">{{ user_likes.length }}</span>
-          </b-button>
-          <b-modal id="likes" scrollable title="Polubienia" hide-footer>
-            <b-row>
-              <b-col cols="6">
-                <b-row>
-                  <b-col cols="12">
-                    <h5>Polubieni: {{ user_likings.length }}</h5>
-                    <b-list-group style="max-width: 300px">
-                      <div
-                        v-for="user_liking in user_likings"
-                        v-bind:key="user_liking.pk"
-                      >
-                        <router-link
-                          :to="{
-                            name: 'userprofile',
-                            params: { pk: user_liking.liked_by.pk },
-                          }"
-                        >
-                          <b-list-group-item class="d-flex align-items-center">
-                            <b-avatar
-                              rounded
-                              variant="info"
-                              :src="
-                                getUrl(user_liking.liked_by.profile_picture)
-                              "
-                              class="mr-3"
-                              size="3rem"
-                            ></b-avatar>
-                            <span class="mr-auto">{{
-                              user_liking.liked_by.username
-                            }}</span>
-                          </b-list-group-item>
-                        </router-link>
-                      </div>
-                    </b-list-group>
-                  </b-col>
-                </b-row>
-              </b-col>
-
-              <b-col cols="6">
-                <b-row>
-                  <b-col cols="12">
-                    <h5>Lubią mnie: {{ user_likes.length }}</h5>
-                    <b-list-group style="max-width: 300px">
-                      <div
-                        v-for="user_like in user_likes"
-                        v-bind:key="user_like.pk"
-                      >
-                        <router-link
-                          :to="{
-                            name: 'userprofile',
-                            params: { pk: user_like.liked.pk },
-                          }"
-                        >
-                          <b-list-group-item class="d-flex align-items-center">
-                            <b-avatar
-                              rounded
-                              variant="info"
-                              :src="getUrl(user_like.liked.profile_picture)"
-                              class="mr-3"
-                              size="3rem"
-                            ></b-avatar>
-                            <span class="mr-auto">{{
-                              user_like.liked.username
-                            }}</span>
-                          </b-list-group-item>
-                        </router-link>
-                      </div>
-                    </b-list-group>
-                  </b-col>
-                </b-row>
-              </b-col>
-            </b-row>
-          </b-modal>
-          <b-button
-            class="my-2 ml-2"
-            type="button"
-            size="sm"
-            v-b-modal.notifications
-            @click="getUserFriends()"
-          >
-            Powiadomienia
-            <span class="badge badge-light">{{
-              usersWaiting.length + newMessages
-            }}</span>
-          </b-button>
-          <b-modal
-            id="notifications"
-            scrollable
-            size="xl"
-            title="Powiadomienia"
-            hide-footer
-          >
-            <b-row>
-              <b-col cols="4">
-                <b-row>
-                  <b-col cols="12">
-                    <h5>Otrzymane zaproszenia:</h5>
-                    <div
-                      v-for="user_friend in user_friends"
-                      v-bind:key="user_friend.friend.pk"
+                    <b-list-group-item
+                      class="d-flex align-items-center"
+                      v-if="user_friend.status == 'waiting for your accept'"
                     >
-                      <b-list-group-item
-                        class="d-flex align-items-center"
-                        v-if="user_friend.status == 'waiting for your accept'"
+                      <router-link
+                        :to="{
+                          name: 'userprofile',
+                          params: { pk: user_friend.friend.pk },
+                        }"
                       >
-                        <router-link
-                          :to="{
-                            name: 'userprofile',
-                            params: { pk: user_friend.friend.pk },
-                          }"
+                        <b-avatar
+                          rounded
+                          variant="info"
+                          :src="getUrl(user_friend.friend.profile_picture)"
+                          class="mr-3"
+                          size="3rem"
+                        ></b-avatar>
+                        <span class="mr-auto"
+                          ><strong>{{
+                            user_friend.friend.username
+                          }}</strong></span
                         >
-                          <b-avatar
-                            rounded
-                            variant="info"
-                            :src="getUrl(user_friend.friend.profile_picture)"
-                            class="mr-3"
-                            size="3rem"
-                          ></b-avatar>
-                          <span class="mr-auto"
-                            ><strong>{{
-                              user_friend.friend.username
-                            }}</strong></span
-                          >
-                        </router-link>
-                        <b-button
-                          class="ml-5 mr-1"
-                          size="sm"
-                          variant="success"
-                          @click="acceptUser(user_friend.friend.pk)"
-                          >Akceptuj</b-button
-                        >
-                        <b-button
-                          class="ml-1"
-                          size="sm"
-                          variant="danger"
-                          @click="rejectUser(user_friend.friend.pk)"
-                          >Odrzuć</b-button
-                        >
-                      </b-list-group-item>
-                    </div>
-                  </b-col>
-                </b-row>
-              </b-col>
-              <b-col cols="4">
-                <b-row>
-                  <b-col cols="12">
-                    <h5>Wysłane zaproszenia:</h5>
-                    <div
-                      v-for="user_friend in user_friends"
-                      v-bind:key="user_friend.friend.pk"
+                      </router-link>
+                      <b-button
+                        class="ml-5 mr-1"
+                        size="sm"
+                        variant="success"
+                        @click="acceptUser(user_friend.friend.pk)"
+                        >Akceptuj</b-button
+                      >
+                      <b-button
+                        class="ml-1"
+                        size="sm"
+                        variant="danger"
+                        @click="rejectUser(user_friend.friend.pk)"
+                        >Odrzuć</b-button
+                      >
+                    </b-list-group-item>
+                  </div>
+                </b-col>
+              </b-row>
+            </b-col>
+            <b-col cols="4">
+              <b-row>
+                <b-col cols="12">
+                  <h5>Wysłane zaproszenia:</h5>
+                  <div
+                    v-for="user_friend in user_friends"
+                    v-bind:key="user_friend.friend.pk"
+                  >
+                    <b-list-group-item
+                      class="d-flex align-items-center"
+                      v-if="user_friend.status == 'waiting'"
                     >
-                      <b-list-group-item
-                        class="d-flex align-items-center"
-                        v-if="user_friend.status == 'waiting'"
+                      <router-link
+                        :to="{
+                          name: 'userprofile',
+                          params: { pk: user_friend.friend.pk },
+                        }"
                       >
-                        <router-link
-                          :to="{
-                            name: 'userprofile',
-                            params: { pk: user_friend.friend.pk },
-                          }"
+                        <b-avatar
+                          rounded
+                          variant="info"
+                          :src="getUrl(user_friend.friend.profile_picture)"
+                          class="mr-3"
+                          size="3rem"
+                        ></b-avatar>
+                        <span class="mr-auto"
+                          ><strong>{{
+                            user_friend.friend.username
+                          }}</strong></span
                         >
-                          <b-avatar
-                            rounded
-                            variant="info"
-                            :src="getUrl(user_friend.friend.profile_picture)"
-                            class="mr-3"
-                            size="3rem"
-                          ></b-avatar>
-                          <span class="mr-auto"
-                            ><strong>{{
-                              user_friend.friend.username
-                            }}</strong></span
-                          >
-                        </router-link>
-                      </b-list-group-item>
-                    </div>
-                  </b-col>
-                </b-row>
-              </b-col>
-              <b-col cols="4">
-                <b-row>
-                  <b-col cols="12">
-                    <h5>Wiadomości:</h5>
-                    <b-list-group style="max-width: 300px"> </b-list-group>
-                  </b-col>
-                </b-row>
-              </b-col>
-            </b-row>
-          </b-modal>
-        </b-nav-form>
-        <b-nav-form v-if="token != null">
-          <b-button
-            class="my-2 ml-2"
-            type="button"
-            size="sm"
-            to="/mainuser/settings"
-            >Ustawienia</b-button
-          >
-        </b-nav-form>
-        <!-- zbedny button -->
-        <!--<b-nav-form v-if="token != null">
-          <b-button class="my-2 ml-2" type="button" size="sm" to="/#">Premium</b-button>
-        </b-nav-form>-->
-        <div v-if="token == null">
-          <b-alert
-            :show="dismissCountDown"
-            fade
-            class="mr-sm-2"
-            variant="danger"
-            @dismissed="dismissCountDown = 0"
-            @dismiss-count-down="countDownChanged"
-            >{{ msg }}</b-alert
-          >
-        </div>
-        <b-nav-form @submit.prevent="login" v-if="token == null">
-          <b-form-input
-            id="username"
-            size="sm"
-            class="mr-sm-2"
-            v-model="username"
-            placeholder="nazwa użytkownika"
-            name="username"
-          />
-          <b-form-input
-            id="password"
-            size="sm"
-            class="mr-sm-2"
-            placeholder="hasło"
-            type="password"
-            v-model="password"
-            name="password"
-          />
-          <b-button v-on:click="login" type="submit" size="sm" class="my-2 ml-2"
-            >Zaloguj</b-button
-          >
-        </b-nav-form>
+                      </router-link>
+                    </b-list-group-item>
+                  </div>
+                </b-col>
+              </b-row>
+            </b-col>
+            <b-col cols="4">
+              <b-row>
+                <b-col cols="12">
+                  <h5>Wiadomości:</h5>
+                  <b-list-group style="max-width: 300px"> </b-list-group>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+        </b-modal>
+      </b-nav-form>
 
-        <b-nav-form @submit.prevent="logout" v-if="token != null">
-          <b-button type="submit" size="sm" class="my-2 ml-2">Wyloguj</b-button>
-        </b-nav-form>
-      </b-navbar-nav>
-    </b-navbar>
-    <!--<b-row>
-      <b-col cols="12">
+      <!--<b-nav-form v-if="token != null">
+        <b-button
+          class="my-2 ml-2"
+          type="button"
+          size="sm"
+          to="/mainuser/settings"
+          >Ustawienia</b-button
+        >
+      </b-nav-form>-->
+
+      <!--<v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>-->
+      <div v-if="token == null">
         <b-alert
           :show="dismissCountDown"
-          dismissible
           fade
+          class="mr-sm-2"
           variant="danger"
-          @dismissed="dismissCountDown=0"
+          @dismissed="dismissCountDown = 0"
           @dismiss-count-down="countDownChanged"
-        >{{msg}}</b-alert>
-      </b-col>
-    </b-row>-->
-  </div>
+          >{{ msg }}</b-alert
+        >
+      </div>
+      <b-nav-form @submit.prevent="login" v-if="token == null">
+        <b-form-input
+          id="username"
+          size="sm"
+          class="mr-sm-2"
+          v-model="username"
+          placeholder="nazwa użytkownika"
+          name="username"
+        />
+        <b-form-input
+          id="password"
+          size="sm"
+          class="mr-sm-2"
+          placeholder="hasło"
+          type="password"
+          v-model="password"
+          name="password"
+        />
+        <v-btn
+          color="purple lighten-3"
+          elevation="4"
+          small
+          v-on:click="login"
+          type="submit"
+          size="sm"
+          class="my-2 ml-2"
+          >Zaloguj</v-btn
+        >
+      </b-nav-form>
+
+      <v-btn icon v-if="token != null">
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+      <b-nav-form @submit.prevent="logout" v-if="token != null">
+        <v-btn
+          data-toggle="tooltip"
+          title="Wyloguj"
+          color="purple"
+          medium
+          type="submit"
+          class="my-2 ml-2 mx-2"
+          depressed
+          ><v-icon large color="purple darken-4">mdi-logout-variant</v-icon></v-btn
+        >
+      </b-nav-form>
+    </v-toolbar>
+
+    <v-navigation-drawer v-model="drawer" absolute temporary class="purple">
+      <v-list-item>
+        <v-list-item-avatar size="95">
+          <v-img :src="getUrl(user_data.profile_picture)"></v-img>
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title large class="white--text font-weight-bold">{{
+            user_data.username
+          }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list class="d-flex flex-row mb-6">
+        <v-list-tile>
+          <v-btn depressed class="purple" href="/mainuser">
+          <v-list-tile-action>
+            <v-icon x-large class="ml-3" color="white">mdi-card-account-details</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="white--text ml-10">Mój profil</v-list-tile-title>
+          </v-list-tile-content>
+          </v-btn>
+        </v-list-tile>
+      </v-list>
+
+      <v-list class="d-flex flex-row mb-6">
+        <v-list-tile>
+          <v-btn depressed class="purple" href="/mainuser/gallery">
+          <v-list-tile-action>
+            <v-icon x-large class="ml-3" color="white">mdi-image-multiple</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="white--text ml-10">Galeria</v-list-tile-title>
+          </v-list-tile-content>
+          </v-btn>
+        </v-list-tile>
+      </v-list>
+
+      <v-list class="d-flex flex-row mb-6">
+        <v-list-tile>
+          <v-btn depressed class="purple" href="/mainuser/search">
+          <v-list-tile-action>
+            <v-icon x-large class="ml-3" color="white">mdi-account-heart</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="white--text ml-10">Szukaj par</v-list-tile-title>
+          </v-list-tile-content>
+          </v-btn>
+        </v-list-tile>
+      </v-list>
+
+      <v-list class="d-flex flex-row mb-6">
+        <v-list-tile>
+          <v-btn depressed class="purple">
+          <v-list-tile-action>
+            <v-icon x-large class="ml-3" color="white">mdi-account-switch</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="white--text ml-10">Interakcje</v-list-tile-title>
+          </v-list-tile-content>
+          </v-btn>
+        </v-list-tile>
+      </v-list>
+
+      <v-list class="d-flex flex-row mb-6">
+        <v-list-tile>
+          <v-btn depressed class="purple" href="/mainuser/settings">
+          <v-list-tile-action>
+            <v-icon x-large class="ml-3" color="white">mdi-cogs</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="white--text ml-10">Ustawienia</v-list-tile-title>
+          </v-list-tile-content>
+          </v-btn>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-navigation-drawer v-model="friendlist" absolute right temporary>
+      <div class="px-1 py-1">
+        <div
+          v-for="user_friend in user_friends"
+          v-bind:key="user_friend.friend.pk"
+        >
+          <b-list-group-item
+            class="d-flex align-items-right"
+            v-if="user_friend.status == 'accepted'"
+          >
+            <router-link
+              :to="{
+                name: 'userprofile',
+                params: { pk: user_friend.friend.pk },
+              }"
+            >
+              <b-avatar
+                badge
+                badge-variant="dark"
+                variant="info"
+                :src="getUrl(user_friend.friend.profile_picture)"
+                class="ml-1 mr-1"
+                size="4rem"
+              ></b-avatar>
+              <span class="ml-2"
+                ><strong>{{ user_friend.friend.username }}</strong></span
+              >
+            </router-link>
+          </b-list-group-item>
+        </div>
+      </div>
+    </v-navigation-drawer>
+  </nav>
 </template>
 
 <script>
@@ -413,6 +582,8 @@ export default {
       usersFriends: 0,
       usersWaiting: 0,
       newMessages: 0,
+      drawer: false,
+      friendlist: false,
     };
   },
   methods: {
@@ -553,21 +724,6 @@ export default {
       });
       console.log(onlyFriends);
       this.usersFriends = onlyFriends.length;
-      //var myFriends = 0;
-      /*this.myFriends = this.user_friends.filter(element => element.status == 'friend');
-      console.log(this.myFriends.length);*/
-      //console.log("getfriends for");
-      /*for (var i = 0; i < this.user_friends.length; i++) {
-          console.log("for");
-        if (
-          this.user_friends[i].status == "accepted") {
-          this.myFriends= this.myFriends + 1;
-        }/* else if (
-          this.user_friendlist[i].status == "waiting for your accept") {
-          this.usersWaiting = this.usersWaiting + 1;
-        }*/
-      //}
-      //return myFriends;
     },
     acceptUser(pk) {
       //console.log("acceptuser");
@@ -686,25 +842,8 @@ export default {
   border-radius: 12px;
 }
 
-/*
-.btn {
-  background-color: #cdb7c0;
-  color: #501c4c;
-  font-weight: 600;
-}
-.my-dropdown .dropdown-menu .dropdown-item {
-  background-color: #cdb7c0;
-  color: #501c4c;
-  font-weight: 600;
-}
-#__BVID__8__BV_toggle_ {
-  background-color: #cdb7c0 !important;
-  color: #501c4c !important;
-  font-weight: 600 !important;
-}
-*/
 #search {
-  margin-left: 30px;
+  margin-left: 100px;
   margin-right: 10px;
 }
 </style>

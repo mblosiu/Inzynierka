@@ -37,6 +37,7 @@
             </footer>
           </blockquote>
         </b-col>
+        <br />
         <b-col cols="5"></b-col>
         <b-col cols="3">
           <br />
@@ -50,7 +51,6 @@
                 <p class="card-text no-background">Dołącz do społeczności e-love zakładając darmowe konto!</p>
               </h6>
               <br />
-              <!--<b-button variant="warning" size="lg" href="/register">Zarejestruj się</b-button>-->
               <a href="/register" class="btn-lg">Zarejestruj się</a>
               <br />
             </div>
@@ -125,7 +125,7 @@ h2 {
   font-size: 20px;
 }
 h1 {
-  color: #ad1717;
+  color: purple;
   text-shadow: 1px 1px #ac0101;
 }
 .card text-black bg-secondary mb-3 {

@@ -25,7 +25,6 @@
       </b-col>
       <b-col cols="4"></b-col>
     </b-row>
-    <b-row></b-row>
   </div>
 </template>
 

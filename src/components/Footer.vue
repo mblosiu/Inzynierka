@@ -1,7 +1,14 @@
 <template>
-  <div class="footer">
-    <div class="container">
-      <br />
+ 
+    
+    <v-footer
+    color="purple"
+    padless
+    class="white--text"
+  >
+    
+      <div class="container">
+      
       <div class="row">
         <div class="col-sm">
           <a href="/about">O nas</a>
@@ -13,17 +20,17 @@
           <a href="/regulations">Regulamin</a>
         </div>
       </div>
-      <br />
-      <div class="row">
-        <div class="col-sm"></div>
-        <div class="col-sm">
-          <center>©{{ new Date().getFullYear() }}</center>
-        </div>
-        <div class="col-sm"></div>
-      </div>
-      <br />
+      
+      
     </div>
-  </div>
+
+      <v-card-text class="py-2 white--text text-center">
+        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+      </v-card-text>
+    
+  
+  </v-footer>
+  
 </template>
 
 <script>

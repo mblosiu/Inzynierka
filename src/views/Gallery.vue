@@ -27,6 +27,7 @@
                 alt="Card image cap"
                 style="width: 11rem; height: 11rem"
               />
+              
               <p></p>
               <h5 class="card-title">Dodaj nowe zdjęcie.</h5>
               <div class="large-12 medium-12 small-12 cell">
