@@ -1,32 +1,18 @@
 <template>
   <div class="page">
     <v-container>
-      <b-row>
-        <b-col cols="1"></b-col>
-        <b-col cols="10">
-          <nav class="navbar navbar-expand-lg">
-            <div
+      <br />
+      <v-expansion-panels color="purple">
+        <v-expansion-panel class="purple">
+          <v-toolbar extended extension-height="50" class="purple">
+            <v-icon
+              medium
+              color="purple lighten-3"
               data-toggle="tooltip"
-              data-placement="right"
+              data-placement="left"
               title="Wyszukaj użytkowników za pomocą nałożonych filtrów, bądź konkretnego z nich po nazwie"
+              >mdi-help-circle</v-icon
             >
-              <svg
-                width="2em"
-                height="2em"
-                viewBox="0 0 16 16"
-                class="bi bi-question-circle"
-                fill="blue"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                />
-                <path
-                  d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
-                />
-              </svg>
-            </div>
             <form id="filters" @submit.prevent="getUsers">
               <table>
                 <tr>
@@ -43,7 +29,7 @@
                       ></b-form-select>
                     </div>
                   </th>
-                  <!---->
+
                   <th>
                     <div id="filter">
                       <input
@@ -53,15 +39,6 @@
                         id="location"
                         v-model="location"
                       />
-
-                      <!--<b-form-select
-                        :options="location_options"
-                        class="ml-2"
-                        id="location"
-                        v-model="location"
-                        size="md"
-                        value="location"
-                      ></b-form-select>-->
                     </div>
                   </th>
                   <th>
@@ -69,7 +46,9 @@
                       <b-col cols="2"></b-col>
                       <b-col cols="8">
                         <div class="p-1 text-white text-i">
-                          <h6>Przedział wiekowy: {{ age_min }} - {{ age_max }}</h6>
+                          <h6>
+                            Przedział wiekowy: {{ age_min }} - {{ age_max }}
+                          </h6>
                         </div>
                       </b-col>
                       <b-col cols="2"></b-col>
@@ -101,153 +80,103 @@
                       <b-col cols="1"></b-col>
                     </b-row>
                   </th>
-                  <!--<th>
-                    <div id="filter" v-if="more_filters == true">
-                      <b-form-input
-                        type="number"
-                        id="agemin"
-                        size="md"
-                        placeholder="wiek min"
-                        v-model="age_min"
-                        class="form-control"
-                      />
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter" v-if="more_filters == true">
-                      <input
-                        type="number"
-                        id="agemax"
-                        size="md"
-                        placeholder="wiek maks"
-                        v-model="age_max"
-                        class="form-control"
-                      />
-                    </div>
-                  </th>-->
-                  <!--<th>
-                    <div id="filter" v-if="more_filters == true">
-                      <input
-                        class="ml-2"
-                        type="text"
-                        name="birthday"
-                        id="birthday"
-                        v-model="birthday"
-                        placeholder="birthday"
-                      />
-                    </div>
-                  </th>-->
+
                   <th>
                     <div id="filter">
-                      <b-form-select
-                        :options="orientation_options"
-                        class="ml-2"
-                        id="orientation"
-                        v-model="orientation"
-                        size="md"
-                        value="orientation"
-                        placeholder="Orientacja"
-                      ></b-form-select>
+                      <v-btn x-large block color="purple lighten-2">
+                        <button type="submit">
+                          <b class="white--text">Filtruj</b>
+                        </button>
+                      </v-btn>
                     </div>
                   </th>
-                  <th>
-                    <div id="filter" v-if="more_filters == true">
-                      <b-form-select
-                        :options="hair_color_options"
-                        class="ml-2"
-                        id="hair_color"
-                        v-model="hair_color"
-                        size="md"
-                        value="hair_color"
-                        placeholder="Kolor włosów"
-                      ></b-form-select>
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter" v-if="more_filters == true">
-                      <b-form-select
-                        :options="hair_length_options"
-                        class="ml-2"
-                        id="hair_length"
-                        v-model="hair_length"
-                        size="md"
-                        value="hair_length"
-                        placeholder="Długość włosów"
-                      ></b-form-select>
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter" v-if="more_filters == true">
-                      <b-form-select
-                        :options="eye_color_options"
-                        class="ml-2"
-                        id="eye_color"
-                        v-model="eye_color"
-                        size="md"
-                        value="eye_color"
-                        placeholder="Kolor oczu"
-                      ></b-form-select>
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter" v-if="more_filters == true">
-                      <b-form-select
-                        :options="body_type_options"
-                        class="ml-2"
-                        id="body_type"
-                        v-model="body_type"
-                        size="md"
-                        value="body_type"
-                        placeholder="Sylwetka"
-                      ></b-form-select>
-                    </div>
-                  </th>
-                  <th>
-                    <div id="filter">
-                      <button type="submit" class="btn btn-primary float-right">Filtruj</button>
-                    </div>
-                  </th>
-                  <th>
-                    <button
-                      v-if="more_filters == false"
-                      v-on:click="more_filters = true"
-                      class="btn btn-primary float-right ml-2"
-                    >Więcej</button>
-                    <button
-                      v-if="more_filters == true"
-                      v-on:click="more_filters = false"
-                      class="btn btn-primary float-right ml-2"
-                    >Ukryj</button>
-                  </th>
-                </tr>
-                <tr>
-                  <!--<div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                      Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                    </div>
-                  </div>-->
                 </tr>
               </table>
             </form>
+          </v-toolbar>
 
-            <!--<input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Nazwa użytkownika"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtruj</button>-->
-          </nav>
-        </b-col>
-        <b-col cols="1"></b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="1"></b-col>
-        <b-col cols="10">
+          <v-expansion-panel-header class="purple" extended>
+            <h5 class="white--text centre">Więcej filtrów</h5>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content class="purple">
+            <v-row>
+              <v-col>
+                <th>
+                  <b-form-select
+                    :options="orientation_options"
+                    class="ml-2"
+                    id="orientation"
+                    v-model="orientation"
+                    size="md"
+                    value="orientation"
+                    placeholder="Orientacja"
+                  ></b-form-select>
+                </th>
+              </v-col>
+              <v-col>
+                <th>
+                  <b-form-select
+                    :options="hair_color_options"
+                    class="ml-2"
+                    id="hair_color"
+                    v-model="hair_color"
+                    size="md"
+                    value="hair_color"
+                    placeholder="Kolor włosów"
+                  ></b-form-select>
+                </th>
+              </v-col>
+              <v-col>
+                <th>
+                  <b-form-select
+                    :options="hair_length_options"
+                    class="ml-2"
+                    id="hair_length"
+                    v-model="hair_length"
+                    size="md"
+                    value="hair_length"
+                    placeholder="Długość włosów"
+                  ></b-form-select>
+                </th>
+              </v-col>
+              <v-col>
+                <th>
+                  <b-form-select
+                    :options="eye_color_options"
+                    class="ml-2"
+                    id="eye_color"
+                    v-model="eye_color"
+                    size="md"
+                    value="eye_color"
+                    placeholder="Kolor oczu"
+                  ></b-form-select>
+                </th>
+              </v-col>
+              <v-col>
+                <th>
+                  <b-form-select
+                    :options="body_type_options"
+                    class="ml-2"
+                    id="body_type"
+                    v-model="body_type"
+                    size="md"
+                    value="body_type"
+                    placeholder="Sylwetka"
+                  ></b-form-select>
+                </th>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+
+      <v-row flex>
+        <v-col cols="3"></v-col>
+
+        <v-col cols="6">
           <div v-if="searchText">
             <div class="oneline">
-              <h1 id="title">Wyniki wyszukiwania dla frazy</h1>
+              <h2 class="purple--text">Wyniki wyszukiwania dla frazy</h2>
             </div>
             <div class="oneline">
               <h2>
@@ -256,54 +185,86 @@
             </div>
           </div>
           <div v-else>
-            <h1 id="title">Wyniki wyszukiwania:</h1>
+            <h2 class="purple--text">Wyniki wyszukiwania:</h2>
           </div>
-        </b-col>
-        <b-col cols="1"></b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="12" align-self="start" class="scroll">
-          <br/>
+        </v-col>
+
+        <v-col cols="3"></v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" align-self="start" class="scroll">
           <b-row v-for="i in Math.ceil(users.length / 2)" v-bind:key="i">
             <b-col
               cols="6"
               v-for="user in users.slice((i - 1) * 2, i * 2)"
               v-bind:key="user.id"
-              style="ml-5 mr-5"
+              style="ml-2 mr-2"
             >
-              <router-link :to="{ name: 'userprofile', params: { pk: user.pk } }">
-                <div cardbox>
-                  <b-card
-                    :img-src="getUrl(user.profile_picture)"
-                    img-alt="Card image"
-                    img-left
-                    class="user-card"
+              <v-hover>
+                <router-link
+                  :to="{ name: 'userprofile', params: { pk: user.pk } }"
+                >
+                  <v-card
+                    outlined
+                    rounded
+                    class="mx-auto"
+                    max-width="500"
+                    height="700"
+                    color="purple"
                   >
-                    <b-card-title>
-                      <div class="oneline">
-                        <h2>
-                          <p class="font-weight-bold">{{ user.username }}</p>
-                        </h2>
-                      </div>
-                      ({{ getAge(user.birthday) }})
-                    </b-card-title>
+                    <v-img
+                      class="white--text align-end"
+                      :src="getUrl(user.profile_picture)"
+                    >
+                      <v-app-bar flat color="rgba(0, 0, 0, 0)">
+                        <v-menu
+                          v-model="menu"
+                          :close-on-content-click="false"
+                          :nudge-width="200"
+                          offset-x
+                          left
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                              fab
+                              small
+                              class="purple"
+                              v-bind="attrs"
+                              v-on="on"
+                              ><v-app-bar-nav-icon
+                                color="white"
+                              ></v-app-bar-nav-icon
+                            ></v-btn>
+                          </template>
 
-                    <b-card-text flex>
+                          <v-card> </v-card>
+                        </v-menu>
+
+                        <v-card-title class="white--text"
+                          >{{ user.username }} ({{
+                            getAge(user.birthday)
+                          }})</v-card-title
+                        >
+                      </v-app-bar>
+                    </v-img>
+
+                    <v-card-text class="white--text">
                       <h4 v-if="user.description != null">
                         <p class="font-italic">{{ user.description }}</p>
                       </h4>
                       <h4 v-else>
                         <p class="font-italic">Brak opisu.</p>
                       </h4>
-                    </b-card-text>
-                  </b-card>
-                </div>
-              </router-link>
+                      <br />
+                    </v-card-text>
+                  </v-card>
+                </router-link>
+              </v-hover>
             </b-col>
           </b-row>
           <br />
-        </b-col>
-      </b-row>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -511,8 +472,8 @@ td {
   height: 100%;
   overflow-y: scroll;
   height: 100vh;
-  background:rgba(241, 55, 55, 0.123);
-  border-radius:12px;
+  background: rgba(128, 0, 128, 0.199);
+  border-radius: 12px;
 }
 .navbar {
   border-radius: 17px;
@@ -531,8 +492,5 @@ td {
 .h6 {
   color: rgb(255, 255, 255);
 }
-.cardbox {
-  width: 200px;
-  height: 500px;
-}
+
 </style>

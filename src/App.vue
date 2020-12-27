@@ -90,12 +90,9 @@ export default {
 #nav {
   top: 0px;
 }
-#content {
+#v-content {
   min-height: 73.2vh;
-  margin-left: 2cm;
-  margin-right: 2cm;
-  margin-top: 2cm;
-  margin-bottom: 2cm;
+
 }
 
 #footer a:hover {
