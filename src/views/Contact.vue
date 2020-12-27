@@ -1,5 +1,5 @@
 <template>
-  <div class="contact">
+  <v-container>
     <b-row></b-row>
     <b-row class="row justify-content-md-center">
       <br />
@@ -25,7 +25,40 @@
       </b-col>
       <b-col cols="4"></b-col>
     </b-row>
-  </div>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

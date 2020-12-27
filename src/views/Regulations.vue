@@ -1,5 +1,5 @@
 <template>
-  <div class="regulations">
+  <v-container>
     <b-row></b-row>
     <b-row class="row justify-content-md-center">
       <br />
@@ -27,7 +27,52 @@
       <b-col cols="2"></b-col>
     </b-row>
     <b-row></b-row>
-  </div>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+    <v-row>
+      <p></p>
+    </v-row>
+  </v-container>
 </template>
 
 
