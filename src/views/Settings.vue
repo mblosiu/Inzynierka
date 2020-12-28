@@ -1,218 +1,261 @@
 <template>
   <div class="page">
-    <b-container class="bv-example-row" fluid>
-      <b-row>
-        <b-col cols="1"></b-col>
-        <b-col cols="10">
-          <b-tabs pills card horizontal>
-            <form class="card" @submit.prevent="editUserData">
-              <b-tab title="Podstawowe informacje" active>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="name" class="white-text">Imię</label>
-                        <input
-                          type="text"
-                          id="name"
-                          v-model="user_data.name"
-                          class="form-control"
-                        />
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="surname" class="grey-text">Nazwisko</label>
-                        <input
-                          type="text"
-                          id="surname"
-                          v-model="user_data.surname"
-                          class="form-control"
-                        />
-                      </b-col>
-                    </b-row>
-                  </li>
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="location" class="grey-text"
-                          >Miejsce zamieszkania</label
-                        >
-                        <input
-                          type="text"
-                          id="location"
-                          v-model="user_data.location"
-                          class="form-control"
-                        />
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="sex" class="grey-text">Płeć</label>
-                        <b-form-select
-                          class="form-control"
-                          id="sex"
-                          v-model="user_data.sex"
-                          :options="sex_options"
-                        ></b-form-select>
-                      </b-col>
-                    </b-row>
-                  </ul>
+    <v-container fluid>
+      <br />
+      <v-card color="purple">
+        <v-card-title class="text-center justify-center py-6">
+          <v-icon x-large color="white">mdi-cogs</v-icon>
+          <h1 class="font-weight-bold display-5 white--text">
+            Ustawienia konta
+          </h1>
+        </v-card-title>
 
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="is_smoking" class="grey-text"
-                          >Papierosy</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="is_smoking"
-                          v-model="user_data.is_smoking"
-                          :options="smoking_options"
-                        ></b-form-select>
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="is_drinking" class="grey-text"
-                          >Alkohol</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="is_drinking"
-                          v-model="user_data.is_drinking_alcohol"
-                          :options="alcohol_options"
-                        ></b-form-select>
-                      </b-col>
-                    </b-row>
-                  </ul>
+        <v-tabs v-model="tab" color="purple" grow>
+          <v-tab> Podstawowe informacje </v-tab>
+          <v-tab> Wygląd </v-tab>
+          <v-tab> Zainteresowania </v-tab>
+          <v-tab> Preferencje </v-tab>
+          <v-tab> Opis profilu </v-tab>
+          <v-tab> Prywatność </v-tab>
+        </v-tabs>
 
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="status" class="grey-text">Status</label>
-                        <b-form-select
-                          class="form-control"
-                          id="status"
-                          v-model="user_data.status"
-                          :options="status_options"
-                        ></b-form-select>
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="education" class="grey-text"
-                          >Edukacja</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="education"
-                          v-model="user_data.education"
-                          :options="education_options"
-                        ></b-form-select>
-                      </b-col>
-                    </b-row>
-                  </ul>
+        <v-tabs-items v-model="tab">
+          <v-tab-item>
+            <v-card flat>
+              <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="10">
+                  <v-card-text>
+                    <form @submit.prevent="editUserData">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="name" class="white-text">Imię</label>
+                              <input
+                                type="text"
+                                id="name"
+                                v-model="user_data.name"
+                                class="form-control"
+                              />
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="surname" class="grey-text"
+                                >Nazwisko</label
+                              >
+                              <input
+                                type="text"
+                                id="surname"
+                                v-model="user_data.surname"
+                                class="form-control"
+                              />
+                            </b-col>
+                          </b-row>
+                        </li>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="location" class="grey-text"
+                                >Miejsce zamieszkania</label
+                              >
+                              <input
+                                type="text"
+                                id="location"
+                                v-model="user_data.location"
+                                class="form-control"
+                              />
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="sex" class="grey-text">Płeć</label>
+                              <b-form-select
+                                class="form-control"
+                                id="sex"
+                                v-model="user_data.sex"
+                                :options="sex_options"
+                              ></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </ul>
 
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="3"></b-col>
-                      <b-col cols="6">
-                        <label for="status" class="grey-text">Orientacja</label>
-                        <b-form-select
-                          class="form-control"
-                          id="orientation"
-                          v-model="user_data.orientation"
-                          :options="orientation_options"
-                        ></b-form-select>
-                      </b-col>
-                      <b-col cols="3"></b-col>
-                    </b-row>
-                  </ul>
-                </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="is_smoking" class="grey-text"
+                                >Papierosy</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="is_smoking"
+                                v-model="user_data.is_smoking"
+                                :options="smoking_options"
+                              ></b-form-select>
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="is_drinking" class="grey-text"
+                                >Alkohol</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="is_drinking"
+                                v-model="user_data.is_drinking_alcohol"
+                                :options="alcohol_options"
+                              ></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </ul>
 
-                <div class="text-center mt-4">
-                  <button type="submit" class="btn btn-success">Zapisz</button>
-                </div>
-                <p></p>
-              </b-tab>
-            </form>
-            <form class="card" @submit.prevent="editUserData">
-              <b-tab title="Wygląd">
-                <ul class="list-group list-group-flush">
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="growth" class="white-text">Wzrost</label>
-                        <input
-                          type="number"
-                          id="growth"
-                          v-model="user_data.growth"
-                          class="form-control"
-                          placeholder="Wzrost w cm"
-                        />
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="weight" class="white-text">Waga</label>
-                        <input
-                          type="text"
-                          id="weight"
-                          v-model="user_data.weight"
-                          class="form-control"
-                          placeholder="Waga w kg"
-                        />
-                      </b-col>
-                    </b-row>
-                  </ul>
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="hair_length" class="grey-text"
-                          >Długość włosów</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="hair_length"
-                          v-model="user_data.hair_length"
-                          :options="hair_length_options"
-                        ></b-form-select>
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="hair_color" class="grey-text"
-                          >Kolor włosów</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="hair_color"
-                          v-model="user_data.hair_color"
-                          :options="hair_color_options"
-                        ></b-form-select>
-                      </b-col>
-                    </b-row>
-                  </ul>
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="body_type" class="grey-text"
-                          >Sylwetka</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="body_type"
-                          v-model="user_data.body_type"
-                          :options="body_type_options"
-                        ></b-form-select>
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="eye_color" class="grey-text"
-                          >Kolor oczu</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="eye_color"
-                          v-model="user_data.eye_color"
-                          :options="eye_color_options"
-                        ></b-form-select>
-                      </b-col>
-                    </b-row>
-                    <br />
-                    <b-row>
-                      <br />
-                      <b-col cols="12">
-                        <!--<label for="special_options" class="grey-text">Znaki szczególne</label>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="status" class="grey-text"
+                                >Status</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="status"
+                                v-model="user_data.status"
+                                :options="status_options"
+                              ></b-form-select>
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="education" class="grey-text"
+                                >Edukacja</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="education"
+                                v-model="user_data.education"
+                                :options="education_options"
+                              ></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </ul>
+
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="3"></b-col>
+                            <b-col cols="6">
+                              <label for="status" class="grey-text"
+                                >Orientacja</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="orientation"
+                                v-model="user_data.orientation"
+                                :options="orientation_options"
+                              ></b-form-select>
+                            </b-col>
+                            <b-col cols="3"></b-col>
+                          </b-row>
+                        </ul>
+                      </ul>
+
+                      <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success">
+                          Zapisz
+                        </button>
+                      </div>
+                      <p></p>
+                    </form>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="1"></v-col>
+              </v-row>
+            </v-card>
+          </v-tab-item>
+
+          <v-tab-item>
+            <v-card flat>
+              <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="10">
+                  <v-card-text>
+                    <form class="card" @submit.prevent="editUserData">
+                      <ul class="list-group list-group-flush">
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="growth" class="white-text"
+                                >Wzrost</label
+                              >
+                              <input
+                                type="number"
+                                id="growth"
+                                v-model="user_data.growth"
+                                class="form-control"
+                                placeholder="Wzrost w cm"
+                              />
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="weight" class="white-text"
+                                >Waga</label
+                              >
+                              <input
+                                type="text"
+                                id="weight"
+                                v-model="user_data.weight"
+                                class="form-control"
+                                placeholder="Waga w kg"
+                              />
+                            </b-col>
+                          </b-row>
+                        </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="hair_length" class="grey-text"
+                                >Długość włosów</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="hair_length"
+                                v-model="user_data.hair_length"
+                                :options="hair_length_options"
+                              ></b-form-select>
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="hair_color" class="grey-text"
+                                >Kolor włosów</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="hair_color"
+                                v-model="user_data.hair_color"
+                                :options="hair_color_options"
+                              ></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="body_type" class="grey-text"
+                                >Sylwetka</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="body_type"
+                                v-model="user_data.body_type"
+                                :options="body_type_options"
+                              ></b-form-select>
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="eye_color" class="grey-text"
+                                >Kolor oczu</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="eye_color"
+                                v-model="user_data.eye_color"
+                                :options="eye_color_options"
+                              ></b-form-select>
+                            </b-col>
+                          </b-row>
+                          <br />
+                          <b-row>
+                            <br />
+                            <b-col cols="12">
+                              <!--<label for="special_options" class="grey-text">Znaki szczególne</label>
                           <br />
                           <input
                             type="checkbox"
@@ -251,23 +294,35 @@
                           <label for="tattoos">Tatuaże</label>
                           <br />
                         <span>Zaznaczono: {{ special_options }}</span>-->
-                      </b-col>
-                    </b-row>
-                  </ul>
-                </ul>
+                            </b-col>
+                          </b-row>
+                        </ul>
+                      </ul>
 
-                <div class="text-center mt-4">
-                  <button type="submit" class="btn btn-success">Zapisz</button>
-                </div>
-                <p></p>
-              </b-tab>
-            </form>
-            <form class="card" @submit.prevent="editUserData">
-              <b-tab title="Zainteresowania">
-                <ul class="list-group list-group-flush">
-                  <ul class="list-group-item">
-                    <b-row>
-                      <!--<b-col cols="6">
+                      <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success">
+                          Zapisz
+                        </button>
+                      </div>
+                      <p></p>
+                    </form>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="1"></v-col>
+              </v-row>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="10">
+                  <v-card-text>
+                    <form class="card" @submit.prevent="editUserData">
+                      <!--<ul class="list-group list-group-flush">
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
                           <label for="entertainment" class="grey-text">Rozrywka i hobby:</label>
                           <br />
                           <input type="checkbox" id="jack" value="Shopping" v-model="checkedNames" />
@@ -296,23 +351,23 @@
                           <label for="john">Koszykówka</label>
                           <input type="checkbox" id="mike" value="Pływactwo" v-model="checkedNames" />
                           <label for="mike">Pływactwo</label>
-                      </b-col>-->
-                    </b-row>
-                  </ul>
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <!--<label for="music" class="grey-text">Muzyka:</label>
+                      </b-col>
+                          </b-row>
+                        </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="music" class="grey-text">Muzyka:</label>
                           <br />
                           <input type="checkbox" id="jack" value="Rock" v-model="checkedNames" />
                           <label for="jack">Rock</label>
                           <input type="checkbox" id="john" value="Jazz" v-model="checkedNames" />
                           <label for="john">Jazz</label>
                           <input type="checkbox" id="mike" value="Pop" v-model="checkedNames" />
-                        <label for="mike">Pop</label>-->
-                      </b-col>
-                      <b-col cols="6">
-                        <!--<label for="cooking" class="grey-text">Kuchnia:</label>
+                        <label for="mike">Pop</label>
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="cooking" class="grey-text">Kuchnia:</label>
                           <br />
                           <input type="checkbox" id="jack" value="Polska" v-model="checkedNames" />
                           <label for="jack">Polska</label>
@@ -324,479 +379,542 @@
                           />
                           <label for="john">Orientalna</label>
                           <input type="checkbox" id="mike" value="Studencka" v-model="checkedNames" />
-                        <label for="mike">Studencka</label>-->
-                      </b-col>
-                    </b-row>
-                  </ul>
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="favourite_place" class="white-text"
-                          >Ulubione miejsce:</label
-                        >
-                        <input
-                          type="text"
-                          id="favourite_place"
-                          v-model="user_data.favourite_place"
-                          class="form-control"
-                        />
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="passion" class="white-text"
-                          >Największa pasja:</label
-                        >
-                        <input
-                          type="text"
-                          id="passion"
-                          v-model="user_data.passion"
-                          class="form-control"
-                        />
-                      </b-col>
-                    </b-row>
-                  </ul>
-                </ul>
+                        <label for="mike">Studencka</label>
+                            </b-col>
+                          </b-row>
+                        </ul>-->
+                      <ul class="list-group-item">
+                        <b-row>
+                          <b-col cols="6">
+                            <label for="favourite_place" class="white-text"
+                              >Ulubione miejsce:</label
+                            >
+                            <input
+                              type="text"
+                              id="favourite_place"
+                              v-model="user_data.favourite_place"
+                              class="form-control"
+                            />
+                          </b-col>
+                          <b-col cols="6">
+                            <label for="passion" class="white-text"
+                              >Największa pasja:</label
+                            >
+                            <input
+                              type="text"
+                              id="passion"
+                              v-model="user_data.passion"
+                              class="form-control"
+                            />
+                          </b-col>
+                        </b-row>
+                      </ul>
 
-                <div class="text-center mt-4">
-                  <button type="submit" class="btn btn-success">Zapisz</button>
-                </div>
-                <p></p>
-              </b-tab>
-            </form>
-            <form class="card" @submit.prevent="editUserPreferences">
-              <b-tab title="Twoje preferencje">
-                <div class="card text-black">
-                  <ul class="list-group list-group-flush">
-                    <ul class="list-group-item">
-                      <b-row>
-                        <b-col cols="12">
-                          <label for="age_preference_min" class="white-text"
-                            >Przedział wiekowy</label
-                          >
-                          <b-row>
-                            <b-col cols="3"></b-col>
-                            <b-col cols="3">
-                              <div>
-                                <div class="mt-2">
-                                  Wiek minimalny:
-                                  {{ user_preferences.age_preference_min }}
-                                </div>
-                                <b-form-input
-                                  id="user_preferences.age_preference_min"
-                                  v-model="user_preferences.age_preference_min"
-                                  type="range"
-                                  min="18"
-                                  :max="user_preferences.age_preference_max"
-                                ></b-form-input>
-                              </div>
-                            </b-col>
-                            <b-col cols="3">
-                              <div>
-                                <div class="mt-2">
-                                  Wiek maksymalny:
-                                  {{ user_preferences.age_preference_max }}
-                                </div>
-                                <b-form-input
-                                  id="age_preference_max"
-                                  v-model="user_preferences.age_preference_max"
-                                  type="range"
-                                  :min="user_preferences.age_preference_min"
-                                  max="100"
-                                ></b-form-input>
-                              </div>
-                            </b-col>
-                            <b-col cols="3"></b-col>
-                          </b-row>
-                        </b-col>
-                      </b-row>
-                    </ul>
-                    <ul class="list-group-item">
-                      <b-row>
-                        <b-col cols="6">
-                          <label for="body_type_preference" class="grey-text"
-                            >Sylwetka</label
-                          >
-                          <b-form-select
-                            class="form-control"
-                            id="body_type_preference"
-                            v-model="user_preferences.body_type_preference"
-                            :options="body_type_options"
-                          ></b-form-select>
-                        </b-col>
-                        <b-col cols="6">
-                          <label for="weight_preference" class="white-text"
-                            >Waga maks:
-                            {{ user_preferences.weight_preference }}</label
-                          >
-                          <b-row>
-                            <b-col cols="2"></b-col>
-                            <b-col cols="8">
-                              <b-form-input
-                                id="weight_preference"
-                                v-model="user_preferences.weight_preference"
-                                type="range"
-                                min="40"
-                                max="200"
-                              ></b-form-input>
-                            </b-col>
-                            <b-col cols="2"></b-col>
-                          </b-row>
-                          <!--<input
+                      <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success">
+                          Zapisz
+                        </button>
+                      </div>
+                      <p></p>
+                    </form>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="1"></v-col>
+              </v-row>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="10">
+                  <v-card-text>
+                    <form class="card" @submit.prevent="editUserPreferences">
+                      <div class="card text-black">
+                        <ul class="list-group list-group-flush">
+                          <ul class="list-group-item">
+                            <b-row>
+                              <b-col cols="12">
+                                <label
+                                  for="age_preference_min"
+                                  class="white-text"
+                                  >Przedział wiekowy</label
+                                >
+                                <b-row>
+                                  <b-col cols="3"></b-col>
+                                  <b-col cols="3">
+                                    <div>
+                                      <div class="mt-2">
+                                        Wiek minimalny:
+                                        {{
+                                          user_preferences.age_preference_min
+                                        }}
+                                      </div>
+                                      <b-form-input
+                                        id="user_preferences.age_preference_min"
+                                        v-model="
+                                          user_preferences.age_preference_min
+                                        "
+                                        type="range"
+                                        min="18"
+                                        :max="
+                                          user_preferences.age_preference_max
+                                        "
+                                      ></b-form-input>
+                                    </div>
+                                  </b-col>
+                                  <b-col cols="3">
+                                    <div>
+                                      <div class="mt-2">
+                                        Wiek maksymalny:
+                                        {{
+                                          user_preferences.age_preference_max
+                                        }}
+                                      </div>
+                                      <b-form-input
+                                        id="age_preference_max"
+                                        v-model="
+                                          user_preferences.age_preference_max
+                                        "
+                                        type="range"
+                                        :min="
+                                          user_preferences.age_preference_min
+                                        "
+                                        max="100"
+                                      ></b-form-input>
+                                    </div>
+                                  </b-col>
+                                  <b-col cols="3"></b-col>
+                                </b-row>
+                              </b-col>
+                            </b-row>
+                          </ul>
+                          <ul class="list-group-item">
+                            <b-row>
+                              <b-col cols="6">
+                                <label
+                                  for="body_type_preference"
+                                  class="grey-text"
+                                  >Sylwetka</label
+                                >
+                                <b-form-select
+                                  class="form-control"
+                                  id="body_type_preference"
+                                  v-model="
+                                    user_preferences.body_type_preference
+                                  "
+                                  :options="body_type_options"
+                                ></b-form-select>
+                              </b-col>
+                              <b-col cols="6">
+                                <label
+                                  for="weight_preference"
+                                  class="white-text"
+                                  >Waga maks:
+                                  {{
+                                    user_preferences.weight_preference
+                                  }}</label
+                                >
+                                <b-row>
+                                  <b-col cols="2"></b-col>
+                                  <b-col cols="8">
+                                    <b-form-input
+                                      id="weight_preference"
+                                      v-model="
+                                        user_preferences.weight_preference
+                                      "
+                                      type="range"
+                                      min="40"
+                                      max="200"
+                                    ></b-form-input>
+                                  </b-col>
+                                  <b-col cols="2"></b-col>
+                                </b-row>
+                                <!--<input
                             type="number"
                             id="weight_preference"
                             placeholder="maksymalna waga"
                             v-model="user_preferences.weight_preference"
                             class="form-control"
                           />-->
-                        </b-col>
-                      </b-row>
-                    </ul>
-                    <ul class="list-group-item">
-                      <b-row>
-                        <b-col cols="6">
-                          <label for="education_preference" class="white-text"
-                            >Edukacja</label
-                          >
-                          <b-form-select
-                            class="form-control"
-                            id="education_preference"
-                            v-model="user_preferences.education_preference"
-                            :options="education_options"
-                          ></b-form-select>
-                        </b-col>
-                        <b-col cols="6">
-                          <label for="eye_color_preference" class="grey-text"
-                            >Kolor oczu</label
-                          >
-                          <b-form-select
-                            class="form-control"
-                            id="eye_color_preference"
-                            v-model="user_preferences.eye_color_preference"
-                            :options="eye_color_options"
-                          ></b-form-select>
-                        </b-col>
-                      </b-row>
-                    </ul>
-                    <ul class="list-group-item">
-                      <b-row>
-                        <b-col cols="6">
-                          <label for="hair_length_preference" class="grey-text"
-                            >Długość włosów</label
-                          >
-                          <b-form-select
-                            class="form-control"
-                            id="hair_length_preference"
-                            v-model="user_preferences.hair_length_preference"
-                            :options="hair_length_options"
-                          ></b-form-select>
-                        </b-col>
-                        <b-col cols="6">
-                          <label for="hair_color_preference" class="grey-text"
-                            >Kolor włosów</label
-                          >
-                          <b-form-select
-                            class="form-control"
-                            id="hair_color_preference"
-                            v-model="user_preferences.hair_color_preference"
-                            :options="hair_color_options"
-                          ></b-form-select>
-                        </b-col>
-                      </b-row>
-                    </ul>
-                    <ul class="list-group-item">
-                      <b-row>
-                        <b-col cols="6">
-                          <label for="is_smoking_preference" class="grey-text"
-                            >Papierosy</label
-                          >
-                          <b-form-select
-                            class="form-control"
-                            id="is_smoking_preference"
-                            v-model="user_preferences.is_smoking_preference"
-                            :options="smoking_options2"
-                          ></b-form-select>
-                        </b-col>
-                        <b-col cols="6">
-                          <label for="is_drinking_preference" class="grey-text"
-                            >Alkohol</label
-                          >
-                          <b-form-select
-                            class="form-control"
-                            id="is_drinking_preference"
-                            v-model="
-                              user_preferences.is_drinking_alcohol_preference
-                            "
-                            :options="alcohol_options2"
-                          ></b-form-select>
-                        </b-col>
-                      </b-row>
-                    </ul>
-                  </ul>
-
-                  <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-success">
-                      Zapisz
-                    </button>
-                  </div>
-                  <p></p>
-                </div>
-              </b-tab>
-            </form>
-            <b-tab title="Opis profilu">
-              <div class="card text-black">
-                <br />
-                <b-card-text>
-                  <form
-                    class="description"
-                    @submit.prevent="editUserDescription"
-                  >
-                    <b-row class="mt-2">
-                      <b-col cols="2"></b-col>
-                      <b-col sm="8">
-                        <b-form-textarea
-                          id="textarea-large"
-                          size="lg"
-                          v-model="user_data.description"
-                          maxlength="200"
-                          rows="4"
-                          placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie!"
-                        ></b-form-textarea>
-                        <small>
-                          <strong>Maks 200 znaków.</strong>
-                        </small>
-                      </b-col>
-                      <b-col cols="2"></b-col>
-                    </b-row>
-                    <div class="text-center mt-4">
-                      <button type="submit" class="btn btn-success">
-                        Zapisz
-                      </button>
-                      <p></p>
-                    </div>
-                  </form>
-                </b-card-text>
-              </div>
-            </b-tab>
-            <b-tab title="Ustawienia prywatności">
-              <form class="card" @submit.prevent="editUserPrivate">
-                <ul class="list-group list-group-flush">
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="msg_option" class="grey-text"
-                          >Otrzymywanie wiadomości:</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="msg_option"
-                          v-model="msg_option"
-                          :options="msgoptions"
-                        ></b-form-select>
-                      </b-col>
-                      <b-col cols="6">
-                        <label for="comm_option" class="grey-text"
-                          >Otrzymywanie komentarzy:</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="comm_option"
-                          v-model="comm_option"
-                          :options="msgoptions"
-                        ></b-form-select>
-                      </b-col>
-                    </b-row>
-                  </ul>
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <label for="search_option" class="grey-text"
-                          >Kto może mnie wyszukać:</label
-                        >
-                        <b-form-select
-                          class="form-control"
-                          id="search_option"
-                          v-model="search_option"
-                          :options="searchoptions"
-                        ></b-form-select>
-                      </b-col>
-                      <b-col cols="6">
-                        <strong>Otrzymywanie powiadomień:</strong><br />
-                        <b-form-checkbox
-                          id="new_likes"
-                          v-model="new_likes"
-                          name="checkbox-1"
-                          value="true"
-                          unchecked-value="false"
-                        >
-                          Polubienia od innych użytkowników
-                        </b-form-checkbox>
-                        <b-form-checkbox
-                          id="new_messages"
-                          v-model="new_messages"
-                          name="checkbox-1"
-                          value="true"
-                          unchecked-value="false"
-                        >
-                          Wiadomości prywatne
-                        </b-form-checkbox>
-                        <b-form-checkbox
-                          id="new_comments"
-                          v-model="new_comments"
-                          name="checkbox-1"
-                          value="true"
-                          unchecked-value="false"
-                        >
-                          Komentarze pod moimi zdjęciami
-                        </b-form-checkbox>
-                      </b-col>
-                    </b-row>
-                  </ul>
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="6">
-                        <b-form-checkbox
-                          id="hideage"
-                          v-model="hideage"
-                          name="checkbox-1"
-                          value="true"
-                          unchecked-value="false"
-                        >
-                          Ukryj mój wiek dla innych użytkowników
-                        </b-form-checkbox>
-                      </b-col>
-                      <b-col cols="6">
-                        <b-row>
-                          <b-col cols="4"></b-col>
-                          <b-col cols="4">
-                            <b-button
-                              v-b-modal.modal-blacklist
-                              @click="getUserBlacklist()"
-                              variant="dark"
-                              size="md"
-                              >Czarna lista</b-button
-                            >
-                            <b-modal
-                              id="modal-blacklist"
-                              scrollable
-                              title="Czarna lista"
-                              hide-footer
-                            >
-                              <h5> Zablokowani: {{blacklisted_users.length}}</h5>
-                              <b-list-group style="max-width: 470px">
-                                <div
-                                  class="my-3"
-                                  v-for="blacklisted_user in blacklisted_users"
-                                  v-bind:key="blacklisted_user.pk"
+                              </b-col>
+                            </b-row>
+                          </ul>
+                          <ul class="list-group-item">
+                            <b-row>
+                              <b-col cols="6">
+                                <label
+                                  for="education_preference"
+                                  class="white-text"
+                                  >Edukacja</label
                                 >
-                                  <b-list-group-item
-                                    class="d-flex align-items-center"
+                                <b-form-select
+                                  class="form-control"
+                                  id="education_preference"
+                                  v-model="
+                                    user_preferences.education_preference
+                                  "
+                                  :options="education_options"
+                                ></b-form-select>
+                              </b-col>
+                              <b-col cols="6">
+                                <label
+                                  for="eye_color_preference"
+                                  class="grey-text"
+                                  >Kolor oczu</label
+                                >
+                                <b-form-select
+                                  class="form-control"
+                                  id="eye_color_preference"
+                                  v-model="
+                                    user_preferences.eye_color_preference
+                                  "
+                                  :options="eye_color_options"
+                                ></b-form-select>
+                              </b-col>
+                            </b-row>
+                          </ul>
+                          <ul class="list-group-item">
+                            <b-row>
+                              <b-col cols="6">
+                                <label
+                                  for="hair_length_preference"
+                                  class="grey-text"
+                                  >Długość włosów</label
+                                >
+                                <b-form-select
+                                  class="form-control"
+                                  id="hair_length_preference"
+                                  v-model="
+                                    user_preferences.hair_length_preference
+                                  "
+                                  :options="hair_length_options"
+                                ></b-form-select>
+                              </b-col>
+                              <b-col cols="6">
+                                <label
+                                  for="hair_color_preference"
+                                  class="grey-text"
+                                  >Kolor włosów</label
+                                >
+                                <b-form-select
+                                  class="form-control"
+                                  id="hair_color_preference"
+                                  v-model="
+                                    user_preferences.hair_color_preference
+                                  "
+                                  :options="hair_color_options"
+                                ></b-form-select>
+                              </b-col>
+                            </b-row>
+                          </ul>
+                          <ul class="list-group-item">
+                            <b-row>
+                              <b-col cols="6">
+                                <label
+                                  for="is_smoking_preference"
+                                  class="grey-text"
+                                  >Papierosy</label
+                                >
+                                <b-form-select
+                                  class="form-control"
+                                  id="is_smoking_preference"
+                                  v-model="
+                                    user_preferences.is_smoking_preference
+                                  "
+                                  :options="smoking_options2"
+                                ></b-form-select>
+                              </b-col>
+                              <b-col cols="6">
+                                <label
+                                  for="is_drinking_preference"
+                                  class="grey-text"
+                                  >Alkohol</label
+                                >
+                                <b-form-select
+                                  class="form-control"
+                                  id="is_drinking_preference"
+                                  v-model="
+                                    user_preferences.is_drinking_alcohol_preference
+                                  "
+                                  :options="alcohol_options2"
+                                ></b-form-select>
+                              </b-col>
+                            </b-row>
+                          </ul>
+                        </ul>
+
+                        <div class="text-center mt-4">
+                          <button type="submit" class="btn btn-success">
+                            Zapisz
+                          </button>
+                        </div>
+                        <p></p>
+                      </div>
+                    </form>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="1"></v-col>
+              </v-row>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="10">
+                  <v-card-text>
+                    <form
+                      class="description"
+                      @submit.prevent="editUserDescription"
+                    >
+                      <b-row class="mt-2">
+                        <b-col cols="2"></b-col>
+                        <b-col sm="8">
+                          <b-form-textarea
+                            id="textarea-large"
+                            size="lg"
+                            v-model="user_data.description"
+                            maxlength="200"
+                            rows="4"
+                            placeholder="Aktualnie nie posiadasz opisu. Napisz coś o sobie!"
+                          ></b-form-textarea>
+                          <small>
+                            <strong>Maks 200 znaków.</strong>
+                          </small>
+                        </b-col>
+                        <b-col cols="2"></b-col>
+                      </b-row>
+                      <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success">
+                          Zapisz
+                        </button>
+                        <p></p>
+                      </div>
+                    </form>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="1"></v-col>
+              </v-row>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="10">
+                  <v-card-text>
+                    <form class="card" @submit.prevent="editUserPrivate">
+                      <ul class="list-group list-group-flush">
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="msg_option" class="grey-text"
+                                >Otrzymywanie wiadomości:</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="msg_option"
+                                v-model="msg_option"
+                                :options="msgoptions"
+                              ></b-form-select>
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="comm_option" class="grey-text"
+                                >Otrzymywanie komentarzy:</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="comm_option"
+                                v-model="comm_option"
+                                :options="msgoptions"
+                              ></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="search_option" class="grey-text"
+                                >Kto może mnie wyszukać:</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="search_option"
+                                v-model="search_option"
+                                :options="searchoptions"
+                              ></b-form-select>
+                            </b-col>
+                            <b-col cols="6">
+                              <strong>Otrzymywanie powiadomień:</strong><br />
+                              <b-form-checkbox
+                                id="new_likes"
+                                v-model="new_likes"
+                                name="checkbox-1"
+                                value="true"
+                                unchecked-value="false"
+                              >
+                                Polubienia od innych użytkowników
+                              </b-form-checkbox>
+                              <b-form-checkbox
+                                id="new_messages"
+                                v-model="new_messages"
+                                name="checkbox-1"
+                                value="true"
+                                unchecked-value="false"
+                              >
+                                Wiadomości prywatne
+                              </b-form-checkbox>
+                              <b-form-checkbox
+                                id="new_comments"
+                                v-model="new_comments"
+                                name="checkbox-1"
+                                value="true"
+                                unchecked-value="false"
+                              >
+                                Komentarze pod moimi zdjęciami
+                              </b-form-checkbox>
+                            </b-col>
+                          </b-row>
+                        </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <b-form-checkbox
+                                id="hideage"
+                                v-model="hideage"
+                                name="checkbox-1"
+                                value="true"
+                                unchecked-value="false"
+                              >
+                                Ukryj mój wiek dla innych użytkowników
+                              </b-form-checkbox>
+                            </b-col>
+                            <b-col cols="6">
+                              <b-row>
+                                <b-col cols="4"></b-col>
+                                <b-col cols="4">
+                                  <b-button
+                                    v-b-modal.modal-blacklist
+                                    @click="getUserBlacklist()"
+                                    variant="dark"
+                                    size="md"
+                                    >Czarna lista</b-button
                                   >
-                                    <b-avatar
-                                      rounded
-                                      :src="
-                                        getUrl(
-                                          blacklisted_user.blacklisted
-                                            .profile_picture
-                                        )
-                                      "
-                                      class="mr-3"
-                                      size="4rem"
-                                    ></b-avatar>
-                                    <span class="mr-auto"
-                                      ><strong>{{
-                                        blacklisted_user.blacklisted.username
-                                      }}</strong>
-                                    </span>
-                                    <b-button
-                                      squared
-                                      variant="outline-success"
-                                      @click="
-                                        unblockUser(
-                                          blacklisted_user.blacklisted.pk
-                                        )
-                                      "
-                                      >Odblokuj</b-button
-                                    >
-                                  </b-list-group-item>
-                                </div>
-                              </b-list-group>
-                            </b-modal>
-                          </b-col>
-                          <b-col cols="4"></b-col>
-                        </b-row>
-                      </b-col>
-                    </b-row>
-                  </ul>
-                  <ul class="list-group-item">
-                    <b-row>
-                      <b-col cols="4"></b-col>
-                      <b-col cols="4">
-                        <b-button
-                          variant="danger"
-                          size="lg"
-                          @click="$bvModal.show('modal-scoped')"
-                          >Usuń konto</b-button
-                        >
-                        <b-modal id="modal-scoped">
-                          <template v-slot:modal-header="{ close }">
-                            <h5>Czy jesteś pewien?</h5>
-                          </template>
+                                  <b-modal
+                                    id="modal-blacklist"
+                                    scrollable
+                                    title="Czarna lista"
+                                    hide-footer
+                                  >
+                                    <h5>
+                                      Zablokowani:
+                                      {{ blacklisted_users.length }}
+                                    </h5>
+                                    <b-list-group style="max-width: 470px">
+                                      <div
+                                        class="my-3"
+                                        v-for="blacklisted_user in blacklisted_users"
+                                        v-bind:key="blacklisted_user.pk"
+                                      >
+                                        <b-list-group-item
+                                          class="d-flex align-items-center"
+                                        >
+                                          <b-avatar
+                                            rounded
+                                            :src="
+                                              getUrl(
+                                                blacklisted_user.blacklisted
+                                                  .profile_picture
+                                              )
+                                            "
+                                            class="mr-3"
+                                            size="4rem"
+                                          ></b-avatar>
+                                          <span class="mr-auto"
+                                            ><strong>{{
+                                              blacklisted_user.blacklisted
+                                                .username
+                                            }}</strong>
+                                          </span>
+                                          <b-button
+                                            squared
+                                            variant="outline-success"
+                                            @click="
+                                              unblockUser(
+                                                blacklisted_user.blacklisted.pk
+                                              )
+                                            "
+                                            >Odblokuj</b-button
+                                          >
+                                        </b-list-group-item>
+                                      </div>
+                                    </b-list-group>
+                                  </b-modal>
+                                </b-col>
+                                <b-col cols="4"></b-col>
+                              </b-row>
+                            </b-col>
+                          </b-row>
+                        </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="4"></b-col>
+                            <b-col cols="4">
+                              <b-button
+                                variant="danger"
+                                size="lg"
+                                @click="$bvModal.show('modal-scoped')"
+                                >Usuń konto</b-button
+                              >
+                              <b-modal id="modal-scoped">
+                                <template v-slot:modal-header="{ close }">
+                                  <h5>Czy jesteś pewien?</h5>
+                                </template>
 
-                          <h6>
-                            Czy na pewno chcesz usunąć swoje konto z portalu
-                            e-Love? Konto zostanie usunięte bezpowrotnie!
-                          </h6>
+                                <h6>
+                                  Czy na pewno chcesz usunąć swoje konto z
+                                  portalu e-Love? Konto zostanie usunięte
+                                  bezpowrotnie!
+                                </h6>
 
-                          <template v-slot:modal-footer="{ cancel }">
-                            <b-button
-                              size="md"
-                              variant="secondary"
-                              class="mr-20 ml-20"
-                              @click="cancel()"
-                              >Nie</b-button
-                            >
-                            <b-button
-                              size="md"
-                              variant="danger"
-                              @click="deleteAccount"
-                              >Tak</b-button
-                            >
-                          </template>
-                        </b-modal>
-                      </b-col>
-                      <b-col cols="4"></b-col>
-                    </b-row>
-                  </ul>
-                </ul>
-                <div class="text-center mt-4">
-                  <button type="submit" class="btn btn-success">Zapisz</button>
-                </div>
-                <p></p>
-              </form>
-            </b-tab>
-          </b-tabs>
-          <p></p>
-          <b-alert
-            :show="dismissCountDown"
-            dismissible
-            fade
-            variant="success"
-            @dismissed="dismissCountDown = 0"
-            @dismiss-count-down="countDownChanged"
-            >{{ msg }}</b-alert
-          >
-          <b-alert
-            :show="dismissCountDown2"
-            dismissible
-            fade
-            variant="danger"
-            @dismissed="dismissCountDown2 = 0"
-            @dismiss-count-down="countDownChanged2"
-            >{{ msg2 }}</b-alert
-          >
-        </b-col>
-        <b-col cols="1"></b-col>
-      </b-row>
-    </b-container>
+                                <template v-slot:modal-footer="{ cancel }">
+                                  <b-button
+                                    size="md"
+                                    variant="secondary"
+                                    class="mr-20 ml-20"
+                                    @click="cancel()"
+                                    >Nie</b-button
+                                  >
+                                  <b-button
+                                    size="md"
+                                    variant="danger"
+                                    @click="deleteAccount"
+                                    >Tak</b-button
+                                  >
+                                </template>
+                              </b-modal>
+                            </b-col>
+                            <b-col cols="4"></b-col>
+                          </b-row>
+                        </ul>
+                      </ul>
+                      <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success">
+                          Zapisz
+                        </button>
+                      </div>
+                      <p></p>
+                    </form>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="1"></v-col>
+              </v-row>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-card>
+    </v-container>
   </div>
 </template>
 
@@ -810,17 +928,12 @@ export default {
     return {
       placeholder: null,
       active: "",
+      tab: null,
       checkedNames: [],
       special_options: [],
       user_data: {},
       user_preferences: {},
-      msg: "",
-      dismissSecs: 3,
-      dismissCountDown: 0,
-      dismissSecs2: 3,
-      dismissCountDown2: 0,
       calculated: 0,
-      msg2: "",
       hideage: false,
       msg_option: "od wszystkich",
       msgoptions: [
@@ -952,18 +1065,6 @@ export default {
       this.$router.go();
     },
 
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
-    },
-    showMsg() {
-      this.dismissCountDown = this.dismissSecs;
-    },
-    countDownChanged2(dismissCountDown2) {
-      this.dismissCountDown2 = dismissCountDown2;
-    },
-    showMsg2() {
-      this.dismissCountDown2 = this.dismissSecs2;
-    },
     getUserBlacklist() {
       //console.log("getblacklist");
       axios
@@ -1007,7 +1108,7 @@ export default {
           //console.log(response);
         })
         .catch((errors) => console.log(errors));
-        this.$router.go();
+      this.$router.go();
     },
     getUserData() {
       axios
@@ -1054,13 +1155,21 @@ export default {
         )
         .then((response) => {
           if (response.status == 200) {
-            this.showMsg(), (this.msg = "Zapisano zmiany");
+            this.toast(
+              "b-toaster-bottom-right",
+              "success",
+              "Zapisano zmiany profilu."
+            );
           }
           console.log(response);
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
+            this.toast(
+              "b-toaster-bottom-right",
+              "danger",
+              "Formularz zawiera błędy!"
+            );
           }
           console.log(errors);
         });
@@ -1082,13 +1191,21 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status == 200) {
-            this.showMsg(), (this.msg = "Zaktualizowano opis profilu");
+            this.toast(
+              "b-toaster-bottom-right",
+              "success",
+              "Zaktualizowano opis profilu!"
+            );
           }
         })
         .catch((errors) => console.log(errors));
     },
     editUserPrivate() {
-      this.showMsg(), (this.msg = "Zapisano zmiany");
+      this.toast(
+        "b-toaster-bottom-right",
+        "success",
+        "Zaktualizowano ustawienia prywatności!"
+      );
     },
     getUserPreferences() {
       axios
@@ -1131,13 +1248,21 @@ export default {
         )
         .then((response) => {
           if (response.status == 200) {
-            this.showMsg(), (this.msg = "Zapisano zmiany");
+            this.toast(
+              "b-toaster-bottom-right",
+              "success",
+              "Zapisano zmiany profilu!"
+            );
           }
           console.log(response);
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg2(), (this.msg2 = "Formularz zawiera błędy");
+            this.toast(
+              "b-toaster-bottom-right",
+              "danger",
+              "Formularz zawiera błędy!"
+            );
           }
           console.log(errors);
         });
@@ -1146,6 +1271,14 @@ export default {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
+    },
+    toast(toaster, variant = null, msg) {
+      this.$bvToast.toast(msg, {
+        title: `Info`,
+        toaster: toaster,
+        solid: true,
+        variant: variant,
+      });
     },
     getUserSettings() {},
     editUserSetting() {},
@@ -1198,9 +1331,7 @@ table {
   width: 80%;
   position: relative;
 }
-.list-group-item {
-  background: #e9bac2;
-}
+
 .tabs {
   background: #db4460;
   border-radius: 12px;
@@ -1208,12 +1339,7 @@ table {
   border-width: 2px;
   border-color: #9a3f66;
 }
-.card {
-  background: #e9bac2;
-}
-.tab {
-  background: #e9bac2;
-}
+
 .textarea {
   height: 100%;
   width: 100%;
@@ -1222,7 +1348,7 @@ table {
 .card-text {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
-  font-size: 20px;
+  font-size: 60px;
 }
 
 .nav-link {

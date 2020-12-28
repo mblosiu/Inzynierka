@@ -1,110 +1,130 @@
 <template>
-  <div class="page">
-    <b-container class="bv-example-row" fluid>
-      <b-row flex>
-        <b-col cols="2">
-          <b-row>
-            <b-col cols="5"></b-col>
-            <b-col cols="4">
-              <!--<h1 class="display-4">Galeria</h1>-->
-            </b-col>
-            <b-col cols="3"></b-col>
-            
-          </b-row>
-          <b-row>
-            <b-col cols="12">
-              
-            </b-col>
-          </b-row>
-          <div class="card text-white bg-secondary mb-5" style="width: 20rem; height: 29rem">
-            <div class="card-header">
-              <h1 class="display-4">Galeria</h1>
-            </div>
-            <div class="card-body">
-              <img
-                class="card-img-top"
-                src="../../public/img/add-image-icon.png"
-                alt="Card image cap"
-                style="width: 11rem; height: 11rem"
-              />
-              
-              <p></p>
-              <h5 class="card-title">Dodaj nowe zdjęcie.</h5>
-              <div class="large-12 medium-12 small-12 cell">
-                <label>
-                  <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-                </label>
-                <button type="button" class="btn btn-success" v-on:click="submitFile()">Wyślij</button>
-              </div>
-            </div>
-          </div>
+  <v-container>
+    <v-row>
+      <v-toolbar color="purple">
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-toolbar-title class="white--text">Galeria</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-icon
+          color="white"
+          class="ml-12 mr-2"
+          x-large
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Dodaj nowe zdjęcie"
+          >mdi-image-plus</v-icon
+        >
+        <div class="fileupload">
+          <label>
+            <input
+              type="file"
+              id="file"
+              ref="file"
+              v-on:change="handleFileUpload()"
+            />
+          </label>
+          <v-btn
+            class="ml-2"
+            color="purple lighten-2"
+            dense
+            v-on:click="submitFile()"
+          >
+            <button bold class="white--text">Wyślij</button>
+          </v-btn>
+        </div>
+      </v-toolbar>
+    </v-row>
+    <b-row class="scroll">
+      <br />
 
-          <b-alert
-            :show="dismissCountDown"
-            fade
-            variant="success"
-            @dismissed="dismissCountDown=0"
-            @dismiss-count-down="countDownChanged"
-          >{{msg}}</b-alert>
-        </b-col>
+      <b-row v-for="i in Math.ceil(images.length / 2)" v-bind:key="i">
         <b-col cols="1"></b-col>
-        <b-col cols="9" align-self="start" class="scroll">
-          <br/>
-          <b-row v-for="i in Math.ceil(images.length / 2)" v-bind:key="i">
-            <b-col cols="1"></b-col>
-            <b-col
-              cols="5"
-              v-for="image in images.slice((i - 1) * 2, i * 2)"
-              v-bind:key="image.id"
-              style="padding-bottom:2px;"
+        <b-col
+          cols="5"
+          v-for="image in images.slice((i - 1) * 2, i * 2)"
+          v-bind:key="image.id"
+          style="padding-bottom: 2px"
+        >
+          <v-card outlined rounded class="mx-auto" color="purple">
+            <v-img
+              width="500"
+              height="500"
+              aspect-ratio="1"
+              class="white--text align-end"
+              :src="getUrl(image.image)"
+              alt="image"
+              @click="showModal(image.image)"
             >
-              <div class="card bg-secondary mb-3" style="width: 377px; height: 285px">
-                <img
-                  :src="getUrl(image.image)"
-                  class="img-responsive rounded mx-auto d-block"
-                  alt="image"
-                  @click="showModal(image.image)"
-                />
+              <v-app-bar flat color="rgba(0, 0, 0, 0)">
+                <v-menu
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :nudge-width="100"
+                  offset-x
+                  left
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn fab small class="purple" v-bind="attrs" v-on="on"
+                      ><v-app-bar-nav-icon color="white"></v-app-bar-nav-icon
+                    ></v-btn>
+                  </template>
 
-                <b-modal :ref="'modal' + image.image" hide-footer title="Podgląd zdjęcia" size="lg">
-                  <div class="d-block text-center"></div>
-                  <img
-                    :src="getUrl(image.image)"
-                    class="img-responsive rounded mx-auto d-block"
-                    alt="image"
-                    style="width:100%; height:100%"
-                  />
-                  <br />
-                </b-modal>
-                <div class="card-body">
-                  <p>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      v-on:click="setAsProfilePic(image.image)"
-                    >Ustaw jako profilowe</button>
-
-                    <button
-                      type="button"
-                      class="btn btn-danger ml-2"
-                      v-on:click="deleteImage(image.pk)"
-                    >Usuń zdjęcie</button>
-                  </p>
-                </div>
-              </div>
-            </b-col>
-          </b-row>
+                  <v-card>
+                    <v-list>
+                      <v-list-item>
+                        <v-btn
+                          icon
+                          x-large
+                          v-b-toggle.sidebar-footer
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="Ustaw jako profilowe"
+                          v-on:click="setAsProfilePic(image.image)"
+                        >
+                          <v-icon color="purple"
+                            >mdi-account-box-outline</v-icon
+                          >
+                        </v-btn>
+                        <v-divider vertical></v-divider>
+                        <v-btn
+                          icon
+                          x-large
+                          v-b-toggle.sidebar-footer
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="Usuń zdjęcie"
+                          v-on:click="deleteImage(image.pk)"
+                        >
+                          <v-icon color="purple"
+                            >mdi-image-remove</v-icon
+                          ></v-btn
+                        >
+                      </v-list-item>
+                    </v-list>
+                  </v-card>
+                </v-menu>
+              </v-app-bar>
+            </v-img>
+          </v-card>
+          <b-modal
+            :ref="'modal' + image.image"
+            hide-footer
+            title="Podgląd zdjęcia"
+            size="lg"
+          >
+            <div class="d-block text-center"></div>
+            <img
+              :src="getUrl(image.image)"
+              class="img-responsive rounded mx-auto d-block"
+              alt="image"
+              style="width: 100%; height: 100%"
+            />
+            <br />
+          </b-modal>
         </b-col>
-
-        <b-col cols="1"></b-col>
       </b-row>
-      <b-row>
-        <b-col cols="12">
-          <p></p>
-        </b-col>
-      </b-row>
-    </b-container>
-  </div>
+    </b-row>
+  </v-container>
 </template>
 
 <script>
@@ -116,9 +136,6 @@ export default {
       user_data: {},
       images: [],
       msg: "",
-      dismissSecs: 5,
-      dismissCountDown: 0,
-      //id: "",
     };
   },
 
@@ -133,12 +150,7 @@ export default {
     hideModal(i) {
       this.$refs["modal" + i][0].hide();
     },
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
-    },
-    showMsg() {
-      this.dismissCountDown = this.dismissSecs;
-    },
+
     submitFile() {
       let formData = new FormData();
       formData.append("image", this.file);
@@ -204,7 +216,11 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status == 200) {
-            this.showMsg(), (this.msg = "Zmieniono zdjęcie profilowe.");
+            this.toast(
+              "b-toaster-bottom-right",
+              "success",
+              "Zaktualizowano zdjęcie profilowe!"
+            );
           }
         })
         .catch((errors) => console.log(errors));
@@ -225,6 +241,14 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    toast(toaster, variant = null, msg) {
+      this.$bvToast.toast(msg, {
+        title: `Info`,
+        toaster: toaster,
+        solid: true,
+        variant: variant,
+      });
+    },
   },
   created() {
     this.getUserImages();
@@ -242,8 +266,7 @@ export default {
   height: 100%;
   overflow-y: scroll;
   height: 100vh;
-  background:rgba(241, 55, 55, 0.123);
-  border-radius:12px;
+  background: rgba(128, 0, 128, 0.199);
 }
 .alert {
   margin-left: 30px;

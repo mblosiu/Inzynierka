@@ -1,7 +1,7 @@
 <template>
-  <div class="page">
-    <b-container class="bv-example-row" fluid>
-      <b-row flex>
+  
+    <v-container >
+      <v-row flex>
         <b-col cols="1"></b-col>
         <b-col cols="10" align-self="start" class="scroll">
           <b-row v-for="i in Math.ceil(images.length / 2)" v-bind:key="i">
@@ -39,9 +39,9 @@
         </b-col>
 
         <b-col cols="1"></b-col>
-      </b-row>
-    </b-container>
-  </div>
+      </v-row>
+    </v-container>
+  
 </template>
 
 <script>
