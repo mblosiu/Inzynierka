@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="mx-auto my-auto" align-stretch>
     <b-row></b-row>
     <b-row class="row justify-content-md-center">
       <br />
@@ -27,51 +27,7 @@
       <b-col cols="2"></b-col>
     </b-row>
     <b-row></b-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
+    
   </v-container>
 </template>
 
