@@ -192,7 +192,6 @@
                         <v-btn
                           color="green darken-1"
                           text
-                          type="submit"
                           @click="createUser()"
                           outlined
                         >
@@ -265,7 +264,7 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status == 201) {
-            this.$router.push("/");
+            this.$router.go();
           }
         })
         .catch((errors) => {

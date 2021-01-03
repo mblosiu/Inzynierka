@@ -17,12 +17,20 @@
               :src="getUrl(user_data.profile_picture)"
               aspect-ratio="1"
             >
-              <!-- if no picture -->
+              <div v-if="user_data.profile_picture==null">
+                <v-card-title class="black--text"
+                >{{ user_data.username }} ({{
+                  getAge(user_data.birthday)
+                }})</v-card-title
+              >
+              </div>
+              <div v-else>
               <v-card-title
                 >{{ user_data.username }} ({{
                   getAge(user_data.birthday)
                 }})</v-card-title
               >
+              </div>
             </v-img>
 
             <v-card-text class="white--text">

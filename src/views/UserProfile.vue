@@ -76,11 +76,11 @@
                         <v-list-item>
                           <div v-if="isUserLiked() == false">
                             <v-btn
-                              :class="fav ? 'red--text' : ''"
+                              
                               icon
                               x-large
                               @click="
-                                fav = !fav;
+                                
                                 likeUser();
                                 toast(
                                   'b-toaster-bottom-right',
@@ -97,11 +97,11 @@
                           </div>
                           <div v-else>
                             <v-btn
-                              :class="fav ? 'red--text' : ''"
+                              
                               icon
                               x-large
                               @click="
-                                fav = !fav;
+                                
                                 dislikeUser();
                                 toast(
                                   'b-toaster-bottom-right',
@@ -228,12 +228,20 @@
                       </v-list>
                     </v-card>
                   </v-menu>
-
+                  <div v-if="user.profile_picture==null">
+                    <v-card-title class="black--text"
+                    >{{ user.username }} ({{
+                      getAge(user.birthday)
+                    }})</v-card-title
+                  >
+                  </div>
+                  <div v-else>
                   <v-card-title class="white--text"
                     >{{ user.username }} ({{
                       getAge(user.birthday)
                     }})</v-card-title
                   >
+                  </div>
                 </v-app-bar>
               </v-img>
 

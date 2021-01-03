@@ -240,12 +240,20 @@
 
                           <v-card> </v-card>
                         </v-menu>
-
+                        <div v-if="user.profile_picture==null">
+                        <v-card-title class="black--text"
+                          >{{ user.username }} ({{
+                            getAge(user.birthday)
+                          }})</v-card-title
+                        >
+                        </div>
+                        <div v-else>
                         <v-card-title class="white--text"
                           >{{ user.username }} ({{
                             getAge(user.birthday)
                           }})</v-card-title
                         >
+                        </div>
                       </v-app-bar>
                     </v-img>
 
