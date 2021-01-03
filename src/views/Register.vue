@@ -1,190 +1,5 @@
 <template>
-  <v-container>
-    <v-card class="mx-auto" max-width="600" outlined color="purple lighten-4">
-      <v-list-item three-line>
-        <v-list-item-content>
-          <v-list-item-title class="headline mb-1">
-            Rejestracja
-          </v-list-item-title>
-          <v-list-item-subtitle>Wprowadź wymagane dane</v-list-item-subtitle>
-          <v-divider></v-divider>
-        </v-list-item-content>
-          <v-row>
-            <form>
-              <v-text-field
-                v-model="name"
-                :error-messages="nameErrors"
-                :counter="10"
-                label="Name"
-                required
-                @input="$v.name.$touch()"
-                @blur="$v.name.$touch()"
-              ></v-text-field>
-              <v-text-field
-                v-model="email"
-                :error-messages="emailErrors"
-                label="E-mail"
-                required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
-              ></v-text-field>
-              <v-select
-                v-model="select"
-                :items="items"
-                :error-messages="selectErrors"
-                label="Item"
-                required
-                @change="$v.select.$touch()"
-                @blur="$v.select.$touch()"
-              ></v-select>
-              <v-checkbox
-                v-model="checkbox"
-                :error-messages="checkboxErrors"
-                label="Do you agree?"
-                required
-                @change="$v.checkbox.$touch()"
-                @blur="$v.checkbox.$touch()"
-              ></v-checkbox>
-
-              <v-btn class="mr-4" @click="submit"> submit </v-btn>
-              <v-btn @click="clear"> clear </v-btn>
-            </form>
-            </v-row>
-            </v-list-item-content>
-            <!--
-            <form class="card" @submit.prevent="createUser" flex>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <b-row>
-                    <b-col cols="6">
-                      <label for="username2">Nazwa konta {{ username }}</label>
-                      <input
-                        type="text"
-                        name="username2"
-                        id="username2"
-                        v-model="username"
-                        required
-                        pattern="[a-zA-Z0-9]{4,}"
-                        title="Nazwa użytkownika musi się składać z minimum 4 znaków"
-                      />
-                    </b-col>
-                    <b-col cols="6">
-                      <label for="email">Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        v-model="email"
-                        required
-                      />
-                    </b-col>
-                  </b-row>
-                </li>
-                <li class="list-group-item">
-                  <b-row>
-                    <b-col cols="6">
-                      <label for="Location">Lokacja</label>
-                      <input
-                        type="text"
-                        name="Location"
-                        id="Location"
-                        v-model="location"
-                        required
-                      />
-                    </b-col>
-                    <b-col cols="6">
-                      <label for="birthday">Data urodzenia</label>
-                      <input
-                        type="date"
-                        name="birthday"
-                        id="birthday"
-                        v-model="birthday"
-                        required
-                      />
-                    </b-col>
-                  </b-row>
-                </li>
-                <li class="list-group-item">
-                  <b-row>
-                    <b-col cols="6">
-                      <label for="password">Hasło</label>
-                      <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        v-model="password"
-                        required
-                        pattern=".{8,}"
-                        title="Nazwa użytkownika musi się składać z minimum 8 znaków"
-                      />
-                    </b-col>
-                    <b-col cols="6">
-                      <label for="password2">Powtórz hasło</label>
-                      <input
-                        type="password"
-                        name="password2"
-                        id="password2"
-                        v-model="password2"
-                        required
-                        oninput='password2.setCustomValidity(password.value != password2.value ? "Hasła się różnią" : "")'
-                      />
-                    </b-col>
-                  </b-row>
-                </li>
-                <li class="list-group-item">
-                  <b-row>
-                    <b-col cols="12">
-                      <label for="sex">Płeć</label>
-                      <br />
-                      <select
-                        class="ml-2"
-                        name="Sex"
-                        id="Sex"
-                        v-model="sex"
-                        required
-                      >
-                        <br />
-                        <option>Mężczyzna</option>
-                        <option>Kobieta</option>
-                        <option>Inna</option>
-                      </select>
-                    </b-col>
-                  </b-row>
-                </li>
-                <li class="list-group-item">
-                  <b-row>
-                    <b-col cols="12">
-                      <br />
-                      <label for="checkbox">
-                        Akceptuję
-                        <router-link to="/regulations">regulamin</router-link>
-                      </label>
-                      <input
-                        type="checkbox"
-                        id="checkbox"
-                        v-model="checked"
-                        required
-                      />
-                    </b-col>
-                  </b-row>
-                </li>
-                <li class="list-group-item">
-                  <b-row>
-                    <b-col cols="12">
-                      <input
-                        class="btn btn-outline-success"
-                        type="submit"
-                        value="Zarejestruj"
-                      />
-                    </b-col>
-                  </b-row>
-                </li>
-              </ul>
-            </form>-->
-          
-        
-      </v-list-item>
-    </v-card>
+  <div>
     <div class="register-form d-flex justify-content-center">
       <b-row class="row justify-content-md-center">
         <b-col cols="12" class="col align-self-center">
@@ -329,7 +144,7 @@
         </b-col>
       </b-row>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -428,7 +243,14 @@ export default {
 h5 {
   color: whitesmoke;
 }
-input {
-  color: purple;
+.card-header {
+  background: #ca5387d8;
+}
+.card {
+  background: #723434;
+  border-radius: 5px;
+}
+.list-group-item {
+  background: #fadbdb;
 }
 </style>

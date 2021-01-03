@@ -36,6 +36,7 @@
               <v-img
                 class="white--text align-end"
                 :src="getUrl(user.profile_picture)"
+                aspect-ratio="1"
               >
                 <v-app-bar flat color="rgba(0, 0, 0, 0)">
                   <v-menu

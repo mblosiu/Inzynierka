@@ -15,7 +15,9 @@
             <v-img
               class="white--text align-end"
               :src="getUrl(user_data.profile_picture)"
+              aspect-ratio="1"
             >
+              <!-- if no picture -->
               <v-card-title
                 >{{ user_data.username }} ({{
                   getAge(user_data.birthday)

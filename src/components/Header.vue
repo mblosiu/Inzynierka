@@ -1,16 +1,10 @@
 <template>
   <nav>
     <v-toolbar app clipped-left dense color="purple">
-      <v-btn
-        color="purple"
-        depressed
-        v-if="token != null"
-        @click="drawer = !drawer"
-        class="mr-3"
-      >
-        <v-app-bar-nav-icon> </v-app-bar-nav-icon>
-        <b-avatar :src="getUrl(user_data.profile_picture)"></b-avatar>
-      </v-btn>
+      
+        <v-app-bar-nav-icon class="mr-2" @click="drawer = !drawer"> </v-app-bar-nav-icon>
+        
+      
       <a v-if="token == null" id="logo" class="navbar-brand" href="/">
         e
 
@@ -398,7 +392,7 @@
       </b-nav-form>
 
       <v-btn icon v-if="token != null">
-        <v-icon>mdi-dots-vertical</v-icon>
+        <b-avatar class="ml-5 mr-2" :src="getUrl(user_data.profile_picture)"></b-avatar>
       </v-btn>
       <b-nav-form @submit.prevent="logout" v-if="token != null">
         <v-btn
