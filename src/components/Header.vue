@@ -1,10 +1,9 @@
 <template>
   <nav>
     <v-toolbar app clipped-left dense color="purple">
-      
-        <v-app-bar-nav-icon class="mr-2" @click="drawer = !drawer"> </v-app-bar-nav-icon>
-        
-      
+      <v-app-bar-nav-icon class="mr-2" @click="drawer = !drawer">
+      </v-app-bar-nav-icon>
+
       <a v-if="token == null" id="logo" class="navbar-brand" href="/">
         e
 
@@ -387,12 +386,15 @@
           type="submit"
           size="sm"
           class="my-2 ml-2"
-          >Zaloguj</v-btn
+          ><button class="font-weight-bold">Zaloguj</button></v-btn
         >
       </b-nav-form>
 
       <v-btn icon v-if="token != null">
-        <b-avatar class="ml-5 mr-2" :src="getUrl(user_data.profile_picture)"></b-avatar>
+        <b-avatar
+          class="ml-5 mr-2"
+          :src="getUrl(user_data.profile_picture)"
+        ></b-avatar>
       </v-btn>
       <b-nav-form @submit.prevent="logout" v-if="token != null">
         <v-btn

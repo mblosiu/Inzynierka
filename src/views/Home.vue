@@ -73,91 +73,131 @@
                     </v-btn>
                   </template>
                   <v-card>
-                    <v-card-title>
-                      <span class="headline">Rejestracja</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-container>
-                        <v-row>
-                          <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                              label="Legal first name*"
-                              required
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                              label="Legal middle name"
-                              hint="example of helper text only on focus"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                              label="Legal last name*"
-                              hint="example of persistent helper text"
-                              persistent-hint
-                              required
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-text-field
-                              label="Email*"
-                              required
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-text-field
-                              label="Password*"
-                              type="password"
-                              required
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12" sm="6">
-                            <v-select
-                              :items="['0-17', '18-29', '30-54', '54+']"
-                              label="Age*"
-                              required
-                            ></v-select>
-                          </v-col>
-                          <v-col cols="12" sm="6">
-                            <v-autocomplete
-                              :items="[
-                                'Skiing',
-                                'Ice hockey',
-                                'Soccer',
-                                'Basketball',
-                                'Hockey',
-                                'Reading',
-                                'Writing',
-                                'Coding',
-                                'Basejump',
-                              ]"
-                              label="Interests"
-                              multiple
-                            ></v-autocomplete>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                      <small>*indicates required field</small>
-                    </v-card-text>
-                    <v-card-actions>
+                    <v-card-title flex class="purple">
+                      <br />
                       <v-spacer></v-spacer>
-                      <v-btn
-                        color="blue darken-1"
-                        text
-                        @click="registerDialog = false"
-                      >
-                        Zamknij
-                      </v-btn>
+                      <span class="headline white--text">Rejestracja</span>
+                      <v-spacer></v-spacer>
+                    </v-card-title>
+                    <form @submit.prevent="createUser">
+                      <v-card-text class="purple lighten-5">
+                        <v-container>
+                          <v-row>
+                            <v-col cols="12" sm="6">
+                              <v-text-field
+                                label="Nazwa użytkownika*"
+                                required
+                                type="text"
+                                name="username2"
+                                id="username2"
+                                v-model="username"
+                                pattern="[a-zA-Z0-9]{4,}"
+                                hint="Nazwa może zawierać małe, duże litery i cyfry."
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                              <v-text-field
+                                label="Miejsce zamieszkania*"
+                                name="Location"
+                                id="Location"
+                                v-model="location"
+                                required
+                              ></v-text-field>
+                            </v-col>
 
-                      <v-btn
-                        color="blue darken-1"
-                        text
-                        @click="this.createUser()"
-                      >
-                        Zarejestruj
-                      </v-btn>
-                    </v-card-actions>
+                            <v-col cols="12" sm="6">
+                              <v-text-field
+                                label="Email*"
+                                required
+                                type="email"
+                                name="email"
+                                id="email"
+                                v-model="email"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                              <br />
+                              <button>
+                                Data urodzenia:
+                                <input
+                                  type="date"
+                                  name="birthday"
+                                  id="birthday"
+                                  v-model="birthday"
+                                  required
+                                />
+                              </button>
+                            </v-col>
+
+                            <v-col cols="12">
+                              <v-text-field
+                                label="Hasło*"
+                                type="password"
+                                required
+                                name="password"
+                                id="password"
+                                v-model="password"
+                                hint="Bezpieczne hasło musi składać się z co najmniej 8 znaków!"
+                                pattern=".{8,}"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-text-field
+                                label="Powtórz hasło*"
+                                type="password"
+                                required
+                                name="password2"
+                                id="password2"
+                                v-model="password2"
+                                oninput='password2.setCustomValidity(password.value != password2.value ? "Hasła się różnią" : "")'
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                              <v-select
+                                :items="['Mężczyzna', 'Kobieta', 'Inna']"
+                                label="Płeć*"
+                                required
+                                name="Sex"
+                                id="Sex"
+                                v-model="sex"
+                              ></v-select>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                              <v-checkbox
+                                label="Akceptuję regulamin serwisu"
+                                required
+                                type="checkbox"
+                                id="checkbox"
+                                v-model="checked"
+                              ></v-checkbox>
+                              <router-link to="/regulations"
+                                >regulamin</router-link
+                              >
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                        <br />
+                        <small>*Pola wymagane</small>
+                      </v-card-text>
+                      <v-card-actions class="purple lighten-5">
+                        <v-btn
+                          color="blue darken-1"
+                          text
+                          @click="registerDialog = false"
+                        >
+                          Zamknij
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="blue darken-1"
+                          text
+                          type="submit"
+                          @click="this.createUser()"
+                        >
+                          Zarejestruj
+                        </v-btn>
+                      </v-card-actions>
+                    </form>
                   </v-card>
                 </v-dialog>
               </v-row>
@@ -335,13 +375,4 @@ h1 {
   color: white;
   font-weight: 600;
 }
-/*
-.btn-lg:hover {
-  background-color: #ffd000;
-  color: rgb(204, 0, 0);
-  font-weight: 600;
-  border-style: solid;
-  border-width: 1px;
-}
-*/
 </style>
