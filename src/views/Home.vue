@@ -79,7 +79,7 @@
                       <span class="headline white--text">Rejestracja</span>
                       <v-spacer></v-spacer>
                     </v-card-title>
-                    <form @submit.prevent="createUser">
+                    <v-form @submit.prevent="createUser">
                       <v-card-text class="purple lighten-5">
                         <v-container>
                           <v-row>
@@ -181,23 +181,25 @@
                       </v-card-text>
                       <v-card-actions class="purple lighten-5">
                         <v-btn
-                          color="blue darken-1"
+                          color="red darken-1"
                           text
+                          outlined
                           @click="registerDialog = false"
                         >
                           Zamknij
                         </v-btn>
                         <v-spacer></v-spacer>
                         <v-btn
-                          color="blue darken-1"
+                          color="green darken-1"
                           text
                           type="submit"
-                          @click="this.createUser()"
+                          @click="createUser()"
+                          outlined
                         >
                           Zarejestruj
                         </v-btn>
                       </v-card-actions>
-                    </form>
+                    </v-form>
                   </v-card>
                 </v-dialog>
               </v-row>
@@ -214,6 +216,7 @@
 <script>
 // @ is an alias to /src
 //import Register from "@/views/Register.vue";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -230,12 +233,7 @@ export default {
       sex: "",
       password: "",
       password2: "",
-      dismissSecs: 5,
-      dismissCountDown: 0,
-      dismissSecs2: 5,
-      dismissCountDown2: 0,
       checked: false,
-      showDismissibleAlert: false,
       error_message: "",
       registerDialog: false,
     };
