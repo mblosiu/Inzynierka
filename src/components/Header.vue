@@ -1,22 +1,29 @@
 <template>
   <nav>
     <v-toolbar app clipped-left dense color="purple">
-      <v-app-bar-nav-icon v-if="token != null" class="mr-2" @click="drawer = !drawer">
+      <v-app-bar-nav-icon
+        v-if="token != null"
+        class="mr-2"
+        @click="drawer = !drawer"
+      >
       </v-app-bar-nav-icon>
 
-      <a v-if="token == null" id="logo" class="navbar-brand" href="/">
-        e
-
-        <v-icon color="red">mdi-heart</v-icon>
-
-        Love
+      <a v-if="token == null" id="logo" class="navbar-brand ml-0" href="/">
+        <v-img
+          max-height="150"
+          max-width="150"
+          contain
+          :src="require('../../public/img/eloveLogo.png')"
+        ></v-img>
       </a>
+
       <a id="logo" v-else class="navbar-brand" href="/mainuser">
-        e
-
-        <v-icon color="red">mdi-heart</v-icon>
-
-        Love
+        <v-img
+          max-height="150"
+          max-width="150"
+          contain
+          :src="require('../../public/img/eloveLogo.png')"
+        ></v-img>
       </a>
 
       <b-nav-form id="logo" class="ml-1 mr-2" v-if="token != null">

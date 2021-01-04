@@ -193,10 +193,10 @@
       </v-row>
       <v-row>
         <v-col cols="12" align-self="start" class="scroll">
-          <b-row v-for="i in Math.ceil(users.length / 2)" v-bind:key="i">
+          <b-row v-for="i in Math.ceil(users.length / 4)" v-bind:key="i">
             <b-col
-              cols="6"
-              v-for="user in users.slice((i - 1) * 2, i * 2)"
+              cols="3"
+              v-for="user in users.slice((i - 1) * 4, i * 4)"
               v-bind:key="user.id"
               style="ml-2 mr-2"
             >
@@ -209,7 +209,7 @@
                     rounded
                     class="mx-auto"
                     max-width="500"
-                    height="700"
+                    max-height="700"
                     color="purple"
                   >
                     <v-img
@@ -217,7 +217,7 @@
                       :src="getUrl(user.profile_picture)"
                       aspect-ratio="1"
                     >
-                      <v-app-bar flat color="rgba(0, 0, 0, 0)">
+                      <v-app-bar flat color="rgba(0, 0, 0, 0)" height="40">
                         <v-menu
                           v-model="menu"
                           :close-on-content-click="false"
@@ -228,13 +228,13 @@
                           <template v-slot:activator="{ on, attrs }">
                             <v-btn
                               fab
-                              small
+                              x-small
                               class="purple"
                               v-bind="attrs"
                               v-on="on"
-                              ><v-app-bar-nav-icon
+                              ><v-icon
                                 color="white"
-                              ></v-app-bar-nav-icon
+                              >mdi-information-variant</v-icon
                             ></v-btn>
                           </template>
 
