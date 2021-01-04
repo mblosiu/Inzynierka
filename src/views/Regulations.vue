@@ -1,5 +1,6 @@
 <template>
-  <v-container class="mx-auto my-auto" align-stretch>
+<v-content style="height: 100vh;">
+  <v-container fluid>
     <b-row></b-row>
     <b-row class="row justify-content-md-center">
       <br />
@@ -29,6 +30,7 @@
     <b-row></b-row>
     
   </v-container>
+</v-content>
 </template>
 
 

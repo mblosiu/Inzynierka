@@ -6,45 +6,32 @@
       <v-content>
         <router-view />
       </v-content>
+
+      <div id="footer">
+        <Footer />
+      </div>
     </div>
     <div id="guest" v-if="token == null">
       <v-content>
-        <b-row>
-          <b-col cols="12"></b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="1"></b-col>
-          <b-col cols="10" flex>
+        <v-row>
+          <v-col cols="12"></v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="1"></v-col>
+          <v-col cols="10">
             <router-view />
-          </b-col>
-          <b-col cols="1"></b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="12"></b-col>
-        </b-row>
-      </v-content>
-    </div>
-    <div id="footer" app>
-    <Footer />
-    </div>
-    <!--<div id="user" v-if="token != null">
-      <v-content>
-        <router-view />
+          </v-col>
+          <v-col cols="1"></v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12"></v-col>
+        </v-row>
       </v-content>
 
       <div id="footer">
         <Footer />
       </div>
     </div>
-    <div id="guest" v-if="token == null">
-      <v-content>
-        <router-view />
-      </v-content>
-
-      <div id="footer">
-        <Footer />
-      </div>
-    </div>-->
   </v-app>
 </template>
 
@@ -74,7 +61,6 @@ export default {
   color: #343a40;
 }
 #user {
-
   background-color: rgba(128, 0, 128, 0.288);
   background-blend-mode: overlay;
   background-repeat: no-repeat;
@@ -92,10 +78,10 @@ export default {
 }
 #v-content {
   min-height: 73.2vh;
-
 }
 
 #footer a:hover {
   color: #0275d8;
+  width: fit-content;
 }
 </style>

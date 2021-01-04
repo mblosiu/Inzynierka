@@ -1,7 +1,7 @@
 <template>
   <nav>
     <v-toolbar app clipped-left dense color="purple">
-      <v-app-bar-nav-icon class="mr-2" @click="drawer = !drawer">
+      <v-app-bar-nav-icon v-if="token != null" class="mr-2" @click="drawer = !drawer">
       </v-app-bar-nav-icon>
 
       <a v-if="token == null" id="logo" class="navbar-brand" href="/">

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container style="height: 100vh">
     <b-row></b-row>
     <b-row class="row justify-content-md-center">
       <br />
@@ -25,39 +25,7 @@
       </b-col>
       <b-col cols="4"></b-col>
     </b-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
-    <v-row>
-      <p></p>
-    </v-row>
+    
   </v-container>
 </template>
 

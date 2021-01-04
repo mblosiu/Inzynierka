@@ -208,7 +208,6 @@
         </b-col>
       </b-row>
     </b-container>
-    <a href="/register" class="btn-lg">Zarejestruj się</a>
   </div>
 </template>
 

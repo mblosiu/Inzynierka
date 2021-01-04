@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <v-container fluid>
+    <v-container>
       <br />
       <v-card color="purple">
         <v-card-title class="text-center justify-center py-6">

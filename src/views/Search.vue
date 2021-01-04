@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <v-content>
     <v-container>
       <br />
       <v-expansion-panels color="purple">
@@ -275,7 +275,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-content>
 </template>
 
 <script>
