@@ -408,15 +408,16 @@
                             />
                           </b-col>
                         </b-row>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        
-
-
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                       </ul>
 
                       <div class="text-center mt-4">
@@ -701,11 +702,11 @@
                         <p></p>
                       </div>
                     </form>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                   </v-card-text>
                 </v-col>
                 <v-col cols="1"></v-col>
@@ -754,7 +755,6 @@
                           </b-row>
                           <v-row>
                             <v-col cols="6">
-                              
                               <b-form-checkbox
                                 id="new_likes"
                                 v-model="new_likes"
@@ -775,7 +775,6 @@
                               >
                                 Wiadomości prywatne
                               </b-form-checkbox>
-                              
                             </v-col>
                           </v-row>
                         </ul>
