@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <v-container>
+    <v-container style="height: 100%">
       <br />
       <v-card color="purple">
         <v-card-title class="text-center justify-center py-6">
@@ -383,7 +383,7 @@
                             </b-col>
                           </b-row>
                         </ul>-->
-                      <ul class="list-group-item">
+                      <ul class="list-group-item" grow>
                         <b-row>
                           <b-col cols="6">
                             <label for="favourite_place" class="white-text"
@@ -408,6 +408,15 @@
                             />
                           </b-col>
                         </b-row>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        
+
+
                       </ul>
 
                       <div class="text-center mt-4">
@@ -692,6 +701,11 @@
                         <p></p>
                       </div>
                     </form>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                   </v-card-text>
                 </v-col>
                 <v-col cols="1"></v-col>
@@ -720,21 +734,6 @@
                               ></b-form-select>
                             </b-col>
                             <b-col cols="6">
-                              <label for="comm_option" class="grey-text"
-                                >Otrzymywanie komentarzy:</label
-                              >
-                              <b-form-select
-                                class="form-control"
-                                id="comm_option"
-                                v-model="comm_option"
-                                :options="msgoptions"
-                              ></b-form-select>
-                            </b-col>
-                          </b-row>
-                        </ul>
-                        <ul class="list-group-item">
-                          <b-row>
-                            <b-col cols="6">
                               <label for="search_option" class="grey-text"
                                 >Kto może mnie wyszukać:</label
                               >
@@ -745,8 +744,17 @@
                                 :options="searchoptions"
                               ></b-form-select>
                             </b-col>
-                            <b-col cols="6">
-                              <strong>Otrzymywanie powiadomień:</strong><br />
+                          </b-row>
+                        </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="12">
+                              Otrzymywanie powiadomień:<br />
+                            </b-col>
+                          </b-row>
+                          <v-row>
+                            <v-col cols="6">
+                              
                               <b-form-checkbox
                                 id="new_likes"
                                 v-model="new_likes"
@@ -756,6 +764,8 @@
                               >
                                 Polubienia od innych użytkowników
                               </b-form-checkbox>
+                            </v-col>
+                            <v-col cols="6">
                               <b-form-checkbox
                                 id="new_messages"
                                 v-model="new_messages"
@@ -765,17 +775,9 @@
                               >
                                 Wiadomości prywatne
                               </b-form-checkbox>
-                              <b-form-checkbox
-                                id="new_comments"
-                                v-model="new_comments"
-                                name="checkbox-1"
-                                value="true"
-                                unchecked-value="false"
-                              >
-                                Komentarze pod moimi zdjęciami
-                              </b-form-checkbox>
-                            </b-col>
-                          </b-row>
+                              
+                            </v-col>
+                          </v-row>
                         </ul>
                         <ul class="list-group-item">
                           <b-row>

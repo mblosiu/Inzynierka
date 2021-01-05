@@ -2,9 +2,9 @@
   <v-content>
     <v-container>
       <br />
-      <v-expansion-panels color="purple">
-        <v-expansion-panel class="purple">
-          <v-toolbar extended extension-height="50" class="purple">
+      <v-card class="mx-auto purple" elevation="5" max-width="1500">
+        <v-row>
+          <v-col cols="1">
             <v-icon
               medium
               color="purple lighten-3"
@@ -13,93 +13,102 @@
               title="Wyszukaj użytkowników za pomocą nałożonych filtrów, bądź konkretnego z nich po nazwie"
               >mdi-help-circle</v-icon
             >
+          </v-col>
+          <v-col cols="11"></v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="1"></v-col>
+          <v-col cols="10">
             <form id="filters" @submit.prevent="getUsers">
-              <table>
-                <tr>
-                  <th>
-                    <div id="filter">
-                      <b-form-select
-                        :options="sex_options"
-                        class="ml-2"
-                        id="sex"
-                        v-model="sex"
-                        size="md"
-                        value="sex"
-                        placeholder="Płeć"
-                      ></b-form-select>
-                    </div>
-                  </th>
+              <v-row>
+                <v-col cols="2">
+                  <b-form-select
+                    :options="sex_options"
+                    class="ml-2"
+                    id="sex"
+                    v-model="sex"
+                    size="md"
+                    value="sex"
+                    placeholder="Płeć"
+                  ></b-form-select>
+                </v-col>
+                <v-col cols="2">
+                  <input
+                    class="form-control ml-2"
+                    type="text"
+                    placeholder="Lokacja"
+                    id="location"
+                    v-model="location"
+                  />
+                </v-col>
+                <v-col cols="6">
+                  <v-card flat color="transparent">
+                    <h5 class="white--text">
+                      Przedział wiekowy: {{ age_min }} - {{ age_max }}
+                    </h5>
 
-                  <th>
-                    <div id="filter">
-                      <input
-                        class="form-control ml-2"
-                        type="text"
-                        placeholder="Lokacja"
-                        id="location"
-                        v-model="location"
-                      />
-                    </div>
-                  </th>
-                  <th>
-                    <b-row>
-                      <b-col cols="2"></b-col>
-                      <b-col cols="8">
-                        <div class="p-1 text-white text-i">
-                          <h6>
-                            Przedział wiekowy: {{ age_min }} - {{ age_max }}
-                          </h6>
-                        </div>
-                      </b-col>
-                      <b-col cols="2"></b-col>
-                    </b-row>
-                    <b-row>
-                      <b-col cols="1"></b-col>
-                      <b-col cols="5">
-                        <div>
-                          <b-form-input
-                            id="age_min"
-                            v-model="age_min"
-                            type="range"
-                            min="18"
-                            :max="age_max"
-                          ></b-form-input>
-                        </div>
-                      </b-col>
-                      <b-col cols="5">
-                        <div>
-                          <b-form-input
-                            id="age_max"
-                            v-model="age_max"
-                            type="range"
-                            :min="age_min"
-                            max="100"
-                          ></b-form-input>
-                        </div>
-                      </b-col>
-                      <b-col cols="1"></b-col>
-                    </b-row>
-                  </th>
+                    <v-card-text>
+                      <b-row>
+                        <b-col cols="1"></b-col>
+                        <b-col cols="5">
+                          <div>
+                            <b-form-input
+                              id="age_min"
+                              v-model="age_min"
+                              type="range"
+                              min="18"
+                              :max="age_max"
+                            ></b-form-input>
+                          </div>
+                        </b-col>
+                        <b-col cols="5">
+                          <div>
+                            <b-form-input
+                              id="age_max"
+                              v-model="age_max"
+                              type="range"
+                              :min="age_min"
+                              max="100"
+                            ></b-form-input>
+                          </div>
+                        </b-col>
+                        <b-col cols="1"></b-col>
+                      </b-row>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
 
-                  <th>
-                    <div id="filter">
-                      <v-btn x-large block color="purple lighten-2">
-                        <button type="submit">
-                          <b class="white--text">Filtruj</b>
-                        </button>
-                      </v-btn>
-                    </div>
-                  </th>
-                </tr>
-              </table>
+                <v-col cols="1">
+                  <button type="submit">
+                    <v-btn x-large block color="purple lighten-2">
+                      <b class="white--text">Filtruj</b>
+                    </v-btn>
+                  </button>
+                </v-col>
+              </v-row>
             </form>
-          </v-toolbar>
+          </v-col>
+          <v-col cols="1"></v-col>
+        </v-row>
 
-          <v-expansion-panel-header class="purple" extended>
-            <h5 class="white--text centre">Więcej filtrów</h5>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content class="purple">
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click="show = !show" flat block depressed color="purple lighten-0">
+            <b class="mr-2 white--text">Więcej filtrów</b>
+
+            <v-btn icon class="purple lighten-1" small>
+              <v-icon color="white">{{
+                show ? "mdi-chevron-up" : "mdi-chevron-down"
+              }}</v-icon>
+            </v-btn>
+          </v-btn>
+        </v-card-actions>
+
+        <v-expand-transition>
+          <div v-show="show">
+            <v-divider></v-divider>
             <v-row>
+              <v-col cols="1"></v-col>
               <v-col>
                 <th>
                   <b-form-select
@@ -165,10 +174,11 @@
                   ></b-form-select>
                 </th>
               </v-col>
+              <v-col cols="1"></v-col>
             </v-row>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
+          </div>
+        </v-expand-transition>
+      </v-card>
 
       <v-row flex>
         <v-col cols="3"></v-col>
@@ -200,75 +210,97 @@
               v-bind:key="user.id"
               style="ml-2 mr-2"
             >
-              <v-hover>
+              <v-card
+                outlined
+                rounded
+                class="mx-auto"
+                max-width="500"
+                max-height="700"
+                color="purple"
+              >
                 <router-link
                   :to="{ name: 'userprofile', params: { pk: user.pk } }"
                 >
-                  <v-card
-                    outlined
-                    rounded
-                    class="mx-auto"
-                    max-width="500"
-                    max-height="700"
-                    color="purple"
+                  <v-img
+                    class="white--text align-end"
+                    :src="getUrl(user.profile_picture)"
+                    aspect-ratio="1"
                   >
-                    <v-img
-                      class="white--text align-end"
-                      :src="getUrl(user.profile_picture)"
-                      aspect-ratio="1"
-                    >
-                      <v-app-bar flat color="rgba(0, 0, 0, 0)" height="40">
-                        <v-menu
-                          v-model="menu"
-                          :close-on-content-click="false"
-                          :nudge-width="200"
-                          offset-x
-                          left
-                        >
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                              fab
-                              x-small
-                              class="purple"
-                              v-bind="attrs"
-                              v-on="on"
-                              ><v-icon
-                                color="white"
+                    <v-app-bar flat color="rgba(0, 0, 0, 0)" height="45">
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            fab
+                            x-small
+                            class="purple"
+                            v-bind="attrs"
+                            v-on="on"
+                            ><v-icon color="white"
                               >mdi-information-variant</v-icon
-                            ></v-btn>
-                          </template>
+                            ></v-btn
+                          >
+                        </template>
 
-                          <v-card> </v-card>
-                        </v-menu>
-                        <div v-if="user.profile_picture==null">
+                        <v-card width="300" color="grey">
+                          <v-list class="purple lighten-5">
+                            <v-list-item>
+                              <v-list-item-avatar size="70">
+                                <img :src="getUrl(user.profile_picture)" />
+                              </v-list-item-avatar>
+
+                              <v-list-item-content>
+                                <v-list-item-title
+                                  ><h5>
+                                    {{ user.username }}
+                                  </h5></v-list-item-title
+                                >
+                                <v-list-item-subtitle
+                                  ><h6>
+                                    ({{ user.location }})
+                                  </h6></v-list-item-subtitle
+                                >
+                              </v-list-item-content>
+                            </v-list-item>
+                            <v-divider></v-divider>
+                            <div v-if="user.description != null">
+                              <v-list-item
+                                ><h6 class="font--italic text-left">
+                                  {{ user.description }}
+                                </h6></v-list-item
+                              >
+                            </div>
+                            <div v-else><h6>Brak opisu.</h6></div>
+                          </v-list>
+                        </v-card>
+                      </v-tooltip>
+                      <div v-if="user.profile_picture == null">
                         <v-card-title class="black--text"
                           >{{ user.username }} ({{
                             getAge(user.birthday)
                           }})</v-card-title
                         >
-                        </div>
-                        <div v-else>
+                      </div>
+                      <div v-else>
                         <v-card-title class="white--text"
                           >{{ user.username }} ({{
                             getAge(user.birthday)
                           }})</v-card-title
                         >
-                        </div>
-                      </v-app-bar>
-                    </v-img>
-
-                    <v-card-text class="white--text">
-                      <h4 v-if="user.description != null">
-                        <p class="font-italic">{{ user.description }}</p>
-                      </h4>
-                      <h4 v-else>
-                        <p class="font-italic">Brak opisu.</p>
-                      </h4>
-                      <br />
-                    </v-card-text>
-                  </v-card>
+                      </div>
+                    </v-app-bar>
+                  </v-img>
                 </router-link>
-              </v-hover>
+
+                <!--<v-card-text class="white--text">
+                  <h4 v-if="user.description != null">
+                    <p class="font-italic">{{ user.description }}</p>
+                  </h4>
+                  <h4 v-else>
+                    <p class="font-italic">Brak opisu.</p>
+                  </h4>
+                  <br />
+                </v-card-text>-->
+              </v-card>
             </b-col>
           </b-row>
           <br />
@@ -303,7 +335,11 @@ export default {
       age: "",
       age_min: 18,
       age_max: 100,
+      min: 18,
+      max: 100,
+      range: [18, 100],
       m: "",
+      show: false,
       description: null,
       sex_options: [
         { value: null, text: "płeć" },
@@ -501,5 +537,4 @@ td {
 .h6 {
   color: rgb(255, 255, 255);
 }
-
 </style>

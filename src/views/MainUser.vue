@@ -33,7 +33,7 @@
               </div>
             </v-img>
 
-            <v-card-text class="white--text">
+            <v-card-text class="white--text text-left">
               <h4 v-if="user_data.description != null">
                 <p class="font-italic">{{ user_data.description }}</p>
               </h4>

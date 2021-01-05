@@ -5,6 +5,7 @@
     color="purple"
     padless
     class="white--text"
+    max-height="1200"
   >
     
       <div class="container">

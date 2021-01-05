@@ -35,94 +35,96 @@
       </v-toolbar>
     </v-row>
     <b-row class="scroll">
+      <b-col cols="1"></b-col>
       <br />
-
-      <b-row v-for="i in Math.ceil(images.length / 2)" v-bind:key="i">
-        <b-col cols="1"></b-col>
-        <b-col
-          cols="5"
-          v-for="image in images.slice((i - 1) * 2, i * 2)"
-          v-bind:key="image.id"
-          style="padding-bottom: 2px"
-        >
-          <v-card outlined rounded class="mx-auto" color="purple">
-            <v-img
-              width="500"
-              height="500"
-              aspect-ratio="1"
-              class="white--text align-end"
-              :src="getUrl(image.image)"
-              alt="image"
-              @click="showModal(image.image)"
-            >
-              <v-app-bar flat color="rgba(0, 0, 0, 0)">
-                <v-menu
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :nudge-width="100"
-                  offset-x
-                  left
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn fab small class="purple" v-bind="attrs" v-on="on"
-                      ><v-app-bar-nav-icon color="white"></v-app-bar-nav-icon
-                    ></v-btn>
-                  </template>
-
-                  <v-card>
-                    <v-list>
-                      <v-list-item>
-                        <v-btn
-                          icon
-                          x-large
-                          v-b-toggle.sidebar-footer
-                          data-toggle="tooltip"
-                          data-placement="bottom"
-                          title="Ustaw jako profilowe"
-                          v-on:click="setAsProfilePic(image.image)"
-                        >
-                          <v-icon color="purple"
-                            >mdi-account-box-outline</v-icon
-                          >
-                        </v-btn>
-                        <v-divider vertical></v-divider>
-                        <v-btn
-                          icon
-                          x-large
-                          v-b-toggle.sidebar-footer
-                          data-toggle="tooltip"
-                          data-placement="bottom"
-                          title="Usuń zdjęcie"
-                          v-on:click="deleteImage(image.pk)"
-                        >
-                          <v-icon color="purple"
-                            >mdi-image-remove</v-icon
-                          ></v-btn
-                        >
-                      </v-list-item>
-                    </v-list>
-                  </v-card>
-                </v-menu>
-              </v-app-bar>
-            </v-img>
-          </v-card>
-          <b-modal
-            :ref="'modal' + image.image"
-            hide-footer
-            title="Podgląd zdjęcia"
-            size="lg"
+      <b-col cols="10">
+        <b-row v-for="i in Math.ceil(images.length / 4)" v-bind:key="i">
+          
+          <b-col
+            cols="3"
+            v-for="image in images.slice((i - 1) * 4, i * 4)"
+            v-bind:key="image.id"
+            style="padding-bottom: 2px"
           >
-            <div class="d-block text-center"></div>
-            <img
-              :src="getUrl(image.image)"
-              class="img-responsive rounded mx-auto d-block"
-              alt="image"
-              style="width: 100%; height: 100%"
-            />
-            <br />
-          </b-modal>
-        </b-col>
-      </b-row>
+            <v-card outlined rounded class="mx-auto" color="purple">
+              <v-img
+                aspect-ratio="1"
+                class="white--text align-end"
+                :src="getUrl(image.image)"
+                alt="image"
+                @click="showModal(image.image)"
+              >
+                <v-app-bar flat color="rgba(0, 0, 0, 0)">
+                  <v-menu
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :nudge-width="100"
+                    offset-x
+                    left
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn fab x-small class="purple" v-bind="attrs" v-on="on"
+                        ><v-app-bar-nav-icon x-small color="white"></v-app-bar-nav-icon
+                      ></v-btn>
+                    </template>
+
+                    <v-card>
+                      <v-list>
+                        <v-list-item>
+                          <v-btn
+                            icon
+                            x-large
+                            v-b-toggle.sidebar-footer
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="Ustaw jako profilowe"
+                            v-on:click="setAsProfilePic(image.image)"
+                          >
+                            <v-icon color="purple"
+                              >mdi-account-box-outline</v-icon
+                            >
+                          </v-btn>
+                          <v-divider vertical></v-divider>
+                          <v-btn
+                            icon
+                            x-large
+                            v-b-toggle.sidebar-footer
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="Usuń zdjęcie"
+                            v-on:click="deleteImage(image.pk)"
+                          >
+                            <v-icon color="purple"
+                              >mdi-image-remove</v-icon
+                            ></v-btn
+                          >
+                        </v-list-item>
+                      </v-list>
+                    </v-card>
+                  </v-menu>
+                </v-app-bar>
+              </v-img>
+            </v-card>
+            <b-modal
+              :ref="'modal' + image.image"
+              hide-footer
+              title="Podgląd zdjęcia"
+              size="lg"
+            >
+              <div class="d-block text-center"></div>
+              <img
+                :src="getUrl(image.image)"
+                class="img-responsive rounded mx-auto d-block"
+                alt="image"
+                style="width: 100%; height: 100%"
+              />
+              <br />
+            </b-modal>
+          </b-col>
+        </b-row>
+      </b-col>
+
+      <b-col cols="1"></b-col>
     </b-row>
   </v-container>
 </template>

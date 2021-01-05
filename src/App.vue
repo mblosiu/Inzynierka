@@ -26,11 +26,10 @@
         <v-row>
           <v-col cols="12"></v-col>
         </v-row>
+        <div id="footer" absolute>
+          <Footer />
+        </div>
       </v-content>
-
-      <div id="footer">
-        <Footer />
-      </div>
     </div>
   </v-app>
 </template>
