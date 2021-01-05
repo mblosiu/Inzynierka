@@ -35,17 +35,24 @@
       </v-col>
     </v-row>
 
-    <v-dialog v-model="about" max-width="290">
+    <v-dialog v-model="about" max-width="700">
       <v-card class="purple lighten-5">
-        <v-card-title class="headline"> O twórcach </v-card-title>
-        <v-divider></v-divider>
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://www.otouczelnie.pl/assets/uploads/wydzial/834ff-wydzial-matematyki-uam.jpg"
+        >
+          <v-card-title><b>O twórcach</b></v-card-title>
+        </v-img>
 
+    
+        <br/>
         <v-card-text class="text-left">
           Serwis randkowy e-Love tworzony jest przez dwóch studentów informatyki
           uniwersytetu im. Adama Mickiewicza w Poznaniu, w ramach inżynierskiego
           projektu zespołowego.
           <br />
-          <v-card-subtitle> Mateusz Błoszyk, Marcin Mirecki </v-card-subtitle>
+          <v-card-subtitle>~ Mateusz Błoszyk, Marcin Mirecki </v-card-subtitle>
           <v-divider></v-divider>
           <v-row>
             <v-spacer></v-spacer>
@@ -68,7 +75,7 @@
         </v-card-subtitle>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="regulations" max-width="500">
+    <v-dialog v-model="regulations" max-width="700">
       <v-card class="purple lighten-5">
         <v-card-title class="headline"> Regulamin </v-card-title>
 
@@ -96,7 +103,6 @@
         <v-divider></v-divider>
         <v-card-text>
           <div class="card-body">
-            
             <div class="card-text">
               Mateusz Błoszyk:
               <p class="font-italic">mblosiu@gmail.com</p>
