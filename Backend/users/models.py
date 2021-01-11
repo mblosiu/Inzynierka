@@ -171,7 +171,7 @@ class Hobby(models.Model):
     objects = models.Manager()
 
 
-class FriendsList(models.Model):
+class Friend(models.Model):
     status = models.CharField(max_length=30, null=True, blank=True, default=None)
     user = models.ForeignKey(User, related_name='user', default=None,
                              on_delete=models.CASCADE)

@@ -17,7 +17,7 @@ from rest_framework.views import APIView
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer, \
     ReportSerializer
-from ..models import User, Image, Like, BlackList, FriendsList, Report
+from ..models import User, Image, Like, BlackList, Friend, Report
 
 EMAIL_SENDER = 'noreply.elove@gmail.com'
 
@@ -608,7 +608,7 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         queryset = queryset.exclude(settings__search_privacy='nobody')
 
         # jeżeli user ma ustawione friends only
-        friendlist = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
+        friendlist = Friend.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
         queryset = queryset.exclude(~Q(pk__in=friendlist), settings__search_privacy="friends")
 
         # jeżeli user chce być wyświetlany tylko przez inną płeć
@@ -695,7 +695,7 @@ class RandomPair(APIView):
         queryset = queryset.exclude(settings__search_privacy='same sex', sex=request.user.sex)
 
         # jeżeli user ma ustawione friends only
-        friendlist = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
+        friendlist = Friend.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
         queryset = queryset.exclude(~Q(pk__in=friendlist), settings__search_privacy="friends")
 
         # jeżeli user jest na mojej black liście to go nie widzę
@@ -887,20 +887,20 @@ class FriendListView(APIView):
         if int(pk) == int(request.user.pk):
             return Response({"detail": "can't add to contacts yourself"}, status=status.HTTP_400_BAD_REQUEST)
 
-        friendlist1 = FriendsList.objects.filter(user=request.user.pk, friend=pk)
-        friendlist2 = FriendsList.objects.filter(user=pk, friend=request.user.pk)
+        friendlist1 = Friend.objects.filter(user=request.user.pk, friend=pk)
+        friendlist2 = Friend.objects.filter(user=pk, friend=request.user.pk)
 
         if friendlist1.count() > 0 or friendlist2.count() > 0:
             response["detail"] = "already on friendlist"
             stat = status.HTTP_400_BAD_REQUEST
         else:
             response["detail"] = "user added to friendlist"
-            friendlist1 = FriendsList(
+            friendlist1 = Friend(
                 status='waiting',
                 user=request.user,
                 friend=get_object_or_404(User, pk=pk),
             )
-            friendlist2 = FriendsList(
+            friendlist2 = Friend(
                 status='waiting for your accept',
                 user=get_object_or_404(User, pk=pk),
                 friend=request.user,
@@ -915,9 +915,9 @@ class FriendListView(APIView):
     def patch(request):
         pk = request.data.get("pk")
 
-        friendlist1 = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk,
+        friendlist1 = get_object_or_404(Friend, user__pk=request.user.pk, friend__pk=pk,
                                         status="waiting for your accept")
-        friendlist2 = get_object_or_404(FriendsList, user__pk=pk, friend__pk=request.user.pk, status='waiting')
+        friendlist2 = get_object_or_404(Friend, user__pk=pk, friend__pk=request.user.pk, status='waiting')
 
         stat = status.HTTP_200_OK
         response = {"detail": "success"}
@@ -933,9 +933,9 @@ class FriendListView(APIView):
     def delete(request):
         pk = request.data.get('pk', None)
 
-        friendlist1 = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk)
+        friendlist1 = get_object_or_404(Friend, user__pk=request.user.pk, friend__pk=pk)
 
-        friendlist2 = get_object_or_404(FriendsList, user__pk=pk, friend__pk=request.user.pk)
+        friendlist2 = get_object_or_404(Friend, user__pk=pk, friend__pk=request.user.pk)
 
         if friendlist1.delete() and friendlist2.delete():
             return Response({"detail": "success"}, status=status.HTTP_200_OK)
@@ -946,7 +946,7 @@ class FriendListView(APIView):
     def get(request):
         pk = request.query_params.get('pk', None)
 
-        queryset = FriendsList.objects.filter(user__pk=pk)
+        queryset = Friend.objects.filter(user__pk=pk)
 
         serializer = FriendListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

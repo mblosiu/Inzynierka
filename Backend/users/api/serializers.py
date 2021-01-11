@@ -2,7 +2,7 @@ from datetime import datetime
 
 from rest_framework import serializers
 
-from ..models import User, Preferences, Settings, Image, Like, BlackList, FriendsList, Report
+from ..models import User, Preferences, Settings, Image, Like, BlackList, Friend, Report
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
@@ -122,7 +122,7 @@ class FriendListSerializer(serializers.ModelSerializer):
     friend = UserSerializer(read_only=True)
 
     class Meta:
-        model = FriendsList
+        model = Friend
         fields = ['pk', 'status', 'user', 'friend']
 
 
