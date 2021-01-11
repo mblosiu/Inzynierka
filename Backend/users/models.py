@@ -196,3 +196,13 @@ class Like(models.Model):
     liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
 
     objects = models.Manager()
+
+
+class Report(models.Model):
+    reporting = models.ForeignKey(User, related_name='reporting', default=None, on_delete=models.CASCADE)
+    reported = models.ForeignKey(User, related_name='reported', null=True, default=None, on_delete=models.CASCADE)
+    reason = models.CharField(max_length=30, null=True, blank=True, default=None)
+    description = models.CharField(max_length=250, null=True, blank=True, default=None)
+    status = models.CharField(max_length=30, null=True, blank=True, default=None)
+
+    objects = models.Manager()

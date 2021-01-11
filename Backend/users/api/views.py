@@ -10,13 +10,14 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
-    UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer
-from ..models import User, Image, Like, BlackList, FriendsList
+    UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer, \
+    ReportSerializer
+from ..models import User, Image, Like, BlackList, FriendsList, Report
 
 EMAIL_SENDER = 'noreply.elove@gmail.com'
 
@@ -962,6 +963,92 @@ class TemplateSendMail(APIView):
         send_mail("subject", msg_plain, EMAIL_SENDER, [email], fail_silently=False, html_message=msg_html)
 
         return Response({'detail': 'success'}, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class ReportView(APIView):
+    @staticmethod
+    def post(request):
+        reporting = request.user
+        reported = request.data.get('reported', None)
+        reason = request.data.get('reason', None)
+        description = request.data.get('description', None)
+        status_ = "new"
+
+        if reported is not None and reported != '':
+            reported = get_object_or_404(User, pk=reported)
+        else:
+            reported = None
+
+        if reporting is None or reporting is '' or reason is None or reason == '' or reporting == reported:
+            return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
+
+        report = Report(
+            reporting=reporting,
+            reported=reported,
+            reason=reason,
+            description=description,
+            status=status_
+        )
+
+        report.save()
+
+        return Response({"detail": "report sent successfully"}, status=status.HTTP_201_CREATED)
+
+    @staticmethod
+    def delete(request):
+        pk = request.data.get('pk', None)
+        reporting = request.data.get('reporting_pk', None)
+        reported = request.data.get('reported_pk', None)
+        if pk is not None and pk != '':
+            report = get_object_or_404(Report, pk=pk)
+        elif reporting is not None and reporting != '' and reported is not None and reported != '':
+            report = get_object_or_404(Report, reporting__pk=reporting, reported__pk=reported)
+        else:
+            return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if report.delete():
+            return Response({"detail": "success"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
+
+    @staticmethod
+    def get(request):
+        pk = request.user.pk
+        queryset = get_list_or_404(Report, reporting__pk=pk)
+        serializer = ReportSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAdminUser])
+class AdminReportView(APIView):
+    @staticmethod
+    def patch(request):
+        pk = request.data.get('pk', None)
+        status_ = request.data.get('status', None)
+
+        report = get_object_or_404(Report, pk=pk)
+
+        report.status = status_
+
+        return Response({"detail": "status changed successfully"}, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def delete(request):
+        pk = request.data.get('pk', None)
+        reporting = request.data.get('reporting_pk', None)
+        reported = request.data.get('reported_pk', None)
+        if pk is not None and pk != '':
+            report = get_object_or_404(Report, pk=pk)
+        elif reporting is not None and reporting != '' and reported is not None and reported != '':
+            report = get_object_or_404(Report, reporting__pk=reporting, reported__pk=reported)
+        else:
+            return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if report.delete():
+            return Response({"detail": "success"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
 # alkohol i papierosy zostały zmienione na int + filter lte
 # dodałem objects = models.Manager() do settings i Preferences

@@ -29,9 +29,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="RandomPair, UserImage POST instead of PUT, fixes">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="fix">
+      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0028_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Inzynierka.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Inzynierka.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mysite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
     </list>
@@ -60,12 +66,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.views">
+  <component name="RunManager" selected="Python.views (1)">
     <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Inzynierka" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,6 +136,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="views (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Inzynierka" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Backend/users/api" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Backend/users/api/views.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Inzynierka" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -152,6 +180,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.views (1)" />
         <item itemvalue="Python.views" />
         <item itemvalue="Python.serializers" />
         <item itemvalue="Python.urls" />
@@ -472,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607016518348</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="fix">
+      <created>1610378426561</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1610378426561</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -516,7 +552,6 @@
     <MESSAGE value="black list - delete" />
     <MESSAGE value="friend list, search fix" />
     <MESSAGE value="optymalizacja" />
-    <MESSAGE value="fix" />
     <MESSAGE value="fix2" />
     <MESSAGE value="add query_params for blacklist" />
     <MESSAGE value="list filter - black list" />
@@ -525,44 +560,7 @@
     <MESSAGE value="friendlist - new logic" />
     <MESSAGE value="friendlist filter update" />
     <MESSAGE value="RandomPair, UserImage POST instead of PUT, fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="RandomPair, UserImage POST instead of PUT, fixes" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="698" y="344" key="#Notifications" timestamp="1606471800972">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="698" y="344" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1606471800972" />
-    <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606916246681">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1606916246681" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1605514451115">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605514451115" />
-    <state width="1199" height="278" key="GridCell.Tab.0.bottom" timestamp="1606561147505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1199" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606561147505" />
-    <state width="1199" height="278" key="GridCell.Tab.0.center" timestamp="1606561147505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1199" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606561147505" />
-    <state width="1199" height="278" key="GridCell.Tab.0.left" timestamp="1606561147505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1199" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606561147505" />
-    <state width="1199" height="278" key="GridCell.Tab.0.right" timestamp="1606561147505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1199" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606561147505" />
-    <state x="922" y="249" key="SettingsEditor" timestamp="1606392058039">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="922" y="249" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606392058039" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1607016519752">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607016519752" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>
