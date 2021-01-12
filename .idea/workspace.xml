@@ -29,11 +29,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="report system: user and admin">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="change model name FriendsList to Friend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -509,7 +508,21 @@
       <option name="project" value="LOCAL" />
       <updated>1610383252292</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="admin site update">
+      <created>1610388177014</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1610388177019</updated>
+    </task>
+    <task id="LOCAL-00047" summary="change model name FriendsList to Friend">
+      <created>1610388381089</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1610388381089</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -537,8 +550,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="get users photos list" />
-    <MESSAGE value="filters and settings" />
     <MESSAGE value="likes" />
     <MESSAGE value="likes - value" />
     <MESSAGE value="likes - delete" />
@@ -562,6 +573,8 @@
     <MESSAGE value="RandomPair, UserImage POST instead of PUT, fixes" />
     <MESSAGE value="fix" />
     <MESSAGE value="report system: user and admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="report system: user and admin" />
+    <MESSAGE value="admin site update" />
+    <MESSAGE value="change model name FriendsList to Friend" />
+    <option name="LAST_COMMIT_MESSAGE" value="change model name FriendsList to Friend" />
   </component>
 </project>

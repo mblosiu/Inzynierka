@@ -1036,12 +1036,9 @@ class AdminReportView(APIView):
     @staticmethod
     def delete(request):
         pk = request.data.get('pk', None)
-        reporting = request.data.get('reporting_pk', None)
-        reported = request.data.get('reported_pk', None)
+
         if pk is not None and pk != '':
             report = get_object_or_404(Report, pk=pk)
-        elif reporting is not None and reporting != '' and reported is not None and reported != '':
-            report = get_object_or_404(Report, reporting__pk=reporting, reported__pk=reported)
         else:
             return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
 

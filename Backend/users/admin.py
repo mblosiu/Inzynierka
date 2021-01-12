@@ -16,6 +16,7 @@ class AccountAdmin(UserAdmin):
 
 
 admin.site.register(User, AccountAdmin)
+
 admin.site.register(Report, list_display=['pk', 'status', 'reason', 'reporting', 'reported'],
                     readonly_fields=['pk', 'reporting', 'reported', 'reason', 'description'])
 
