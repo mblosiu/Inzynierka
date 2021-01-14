@@ -1,19 +1,36 @@
 import random
+import string
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.db.models import Lookup, Field, Q
 from django.shortcuts import get_list_or_404
+from django.template.loader import render_to_string
 from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
-    UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer
-from ..models import User, Image, Like, BlackList, FriendsList
+    UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer, \
+    ReportSerializer
+from ..models import User, Image, Like, BlackList, Friend, Report
+
+EMAIL_SENDER = 'noreply.elove@gmail.com'
+
+
+def password_generator(length):
+    printable = f'{string.ascii_letters}{string.digits}'
+
+    printable = list(printable)
+    random.shuffle(printable)
+
+    random_password = random.choices(printable, k=length)
+    random_password = ''.join(random_password)
+    return random_password
 
 
 @Field.register_lookup
@@ -27,22 +44,45 @@ class NotEqual(Lookup):
         return '%s <> %s' % (lhs, rhs), params
 
 
+# wysyła maila przy rejestracji
 @permission_classes([])
 class RegistrationView(APIView):
     @staticmethod
     def post(request):
         serializer = RegistrationSerializer(data=request.data)
         data = {}
-        if serializer.is_valid():
-            serializer.save()
-
-            data['detail'] = 'successfully registered new user.'
-
-            stat = status.HTTP_201_CREATED
-        else:
+        if not serializer.is_valid():
             data = serializer.errors
-            stat = status.HTTP_400_BAD_REQUEST
-        return Response(data, status=stat)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+        data['detail'] = 'successfully registered new user.'
+
+        msg_html = render_to_string('mail/registration.html', {'username': request.data.get("username")})
+        msg_plain = render_to_string('mail/registration.txt', {'username': request.data.get("username")})
+        send_mail("subject", msg_plain, EMAIL_SENDER, [serializer.data.get("email")], fail_silently=False,
+                  html_message=msg_html)
+
+        serializer.save()
+
+        return Response(data, status=status.HTTP_201_CREATED)
+
+
+# po kliknięciu w mailu weryfikuje konto
+@permission_classes([])
+class VerifyAccountView(APIView):
+    @staticmethod
+    def patch(request):
+        email = request.data.get('email')
+
+        user = get_object_or_404(User, email=email)
+
+        if user.verified:
+            return Response({'detail': 'already verified'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.verified = True
+        user.save()
+
+        return Response({'detail': 'account verified successfully'}, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])
@@ -59,11 +99,64 @@ class LogoutView(APIView):
 class DeleteUserAccountView(APIView):
     @staticmethod
     def delete(request):
+        password = request.data.get('password')
+
+        if not request.user.check_password(password):
+            return Response({"detail": "wrong password"}, status=status.HTTP_400_BAD_REQUEST)
+
         if request.user.delete():
-            # TODO : check password
             return Response({"detail": "Account removed successfully"}, status=status.HTTP_200_OK)
         else:
-            return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# zmień hasło
+@permission_classes([IsAuthenticated])
+class ChangePasswordView(APIView):
+    @staticmethod
+    def patch(request):
+        user = get_object_or_404(User, pk=request.user.pk)
+        password1 = request.data.get('password1')
+        password2 = request.data.get('password2')
+        new_password = request.data.get('new_password')
+
+        if not password1 == password2:
+            return Response({'detail': 'passwords does not match'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not user.check_password(password1):
+            return Response({'detail': 'wrong password'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(new_password)
+        user.save()
+
+        msg_html = render_to_string('mail/change_password.html', {'username': user.username})
+        msg_plain = render_to_string('mail/change_password.txt', {'username': user.username})
+
+        send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
+                  html_message=msg_html)
+
+        return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
+
+
+# zmień hasło i wyślij na maila
+@permission_classes([])
+class RestorePasswordView(APIView):
+    @staticmethod
+    def patch(request):
+        email = request.data.get('email')
+        user = get_object_or_404(User, email=email)
+
+        new_password = password_generator(8)
+        user.set_password(new_password)
+
+        user.save()
+
+        msg_html = render_to_string('mail/restore_password.html', {'username': user.username, 'password': new_password})
+        msg_plain = render_to_string('mail/restore_password.txt', {'username': user.username, 'password': new_password})
+        send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
+                  html_message=msg_html)
+
+        return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])
@@ -195,14 +288,21 @@ class UserProfileView(APIView):
         if is_smoking == account.is_smoking or is_smoking is None:
             response["is_smoking"] = "no changes"
         else:
-            account.is_smoking = is_smoking
-            response["is_smoking"] = "updated"
+            if is_smoking.isdecimal():
+                account.is_smoking = int(is_smoking)
+                response["is_smoking"] = "updated"
+            else:
+                response["is_smoking"] = "no changes"
 
         if is_drinking_alcohol == account.is_drinking_alcohol or is_drinking_alcohol is None:
             response["is_drinking_alcohol"] = "no changes"
         else:
-            account.is_drinking_alcohol = is_drinking_alcohol
-            response["is_drinking_alcohol"] = "updated"
+            if is_drinking_alcohol.isdecimal():
+                account.is_drinking_alcohol = int(is_drinking_alcohol)
+                response["is_drinking_alcohol"] = "updated"
+            else:
+                account.is_drinking_alcohol = int(is_drinking_alcohol)
+                response["is_drinking_alcohol"] = "no changes"
 
         if description == account.description or description is None:
             response["description"] = "no changes"
@@ -511,7 +611,7 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         queryset = queryset.exclude(settings__search_privacy='nobody')
 
         # jeżeli user ma ustawione friends only
-        friendlist = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
+        friendlist = Friend.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
         queryset = queryset.exclude(~Q(pk__in=friendlist), settings__search_privacy="friends")
 
         # jeżeli user chce być wyświetlany tylko przez inną płeć
@@ -565,9 +665,11 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         if not (body_type is None or body_type == ''):
             queryset = queryset.filter(body_type=body_type.capitalize())
         if not (is_smoking is None or is_smoking == ''):
-            queryset = queryset.filter(is_smoking__lte=int(is_smoking))
+            if is_smoking.isdecimal():
+                queryset = queryset.filter(is_smoking__lte=int(is_smoking))
         if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
-            queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
+            if is_drinking_alcohol.isdecimal():
+                queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
         serializer = UserSerializer(queryset, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -596,7 +698,7 @@ class RandomPair(APIView):
         queryset = queryset.exclude(settings__search_privacy='same sex', sex=request.user.sex)
 
         # jeżeli user ma ustawione friends only
-        friendlist = FriendsList.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
+        friendlist = Friend.objects.filter(user__pk=request.user.pk).values_list("friend", flat=True)
         queryset = queryset.exclude(~Q(pk__in=friendlist), settings__search_privacy="friends")
 
         # jeżeli user jest na mojej black liście to go nie widzę
@@ -607,49 +709,38 @@ class RandomPair(APIView):
         blacklist = BlackList.objects.filter(blacklisted__pk=request.user.pk).values_list("user", flat=True)
         queryset = queryset.exclude(pk__in=blacklist)
 
-        name = request.user.name
-        surname = request.user.surname
-        sex = request.user.sex
-        location = request.user.location
-        hair_length = request.user.hair_length
-        hair_color = request.user.hair_color
-        growth = request.user.growth
-        body_type = request.user.body_type
-        is_smoking = request.user.is_smoking
-        is_drinking_alcohol = request.user.is_drinking_alcohol
+        # todo: filters
+
         orientation = request.user.orientation
-        eye_color = request.user.eye_color
+        hair_color_blonde_preference = request.user.preferences.hair_color_blonde_preference
+        hair_color_brunette_preference = request.user.preferences.hair_color_brunette_preference
+        hair_color_red_preference = request.user.preferences.hair_color_red_preference
+        growth_preference = request.user.preferences.growth_preference
+        weight_preference = request.user.preferences.weight_preference
+        body_type_preference = request.user.preferences.body_type_preference
+        freckles_preference = request.user.preferences.freckles_preference
+        glasses_preference = request.user.preferences.glasses_preference
+        hair_length_preference = request.user.preferences.hair_length_preference
+        is_smoking_preference = request.user.preferences.is_smoking_preference
+        is_drinking_alcohol_preference = request.user.preferences.is_drinking_alcohol_preference
         age_preference_min = request.user.preferences.age_preference_min
         age_preference_max = request.user.preferences.age_preference_max
 
-        if not (location is None or location == ''):
-            queryset = queryset.filter(location=location.capitalize())
-        if not (sex is None or sex == ''):
-            queryset = queryset.filter(sex=sex.capitalize())
-        if not (orientation is None or orientation == ''):
-            queryset = queryset.filter(orientation=orientation.capitalize())
         if not (age_preference_min is None or age_preference_min == ''):
-            queryset = queryset.filter(age__gte=int(age_preference_min))
+            if age_preference_min.isdecimal():
+                queryset = queryset.filter(age__gte=int(age_preference_min))
+
         if not (age_preference_max is None or age_preference_max == ''):
-            queryset = queryset.filter(age__lte=int(age_preference_max))
-        if not (eye_color is None or eye_color == ''):
-            queryset = queryset.filter(eye_color=eye_color.capitalize())
-        if not (name is None or name == ''):
-            queryset = queryset.filter(name=name.capitalize())
-        if not (surname is None or surname == ''):
-            queryset = queryset.filter(surname=surname.capitalize())
-        if not (hair_color is None or hair_color == ''):
-            queryset = queryset.filter(hair_color=hair_color.capitalize())
-        if not (growth is None or growth == ''):
-            queryset = queryset.filter(growth=growth)
-        if not (hair_length is None or hair_length == ''):
-            queryset = queryset.filter(hair_length=hair_length)
-        if not (body_type is None or body_type == ''):
-            queryset = queryset.filter(body_type=body_type.capitalize())
-        if not (is_smoking is None or is_smoking == ''):
-            queryset = queryset.filter(is_smoking=is_smoking)
-        if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
-            queryset = queryset.filter(is_drinking_alcohol=is_drinking_alcohol)
+            if age_preference_min.isdecimal():
+                queryset = queryset.filter(age__lte=int(age_preference_max))
+
+        if not (is_smoking_preference is None or is_smoking_preference == ''):
+            if is_smoking_preference.isdecimal():
+                queryset = queryset.filter(is_smoking__lte=int(is_smoking_preference))
+
+        if not (is_drinking_alcohol_preference is None or is_drinking_alcohol_preference == ''):
+            if is_drinking_alcohol_preference.isdecimal():
+                queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol_preference))
 
         x = random.randint(0, queryset.count() - 1)
 
@@ -799,20 +890,20 @@ class FriendListView(APIView):
         if int(pk) == int(request.user.pk):
             return Response({"detail": "can't add to contacts yourself"}, status=status.HTTP_400_BAD_REQUEST)
 
-        friendlist1 = FriendsList.objects.filter(user=request.user.pk, friend=pk)
-        friendlist2 = FriendsList.objects.filter(user=pk, friend=request.user.pk)
+        friendlist1 = Friend.objects.filter(user=request.user.pk, friend=pk)
+        friendlist2 = Friend.objects.filter(user=pk, friend=request.user.pk)
 
         if friendlist1.count() > 0 or friendlist2.count() > 0:
             response["detail"] = "already on friendlist"
             stat = status.HTTP_400_BAD_REQUEST
         else:
             response["detail"] = "user added to friendlist"
-            friendlist1 = FriendsList(
+            friendlist1 = Friend(
                 status='waiting',
                 user=request.user,
                 friend=get_object_or_404(User, pk=pk),
             )
-            friendlist2 = FriendsList(
+            friendlist2 = Friend(
                 status='waiting for your accept',
                 user=get_object_or_404(User, pk=pk),
                 friend=request.user,
@@ -827,9 +918,9 @@ class FriendListView(APIView):
     def patch(request):
         pk = request.data.get("pk")
 
-        friendlist1 = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk,
+        friendlist1 = get_object_or_404(Friend, user__pk=request.user.pk, friend__pk=pk,
                                         status="waiting for your accept")
-        friendlist2 = get_object_or_404(FriendsList, user__pk=pk, friend__pk=request.user.pk, status='waiting')
+        friendlist2 = get_object_or_404(Friend, user__pk=pk, friend__pk=request.user.pk, status='waiting')
 
         stat = status.HTTP_200_OK
         response = {"detail": "success"}
@@ -845,9 +936,9 @@ class FriendListView(APIView):
     def delete(request):
         pk = request.data.get('pk', None)
 
-        friendlist1 = get_object_or_404(FriendsList, user__pk=request.user.pk, friend__pk=pk)
+        friendlist1 = get_object_or_404(Friend, user__pk=request.user.pk, friend__pk=pk)
 
-        friendlist2 = get_object_or_404(FriendsList, user__pk=pk, friend__pk=request.user.pk)
+        friendlist2 = get_object_or_404(Friend, user__pk=pk, friend__pk=request.user.pk)
 
         if friendlist1.delete() and friendlist2.delete():
             return Response({"detail": "success"}, status=status.HTTP_200_OK)
@@ -858,13 +949,108 @@ class FriendListView(APIView):
     def get(request):
         pk = request.query_params.get('pk', None)
 
-        queryset = FriendsList.objects.filter(user__pk=pk)
+        queryset = Friend.objects.filter(user__pk=pk)
 
         serializer = FriendListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-# todo: alkohol i pety ustawić jako cyfrę i dać wyszukiwanie ge - zrobione
-# todo: dodać dislike na froncie
+
+@permission_classes([IsAuthenticated])
+class ReportView(APIView):
+    @staticmethod
+    def post(request):
+        reporting = request.user
+        reported = request.data.get('reported', None)
+        reason = request.data.get('reason', None)
+        description = request.data.get('description', None)
+        status_ = "new"
+
+        if reported is not None and reported != '':
+            reported = get_object_or_404(User, pk=reported)
+        else:
+            reported = None
+
+        if reporting is None or reporting is '' or reason is None or reason == '' or reporting == reported:
+            return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
+
+        report = Report(
+            reporting=reporting,
+            reported=reported,
+            reason=reason,
+            description=description,
+            status=status_
+        )
+
+        report.save()
+
+        return Response({"detail": "report sent successfully"}, status=status.HTTP_201_CREATED)
+
+    @staticmethod
+    def delete(request):
+        pk = request.data.get('pk', None)
+        reporting = request.data.get('reporting_pk', None)
+        reported = request.data.get('reported_pk', None)
+        if pk is not None and pk != '':
+            report = get_object_or_404(Report, pk=pk)
+        elif reporting is not None and reporting != '' and reported is not None and reported != '':
+            report = get_object_or_404(Report, reporting__pk=reporting, reported__pk=reported)
+        else:
+            return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if report.delete():
+            return Response({"detail": "success"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
+
+    @staticmethod
+    def get(request):
+        pk = request.user.pk
+        queryset = get_list_or_404(Report, reporting__pk=pk)
+        serializer = ReportSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAdminUser])
+class AdminReportView(APIView):
+    @staticmethod
+    def patch(request):
+        pk = request.data.get('pk', None)
+        status_ = request.data.get('status', None)
+
+        report = get_object_or_404(Report, pk=pk)
+
+        report.status = status_
+
+        return Response({"detail": "status changed successfully"}, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def delete(request):
+        pk = request.data.get('pk', None)
+
+        if pk is not None and pk != '':
+            report = get_object_or_404(Report, pk=pk)
+        else:
+            return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if report.delete():
+            return Response({"detail": "success"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@permission_classes([])
+class TemplateSendMail(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+
+        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+
+        send_mail("subject", msg_plain, EMAIL_SENDER, [email], fail_silently=False, html_message=msg_html)
+
+        return Response({'detail': 'success'}, status=status.HTTP_200_OK)
+
+# alkohol i papierosy zostały zmienione na int + filter lte
 # dodałem objects = models.Manager() do settings i Preferences
 # UserImage - put zostało zmienione na post
 

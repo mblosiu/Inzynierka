@@ -15,8 +15,8 @@ class Preferences(models.Model):
     age_preference_min = models.IntegerField(null=True, blank=True, default=None)
     age_preference_max = models.IntegerField(null=True, blank=True, default=None)
 
-    is_smoking_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
-    is_drinking_alcohol_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
+    is_smoking_preference = models.IntegerField(null=True, blank=True, default=None)
+    is_drinking_alcohol_preference = models.IntegerField(null=True, blank=True, default=None)
 
     Assertiveness_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
     Sincerity_preference = models.CharField(max_length=30, null=True, blank=True, default=None)
@@ -82,6 +82,8 @@ class MyAccountManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    verified = models.BooleanField(default=False)
+
     preferences = models.OneToOneField(Preferences, on_delete=models.CASCADE, null=True, default=None)
     settings = models.OneToOneField(Settings, on_delete=models.CASCADE, null=True, default=None)
 
@@ -120,8 +122,8 @@ class User(AbstractBaseUser):
     hair_length = models.CharField(max_length=30, null=True, blank=True, default=None)
 
     # Habits:
-    is_smoking = models.CharField(max_length=30, null=True, blank=True, default=None)
-    is_drinking_alcohol = models.CharField(max_length=30, null=True, blank=True, default=None)
+    is_smoking = models.IntegerField(null=True, blank=True, default=None)
+    is_drinking_alcohol = models.IntegerField(null=True, blank=True, default=None)
 
     # character (scale 1-10)
     Assertiveness = models.FloatField(null=True, blank=True, default=None)
@@ -140,7 +142,7 @@ class User(AbstractBaseUser):
     objects = MyAccountManager()
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
@@ -169,7 +171,7 @@ class Hobby(models.Model):
     objects = models.Manager()
 
 
-class FriendsList(models.Model):
+class Friend(models.Model):
     status = models.CharField(max_length=30, null=True, blank=True, default=None)
     user = models.ForeignKey(User, related_name='user', default=None,
                              on_delete=models.CASCADE)
@@ -194,3 +196,16 @@ class Like(models.Model):
     liked = models.ForeignKey(User, related_name='liked', default=None, on_delete=models.CASCADE)
 
     objects = models.Manager()
+
+
+class Report(models.Model):
+    reporting = models.ForeignKey(User, related_name='reporting', default=None, on_delete=models.CASCADE)
+    reported = models.ForeignKey(User, related_name='reported', null=True, default=None, on_delete=models.CASCADE)
+    reason = models.CharField(max_length=30, null=True, blank=True, default=None)
+    description = models.CharField(max_length=250, null=True, blank=True, default=None)
+    status = models.CharField(max_length=30, null=True, blank=True, default=None)
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.status

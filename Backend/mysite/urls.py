@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', admin.site.urls, name="admin"),
+    path('admin', admin.site.urls, name="admin"),
 
     # REST API
     path('api/user/', include('users.api.urls', 'users_api')),
