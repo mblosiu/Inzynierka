@@ -29,7 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="registratration, change password, restore password - email templates, sending mail function fix">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="allowed_hosts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
     </list>
@@ -199,13 +199,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00001" summary="UserProfilePic - bad datatype handle">
-      <created>1596815170241</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1596815170241</updated>
     </task>
     <task id="LOCAL-00002" summary="serialization for new fields">
       <created>1597585250941</created>
@@ -543,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610623040834</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="allowed_hosts">
+      <created>1610650397388</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1610650397389</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -571,7 +571,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="likes - delete" />
     <MESSAGE value="likes - delete fix" />
     <MESSAGE value="user age filter" />
     <MESSAGE value="user liked pk" />
@@ -596,6 +595,7 @@
     <MESSAGE value="change model name FriendsList to Friend" />
     <MESSAGE value="report fix" />
     <MESSAGE value="registratration, change password, restore password - email templates, sending mail function fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="registratration, change password, restore password - email templates, sending mail function fix" />
+    <MESSAGE value="allowed_hosts" />
+    <option name="LAST_COMMIT_MESSAGE" value="allowed_hosts" />
   </component>
 </project>
