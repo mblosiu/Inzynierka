@@ -29,15 +29,29 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="change model name FriendsList to Friend">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="report fix">
+      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/change_password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/change_password.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/registration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/registration.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/users/templates/mail/restore_password.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/templates/mail/test/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/templates/mail/restore_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/templates/mail/test/test.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/master" />
@@ -59,6 +73,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -522,7 +537,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610388381089</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="report fix">
+      <created>1610441527043</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1610441527043</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -550,7 +572,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="likes" />
     <MESSAGE value="likes - value" />
     <MESSAGE value="likes - delete" />
     <MESSAGE value="likes - delete fix" />
@@ -575,6 +596,7 @@
     <MESSAGE value="report system: user and admin" />
     <MESSAGE value="admin site update" />
     <MESSAGE value="change model name FriendsList to Friend" />
-    <option name="LAST_COMMIT_MESSAGE" value="change model name FriendsList to Friend" />
+    <MESSAGE value="report fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="report fix" />
   </component>
 </project>

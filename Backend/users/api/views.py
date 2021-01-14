@@ -57,8 +57,8 @@ class RegistrationView(APIView):
 
         data['detail'] = 'successfully registered new user.'
 
-        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
-        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        msg_html = render_to_string('mail/registration.html', {'username': request.data.get("username")})
+        msg_plain = render_to_string('mail/registration.txt', {'username': request.data.get("username")})
         send_mail("subject", msg_plain, EMAIL_SENDER, [serializer.data.get("email")], fail_silently=False,
                   html_message=msg_html)
 
@@ -129,8 +129,9 @@ class ChangePasswordView(APIView):
         user.set_password(new_password)
         user.save()
 
-        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
-        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        msg_html = render_to_string('mail/change_password.html', {'username': user.username})
+        msg_plain = render_to_string('mail/change_password.txt', {'username': user.username})
+
         send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
                   html_message=msg_html)
 
@@ -148,8 +149,10 @@ class RestorePasswordView(APIView):
         new_password = password_generator(8)
         user.set_password(new_password)
 
-        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
-        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        user.save()
+
+        msg_html = render_to_string('mail/restore_password.html', {'username': user.username, 'password': new_password})
+        msg_plain = render_to_string('mail/restore_password.txt', {'username': user.username, 'password': new_password})
         send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
                   html_message=msg_html)
 
@@ -952,19 +955,6 @@ class FriendListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@permission_classes([])
-class TemplateSendMail(APIView):
-    def post(self, request):
-        email = request.data.get("email")
-
-        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
-        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
-
-        send_mail("subject", msg_plain, EMAIL_SENDER, [email], fail_silently=False, html_message=msg_html)
-
-        return Response({'detail': 'success'}, status=status.HTTP_200_OK)
-
-
 @permission_classes([IsAuthenticated])
 class ReportView(APIView):
     @staticmethod
@@ -1046,6 +1036,19 @@ class AdminReportView(APIView):
             return Response({"detail": "success"}, status=status.HTTP_200_OK)
         else:
             return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@permission_classes([])
+class TemplateSendMail(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+
+        msg_plain = render_to_string('mail/test/test.html', {'some_params': 'param'})
+        msg_html = render_to_string('mail/test/test.html', {'some_params': 'param'})
+
+        send_mail("subject", msg_plain, EMAIL_SENDER, [email], fail_silently=False, html_message=msg_html)
+
+        return Response({'detail': 'success'}, status=status.HTTP_200_OK)
 
 # alkohol i papierosy zostały zmienione na int + filter lte
 # dodałem objects = models.Manager() do settings i Preferences
