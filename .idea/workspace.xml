@@ -30,6 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="allowed_hosts">
+      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0029_auto_20210111_1904.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
     </list>
