@@ -29,10 +29,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="allowed_hosts">
-      <change afterPath="$PROJECT_DIR$/Backend/users/migrations/0029_auto_20210111_1904.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="remove migrations">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,20 +198,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00002" summary="serialization for new fields">
-      <created>1597585250941</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1597585250941</updated>
-    </task>
-    <task id="LOCAL-00003" summary="serialization for new fields">
-      <created>1597585279282</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1597585279282</updated>
     </task>
     <task id="LOCAL-00004" summary="nothing special">
       <created>1597649807608</created>
@@ -544,7 +528,21 @@
       <option name="project" value="LOCAL" />
       <updated>1610650397389</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="allowed_hosts">
+      <created>1610882325770</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1610882325770</updated>
+    </task>
+    <task id="LOCAL-00052" summary="remove migrations">
+      <created>1610882957208</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1610882957209</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -572,7 +570,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="likes - delete fix" />
     <MESSAGE value="user age filter" />
     <MESSAGE value="user liked pk" />
     <MESSAGE value="profile privacy - new fields set, get" />
@@ -597,6 +594,7 @@
     <MESSAGE value="report fix" />
     <MESSAGE value="registratration, change password, restore password - email templates, sending mail function fix" />
     <MESSAGE value="allowed_hosts" />
-    <option name="LAST_COMMIT_MESSAGE" value="allowed_hosts" />
+    <MESSAGE value="remove migrations" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove migrations" />
   </component>
 </project>
