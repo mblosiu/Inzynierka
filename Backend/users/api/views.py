@@ -970,7 +970,7 @@ class ReportView(APIView):
         else:
             reported = None
 
-        if reporting is None or reporting is '' or reason is None or reason == '' or reporting == reported:
+        if reporting is None or reporting == '' or reason is None or reason == '' or reporting == reported:
             return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
 
         report = Report(
@@ -1037,6 +1037,12 @@ class AdminReportView(APIView):
         else:
             return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
+    @staticmethod
+    def get(request):
+        queryset = get_list_or_404(Report)
+        serializer = ReportSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 @permission_classes([])
 class TemplateSendMail(APIView):
@@ -1049,10 +1055,6 @@ class TemplateSendMail(APIView):
         send_mail("subject", msg_plain, EMAIL_SENDER, [email], fail_silently=False, html_message=msg_html)
 
         return Response({'detail': 'success'}, status=status.HTTP_200_OK)
-
-# alkohol i papierosy zostały zmienione na int + filter lte
-# dodałem objects = models.Manager() do settings i Preferences
-# UserImage - put zostało zmienione na post
 
 # ctrl + alt + O - formatowanie importów
 # ctrl + alt + L - formatowanie kodu
