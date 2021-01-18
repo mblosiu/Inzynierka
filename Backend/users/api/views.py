@@ -1054,6 +1054,6 @@ class TemplateSendMail(APIView):
 # dodałem objects = models.Manager() do settings i Preferences
 # UserImage - put zostało zmienione na post
 
-# ctrl + shift + O - formatowanie importów
+# ctrl + alt + O - formatowanie importów
 # ctrl + alt + L - formatowanie kodu
 # ctrl + shift + - - zwiń wszystko

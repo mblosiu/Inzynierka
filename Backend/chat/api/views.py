@@ -1,24 +1,15 @@
-import random
-import string
 from itertools import chain
 from operator import attrgetter
-from datetime import datetime
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import send_mail
-from django.db.models import Lookup, Field, Q
-from django.shortcuts import get_list_or_404
-from django.template.loader import render_to_string
+
 from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
-from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
-
 from users.models import User
-from ..models import Message
+
 from .serializers import MessageSerializer
+from ..models import Message
 
 
 @permission_classes([IsAuthenticated])
