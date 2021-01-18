@@ -2,3 +2,4 @@
 /backend/images/
 /Backend/users/migrations/
 /Backend/db.sqlite3
+/Backend/chat/migrations/

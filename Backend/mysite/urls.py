@@ -23,5 +23,6 @@ urlpatterns = [
 
     # REST API
     path('api/user/', include('users.api.urls', 'users_api')),
+    path('api/chat/', include('chat.api.urls', 'chat_api')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
