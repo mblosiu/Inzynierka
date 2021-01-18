@@ -59,7 +59,7 @@ class RegistrationView(APIView):
 
         msg_html = render_to_string('mail/registration.html', {'username': request.data.get("username")})
         msg_plain = render_to_string('mail/registration.txt', {'username': request.data.get("username")})
-        send_mail("subject", msg_plain, EMAIL_SENDER, [serializer.data.get("email")], fail_silently=False,
+        send_mail("[elove.ml] Rejestracja konta", msg_plain, EMAIL_SENDER, [serializer.data.get("email")], fail_silently=False,
                   html_message=msg_html)
 
         serializer.save()
@@ -132,7 +132,7 @@ class ChangePasswordView(APIView):
         msg_html = render_to_string('mail/change_password.html', {'username': user.username})
         msg_plain = render_to_string('mail/change_password.txt', {'username': user.username})
 
-        send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
+        send_mail("[elove.ml] Zmiana hasła", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
                   html_message=msg_html)
 
         return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
@@ -153,7 +153,7 @@ class RestorePasswordView(APIView):
 
         msg_html = render_to_string('mail/restore_password.html', {'username': user.username, 'password': new_password})
         msg_plain = render_to_string('mail/restore_password.txt', {'username': user.username, 'password': new_password})
-        send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
+        send_mail("[elove.ml] Odzyskiwanie hasła", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
                   html_message=msg_html)
 
         return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)

@@ -29,7 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="porzadki">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="adminreport - get method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
@@ -200,13 +200,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00010" summary="test">
-      <created>1597758232568</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1597758232568</updated>
     </task>
     <task id="LOCAL-00011" summary="1">
       <created>1597939298252</created>
@@ -544,7 +537,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610971842829</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="adminreport - get method">
+      <created>1610974956761</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1610974956761</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -572,7 +572,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="black list - post, get" />
     <MESSAGE value="black list - delete" />
     <MESSAGE value="friend list, search fix" />
     <MESSAGE value="optymalizacja" />
@@ -597,6 +596,18 @@
     <MESSAGE value="chat - post message, get messages" />
     <MESSAGE value="chat - chat new functions" />
     <MESSAGE value="porzadki" />
-    <option name="LAST_COMMIT_MESSAGE" value="porzadki" />
+    <MESSAGE value="adminreport - get method" />
+    <option name="LAST_COMMIT_MESSAGE" value="adminreport - get method" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Backend/users/api/views.py</url>
+          <line>144</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
