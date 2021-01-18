@@ -29,22 +29,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="git ignore">
-      <change afterPath="$PROJECT_DIR$/Backend/chat/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/api/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/api/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/api/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/api/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/chat/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="chat - post message, get messages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mysite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/chat/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/chat/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,13 +201,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00007" summary="profile pic">
-      <created>1597673291500</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1597673291500</updated>
     </task>
     <task id="LOCAL-00008" summary="test">
       <created>1597758177809</created>
@@ -557,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610956362074</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="chat - post message, get messages">
+      <created>1610964349071</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1610964349071</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -585,7 +573,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="profile privacy - new fields set, get" />
     <MESSAGE value="profile privacy - search" />
     <MESSAGE value="black list - model, serializer" />
     <MESSAGE value="black list - post, get" />
@@ -610,6 +597,7 @@
     <MESSAGE value="remove migrations" />
     <MESSAGE value="migrations git ignore" />
     <MESSAGE value="git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="git ignore" />
+    <MESSAGE value="chat - post message, get messages" />
+    <option name="LAST_COMMIT_MESSAGE" value="chat - post message, get messages" />
   </component>
 </project>
