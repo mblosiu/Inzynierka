@@ -625,10 +625,27 @@
       </v-list>
       <br />
     </v-navigation-drawer>
-
+    <!--<b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
+      <template v-slot:footer="{ hide }">
+        <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
+          <strong class="mr-auto"></strong>
+          <b-button size="sm" @click="hide">Zamknij</b-button>
+        </div>
+      </template>
+      <div class="px-3 py-2">
+        <h3>Okienko chatu</h3>
+      </div>
+      <p>
+        Początek rozmowy między {{ user_data.username }} a
+        {{ user.username }}
+      </p>
+    </b-sidebar>-->
     <v-navigation-drawer v-model="friendlist" absolute right temporary>
-      <br />
-      <h5>Znajomi</h5>
+      <div class="purple">
+        <b-list-group-item class="purple rounded">
+          <h5 class="white--text">Znajomi</h5>
+        </b-list-group-item>
+      </div>
       <div
         v-for="user_friend in user_friends"
         v-bind:key="user_friend.friend.pk"
@@ -637,24 +654,41 @@
           class="d-flex align-items-right"
           v-if="user_friend.status == 'accepted'"
         >
-          <router-link
-            :to="{
-              name: 'userprofile',
-              params: { pk: user_friend.friend.pk },
-            }"
-          >
-            <b-avatar
-              badge
-              badge-variant="dark"
-              variant="info"
-              :src="getUrl(user_friend.friend.profile_picture)"
-              class="ml-1 mr-1"
-              size="4rem"
-            ></b-avatar>
-            <span class="ml-2"
-              ><strong>{{ user_friend.friend.username }}</strong></span
+          <div>
+            <v-dialog
+              transition="dialog-bottom-transition"
+              max-width="600"
+              position="absolute; bottom: 0;"
             >
-          </router-link>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn depressed flat x-large v-bind="attrs" v-on="on">
+                  <v-avatar size="70" class=" mr-1">
+                    <img :src="getUrl(user_friend.friend.profile_picture)" />
+                  </v-avatar>
+                  <span class="ml-2"
+                    ><strong
+                      ><button>
+                        {{ user_friend.friend.username }}
+                      </button></strong
+                    ></span
+                  >
+                </v-btn>
+              </template>
+              <template v-slot:default="dialog">
+                <v-card>
+                  <v-toolbar color="purple"
+                    >Chat</v-toolbar
+                  >
+                  <v-card-text>
+                    <div class="text-h2 pa-12">msgs</div>
+                  </v-card-text>
+                  <v-card-actions class="justify-end">
+                    <v-btn text @click="dialog.value = false">Close</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </template>
+            </v-dialog>
+          </div>
         </b-list-group-item>
       </div>
     </v-navigation-drawer>
