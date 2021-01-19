@@ -270,34 +270,6 @@ export default {
           console.log(errors.response);
         });
     },
-    validate(inputID, inputID2) {
-      axios
-        .post("http://127.0.0.1:8000/api/user/validregister", {
-          username: this.username,
-          email: this.email,
-        })
-        .then((response) => {
-          console.log(response), (this.data = response.data);
-        })
-        .catch((errors) => console.log(errors));
-
-      var input = document.getElementById(inputID);
-      var input2 = document.getElementById(inputID2);
-      if (this.data["username"] != "valid") {
-        input.setCustomValidity("Nazwa użytkownika zajęta");
-        input.reportValidity();
-      } else {
-        input.setCustomValidity("");
-        input.reportValidity();
-      }
-      if (this.data["email"] != "valid") {
-        input2.setCustomValidity("Email jest już w użyciu");
-        input2.reportValidity();
-      } else {
-        input2.setCustomValidity("");
-        input2.reportValidity();
-      }
-    },
   },
 };
 </script>

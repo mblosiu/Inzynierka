@@ -40,7 +40,7 @@
               >
                 <v-app-bar flat color="rgba(0, 0, 0, 0)">
                   <v-menu
-                    v-model="menu"
+                    
                     :close-on-content-click="false"
                     :nudge-width="200"
                     offset-x

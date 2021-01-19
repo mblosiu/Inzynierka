@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar app clipped-left dense color="purple">
+    <v-app-bar app clipped-left dense color="purple">
       <v-app-bar-nav-icon
         v-if="token != null"
         class="mr-2"
@@ -363,7 +363,7 @@
           ></v-btn
         >
       </b-nav-form>
-    </v-toolbar>
+    </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary class="purple">
       <v-list-item>
@@ -625,21 +625,7 @@
       </v-list>
       <br />
     </v-navigation-drawer>
-    <!--<b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
-      <template v-slot:footer="{ hide }">
-        <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
-          <strong class="mr-auto"></strong>
-          <b-button size="sm" @click="hide">Zamknij</b-button>
-        </div>
-      </template>
-      <div class="px-3 py-2">
-        <h3>Okienko chatu</h3>
-      </div>
-      <p>
-        Początek rozmowy między {{ user_data.username }} a
-        {{ user.username }}
-      </p>
-    </b-sidebar>-->
+
     <v-navigation-drawer v-model="friendlist" absolute right temporary>
       <div class="purple">
         <b-list-group-item class="purple rounded">
@@ -657,12 +643,13 @@
           <div>
             <v-dialog
               transition="dialog-bottom-transition"
-              max-width="600"
-              position="absolute; bottom: 0;"
+              max-width="550"
+              max-height="1000"
+              scrollable
             >
               <template v-slot:activator="{ on, attrs }">
-                <v-btn depressed flat x-large v-bind="attrs" v-on="on">
-                  <v-avatar size="70" class=" mr-1">
+                <v-btn depressed x-large v-bind="attrs" v-on="on" block>
+                  <v-avatar size="50" class="mr-1">
                     <img :src="getUrl(user_friend.friend.profile_picture)" />
                   </v-avatar>
                   <span class="ml-2"
@@ -676,14 +663,61 @@
               </template>
               <template v-slot:default="dialog">
                 <v-card>
-                  <v-toolbar color="purple"
-                    >Chat</v-toolbar
+                  <v-toolbar class="purple white--text"
+                    ><h5>Rozmowa z {{ user_friend.friend.username }}</h5>
+                    <v-spacer></v-spacer
+                    ><v-icon
+                      large
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Historia rozmowy"
+                      color="white"
+                      >mdi-history</v-icon
+                    ></v-toolbar
                   >
-                  <v-card-text>
-                    <div class="text-h2 pa-12">msgs</div>
+                  <v-card-text class="purple lighten-5">
+                    <div class="text-h2 pa-12">
+                      <h1 class="font--italic text-left">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Eligendi amet nisi modi culpa, placeat animi ut
+                        soluta quasi cumque recusandae saepe pariatur nihil cum
+                        illo unde minus adipisci quisquam libero.
+                      </h1>
+                    </div>
                   </v-card-text>
-                  <v-card-actions class="justify-end">
-                    <v-btn text @click="dialog.value = false">Close</v-btn>
+
+                  <v-card-actions class="purple lighten-5">
+                    <v-form>
+                      <v-container>
+                        <v-row>
+                          <v-col cols="11">
+                            <v-text-field
+                              v-model="message"
+                              prepend-icon="mdi-chat-processing"
+                              filled
+                              clear-icon="mdi-close-circle"
+                              clearable
+                              label="Wiadomość"
+                              type="text"
+                              :rules="[
+                                (v) =>
+                                  (v || '').length <= 199 ||
+                                  'Maksymalna długość wiadomości to 200 znaków!',
+                              ]"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="1">
+                            <v-btn
+                              fab
+                              class="purple ml-2"
+                              @click="sendMessage(message)"
+                              ><v-icon color="white">mdi-send</v-icon></v-btn
+                            >
+                            a
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                    </v-form>
                   </v-card-actions>
                 </v-card>
               </template>
@@ -719,15 +753,50 @@ export default {
       drawer: false,
       friendlist: false,
       interactionsDialog: false,
+      message: "",
+      conversation: [],
     };
   },
   methods: {
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
+    sendMessage(message) {
+      console.log(this.message);
+      if (message.length>200 || message.length==0) {
+
+      } else {
+      axios
+        .post("http://127.0.0.1:8000/api/chat/<str:username>/send-msg", {
+          
+        })
+        .then((response) => {
+          if (response.status == 200) {
+            (this.error_message = ""),
+              (this.showDismissibleAlert = false),
+              (this.token = response.data.token),
+              localStorage.setItem("user-token", response.data.token),
+              this.$router.go();
+          }
+        })
+        .catch((errors) => {
+          if (errors.response.status != 200) {
+            this.showMsg(), (this.msg = "Błędny login lub hasło!");
+          }
+        });
+      }
     },
-    showMsg() {
-      this.dismissCountDown = this.dismissSecs;
+    getMessages(username){
+      return axios
+        .get("http://127.0.0.1:8000/api/chat/username/get-last-10-msgs" , {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.conversation = response.data);
+        })
+        .catch((errors) => console.log(errors));
     },
+    
     getUserData() {
       return axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -913,6 +982,7 @@ export default {
         this.getUserLikes(),
         this.getUserLiking(),
         this.getUserFriends();
+        this.getMessages();
     }
   },
 };
