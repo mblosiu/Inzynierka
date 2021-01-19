@@ -16,8 +16,8 @@ from rest_framework.views import APIView
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer, \
-    ReportSerializer
-from ..models import User, Image, Like, BlackList, Friend, Report
+    ReportSerializer, VerifyAccountSerializer
+from ..models import User, Image, Like, BlackList, Friend, Report, Verify
 
 EMAIL_SENDER = 'noreply.elove@gmail.com'
 
@@ -57,12 +57,29 @@ class RegistrationView(APIView):
 
         data['detail'] = 'successfully registered new user.'
 
-        msg_html = render_to_string('mail/registration.html', {'username': request.data.get("username")})
-        msg_plain = render_to_string('mail/registration.txt', {'username': request.data.get("username")})
-        send_mail("subject", msg_plain, EMAIL_SENDER, [serializer.data.get("email")], fail_silently=False,
-                  html_message=msg_html)
-
         serializer.save()
+
+        user = get_object_or_404(User, username=request.data.get("username"))
+        verify_code = password_generator(32)
+
+        while Verify.objects.filter(verify_code=verify_code).count() > 0:
+            verify_code = password_generator(32)
+
+        verify = Verify(
+            user=user,
+            verify_code=verify_code
+        )
+        verify.save()
+
+        msg_html = render_to_string('mail/registration.html',
+                                    {'username': serializer.data.get("username"),
+                                     'verify_code': verify_code})
+        msg_plain = render_to_string('mail/registration.txt',
+                                     {'username': serializer.data.get("username"),
+                                      'verify_code': verify_code})
+        send_mail("[elove.ml] Rejestracja konta", msg_plain, EMAIL_SENDER, [serializer.data.get("email")],
+                  fail_silently=False,
+                  html_message=msg_html)
 
         return Response(data, status=status.HTTP_201_CREATED)
 
@@ -72,12 +89,15 @@ class RegistrationView(APIView):
 class VerifyAccountView(APIView):
     @staticmethod
     def patch(request):
-        email = request.data.get('email')
-
-        user = get_object_or_404(User, email=email)
+        verify_code = request.data.get('verify_code')
+        verify_object = get_object_or_404(Verify, verify_code=verify_code)
+        user = verify_object.user
 
         if user.verified:
             return Response({'detail': 'already verified'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if verify_object.verify_code != verify_code:
+            return Response({'detail': 'wrong verify code'}, status=status.HTTP_401_UNAUTHORIZED)
 
         user.verified = True
         user.save()
@@ -116,23 +136,24 @@ class ChangePasswordView(APIView):
     @staticmethod
     def patch(request):
         user = get_object_or_404(User, pk=request.user.pk)
-        password1 = request.data.get('password1')
-        password2 = request.data.get('password2')
-        new_password = request.data.get('new_password')
 
-        if not password1 == password2:
+        password = request.data.get('password')
+        new_password1 = request.data.get('new_password1')
+        new_password1 = request.data.get('new_password2')
+
+        if not user.check_password(password):
+            return Response({'detail': 'wrong current password'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not new_password1 == new_password1:
             return Response({'detail': 'passwords does not match'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if not user.check_password(password1):
-            return Response({'detail': 'wrong password'}, status=status.HTTP_400_BAD_REQUEST)
-
-        user.set_password(new_password)
+        user.set_password(new_password1)
         user.save()
 
         msg_html = render_to_string('mail/change_password.html', {'username': user.username})
         msg_plain = render_to_string('mail/change_password.txt', {'username': user.username})
 
-        send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
+        send_mail("[elove.ml] Zmiana hasła", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
                   html_message=msg_html)
 
         return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
@@ -153,7 +174,7 @@ class RestorePasswordView(APIView):
 
         msg_html = render_to_string('mail/restore_password.html', {'username': user.username, 'password': new_password})
         msg_plain = render_to_string('mail/restore_password.txt', {'username': user.username, 'password': new_password})
-        send_mail("subject", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
+        send_mail("[elove.ml] Odzyskiwanie hasła", msg_plain, EMAIL_SENDER, [user.email], fail_silently=False,
                   html_message=msg_html)
 
         return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
@@ -970,7 +991,7 @@ class ReportView(APIView):
         else:
             reported = None
 
-        if reporting is None or reporting is '' or reason is None or reason == '' or reporting == reported:
+        if reporting is None or reporting == '' or reason is None or reason == '' or reporting == reported:
             return Response({"detail": "wrong data"}, status=status.HTTP_400_BAD_REQUEST)
 
         report = Report(
@@ -1037,6 +1058,12 @@ class AdminReportView(APIView):
         else:
             return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
+    @staticmethod
+    def get(request):
+        queryset = get_list_or_404(Report)
+        serializer = ReportSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 @permission_classes([])
 class TemplateSendMail(APIView):
@@ -1050,10 +1077,6 @@ class TemplateSendMail(APIView):
 
         return Response({'detail': 'success'}, status=status.HTTP_200_OK)
 
-# alkohol i papierosy zostały zmienione na int + filter lte
-# dodałem objects = models.Manager() do settings i Preferences
-# UserImage - put zostało zmienione na post
-
-# ctrl + shift + O - formatowanie importów
+# ctrl + alt + O - formatowanie importów
 # ctrl + alt + L - formatowanie kodu
 # ctrl + shift + - - zwiń wszystko
