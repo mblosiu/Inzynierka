@@ -1,8 +1,10 @@
+import random
+import string
 from datetime import datetime
 
 from rest_framework import serializers
 
-from ..models import User, Preferences, Settings, Image, Like, BlackList, Friend, Report
+from ..models import User, Preferences, Settings, Image, Like, BlackList, Friend, Report, Verify
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
@@ -96,6 +98,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         )
         account.set_password(password)
         account.save()
+
         return account
 
 
@@ -133,3 +136,11 @@ class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
         fields = ['pk', 'status', 'reporting', 'reported', 'reason', 'description']
+
+
+class VerifyAccountSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Verify
+        fields = ['pk', 'user', 'verify_code']

@@ -209,3 +209,10 @@ class Report(models.Model):
 
     def __str__(self):
         return self.status
+
+
+class Verify(models.Model):
+    user = models.ForeignKey(User, related_name='user_verify', default=None, on_delete=models.CASCADE)
+    verify_code = models.CharField(max_length=30, null=True, blank=True, default=None, unique=True)
+
+    objects = models.Manager()
