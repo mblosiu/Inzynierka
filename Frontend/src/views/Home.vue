@@ -170,9 +170,7 @@
                                 id="checkbox"
                                 v-model="checked"
                               ></v-checkbox>
-                              <router-link to="/regulations"
-                                >regulamin</router-link
-                              >
+                              
                             </v-col>
                           </v-row>
                         </v-container>

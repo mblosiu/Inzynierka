@@ -676,8 +676,13 @@
               </template>
               <template v-slot:default="dialog">
                 <v-card>
-                  <v-toolbar class="purple white--text"
-                    ><h5>Rozmowa z {{ user_friend.friend.username }}</h5>
+                  <v-toolbar class="purple white--text">
+                    <v-avatar class="mr-3">
+                      <img :src="getUrl(user_friend.friend.profile_picture)" />
+                    </v-avatar>
+                    <button bold>
+                      Rozmowa z {{ user_friend.friend.username }}
+                    </button>
                     <v-spacer></v-spacer
                     ><v-icon
                       large
@@ -689,6 +694,33 @@
                     ></v-toolbar
                   >
                   <v-card-text class="purple lighten-5">
+                    <v-row>
+                      <v-col cols="1"> </v-col>
+                      <v-col cols="10">
+                        <!--<div
+                          v-for="message in messages"
+                          v-bind:key="message.pk"
+                        >-->
+                        <v-card elevation="5" outlined>
+                          <v-card-title> Sender </v-card-title>
+                          <v-card-subtitle> data </v-card-subtitle>
+                          <v-divider></v-divider>
+                          <v-card-text class="text-left"
+                            ><button>
+                              {{ message.message }}
+                              {{ messages }}
+                            </button></v-card-text
+                          >
+                          <div class="text-h2 pa-12">
+                            <h1 class="font--italic text-left"></h1>
+                          </div>
+                        </v-card>
+
+                        <br />
+                        <!--</div>-->
+                      </v-col>
+                      <v-col cols="1"> </v-col>
+                    </v-row>
                     <div class="text-h2 pa-12">
                       <h1 class="font--italic text-left"></h1>
                     </div>
@@ -808,8 +840,11 @@ export default {
           "http://127.0.0.1:8000/api/chat/" + username + "/get-last-x-msgs",
           {
             x: this.lastmessages,
-          },
-          config
+
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
         )
         .then((response) => {
           console.log(response), (this.messages = response.data);
