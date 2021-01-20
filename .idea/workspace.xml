@@ -29,9 +29,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="account verify system">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="get message fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/chat/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,13 +202,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00013" summary="filters and settings">
-      <created>1600417673717</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1600417673717</updated>
     </task>
     <task id="LOCAL-00014" summary="likes">
       <created>1600514659724</created>
@@ -544,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611046471706</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="get message fix">
+      <created>1611158878749</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1611158878749</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -572,7 +574,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="optymalizacja" />
     <MESSAGE value="fix2" />
     <MESSAGE value="add query_params for blacklist" />
     <MESSAGE value="list filter - black list" />
@@ -597,7 +598,8 @@
     <MESSAGE value="adminreport - get method" />
     <MESSAGE value="sending email update" />
     <MESSAGE value="account verify system" />
-    <option name="LAST_COMMIT_MESSAGE" value="account verify system" />
+    <MESSAGE value="get message fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="get message fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

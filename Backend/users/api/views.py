@@ -461,6 +461,7 @@ class SettingsView(APIView):
         messages_privacy = request.data.get('messages_privacy', None)
         search_privacy = request.data.get('search_privacy', None)
         comments_privacy = request.data.get('comments_privacy', None)
+        hide_age = request.data.get('hide_age', None)
 
         if dark_theme == settings.dark_theme or dark_theme is None:
             response["dark_theme"] = "no changes"
@@ -486,13 +487,15 @@ class SettingsView(APIView):
             settings.comments_privacy = comments_privacy
             response["comments_privacy"] = "updated"
 
-        if response:
-            settings.save()
-            account.save()
-            return Response(response, status=status.HTTP_200_OK)
+        if hide_age == settings.hide_age or hide_age is None:
+            response["hide_age"] = "no changes"
         else:
-            response["detail"] = "request must contain user data"
-            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+            settings.hide_age = hide_age
+            response["hide_age"] = "updated"
+
+        settings.save()
+        account.save()
+        return Response(response, status=status.HTTP_200_OK)
 
     @staticmethod
     def get(request):

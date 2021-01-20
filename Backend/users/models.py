@@ -32,10 +32,11 @@ class Preferences(models.Model):
 
 
 class Settings(models.Model):
-    dark_theme = models.BooleanField(default=True)
+    dark_theme = models.BooleanField(default=False)
     messages_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
     search_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
     comments_privacy = models.CharField(max_length=30, null=True, blank=True, default="everybody")
+    hide_age = models.CharField(max_length=30, null=True, blank=True, default="nobody")
 
     objects = models.Manager()
 
