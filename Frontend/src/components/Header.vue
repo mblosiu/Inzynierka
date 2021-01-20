@@ -132,7 +132,6 @@
             color="purple darken-4"
             data-toggle="tooltip"
             title="Nowe wiadomości"
-            v-b-modal.notifications
             x-large
             class="ml-2 mr-2"
           >
@@ -286,7 +285,14 @@
                   class="ml-5 mr-1"
                   size="sm"
                   variant="success"
-                  @click="acceptUser(user_friend.friend.pk)"
+                  @click="
+                    acceptUser(user_friend.friend.pk);
+                    toast(
+                      'b-toaster-bottom-right',
+                      'success',
+                      'Zaakceptowano zaproszenie użytkownika.'
+                    );
+                  "
                   >Akceptuj</b-button
                 >
                 <b-button
@@ -648,7 +654,14 @@
               scrollable
             >
               <template v-slot:activator="{ on, attrs }">
-                <v-btn depressed x-large v-bind="attrs" v-on="on" block>
+                <v-btn
+                  depressed
+                  x-large
+                  v-bind="attrs"
+                  v-on="on"
+                  block
+                  @click="getMessages(user_friend.friend.username)"
+                >
                   <v-avatar size="50" class="mr-1">
                     <img :src="getUrl(user_friend.friend.profile_picture)" />
                   </v-avatar>
@@ -677,45 +690,34 @@
                   >
                   <v-card-text class="purple lighten-5">
                     <div class="text-h2 pa-12">
-                      <h1 class="font--italic text-left">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Eligendi amet nisi modi culpa, placeat animi ut
-                        soluta quasi cumque recusandae saepe pariatur nihil cum
-                        illo unde minus adipisci quisquam libero.
-                      </h1>
+                      <h1 class="font--italic text-left"></h1>
                     </div>
                   </v-card-text>
 
                   <v-card-actions class="purple lighten-5">
                     <v-form>
                       <v-container>
-                        <v-row>
-                          <v-col cols="11">
-                            <v-text-field
-                              v-model="message"
-                              prepend-icon="mdi-chat-processing"
-                              filled
-                              clear-icon="mdi-close-circle"
-                              clearable
-                              label="Wiadomość"
-                              type="text"
-                              :rules="[
-                                (v) =>
-                                  (v || '').length <= 199 ||
-                                  'Maksymalna długość wiadomości to 200 znaków!',
-                              ]"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="1">
-                            <v-btn
-                              fab
-                              class="purple ml-2"
-                              @click="sendMessage(message)"
-                              ><v-icon color="white">mdi-send</v-icon></v-btn
-                            >
-                            a
-                          </v-col>
-                        </v-row>
+                        <v-text-field
+                          v-model="message"
+                          prepend-icon="mdi-chat-processing"
+                          :rules="[
+                            (v) =>
+                              (v || '').length <= 199 ||
+                              'Maksymalna długość wiadomości to 200 znaków!',
+                          ]"
+                          :append-outer-icon="
+                            message ? 'mdi-send' : 'mdi-send-lock'
+                          "
+                          filled
+                          clear-icon="mdi-close-circle"
+                          clearable
+                          label="Wiadomość"
+                          type="text"
+                          @click:append-outer="
+                            sendMessage(message, user_friend.friend.username)
+                          "
+                          @click:clear="clearMessage"
+                        ></v-text-field>
                       </v-container>
                     </v-form>
                   </v-card-actions>
@@ -754,49 +756,67 @@ export default {
       friendlist: false,
       interactionsDialog: false,
       message: "",
-      conversation: [],
+      messages: [],
+      lastmessages: 10,
     };
   },
   methods: {
-    sendMessage(message) {
-      console.log(this.message);
-      if (message.length>200 || message.length==0) {
-
-      } else {
-      axios
-        .post("http://127.0.0.1:8000/api/chat/<str:username>/send-msg", {
-          
-        })
-        .then((response) => {
-          if (response.status == 200) {
-            (this.error_message = ""),
-              (this.showDismissibleAlert = false),
-              (this.token = response.data.token),
-              localStorage.setItem("user-token", response.data.token),
-              this.$router.go();
-          }
-        })
-        .catch((errors) => {
-          if (errors.response.status != 200) {
-            this.showMsg(), (this.msg = "Błędny login lub hasło!");
-          }
-        });
-      }
+    clearMessage() {
+      this.message = "";
     },
-    getMessages(username){
-      return axios
-        .get("http://127.0.0.1:8000/api/chat/username/get-last-10-msgs" , {
-          params: {},
+    sendMessage(message, username) {
+      console.log(message + " -> " + username);
+      if (message.length > 200 || message.length == 0) {
+        this.toast(
+          "b-toaster-bottom-right",
+          "danger",
+          "Wiadomość nie może być pusta, lub dłuższa niż 200 znaków!"
+        );
+      } else {
+        const config = {
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
-        })
+        };
+        axios
+          .post(
+            "http://127.0.0.1:8000/api/chat/" + username + "/send-msg",
+            { message: message },
+            config
+          )
+          .then((response) => {
+            if (response.status == 201) {
+              console.log(response);
+              this.clearMessage();
+            }
+          })
+          .catch((errors) => {
+            if (errors.response.status != 201) {
+              console.log(errors);
+            }
+          });
+      }
+    },
+    getMessages(username) {
+      const config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      return axios
+        .get(
+          "http://127.0.0.1:8000/api/chat/" + username + "/get-last-x-msgs",
+          {
+            x: this.lastmessages,
+          },
+          config
+        )
         .then((response) => {
-          console.log(response), (this.conversation = response.data);
+          console.log(response), (this.messages = response.data);
         })
         .catch((errors) => console.log(errors));
     },
-    
+
     getUserData() {
       return axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -975,6 +995,14 @@ export default {
       this.$router.go();
       //this.$forceUpdate();
     },
+    toast(toaster, variant = null, msg) {
+      this.$bvToast.toast(msg, {
+        title: `Info`,
+        toaster: toaster,
+        solid: true,
+        variant: variant,
+      });
+    },
   },
   created() {
     if (this.token != null) {
@@ -982,7 +1010,7 @@ export default {
         this.getUserLikes(),
         this.getUserLiking(),
         this.getUserFriends();
-        this.getMessages();
+      //this.getMessages();
     }
   },
 };
@@ -1024,29 +1052,13 @@ export default {
   color: whitesmoke;
   font-weight: 600;
 }
-.dropdown {
-  border: solid 1px rgba(82, 82, 82, 100);
-  border-radius: 5px;
-  background: blue !important;
-  background-color: #cdb7c0 !important;
-  color: #501c4c !important;
-  font-weight: 600;
-  width: 160px;
-  height: 35px;
-  position: flex;
-  margin-block: 5px;
-}
-.dropdown:hover {
-  background-color: #0275d8 !important;
-  color: #ffffff !important;
-}
-.dropdown-text {
-  color: #501c4c !important;
-}
+
 .list-group-item {
   border-radius: 12px;
 }
-
+.v-text-field {
+  width: 490px;
+}
 #search {
   margin-left: 100px;
   margin-right: 10px;
