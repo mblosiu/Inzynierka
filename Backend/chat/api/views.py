@@ -67,7 +67,7 @@ class ConversationView(viewsets.GenericViewSet):
         if x is None or x == '':
             x = 20
 
-        if not x.isdecimal():
+        if not str(x).isdecimal():
             x = 20
 
         x = int(x)
