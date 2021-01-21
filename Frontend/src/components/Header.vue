@@ -697,18 +697,18 @@
                     <v-row>
                       <v-col cols="1"> </v-col>
                       <v-col cols="10">
-                        <!--<div
+                        <div
                           v-for="message in messages"
                           v-bind:key="message.pk"
-                        >-->
-                        <v-card elevation="5" outlined>
+                        >
+                        <v-card elevation="5" outlined class="mx-auto">
                           <v-card-title> Sender </v-card-title>
                           <v-card-subtitle> data </v-card-subtitle>
                           <v-divider></v-divider>
-                          <v-card-text class="text-left"
+                          <v-card-text class="text-left text-body-1 font-weight-medium"
                             ><button>
-                              {{ message.message }}
-                              {{ messages }}
+                              {{message}}
+                              
                             </button></v-card-text
                           >
                           <div class="text-h2 pa-12">
@@ -717,7 +717,7 @@
                         </v-card>
 
                         <br />
-                        <!--</div>-->
+                        </div>
                       </v-col>
                       <v-col cols="1"> </v-col>
                     </v-row>
@@ -730,7 +730,7 @@
                     <v-form>
                       <v-container>
                         <v-text-field
-                          v-model="message"
+                          v-model="messagefield"
                           prepend-icon="mdi-chat-processing"
                           :rules="[
                             (v) =>
@@ -738,7 +738,7 @@
                               'Maksymalna długość wiadomości to 200 znaków!',
                           ]"
                           :append-outer-icon="
-                            message ? 'mdi-send' : 'mdi-send-lock'
+                            messagefield ? 'mdi-send' : 'mdi-send-lock'
                           "
                           filled
                           clear-icon="mdi-close-circle"
@@ -746,7 +746,7 @@
                           label="Wiadomość"
                           type="text"
                           @click:append-outer="
-                            sendMessage(message, user_friend.friend.username)
+                            sendMessage(messagefield, user_friend.friend.username)
                           "
                           @click:clear="clearMessage"
                         ></v-text-field>
@@ -787,7 +787,7 @@ export default {
       drawer: false,
       friendlist: false,
       interactionsDialog: false,
-      message: "",
+      messagefield: "",
       messages: [],
       lastmessages: 10,
     };
