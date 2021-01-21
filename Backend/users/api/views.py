@@ -16,7 +16,7 @@ from rest_framework.views import APIView
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer, \
-    ReportSerializer, VerifyAccountSerializer
+    ReportSerializer
 from ..models import User, Image, Like, BlackList, Friend, Report, Verify
 
 EMAIL_SENDER = 'noreply.elove@gmail.com'
@@ -139,12 +139,12 @@ class ChangePasswordView(APIView):
 
         password = request.data.get('password')
         new_password1 = request.data.get('new_password1')
-        new_password1 = request.data.get('new_password2')
+        new_password2 = request.data.get('new_password2')
 
         if not user.check_password(password):
             return Response({'detail': 'wrong current password'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if not new_password1 == new_password1:
+        if not new_password1 == new_password2:
             return Response({'detail': 'passwords does not match'}, status=status.HTTP_400_BAD_REQUEST)
 
         user.set_password(new_password1)
@@ -606,9 +606,9 @@ class UserImage(APIView):
 
 
 @permission_classes([IsAuthenticated])
-class ImageByUserId(viewsets.ReadOnlyModelViewSet):
+class ImageByUserId(APIView):
     @staticmethod
-    def retrieve(request, pk=None):
+    def get(request, pk=None):
         images = Image.objects.filter(user__pk=pk)
 
         serializer = ImageSerializer(images, many=True)
@@ -833,21 +833,21 @@ class LikesView(viewsets.ModelViewSet):
 
     # kogo polubił user po pk - userprofile
     @staticmethod
-    def get_users_are_liked(request, pk=None):
+    def get_liked_users(request, pk=None):
         queryset = Like.objects.filter(liked_by__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # lajki użytkownika po pk - userprofile
     @staticmethod
-    def get_users_liked(request, pk=None):
+    def get_like_users(request, pk=None):
         queryset = Like.objects.filter(liked__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # kogo polubił user po pk - mainuser
     @staticmethod
-    def get_user_are_liked(request):
+    def get_liked_user(request):
         pk = request.user.pk
         queryset = Like.objects.filter(liked_by__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
@@ -855,7 +855,7 @@ class LikesView(viewsets.ModelViewSet):
 
     # lajki użytkownika po pk - mainuser
     @staticmethod
-    def get_user_liked(request):
+    def get_like_user(request):
         pk = request.user.pk
         queryset = Like.objects.filter(liked__pk=pk)
         serializer = LikesSerializer(queryset, many=True)
