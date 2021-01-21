@@ -649,7 +649,7 @@
           <div>
             <v-dialog
               transition="dialog-bottom-transition"
-              max-width="550"
+              max-width="600"
               max-height="1000"
               scrollable
             >
@@ -686,6 +686,7 @@
                     <v-spacer></v-spacer
                     ><v-icon
                       large
+                      @click="historyDialog = true"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="Historia rozmowy"
@@ -694,35 +695,59 @@
                     ></v-toolbar
                   >
                   <v-card-text class="purple lighten-5">
-                    <v-row>
-                      <v-col cols="1"> </v-col>
-                      <v-col cols="10">
-                        <div
-                          v-for="message in messages"
-                          v-bind:key="message.pk"
-                        >
-                        <v-card elevation="5" outlined class="mx-auto">
-                          <v-card-title> Sender </v-card-title>
-                          <v-card-subtitle> data </v-card-subtitle>
-                          <v-divider></v-divider>
-                          <v-card-text class="text-left text-body-1 font-weight-medium"
-                            ><button>
-                              {{message}}
-                              
-                            </button></v-card-text
-                          >
-                          <div class="text-h2 pa-12">
-                            <h1 class="font--italic text-left"></h1>
-                          </div>
-                        </v-card>
-
+                    <div v-for="message in messages" v-bind:key="message.pk">
+                      <div v-if="message.sender.username == user_data.username">
+                        <v-row>
+                          <v-col cols="4"></v-col>
+                          <v-col cols="8">
+                            <v-card
+                              elevation="5"
+                              class="mx-auto my-auto"
+                              outlined
+                              rounded
+                              data-toggle="tooltip"
+                              data-placement="bottom"
+                              :title="'Wysłano ' + extractDate(message.created)"
+                            >
+                              <v-card-text
+                                class="text-left text-body-1 font-weight-medium"
+                              >
+                                {{ message.message }}
+                              </v-card-text>
+                            </v-card>
+                          </v-col>
+                        </v-row>
                         <br />
-                        </div>
-                      </v-col>
-                      <v-col cols="1"> </v-col>
-                    </v-row>
-                    <div class="text-h2 pa-12">
-                      <h1 class="font--italic text-left"></h1>
+                      </div>
+                      <div v-else>
+                        <v-row>
+                          <v-col cols="1">
+                            <v-avatar>
+                              <img
+                                :src="getUrl(message.sender.profile_picture)"
+                              />
+                            </v-avatar>
+                          </v-col>
+                          <v-col cols="8">
+                            <v-card
+                              elevation="5"
+                              outlined
+                              class="ml-1 my-auto"
+                              rounded
+                              data-toggle="tooltip"
+                              data-placement="bottom"
+                              :title="'Wysłano ' + extractDate(message.created)"
+                            >
+                              <v-card-text
+                                class="text-left text-body-1 font-weight-medium"
+                              >
+                                {{ message.message }}
+                              </v-card-text>
+                            </v-card>
+                          </v-col>
+                          <v-col cols="3"></v-col>
+                        </v-row>
+                      </div>
                     </div>
                   </v-card-text>
 
@@ -730,7 +755,7 @@
                     <v-form>
                       <v-container>
                         <v-text-field
-                          v-model="messagefield"
+                          v-model="message"
                           prepend-icon="mdi-chat-processing"
                           :rules="[
                             (v) =>
@@ -738,7 +763,7 @@
                               'Maksymalna długość wiadomości to 200 znaków!',
                           ]"
                           :append-outer-icon="
-                            messagefield ? 'mdi-send' : 'mdi-send-lock'
+                            message ? 'mdi-send' : 'mdi-send-lock'
                           "
                           filled
                           clear-icon="mdi-close-circle"
@@ -746,7 +771,7 @@
                           label="Wiadomość"
                           type="text"
                           @click:append-outer="
-                            sendMessage(messagefield, user_friend.friend.username)
+                            sendMessage(message, user_friend.friend.username)
                           "
                           @click:clear="clearMessage"
                         ></v-text-field>
@@ -787,14 +812,22 @@ export default {
       drawer: false,
       friendlist: false,
       interactionsDialog: false,
-      messagefield: "",
+      message: "",
       messages: [],
+      allMessages: [],
       lastmessages: 10,
+      historyDialog: false,
     };
   },
   methods: {
     clearMessage() {
       this.message = "";
+    },
+    extractDate(date) {
+      var y = date.slice(0, 10);
+      var t = date.slice(12, 19);
+      var ty = t + ", " + y;
+      return ty;
     },
     sendMessage(message, username) {
       console.log(message + " -> " + username);
@@ -851,7 +884,25 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    getConversation(username) {
+      const config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      return axios
+        .get("http://127.0.0.1:8000/api/chat/" + username + "/get-all-msgs", {
+          x: this.lastmessages,
 
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.allMessages = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
     getUserData() {
       return axios
         .get("http://127.0.0.1:8000/api/user/properties", {
@@ -1048,6 +1099,11 @@ export default {
       //this.getMessages();
     }
   },
+  /*computed: {
+    updatedMessages() {
+      return this.getMessages(this.username);
+    }
+  },*/
 };
 </script>
 
