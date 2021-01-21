@@ -48,7 +48,7 @@ class ConversationView(viewsets.GenericViewSet):
         result_list = sorted(chain(user_messages, interlocutor_messages), key=attrgetter('created'))
         list_serializer = MessageSerializer(result_list, many=True)
 
-        return Response({'detail': list_serializer.data}, status=status.HTTP_200_OK)
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
     def get_last_x(request, username):
@@ -75,7 +75,7 @@ class ConversationView(viewsets.GenericViewSet):
             result_list = result_list[-x:]
         list_serializer = MessageSerializer(result_list, many=True)
 
-        return Response({'detail': list_serializer.data}, status=status.HTTP_200_OK)
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
     def get_new(request, username):
@@ -93,4 +93,4 @@ class ConversationView(viewsets.GenericViewSet):
         result_list = sorted(chain(user_messages, interlocutor_messages), key=attrgetter('created'), reverse=False)
         list_serializer = MessageSerializer(result_list, many=True)
 
-        return Response({'detail': list_serializer.data}, status=status.HTTP_200_OK)
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
