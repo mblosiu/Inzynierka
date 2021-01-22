@@ -660,7 +660,10 @@
                   v-bind="attrs"
                   v-on="on"
                   block
-                  @click="getMessages(user_friend.friend.username)"
+                  @click="
+                    getMessages(user_friend.friend.username);
+                    getConversation(user_friend.friend.username);
+                  "
                 >
                   <v-avatar size="50" class="mr-1">
                     <img :src="getUrl(user_friend.friend.profile_picture)" />
@@ -675,7 +678,7 @@
                 </v-btn>
               </template>
               <template v-slot:default="dialog">
-                <v-card>
+                <v-card v-on:click="getMessages(user_friend.friend.username)">
                   <v-toolbar class="purple white--text">
                     <v-avatar class="mr-3">
                       <img :src="getUrl(user_friend.friend.profile_picture)" />
@@ -694,7 +697,99 @@
                       >mdi-history</v-icon
                     ></v-toolbar
                   >
+                  <v-dialog v-model="historyDialog" max-width="600" scrollable>
+                    <v-card>
+                      <v-toolbar class="purple white--text">
+                        <h5>Historia rozmowy</h5>
+                        <v-spacer></v-spacer
+                        ><v-icon
+                          large
+                          @click="historyDialog = false"
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="Zamknij"
+                          color="white"
+                          >mdi-close</v-icon
+                        ></v-toolbar
+                      >
+
+                      <v-card-text class="purple lighten-5">
+                        <br />
+                        Początek rozmowy.
+                        <v-divider></v-divider>
+                        <div
+                          v-for="allMessage in allMessages"
+                          v-bind:key="allMessage.pk"
+                        >
+                          <div
+                            v-if="
+                              allMessage.sender.username == user_data.username
+                            "
+                          >
+                            <v-row>
+                              <v-col cols="4"></v-col>
+                              <v-col cols="8">
+                                <v-card
+                                  elevation="5"
+                                  class="mx-auto my-auto"
+                                  outlined
+                                  rounded
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  :title="
+                                    'Wysłano ' + extractDate(allMessage.created)
+                                  "
+                                >
+                                  <v-card-text
+                                    class="text-left text-body-1 font-weight-medium"
+                                  >
+                                    {{ allMessage.message }}
+                                  </v-card-text>
+                                </v-card>
+                              </v-col>
+                            </v-row>
+                            <br />
+                          </div>
+                          <div v-else>
+                            <v-row>
+                              <v-col cols="1">
+                                <v-avatar>
+                                  <img
+                                    :src="
+                                      getUrl(allMessage.sender.profile_picture)
+                                    "
+                                  />
+                                </v-avatar>
+                              </v-col>
+                              <v-col cols="8">
+                                <v-card
+                                  elevation="5"
+                                  outlined
+                                  class="ml-1 my-auto"
+                                  rounded
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  :title="
+                                    'Wysłano ' + extractDate(allMessage.created)
+                                  "
+                                >
+                                  <v-card-text
+                                    class="text-left text-body-1 font-weight-medium"
+                                  >
+                                    {{ allMessage.message }}
+                                  </v-card-text>
+                                </v-card>
+                              </v-col>
+                              <v-col cols="3"></v-col>
+                            </v-row>
+                          </div>
+                        </div>
+                        <br />
+                      </v-card-text>
+                    </v-card>
+                  </v-dialog>
                   <v-card-text class="purple lighten-5">
+                    <!--<div v-if="newMessages">-->
                     <div v-for="message in messages" v-bind:key="message.pk">
                       <div v-if="message.sender.username == user_data.username">
                         <v-row>
@@ -749,6 +844,7 @@
                         </v-row>
                       </div>
                     </div>
+                    <!--</div>-->
                   </v-card-text>
 
                   <v-card-actions class="purple lighten-5">
@@ -808,7 +904,7 @@ export default {
       user_friends: [],
       usersFriends: 0,
       usersWaiting: 0,
-      newMessages: 0,
+      //newMessages: 0,
       drawer: false,
       friendlist: false,
       interactionsDialog: false,
@@ -820,6 +916,8 @@ export default {
     };
   },
   methods: {
+    //rerender(){
+    //},
     clearMessage() {
       this.message = "";
     },
@@ -1099,6 +1197,7 @@ export default {
       //this.getMessages();
     }
   },
+  watch: {},
   /*computed: {
     updatedMessages() {
       return this.getMessages(this.username);
