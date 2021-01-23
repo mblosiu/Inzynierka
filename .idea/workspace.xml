@@ -29,8 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="porządki">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/chat/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/chat/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,13 +201,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00016" summary="likes - delete">
-      <created>1600612193540</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1600612193540</updated>
     </task>
     <task id="LOCAL-00017" summary="likes - delete fix">
       <created>1600612419463</created>
@@ -544,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611219602241</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="fix">
+      <created>1611254179267</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1611254179267</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -578,7 +579,6 @@
     <MESSAGE value="friendlist - new logic" />
     <MESSAGE value="friendlist filter update" />
     <MESSAGE value="RandomPair, UserImage POST instead of PUT, fixes" />
-    <MESSAGE value="fix" />
     <MESSAGE value="report system: user and admin" />
     <MESSAGE value="admin site update" />
     <MESSAGE value="change model name FriendsList to Friend" />
@@ -597,7 +597,8 @@
     <MESSAGE value="get message fix" />
     <MESSAGE value="settings hide age" />
     <MESSAGE value="porządki" />
-    <option name="LAST_COMMIT_MESSAGE" value="porządki" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -94,3 +94,21 @@ class ConversationView(viewsets.GenericViewSet):
         list_serializer = MessageSerializer(result_list, many=True)
 
         return Response(list_serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def get_all_messages_sent_by_user_pk(request):
+        user = request.user
+        user_messages = Message.objects.filter(sender=user)
+        result_list = sorted(user_messages, key=attrgetter('created'), reverse=False)
+        list_serializer = MessageSerializer(result_list, many=True)
+
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def get_all_messages_received_by_user_pk(request):
+        user = request.user
+        user_messages = Message.objects.filter(receiver=user)
+        result_list = sorted(user_messages, key=attrgetter('created'), reverse=False)
+        list_serializer = MessageSerializer(result_list, many=True)
+
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
