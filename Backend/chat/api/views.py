@@ -116,7 +116,8 @@ class ConversationView(viewsets.GenericViewSet):
 
 
 class ChatNotificationsView(viewsets.GenericViewSet):
-    def get_is_active(self, username):
+    @staticmethod
+    def get_is_active(request, username):
         user = get_object_or_404(User, username=username)
         try:
             user.auth_token

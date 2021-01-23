@@ -29,9 +29,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="chat - new methods">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="chat - notifs - is active">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/chat/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/chat/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -201,13 +200,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00019" summary="user age filter">
-      <created>1600672960397</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1600672960397</updated>
     </task>
     <task id="LOCAL-00020" summary="user liked pk">
       <created>1600687121324</created>
@@ -545,7 +537,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611390827273</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="chat - notifs - is active">
+      <created>1611395784235</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1611395784235</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -573,7 +572,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="friendlist fix" />
     <MESSAGE value="patch methods fix, filter: only friends" />
     <MESSAGE value="friendlist - new logic" />
     <MESSAGE value="friendlist filter update" />
@@ -598,7 +596,8 @@
     <MESSAGE value="porządki" />
     <MESSAGE value="fix" />
     <MESSAGE value="chat - new methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="chat - new methods" />
+    <MESSAGE value="chat - notifs - is active" />
+    <option name="LAST_COMMIT_MESSAGE" value="chat - notifs - is active" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
