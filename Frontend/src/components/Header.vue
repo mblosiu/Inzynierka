@@ -152,14 +152,14 @@
           >
             <v-btn
               icon
-              color="red lighten"
+              color="purple darken-4"
               data-toggle="tooltip"
               title="Polubienia"
               x-large
               v-b-modal.likes
               class="ml-2 mr-2"
             >
-              <v-icon>mdi-heart</v-icon>
+              <v-icon>mdi-account-heart</v-icon>
             </v-btn>
           </v-badge>
         </div>
@@ -176,76 +176,71 @@
             <v-icon>mdi-heart</v-icon>
           </v-btn>
         </div>
+        <div v-if="user_likes.length != 0">
+          <v-badge
+            overlap
+            offset-x="25"
+            offset-y="27"
+            bottom
+            color="green"
+            :content="user_likes.length"
+          >
+            <v-btn
+              icon
+              color="purple darken-4"
+              data-toggle="tooltip"
+              title="Pary"
+              x-large
+              v-b-modal.likes
+              class="ml-2 mr-2"
+            >
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+          </v-badge>
+        </div>
+        <div v-else>
+          <v-btn
+            icon
+            color="red lighten"
+            data-toggle="tooltip"
+            title="Pary"
+            x-large
+            v-b-modal.likes
+            class="ml-2 mr-2"
+          >
+            <v-icon>mdi-heart</v-icon>
+          </v-btn>
+        </div>
 
-        <b-modal id="likes" scrollable title="Polubienia" hide-footer>
+        <b-modal id="likes" scrollable title="Otrzymane polubienia" hide-footer>
           <b-row>
-            <b-col cols="6">
-              <b-row>
-                <b-col cols="12">
-                  <h5>Polubieni: {{ user_likings.length }}</h5>
-                  <b-list-group style="max-width: 300px">
-                    <div
-                      v-for="user_liking in user_likings"
-                      v-bind:key="user_liking.pk"
-                    >
-                      <router-link
-                        :to="{
-                          name: 'userprofile',
-                          params: { pk: user_liking.liked_by.pk },
-                        }"
-                      >
-                        <b-list-group-item class="d-flex align-items-center">
-                          <b-avatar
-                            rounded
-                            variant="info"
-                            :src="getUrl(user_liking.liked_by.profile_picture)"
-                            class="mr-3"
-                            size="3rem"
-                          ></b-avatar>
-                          <span class="mr-auto">{{
-                            user_liking.liked_by.username
-                          }}</span>
-                        </b-list-group-item>
-                      </router-link>
-                    </div>
-                  </b-list-group>
-                </b-col>
-              </b-row>
+            <b-col cols="1"></b-col>
+            <b-col cols="10">
+              <b-list-group style="max-width: 600px">
+                <div v-for="user_like in user_likes" v-bind:key="user_like.pk">
+                  <router-link
+                    :to="{
+                      name: 'userprofile',
+                      params: { pk: user_like.liked.pk },
+                    }"
+                  >
+                    <b-list-group-item class="d-flex align-items-center">
+                      <b-avatar
+                        rounded
+                        variant="info"
+                        :src="getUrl(user_like.liked.profile_picture)"
+                        class="mr-3"
+                        size="3rem"
+                      ></b-avatar>
+                      <span class="mr-auto">{{
+                        user_like.liked.username
+                      }}</span>
+                    </b-list-group-item>
+                  </router-link>
+                </div>
+              </b-list-group>
             </b-col>
-
-            <b-col cols="6">
-              <b-row>
-                <b-col cols="12">
-                  <h5>Lubią mnie: {{ user_likes.length }}</h5>
-                  <b-list-group style="max-width: 300px">
-                    <div
-                      v-for="user_like in user_likes"
-                      v-bind:key="user_like.pk"
-                    >
-                      <router-link
-                        :to="{
-                          name: 'userprofile',
-                          params: { pk: user_like.liked.pk },
-                        }"
-                      >
-                        <b-list-group-item class="d-flex align-items-center">
-                          <b-avatar
-                            rounded
-                            variant="info"
-                            :src="getUrl(user_like.liked.profile_picture)"
-                            class="mr-3"
-                            size="3rem"
-                          ></b-avatar>
-                          <span class="mr-auto">{{
-                            user_like.liked.username
-                          }}</span>
-                        </b-list-group-item>
-                      </router-link>
-                    </div>
-                  </b-list-group>
-                </b-col>
-              </b-row>
-            </b-col>
+            <b-col cols="1"></b-col>
           </b-row>
         </b-modal>
 
@@ -678,8 +673,11 @@
                 </v-btn>
               </template>
               <template v-slot:default="dialog">
-                <v-card v-on:click="getMessages(user_friend.friend.username)">
-                  <v-toolbar class="purple white--text">
+                <v-card>
+                  <v-toolbar
+                    class="purple white--text"
+                    @click="getMessages(user_friend.friend.username)"
+                  >
                     <v-avatar class="mr-3">
                       <img :src="getUrl(user_friend.friend.profile_picture)" />
                     </v-avatar>
@@ -689,7 +687,11 @@
                     <v-spacer></v-spacer
                     ><v-icon
                       large
-                      @click="historyDialog = true"
+                      @click="
+                        getConversation(user_friend.friend.username);
+                        getMessages(user_friend.friend.username);
+                        historyDialog = true;
+                      "
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="Historia rozmowy"
@@ -704,7 +706,10 @@
                         <v-spacer></v-spacer
                         ><v-icon
                           large
-                          @click="historyDialog = false"
+                          @click="
+                            getMessages(user_friend.friend.username);
+                            historyDialog = false;
+                          "
                           data-toggle="tooltip"
                           data-placement="bottom"
                           title="Zamknij"
@@ -788,7 +793,10 @@
                       </v-card-text>
                     </v-card>
                   </v-dialog>
-                  <v-card-text class="purple lighten-5">
+                  <v-card-text
+                    class="purple lighten-5"
+                    @click="getMessages(user_friend.friend.username)"
+                  >
                     <!--<div v-if="newMessages">-->
                     <div v-for="message in messages" v-bind:key="message.pk">
                       <div v-if="message.sender.username == user_data.username">
@@ -847,10 +855,14 @@
                     <!--</div>-->
                   </v-card-text>
 
-                  <v-card-actions class="purple lighten-5">
+                  <v-card-actions
+                    class="purple lighten-5"
+                    @click="getMessages(user_friend.friend.username)"
+                  >
                     <v-form>
                       <v-container>
                         <v-text-field
+                          @click="getMessages(user_friend.friend.username)"
                           v-model="message"
                           prepend-icon="mdi-chat-processing"
                           :rules="[
@@ -867,7 +879,8 @@
                           label="Wiadomość"
                           type="text"
                           @click:append-outer="
-                            sendMessage(message, user_friend.friend.username)
+                            sendMessage(message, user_friend.friend.username);
+                            getMessages(user_friend.friend.username);
                           "
                           @click:clear="clearMessage"
                         ></v-text-field>
@@ -904,6 +917,7 @@ export default {
       user_friends: [],
       usersFriends: 0,
       usersWaiting: 0,
+      userCouples: [],
       //newMessages: 0,
       drawer: false,
       friendlist: false,
@@ -1047,6 +1061,18 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    async couples() {
+      await this.getUserLikes();
+      await this.getUserLiking();
+      for (var i = 0; i < this.user_likes.length; i += 1) {
+        for (var j = 0; j < this.user_likings.length; j += 1) {
+          if (this.user_likes[i].liked.pk == this.user_likings[j].liked_by.pk) {
+            this.couples.push(user_likes[i]);
+          }
+        }
+      }
+      console.log(this.couples.length);
+    },
     getUrl(pic) {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
     },
@@ -1179,6 +1205,7 @@ export default {
       this.$router.go();
       //this.$forceUpdate();
     },
+
     toast(toaster, variant = null, msg) {
       this.$bvToast.toast(msg, {
         title: `Info`,
