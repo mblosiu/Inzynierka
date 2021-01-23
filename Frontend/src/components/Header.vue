@@ -166,28 +166,29 @@
         <div v-else>
           <v-btn
             icon
-            color="red lighten"
+            color="purple darken-4"
             data-toggle="tooltip"
             title="Polubienia"
             x-large
             v-b-modal.likes
             class="ml-2 mr-2"
           >
-            <v-icon>mdi-heart</v-icon>
+            <v-icon>mdi-account-heart</v-icon>
           </v-btn>
         </div>
+
         <div v-if="user_likes.length != 0">
           <v-badge
             overlap
             offset-x="25"
             offset-y="27"
             bottom
-            color="green"
+            color="pink"
             :content="user_likes.length"
           >
             <v-btn
               icon
-              color="purple darken-4"
+              color="red darken"
               data-toggle="tooltip"
               title="Pary"
               x-large
@@ -201,7 +202,7 @@
         <div v-else>
           <v-btn
             icon
-            color="red lighten"
+            color="purple darken-4"
             data-toggle="tooltip"
             title="Pary"
             x-large
