@@ -177,14 +177,14 @@
           </v-btn>
         </div>
 
-        <div v-if="user_likes.length != 0">
+        <div v-if="userCouples.length != 0">
           <v-badge
             overlap
             offset-x="25"
             offset-y="27"
             bottom
             color="pink"
-            :content="user_likes.length"
+            :content="userCouples.length"
           >
             <v-btn
               icon
@@ -192,7 +192,7 @@
               data-toggle="tooltip"
               title="Pary"
               x-large
-              v-b-modal.likes
+              v-b-modal.couples
               class="ml-2 mr-2"
             >
               <v-icon>mdi-heart</v-icon>
@@ -206,7 +206,7 @@
             data-toggle="tooltip"
             title="Pary"
             x-large
-            v-b-modal.likes
+            v-b-modal.couples
             class="ml-2 mr-2"
           >
             <v-icon>mdi-heart</v-icon>
@@ -235,6 +235,41 @@
                       ></b-avatar>
                       <span class="mr-auto">{{
                         user_like.liked.username
+                      }}</span>
+                    </b-list-group-item>
+                  </router-link>
+                </div>
+              </b-list-group>
+            </b-col>
+            <b-col cols="1"></b-col>
+          </b-row>
+        </b-modal>
+
+        <b-modal id="couples" scrollable title="Pary" hide-footer>
+          <b-row>
+            <b-col cols="1"></b-col>
+            <b-col cols="10">
+              <b-list-group style="max-width: 600px">
+                <div
+                  v-for="userCouple in userCouples"
+                  v-bind:key="userCouple.pk"
+                >
+                  <router-link
+                    :to="{
+                      name: 'userprofile',
+                      params: { pk: userCouple.liked_by.pk },
+                    }"
+                  >
+                    <b-list-group-item class="d-flex align-items-center">
+                      <b-avatar
+                        rounded
+                        variant="info"
+                        :src="getUrl(userCouple.liked_by.profile_picture)"
+                        class="mr-3"
+                        size="3rem"
+                      ></b-avatar>
+                      <span class="mr-auto">{{
+                        userCouple.liked_by.username
                       }}</span>
                     </b-list-group-item>
                   </router-link>
@@ -919,6 +954,8 @@ export default {
       usersFriends: 0,
       usersWaiting: 0,
       userCouples: [],
+      likingsUsers: [],
+      likesUsers: [],
       //newMessages: 0,
       drawer: false,
       friendlist: false,
@@ -1030,9 +1067,9 @@ export default {
         .catch((errors) => console.log(errors));
     },
     //to jest routing aby dostać lajki które otrzymał przeglądany user
-    getUserLikes() {
+    async getUserLikes() {
       //console.log(this.user_data['pk']);
-      axios
+      return axios
         .get("http://127.0.0.1:8000/api/user/get-user-are-liked", {
           params: {},
           headers: {
@@ -1047,8 +1084,9 @@ export default {
         .catch((errors) => console.log(errors));
     },
     //to jest routing do lajków które current user rozdał
-    getUserLiking() {
-      axios
+    async getUserLiking() {
+      await this.getUserLikes();
+      return axios
         .get("http://127.0.0.1:8000/api/user/get-user-liked", {
           params: {},
           headers: {
@@ -1059,20 +1097,35 @@ export default {
           console.log(response),
             (this.user_likings = response.data),
             console.log(this.user_likings);
+
+          for (var i = 0; i < this.user_likings.length; i = i + 1) {
+            //console.log(this.user_likings[i].liked_by.username);
+            for (var j = 0; j < this.user_likes.length; j = j + 1) {
+              if (
+                this.user_likings[i].liked_by.username ==
+                this.user_likes[j].liked.username
+              ) {
+                //console.log(this.user_likings[i].liked_by.username);
+                this.userCouples.push(this.user_likings[i]);
+              }
+            }
+          }
+          //console.log(this.likingsUsers);
         })
         .catch((errors) => console.log(errors));
     },
-    async couples() {
-      await this.getUserLikes();
-      await this.getUserLiking();
+    couplesCount() {
       for (var i = 0; i < this.user_likes.length; i += 1) {
+        console.log(this.user_likes[i].liked.pk);
         for (var j = 0; j < this.user_likings.length; j += 1) {
+          console.log(this.user_likings[j].liked_by.pk);
           if (this.user_likes[i].liked.pk == this.user_likings[j].liked_by.pk) {
-            this.couples.push(user_likes[i]);
+            this.userCouples.push(user_likes[i]);
           }
         }
       }
       console.log(this.couples.length);
+      return this.userCouples;
     },
     getUrl(pic) {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
