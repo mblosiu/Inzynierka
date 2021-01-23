@@ -1,5 +1,6 @@
 from itertools import chain
 from operator import attrgetter
+from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
@@ -112,3 +113,14 @@ class ConversationView(viewsets.GenericViewSet):
         list_serializer = MessageSerializer(result_list, many=True)
 
         return Response(list_serializer.data, status=status.HTTP_200_OK)
+
+
+class ChatNotificationsView(viewsets.GenericViewSet):
+    def get_is_active(self, username):
+        user = get_object_or_404(User, username=username)
+        try:
+            user.auth_token
+        except ObjectDoesNotExist:
+            return Response({"is_active": False}, status=status.HTTP_200_OK)
+
+        return Response({"is_active": True}, status=status.HTTP_200_OK)

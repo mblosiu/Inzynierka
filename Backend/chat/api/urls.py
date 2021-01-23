@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import ConversationView
+from .views import ConversationView, ChatNotificationsView
 
 app_name = 'chat'
 
@@ -14,4 +14,5 @@ urlpatterns = [
     path('get-all-messages-received-by-user-pk',
          ConversationView.as_view({'get': 'get_all_messages_received_by_user_pk'}),
          name="get_all_messages_received_by_user_pk"),
+    path('<str:username>/is-active', ChatNotificationsView.as_view({'get': 'get_is_active'}), name="get_is_active"),
 ]
