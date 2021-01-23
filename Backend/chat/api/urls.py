@@ -11,5 +11,7 @@ urlpatterns = [
     path('<str:username>/get-new-msgs', ConversationView.as_view({'get': 'get_new'}), name="get_new"),
     path('get-all-messages-sent-by-user-pk', ConversationView.as_view({'get': 'get_all_messages_sent_by_user_pk'}),
          name="get_all_messages_sent_by_user_pk"),
-    path('get-all-messages-received-by-user-pk', ConversationView.as_view({'get': 'get_all_messages_received_by_user_pk'}), name="get_all_messages_received_by_user_pk"),
+    path('get-all-messages-received-by-user-pk',
+         ConversationView.as_view({'get': 'get_all_messages_received_by_user_pk'}),
+         name="get_all_messages_received_by_user_pk"),
 ]
