@@ -1114,7 +1114,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    couplesCount() {
+    /*couplesCount() {
       for (var i = 0; i < this.user_likes.length; i += 1) {
         console.log(this.user_likes[i].liked.pk);
         for (var j = 0; j < this.user_likings.length; j += 1) {
@@ -1126,7 +1126,7 @@ export default {
       }
       console.log(this.couples.length);
       return this.userCouples;
-    },
+    },*/
     getUrl(pic) {
       if (pic != null) return "http://127.0.0.1:8000" + pic;
     },
