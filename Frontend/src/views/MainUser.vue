@@ -17,19 +17,19 @@
               :src="getUrl(user_data.profile_picture)"
               aspect-ratio="1"
             >
-              <div v-if="user_data.profile_picture==null">
+              <div v-if="user_data.profile_picture == null">
                 <v-card-title class="black--text"
-                >{{ user_data.username }} ({{
-                  getAge(user_data.birthday)
-                }})</v-card-title
-              >
+                  >{{ user_data.username }} ({{
+                    getAge(user_data.birthday)
+                  }})</v-card-title
+                >
               </div>
               <div v-else>
-              <v-card-title
-                >{{ user_data.username }} ({{
-                  getAge(user_data.birthday)
-                }})</v-card-title
-              >
+                <v-card-title
+                  >{{ user_data.username }} ({{
+                    getAge(user_data.birthday)
+                  }})</v-card-title
+                >
               </div>
             </v-img>
 
@@ -217,7 +217,6 @@
                         </div>
                       </li>
 
-                    
                       <li class="list-group-item">
                         Waga:
                         <div
@@ -237,7 +236,6 @@
                           </p>
                         </div>
                       </li>
-                      
 
                       <div v-if="user_preferences.is_smoking_preference == 0">
                         <li class="list-group-item">

@@ -2,7 +2,7 @@
   <v-footer color="purple" padless>
     <v-row justify="center" no-gutters>
       <v-spacer></v-spacer>
-      <v-btn color="yellow" text rounded class="my-2"> Feedback </v-btn>
+      <v-btn color="yellow" text rounded class="my-2" href="https://forms.gle/McQgxy2bTwmBjgXy9"> Feedback </v-btn>
       <v-spacer></v-spacer>
       <v-btn color="white" text rounded class="my-2" @click.stop="about = true">
         <v-icon class="white"></v-icon>
