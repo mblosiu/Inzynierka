@@ -131,7 +131,7 @@
                                 v-on="on"
                                 @click="
                                   getMessages(user.username);
-                                  checkMessage();
+                                  
                                 "
                               >
                                 <v-icon color="purple"
@@ -245,7 +245,7 @@
                                   class="purple lighten-5"
                                   @click="
                                     getMessages(user.username);
-                                    checkMessage();
+                                    
                                   "
                                 >
                                   <v-form>
@@ -254,7 +254,7 @@
                                         <v-text-field
                                           @click="
                                             getMessages(user.username);
-                                            checkMessage();
+                                            
                                           "
                                           v-model="message"
                                           prepend-icon="mdi-chat-processing"
@@ -284,7 +284,7 @@
                                         <v-text-field
                                           @click="
                                             getMessages(user.username);
-                                            checkMessage();
+                                            
                                           "
                                           prepend-icon="mdi-chat-processing"
                                           @click:append-outer="

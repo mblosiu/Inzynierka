@@ -683,6 +683,7 @@
               max-width="600"
               max-height="1000"
               scrollable
+              origin="bottom center 0"
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -712,14 +713,28 @@
                 <v-card>
                   <v-toolbar
                     class="purple white--text"
-                    @click="getMessages(user_friend.friend.username)"
+                    @click="
+                      getMessages(
+                        user_friend.friend.username
+                      ) /*$vuetify.goTo(9999, options)*/
+                    "
                   >
-                    <v-avatar class="mr-3">
-                      <img :src="getUrl(user_friend.friend.profile_picture)" />
-                    </v-avatar>
+                    <router-link
+                      :to="{
+                        name: 'userprofile',
+                        params: { pk: user_friend.friend.pk },
+                      }"
+                    >
+                      <v-avatar class="mr-3">
+                        <img
+                          :src="getUrl(user_friend.friend.profile_picture)"
+                        />
+                      </v-avatar>
+                    </router-link>
                     <button bold>
                       Rozmowa z {{ user_friend.friend.username }}
                     </button>
+
                     <v-spacer></v-spacer
                     ><v-icon
                       large
@@ -956,7 +971,6 @@ export default {
       userCouples: [],
       likingsUsers: [],
       likesUsers: [],
-      //newMessages: 0,
       drawer: false,
       friendlist: false,
       interactionsDialog: false,
@@ -965,11 +979,10 @@ export default {
       allMessages: [],
       lastmessages: 10,
       historyDialog: false,
+      target: 9999,
     };
   },
   methods: {
-    //rerender(){
-    //},
     clearMessage() {
       this.message = "";
     },
