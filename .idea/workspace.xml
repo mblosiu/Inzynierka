@@ -29,12 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="sending email update">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="chat - notifs - is active - fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/templates/mail/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/templates/mail/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +73,7 @@
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.views (2)">
+  <component name="RunManager" selected="Python tests.Unittests in tests.py">
     <configuration name="admin" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Inzynierka" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -90,27 +87,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Backend/users/admin.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="serializers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Inzynierka" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend/users/api" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/users/api/serializers.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -182,13 +158,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests in tests.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Inzynierka" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Backend" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Backend/users/tests.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests in tests.py" />
         <item itemvalue="Python.views (2)" />
         <item itemvalue="Python.admin" />
         <item itemvalue="Python.views (1)" />
         <item itemvalue="Python.views" />
-        <item itemvalue="Python.serializers" />
       </list>
     </recent_temporary>
   </component>
@@ -203,69 +193,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00012" summary="get users photos list">
-      <created>1598518696344</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1598518696344</updated>
-    </task>
-    <task id="LOCAL-00013" summary="filters and settings">
-      <created>1600417673717</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1600417673717</updated>
-    </task>
-    <task id="LOCAL-00014" summary="likes">
-      <created>1600514659724</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1600514659724</updated>
-    </task>
-    <task id="LOCAL-00015" summary="likes - value">
-      <created>1600604654107</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1600604654107</updated>
-    </task>
-    <task id="LOCAL-00016" summary="likes - delete">
-      <created>1600612193540</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1600612193540</updated>
-    </task>
-    <task id="LOCAL-00017" summary="likes - delete fix">
-      <created>1600612419463</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1600612419463</updated>
-    </task>
-    <task id="LOCAL-00018" summary="likes - delete fix">
-      <created>1600670217863</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1600670217863</updated>
-    </task>
-    <task id="LOCAL-00019" summary="user age filter">
-      <created>1600672960397</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1600672960397</updated>
-    </task>
-    <task id="LOCAL-00020" summary="user liked pk">
-      <created>1600687121324</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1600687121324</updated>
     </task>
     <task id="LOCAL-00021" summary="fix">
       <created>1605460352062</created>
@@ -547,7 +474,70 @@
       <option name="project" value="LOCAL" />
       <updated>1610976818978</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="account verify system">
+      <created>1611046471706</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1611046471706</updated>
+    </task>
+    <task id="LOCAL-00062" summary="get message fix">
+      <created>1611158878749</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1611158878749</updated>
+    </task>
+    <task id="LOCAL-00063" summary="settings hide age">
+      <created>1611160021870</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1611160021870</updated>
+    </task>
+    <task id="LOCAL-00064" summary="porządki">
+      <created>1611219602240</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1611219602241</updated>
+    </task>
+    <task id="LOCAL-00065" summary="fix">
+      <created>1611254179267</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1611254179267</updated>
+    </task>
+    <task id="LOCAL-00066" summary="chat - new methods">
+      <created>1611390615416</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1611390615416</updated>
+    </task>
+    <task id="LOCAL-00067" summary="chat - new methods">
+      <created>1611390827273</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1611390827273</updated>
+    </task>
+    <task id="LOCAL-00068" summary="chat - notifs - is active">
+      <created>1611395784235</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1611395784235</updated>
+    </task>
+    <task id="LOCAL-00069" summary="chat - notifs - is active - fix">
+      <created>1611396548821</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1611396548821</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -575,17 +565,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="friend list, search fix" />
-    <MESSAGE value="optymalizacja" />
-    <MESSAGE value="fix2" />
-    <MESSAGE value="add query_params for blacklist" />
-    <MESSAGE value="list filter - black list" />
-    <MESSAGE value="friendlist fix" />
-    <MESSAGE value="patch methods fix, filter: only friends" />
     <MESSAGE value="friendlist - new logic" />
     <MESSAGE value="friendlist filter update" />
     <MESSAGE value="RandomPair, UserImage POST instead of PUT, fixes" />
-    <MESSAGE value="fix" />
     <MESSAGE value="report system: user and admin" />
     <MESSAGE value="admin site update" />
     <MESSAGE value="change model name FriendsList to Friend" />
@@ -600,7 +582,15 @@
     <MESSAGE value="porzadki" />
     <MESSAGE value="adminreport - get method" />
     <MESSAGE value="sending email update" />
-    <option name="LAST_COMMIT_MESSAGE" value="sending email update" />
+    <MESSAGE value="account verify system" />
+    <MESSAGE value="get message fix" />
+    <MESSAGE value="settings hide age" />
+    <MESSAGE value="porządki" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="chat - new methods" />
+    <MESSAGE value="chat - notifs - is active" />
+    <MESSAGE value="chat - notifs - is active - fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="chat - notifs - is active - fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

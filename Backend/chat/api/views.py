@@ -1,5 +1,6 @@
 from itertools import chain
 from operator import attrgetter
+from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
@@ -48,7 +49,7 @@ class ConversationView(viewsets.GenericViewSet):
         result_list = sorted(chain(user_messages, interlocutor_messages), key=attrgetter('created'))
         list_serializer = MessageSerializer(result_list, many=True)
 
-        return Response({'detail': list_serializer.data}, status=status.HTTP_200_OK)
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
     def get_last_x(request, username):
@@ -67,7 +68,7 @@ class ConversationView(viewsets.GenericViewSet):
         if x is None or x == '':
             x = 20
 
-        if not x.isdecimal():
+        if not str(x).isdecimal():
             x = 20
 
         x = int(x)
@@ -75,7 +76,7 @@ class ConversationView(viewsets.GenericViewSet):
             result_list = result_list[-x:]
         list_serializer = MessageSerializer(result_list, many=True)
 
-        return Response({'detail': list_serializer.data}, status=status.HTTP_200_OK)
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
     def get_new(request, username):
@@ -93,4 +94,34 @@ class ConversationView(viewsets.GenericViewSet):
         result_list = sorted(chain(user_messages, interlocutor_messages), key=attrgetter('created'), reverse=False)
         list_serializer = MessageSerializer(result_list, many=True)
 
-        return Response({'detail': list_serializer.data}, status=status.HTTP_200_OK)
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def get_all_messages_sent_by_user_pk(request):
+        user = request.user
+        user_messages = Message.objects.filter(sender=user)
+        result_list = sorted(user_messages, key=attrgetter('created'), reverse=False)
+        list_serializer = MessageSerializer(result_list, many=True)
+
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def get_all_messages_received_by_user_pk(request):
+        user = request.user
+        user_messages = Message.objects.filter(receiver=user)
+        result_list = sorted(user_messages, key=attrgetter('created'), reverse=False)
+        list_serializer = MessageSerializer(result_list, many=True)
+
+        return Response(list_serializer.data, status=status.HTTP_200_OK)
+
+
+class ChatNotificationsView(viewsets.GenericViewSet):
+    @staticmethod
+    def get_is_active(request, username):
+        user = get_object_or_404(User, username=username)
+        try:
+            user.auth_token
+        except ObjectDoesNotExist:
+            return Response({"is_active": False}, status=status.HTTP_200_OK)
+
+        return Response({"is_active": True}, status=status.HTTP_200_OK)
