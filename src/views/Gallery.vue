@@ -157,7 +157,7 @@ export default {
       let formData = new FormData();
       formData.append("image", this.file);
       axios
-        .post("http://127.0.0.1:8000/api/user/images", formData, {
+        .post("http://46.101.213.106:8000/api/user/images", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -176,7 +176,7 @@ export default {
     },
     getUserImages() {
       axios
-        .get("http://127.0.0.1:8000/api/user/images", {
+        .get("http://46.101.213.106:8000/api/user/images", {
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
@@ -189,7 +189,7 @@ export default {
     },
     deleteImage(pk) {
       axios
-        .delete("http://127.0.0.1:8000/api/user/images", {
+        .delete("http://46.101.213.106:8000/api/user/images", {
           data: { pk: pk },
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -209,7 +209,7 @@ export default {
       };
       axios
         .patch(
-          "http://127.0.0.1:8000/api/user/profile-image",
+          "http://46.101.213.106:8000/api/user/profile-image",
           {
             profile_picture: pic,
           },
@@ -228,12 +228,12 @@ export default {
         .catch((errors) => console.log(errors));
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return "http://46.101.213.106:8000" + pic;
       else return null;
     },
     getUserPicture() {
       axios
-        .get("http://127.0.0.1:8000/api/user/profile-picture", {
+        .get("http://46.101.213.106:8000/api/user/profile-picture", {
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },

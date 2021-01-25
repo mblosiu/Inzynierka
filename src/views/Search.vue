@@ -410,7 +410,7 @@ export default {
     getUsers() {
       this.users = [];
       axios
-        .get("http://127.0.0.1:8000/api/user/users", {
+        .get("http://46.101.213.106:8000/api/user/users", {
           params: {
             search: localStorage.getItem("search-text"),
             sex: this.sex,
@@ -448,7 +448,7 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return "http://46.101.213.106:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },

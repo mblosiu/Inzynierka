@@ -1033,7 +1033,7 @@ export default {
         };
         axios
           .post(
-            "http://127.0.0.1:8000/api/chat/" + username + "/send-msg",
+            "http://46.101.213.106:8000/api/chat/" + username + "/send-msg",
             { message: message },
             config
           )
@@ -1058,7 +1058,7 @@ export default {
       };
       return axios
         .get(
-          "http://127.0.0.1:8000/api/chat/" + username + "/get-last-x-msgs",
+          "http://46.101.213.106:8000/api/chat/" + username + "/get-last-x-msgs",
           {
             x: this.lastmessages,
 
@@ -1081,28 +1081,9 @@ export default {
         this.iAmSender = false;
       }
     },
-    /*getConversation(username) {
-      const config = {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("user-token"),
-        },
-      };
-      return axios
-        .get("http://127.0.0.1:8000/api/chat/" + username + "/get-all-msgs", {
-          x: this.lastmessages,
-
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
-        .then((response) => {
-          console.log(response), (this.allMessages = response.data);
-        })
-        .catch((errors) => console.log(errors));
-    },*/
     getUserData() {
       return axios
-        .get("http://127.0.0.1:8000/api/user/properties", {
+        .get("http://46.101.213.106:8000/api/user/properties", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1117,7 +1098,7 @@ export default {
     },
     async getUsers() {
       return axios
-        .get("http://127.0.0.1:8000/api/user/users/" + this.$route.params.pk, {
+        .get("http://46.101.213.106:8000/api/user/users/" + this.$route.params.pk, {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1133,7 +1114,7 @@ export default {
     getUserImages() {
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/users/" +
+          "http://46.101.213.106:8000/api/user/users/" +
             this.$route.params.pk +
             "/images",
           {
@@ -1157,7 +1138,7 @@ export default {
 
       axios
         .post(
-          "http://127.0.0.1:8000/api/user/create-like",
+          "http://46.101.213.106:8000/api/user/create-like",
           { value: "like", pk: this.$route.params.pk },
           config
         )
@@ -1172,7 +1153,7 @@ export default {
     dislikeUser() {
       const config = {};
       axios
-        .delete("http://127.0.0.1:8000/api/user/delete-like", {
+        .delete("http://46.101.213.106:8000/api/user/delete-like", {
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
@@ -1189,7 +1170,7 @@ export default {
     getUserLikes() {
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/get-users-are-liked/" +
+          "http://46.101.213.106:8000/api/user/get-users-are-liked/" +
             this.$route.params.pk,
           {
             params: {},
@@ -1234,7 +1215,7 @@ export default {
       }
       axios
         .post(
-          "http://127.0.0.1:8000/api/user/blacklist",
+          "http://46.101.213.106:8000/api/user/blacklist",
           { pk: this.$route.params.pk },
           config
         )
@@ -1265,7 +1246,7 @@ export default {
       });
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return "http://46.101.213.106:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
@@ -1279,7 +1260,7 @@ export default {
 
       axios
         .post(
-          "http://127.0.0.1:8000/api/user/friendlist",
+          "http://46.101.213.106:8000/api/user/friendlist",
           { pk: this.$route.params.pk },
           config
         )
@@ -1304,7 +1285,7 @@ export default {
       //console.log(pk);
       axios
         .delete(
-          "http://127.0.0.1:8000/api/user/friendlist",
+          "http://46.101.213.106:8000/api/user/friendlist",
 
           {
             headers: {
@@ -1331,7 +1312,7 @@ export default {
       console.log(this.user_data.pk);
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/friendlist",
+          "http://46.101.213.106:8000/api/user/friendlist",
 
           {
             params: { pk: this.user_data.pk },
