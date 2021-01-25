@@ -249,7 +249,7 @@ export default {
     },
     createUser() {
       axios
-        .post("http://127.0.0.1:8000/api/user/register", {
+        .post("http://46.101.213.106:8000/api/user/register", {
           username: this.username,
           password: this.password,
           password2: this.password2,

@@ -1057,7 +1057,7 @@ export default {
   methods: {
     deleteAccount() {
       //console.log("usuwanie konta");
-      axios.delete("http://127.0.0.1:8000/api/user/delete", {
+      axios.delete("http://46.101.213.106:8000/api/user/delete", {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
         },
@@ -1070,7 +1070,7 @@ export default {
       //console.log("getblacklist");
       axios
         .get(
-          "http://127.0.0.1:8000/api/user/blacklist",
+          "http://46.101.213.106:8000/api/user/blacklist",
 
           {
             params: { pk: this.user_data.pk },
@@ -1093,7 +1093,7 @@ export default {
       //console.log(pk);
       axios
         .delete(
-          "http://127.0.0.1:8000/api/user/blacklist",
+          "http://46.101.213.106:8000/api/user/blacklist",
 
           {
             headers: {
@@ -1113,7 +1113,7 @@ export default {
     },
     getUserData() {
       axios
-        .get("http://127.0.0.1:8000/api/user/properties", {
+        .get("http://46.101.213.106:8000/api/user/properties", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1132,7 +1132,7 @@ export default {
       };
       axios
         .patch(
-          "http://127.0.0.1:8000/api/user/properties",
+          "http://46.101.213.106:8000/api/user/properties",
           {
             surname: this.user_data.surname,
             name: this.user_data.name,
@@ -1183,7 +1183,7 @@ export default {
       };
       axios
         .patch(
-          "http://127.0.0.1:8000/api/user/properties",
+          "http://46.101.213.106:8000/api/user/properties",
           {
             description: this.user_data.description,
           },
@@ -1210,7 +1210,7 @@ export default {
     },
     getUserPreferences() {
       axios
-        .get("http://127.0.0.1:8000/api/user/preferences", {
+        .get("http://46.101.213.106:8000/api/user/preferences", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1229,7 +1229,7 @@ export default {
       };
       axios
         .patch(
-          "http://127.0.0.1:8000/api/user/preferences",
+          "http://46.101.213.106:8000/api/user/preferences",
           {
             orientation: this.user_preferences.orientation,
             is_drinking_alcohol_preference: this.user_preferences
@@ -1269,7 +1269,7 @@ export default {
         });
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return "http://46.101.213.106:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },

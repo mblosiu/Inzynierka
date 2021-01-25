@@ -885,7 +885,7 @@ export default {
     },
     getUserData() {
       axios
-        .get("http://127.0.0.1:8000/api/user/properties", {
+        .get("http://46.101.213.106:8000/api/user/properties", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -898,7 +898,7 @@ export default {
     },
     getUserPreferences() {
       axios
-        .get("http://127.0.0.1:8000/api/user/preferences", {
+        .get("http://46.101.213.106:8000/api/user/preferences", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -917,7 +917,7 @@ export default {
       };
       axios
         .patch(
-          "http://127.0.0.1:8000/api/user/properties",
+          "http://46.101.213.106:8000/api/user/properties",
           {
             description: this.user_data.description,
           },
@@ -942,7 +942,7 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return "http://46.101.213.106:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },

@@ -1008,7 +1008,7 @@ export default {
         };
         axios
           .post(
-            "http://127.0.0.1:8000/api/chat/" + username + "/send-msg",
+            "http://46.101.213.106:8000/api/chat/" + username + "/send-msg",
             { message: message },
             config
           )
@@ -1033,7 +1033,7 @@ export default {
       };
       return axios
         .get(
-          "http://127.0.0.1:8000/api/chat/" + username + "/get-last-x-msgs",
+          "http://46.101.213.106:8000/api/chat/" + username + "/get-last-x-msgs",
           {
             x: this.lastmessages,
 
@@ -1054,7 +1054,7 @@ export default {
         },
       };
       return axios
-        .get("http://127.0.0.1:8000/api/chat/" + username + "/get-all-msgs", {
+        .get("http://46.101.213.106:8000/api/chat/" + username + "/get-all-msgs", {
           x: this.lastmessages,
 
           headers: {
@@ -1068,7 +1068,7 @@ export default {
     },
     getUserData() {
       return axios
-        .get("http://127.0.0.1:8000/api/user/properties", {
+        .get("http://46.101.213.106:8000/api/user/properties", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1083,7 +1083,7 @@ export default {
     async getUserLikes() {
       //console.log(this.user_data['pk']);
       return axios
-        .get("http://127.0.0.1:8000/api/user/get-user-are-liked", {
+        .get("http://46.101.213.106:8000/api/user/get-user-are-liked", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1100,7 +1100,7 @@ export default {
     async getUserLiking() {
       await this.getUserLikes();
       return axios
-        .get("http://127.0.0.1:8000/api/user/get-user-liked", {
+        .get("http://46.101.213.106:8000/api/user/get-user-liked", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1141,11 +1141,11 @@ export default {
       return this.userCouples;
     },*/
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return "http://46.101.213.106:8000" + pic;
     },
     login() {
       axios
-        .post("http://127.0.0.1:8000/api/user/login", {
+        .post("http://46.101.213.106:8000/api/user/login", {
           username: this.username,
           password: this.password,
         })
@@ -1172,7 +1172,7 @@ export default {
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/user/logout", {}, config)
+        .post("http://46.101.213.106:8000/api/user/logout", {}, config)
         .then((response) => {})
         .catch((errors) => {});
       localStorage.removeItem("user-token"),
@@ -1185,7 +1185,7 @@ export default {
       else this.$router.push({ name: "search" });
     },
     getUrl(pic) {
-      if (pic != null) return "http://127.0.0.1:8000" + pic;
+      if (pic != null) return "http://46.101.213.106:8000" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
@@ -1194,7 +1194,7 @@ export default {
       //console.log("getFriends");
       return axios
         .get(
-          "http://127.0.0.1:8000/api/user/friendlist",
+          "http://46.101.213.106:8000/api/user/friendlist",
 
           {
             params: { pk: this.user_data.pk },
@@ -1236,7 +1236,7 @@ export default {
       };
       axios
         .patch(
-          "http://127.0.0.1:8000/api/user/friendlist",
+          "http://46.101.213.106:8000/api/user/friendlist",
           {
             pk: pk,
           },
@@ -1253,7 +1253,7 @@ export default {
       //console.log(pk);
       axios
         .delete(
-          "http://127.0.0.1:8000/api/user/friendlist",
+          "http://46.101.213.106:8000/api/user/friendlist",
 
           {
             headers: {
