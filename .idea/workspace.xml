@@ -29,9 +29,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="server time zone">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="search - username">
+      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,13 +192,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00022" summary="fix">
-      <created>1605460399266</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1605460399266</updated>
     </task>
     <task id="LOCAL-00023" summary="profile privacy - new fields set, get">
       <created>1606041885179</created>
@@ -537,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611411604057</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="search - username">
+      <created>1611679638875</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1611679638876</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -565,7 +564,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="friendlist filter update" />
     <MESSAGE value="RandomPair, UserImage POST instead of PUT, fixes" />
     <MESSAGE value="report system: user and admin" />
     <MESSAGE value="admin site update" />
@@ -590,7 +588,8 @@
     <MESSAGE value="chat - notifs - is active" />
     <MESSAGE value="chat - notifs - is active - fix" />
     <MESSAGE value="server time zone" />
-    <option name="LAST_COMMIT_MESSAGE" value="server time zone" />
+    <MESSAGE value="search - username" />
+    <option name="LAST_COMMIT_MESSAGE" value="search - username" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
