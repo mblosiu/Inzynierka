@@ -621,7 +621,7 @@ class ImageByUserId(APIView):
 class UserListView(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ['name', 'surname', 'birthday', 'sex', 'location',
+    search_fields = ['username', 'name', 'surname', 'birthday', 'sex', 'location',
                      'hair_color', 'body_type', 'is_smoking',
                      'is_drinking_alcohol']
     queryset = User.objects.all()
