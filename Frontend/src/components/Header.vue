@@ -1170,7 +1170,7 @@ export default {
       return this.userCouples;
     },*/
     getUrl(pic) {
-      if (pic != null) return "http://46.101.213.106:8000" + pic;
+      if (pic != null) return "http://elove.ml" + pic;
     },
     login() {
       axios
@@ -1214,7 +1214,7 @@ export default {
       else this.$router.push({ name: "search" });
     },
     getUrl(pic) {
-      if (pic != null) return "http://46.101.213.106:8000" + pic;
+      if (pic != null) return "http://elove.ml" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },

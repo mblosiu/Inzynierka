@@ -1154,7 +1154,7 @@ export default {
       });
     },
     getUrl(pic) {
-      if (pic != null) return "http://46.101.213.106:8000" + pic;
+      if (pic != null) return "http://elove.ml" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
