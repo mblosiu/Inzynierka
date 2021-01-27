@@ -154,7 +154,7 @@
                             </v-col>
                             <v-col cols="12" sm="6">
                               <v-select
-                                :items="['Mężczyzna', 'Kobieta', 'Inna']"
+                                :items="['Mężczyzna', 'Kobieta']"
                                 label="Płeć*"
                                 required
                                 name="Sex"

@@ -228,7 +228,7 @@ export default {
         .catch((errors) => console.log(errors));
     },
     getUrl(pic) {
-      if (pic != null) return "http://46.101.213.106:8000" + pic;
+      if (pic != null) return "http://elove.ml" + pic;
       else return null;
     },
     getUserPicture() {

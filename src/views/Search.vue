@@ -148,7 +148,7 @@
                   ></b-form-select>
                 </th>
               </v-col>
-              <v-col>
+              <!--<v-col>
                 <th>
                   <b-form-select
                     :options="eye_color_options"
@@ -160,7 +160,7 @@
                     placeholder="Kolor oczu"
                   ></b-form-select>
                 </th>
-              </v-col>
+              </v-col>-->
               <v-col>
                 <th>
                   <b-form-select
@@ -448,7 +448,7 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://46.101.213.106:8000" + pic;
+      if (pic != null) return "http://elove.ml" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
