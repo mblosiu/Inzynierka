@@ -13,7 +13,7 @@
         <v-tabs v-model="tab" color="purple" grow>
           <v-tab> Podstawowe informacje </v-tab>
           <v-tab> Wygląd </v-tab>
-          <v-tab> Zainteresowania </v-tab>
+          <!--<v-tab> Zainteresowania </v-tab>-->
           <v-tab> Preferencje </v-tab>
           <v-tab> Opis profilu </v-tab>
           <v-tab> Prywatność </v-tab>
@@ -312,13 +312,14 @@
               </v-row>
             </v-card>
           </v-tab-item>
-          <v-tab-item>
+          <!--<v-tab-item>
             <v-card flat>
               <v-row>
                 <v-col cols="1"></v-col>
                 <v-col cols="10">
                   <v-card-text>
-                    <form class="card" @submit.prevent="editUserData">
+                    <form class="card" @submit.prevent="editUserData">-->
+
                       <!--<ul class="list-group list-group-flush">
                         <ul class="list-group-item">
                           <b-row>
@@ -383,7 +384,7 @@
                             </b-col>
                           </b-row>
                         </ul>-->
-                      <ul class="list-group-item" grow>
+                      <!--<ul class="list-group-item" grow>
                         <b-row>
                           <b-col cols="6">
                             <label for="favourite_place" class="white-text"
@@ -432,7 +433,7 @@
                 <v-col cols="1"></v-col>
               </v-row>
             </v-card>
-          </v-tab-item>
+          </v-tab-item>-->
           <v-tab-item>
             <v-card flat>
               <v-row>
@@ -550,7 +551,7 @@
                               </b-col>
                             </b-row>
                           </ul>
-                          <ul class="list-group-item">
+                          <!--<ul class="list-group-item">
                             <b-row>
                               <b-col cols="6">
                                 <label
@@ -583,8 +584,9 @@
                                 ></b-form-select>
                               </b-col>
                             </b-row>
-                          </ul>
-                          <ul class="list-group-item">
+                          </ul>-->
+                          
+                          <!--<ul class="list-group-item">
                             <b-row>
                               <b-col cols="6">
                                 <label
@@ -617,7 +619,7 @@
                                 ></b-form-select>
                               </b-col>
                             </b-row>
-                          </ul>
+                          </ul>-->
                           <ul class="list-group-item">
                             <b-row>
                               <b-col cols="6">
@@ -712,6 +714,7 @@
                 <v-col cols="1"></v-col>
               </v-row>
             </v-card>
+            
           </v-tab-item>
           <v-tab-item>
             <v-card flat>
@@ -915,6 +918,7 @@
           </v-tab-item>
         </v-tabs-items>
       </v-card>
+      <br/>
     </v-container>
   </div>
 </template>

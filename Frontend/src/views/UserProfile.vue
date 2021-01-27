@@ -129,10 +129,7 @@
                                 title="Wyślij wiadomość"
                                 v-bind="attrs"
                                 v-on="on"
-                                @click="
-                                  getMessages(user.username);
-                                  
-                                "
+                                @click="getMessages(user.username)"
                               >
                                 <v-icon color="purple"
                                   >mdi-message-processing</v-icon
@@ -157,7 +154,7 @@
                                     color="white"
                                     data-toggle="tooltip"
                                     data-placement="bottom"
-                                    title="Do osób spoza listy znajomych możesz wysłać jedną wiadomość przypadającą na każdą odpowiedź rozmówcy."
+                                    title="Aby czatować bez ograniczeń zaproś użytkownika do grona znajomych."
                                     >mdi-chat-question</v-icon
                                   >
                                 </v-toolbar>
@@ -243,19 +240,13 @@
 
                                 <v-card-actions
                                   class="purple lighten-5"
-                                  @click="
-                                    getMessages(user.username);
-                                    
-                                  "
+                                  @click="getMessages(user.username)"
                                 >
                                   <v-form>
                                     <v-container>
                                       <div v-if="iAmSender == false">
                                         <v-text-field
-                                          @click="
-                                            getMessages(user.username);
-                                            
-                                          "
+                                          @click="getMessages(user.username)"
                                           v-model="message"
                                           prepend-icon="mdi-chat-processing"
                                           :rules="[
@@ -282,10 +273,7 @@
                                       </div>
                                       <div v-else>
                                         <v-text-field
-                                          @click="
-                                            getMessages(user.username);
-                                            
-                                          "
+                                          @click="getMessages(user.username)"
                                           prepend-icon="mdi-chat-processing"
                                           @click:append-outer="
                                             getMessages(user.username)
@@ -423,165 +411,7 @@
                   <p class="font-italic">Brak opisu.</p>
                 </h4>
                 <br />
-                <!--<div
-                  class="btn-toolbar"
-                  role="toolbar"
-                  aria-label="Toolbar with button groups"
-                >
-                  <div
-                    class="btn-group mr-3 ml-3"
-                    role="group"
-                    aria-label="icons"
-                  >
-                    <button
-                      v-b-toggle.sidebar-footer
-                      type="button"
-                      class="btn btn-secondary"
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      title="Wyślij wiadomość"
-                    >
-                      <svg
-                        color="lightblue"
-                        width="3em"
-                        height="3em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-chat-right-dots"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"
-                        />
-                        <path
-                          d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-                        />
-                      </svg>
-                    </button>
-                    <div v-if="userStatus() == 'none'">
-                      <button
-                        type="button"
-                        v-on:click="
-                          inviteUser();
-                          toast(
-                            'b-toaster-bottom-right',
-                            'info',
-                            'Wysłano zaproszenie do grona znajomych.'
-                          );
-                        "
-                        class="btn btn-secondary"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Zaproś do grona znajomych"
-                      >
-                        <svg
-                          color="lightblue"
-                          width="3em"
-                          height="3em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-person-plus-fill"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                          />
-                          <path
-                            fill-rule="evenodd"
-                            d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <div v-else-if="userStatus() == 'friend'">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Usuń z grona znajomych"
-                        v-on:click="removeFriend(user.pk)"
-                      >
-                        <svg
-                          color="lightgreen"
-                          width="3em"
-                          height="3em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-person-check-fill"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm9.854-2.854a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <div v-else-if="userStatus() == 'waiting'">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Oczekiwanie na akceptację"
-                        v-on:click="
-                          toast(
-                            'b-toaster-bottom-right',
-                            'info',
-                            'Użytkownik czeka na akceptację w twoich powiadomieniach!'
-                          )
-                        "
-                      >
-                        <svg
-                          color="lightblue"
-                          width="3em"
-                          height="3em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-person-check"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zm4.854-7.85a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      title="Zobacz galerię"
-                    >
-                      <div id="show-btn" @click="$bvModal.show('user_gallery')">
-                        <svg
-                          color="lightblue"
-                          width="3em"
-                          height="3em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-images"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M12.002 4h-10a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10z"
-                          />
-                          <path
-                            d="M10.648 8.646a.5.5 0 0 1 .577-.093l1.777 1.947V14h-12v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"
-                          />
-                          <path
-                            fill-rule="evenodd"
-                            d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"
-                          />
-                        </svg>
-                      </div>
-                    </button>-->
+
                 <b-modal
                   id="user_gallery"
                   size="lg"
@@ -737,6 +567,84 @@
                             </p>
                           </div>
                         </li>
+
+                        <li class="list-group-item">
+                          <div v-if="user.is_smoking == 0">
+                            Papierosy:
+                            <div class="oneline">
+                              <p class="font-weight-bold">nie palę</p>
+                            </div>
+                          </div>
+                          <div v-else-if="user.is_smoking == 1">
+                            Papierosy:
+                            <div class="oneline">
+                              <p class="font-weight-bold">okazjonalnie</p>
+                            </div>
+                          </div>
+                          <div v-else-if="user.is_smoking == 2">
+                            Papierosy:
+                            <div class="oneline">
+                              <p class="font-weight-bold">często</p>
+                            </div>
+                          </div>
+                          <div v-else-if="user.is_smoking == 3">
+                            Papierosy:
+                            <div class="oneline">
+                              <p class="font-weight-bold">codziennie</p>
+                            </div>
+                          </div>
+                          <div v-else-if="user.is_smoking == 4">
+                            Papierosy:
+                            <div class="oneline">
+                              <p class="font-weight-bold">nałogowo</p>
+                            </div>
+                          </div>
+                          <div v-else>
+                            Papierosy:
+                            <div class="oneline">
+                              <p class="font-weight-bold"></p>
+                            </div>
+                          </div>
+                        </li>
+
+                        <li class="list-group-item">
+                          <div v-if="user.is_drinking_alcohol == 0">
+                            Alkohol:
+                            <div class="oneline">
+                              <p class="font-weight-bold">nie piję</p>
+                            </div>
+                          </div>
+                          <div v-else-if="user.is_drinking_alcohol == 1">
+                            Alkohol:
+                            <div class="oneline">
+                              <p class="font-weight-bold">okazjonalnie</p>
+                            </div>
+                          </div>
+                          <div v-else-if="user.is_drinking_alcohol == 2">
+                            Alkohol:
+                            <div class="oneline">
+                              <p class="font-weight-bold">często</p>
+                            </div>
+                          </div>
+                          <div v-else-if="user.is_drinking_alcohol == 3">
+                            Alkohol:
+                            <div class="oneline">
+                              <p class="font-weight-bold">codziennie</p>
+                            </div>
+                          </div>
+                          <div v-else-if="user.is_drinking_alcohol == 4">
+                            Alkohol:
+                            <div class="oneline">
+                              <p class="font-weight-bold">nałogowo</p>
+                            </div>
+                          </div>
+                          <div v-else>
+                            Alkohol:
+                            <div class="oneline">
+                              <p class="font-weight-bold"></p>
+                            </div>
+                          </div>
+                        </li>
                       </ul>
                     </v-card-text>
                   </v-card>
@@ -831,141 +739,136 @@
                             </p>
                           </div>
                         </li>
+                        <li class="list-group-item">
+                          Moja orientacja:
+                          <div class="oneline">
+                            <p class="font-weight-bold">
+                              {{ user.orientation }}
+                            </p>
+                          </div>
+                        </li>
 
-                        <div v-if="user_preferences.is_smoking_preference == 0">
-                          <li class="list-group-item">
+                        <li class="list-group-item">
+                          <div
+                            v-if="user_preferences.is_smoking_preference == 0"
+                          >
                             Papierosy:
                             <div class="oneline">
                               <p class="font-weight-bold">nie pali</p>
                             </div>
-                          </li>
-                        </div>
+                          </div>
 
-                        <div
-                          v-else-if="
-                            user_preferences.is_smoking_preference == 1
-                          "
-                        >
-                          <li class="list-group-item">
+                          <div
+                            v-else-if="
+                              user_preferences.is_smoking_preference == 1
+                            "
+                          >
                             Papierosy:
                             <div class="oneline">
                               <p class="font-weight-bold">okazjonalnie</p>
                             </div>
-                          </li>
-                        </div>
-                        <div
-                          v-else-if="
-                            user_preferences.is_smoking_preference == 2
-                          "
-                        >
-                          <li class="list-group-item">
+                          </div>
+                          <div
+                            v-else-if="
+                              user_preferences.is_smoking_preference == 2
+                            "
+                          >
                             Papierosy:
                             <div class="oneline">
                               <p class="font-weight-bold">często</p>
                             </div>
-                          </li>
-                        </div>
-                        <div
-                          v-else-if="
-                            user_preferences.is_smoking_preference == 3
-                          "
-                        >
-                          <li class="list-group-item">
+                          </div>
+                          <div
+                            v-else-if="
+                              user_preferences.is_smoking_preference == 3
+                            "
+                          >
                             Papierosy:
                             <div class="oneline">
                               <p class="font-weight-bold">codziennie</p>
                             </div>
-                          </li>
-                        </div>
-                        <div
-                          v-else-if="
-                            user_preferences.is_smoking_preference == 4
-                          "
-                        >
-                          <li class="list-group-item">
+                          </div>
+                          <div
+                            v-else-if="
+                              user_preferences.is_smoking_preference == 4
+                            "
+                          >
                             Papierosy:
                             <div class="oneline">
                               <p class="font-weight-bold">nałogowo</p>
                             </div>
-                          </li>
-                        </div>
-                        <div v-else>
-                          <li class="list-group-item">
+                          </div>
+                          <div v-else>
                             Papierosy:
                             <div class="oneline">
                               <p class="font-weight-bold">obojętne</p>
                             </div>
-                          </li>
-                        </div>
+                          </div>
+                        </li>
 
-                        <div
-                          v-if="
-                            user_preferences.is_drinking_alcohol_preference == 0
-                          "
-                        >
-                          <li class="list-group-item">
+                        <li class="list-group-item">
+                          <div
+                            v-if="
+                              user_preferences.is_drinking_alcohol_preference ==
+                              0
+                            "
+                          >
                             Alkohol:
                             <div class="oneline">
                               <p class="font-weight-bold">nie pije</p>
                             </div>
-                          </li>
-                        </div>
-                        <div
-                          v-else-if="
-                            user_preferences.is_drinking_alcohol_preference == 1
-                          "
-                        >
-                          <li class="list-group-item">
+                          </div>
+                          <div
+                            v-else-if="
+                              user_preferences.is_drinking_alcohol_preference ==
+                              1
+                            "
+                          >
                             Alkohol:
                             <div class="oneline">
                               <p class="font-weight-bold">okazjonalnie</p>
                             </div>
-                          </li>
-                        </div>
-                        <div
-                          v-else-if="
-                            user_preferences.is_drinking_alcohol_preference == 2
-                          "
-                        >
-                          <li class="list-group-item">
+                          </div>
+                          <div
+                            v-else-if="
+                              user_preferences.is_drinking_alcohol_preference ==
+                              2
+                            "
+                          >
                             Alkohol:
                             <div class="oneline">
                               <p class="font-weight-bold">często</p>
                             </div>
-                          </li>
-                        </div>
-                        <div
-                          v-else-if="
-                            user_preferences.is_drinking_alcohol_preference == 3
-                          "
-                        >
-                          <li class="list-group-item">
+                          </div>
+                          <div
+                            v-else-if="
+                              user_preferences.is_drinking_alcohol_preference ==
+                              3
+                            "
+                          >
                             Alkohol:
                             <div class="oneline">
                               <p class="font-weight-bold">codziennie</p>
                             </div>
-                          </li>
-                        </div>
-                        <div
-                          v-else-if="
-                            user_preferences.is_drinking_alcohol_preference == 4
-                          "
-                        >
-                          <li class="list-group-item">
+                          </div>
+                          <div
+                            v-else-if="
+                              user_preferences.is_drinking_alcohol_preference ==
+                              4
+                            "
+                          >
                             Alkohol:
                             <div class="oneline">
                               <p class="font-weight-bold">nałogowo</p>
                             </div>
-                          </li>
-                        </div>
-                        <div v-else>
-                          <li class="list-group-item">
+                          </div>
+                          <div v-else>
                             Alkohol:
                             <div class="oneline">
                               <p class="font-weight-bold">obojętnie</p>
                             </div>
-                          </li>
-                        </div>
+                          </div>
+                        </li>
                       </ul>
                     </v-card-text>
                   </v-card>
@@ -1058,7 +961,9 @@ export default {
       };
       return axios
         .get(
-          "http://46.101.213.106:8000/api/chat/" + username + "/get-last-x-msgs",
+          "http://46.101.213.106:8000/api/chat/" +
+            username +
+            "/get-last-x-msgs",
           {
             x: this.lastmessages,
 
@@ -1098,12 +1003,15 @@ export default {
     },
     async getUsers() {
       return axios
-        .get("http://46.101.213.106:8000/api/user/users/" + this.$route.params.pk, {
-          params: {},
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
+        .get(
+          "http://46.101.213.106:8000/api/user/users/" + this.$route.params.pk,
+          {
+            params: {},
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
         .then((response) => {
           console.log(response),
             (this.user = response.data),

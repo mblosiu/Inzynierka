@@ -29,7 +29,8 @@
       <b-nav-form id="logo" class="ml-1 mr-2" v-if="token != null">
       </b-nav-form>
       <b-nav-form id="search" @submit.prevent="search" v-if="token != null">
-        <v-btn icon large>
+        <v-btn icon large data-toggle="tooltip"
+              title="Wyszukaj użytkowników po ich atrybutach i cechach">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
         <b-form-input
@@ -37,7 +38,7 @@
           size="sm"
           class="mr-sm-2"
           v-model="searchText"
-          placeholder="wyszukaj użytkownika"
+          placeholder="wyszukaj użytkowników"
           name="search"
         />
       </b-nav-form>
@@ -119,14 +120,28 @@
         </div>
       </b-nav-form>
       <b-nav-form v-if="token != null">
-        <v-badge
-          overlap
-          offset-x="25"
-          offset-y="27"
-          bottom
-          color="blue"
-          content="0"
-        >
+        <div v-if="userMessages.length != 0">
+          <v-badge
+            overlap
+            offset-x="25"
+            offset-y="27"
+            bottom
+            color="blue"
+            content="0"
+          >
+            <v-btn
+              icon
+              color="purple darken-4"
+              data-toggle="tooltip"
+              title="Nowe wiadomości"
+              x-large
+              class="ml-2 mr-2"
+            >
+              <v-icon>mdi-message-text</v-icon>
+            </v-btn>
+          </v-badge>
+        </div>
+        <div v-else>
           <v-btn
             icon
             color="purple darken-4"
@@ -137,7 +152,7 @@
           >
             <v-icon>mdi-message-text</v-icon>
           </v-btn>
-        </v-badge>
+        </div>
       </b-nav-form>
 
       <b-nav-form v-if="token != null">
@@ -402,18 +417,31 @@
       </b-nav-form>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary class="purple">
-      <v-list-item>
-        <v-list-item-avatar size="95">
-          <v-img :src="getUrl(user_data.profile_picture)"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
+    <v-navigation-drawer
+      v-model="drawer"
+      temporary
+      class="purple"
+      width="300"
+      style="position: fixed; top: 0; left: 0"
+    >
+      <v-row>
+        <v-col cols="2"></v-col>
+        <v-col cols="8">
+          <v-list-item-avatar size="150">
+            <v-img :src="getUrl(user_data.profile_picture)"></v-img>
+          </v-list-item-avatar>
+        </v-col>
+        <v-col cols="2"></v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="1"></v-col>
+        <v-col cols="10">
           <button class="text-lg-h6 white--text">
             {{ user_data.username }}
           </button>
-        </v-list-item-content>
-      </v-list-item>
+        </v-col>
+        <v-col cols="1"></v-col>
+      </v-row>
 
       <v-divider></v-divider>
 
@@ -663,7 +691,7 @@
       <br />
     </v-navigation-drawer>
 
-    <v-navigation-drawer v-model="friendlist" absolute right temporary>
+    <v-navigation-drawer v-model="friendlist" right temporary width="300" style="position: fixed; top: 0; right: 0">
       <div class="purple">
         <b-list-group-item class="purple rounded">
           <h5 class="white--text">Znajomi</h5>
@@ -977,6 +1005,7 @@ export default {
       message: "",
       messages: [],
       allMessages: [],
+      userMessages: [],
       lastmessages: 10,
       historyDialog: false,
       target: 9999,

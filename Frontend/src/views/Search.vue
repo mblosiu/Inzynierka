@@ -148,7 +148,7 @@
                   ></b-form-select>
                 </th>
               </v-col>
-              <v-col>
+              <!--<v-col>
                 <th>
                   <b-form-select
                     :options="eye_color_options"
@@ -160,7 +160,7 @@
                     placeholder="Kolor oczu"
                   ></b-form-select>
                 </th>
-              </v-col>
+              </v-col>-->
               <v-col>
                 <th>
                   <b-form-select
