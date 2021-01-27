@@ -72,7 +72,7 @@ class ConversationView(viewsets.GenericViewSet):
             x = 20
 
         x = int(x)
-        if x > 1:
+        if x >= 1:
             result_list = result_list[-x:]
         list_serializer = MessageSerializer(result_list, many=True)
 
