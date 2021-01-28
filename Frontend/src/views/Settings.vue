@@ -254,47 +254,7 @@
                           <br />
                           <b-row>
                             <br />
-                            <b-col cols="12">
-                              <!--<label for="special_options" class="grey-text">Znaki szczególne</label>
-                          <br />
-                          <input
-                            type="checkbox"
-                            id="glasses"
-                            value="okulary"
-                            v-model="special_options"
-                          />
-                          <label for="glasses">Okulary</label>
-                          <input
-                            type="checkbox"
-                            id="freckles"
-                            value="piegi"
-                            v-model="special_options"
-                          />
-                          <label for="freckles">Piegi</label>
-                          <input
-                            type="checkbox"
-                            id="scars"
-                            value="blizny"
-                            v-model="special_options"
-                          />
-                          <label for="scars">Blizny</label>
-                          <input
-                            type="checkbox"
-                            id="body_piercing"
-                            value="body piercing"
-                            v-model="special_options"
-                          />
-                          <label for="body_piercing">Body piercing</label>
-                          <input
-                            type="checkbox"
-                            id="tattoos"
-                            value="tatuaże"
-                            v-model="special_options"
-                          />
-                          <label for="tattoos">Tatuaże</label>
-                          <br />
-                        <span>Zaznaczono: {{ special_options }}</span>-->
-                            </b-col>
+                            <b-col cols="12"> </b-col>
                           </b-row>
                         </ul>
                       </ul>
@@ -312,128 +272,7 @@
               </v-row>
             </v-card>
           </v-tab-item>
-          <!--<v-tab-item>
-            <v-card flat>
-              <v-row>
-                <v-col cols="1"></v-col>
-                <v-col cols="10">
-                  <v-card-text>
-                    <form class="card" @submit.prevent="editUserData">-->
 
-                      <!--<ul class="list-group list-group-flush">
-                        <ul class="list-group-item">
-                          <b-row>
-                            <b-col cols="6">
-                          <label for="entertainment" class="grey-text">Rozrywka i hobby:</label>
-                          <br />
-                          <input type="checkbox" id="jack" value="Shopping" v-model="checkedNames" />
-                          <label for="jack">Shopping</label>
-                          <input type="checkbox" id="john" value="Netflix" v-model="checkedNames" />
-                          <label for="john">Netflix</label>
-                          <input type="checkbox" id="mike" value="Książki" v-model="checkedNames" />
-                          <label for="mike">Książki</label>
-                        </b-col>
-                        <b-col cols="6">
-                          <label for="sport" class="grey-text">Sport:</label>
-                          <br />
-                          <input
-                            type="checkbox"
-                            id="jack"
-                            value="Piłka nożna"
-                            v-model="checkedNames"
-                          />
-                          <label for="jack">Piłka nożna</label>
-                          <input
-                            type="checkbox"
-                            id="john"
-                            value="Koszykówka"
-                            v-model="checkedNames"
-                          />
-                          <label for="john">Koszykówka</label>
-                          <input type="checkbox" id="mike" value="Pływactwo" v-model="checkedNames" />
-                          <label for="mike">Pływactwo</label>
-                      </b-col>
-                          </b-row>
-                        </ul>
-                        <ul class="list-group-item">
-                          <b-row>
-                            <b-col cols="6">
-                              <label for="music" class="grey-text">Muzyka:</label>
-                          <br />
-                          <input type="checkbox" id="jack" value="Rock" v-model="checkedNames" />
-                          <label for="jack">Rock</label>
-                          <input type="checkbox" id="john" value="Jazz" v-model="checkedNames" />
-                          <label for="john">Jazz</label>
-                          <input type="checkbox" id="mike" value="Pop" v-model="checkedNames" />
-                        <label for="mike">Pop</label>
-                            </b-col>
-                            <b-col cols="6">
-                              <label for="cooking" class="grey-text">Kuchnia:</label>
-                          <br />
-                          <input type="checkbox" id="jack" value="Polska" v-model="checkedNames" />
-                          <label for="jack">Polska</label>
-                          <input
-                            type="checkbox"
-                            id="john"
-                            value="Orientalna"
-                            v-model="checkedNames"
-                          />
-                          <label for="john">Orientalna</label>
-                          <input type="checkbox" id="mike" value="Studencka" v-model="checkedNames" />
-                        <label for="mike">Studencka</label>
-                            </b-col>
-                          </b-row>
-                        </ul>-->
-                      <!--<ul class="list-group-item" grow>
-                        <b-row>
-                          <b-col cols="6">
-                            <label for="favourite_place" class="white-text"
-                              >Ulubione miejsce:</label
-                            >
-                            <input
-                              type="text"
-                              id="favourite_place"
-                              v-model="user_data.favourite_place"
-                              class="form-control"
-                            />
-                          </b-col>
-                          <b-col cols="6">
-                            <label for="passion" class="white-text"
-                              >Największa pasja:</label
-                            >
-                            <input
-                              type="text"
-                              id="passion"
-                              v-model="user_data.passion"
-                              class="form-control"
-                            />
-                          </b-col>
-                        </b-row>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                      </ul>
-
-                      <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-success">
-                          Zapisz
-                        </button>
-                      </div>
-                      <p></p>
-                    </form>
-                  </v-card-text>
-                </v-col>
-                <v-col cols="1"></v-col>
-              </v-row>
-            </v-card>
-          </v-tab-item>-->
           <v-tab-item>
             <v-card flat>
               <v-row>
@@ -541,85 +380,10 @@
                                   </b-col>
                                   <b-col cols="2"></b-col>
                                 </b-row>
-                                <!--<input
-                            type="number"
-                            id="weight_preference"
-                            placeholder="maksymalna waga"
-                            v-model="user_preferences.weight_preference"
-                            class="form-control"
-                          />-->
                               </b-col>
                             </b-row>
                           </ul>
-                          <!--<ul class="list-group-item">
-                            <b-row>
-                              <b-col cols="6">
-                                <label
-                                  for="education_preference"
-                                  class="white-text"
-                                  >Edukacja</label
-                                >
-                                <b-form-select
-                                  class="form-control"
-                                  id="education_preference"
-                                  v-model="
-                                    user_preferences.education_preference
-                                  "
-                                  :options="education_options"
-                                ></b-form-select>
-                              </b-col>
-                              <b-col cols="6">
-                                <label
-                                  for="eye_color_preference"
-                                  class="grey-text"
-                                  >Kolor oczu</label
-                                >
-                                <b-form-select
-                                  class="form-control"
-                                  id="eye_color_preference"
-                                  v-model="
-                                    user_preferences.eye_color_preference
-                                  "
-                                  :options="eye_color_options"
-                                ></b-form-select>
-                              </b-col>
-                            </b-row>
-                          </ul>-->
-                          
-                          <!--<ul class="list-group-item">
-                            <b-row>
-                              <b-col cols="6">
-                                <label
-                                  for="hair_length_preference"
-                                  class="grey-text"
-                                  >Długość włosów</label
-                                >
-                                <b-form-select
-                                  class="form-control"
-                                  id="hair_length_preference"
-                                  v-model="
-                                    user_preferences.hair_length_preference
-                                  "
-                                  :options="hair_length_options"
-                                ></b-form-select>
-                              </b-col>
-                              <b-col cols="6">
-                                <label
-                                  for="hair_color_preference"
-                                  class="grey-text"
-                                  >Kolor włosów</label
-                                >
-                                <b-form-select
-                                  class="form-control"
-                                  id="hair_color_preference"
-                                  v-model="
-                                    user_preferences.hair_color_preference
-                                  "
-                                  :options="hair_color_options"
-                                ></b-form-select>
-                              </b-col>
-                            </b-row>
-                          </ul>-->
+
                           <ul class="list-group-item">
                             <b-row>
                               <b-col cols="6">
@@ -714,7 +478,6 @@
                 <v-col cols="1"></v-col>
               </v-row>
             </v-card>
-            
           </v-tab-item>
           <v-tab-item>
             <v-card flat>
@@ -722,35 +485,42 @@
                 <v-col cols="1"></v-col>
                 <v-col cols="10">
                   <v-card-text>
-                    <form class="card" @submit.prevent="editUserPrivate">
+                    <form class="card" @submit.prevent="editUserSettings">
                       <ul class="list-group list-group-flush">
                         <ul class="list-group-item">
                           <b-row>
                             <b-col cols="6">
-                              <label for="msg_option" class="grey-text"
+                              <label for="messages_privacy" class="grey-text"
                                 >Otrzymywanie wiadomości:</label
                               >
+
                               <b-form-select
+                                class="form-control"
+                                id="messages_privacy"
+                                v-model="user_data.settings.messages_privacy"
+                                :options="messages_privacy"
+                              ></b-form-select>
+                              <!--<b-form-select
                                 class="form-control"
                                 id="msg_option"
                                 v-model="msg_option"
                                 :options="msgoptions"
-                              ></b-form-select>
+                              ></b-form-select>-->
                             </b-col>
                             <b-col cols="6">
-                              <label for="search_option" class="grey-text"
+                              <label for="search_privacy" class="grey-text"
                                 >Kto może mnie wyszukać:</label
                               >
                               <b-form-select
                                 class="form-control"
-                                id="search_option"
-                                v-model="search_option"
-                                :options="searchoptions"
+                                id="search_privacy"
+                                v-model="user_data.settings.search_privacy"
+                                :options="search_privacy"
                               ></b-form-select>
                             </b-col>
                           </b-row>
                         </ul>
-                        <ul class="list-group-item">
+                        <!--<ul class="list-group-item">
                           <b-row>
                             <b-col cols="12">
                               Otrzymywanie powiadomień:<br />
@@ -780,30 +550,46 @@
                               </b-form-checkbox>
                             </v-col>
                           </v-row>
-                        </ul>
+                        </ul>-->
                         <ul class="list-group-item">
                           <b-row>
                             <b-col cols="6">
-                              <b-form-checkbox
-                                id="hideage"
-                                v-model="hideage"
+                              <!--<b-form-checkbox
+                                id="hide_age"
+                                v-model="user_data.settings.hide_age"
                                 name="checkbox-1"
                                 value="true"
                                 unchecked-value="false"
                               >
                                 Ukryj mój wiek dla innych użytkowników
-                              </b-form-checkbox>
+                              </b-form-checkbox>-->
+                              <label for="hide_age" class="grey-text"
+                                >Ukrywanie wieku:</label
+                              >
+                              <b-form-select
+                                class="form-control"
+                                id="hide_age"
+                                v-model="user_data.settings.hide_age"
+                                :options="hide_age"
+                              ></b-form-select>
                             </b-col>
                             <b-col cols="6">
                               <b-row>
                                 <b-col cols="4"></b-col>
                                 <b-col cols="4">
-                                  <b-button
+                                  <v-btn
+                                    x-large
+                                    color="black"
+                                    elevation="5"
                                     v-b-modal.modal-blacklist
                                     @click="getUserBlacklist()"
-                                    variant="dark"
-                                    size="md"
-                                    >Czarna lista</b-button
+                                    ><button
+                                      class="white--text font-weight-black"
+                                    >
+                                      Czarna lista</button
+                                    ><v-icon color="white" class="ml-2"
+                                      >mdi-account-cancel</v-icon
+                                    ></v-btn
                                   >
                                   <b-modal
                                     id="modal-blacklist"
@@ -861,47 +647,6 @@
                             </b-col>
                           </b-row>
                         </ul>
-                        <ul class="list-group-item">
-                          <b-row>
-                            <b-col cols="4"></b-col>
-                            <b-col cols="4">
-                              <b-button
-                                variant="danger"
-                                size="lg"
-                                @click="$bvModal.show('modal-scoped')"
-                                >Usuń konto</b-button
-                              >
-                              <b-modal id="modal-scoped">
-                                <template v-slot:modal-header="{ close }">
-                                  <h5>Czy jesteś pewien?</h5>
-                                </template>
-
-                                <h6>
-                                  Czy na pewno chcesz usunąć swoje konto z
-                                  portalu e-Love? Konto zostanie usunięte
-                                  bezpowrotnie!
-                                </h6>
-
-                                <template v-slot:modal-footer="{ cancel }">
-                                  <b-button
-                                    size="md"
-                                    variant="secondary"
-                                    class="mr-20 ml-20"
-                                    @click="cancel()"
-                                    >Nie</b-button
-                                  >
-                                  <b-button
-                                    size="md"
-                                    variant="danger"
-                                    @click="deleteAccount"
-                                    >Tak</b-button
-                                  >
-                                </template>
-                              </b-modal>
-                            </b-col>
-                            <b-col cols="4"></b-col>
-                          </b-row>
-                        </ul>
                       </ul>
                       <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success">
@@ -910,6 +655,83 @@
                       </div>
                       <p></p>
                     </form>
+                    <br />
+                    <br />
+                    <br />
+                    <b-row>
+                      <b-col cols="3"></b-col>
+                      <b-col cols="6">
+                        <v-btn
+                          block
+                          color="red darken-1"
+                          x-large
+                          elevation="5"
+                          @click.stop="deleteDialog = true"
+                          ><button class="white--text font-weight-black">
+                            Usuwanie konta
+                          </button>
+                          <v-icon class="ml-2" color="white"
+                            >mdi-delete-empty</v-icon
+                          ></v-btn
+                        >
+                        <v-dialog v-model="deleteDialog" max-width="450">
+                          <v-card>
+                            <v-card-title class="headline">
+                              Czy jesteś pewien?
+                            </v-card-title>
+                            <v-divider></v-divider>
+                            <v-card-text class="text-left">
+                              Czy na pewno chcesz usunąć swoje konto z portalu
+                              e-Love? Historia konta i wszystkie przypisane do
+                              niego dane zostaną usunięte bezpowrotnie!
+                              <v-divider></v-divider>
+
+                              Aby kontynuować wpisz swoje hasło.
+                            </v-card-text>
+                            <v-row>
+                              <v-col cols="3"></v-col>
+                              <v-col cols="6">
+                                <v-text-field
+                                  label="Hasło*"
+                                  type="password"
+                                  required
+                                  name="password"
+                                  id="password"
+                                  v-model="password"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3"></v-col>
+                            </v-row>
+
+                            <v-card-actions>
+                              <v-btn
+                                color="green darken-1"
+                                x-large
+                                text
+                                @click="deleteDialog = false"
+                                ><button class="font-weight-black">
+                                  Powrót
+                                </button>
+                              </v-btn>
+                              <v-spacer></v-spacer>
+                              <v-btn
+                                color="red darken-1"
+                                x-large
+                                text
+                                @click="deleteAccount()"
+                                ><button class="font-weight-black">
+                                  Usuń konto
+                                </button>
+                              </v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-dialog>
+                      </b-col>
+                      <b-col cols="3"></b-col>
+                    </b-row>
+
+                    <br />
+                    <br />
                   </v-card-text>
                 </v-col>
                 <v-col cols="1"></v-col>
@@ -918,7 +740,7 @@
           </v-tab-item>
         </v-tabs-items>
       </v-card>
-      <br/>
+      <br />
     </v-container>
   </div>
 </template>
@@ -939,20 +761,28 @@ export default {
       user_data: {},
       user_preferences: {},
       calculated: 0,
-      hideage: false,
-      msg_option: "od wszystkich",
-      msgoptions: [
-        { text: "od wszystkich", value: "od wszystkich" },
-        { text: "od płci przeciwnej", value: "od płci przeciwnej" },
-        { text: "od znajomych", value: "od znajomych" },
-        { text: "od nikogo", value: "od nikogo" },
+      deleteDialog: false,
+      password: "",
+      //hide_age: 'everybody',
+      //msg_option: "od wszystkich",
+      messages_privacy: [
+        { text: "", value: null },
+        { text: "od wszystkich", value: "everybody" },
+        { text: "od płci przeciwnej", value: "oppSex" },
+        { text: "od znajomych", value: "friends" },
+      ],
+      hide_age: [
+        { text: "", value: null },
+        { text: "ukryj mój wiek", value: "everybody" },
+        { text: "pokaż mój wiek", value: "nobody" },
       ],
       comm_option: "od wszystkich",
       search_option: "wszyscy",
-      searchoptions: [
-        { text: "wszyscy", value: "wszyscy" },
-        { text: "płeć przeciwna", value: "płeć przeciwna" },
-        { text: "ukrycie konta", value: "ukrycie konta" },
+      search_privacy: [
+        { text: "", value: null },
+        { text: "wszyscy", value: "everybody" },
+        { text: "płeć przeciwna", value: "oppSex" },
+        { text: "ukrycie konta", value: "nobody" },
       ],
       new_likes: true,
       new_messages: true,
@@ -963,7 +793,7 @@ export default {
         { value: null, text: "" },
         { value: "Mężczyzna", text: "mężczyzna" },
         { value: "Kobieta", text: "kobieta" },
-        { value: "Inna", text: "inna" },
+        //{ value: "Inna", text: "inna" },
       ],
       orientation_options: [
         { value: null, text: "" },
@@ -1061,13 +891,30 @@ export default {
   methods: {
     deleteAccount() {
       //console.log("usuwanie konta");
-      axios.delete("http://46.101.213.106:8000/api/user/delete", {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("user-token"),
-        },
-      });
-      localStorage.removeItem("user-token");
-      this.$router.go();
+      axios
+        .delete("http://46.101.213.106:8000/api/user/delete", {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+          data: {
+            password: this.password,
+          },
+        })
+        .then((response) => {
+          //console.log("unblocked:");
+          console.log(response);
+          if (response.status == 200) {
+            localStorage.removeItem("user-token");
+            this.$router.go();
+          } else {
+            this.toast(
+              "b-toaster-bottom-right",
+              "danger",
+              "Podano nieprawidłowe hasło!"
+            );
+          }
+        })
+        .catch((errors) => console.log(errors));
     },
 
     getUserBlacklist() {
@@ -1093,8 +940,6 @@ export default {
         .catch((errors) => console.log(errors));
     },
     unblockUser(pk) {
-      //console.log("unblockUser");
-      //console.log(pk);
       axios
         .delete(
           "http://46.101.213.106:8000/api/user/blacklist",
@@ -1164,6 +1009,43 @@ export default {
               "b-toaster-bottom-right",
               "success",
               "Zapisano zmiany profilu."
+            );
+          }
+          console.log(response);
+        })
+        .catch((errors) => {
+          if (errors.response.status != 200) {
+            this.toast(
+              "b-toaster-bottom-right",
+              "danger",
+              "Formularz zawiera błędy!"
+            );
+          }
+          console.log(errors);
+        });
+    },
+    editUserSettings() {
+      let config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      axios
+        .patch(
+          "http://46.101.213.106:8000/api/user/settings",
+          {
+            messages_privacy: this.user_data.settings.messages_privacy,
+            hide_age: this.user_data.settings.hide_age,
+            search_privacy: this.user_data.settings.search_privacy,
+          },
+          config
+        )
+        .then((response) => {
+          if (response.status == 200) {
+            this.toast(
+              "b-toaster-bottom-right",
+              "success",
+              "Zapisano zmiany ustawień."
             );
           }
           console.log(response);
@@ -1285,13 +1167,10 @@ export default {
         variant: variant,
       });
     },
-    getUserSettings() {},
-    editUserSetting() {},
   },
   created() {
     this.getUserData();
     this.getUserPreferences();
-    this.getUserSettings();
     this.getUserBlacklist();
   },
   //computed() {},

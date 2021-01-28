@@ -29,8 +29,12 @@
       <b-nav-form id="logo" class="ml-1 mr-2" v-if="token != null">
       </b-nav-form>
       <b-nav-form id="search" @submit.prevent="search" v-if="token != null">
-        <v-btn icon large data-toggle="tooltip"
-              title="Wyszukaj użytkowników po ich atrybutach i cechach">
+        <v-btn
+          icon
+          large
+          data-toggle="tooltip"
+          title="Wyszukaj użytkowników po ich atrybutach i cechach"
+        >
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
         <b-form-input
@@ -120,14 +124,14 @@
         </div>
       </b-nav-form>
       <b-nav-form v-if="token != null">
-        <div v-if="userMessages.length != 0">
+        <div v-if="messagesFromStrangers.length != 0">
           <v-badge
             overlap
             offset-x="25"
             offset-y="27"
             bottom
             color="blue"
-            content="0"
+            :content="messagesFromStrangers.length"
           >
             <v-btn
               icon
@@ -136,6 +140,7 @@
               title="Nowe wiadomości"
               x-large
               class="ml-2 mr-2"
+              v-b-modal.messages
             >
               <v-icon>mdi-message-text</v-icon>
             </v-btn>
@@ -149,10 +154,50 @@
             title="Nowe wiadomości"
             x-large
             class="ml-2 mr-2"
+            v-b-modal.messages
           >
             <v-icon>mdi-message-text</v-icon>
           </v-btn>
         </div>
+        <b-modal
+          id="messages"
+          scrollable
+          title="Nowe wiadomości od nieznajomych: "
+          hide-footer
+        >
+          <b-row>
+            <b-col cols="1"></b-col>
+            <b-col cols="10">
+              <div
+                v-for="messagesFromStranger in messagesFromStrangers"
+                v-bind:key="messagesFromStranger.pk"
+              >
+                <b-list-group-item class="d-flex align-items-center">
+                  <router-link
+                    :to="{
+                      name: 'userprofile',
+                      params: { pk: messagesFromStranger.sender.pk },
+                    }"
+                  >
+                    <b-avatar
+                      rounded
+                      variant="info"
+                      :src="getUrl(messagesFromStranger.sender.profile_picture)"
+                      class="mr-3"
+                      size="3rem"
+                    ></b-avatar>
+                    <span class="mr-auto"
+                      ><strong>{{
+                        messagesFromStranger.sender.username
+                      }}</strong></span
+                    >
+                  </router-link>
+                </b-list-group-item>
+              </div>
+            </b-col>
+            <b-col cols="1"></b-col>
+          </b-row>
+        </b-modal>
       </b-nav-form>
 
       <b-nav-form v-if="token != null">
@@ -446,23 +491,23 @@
       <v-divider></v-divider>
 
       <v-list class="d-flex flex-row mb-6">
-        <v-list-tile>
+        <div>
           <v-btn block x-large fixed depressed class="purple" href="/mainuser">
-            <v-list-tile-action>
+            <div>
               <v-icon x-large class="ml-0" color="white"
                 >mdi-card-account-details</v-icon
               >
-            </v-list-tile-action>
+            </div>
 
-            <v-list-tile-title class="white--text ml-10 mr-5"
-              ><button class="text-lg-h6">Mój profil</button></v-list-tile-title
-            >
+            <div class="white--text ml-10 mr-5">
+              <button class="text-lg-h6">Mój profil</button>
+            </div>
           </v-btn>
-        </v-list-tile>
+        </div>
       </v-list>
       <br />
       <v-list class="d-flex flex-row mb-6">
-        <v-list-tile>
+        <div>
           <v-btn
             block
             x-large
@@ -471,21 +516,21 @@
             class="purple"
             href="/mainuser/search"
           >
-            <v-list-tile-action>
+            <div>
               <v-icon x-large class="ml-0" color="white"
                 >mdi-account-heart</v-icon
               >
-            </v-list-tile-action>
+            </div>
 
-            <v-list-tile-title class="white--text ml-10 mr-5"
-              ><button class="text-lg-h6">Szukaj par</button></v-list-tile-title
-            >
+            <div class="white--text ml-10 mr-5">
+              <button class="text-lg-h6">Szukaj par</button>
+            </div>
           </v-btn>
-        </v-list-tile>
+        </div>
       </v-list>
       <br />
       <v-list class="d-flex flex-row mb-6">
-        <v-list-tile>
+        <div>
           <v-dialog v-model="interactionsDialog" width="1000px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -501,17 +546,15 @@
                   >mdi-account-switch</v-icon
                 >
 
-                <v-list-tile-title class="white--text ml-5 mr-5"
-                  ><button class="text-lg-h6">
-                    Powiadomienia
-                  </button></v-list-tile-title
-                >
+                <div class="white--text ml-5 mr-5">
+                  <button class="text-lg-h6">Interakcje</button>
+                </div>
               </v-btn>
             </template>
             <v-card>
               <v-card-title>
                 <v-spacer></v-spacer>
-                <span class="headline">Powiadomienia</span>
+                <span class="headline">Interakcje</span>
                 <v-spacer></v-spacer>
               </v-card-title>
               <v-card-text>
@@ -642,11 +685,11 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-        </v-list-tile>
+        </div>
       </v-list>
       <br />
       <v-list class="d-flex flex-row mb-6">
-        <v-list-tile>
+        <div>
           <v-btn
             block
             x-large
@@ -655,21 +698,21 @@
             class="purple"
             href="/mainuser/gallery"
           >
-            <v-list-tile-action>
+            <div>
               <v-icon x-large class="ml-0" color="white"
                 >mdi-image-multiple</v-icon
               >
-            </v-list-tile-action>
+            </div>
 
-            <v-list-tile-title class="white--text ml-10 mr-5"
-              ><button class="text-lg-h6">Galeria</button></v-list-tile-title
-            >
+            <div class="white--text ml-10 mr-5">
+              <button class="text-lg-h6">Galeria</button>
+            </div>
           </v-btn>
-        </v-list-tile>
+        </div>
       </v-list>
       <br />
       <v-list class="d-flex flex-row mb-6">
-        <v-list-tile>
+        <div>
           <v-btn
             block
             x-large
@@ -678,20 +721,26 @@
             class="purple"
             href="/mainuser/settings"
           >
-            <v-list-tile-action>
+            <div>
               <v-icon x-large class="ml-0" color="white">mdi-cogs</v-icon>
-            </v-list-tile-action>
+            </div>
 
-            <v-list-tile-title class="white--text ml-10 mr-5"
-              ><button class="text-lg-h6">Ustawienia</button></v-list-tile-title
-            >
+            <div class="white--text ml-10 mr-5">
+              <button class="text-lg-h6">Ustawienia</button>
+            </div>
           </v-btn>
-        </v-list-tile>
+        </div>
       </v-list>
       <br />
     </v-navigation-drawer>
 
-    <v-navigation-drawer v-model="friendlist" right temporary width="300" style="position: fixed; top: 0; right: 0">
+    <v-navigation-drawer
+      v-model="friendlist"
+      right
+      temporary
+      width="250"
+      style="position: fixed; top: 0; right: 0"
+    >
       <div class="purple">
         <b-list-group-item class="purple rounded">
           <h5 class="white--text">Znajomi</h5>
@@ -735,6 +784,16 @@
                       </button></strong
                     ></span
                   >
+                  <!--<div
+                    v-if="getLastMessage(user_friend.friend.username) == true"
+                  >
+                    <v-icon class="ml-2" color="purple darken-1"
+                      >mdi-chat-alert</v-icon
+                    >
+                  </div>
+                  <div v-else>
+                    <v-icon class="ml-2" color="grey">mdi-chat-alert</v-icon>
+                  </div>-->
                 </v-btn>
               </template>
               <template v-slot:default="dialog">
@@ -995,6 +1054,7 @@ export default {
       user_likings: [],
       user_friends: [],
       usersFriends: 0,
+      usersFriendsNames: [],
       usersWaiting: 0,
       userCouples: [],
       likingsUsers: [],
@@ -1005,10 +1065,14 @@ export default {
       message: "",
       messages: [],
       allMessages: [],
+      //lastMessage: [],
       userMessages: [],
+      messagesFromFriends: [],
+      messagesFromStrangers: [],
       lastmessages: 10,
       historyDialog: false,
       target: 9999,
+      oneMessage: 1,
     };
   },
   methods: {
@@ -1017,9 +1081,12 @@ export default {
     },
     extractDate(date) {
       var y = date.slice(0, 10);
-      var t = date.slice(12, 19);
+      var t = date.slice(11, 19);
       var ty = t + ", " + y;
       return ty;
+    },
+    showMsg() {
+      this.dismissCountDown = this.dismissSecs;
     },
     sendMessage(message, username) {
       console.log(message + " -> " + username);
@@ -1062,7 +1129,9 @@ export default {
       };
       return axios
         .get(
-          "http://46.101.213.106:8000/api/chat/" + username + "/get-last-x-msgs",
+          "http://46.101.213.106:8000/api/chat/" +
+            username +
+            "/get-last-x-msgs",
           {
             x: this.lastmessages,
 
@@ -1076,6 +1145,35 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    /*getLastMessage(name) {
+      const config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      var lastMessage = [];
+      axios
+        .get("http://127.0.0.1:8000/api/chat/" + name + "/get-last-x-msgs", {
+          x: this.oneMessage,
+
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log("lastMessage " + name);
+          console.log(response), (this.lastMessage = response.data);
+          console.log(this.lastMessage);
+          if (this.lastMessage[0].receiver.username != name) {
+            console.log("true");
+            return true;
+          } else {
+            console.log("false");
+            return false;
+          }
+        })
+        .catch((errors) => console.log(errors));
+    },*/
     getConversation(username) {
       const config = {
         headers: {
@@ -1083,15 +1181,56 @@ export default {
         },
       };
       return axios
-        .get("http://46.101.213.106:8000/api/chat/" + username + "/get-all-msgs", {
-          x: this.lastmessages,
+        .get(
+          "http://46.101.213.106:8000/api/chat/" + username + "/get-all-msgs",
+          {
+            x: this.lastmessages,
 
-          headers: {
-            Authorization: "Token " + localStorage.getItem("user-token"),
-          },
-        })
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
         .then((response) => {
           console.log(response), (this.allMessages = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },
+    async getUserMessages() {
+      await this.getUserFriends();
+      return axios
+        .get(
+          "http://46.101.213.106:8000/api/chat/get-all-messages-received-by-user-pk",
+          {
+            params: {},
+            headers: {
+              Authorization: "Token " + localStorage.getItem("user-token"),
+            },
+          }
+        )
+        .then((response) => {
+          //console.log("getuserMessages");
+          console.log(response), (this.userMessages = response.data);
+
+          var strangersNames = [];
+
+          for (var i = 0; i < this.userMessages.length; i = i + 1) {
+            if (
+              this.usersFriendsNames.includes(
+                this.userMessages[i].sender.username
+              ) == false
+            ) {
+              if (
+                false ==
+                strangersNames.includes(this.userMessages[i].sender.username)
+              ) {
+                this.messagesFromStrangers.push(this.userMessages[i]);
+                strangersNames.push(this.userMessages[i].sender.username);
+              }
+            }
+          }
+          //console.log("this.messagesFromStrangers");
+          console.log(this.messagesFromStrangers);
         })
         .catch((errors) => console.log(errors));
     },
@@ -1104,6 +1243,7 @@ export default {
           },
         })
         .then((response) => {
+          console.log("getuserdata");
           console.log(response), (this.user_data = response.data);
         })
         .catch((errors) => console.log(errors));
@@ -1119,6 +1259,7 @@ export default {
           },
         })
         .then((response) => {
+          console.log("userdata");
           console.log(response),
             (this.user_likes = response.data),
             console.log(this.user_likes);
@@ -1156,19 +1297,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    /*couplesCount() {
-      for (var i = 0; i < this.user_likes.length; i += 1) {
-        console.log(this.user_likes[i].liked.pk);
-        for (var j = 0; j < this.user_likings.length; j += 1) {
-          console.log(this.user_likings[j].liked_by.pk);
-          if (this.user_likes[i].liked.pk == this.user_likings[j].liked_by.pk) {
-            this.userCouples.push(user_likes[i]);
-          }
-        }
-      }
-      console.log(this.couples.length);
-      return this.userCouples;
-    },*/
+
     getUrl(pic) {
       if (pic != null) return "http://elove.ml" + pic;
     },
@@ -1190,6 +1319,11 @@ export default {
         .catch((errors) => {
           if (errors.response.status != 200) {
             this.showMsg(), (this.msg = "Błędny login lub hasło!");
+            /*this.toast(
+              "b-toaster-top-left",
+              "danger",
+              "Błędny login lub hasło!"
+            );*/
           }
         });
     },
@@ -1220,7 +1354,7 @@ export default {
     },
     async getUserFriends() {
       await this.getUserData();
-      //console.log("getFriends");
+
       return axios
         .get(
           "http://46.101.213.106:8000/api/user/friendlist",
@@ -1233,7 +1367,6 @@ export default {
           }
         )
         .then((response) => {
-          //console.log("userfriendlist:");
           console.log(response),
             (this.user_friends =
               response.data) /*, console.log(this.usersFriends = response.data.filter(element => element.status == 'friend'))*/;
@@ -1243,6 +1376,9 @@ export default {
           this.usersWaiting = this.user_friends.filter((element) => {
             return element.status == "waiting for your accept";
           });
+          this.usersFriendsNames = this.usersFriends.map(
+            (a) => a.friend.username
+          );
         })
         .catch((errors) => console.log(errors));
     },
@@ -1256,8 +1392,6 @@ export default {
       this.usersFriends = onlyFriends.length;
     },
     acceptUser(pk) {
-      //console.log("acceptuser");
-      //console.log(pk);
       let config = {
         headers: {
           Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1272,14 +1406,11 @@ export default {
           config
         )
         .then((response) => {
-          //console.log("user accepted");
           console.log(response);
         })
         .catch((errors) => console.log(errors));
     },
     rejectUser(pk) {
-      //console.log("rejectUser");
-      //console.log(pk);
       axios
         .delete(
           "http://46.101.213.106:8000/api/user/friendlist",
@@ -1294,12 +1425,10 @@ export default {
           }
         )
         .then((response) => {
-          //console.log("rejected:");
           console.log(response);
         })
         .catch((errors) => console.log(errors));
       this.$router.go();
-      //this.$forceUpdate();
     },
 
     toast(toaster, variant = null, msg) {
@@ -1317,6 +1446,7 @@ export default {
         this.getUserLikes(),
         this.getUserLiking(),
         this.getUserFriends();
+      this.getUserMessages();
       //this.getMessages();
     }
   },
@@ -1375,5 +1505,10 @@ export default {
 #search {
   margin-left: 100px;
   margin-right: 10px;
+}
+.scroll {
+  height: 100%;
+  overflow-y: scroll;
+  height: 100vh;
 }
 </style>

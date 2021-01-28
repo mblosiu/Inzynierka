@@ -93,7 +93,13 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="show = !show" flat block depressed color="purple lighten-0">
+          <v-btn
+            @click="show = !show"
+            flat
+            block
+            depressed
+            color="purple lighten-0"
+          >
             <b class="mr-2 white--text">Więcej filtrów</b>
 
             <v-btn icon class="purple lighten-1" small>
@@ -210,97 +216,208 @@
               v-bind:key="user.id"
               style="ml-2 mr-2"
             >
-              <v-card
-                outlined
-                rounded
-                class="mx-auto"
-                max-width="500"
-                max-height="700"
-                color="purple"
-              >
-                <router-link
-                  :to="{ name: 'userprofile', params: { pk: user.pk } }"
+              <div v-if="user.settings.search_privacy == 'everybody'">
+                <v-card
+                  outlined
+                  rounded
+                  class="mx-auto"
+                  max-width="500"
+                  max-height="700"
+                  color="purple"
                 >
-                  <v-img
-                    class="white--text align-end"
-                    :src="getUrl(user.profile_picture)"
-                    aspect-ratio="1"
+                  <router-link
+                    :to="{ name: 'userprofile', params: { pk: user.pk } }"
                   >
-                    <v-app-bar flat color="rgba(0, 0, 0, 0)" height="45">
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-btn
-                            fab
-                            x-small
-                            class="purple"
-                            v-bind="attrs"
-                            v-on="on"
-                            ><v-icon color="white"
-                              >mdi-information-variant</v-icon
-                            ></v-btn
+                    <v-img
+                      class="white--text align-end"
+                      :src="getUrl(user.profile_picture)"
+                      aspect-ratio="1"
+                    >
+                      <v-app-bar flat color="rgba(0, 0, 0, 0)" height="45">
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                              fab
+                              x-small
+                              class="purple"
+                              v-bind="attrs"
+                              v-on="on"
+                              ><v-icon color="white"
+                                >mdi-information-variant</v-icon
+                              ></v-btn
+                            >
+                          </template>
+
+                          <v-card width="300" color="grey">
+                            <v-list class="purple lighten-5">
+                              <v-list-item>
+                                <v-list-item-avatar size="70">
+                                  <img :src="getUrl(user.profile_picture)" />
+                                </v-list-item-avatar>
+
+                                <v-list-item-content>
+                                  <v-list-item-title
+                                    ><h5>
+                                      {{ user.username }}
+                                    </h5></v-list-item-title
+                                  >
+                                  <v-list-item-subtitle
+                                    ><h6>
+                                      ({{ user.location }})
+                                    </h6></v-list-item-subtitle
+                                  >
+                                </v-list-item-content>
+                              </v-list-item>
+                              <v-divider></v-divider>
+                              <div v-if="user.description != null">
+                                <v-list-item
+                                  ><h6 class="font--italic text-left">
+                                    {{ user.description }}
+                                  </h6></v-list-item
+                                >
+                              </div>
+                              <div v-else><h6>Brak opisu.</h6></div>
+                            </v-list>
+                          </v-card>
+                        </v-tooltip>
+                        <div
+                          v-if="user.settings.hide_age == 'nobody'"
+                          class="oneline"
+                        >
+                          <div v-if="user.profile_picture == null">
+                            <v-card-title class="black--text"
+                              >{{ user.username }} ({{
+                                getAge(user.birthday)
+                              }})</v-card-title
+                            >
+                          </div>
+                          <div v-else>
+                            <v-card-title class="white--text"
+                              >{{ user.username }} ({{
+                                getAge(user.birthday)
+                              }})</v-card-title
+                            >
+                          </div>
+                        </div>
+                        <div v-else>
+                          <div v-if="user.profile_picture == null">
+                            <v-card-title class="black--text">{{
+                              user.username
+                            }}</v-card-title>
+                          </div>
+                          <div v-else>
+                            <v-card-title class="white--text"
+                              >{{ user.username }}
+                            </v-card-title>
+                          </div>
+                        </div>
+                      </v-app-bar>
+                    </v-img>
+                  </router-link>
+                </v-card>
+              </div>
+              <div v-else-if="user.settings.search_privacy == 'oppSex'">
+                <div v-if="user_data.sex != user.sex">
+                  <v-card
+                    outlined
+                    rounded
+                    class="mx-auto"
+                    max-width="500"
+                    max-height="700"
+                    color="purple"
+                  >
+                    <router-link
+                      :to="{ name: 'userprofile', params: { pk: user.pk } }"
+                    >
+                      <v-img
+                        class="white--text align-end"
+                        :src="getUrl(user.profile_picture)"
+                        aspect-ratio="1"
+                      >
+                        <v-app-bar flat color="rgba(0, 0, 0, 0)" height="45">
+                          <v-tooltip bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                fab
+                                x-small
+                                class="purple"
+                                v-bind="attrs"
+                                v-on="on"
+                                ><v-icon color="white"
+                                  >mdi-information-variant</v-icon
+                                ></v-btn
+                              >
+                            </template>
+
+                            <v-card width="300" color="grey">
+                              <v-list class="purple lighten-5">
+                                <v-list-item>
+                                  <v-list-item-avatar size="70">
+                                    <img :src="getUrl(user.profile_picture)" />
+                                  </v-list-item-avatar>
+
+                                  <v-list-item-content>
+                                    <v-list-item-title
+                                      ><h5>
+                                        {{ user.username }}
+                                      </h5></v-list-item-title
+                                    >
+                                    <v-list-item-subtitle
+                                      ><h6>
+                                        ({{ user.location }})
+                                      </h6></v-list-item-subtitle
+                                    >
+                                  </v-list-item-content>
+                                </v-list-item>
+                                <v-divider></v-divider>
+                                <div v-if="user.description != null">
+                                  <v-list-item
+                                    ><h6 class="font--italic text-left">
+                                      {{ user.description }}
+                                    </h6></v-list-item
+                                  >
+                                </div>
+                                <div v-else><h6>Brak opisu.</h6></div>
+                              </v-list>
+                            </v-card>
+                          </v-tooltip>
+                          <div
+                            v-if="user.settings.hide_age == 'nobody'"
+                            class="oneline"
                           >
-                        </template>
-
-                        <v-card width="300" color="grey">
-                          <v-list class="purple lighten-5">
-                            <v-list-item>
-                              <v-list-item-avatar size="70">
-                                <img :src="getUrl(user.profile_picture)" />
-                              </v-list-item-avatar>
-
-                              <v-list-item-content>
-                                <v-list-item-title
-                                  ><h5>
-                                    {{ user.username }}
-                                  </h5></v-list-item-title
-                                >
-                                <v-list-item-subtitle
-                                  ><h6>
-                                    ({{ user.location }})
-                                  </h6></v-list-item-subtitle
-                                >
-                              </v-list-item-content>
-                            </v-list-item>
-                            <v-divider></v-divider>
-                            <div v-if="user.description != null">
-                              <v-list-item
-                                ><h6 class="font--italic text-left">
-                                  {{ user.description }}
-                                </h6></v-list-item
+                            <div v-if="user.profile_picture == null">
+                              <v-card-title class="black--text"
+                                >{{ user.username }} ({{
+                                  getAge(user.birthday)
+                                }})</v-card-title
                               >
                             </div>
-                            <div v-else><h6>Brak opisu.</h6></div>
-                          </v-list>
-                        </v-card>
-                      </v-tooltip>
-                      <div v-if="user.profile_picture == null">
-                        <v-card-title class="black--text"
-                          >{{ user.username }} ({{
-                            getAge(user.birthday)
-                          }})</v-card-title
-                        >
-                      </div>
-                      <div v-else>
-                        <v-card-title class="white--text"
-                          >{{ user.username }} ({{
-                            getAge(user.birthday)
-                          }})</v-card-title
-                        >
-                      </div>
-                    </v-app-bar>
-                  </v-img>
-                </router-link>
-
-                <!--<v-card-text class="white--text">
-                  <h4 v-if="user.description != null">
-                    <p class="font-italic">{{ user.description }}</p>
-                  </h4>
-                  <h4 v-else>
-                    <p class="font-italic">Brak opisu.</p>
-                  </h4>
-                  <br />
-                </v-card-text>-->
-              </v-card>
+                            <div v-else>
+                              <v-card-title class="white--text"
+                                >{{ user.username }} ({{
+                                  getAge(user.birthday)
+                                }})</v-card-title
+                              >
+                            </div>
+                          </div>
+                          <div v-else>
+                            <div v-if="user.profile_picture == null">
+                              <v-card-title class="black--text">{{
+                                user.username
+                              }}</v-card-title>
+                            </div>
+                            <div v-else>
+                              <v-card-title class="white--text"
+                                >{{ user.username }}
+                              </v-card-title>
+                            </div>
+                          </div>
+                        </v-app-bar>
+                      </v-img>
+                    </router-link>
+                  </v-card>
+                </div>
+              </div>
             </b-col>
           </b-row>
           <br />
@@ -345,7 +462,7 @@ export default {
         { value: null, text: "płeć" },
         { value: "Mężczyzna", text: "mężczyzna" },
         { value: "Kobieta", text: "kobieta" },
-        { value: "Inna", text: "inna" },
+        //{ value: "Inna", text: "inna" },
       ],
       orientation_options: [
         { value: null, text: "orientacja" },

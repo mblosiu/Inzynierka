@@ -488,6 +488,7 @@ export default {
           },
         })
         .then((response) => {
+          //console.log("getUserData");
           console.log(response), (this.user_data = response.data);
         })
         .catch((errors) => console.log(errors));
@@ -501,6 +502,7 @@ export default {
           },
         })
         .then((response) => {
+          console.log("getUserPreferences");
           console.log(response), (this.user_preferences = response.data);
         })
         .catch((errors) => console.log(errors));
