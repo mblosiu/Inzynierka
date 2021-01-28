@@ -80,7 +80,7 @@
                       <v-spacer></v-spacer>
                     </v-card-title>
                     <v-form @submit.prevent="createUser">
-                      <v-card-text class="purple lighten-5">
+                      <v-card-text>
                         <v-container>
                           <v-row>
                             <v-col cols="12" sm="6">
@@ -170,14 +170,13 @@
                                 id="checkbox"
                                 v-model="checked"
                               ></v-checkbox>
-                              
                             </v-col>
                           </v-row>
                         </v-container>
                         <br />
                         <small>*Pola wymagane</small>
                       </v-card-text>
-                      <v-card-actions class="purple lighten-5">
+                      <v-card-actions>
                         <v-btn
                           color="red darken-1"
                           text
@@ -187,14 +186,21 @@
                           Zamknij
                         </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn
-                          color="green darken-1"
-                          text
-                          @click="createUser()"
-                          outlined
-                        >
-                          Zarejestruj
-                        </v-btn>
+                        <div v-if="checked == true">
+                          <v-btn
+                            color="green darken-1"
+                            text
+                            @click="createUser()"
+                            outlined
+                          >
+                            Zarejestruj
+                          </v-btn>
+                        </div>
+                        <div v-else>
+                          <v-btn color="green darken-1" text disabled outlined>
+                            Zarejestruj
+                          </v-btn>
+                        </div>
                       </v-card-actions>
                     </v-form>
                   </v-card>
@@ -235,18 +241,7 @@ export default {
     };
   },
   methods: {
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
-    },
-    showMsg() {
-      this.dismissCountDown = this.dismissSecs;
-    },
-    countDownChanged2(dismissCountDown) {
-      this.dismissCountDown2 = dismissCountDown2;
-    },
-    showMsg2() {
-      this.dismissCountDown2 = this.dismissSecs2;
-    },
+    //http://46.101.213.106:8000/api/user/register
     createUser() {
       axios
         .post("http://46.101.213.106:8000/api/user/register", {
@@ -260,13 +255,28 @@ export default {
         })
         .then((response) => {
           console.log(response);
+
           if (response.status == 201) {
             this.$router.go();
+          } else {
+            this.toast(
+              "b-toaster-bottom-right",
+              "danger",
+              "Wprowadzone dane są niepoprawne!"
+            );
           }
         })
         .catch((errors) => {
           console.log(errors.response);
         });
+    },
+    toast(toaster, variant = null, msg) {
+      this.$bvToast.toast(msg, {
+        title: `Info`,
+        toaster: toaster,
+        solid: true,
+        variant: variant,
+      });
     },
   },
 };

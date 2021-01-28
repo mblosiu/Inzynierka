@@ -121,21 +121,73 @@
                             scrollable
                           >
                             <template v-slot:activator="{ on, attrs }">
-                              <v-btn
-                                icon
-                                x-large
-                                data-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Wyślij wiadomość"
-                                v-bind="attrs"
-                                v-on="on"
-                                @click="getMessages(user.username)"
+                              <div
+                                v-if="
+                                  user.settings.messages_privacy == 'everybody'
+                                "
                               >
-                                <v-icon color="purple"
-                                  >mdi-message-processing</v-icon
+                                <v-btn
+                                  icon
+                                  x-large
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Wyślij wiadomość"
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  @click="getMessages(user.username)"
                                 >
-                              </v-btn>
+                                  <v-icon color="purple"
+                                    >mdi-message-processing</v-icon
+                                  >
+                                </v-btn>
+                              </div>
+
+                              <div
+                                v-else-if="
+                                  user.settings.messages_privacy == 'oppSex'
+                                "
+                              >
+                                <div v-if="user.sex == user_data.sex">
+                                  <v-btn
+                                    icon
+                                    x-large
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Użytkownik zablokował możliwość wysyłania wiadomości"
+                                  >
+                                    <v-icon>mdi-message-lock</v-icon>
+                                  </v-btn>
+                                </div>
+                                <div v-else>
+                                  <v-btn
+                                    icon
+                                    x-large
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Wyślij wiadomość"
+                                    v-bind="attrs"
+                                    v-on="on"
+                                    @click="getMessages(user.username)"
+                                  >
+                                    <v-icon color="purple"
+                                      >mdi-message-processing</v-icon
+                                    >
+                                  </v-btn>
+                                </div>
+                              </div>
+                              <div v-else>
+                                <v-btn
+                                  icon
+                                  x-large
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Użytkownik zablokował możliwość wysyłania wiadomości"
+                                >
+                                  <v-icon>mdi-message-lock</v-icon>
+                                </v-btn>
+                              </div>
                             </template>
+
                             <template v-slot:default="dialog">
                               <v-card>
                                 <v-toolbar
@@ -244,45 +296,29 @@
                                 >
                                   <v-form>
                                     <v-container>
-                                      <div v-if="iAmSender == false">
-                                        <v-text-field
-                                          @click="getMessages(user.username)"
-                                          v-model="message"
-                                          prepend-icon="mdi-chat-processing"
-                                          :rules="[
-                                            (v) =>
-                                              (v || '').length <= 199 ||
-                                              'Maksymalna długość wiadomości to 200 znaków!',
-                                          ]"
-                                          :append-outer-icon="
-                                            message
-                                              ? 'mdi-send'
-                                              : 'mdi-send-lock'
-                                          "
-                                          filled
-                                          clear-icon="mdi-close-circle"
-                                          clearable
-                                          label="Wiadomość"
-                                          type="text"
-                                          @click:append-outer="
-                                            sendMessage(message, user.username);
-                                            getMessages(user.username);
-                                          "
-                                          @click:clear="clearMessage"
-                                        ></v-text-field>
-                                      </div>
-                                      <div v-else>
-                                        <v-text-field
-                                          @click="getMessages(user.username)"
-                                          prepend-icon="mdi-chat-processing"
-                                          @click:append-outer="
-                                            getMessages(user.username)
-                                          "
-                                          value="Wysłano wiadomość, czekaj na odpowiedź"
-                                          label="Info"
-                                          disabled
-                                        ></v-text-field>
-                                      </div>
+                                      <v-text-field
+                                        @click="getMessages(user.username)"
+                                        v-model="message"
+                                        prepend-icon="mdi-chat-processing"
+                                        :rules="[
+                                          (v) =>
+                                            (v || '').length <= 199 ||
+                                            'Maksymalna długość wiadomości to 200 znaków!',
+                                        ]"
+                                        :append-outer-icon="
+                                          message ? 'mdi-send' : 'mdi-send-lock'
+                                        "
+                                        filled
+                                        clear-icon="mdi-close-circle"
+                                        clearable
+                                        label="Wiadomość"
+                                        type="text"
+                                        @click:append-outer="
+                                          sendMessage(message, user.username);
+                                          getMessages(user.username);
+                                        "
+                                        @click:clear="clearMessage"
+                                      ></v-text-field>
                                     </v-container>
                                   </v-form>
                                 </v-card-actions>
@@ -386,19 +422,33 @@
                       </v-list>
                     </v-card>
                   </v-menu>
-                  <div v-if="user.profile_picture == null">
-                    <v-card-title class="black--text"
-                      >{{ user.username }} ({{
-                        getAge(user.birthday)
-                      }})</v-card-title
-                    >
+                  <div v-if="user.settings.hide_age == 'nobody'">
+                    <div v-if="user.profile_picture == null">
+                      <v-card-title class="black--text"
+                        >{{ user.username }} ({{
+                          getAge(user.birthday)
+                        }})</v-card-title
+                      >
+                    </div>
+                    <div v-else>
+                      <v-card-title class="white--text"
+                        >{{ user.username }} ({{
+                          getAge(user.birthday)
+                        }})</v-card-title
+                      >
+                    </div>
                   </div>
                   <div v-else>
-                    <v-card-title class="white--text"
-                      >{{ user.username }} ({{
-                        getAge(user.birthday)
-                      }})</v-card-title
-                    >
+                    <div v-if="user.profile_picture == null">
+                      <v-card-title class="black--text"
+                        >{{ user.username }}
+                      </v-card-title>
+                    </div>
+                    <div v-else>
+                      <v-card-title class="white--text"
+                        >{{ user.username }}
+                      </v-card-title>
+                    </div>
                   </div>
                 </v-app-bar>
               </v-img>
@@ -527,14 +577,19 @@
                             <p class="font-weight-bold">{{ user.sex }}</p>
                           </div>
                         </li>
+
                         <li class="list-group-item">
                           Wiek:
-                          <div class="oneline">
+                          <div
+                            v-if="user.settings.hide_age == 'nobody'"
+                            class="oneline"
+                          >
                             <p class="font-weight-bold">
                               {{ getAge(user.birthday) }}
                             </p>
                           </div>
                         </li>
+
                         <li class="list-group-item">
                           Mieszkam w:
                           <div class="oneline">
@@ -545,7 +600,10 @@
                         </li>
                         <li class="list-group-item">
                           Urodziny:
-                          <div class="oneline">
+                          <div
+                            v-if="user.settings.hide_age == 'nobody'"
+                            class="oneline"
+                          >
                             <p class="font-weight-bold">
                               {{ user.birthday }}
                             </p>
@@ -907,7 +965,7 @@ export default {
       messages: [],
       //allMessages: [],
       lastmessages: 10,
-      iAmSender: false,
+      //iAmSender: false,
     };
   },
   methods: {
@@ -977,15 +1035,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    checkMessage() {
-      var lastMessage = this.messages.pop();
-      console.log(lastMessage.sender.username);
-      if (lastMessage.sender.username == this.user_data.username) {
-        this.iAmSender = true;
-      } else {
-        this.iAmSender = false;
-      }
-    },
+
     getUserData() {
       return axios
         .get("http://46.101.213.106:8000/api/user/properties", {
@@ -1252,7 +1302,7 @@ export default {
           return status;
         }
       }
-      console.log("none");
+      //console.log("none");
       return status;
     },
   },
