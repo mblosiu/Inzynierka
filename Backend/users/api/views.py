@@ -50,14 +50,15 @@ class RegistrationView(APIView):
     @staticmethod
     def post(request):
         serializer = RegistrationSerializer(data=request.data)
+
         data = {}
         if not serializer.is_valid():
             data = serializer.errors
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
-        data['detail'] = 'successfully registered new user.'
+        serializer.save(request)
 
-        serializer.save()
+        data['detail'] = 'successfully registered new user.'
 
         user = get_object_or_404(User, username=request.data.get("username"))
         verify_code = password_generator(32)
@@ -565,29 +566,24 @@ class UserImage(APIView):
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        response = {}
-
         file = request.data.get('image', None)
 
         if not file:
-            response["detail"] = "request must contain image"
-            stat = status.HTTP_400_BAD_REQUEST
-        else:
-            main, sub = file.content_type.split('/')
-            if not (sub in ['jpeg', 'jpg', 'png']):
-                response["detail"] = "wrong data type"
-                stat = status.HTTP_400_BAD_REQUEST
-            else:
-                image = Image(
-                    user=user,
-                    image=file,
-                    title=main,
-                    alt=main,
-                )
-                image.save()
-                response["detail"] = "photo added successfully"
-                stat = status.HTTP_201_CREATED
-        return Response(response, status=stat)
+            return Response({"detail": "request must contain image"}, status=status.HTTP_400_BAD_REQUEST)
+
+        main, sub = file.content_type.split('/')
+
+        if not (sub in ['jpeg', 'jpg', 'png']):
+            return Response({"detail": "wrong data type"}, status=status.HTTP_400_BAD_REQUEST)
+
+        image = Image(
+            user=user,
+            image=file,
+            title=main,
+            alt=main,
+        )
+        image.save()
+        return Response({"detail": "photo added successfully"}, status=status.HTTP_201_CREATED)
 
     @staticmethod
     def delete(request):
@@ -601,8 +597,7 @@ class UserImage(APIView):
         if image.count() > 0:
             image.delete()
             return Response({"detail": "Image removed successfully"}, status=status.HTTP_200_OK)
-        else:
-            return Response({"detail": "file not exists"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"detail": "file not exists"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @permission_classes([IsAuthenticated])

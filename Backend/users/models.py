@@ -83,7 +83,9 @@ class MyAccountManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    account_status = models.CharField(max_length=30, null=True, default="Active")
     verified = models.BooleanField(default=False)
+    ip = models.CharField(max_length=30, null=True, default=None)
 
     preferences = models.OneToOneField(Preferences, on_delete=models.CASCADE, null=True, default=None)
     settings = models.OneToOneField(Settings, on_delete=models.CASCADE, null=True, default=None)
@@ -96,7 +98,7 @@ class User(AbstractBaseUser):
     birthday = models.DateField(null=True, default=None)
     age = models.IntegerField(null=True, default=None)
     location = models.CharField(max_length=30, null=True, default=None)
-    profile_picture = models.CharField(max_length=60, null=True, default=None)
+    profile_picture = models.CharField(max_length=255, null=True, default=None)
 
     description = models.CharField(max_length=200, null=True, default=None)
     status = models.CharField(max_length=30, null=True, default=None)
@@ -215,5 +217,11 @@ class Report(models.Model):
 class Verify(models.Model):
     user = models.ForeignKey(User, related_name='user_verify', default=None, on_delete=models.CASCADE)
     verify_code = models.CharField(max_length=30, null=True, blank=True, default=None, unique=True)
+
+    objects = models.Manager()
+
+
+class BannedIp(models.Model):
+    ip = models.CharField(max_length=30, null=True, blank=True, default=None)
 
     objects = models.Manager()
