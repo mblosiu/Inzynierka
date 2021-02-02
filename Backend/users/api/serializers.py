@@ -1,10 +1,10 @@
 import random
 import string
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 from rest_framework import serializers
 
-from ..models import User, Preferences, Settings, Image, Like, BlackList, Friend, Report, Verify
+from ..models import User, Preferences, Settings, Image, Like, BlackList, Friend, Report, Verify, BannedIp
 
 
 class UserPreferencesSerializer(serializers.ModelSerializer):
@@ -46,6 +46,12 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = ['pk', 'image', 'title', 'alt']
 
 
+class UserCheck(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['pk', 'ip', 'date_joined']
+
+
 class RegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
@@ -56,7 +62,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
             'password': {'write_only': True},
         }
 
-    def save(self):
+    def save(self, request):
+        client_ip = request.META['REMOTE_ADDR']
         username = self.validated_data.get('username')
         email = self.validated_data.get('email')
         location = self.validated_data.get('location')
@@ -65,6 +72,23 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
         password = self.validated_data.get('password')
         password2 = self.validated_data.get('password2')
+
+        banned_list = BannedIp.objects.filter(ip=client_ip)
+
+        if banned_list.count() > 0:
+            raise serializers.ValidationError({'detail': ['you have been permanently banned']})
+
+        time = datetime.now(timezone.utc) - timedelta(seconds=5)
+        account_list = User.objects.filter(ip=client_ip, date_joined__gt=time)
+
+        if account_list.count() >= 1:
+            banned_ip = BannedIp(ip=client_ip)
+            banned_ip.save()
+
+            for acc in account_list:
+                acc.account_status = "banned"
+                acc.save()
+            raise serializers.ValidationError({'detail': ["you have been permanently banned"]})
 
         if username is None:
             raise serializers.ValidationError({'username': ['This field is required.']})
@@ -95,6 +119,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             preferences=p,
             settings=s,
             age=int(datetime.today().strftime('%Y')) - int(birthday.strftime("%Y")),
+            ip=client_ip
         )
         account.set_password(password)
         account.save()
