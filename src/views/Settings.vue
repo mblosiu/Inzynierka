@@ -892,7 +892,7 @@ export default {
     deleteAccount() {
       //console.log("usuwanie konta");
       axios
-        .delete("http://46.101.213.106:8000/api/user/delete", {
+        .delete("https://elove.ml:8000/api/user/delete", {
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
@@ -921,7 +921,7 @@ export default {
       //console.log("getblacklist");
       axios
         .get(
-          "http://46.101.213.106:8000/api/user/blacklist",
+          "https://elove.ml:8000/api/user/blacklist",
 
           {
             params: { pk: this.user_data.pk },
@@ -942,7 +942,7 @@ export default {
     unblockUser(pk) {
       axios
         .delete(
-          "http://46.101.213.106:8000/api/user/blacklist",
+          "https://elove.ml:8000/api/user/blacklist",
 
           {
             headers: {
@@ -962,7 +962,7 @@ export default {
     },
     getUserData() {
       axios
-        .get("http://46.101.213.106:8000/api/user/properties", {
+        .get("https://elove.ml:8000/api/user/properties", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -981,7 +981,7 @@ export default {
       };
       axios
         .patch(
-          "http://46.101.213.106:8000/api/user/properties",
+          "https://elove.ml:8000/api/user/properties",
           {
             surname: this.user_data.surname,
             name: this.user_data.name,
@@ -1032,7 +1032,7 @@ export default {
       };
       axios
         .patch(
-          "http://46.101.213.106:8000/api/user/settings",
+          "https://elove.ml:8000/api/user/settings",
           {
             messages_privacy: this.user_data.settings.messages_privacy,
             hide_age: this.user_data.settings.hide_age,
@@ -1069,7 +1069,7 @@ export default {
       };
       axios
         .patch(
-          "http://46.101.213.106:8000/api/user/properties",
+          "https://elove.ml:8000/api/user/properties",
           {
             description: this.user_data.description,
           },
@@ -1096,7 +1096,7 @@ export default {
     },
     getUserPreferences() {
       axios
-        .get("http://46.101.213.106:8000/api/user/preferences", {
+        .get("https://elove.ml:8000/api/user/preferences", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1115,7 +1115,7 @@ export default {
       };
       axios
         .patch(
-          "http://46.101.213.106:8000/api/user/preferences",
+          "https://elove.ml:8000/api/user/preferences",
           {
             orientation: this.user_preferences.orientation,
             is_drinking_alcohol_preference: this.user_preferences

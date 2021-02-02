@@ -481,7 +481,7 @@ export default {
     },
     getUserData() {
       axios
-        .get("http://46.101.213.106:8000/api/user/properties", {
+        .get("https://elove.ml:8000/api/user/properties", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -495,7 +495,7 @@ export default {
     },
     getUserPreferences() {
       axios
-        .get("http://46.101.213.106:8000/api/user/preferences", {
+        .get("https://elove.ml:8000/api/user/preferences", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -515,7 +515,7 @@ export default {
       };
       axios
         .patch(
-          "http://46.101.213.106:8000/api/user/properties",
+          "https://elove.ml:8000/api/user/properties",
           {
             description: this.user_data.description,
           },

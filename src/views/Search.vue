@@ -527,7 +527,7 @@ export default {
     getUsers() {
       this.users = [];
       axios
-        .get("http://46.101.213.106:8000/api/user/users", {
+        .get("https://elove.ml:8000/api/user/users", {
           params: {
             search: localStorage.getItem("search-text"),
             sex: this.sex,

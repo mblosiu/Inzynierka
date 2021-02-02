@@ -2,7 +2,15 @@
   <v-footer color="purple" padless>
     <v-row justify="center" no-gutters>
       <v-spacer></v-spacer>
-      <v-btn color="yellow" text rounded class="my-2" href="https://forms.gle/McQgxy2bTwmBjgXy9"> Feedback </v-btn>
+      <v-btn
+        color="yellow"
+        text
+        rounded
+        class="my-2"
+        href="https://forms.gle/McQgxy2bTwmBjgXy9"
+      >
+        Feedback
+      </v-btn>
       <v-spacer></v-spacer>
       <v-btn color="white" text rounded class="my-2" @click.stop="about = true">
         <v-icon class="white"></v-icon>
@@ -45,14 +53,13 @@
           <v-card-title><b>O twórcach</b></v-card-title>
         </v-img>
 
-    
-        <br/>
+        <br />
         <v-card-text class="text-left">
           Serwis randkowy e-Love tworzony jest przez dwóch studentów informatyki
           uniwersytetu im. Adama Mickiewicza w Poznaniu, w ramach inżynierskiego
           projektu zespołowego.
           <br />
-          <v-card-subtitle>~ Mateusz Błoszyk, Marcin Mirecki </v-card-subtitle>
+          <!--<v-card-subtitle>~ Mateusz Błoszyk, Marcin Mirecki </v-card-subtitle>-->
           <v-divider></v-divider>
           <v-row>
             <v-spacer></v-spacer>
@@ -71,7 +78,7 @@
         <v-card-subtitle>
           Ostatnia aktualizacja:
           <p class="font-weight-bold"></p>
-          5.01.2021r.
+          02.02.2021r.
         </v-card-subtitle>
       </v-card>
     </v-dialog>
@@ -93,7 +100,7 @@
         <v-card-subtitle>
           Ostatnia aktualizacja:
           <p class="font-weight-bold"></p>
-          5.01.2021r.
+          02.02.2021r.
         </v-card-subtitle>
       </v-card>
     </v-dialog>
@@ -104,9 +111,8 @@
         <v-card-text>
           <div class="card-body">
             <div class="card-text">
-              Mateusz Błoszyk:
               <p class="font-italic">mblosiu@gmail.com</p>
-              Marcin Mirecki:
+
               <p class="font-italic">marmir@st.amu.edu.pl</p>
             </div>
           </div>
