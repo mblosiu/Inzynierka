@@ -29,12 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="get_last_x">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="blocking bots + ssl">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,13 +193,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00025" summary="profile privacy - search">
-      <created>1606044942004</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1606044942004</updated>
     </task>
     <task id="LOCAL-00026" summary="black list - model, serializer">
       <created>1606290624476</created>
@@ -540,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611762927047</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="blocking bots + ssl">
+      <created>1612259062331</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1612259062331</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -568,7 +565,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="admin site update" />
     <MESSAGE value="change model name FriendsList to Friend" />
     <MESSAGE value="report fix" />
     <MESSAGE value="registratration, change password, restore password - email templates, sending mail function fix" />
@@ -593,7 +589,8 @@
     <MESSAGE value="search - username" />
     <MESSAGE value="MEDIA_ROOT" />
     <MESSAGE value="get_last_x" />
-    <option name="LAST_COMMIT_MESSAGE" value="get_last_x" />
+    <MESSAGE value="blocking bots + ssl" />
+    <option name="LAST_COMMIT_MESSAGE" value="blocking bots + ssl" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
