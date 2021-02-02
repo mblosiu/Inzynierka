@@ -77,7 +77,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000', 'https://localhost:8000', 'https://46.101.213.106:8000'
+    'http://localhost:8080', 'http://elove.ml:8080', 'https://elove.ml:8080', 'http://46.101.213.106:8080',
+    'https://46.101.213.106:8080',
 ]
 
 # Database
