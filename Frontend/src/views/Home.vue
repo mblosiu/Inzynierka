@@ -244,7 +244,7 @@ export default {
     //http://46.101.213.106:8000/api/user/register
     createUser() {
       axios
-        .post("http://46.101.213.106:8000/api/user/register", {
+        .post("https://elove.ml:8000/api/user/register", {
           username: this.username,
           password: this.password,
           password2: this.password2,

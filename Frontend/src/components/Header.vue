@@ -1104,7 +1104,7 @@ export default {
         };
         axios
           .post(
-            "http://46.101.213.106:8000/api/chat/" + username + "/send-msg",
+            "https://elove.ml:8000/api/chat/" + username + "/send-msg",
             { message: message },
             config
           )
@@ -1129,7 +1129,7 @@ export default {
       };
       return axios
         .get(
-          "http://46.101.213.106:8000/api/chat/" +
+          "https://elove.ml:8000/api/chat/" +
             username +
             "/get-last-x-msgs",
           {
@@ -1182,7 +1182,7 @@ export default {
       };
       return axios
         .get(
-          "http://46.101.213.106:8000/api/chat/" + username + "/get-all-msgs",
+          "https://elove.ml:8000/api/chat/" + username + "/get-all-msgs",
           {
             x: this.lastmessages,
 
@@ -1200,7 +1200,7 @@ export default {
       await this.getUserFriends();
       return axios
         .get(
-          "http://46.101.213.106:8000/api/chat/get-all-messages-received-by-user-pk",
+          "https://elove.ml:8000/api/chat/get-all-messages-received-by-user-pk",
           {
             params: {},
             headers: {
@@ -1236,7 +1236,7 @@ export default {
     },
     getUserData() {
       return axios
-        .get("http://46.101.213.106:8000/api/user/properties", {
+        .get("https://elove.ml:8000/api/user/properties", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1252,7 +1252,7 @@ export default {
     async getUserLikes() {
       //console.log(this.user_data['pk']);
       return axios
-        .get("http://46.101.213.106:8000/api/user/get-user-are-liked", {
+        .get("https://elove.ml:8000/api/user/get-user-are-liked", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1270,7 +1270,7 @@ export default {
     async getUserLiking() {
       await this.getUserLikes();
       return axios
-        .get("http://46.101.213.106:8000/api/user/get-user-liked", {
+        .get("https://elove.ml:8000/api/user/get-user-liked", {
           params: {},
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
@@ -1303,7 +1303,7 @@ export default {
     },
     login() {
       axios
-        .post("http://46.101.213.106:8000/api/user/login", {
+        .post("https://elove.ml:8000/api/user/login", {
           username: this.username,
           password: this.password,
         })
@@ -1335,7 +1335,7 @@ export default {
       };
 
       axios
-        .post("http://46.101.213.106:8000/api/user/logout", {}, config)
+        .post("https://elove.ml:8000/api/user/logout", {}, config)
         .then((response) => {})
         .catch((errors) => {});
       localStorage.removeItem("user-token"),
@@ -1357,7 +1357,7 @@ export default {
 
       return axios
         .get(
-          "http://46.101.213.106:8000/api/user/friendlist",
+          "https://elove.ml:8000/api/user/friendlist",
 
           {
             params: { pk: this.user_data.pk },
@@ -1399,7 +1399,7 @@ export default {
       };
       axios
         .patch(
-          "http://46.101.213.106:8000/api/user/friendlist",
+          "https://elove.ml:8000/api/user/friendlist",
           {
             pk: pk,
           },
@@ -1413,7 +1413,7 @@ export default {
     rejectUser(pk) {
       axios
         .delete(
-          "http://46.101.213.106:8000/api/user/friendlist",
+          "https://elove.ml:8000/api/user/friendlist",
 
           {
             headers: {
