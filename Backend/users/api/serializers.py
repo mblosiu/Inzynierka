@@ -1,6 +1,6 @@
 import random
 import string
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, date
 
 from rest_framework import serializers
 
@@ -73,14 +73,23 @@ class RegistrationSerializer(serializers.ModelSerializer):
         password = self.validated_data.get('password')
         password2 = self.validated_data.get('password2')
 
-        banned_list = BannedIp.objects.filter(ip=client_ip)
+        # hasło wymaga 8 znaków
+        if len(password) < 8:
+            raise serializers.ValidationError({'detail': ["password must contain 8 characters"]})
 
+        # limit 10 kont na ip
+        account_list = User.objects.filter(ip=client_ip)
+        if account_list.count() >= 10:
+            raise serializers.ValidationError({'detail': ["you can't create more accounts"]})
+
+        # sprawdza czy zbanowany
+        banned_list = BannedIp.objects.filter(ip=client_ip)
         if banned_list.count() > 0:
             raise serializers.ValidationError({'detail': ['you have been permanently banned']})
 
+        # blokowanie spamerskiego tworzenia kont
         time = datetime.now(timezone.utc) - timedelta(seconds=5)
         account_list = User.objects.filter(ip=client_ip, date_joined__gt=time)
-
         if account_list.count() >= 1:
             banned_ip = BannedIp(ip=client_ip)
             banned_ip.save()
@@ -104,6 +113,14 @@ class RegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'password': 'This field is required.'})
         elif password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
+
+        # wymóg 18 lat
+        today = datetime.today().strftime('%Y-%m-%d').split('-')
+        today = date(int(today[0]), int(today[1]), int(today[2]))
+        delta = today - birthday
+        if delta.days < 6570:
+            raise serializers.ValidationError({'detail': 'You must be 18 years old to create an account'})
+
         p = Preferences()
         p.save()
         s = Settings(

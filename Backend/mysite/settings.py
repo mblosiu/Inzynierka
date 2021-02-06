@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3^f-99nfc-$(a-l@#o9qk4&o+$!mkpn^5d0%w^+7x!rw_n8_*j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'elove.ml', '46.101.213.106']
 
@@ -81,13 +81,13 @@ CORS_ORIGIN_WHITELIST = [
     'https://46.101.213.106:8080',
 ]
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
