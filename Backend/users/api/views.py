@@ -101,7 +101,7 @@ class RegistrationValidationView(APIView):
             if user_username.count() > 0:
                 data['username'] = "username in use"
             else:
-                data['username'] = "username free to use"
+                data['username'] = "username is free to use"
 
         if email is not None or email != '':
             user_email = User.objects.filter(email=email)
@@ -109,7 +109,7 @@ class RegistrationValidationView(APIView):
             if user_email.count() > 0:
                 data['email'] = "email in use"
             else:
-                data['email'] = "email free to use"
+                data['email'] = "email is free to use"
 
         return Response(data, status=status.HTTP_200_OK)
 
