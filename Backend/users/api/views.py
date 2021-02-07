@@ -85,6 +85,35 @@ class RegistrationView(APIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 
+class RegistrationValidationView(APIView):
+    @staticmethod
+    def get(request):
+        username = request.data.get('username')
+        email = request.data.get('email')
+        data = {}
+
+        if (username is not None or username != '') and (email is not None or email != ''):
+            return Response({"detail": "You sent no data to check"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if username is not None or username != '':
+            user_username = User.objects.filter(username=username)
+
+            if user_username.count() > 0:
+                data['username'] = "username in use"
+            else:
+                data['username'] = "username free to use"
+
+        if email is not None or email != '':
+            user_email = User.objects.filter(email=email)
+
+            if user_email.count() > 0:
+                data['email'] = "email in use"
+            else:
+                data['email'] = "email free to use"
+
+        return Response(data, status=status.HTTP_200_OK)
+
+
 # po kliknięciu w mailu weryfikuje konto
 @permission_classes([])
 class VerifyAccountView(APIView):
@@ -593,7 +622,7 @@ class UserImage(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         pk = request.data.get('pk', None)
-        #image = Image.objects.filter(pk=pk, user__pk=user.pk)
+        # image = Image.objects.filter(pk=pk, user__pk=user.pk)
         image = get_object_or_404(Image, pk=pk, user__pk=user.pk)
         image.delete()
         return Response({"detail": "Image removed successfully"}, status=status.HTTP_200_OK)

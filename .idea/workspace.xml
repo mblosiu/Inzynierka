@@ -29,10 +29,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="account create limit">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="register restrictions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,13 +195,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00029" summary="black list - delete">
-      <created>1606319165142</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1606319165142</updated>
     </task>
     <task id="LOCAL-00030" summary="friend list, search fix">
       <created>1606381621235</created>
@@ -539,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612261091911</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="register restrictions">
+      <created>1612631390214</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1612631390214</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -567,7 +567,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="report fix" />
     <MESSAGE value="registratration, change password, restore password - email templates, sending mail function fix" />
     <MESSAGE value="allowed_hosts" />
     <MESSAGE value="remove migrations" />
@@ -592,6 +591,7 @@
     <MESSAGE value="get_last_x" />
     <MESSAGE value="blocking bots + ssl" />
     <MESSAGE value="ssl" />
-    <option name="LAST_COMMIT_MESSAGE" value="ssl" />
+    <MESSAGE value="register restrictions" />
+    <option name="LAST_COMMIT_MESSAGE" value="register restrictions" />
   </component>
 </project>
