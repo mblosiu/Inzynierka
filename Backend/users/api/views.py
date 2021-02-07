@@ -593,11 +593,10 @@ class UserImage(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         pk = request.data.get('pk', None)
-        image = Image.objects.filter(pk=pk, user__pk=user.pk)
-        if image.count() > 0:
-            image.delete()
-            return Response({"detail": "Image removed successfully"}, status=status.HTTP_200_OK)
-        return Response({"detail": "file not exists"}, status=status.HTTP_400_BAD_REQUEST)
+        #image = Image.objects.filter(pk=pk, user__pk=user.pk)
+        image = get_object_or_404(Image, pk=pk, user__pk=user.pk)
+        image.delete()
+        return Response({"detail": "Image removed successfully"}, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])
