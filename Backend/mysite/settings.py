@@ -24,7 +24,12 @@ SECRET_KEY = '3^f-99nfc-$(a-l@#o9qk4&o+$!mkpn^5d0%w^+7x!rw_n8_*j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'elove.ml', '46.101.213.106']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'elove.ml',
+    '46.101.213.106'
+]
 # ALLOWED_HOSTS = ['elove.ml', '46.101.213.106']
 
 # Application definition
@@ -40,6 +45,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'django_cleanup',
+    'drf_yasg',
+    'django.contrib.admindocs',
 
     'users',
     'chat'
@@ -78,9 +85,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8080', 'http://elove.ml:8080', 'http://46.101.213.106:8080', 'https://46.101.213.106:8080',
+    # 'http://localhost:8080',
+    # 'http://elove.ml:8080',
+    # 'http://46.101.213.106:8080',
+    'https://46.101.213.106:8080',
     'https://elove.ml:8080'
-
 ]
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -85,6 +85,7 @@ class RegistrationView(APIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 
+@permission_classes([])
 class RegistrationValidationView(APIView):
     @staticmethod
     def get(request):
@@ -823,6 +824,9 @@ class ValidUsernameAndEmail(APIView):
 
 @permission_classes([IsAuthenticated])
 class LikesView(viewsets.ModelViewSet):
+    serializer_class = LikesSerializer
+    queryset = Like.objects.all()
+
     # zostałeś polubiony
     @staticmethod
     def create_like(request):

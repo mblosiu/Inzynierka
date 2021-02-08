@@ -18,10 +18,33 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from rest_framework import permissions, authentication
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(openapi.Info(
+    title="Elove API documentation",
+    default_version='1.0.0',
+    description="Test description",
+    # terms_of_service="https://www.google.com/policies/terms/",
+    contact=openapi.Contact(email="mblosiu@gmail.com"),
+    license=openapi.License(name="BSD License"),
+),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+    authentication_classes=[authentication.TokenAuthentication],
+)
+
 urlpatterns = [
-    path('admin', admin.site.urls, name="admin"),
+    path('api-documentation/swagger', schema_view.with_ui('swagger', cache_timeout=0),
+         name='schema-swagger-ui'),
+    path('api-documentation/redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+    path('admin/', admin.site.urls, name="admin"),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
 
     # REST API
+
     path('api/user/', include('users.api.urls', 'users_api')),
     path('api/chat/', include('chat.api.urls', 'chat_api')),
 ]
