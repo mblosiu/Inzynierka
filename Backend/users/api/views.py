@@ -89,14 +89,15 @@ class RegistrationView(APIView):
 class RegistrationValidationView(APIView):
     @staticmethod
     def get(request):
-        username = request.data.get('username')
-        email = request.data.get('email')
+        username = request.data.get('username', None)
+        print(username)
+        email = request.data.get('email', None)
         data = {}
 
-        if (username is not None or username != '') and (email is not None or email != ''):
+        if (username is None or username == '') and (email is None or email == ''):
             return Response({"detail": "You sent no data to check"}, status=status.HTTP_400_BAD_REQUEST)
 
-        if username is not None or username != '':
+        if username is not None and username != '':
             user_username = User.objects.filter(username=username)
 
             if user_username.count() > 0:
@@ -104,7 +105,7 @@ class RegistrationValidationView(APIView):
             else:
                 data['username'] = "username is free to use"
 
-        if email is not None or email != '':
+        if email is not None and email != '':
             user_email = User.objects.filter(email=email)
 
             if user_email.count() > 0:
