@@ -41,12 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
     'django_cleanup',
     'drf_yasg',
-    'django.contrib.admindocs',
 
     'users',
     'chat'
@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
-    # 'http://localhost:8080',
-    # 'http://elove.ml:8080',
-    # 'http://46.101.213.106:8080',
+    'http://localhost:8080',
+    'http://elove.ml:8080',
+    'http://46.101.213.106:8080',
     'https://46.101.213.106:8080',
     'https://elove.ml:8080'
 ]
