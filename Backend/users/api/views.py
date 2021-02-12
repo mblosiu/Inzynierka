@@ -46,7 +46,7 @@ class NotEqual(Lookup):
         return '%s <> %s' % (lhs, rhs), params
 
 
-# wysyła maila przy rejestracji
+# rejestracja + wysłanie maila aktywacyjnego
 @permission_classes([])
 class RegistrationView(APIView):
     @staticmethod
@@ -87,6 +87,7 @@ class RegistrationView(APIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 
+# walidacja username i email
 @permission_classes([])
 class RegistrationValidationView(APIView):
     @staticmethod
@@ -118,7 +119,7 @@ class RegistrationValidationView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-# po kliknięciu w mailu weryfikuje konto
+# weryfikacja adresu email
 @permission_classes([])
 class VerifyAccountView(APIView):
     @staticmethod
@@ -139,6 +140,7 @@ class VerifyAccountView(APIView):
         return Response({'detail': 'account verified successfully'}, status=status.HTTP_200_OK)
 
 
+# wylogowanie
 @permission_classes([IsAuthenticated])
 class LogoutView(APIView):
     @staticmethod
@@ -149,6 +151,7 @@ class LogoutView(APIView):
             return Response({"detail": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# usuwanie konta
 @permission_classes([IsAuthenticated])
 class DeleteUserAccountView(APIView):
     @staticmethod
@@ -164,7 +167,7 @@ class DeleteUserAccountView(APIView):
             return Response({"detail": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# zmień hasło
+# zmiana hasła
 @permission_classes([IsAuthenticated])
 class ChangePasswordView(APIView):
     @staticmethod
@@ -214,6 +217,7 @@ class RestorePasswordView(APIView):
         return Response({'detail': 'password changed'}, status=status.HTTP_200_OK)
 
 
+# profil użytkownika
 @permission_classes([IsAuthenticated])
 class UserProfileView(APIView):
     @staticmethod
@@ -373,6 +377,7 @@ class UserProfileView(APIView):
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
+# preferencje użytkownika
 @permission_classes([IsAuthenticated])
 class PreferencesView(APIView):
     @staticmethod
@@ -477,6 +482,7 @@ class PreferencesView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# ustawienia użytkownika
 @permission_classes([IsAuthenticated])
 class SettingsView(APIView):
     @staticmethod
@@ -541,6 +547,7 @@ class SettingsView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# zdjęcie profilowe
 @permission_classes([IsAuthenticated])
 class UserProfilePic(APIView):
     @staticmethod
@@ -577,6 +584,7 @@ class UserProfilePic(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# obsługa zdjęć użytkownika
 @permission_classes([IsAuthenticated])
 class UserImage(APIView):
     @staticmethod
@@ -632,6 +640,7 @@ class UserImage(APIView):
         return Response({"detail": "Image removed successfully"}, status=status.HTTP_200_OK)
 
 
+# pobieranie zdjęć innego usera
 @permission_classes([IsAuthenticated])
 class ImageByUserId(APIView):
     @staticmethod
@@ -725,7 +734,7 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
                 queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
 
         queryset_count = queryset.count()
-        pages_num = math.ceil(queryset_count / 2)
+        pages_num = math.ceil(queryset_count / 20)
 
         queryset = queryset.order_by('-last_login')
         queryset = self.paginate_queryset(queryset)
@@ -740,6 +749,7 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         return Response(resp, status=status.HTTP_200_OK)
 
 
+# losowe dopasowanie użytkowników na podstawie preferencji
 @permission_classes([IsAuthenticated])
 class RandomPair(APIView):
     @staticmethod
@@ -814,6 +824,7 @@ class RandomPair(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# nie używana (zastąpiona) walidacja
 @permission_classes([])
 class ValidUsernameAndEmail(APIView):
     @staticmethod
@@ -839,6 +850,7 @@ class ValidUsernameAndEmail(APIView):
         return Response(response, status=status.HTTP_200_OK)
 
 
+# polubienia
 @permission_classes([IsAuthenticated])
 class LikesView(viewsets.ModelViewSet):
     serializer_class = LikesSerializer
@@ -906,6 +918,7 @@ class LikesView(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# blokowanie użytkowników
 @permission_classes([IsAuthenticated])
 class BlackListView(APIView):
     @staticmethod
@@ -948,6 +961,7 @@ class BlackListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# lista znajomych
 @permission_classes([IsAuthenticated])
 class FriendListView(APIView):
     @staticmethod
@@ -1023,6 +1037,7 @@ class FriendListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# zgłaszanie użytkowników i błędów
 @permission_classes([IsAuthenticated])
 class ReportView(APIView):
     @staticmethod
@@ -1078,6 +1093,7 @@ class ReportView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# obsługa zgłoszeń (admin)
 @permission_classes([IsAdminUser])
 class AdminReportView(APIView):
     @staticmethod
