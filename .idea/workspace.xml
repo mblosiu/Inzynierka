@@ -195,13 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
     </task>
-    <task id="LOCAL-00040" summary="friendlist - new logic">
-      <created>1607002999500</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1607002999500</updated>
-    </task>
     <task id="LOCAL-00041" summary="friendlist filter update">
       <created>1607004329465</created>
       <option name="number" value="00041" />
@@ -538,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613151215058</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="local to ssl server">
+      <created>1613151855899</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1613151855899</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
