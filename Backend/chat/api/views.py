@@ -7,6 +7,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from users.models import User
 
 from .serializers import MessageSerializer
@@ -15,6 +16,8 @@ from ..models import Message
 
 @permission_classes([IsAuthenticated])
 class ConversationView(viewsets.GenericViewSet):
+    serializer_class = MessageSerializer
+
     @staticmethod
     def create_msg(request, username):
         sender = request.user
@@ -115,7 +118,7 @@ class ConversationView(viewsets.GenericViewSet):
         return Response(list_serializer.data, status=status.HTTP_200_OK)
 
 
-class ChatNotificationsView(viewsets.GenericViewSet):
+class ChatNotificationsView(APIView):
     @staticmethod
     def get_is_active(request, username):
         user = get_object_or_404(User, username=username)
@@ -123,5 +126,4 @@ class ChatNotificationsView(viewsets.GenericViewSet):
             user.auth_token
         except ObjectDoesNotExist:
             return Response({"is_active": False}, status=status.HTTP_200_OK)
-
         return Response({"is_active": True}, status=status.HTTP_200_OK)

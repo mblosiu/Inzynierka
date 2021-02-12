@@ -29,11 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="account create limit">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="pagination2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +41,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -73,6 +71,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Inzynierka-Backend" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python tests.Unittests in tests.py">
@@ -195,76 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00029" summary="black list - delete">
-      <created>1606319165142</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1606319165142</updated>
-    </task>
-    <task id="LOCAL-00030" summary="friend list, search fix">
-      <created>1606381621235</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1606381621236</updated>
-    </task>
-    <task id="LOCAL-00031" summary="friend list, search fix">
-      <created>1606383378260</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1606383378260</updated>
-    </task>
-    <task id="LOCAL-00032" summary="optymalizacja">
-      <created>1606410840965</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1606410840965</updated>
-    </task>
-    <task id="LOCAL-00033" summary="fix">
-      <created>1606552985558</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1606552985558</updated>
-    </task>
-    <task id="LOCAL-00034" summary="fix2">
-      <created>1606556963649</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1606556963650</updated>
-    </task>
-    <task id="LOCAL-00035" summary="add query_params for blacklist">
-      <created>1606561196751</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1606561196751</updated>
-    </task>
-    <task id="LOCAL-00036" summary="list filter - black list">
-      <created>1606658980711</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1606658980711</updated>
-    </task>
-    <task id="LOCAL-00037" summary="friendlist fix">
-      <created>1606737160425</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1606737160425</updated>
-    </task>
-    <task id="LOCAL-00038" summary="friendlist fix">
-      <created>1606737196443</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1606737196443</updated>
     </task>
     <task id="LOCAL-00039" summary="patch methods fix, filter: only friends">
       <created>1606914678557</created>
@@ -539,7 +468,77 @@
       <option name="project" value="LOCAL" />
       <updated>1612261091911</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="register restrictions">
+      <created>1612631390214</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1612631390214</updated>
+    </task>
+    <task id="LOCAL-00079" summary="validation for registration">
+      <created>1612722045001</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1612722045002</updated>
+    </task>
+    <task id="LOCAL-00080" summary="validation for registration">
+      <created>1612722400795</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1612722400795</updated>
+    </task>
+    <task id="LOCAL-00081" summary="setup for localhost">
+      <created>1612724723940</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1612724723940</updated>
+    </task>
+    <task id="LOCAL-00082" summary="api documentation">
+      <created>1612809075985</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1612809075985</updated>
+    </task>
+    <task id="LOCAL-00083" summary="localhost fix">
+      <created>1612894671242</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1612894671243</updated>
+    </task>
+    <task id="LOCAL-00084" summary="RegistrationValidationView fix">
+      <created>1612897682684</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1612897682684</updated>
+    </task>
+    <task id="LOCAL-00085" summary="pagination">
+      <created>1613126694270</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1613126694270</updated>
+    </task>
+    <task id="LOCAL-00086" summary="pagination2">
+      <created>1613146419252</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1613146419252</updated>
+    </task>
+    <task id="LOCAL-00087" summary="pagination2">
+      <created>1613151067078</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1613151067079</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -567,14 +566,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="report fix" />
-    <MESSAGE value="registratration, change password, restore password - email templates, sending mail function fix" />
-    <MESSAGE value="allowed_hosts" />
-    <MESSAGE value="remove migrations" />
-    <MESSAGE value="migrations git ignore" />
-    <MESSAGE value="git ignore" />
-    <MESSAGE value="chat - post message, get messages" />
-    <MESSAGE value="chat - chat new functions" />
     <MESSAGE value="porzadki" />
     <MESSAGE value="adminreport - get method" />
     <MESSAGE value="sending email update" />
@@ -592,6 +583,24 @@
     <MESSAGE value="get_last_x" />
     <MESSAGE value="blocking bots + ssl" />
     <MESSAGE value="ssl" />
-    <option name="LAST_COMMIT_MESSAGE" value="ssl" />
+    <MESSAGE value="register restrictions" />
+    <MESSAGE value="validation for registration" />
+    <MESSAGE value="setup for localhost" />
+    <MESSAGE value="api documentation" />
+    <MESSAGE value="localhost fix" />
+    <MESSAGE value="RegistrationValidationView fix" />
+    <MESSAGE value="pagination" />
+    <MESSAGE value="pagination2" />
+    <option name="LAST_COMMIT_MESSAGE" value="pagination2" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Backend/chat/api/views.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
