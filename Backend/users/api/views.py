@@ -13,6 +13,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer, \
@@ -649,10 +650,12 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
     search_fields = ['username', 'name', 'surname', 'birthday', 'sex', 'location',
                      'hair_color', 'body_type', 'is_smoking',
                      'is_drinking_alcohol']
+    pagination_class = PageNumberPagination
     queryset = User.objects.all()
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
+
         # nie można wyszukać samego siebie
         queryset = queryset.exclude(pk=request.user.pk)
 
@@ -719,6 +722,10 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
         if not (is_drinking_alcohol is None or is_drinking_alcohol == ''):
             if is_drinking_alcohol.isdecimal():
                 queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
+
+        queryset = queryset.order_by('-last_login')
+        queryset = self.paginate_queryset(queryset)
+
         serializer = UserSerializer(queryset, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)

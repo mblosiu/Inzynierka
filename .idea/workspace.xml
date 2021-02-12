@@ -29,8 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="localhost fix">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="RegistrationValidationView fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -194,13 +195,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00035" summary="add query_params for blacklist">
-      <created>1606561196751</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1606561196751</updated>
     </task>
     <task id="LOCAL-00036" summary="list filter - black list">
       <created>1606658980711</created>
@@ -538,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612894671243</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="RegistrationValidationView fix">
+      <created>1612897682684</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1612897682684</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -566,7 +567,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="git ignore" />
     <MESSAGE value="chat - post message, get messages" />
     <MESSAGE value="chat - chat new functions" />
     <MESSAGE value="porzadki" />
@@ -591,7 +591,8 @@
     <MESSAGE value="setup for localhost" />
     <MESSAGE value="api documentation" />
     <MESSAGE value="localhost fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="localhost fix" />
+    <MESSAGE value="RegistrationValidationView fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="RegistrationValidationView fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
