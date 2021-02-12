@@ -1,5 +1,6 @@
 import random
 import string
+import math
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
@@ -723,12 +724,20 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
             if is_drinking_alcohol.isdecimal():
                 queryset = queryset.filter(is_drinking_alcohol__lte=int(is_drinking_alcohol))
 
+        queryset_count = queryset.count()
+        pages_num = math.ceil(queryset_count / 2)
+
         queryset = queryset.order_by('-last_login')
         queryset = self.paginate_queryset(queryset)
 
         serializer = UserSerializer(queryset, many=True)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        resp = {}
+        resp['users_count'] = queryset_count
+        resp['pages'] = pages_num
+        resp['users'] = serializer.data
+
+        return Response(resp, status=status.HTTP_200_OK)
 
 
 @permission_classes([IsAuthenticated])

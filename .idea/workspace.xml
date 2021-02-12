@@ -29,7 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="RegistrationValidationView fix">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="pagination">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
@@ -195,13 +195,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00036" summary="list filter - black list">
-      <created>1606658980711</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1606658980711</updated>
     </task>
     <task id="LOCAL-00037" summary="friendlist fix">
       <created>1606737160425</created>
@@ -539,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612897682684</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="pagination">
+      <created>1613126694270</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1613126694270</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -567,7 +567,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chat - post message, get messages" />
     <MESSAGE value="chat - chat new functions" />
     <MESSAGE value="porzadki" />
     <MESSAGE value="adminreport - get method" />
@@ -592,7 +591,8 @@
     <MESSAGE value="api documentation" />
     <MESSAGE value="localhost fix" />
     <MESSAGE value="RegistrationValidationView fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="RegistrationValidationView fix" />
+    <MESSAGE value="pagination" />
+    <option name="LAST_COMMIT_MESSAGE" value="pagination" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
