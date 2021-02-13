@@ -29,9 +29,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="local to ssl server">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="static files fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,13 +196,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00041" summary="friendlist filter update">
-      <created>1607004329465</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1607004329465</updated>
     </task>
     <task id="LOCAL-00042" summary="RandomPair, UserImage POST instead of PUT, fixes">
       <created>1607016450743</created>
@@ -538,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613151855899</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="static files fix">
+      <created>1613152192929</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1613152192929</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -566,7 +568,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adminreport - get method" />
     <MESSAGE value="sending email update" />
     <MESSAGE value="account verify system" />
     <MESSAGE value="get message fix" />
@@ -591,7 +592,8 @@
     <MESSAGE value="pagination" />
     <MESSAGE value="pagination2" />
     <MESSAGE value="local to ssl server" />
-    <option name="LAST_COMMIT_MESSAGE" value="local to ssl server" />
+    <MESSAGE value="static files fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="static files fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -599,6 +601,11 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Backend/chat/api/views.py</url>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Backend/users/models.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

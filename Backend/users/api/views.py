@@ -15,6 +15,9 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
 from .serializers import RegistrationSerializer, UserSerializer, UserPreferencesSerializer, UserProfilePicSerializer, \
     UserSettingsSerializer, ImageSerializer, LikesSerializer, BlackListSerializer, FriendListSerializer, \
@@ -138,6 +141,20 @@ class VerifyAccountView(APIView):
         user.save()
 
         return Response({'detail': 'account verified successfully'}, status=status.HTTP_200_OK)
+
+
+# logowanie
+@permission_classes([])
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        if user.verified == False:
+            return Response({'detail': 'account is not verified'}, status=status.HTTP_401_UNAUTHORIZED)
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key}, status=status.HTTP_201_CREATED)
 
 
 # wylogowanie
@@ -668,6 +685,9 @@ class UserListView(viewsets.ReadOnlyModelViewSet):
 
         # nie można wyszukać samego siebie
         queryset = queryset.exclude(pk=request.user.pk)
+
+        # nie można wyszukać kont nie zweryfikowanych
+        queryset = queryset.exclude(verified=False)
 
         # jeżeli user ma zablokowaną widoczność profilu
         queryset = queryset.exclude(settings__search_privacy='nobody')
