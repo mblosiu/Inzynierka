@@ -64,6 +64,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def save(self, request):
         client_ip = request.META['REMOTE_ADDR']
+        print(client_ip)
         username = self.validated_data.get('username')
         email = self.validated_data.get('email')
         location = self.validated_data.get('location')
