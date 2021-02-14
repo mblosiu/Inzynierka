@@ -29,8 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="ip white list">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="ip whitelist">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -194,13 +195,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00044" summary="fix">
-      <created>1610378426561</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1610378426561</updated>
     </task>
     <task id="LOCAL-00045" summary="report system: user and admin">
       <created>1610383252292</created>
@@ -538,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613302780531</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="ip whitelist">
+      <created>1613302919072</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1613302919072</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -566,7 +567,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="get message fix" />
     <MESSAGE value="settings hide age" />
     <MESSAGE value="porządki" />
     <MESSAGE value="fix" />
@@ -591,7 +591,8 @@
     <MESSAGE value="static files fix" />
     <MESSAGE value="mail verify, not verified account restrictions" />
     <MESSAGE value="ip white list" />
-    <option name="LAST_COMMIT_MESSAGE" value="ip white list" />
+    <MESSAGE value="ip whitelist" />
+    <option name="LAST_COMMIT_MESSAGE" value="ip whitelist" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -604,6 +605,11 @@
           <url>file://$PROJECT_DIR$/Backend/users/models.py</url>
           <line>33</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Backend/mysite/settings.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
