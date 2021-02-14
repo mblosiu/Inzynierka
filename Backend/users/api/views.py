@@ -151,10 +151,10 @@ class CustomAuthToken(ObtainAuthToken):
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        if user.verified == False:
+        if not user.verified:
             return Response({'detail': 'account is not verified'}, status=status.HTTP_401_UNAUTHORIZED)
         token, created = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key}, status=status.HTTP_201_CREATED)
+        return Response({'token': token.key}, status=status.HTTP_200_OK)
 
 
 # wylogowanie

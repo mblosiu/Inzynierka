@@ -5,7 +5,7 @@ from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic
     UserListView, PreferencesView, SettingsView, UserImage, ImageByUserId, LikesView, \
     AdminReportView, BlackListView, FriendListView, RandomPair, ChangePasswordView, RestorePasswordView, \
     VerifyAccountView, ReportView, RegistrationValidationView, CustomAuthToken
-
+from rest_framework.authtoken.views import ObtainAuthToken
 app_name = 'users'
 
 user_detail = UserListView.as_view({'get': 'retrieve'})
