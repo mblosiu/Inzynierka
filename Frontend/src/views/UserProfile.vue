@@ -6,31 +6,16 @@
     -->
     <br />
     <v-container>
-      <b-sidebar id="sidebar-footer" aria-label="Okno chatu" no-header shadow>
-        <template v-slot:footer="{ hide }">
-          <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
-            <strong class="mr-auto"></strong>
-            <b-button size="sm" @click="hide">Zamknij</b-button>
-          </div>
-        </template>
-        <div class="px-3 py-2">
-          <h3>Okienko chatu</h3>
-        </div>
-        <p>
-          Początek rozmowy między {{ user_data.username }} a
-          {{ user.username }}
-        </p>
-      </b-sidebar>
-      <b-row>
-        <b-col cols="1"> </b-col>
-        <b-col cols="5">
+      <v-row>
+        <v-col lg="1"> </v-col>
+        <v-col cols="5" lg="5" md="5" sm="5" xs="5">
           <div>
             <v-card
               outlined
               rounded
               class="mx-auto"
               max-width="500"
-              height="700"
+              min-height="500"
               color="purple"
             >
               <v-img
@@ -545,8 +530,8 @@
             </v-card>
           </div>
           <br />
-        </b-col>
-        <b-col cols="5">
+        </v-col>
+        <v-col lg="5" md="6" sm="6" xs="6">
           <div>
             <v-card>
               <v-toolbar flat color="purple" dark>
@@ -934,9 +919,9 @@
               </v-tabs>
             </v-card>
           </div>
-        </b-col>
-        <b-col cols="1"></b-col>
-      </b-row>
+        </v-col>
+        <v-col lg="1"></v-col>
+      </v-row>
     </v-container>
   </v-container>
 </template>
@@ -1019,9 +1004,7 @@ export default {
       };
       return axios
         .get(
-          "https://elove.ml:8000/api/chat/" +
-            username +
-            "/get-last-x-msgs",
+          "https://elove.ml:8000/api/chat/" + username + "/get-last-x-msgs",
           {
             x: this.lastmessages,
 
@@ -1035,7 +1018,34 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    /*checkMessage() {
+      var lastMessage = this.messages.pop();
+      console.log(lastMessage.sender.username);
+      if (lastMessage.sender.username == this.user_data.username) {
+        this.iAmSender = true;
+      } else {
+        this.iAmSender = false;
+      }
+    },*/
+    /*getConversation(username) {
+      const config = {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("user-token"),
+        },
+      };
+      return axios
+        .get("http://127.0.0.1:8000/api/chat/" + username + "/get-all-msgs", {
+          x: this.lastmessages,
 
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log(response), (this.allMessages = response.data);
+        })
+        .catch((errors) => console.log(errors));
+    },*/
     getUserData() {
       return axios
         .get("https://elove.ml:8000/api/user/properties", {
@@ -1053,15 +1063,12 @@ export default {
     },
     async getUsers() {
       return axios
-        .get(
-          "https://elove.ml:8000/api/user/users/" + this.$route.params.pk,
-          {
-            params: {},
-            headers: {
-              Authorization: "Token " + localStorage.getItem("user-token"),
-            },
-          }
-        )
+        .get("https://elove.ml:8000/api/user/users/" + this.$route.params.pk, {
+          params: {},
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
         .then((response) => {
           console.log(response),
             (this.user = response.data),
@@ -1204,7 +1211,7 @@ export default {
       });
     },
     getUrl(pic) {
-      if (pic != null) return "http://elove.ml" + pic;
+      if (pic != null) return "https://elove.ml" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
@@ -1365,5 +1372,8 @@ export default {
 }
 .v-text-field {
   width: 490px;
+}
+.v-card__text, .v-card__title {
+  word-break: normal; /* maybe !important  */
 }
 </style>

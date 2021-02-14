@@ -19,7 +19,7 @@
         <v-row>
           <v-col cols="1"></v-col>
           <v-col cols="10">
-            <form id="filters" @submit.prevent="getUsers">
+            <form id="filters" @submit.prevent="getPageUsers">
               <v-row>
                 <v-col cols="2">
                   <b-form-select
@@ -48,9 +48,9 @@
                     </h5>
 
                     <v-card-text>
-                      <b-row>
-                        <b-col cols="1"></b-col>
-                        <b-col cols="5">
+                      <v-row>
+                        <v-col cols="1"></v-col>
+                        <v-col cols="5">
                           <div>
                             <b-form-input
                               id="age_min"
@@ -60,8 +60,8 @@
                               :max="age_max"
                             ></b-form-input>
                           </div>
-                        </b-col>
-                        <b-col cols="5">
+                        </v-col>
+                        <v-col cols="5">
                           <div>
                             <b-form-input
                               id="age_max"
@@ -71,15 +71,15 @@
                               max="100"
                             ></b-form-input>
                           </div>
-                        </b-col>
-                        <b-col cols="1"></b-col>
-                      </b-row>
+                        </v-col>
+                        <v-col cols="1"></v-col>
+                      </v-row>
                     </v-card-text>
                   </v-card>
                 </v-col>
 
                 <v-col cols="1">
-                  <button type="submit">
+                  <button type="submit" @click="page = 1">
                     <v-btn x-large block color="purple lighten-2">
                       <b class="white--text">Filtruj</b>
                     </v-btn>
@@ -208,9 +208,23 @@
         <v-col cols="3"></v-col>
       </v-row>
       <v-row>
+        <v-row>
+          <v-spacer></v-spacer>
+          <div class="text-center" @click="getPageUsers()">
+            <v-pagination
+              color="purple darken-1"
+              v-model="page"
+              :length="totalPages"
+              :total-visible="7"
+              prev-icon="mdi-menu-left"
+              next-icon="mdi-menu-right"
+            ></v-pagination>
+          </div>
+          <v-spacer></v-spacer>
+        </v-row>
         <v-col cols="12" align-self="start" class="scroll">
-          <b-row v-for="i in Math.ceil(users.length / 4)" v-bind:key="i">
-            <b-col
+          <v-row v-for="i in Math.ceil(users.length / 4)" v-bind:key="i">
+            <v-col
               cols="3"
               v-for="user in users.slice((i - 1) * 4, i * 4)"
               v-bind:key="user.id"
@@ -418,8 +432,8 @@
                   </v-card>
                 </div>
               </div>
-            </b-col>
-          </b-row>
+            </v-col>
+          </v-row>
           <br />
         </v-col>
       </v-row>
@@ -434,6 +448,9 @@ export default {
   components: {},
   data() {
     return {
+      page: 1,
+      itemsPerPage: 2,
+      resultCount: 0,
       more_filters: false,
       searchText: null,
       birthday: null,
@@ -445,6 +462,7 @@ export default {
       eye_color: null,
       body_type: null,
       users: [],
+      users_count: "",
       profileImage: null,
       is_smoking: null,
       today: new Date(),
@@ -524,10 +542,9 @@ export default {
     };
   },
   methods: {
-    getUsers() {
-      this.users = [];
+    /*getAllUsers() {
       axios
-        .get("https://elove.ml:8000/api/user/users", {
+        .get("http://127.0.0.1:8000/api/user/users", {
           params: {
             search: localStorage.getItem("search-text"),
             sex: this.sex,
@@ -547,12 +564,45 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response), (this.users = response.data);
+          console.log("getallusers");
+          console.log(response), (this.allUsers = response.data);
+        })
+        .catch((errors) => console.log(errors));
+      this.searchText = localStorage.getItem("search-text");
+      localStorage.removeItem("search-text");
+    },*/
+    getPageUsers() {
+      axios
+        .get("https://elove.ml:8000/api/user/users?page=" + this.page, {
+          params: {
+            search: localStorage.getItem("search-text"),
+            sex: this.sex,
+            location: this.location,
+            birthday: this.birthday,
+            hair_length: this.hair_length,
+            hair_color: this.hair_color,
+            eye_color: this.eye_color,
+            body_type: this.body_type,
+            is_smoking: this.is_smoking,
+            orientation: this.orientation,
+            age_preference_min: this.age_min,
+            age_preference_max: this.age_max,
+          },
+          headers: {
+            Authorization: "Token " + localStorage.getItem("user-token"),
+          },
+        })
+        .then((response) => {
+          console.log("pageusers"),
+            console.log(response),
+            (this.users = response.data.users);
+            (this.users_count = response.data.users_count);
         })
         .catch((errors) => console.log(errors));
       this.searchText = localStorage.getItem("search-text");
       localStorage.removeItem("search-text");
     },
+    
     getAge(dateString) {
       var today = new Date();
       var birthDate = new Date(dateString);
@@ -565,14 +615,31 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://elove.ml" + pic;
+      if (pic != null) return "https://elove.ml" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
   },
   created() {
-    this.getUsers();
+    this.getPageUsers();
+    this.getAllUsers();
   },
+  computed: {
+    totalPages: function () {
+      return Math.ceil(this.users_count / 20);
+    },
+    pageUsers: function () {
+      return this.paginate(this.users);
+    },
+  },
+  /*filters: {
+        paginate: function(list) {
+            this.resultCount = list.length
+            
+            var index = this.currentPage * this.itemsPerPage
+            return list.slice(index, index + this.itemsPerPage)
+        }
+    },*/
 };
 </script>
 
@@ -653,5 +720,8 @@ td {
 }
 .h6 {
   color: rgb(255, 255, 255);
+}
+.v-card__text, .v-card__title {
+  word-break: normal; /* maybe !important  */
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
   <v-container>
-    <b-row>
-      <b-col cols="1"> </b-col>
-      <b-col cols="5">
+    <v-row>
+      <v-col lg="1"> </v-col>
+      <v-col cols="5" lg="5" md="5" sm="5" xs="5">
         <div>
           <v-card
             outlined
             rounded
-            class="mx-auto"
             max-width="500"
-            height="700"
+            min-height="500"
+            class="mx-auto"
             color="purple"
           >
             <v-img
@@ -38,37 +38,14 @@
                 <p class="font-italic">{{ user_data.description }}</p>
               </h4>
               <h4 v-else>
-                <p class="font-italic">Brak opisu.</p>
+                <p class="font-italic text-center">Brak opisu.</p>
               </h4>
             </v-card-text>
           </v-card>
-
-          <!--<b-card
-            class="user-card"
-            :img-src="getUrl(user_data.profile_picture)"
-            img-top
-          >
-            <b-card-title>
-              <div class="oneline">
-                <h2>
-                  <p class="font-weight-bold">{{ user_data.username }}</p>
-                </h2>
-              </div>
-              ({{ getAge(user_data.birthday) }})
-            </b-card-title>
-            <b-card-text>
-              <h4 v-if="user_data.description != null">
-                <p class="font-italic">{{ user_data.description }}</p>
-              </h4>
-              <h4 v-else>
-                <p class="font-italic">Brak opisu.</p>
-              </h4>
-            </b-card-text>
-          </b-card>-->
         </div>
         <br />
-      </b-col>
-      <b-col cols="5">
+      </v-col>
+      <v-col lg="5" md="6" sm="6" xs="6">
         <div>
           <v-card>
             <v-toolbar flat color="purple" dark>
@@ -445,9 +422,9 @@
             </v-tabs>
           </v-card>
         </div>
-      </b-col>
-      <b-col cols="1"></b-col>
-    </b-row>
+      </v-col>
+      <v-col lg="1"></v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -540,7 +517,7 @@ export default {
       return age;
     },
     getUrl(pic) {
-      if (pic != null) return "http://elove.ml" + pic;
+      if (pic != null) return "https://elove.ml" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
@@ -625,5 +602,8 @@ textarea {
 }
 .h6 {
   align-content: left;
+}
+.v-card__text, .v-card__title {
+  word-break: normal; /* maybe !important  */
 }
 </style>
