@@ -69,6 +69,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         location = self.validated_data.get('location')
         birthday = self.validated_data.get('birthday')
         sex = self.validated_data.get('sex')
+        verified = False
 
         password = self.validated_data.get('password')
         password2 = self.validated_data.get('password2')
@@ -100,6 +101,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
                     acc.account_status = "banned"
                     acc.save()
                 raise serializers.ValidationError({'detail': ["you have been permanently banned"]})
+        else:
+            verified = True
 
         if username is None:
             raise serializers.ValidationError({'username': ['This field is required.']})
@@ -138,7 +141,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
             preferences=p,
             settings=s,
             age=int(datetime.today().strftime('%Y')) - int(birthday.strftime("%Y")),
-            ip=client_ip
+            ip=client_ip,
+            verified=verified,
         )
         account.set_password(password)
         account.save()
