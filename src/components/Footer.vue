@@ -59,7 +59,7 @@
           uniwersytetu im. Adama Mickiewicza w Poznaniu, w ramach inżynierskiego
           projektu zespołowego.
           <br />
-          <!--<v-card-subtitle>~ Mateusz Błoszyk, Marcin Mirecki </v-card-subtitle>-->
+          <v-card-subtitle></v-card-subtitle>
           <v-divider></v-divider>
           <v-row>
             <v-spacer></v-spacer>
@@ -78,7 +78,7 @@
         <v-card-subtitle>
           Ostatnia aktualizacja:
           <p class="font-weight-bold"></p>
-          02.02.2021r.
+          14.02.2021r.
         </v-card-subtitle>
       </v-card>
     </v-dialog>
@@ -91,6 +91,8 @@
           <h5 class="card-title">1. Postanowienia ogólne.</h5>
 
           <p class="font-italic">
+            Aby założyć konto wymagane jest ukończenie 18 roku życia.
+            <br/>
             Bądźmy dla siebie mili i życzliwi. Serwis powstał aby szerzyć
             miłość, nie nienawiść.
           </p>
@@ -100,7 +102,7 @@
         <v-card-subtitle>
           Ostatnia aktualizacja:
           <p class="font-weight-bold"></p>
-          02.02.2021r.
+          14.02.2021r.
         </v-card-subtitle>
       </v-card>
     </v-dialog>
@@ -112,7 +114,7 @@
           <div class="card-body">
             <div class="card-text">
               <p class="font-italic">mblosiu@gmail.com</p>
-
+              <v-divider></v-divider>
               <p class="font-italic">marmir@st.amu.edu.pl</p>
             </div>
           </div>

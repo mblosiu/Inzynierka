@@ -1,19 +1,12 @@
 <template>
   <v-container>
     <v-row>
-      <v-toolbar color="purple">
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      
+      <v-toolbar color="purple" app fixed>
+        <v-icon color="white" class="mr-3" x-large>mdi-image-plus</v-icon>
         <v-toolbar-title class="white--text">Galeria</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-icon
-          color="white"
-          class="ml-12 mr-2"
-          x-large
-          data-toggle="tooltip"
-          data-placement="bottom"
-          title="Dodaj nowe zdjęcie"
-          >mdi-image-plus</v-icon
-        >
+
         <div class="fileupload">
           <label>
             <input
@@ -32,15 +25,24 @@
             <button bold class="white--text">Wyślij</button>
           </v-btn>
         </div>
+        <v-icon
+          color="white"
+          class="ml-3"
+          x-large
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Z racji problemów z obsługą większych zdjęć, prosimy o wybieranie plików o niedużych wymiarach (najlepiej do ok 800x600)"
+          >mdi-alert-circle-outline</v-icon
+        >
       </v-toolbar>
+      
     </v-row>
-    <b-row class="scroll">
-      <b-col cols="1"></b-col>
+    <v-row class="scroll">
+      <v-col cols="1"></v-col>
       <br />
-      <b-col cols="10">
-        <b-row v-for="i in Math.ceil(images.length / 4)" v-bind:key="i">
-          
-          <b-col
+      <v-col cols="10">
+        <v-row v-for="i in Math.ceil(images.length / 4)" v-bind:key="i">
+          <v-col
             cols="3"
             v-for="image in images.slice((i - 1) * 4, i * 4)"
             v-bind:key="image.id"
@@ -64,7 +66,10 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn fab x-small class="purple" v-bind="attrs" v-on="on"
-                        ><v-app-bar-nav-icon x-small color="white"></v-app-bar-nav-icon
+                        ><v-app-bar-nav-icon
+                          x-small
+                          color="white"
+                        ></v-app-bar-nav-icon
                       ></v-btn>
                     </template>
 
@@ -120,12 +125,12 @@
               />
               <br />
             </b-modal>
-          </b-col>
-        </b-row>
-      </b-col>
+          </v-col>
+        </v-row>
+      </v-col>
 
-      <b-col cols="1"></b-col>
-    </b-row>
+      <v-col cols="1"></v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -228,7 +233,7 @@ export default {
         .catch((errors) => console.log(errors));
     },
     getUrl(pic) {
-      if (pic != null) return "http://elove.ml" + pic;
+      if (pic != null) return "https://elove.ml" + pic;
       else return null;
     },
     getUserPicture() {
