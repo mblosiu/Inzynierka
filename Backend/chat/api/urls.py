@@ -14,5 +14,5 @@ urlpatterns = [
     path('get-all-messages-received-by-user-pk',
          ConversationView.as_view({'get': 'get_all_messages_received_by_user_pk'}),
          name="get_all_messages_received_by_user_pk"),
-    path('<str:username>/is-active', ChatNotificationsView.as_view({'get': 'get_is_active'}), name="get_is_active"),
+    path('<str:username>/is-active', ChatNotificationsView.as_view(), name="get_is_active"),
 ]

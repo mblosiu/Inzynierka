@@ -4,7 +4,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from .views import LogoutView, RegistrationView, UserProfileView, UserProfilePic, DeleteUserAccountView, \
     UserListView, PreferencesView, SettingsView, UserImage, ImageByUserId, LikesView, \
     AdminReportView, BlackListView, FriendListView, RandomPair, ChangePasswordView, RestorePasswordView, \
-    VerifyAccountView, ReportView
+    VerifyAccountView, ReportView, RegistrationValidationView, CustomAuthToken
 
 app_name = 'users'
 
@@ -20,7 +20,7 @@ get_like_user = LikesView.as_view({'get': 'get_like_user'})
 urlpatterns = [
     # zarządzanie kontem
     path('register', RegistrationView.as_view(), name="register"),
-    path('login', obtain_auth_token, name="login"),
+    path('login', CustomAuthToken.as_view(), name="login"),
     path('logout', LogoutView.as_view(), name="logout"),
     path('delete', DeleteUserAccountView.as_view(), name="delete"),
     path('properties', UserProfileView.as_view(), name="properties"),
@@ -34,6 +34,7 @@ urlpatterns = [
     path('change-password', ChangePasswordView.as_view(), name='change-password'),
     path('restore-password', RestorePasswordView.as_view(), name='restore-password'),
     path('account-verify', VerifyAccountView.as_view(), name='account-verify'),
+    path('registration-validation', RegistrationValidationView.as_view(), name='registration-validation'),
 
     # interakcja między użytkownikami
     path('create-like', create_like, name='create-like'),
