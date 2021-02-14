@@ -69,6 +69,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         location = self.validated_data.get('location')
         birthday = self.validated_data.get('birthday')
         sex = self.validated_data.get('sex')
+        verified = False
 
         password = self.validated_data.get('password')
         password2 = self.validated_data.get('password2')
@@ -77,27 +78,31 @@ class RegistrationSerializer(serializers.ModelSerializer):
         if len(password) < 8:
             raise serializers.ValidationError({'detail': ["password must contain 8 characters"]})
 
-        # limit 10 kont na ip
-        account_list = User.objects.filter(ip=client_ip)
-        if account_list.count() >= 10:
-            raise serializers.ValidationError({'detail': ["you can't create more accounts"]})
+        # whitelist ip
+        if client_ip not in ['77.65.82.115', '37.247.57.187']:
+            # limit 10 kont na ip
+            account_list = User.objects.filter(ip=client_ip)
+            if account_list.count() >= 10:
+                raise serializers.ValidationError({'detail': ["you can't create more accounts"]})
 
-        # sprawdza czy zbanowany
-        banned_list = BannedIp.objects.filter(ip=client_ip)
-        if banned_list.count() > 0:
-            raise serializers.ValidationError({'detail': ['you have been permanently banned']})
+            # sprawdza czy zbanowany
+            banned_list = BannedIp.objects.filter(ip=client_ip)
+            if banned_list.count() > 0:
+                raise serializers.ValidationError({'detail': ['you have been permanently banned']})
 
-        # blokowanie spamerskiego tworzenia kont
-        time = datetime.now(timezone.utc) - timedelta(seconds=5)
-        account_list = User.objects.filter(ip=client_ip, date_joined__gt=time)
-        if account_list.count() >= 1:
-            banned_ip = BannedIp(ip=client_ip)
-            banned_ip.save()
+            # blokowanie spamerskiego tworzenia kont
+            time = datetime.now(timezone.utc) - timedelta(seconds=5)
+            account_list = User.objects.filter(ip=client_ip, date_joined__gt=time)
+            if account_list.count() >= 1:
+                banned_ip = BannedIp(ip=client_ip)
+                banned_ip.save()
 
-            for acc in account_list:
-                acc.account_status = "banned"
-                acc.save()
-            raise serializers.ValidationError({'detail': ["you have been permanently banned"]})
+                for acc in account_list:
+                    acc.account_status = "banned"
+                    acc.save()
+                raise serializers.ValidationError({'detail': ["you have been permanently banned"]})
+        else:
+            verified = True
 
         if username is None:
             raise serializers.ValidationError({'username': ['This field is required.']})
@@ -136,7 +141,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
             preferences=p,
             settings=s,
             age=int(datetime.today().strftime('%Y')) - int(birthday.strftime("%Y")),
-            ip=client_ip
+            ip=client_ip,
+            verified=verified,
         )
         account.set_password(password)
         account.save()
