@@ -29,11 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="small fixes that took several hours :(">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="new age calc and restrictions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/templates/mail/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/templates/mail/registration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,13 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00047" summary="change model name FriendsList to Friend">
-      <created>1610388381089</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1610388381089</updated>
     </task>
     <task id="LOCAL-00048" summary="report fix">
       <created>1610441527043</created>
@@ -540,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613310971448</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="new age calc and restrictions">
+      <created>1613407698774</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1613407698774</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -568,7 +566,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix" />
     <MESSAGE value="chat - new methods" />
     <MESSAGE value="chat - notifs - is active" />
     <MESSAGE value="chat - notifs - is active - fix" />
@@ -593,7 +590,8 @@
     <MESSAGE value="ip whitelist" />
     <MESSAGE value="ssl settings" />
     <MESSAGE value="small fixes that took several hours :(" />
-    <option name="LAST_COMMIT_MESSAGE" value="small fixes that took several hours :(" />
+    <MESSAGE value="new age calc and restrictions" />
+    <option name="LAST_COMMIT_MESSAGE" value="new age calc and restrictions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
