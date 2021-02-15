@@ -25,8 +25,8 @@ SECRET_KEY = '3^f-99nfc-$(a-l@#o9qk4&o+$!mkpn^5d0%w^+7x!rw_n8_*j'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    #'localhost',
-    #'127.0.0.1',
+    # 'localhost',
+    # '127.0.0.1',
     'elove.ml',
     '46.101.213.106'
 ]
@@ -75,7 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'django.core.context_processors.static',
+                # 'django.core.context_processors.static',
             ],
         },
     },
@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
-    #'http://localhost:8080',
-    #'http://elove.ml:8080',
-    #'http://46.101.213.106:8080',
+    # 'http://localhost:8080',
+    # 'http://elove.ml:8080',
+    # 'http://46.101.213.106:8080',
     'https://46.101.213.106:8080',
     'https://elove.ml:8080'
 ]

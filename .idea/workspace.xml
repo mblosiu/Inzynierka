@@ -29,11 +29,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="ssl settings">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="small fixes that took several hours :(">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/templates/mail/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/templates/mail/registration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,13 +196,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00046" summary="admin site update">
-      <created>1610388177014</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1610388177019</updated>
     </task>
     <task id="LOCAL-00047" summary="change model name FriendsList to Friend">
       <created>1610388381089</created>
@@ -540,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613303210075</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="small fixes that took several hours :(">
+      <created>1613310971448</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1613310971448</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -568,7 +568,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="porządki" />
     <MESSAGE value="fix" />
     <MESSAGE value="chat - new methods" />
     <MESSAGE value="chat - notifs - is active" />
@@ -593,7 +592,8 @@
     <MESSAGE value="ip white list" />
     <MESSAGE value="ip whitelist" />
     <MESSAGE value="ssl settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="ssl settings" />
+    <MESSAGE value="small fixes that took several hours :(" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fixes that took several hours :(" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -606,11 +606,6 @@
           <url>file://$PROJECT_DIR$/Backend/users/models.py</url>
           <line>33</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Backend/mysite/settings.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
