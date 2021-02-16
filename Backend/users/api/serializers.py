@@ -64,7 +64,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def save(self, request):
         client_ip = request.META['REMOTE_ADDR']
-        print(client_ip)
         username = self.validated_data.get('username')
         email = self.validated_data.get('email')
         location = self.validated_data.get('location')
@@ -104,7 +103,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError({'detail': ["you have been permanently banned"]})
         else:
             verified = True
-
+        # testowy fix 500
+        if client_ip is None:
+            raise serializers.ValidationError({'client_ip': ['Something went wrong.']})
         if username is None:
             raise serializers.ValidationError({'username': ['This field is required.']})
         elif email is None:
@@ -120,11 +121,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
         elif password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
 
-        # wymóg 18 lat
-        today = datetime.today().strftime('%Y-%m-%d').split('-')
-        today = date(int(today[0]), int(today[1]), int(today[2]))
-        delta = today - birthday
-        if delta.days < 6570:
+        today = date.today()
+        age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
+
+        if age < 18:
             raise serializers.ValidationError({'detail': 'You must be 18 years old to create an account'})
 
         p = Preferences()
@@ -141,7 +141,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             sex=sex,
             preferences=p,
             settings=s,
-            age=int(datetime.today().strftime('%Y')) - int(birthday.strftime("%Y")),
+            age=age,
             ip=client_ip,
             verified=verified,
         )
