@@ -29,10 +29,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="ip whitelist">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment=".">
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,41 +193,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00045" summary="report system: user and admin">
-      <created>1610383252292</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1610383252292</updated>
-    </task>
-    <task id="LOCAL-00046" summary="admin site update">
-      <created>1610388177014</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1610388177019</updated>
-    </task>
-    <task id="LOCAL-00047" summary="change model name FriendsList to Friend">
-      <created>1610388381089</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1610388381089</updated>
-    </task>
-    <task id="LOCAL-00048" summary="report fix">
-      <created>1610441527043</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1610441527043</updated>
-    </task>
-    <task id="LOCAL-00049" summary="registratration, change password, restore password - email templates, sending mail function fix">
-      <created>1610623040834</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1610623040834</updated>
     </task>
     <task id="LOCAL-00050" summary="allowed_hosts">
       <created>1610650397388</created>
@@ -539,7 +502,42 @@
       <option name="project" value="LOCAL" />
       <updated>1613302919072</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="ssl settings">
+      <created>1613303210075</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1613303210075</updated>
+    </task>
+    <task id="LOCAL-00095" summary="small fixes that took several hours :(">
+      <created>1613310971448</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1613310971448</updated>
+    </task>
+    <task id="LOCAL-00096" summary="new age calc and restrictions">
+      <created>1613407698774</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1613407698774</updated>
+    </task>
+    <task id="LOCAL-00097" summary="localhost settings">
+      <created>1613408374729</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1613408374729</updated>
+    </task>
+    <task id="LOCAL-00098" summary=".">
+      <created>1613458434431</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1613458434431</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -567,11 +565,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="settings hide age" />
-    <MESSAGE value="porządki" />
-    <MESSAGE value="fix" />
-    <MESSAGE value="chat - new methods" />
-    <MESSAGE value="chat - notifs - is active" />
     <MESSAGE value="chat - notifs - is active - fix" />
     <MESSAGE value="server time zone" />
     <MESSAGE value="search - username" />
@@ -592,7 +585,12 @@
     <MESSAGE value="mail verify, not verified account restrictions" />
     <MESSAGE value="ip white list" />
     <MESSAGE value="ip whitelist" />
-    <option name="LAST_COMMIT_MESSAGE" value="ip whitelist" />
+    <MESSAGE value="ssl settings" />
+    <MESSAGE value="small fixes that took several hours :(" />
+    <MESSAGE value="new age calc and restrictions" />
+    <MESSAGE value="localhost settings" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -605,11 +603,6 @@
           <url>file://$PROJECT_DIR$/Backend/users/models.py</url>
           <line>33</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Backend/mysite/settings.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
