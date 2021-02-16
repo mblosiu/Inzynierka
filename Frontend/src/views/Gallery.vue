@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       
-      <v-toolbar color="purple" app fixed>
+      <v-toolbar color="purple" fixed>
         <v-icon color="white" class="mr-3" x-large>mdi-image-plus</v-icon>
         <v-toolbar-title class="white--text">Galeria</v-toolbar-title>
         <v-spacer></v-spacer>
