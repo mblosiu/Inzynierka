@@ -103,7 +103,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError({'detail': ["you have been permanently banned"]})
         else:
             verified = True
-
+        # testowy fix 500
+        if client_ip is None:
+            raise serializers.ValidationError({'client_ip': ['Something went wrong.']})
         if username is None:
             raise serializers.ValidationError({'username': ['This field is required.']})
         elif email is None:

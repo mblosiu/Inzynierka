@@ -29,9 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="new age calc and restrictions">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="localhost settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/api/serializers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,13 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00048" summary="report fix">
-      <created>1610441527043</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1610441527043</updated>
     </task>
     <task id="LOCAL-00049" summary="registratration, change password, restore password - email templates, sending mail function fix">
       <created>1610623040834</created>
@@ -538,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613407698774</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="localhost settings">
+      <created>1613408374729</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1613408374729</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -566,7 +566,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chat - new methods" />
     <MESSAGE value="chat - notifs - is active" />
     <MESSAGE value="chat - notifs - is active - fix" />
     <MESSAGE value="server time zone" />
@@ -591,7 +590,8 @@
     <MESSAGE value="ssl settings" />
     <MESSAGE value="small fixes that took several hours :(" />
     <MESSAGE value="new age calc and restrictions" />
-    <option name="LAST_COMMIT_MESSAGE" value="new age calc and restrictions" />
+    <MESSAGE value="localhost settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="localhost settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
