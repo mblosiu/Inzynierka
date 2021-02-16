@@ -622,7 +622,7 @@ export default {
   },
   created() {
     this.getPageUsers();
-    this.getAllUsers();
+    //this.getAllUsers();
   },
   computed: {
     totalPages: function () {

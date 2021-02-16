@@ -1,17 +1,18 @@
 <template>
-  <v-container background-image>
+  <v-container>
     <v-row no-gutters align="start">
       <v-col cols="4">
         <h1>Witamy w e-love</h1>
       </v-col>
-      <v-col cols="7"></v-col>
+      <v-col cols="4"> </v-col>
+      <v-col cols="4"> </v-col>
     </v-row>
     <br />
     <v-row>
       <v-col class="leftside" lg="4" sm="7">
         <h4>Tu znajdziesz swoją drugą połówkę!</h4>
         <br />
-        
+
         <div class="text">
           Jeśli szukasz miłości, życiowego partnera, lub po prostu osoby, z
           którą można porozmawiać na wspólne tematy to dobrze trafiłeś. Serwis
@@ -369,8 +370,8 @@
           </v-card-title>
           <br />
           <v-card-text>
-            Twoje konto zostało pomyślnie założone. Przejdź do strony głównej,
-            aby się zalogować.
+            Na podany adres email został wysłany link aktywacyjny. Weryfikacja
+            jest wymagana, aby móc korzystać z serwisu.
           </v-card-text>
 
           <v-card-actions>

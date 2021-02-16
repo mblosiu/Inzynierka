@@ -926,7 +926,16 @@
         </b-nav-form>
 
         <div v-if="token == null">
-          <b-alert
+          <v-alert
+            v-model="valert"
+            class="mr-3 ml-3"
+            dense
+            :type="alertType"
+            transition="fade-transition"
+          >
+            {{ alertMsg }}
+          </v-alert>
+          <!--<b-alert
             :show="dismissCountDown"
             fade
             class="mr-sm-2"
@@ -934,7 +943,7 @@
             @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
             >{{ msg }}</b-alert
-          >
+          >-->
         </div>
         <b-nav-form @submit.prevent="login" v-if="token == null">
           <b-form-input
@@ -1620,6 +1629,9 @@ export default {
       target: 9999,
       oneMessage: 1,
       newMessagesDialog: false,
+      valert: false,
+      alertType: null,
+      alertMsg: null,
     };
   },
   methods: {
@@ -1632,9 +1644,9 @@ export default {
       var ty = t + ", " + y;
       return ty;
     },
-    showMsg() {
+    /*showMsg() {
       this.dismissCountDown = this.dismissSecs;
-    },
+    },*/
     sendMessage(message, username) {
       console.log(message + " -> " + username);
       if (message.length > 200 || message.length == 0) {
@@ -1860,12 +1872,19 @@ export default {
         })
         .catch((errors) => {
           if (errors.response.status != 200) {
-            this.showMsg(), (this.msg = "Błędny login lub hasło!");
-            /*this.toast(
-              "b-toaster-top-left",
-              "danger",
-              "Błędny login lub hasło!"
-            );*/
+            //this.showMsg(),
+            if (errors.response.data.detail == "account is not verified") {
+              this.alertType = "warning";
+              this.alertMsg = "Użytkownik niezweryfikowany.";
+            } else {
+              this.alertType = "error";
+              this.alertMsg = "Błędny login lub hasło!";
+            }
+
+            (this.valert = true),
+              setTimeout(() => {
+                this.valert = false;
+              }, 5000);
           }
         });
     },
@@ -1991,7 +2010,11 @@ export default {
       this.getUserMessages();
       //this.getMessages();
     }
+    setTimeout(() => {
+      this.valert = false;
+    }, 5000);
   },
+
   watch: {},
   /*computed: {
     updatedMessages() {
@@ -2003,6 +2026,11 @@ export default {
 
 <style scoped>
 .alert {
+  padding-block: 5px;
+  margin-block: 5px;
+  align-content: inherit;
+}
+.v-alert {
   padding-block: 5px;
   margin-block: 5px;
   align-content: inherit;

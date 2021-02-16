@@ -8,7 +8,8 @@ import Settings from '../views/Settings.vue'
 import Search from '../views/Search.vue'
 import Gallery from '../views/Gallery.vue'
 import UserProfile from '../views/UserProfile.vue'
-import Regulations from '../views/Regulations.vue'
+import Verification from '../views/Verification.vue'
+//import Regulations from '../views/Regulations.vue'
 import Contact from '../views/Contact.vue'
 
 Vue.use(VueRouter)
@@ -66,7 +67,16 @@ const routes = [
     meta: {
       title: 'Profil użytkownika'
     }
-  }, 
+  },
+  /*{
+    path: '/verification',
+    name: 'verification',
+    component: Verification,
+    params: true,
+    meta: {
+      title: 'Weryfikacja konta'
+    }
+  },*/  
   {
     path: '/mainuser/gallery',
     name: 'Gallery',
@@ -84,11 +94,12 @@ const routes = [
     }
   },
   {
-    path: '/regulations',
-    name: 'Regulations',
-    component: Regulations,
+    path: '/verify*',
+    name: 'Verification',
+    component: Verification,
+    params: true,
     meta: {
-      title: 'Regulamin'
+      title: 'Weryfikacja'
     }
   },
   {
@@ -154,10 +165,10 @@ const router = new VueRouter({
 }) */
 
 router.beforeEach((to, from, next) => {
-  if (!['Home', 'Register', 'About', 'Regulations', 'Contact'].includes(to.name) && !localStorage.getItem("user-token")) {
+  if (!['Home', 'Register', 'About', 'Regulations', 'Contact', 'Verification'].includes(to.name) && !localStorage.getItem("user-token")) {
     next({ name: 'Home' })
   }
-  else if (['Register', 'Home'].includes(to.name) && localStorage.getItem("user-token")) {
+  else if (['Register', 'Home', 'Verification'].includes(to.name) && localStorage.getItem("user-token")) {
     next({ name: 'MainUser' })
   }
   else {
