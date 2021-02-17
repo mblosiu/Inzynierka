@@ -75,6 +75,7 @@ class MyAccountManager(BaseUserManager):
             birthday=birthday,
             sex=sex,
         )
+        user.verified = True
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
