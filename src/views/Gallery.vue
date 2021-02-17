@@ -168,13 +168,10 @@ export default {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
-        .then(function () {
-          console.log("SUCCESS!!");
+        .then((response) => {
+          this.$router.go();
         })
-        .catch(function () {
-          console.log("FAILURE!!");
-        });
-      this.$router.go();
+        .catch((errors) => console.log(errors));
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
@@ -201,10 +198,9 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response), (this.images = response.data);
+          console.log(response), (this.images = response.data), this.$router.go();
         })
         .catch((errors) => console.log(errors));
-      this.$router.go();
     },
     setAsProfilePic(pic) {
       let config = {
