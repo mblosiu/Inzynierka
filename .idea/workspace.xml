@@ -29,10 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="ssl settings">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="su verified">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,13 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00051" summary="allowed_hosts">
-      <created>1610882325770</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1610882325770</updated>
     </task>
     <task id="LOCAL-00052" summary="remove migrations">
       <created>1610882957208</created>
@@ -539,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613458507341</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="su verified">
+      <created>1613555208346</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1613555208347</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -567,7 +566,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chat - notifs - is active - fix" />
     <MESSAGE value="server time zone" />
     <MESSAGE value="search - username" />
     <MESSAGE value="MEDIA_ROOT" />
@@ -592,7 +590,8 @@
     <MESSAGE value="localhost settings" />
     <MESSAGE value="." />
     <MESSAGE value="ssl settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="ssl settings" />
+    <MESSAGE value="su verified" />
+    <option name="LAST_COMMIT_MESSAGE" value="su verified" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
