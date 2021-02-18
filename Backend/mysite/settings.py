@@ -87,7 +87,8 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'https://46.101.213.106:8080',
     'https://elove.ml:8080',
-    'elove.ml'
+    'elove.ml',
+    'https://elove.ml',
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
