@@ -29,7 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="su verified">
+    <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="ssl settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
     </list>
@@ -194,13 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596814118859</updated>
-    </task>
-    <task id="LOCAL-00052" summary="remove migrations">
-      <created>1610882957208</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1610882957209</updated>
     </task>
     <task id="LOCAL-00053" summary="migrations git ignore">
       <created>1610882999487</created>
@@ -538,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613555208347</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="ssl settings">
+      <created>1613645259719</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1613645259719</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -589,9 +589,9 @@
     <MESSAGE value="new age calc and restrictions" />
     <MESSAGE value="localhost settings" />
     <MESSAGE value="." />
-    <MESSAGE value="ssl settings" />
     <MESSAGE value="su verified" />
-    <option name="LAST_COMMIT_MESSAGE" value="su verified" />
+    <MESSAGE value="ssl settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="ssl settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
