@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import User, Report, BlackList, Friend, Like
+from .models import User, Report, BlackList, Friend, Like, BannedIp
 
 
 class AccountAdmin(UserAdmin):
@@ -28,3 +28,6 @@ admin.site.register(Friend, list_display=['pk', 'user', 'friend', 'status'],
 
 admin.site.register(Like, list_display=['pk', 'liked_by', 'liked', 'value'],
                     readonly_fields=['pk', 'liked_by', 'liked', 'value'])
+
+admin.site.register(BannedIp, list_display=['pk', 'ip'],
+                    readonly_fields=['pk', 'ip'])
