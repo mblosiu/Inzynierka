@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3^f-99nfc-$(a-l@#o9qk4&o+$!mkpn^5d0%w^+7x!rw_n8_*j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     #'localhost',
@@ -85,11 +85,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
-    #'http://localhost:8080',
-    #'http://elove.ml:8080',
-    #'http://46.101.213.106:8080',
     'https://46.101.213.106:8080',
-    'https://elove.ml:8080'
+    'https://elove.ml:8080',
+    'elove.ml'
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
