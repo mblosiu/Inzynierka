@@ -7,13 +7,13 @@
     <br />
     <v-container>
       <v-row>
-        <v-col lg="1"> </v-col>
-        <v-col cols="5" lg="5" md="5" sm="5" xs="5">
+        <v-col lg="1" md="1" sm="0" xs="0"> </v-col>
+        <v-col lg="5" md="5" sm="12" xs="12">
           <div>
             <v-card
               outlined
               rounded
-              class="mx-auto"
+              class="mx-auto hidden-sm-and-down"
               max-width="500"
               min-height="500"
               color="purple"
@@ -528,10 +528,460 @@
                 </b-modal>
               </v-card-text>
             </v-card>
+            <v-card
+              outlined
+              rounded
+              max-width="500"
+              class="mx-auto hidden-md-and-up"
+              color="purple"
+            >
+              <v-row>
+                <v-col cols="8">
+                  <div>
+                    <v-app-bar flat color="rgba(0, 0, 0, 0)">
+                      <v-menu
+                        :close-on-content-click="false"
+                        :nudge-width="200"
+                        offset-x
+                        left
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            fab
+                            small
+                            class="purple lighten-1"
+                            v-bind="attrs"
+                            v-on="on"
+                            ><v-app-bar-nav-icon
+                              color="white"
+                            ></v-app-bar-nav-icon
+                          ></v-btn>
+                        </template>
+
+                        <v-card>
+                          <v-list>
+                            <v-list-item>
+                              <v-list-item-avatar>
+                                <img :src="getUrl(user.profile_picture)" />
+                              </v-list-item-avatar>
+
+                              <v-list-item-content>
+                                <v-list-item-title>{{
+                                  user.username
+                                }}</v-list-item-title>
+                                <v-list-item-subtitle
+                                  >({{ user.location }})</v-list-item-subtitle
+                                >
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list>
+
+                          <v-divider></v-divider>
+
+                          <v-list>
+                            <v-list-item>
+                              <div v-if="isUserLiked() == false">
+                                <v-btn
+                                  icon
+                                  x-large
+                                  @click="
+                                    likeUser();
+                                    toast(
+                                      'b-toaster-bottom-right',
+                                      'success',
+                                      'Polubiono użytkownika!'
+                                    );
+                                  "
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Polub"
+                                >
+                                  <v-icon>mdi-heart</v-icon>
+                                </v-btn>
+                              </div>
+                              <div v-else>
+                                <v-btn
+                                  icon
+                                  x-large
+                                  @click="
+                                    dislikeUser();
+                                    toast(
+                                      'b-toaster-bottom-right',
+                                      'danger',
+                                      'Usunięto polubienie.'
+                                    );
+                                  "
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Usuń polubienie"
+                                >
+                                  <v-icon color="red">mdi-heart</v-icon>
+                                </v-btn>
+                              </div>
+
+                              <v-divider vertical></v-divider>
+
+                              <v-dialog
+                                transition="dialog-bottom-transition"
+                                max-width="600"
+                                max-height="1000"
+                                scrollable
+                              >
+                                <template v-slot:activator="{ on, attrs }">
+                                  <div
+                                    v-if="
+                                      user.settings.messages_privacy ==
+                                      'everybody'
+                                    "
+                                  >
+                                    <v-btn
+                                      icon
+                                      x-large
+                                      data-toggle="tooltip"
+                                      data-placement="bottom"
+                                      title="Wyślij wiadomość"
+                                      v-bind="attrs"
+                                      v-on="on"
+                                      @click="getMessages(user.username)"
+                                    >
+                                      <v-icon color="purple"
+                                        >mdi-message-processing</v-icon
+                                      >
+                                    </v-btn>
+                                  </div>
+
+                                  <div
+                                    v-else-if="
+                                      user.settings.messages_privacy == 'oppSex'
+                                    "
+                                  >
+                                    <div v-if="user.sex == user_data.sex">
+                                      <v-btn
+                                        icon
+                                        x-large
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="Użytkownik zablokował możliwość wysyłania wiadomości"
+                                      >
+                                        <v-icon>mdi-message-lock</v-icon>
+                                      </v-btn>
+                                    </div>
+                                    <div v-else>
+                                      <v-btn
+                                        icon
+                                        x-large
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="Wyślij wiadomość"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                        @click="getMessages(user.username)"
+                                      >
+                                        <v-icon color="purple"
+                                          >mdi-message-processing</v-icon
+                                        >
+                                      </v-btn>
+                                    </div>
+                                  </div>
+                                  <div v-else>
+                                    <v-btn
+                                      icon
+                                      x-large
+                                      data-toggle="tooltip"
+                                      data-placement="bottom"
+                                      title="Użytkownik zablokował możliwość wysyłania wiadomości"
+                                    >
+                                      <v-icon>mdi-message-lock</v-icon>
+                                    </v-btn>
+                                  </div>
+                                </template>
+
+                                <template v-slot:default="dialog">
+                                  <v-card>
+                                    <v-toolbar
+                                      class="purple white--text"
+                                      @click="getMessages(user.username)"
+                                    >
+                                      <v-avatar class="mr-3">
+                                        <img
+                                          :src="getUrl(user.profile_picture)"
+                                        />
+                                      </v-avatar>
+                                      <button bold>
+                                        Rozmowa z {{ user.username }}
+                                      </button>
+                                      <v-spacer></v-spacer>
+                                      <v-icon
+                                        large
+                                        color="white"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="Aby czatować bez ograniczeń zaproś użytkownika do grona znajomych."
+                                        >mdi-chat-question</v-icon
+                                      >
+                                    </v-toolbar>
+                                    <v-card-text
+                                      class="purple lighten-5"
+                                      @click="getMessages(user.username)"
+                                    >
+                                      <!--<div v-if="newMessages">-->
+                                      <div
+                                        v-for="message in messages"
+                                        v-bind:key="message.pk"
+                                      >
+                                        <div
+                                          v-if="
+                                            message.sender.username ==
+                                            user_data.username
+                                          "
+                                        >
+                                          <v-row>
+                                            <v-col cols="4"></v-col>
+                                            <v-col cols="8">
+                                              <v-card
+                                                elevation="5"
+                                                class="mx-auto my-auto"
+                                                outlined
+                                                rounded
+                                                data-toggle="tooltip"
+                                                data-placement="bottom"
+                                                :title="
+                                                  'Wysłano ' +
+                                                  extractDate(message.created)
+                                                "
+                                              >
+                                                <v-card-text
+                                                  class="text-left text-body-1 font-weight-medium"
+                                                >
+                                                  {{ message.message }}
+                                                </v-card-text>
+                                              </v-card>
+                                            </v-col>
+                                          </v-row>
+                                          <br />
+                                        </div>
+                                        <div v-else>
+                                          <v-row>
+                                            <v-col cols="1">
+                                              <v-avatar>
+                                                <img
+                                                  :src="
+                                                    getUrl(
+                                                      message.sender
+                                                        .profile_picture
+                                                    )
+                                                  "
+                                                />
+                                              </v-avatar>
+                                            </v-col>
+                                            <v-col cols="8">
+                                              <v-card
+                                                elevation="5"
+                                                outlined
+                                                class="ml-1 my-auto"
+                                                rounded
+                                                data-toggle="tooltip"
+                                                data-placement="bottom"
+                                                :title="
+                                                  'Wysłano ' +
+                                                  extractDate(message.created)
+                                                "
+                                              >
+                                                <v-card-text
+                                                  class="text-left text-body-1 font-weight-medium"
+                                                >
+                                                  {{ message.message }}
+                                                </v-card-text>
+                                              </v-card>
+                                            </v-col>
+                                            <v-col cols="3"></v-col>
+                                          </v-row>
+                                        </div>
+                                      </div>
+                                      <!--</div>-->
+                                    </v-card-text>
+
+                                    <v-card-actions
+                                      class="purple lighten-5"
+                                      @click="getMessages(user.username)"
+                                    >
+                                      <v-form>
+                                        <v-container>
+                                          <v-text-field
+                                            @click="getMessages(user.username)"
+                                            v-model="message"
+                                            prepend-icon="mdi-chat-processing"
+                                            :rules="[
+                                              (v) =>
+                                                (v || '').length <= 199 ||
+                                                'Maksymalna długość wiadomości to 200 znaków!',
+                                            ]"
+                                            :append-outer-icon="
+                                              message
+                                                ? 'mdi-send'
+                                                : 'mdi-send-lock'
+                                            "
+                                            filled
+                                            clear-icon="mdi-close-circle"
+                                            clearable
+                                            label="Wiadomość"
+                                            type="text"
+                                            @click:append-outer="
+                                              sendMessage(
+                                                message,
+                                                user.username
+                                              );
+                                              getMessages(user.username);
+                                            "
+                                            @click:clear="clearMessage"
+                                          ></v-text-field>
+                                        </v-container>
+                                      </v-form>
+                                    </v-card-actions>
+                                  </v-card>
+                                </template>
+                              </v-dialog>
+                              <v-divider vertical></v-divider>
+                              <div v-if="userStatus() == 'none'">
+                                <v-btn
+                                  :class="inv ? 'blue--text' : ''"
+                                  icon
+                                  x-large
+                                  @click="
+                                    inviteUser();
+                                    toast(
+                                      'b-toaster-bottom-right',
+                                      'info',
+                                      'Wysłano zaproszenie do grona znajomych.'
+                                    );
+                                  "
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Zaproś do grona znajomych"
+                                >
+                                  <v-icon>mdi-account-plus</v-icon>
+                                </v-btn>
+                              </div>
+                              <div v-else-if="userStatus() == 'friend'">
+                                <v-btn
+                                  icon
+                                  x-large
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Usuń z grona znajomych"
+                                  @click="removeFriend(user.pk)"
+                                >
+                                  <v-icon color="green"
+                                    >mdi-account-check</v-icon
+                                  >
+                                </v-btn>
+                              </div>
+                              <div v-else-if="userStatus() == 'waiting'">
+                                <v-btn
+                                  icon
+                                  x-large
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Oczekiwanie na akceptację"
+                                  @click="
+                                    toast(
+                                      'b-toaster-bottom-right',
+                                      'info',
+                                      'Użytkownik czeka na akceptację w twoich powiadomieniach!'
+                                    )
+                                  "
+                                >
+                                  <v-icon color="blue"
+                                    >mdi-account-question</v-icon
+                                  >
+                                </v-btn>
+                              </div>
+                              <v-divider vertical></v-divider>
+                              <v-btn
+                                icon
+                                x-large
+                                @click="$bvModal.show('user_gallery')"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="Zobacz galerię"
+                              >
+                                <v-icon color="purple">mdi-image-search</v-icon>
+                              </v-btn>
+                              <v-divider vertical></v-divider>
+                              <div v-if="isUserLiked() == false">
+                                <v-btn
+                                  icon
+                                  x-large
+                                  @click="blockUser()"
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Zablokuj użytkownika"
+                                >
+                                  <v-icon>mdi-lock</v-icon>
+                                </v-btn>
+                              </div>
+                              <div v-else>
+                                <v-btn
+                                  icon
+                                  x-large
+                                  @click="
+                                    toast(
+                                      'b-toaster-bottom-right',
+                                      'danger',
+                                      'Nie możesz zablokować polubionego użytkownika.'
+                                    )
+                                  "
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title="Nie możesz zablokować polubionego użytkownika."
+                                >
+                                  <v-icon>mdi-lock-off</v-icon>
+                                </v-btn>
+                              </div>
+                            </v-list-item>
+                          </v-list>
+                        </v-card>
+                      </v-menu>
+                      <div v-if="user.settings.hide_age == 'nobody'">
+                        <v-card-title class="white--text"
+                          >{{ user.username }} ({{
+                            getAge(user.birthday)
+                          }})</v-card-title
+                        >
+                      </div>
+                      <div v-else>
+                        <v-card-title class="white--text"
+                          >{{ user.username }}
+                        </v-card-title>
+                      </div>
+                    </v-app-bar>
+
+                    <v-card-text class="white--text text-left">
+                      <h4 v-if="user.description != null">
+                        <p class="font-italic">{{ user.description }}</p>
+                      </h4>
+                      <h4 v-else>
+                        <p class="font-italic text-center">Brak opisu.</p>
+                      </h4>
+                    </v-card-text>
+                  </div>
+                </v-col>
+                <v-col cols="4">
+                  <v-avatar class="ma-3 mr-5" size="125" tile>
+                    <v-img
+                      class="white--text align-end"
+                      :src="getUrl(user.profile_picture)"
+                      aspect-ratio="1"
+                    >
+                    </v-img>
+                  </v-avatar>
+                </v-col>
+              </v-row>
+            </v-card>
           </div>
           <br />
         </v-col>
-        <v-col lg="5" md="6" sm="6" xs="6">
+        <v-col lg="5" md="6" sm="12" xs="12">
           <div>
             <v-card>
               <v-toolbar flat color="purple" dark>
