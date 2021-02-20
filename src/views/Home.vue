@@ -1,60 +1,259 @@
 <template>
   <v-container>
-    <v-row no-gutters align="start">
-      <v-col cols="4">
-        <h1>Witamy w e-love</h1>
-      </v-col>
-      <v-col cols="4"> </v-col>
-      <v-col cols="4"> </v-col>
-    </v-row>
     <br />
     <v-row>
-      <v-col class="leftside" lg="4" sm="7">
-        <h4>Tu znajdziesz swoją drugą połówkę!</h4>
-        <br />
-
-        <div class="text">
-          Jeśli szukasz miłości, życiowego partnera, lub po prostu osoby, z
-          którą można porozmawiać na wspólne tematy to dobrze trafiłeś. Serwis
-          e-Love skierowany jest do każdego użytkownika bez względu na wiek, czy
-          rodzaj zawieranych relacji.
-          <br />W dzisiejszych czasach samotność jest bardzo częstym problemem i
-          dotyka ludzi z każdego przedziału wiekowego. Poza faktem iż samotność
-          sama w sobie jest przykrym uczuciem, należy dodać, że jak donoszą
-          najnowsze badania, długotrwałe jej doświadczanie bardzo niekorzystnie
-          wpływa na nasze zdrowie. <br />
-          Nasz portal jest stale rozwijany i powiększa się nie tylko o nowe
-          funkcjonalności ale i nowych użytkowników. Zapraszamy do darmowej
-          rejestracji!
+      <v-col lg="4" sm="7" xs="10">
+        <v-card
+          class="mx-auto"
+          outlined
+          max-width="550"
+          color="rgb(255, 198, 247, 0.7)"
+          elevation="15"
+        >
           <br />
-        </div>
-        <br />
+          <v-card-title
+            ><v-spacer></v-spacer>
+            <h2>Witamy w e-Love</h2>
+            <v-spacer></v-spacer
+          ></v-card-title>
 
-        <p></p>
-        <blockquote class="blockquote text-right">
-          <h6>
-            "Każdy powinien mieć kogoś, z kim mógłby szczerze pomówić, bo choćby
-            człowiek był nie wiadomo jak dzielny, czasami czuje się bardzo
-            samotny."
-          </h6>
-          <footer class="blockquote-footer">
-            Ernest Hemingway
-            <cite title="Source Title">"Komu bije dzwon"</cite>
-          </footer>
-        </blockquote>
+          <br />
+          <v-card-subtitle class="pb-0"
+            ><h6>
+              Tu znajdziesz swoją drugą połówkę!
+              <v-icon class="ml-2 mr-2">mdi-heart-half-full</v-icon>
+            </h6></v-card-subtitle
+          >
+          <br />
+          <v-card-text class="text--primary">
+            <div class="text">
+              Jeśli szukasz miłości, życiowego partnera, lub po prostu osoby, z
+              którą można porozmawiać na wspólne tematy to dobrze trafiłeś.
+              Serwis e-Love skierowany jest do każdego użytkownika bez względu
+              na wiek, czy rodzaj zawieranych relacji.
+              <div class="hidden-md-and-down">
+                <br />W dzisiejszych czasach samotność jest bardzo częstym
+                problemem i dotyka ludzi z każdego przedziału wiekowego. Poza
+                faktem iż samotność sama w sobie jest przykrym uczuciem, należy
+                dodać, że jak donoszą najnowsze badania, długotrwałe jej
+                doświadczanie bardzo niekorzystnie wpływa na nasze zdrowie.
+              </div>
+              <br />
+              Nasz portal jest stale rozwijany i powiększa się nie tylko o nowe
+              funkcjonalności ale i nowych użytkowników.
+              <br />
+              <p>Zapraszamy do darmowej rejestracji!</p>
+              <br />
+              <div class="hidden-md-and-up">
+                <v-spacer></v-spacer>
+                <v-row justify="center">
+                  <br />
+                  <v-dialog
+                    v-model="registerDialog"
+                    persistent
+                    max-width="600px"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="purple"
+                        class="white--text"
+                        x-large
+                        dark
+                        v-bind="attrs"
+                        v-on="on"
+                        elevation="5"
+                      >
+                        <button class="font-weight-bold">
+                          Zarejestruj się
+                        </button>
+                      </v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title flex class="purple">
+                        <br />
+                        <v-spacer></v-spacer>
+                        <span class="headline white--text">Rejestracja</span>
+                        <v-spacer></v-spacer>
+                      </v-card-title>
+
+                      <v-form
+                        @submit.prevent="createUser"
+                        v-model="valid"
+                        ref="form"
+                      >
+                        <v-card-text>
+                          <v-container>
+                            <v-row>
+                              <v-col cols="12" sm="6">
+                                <v-text-field
+                                  label="Nazwa użytkownika"
+                                  type="text"
+                                  name="username"
+                                  id="username"
+                                  v-model="username"
+                                  :rules="usernameRules"
+                                  :counter="20"
+                                  required
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" sm="6">
+                                <v-text-field
+                                  label="Miejsce zamieszkania"
+                                  type="text"
+                                  name="Location"
+                                  id="Location"
+                                  v-model="location"
+                                  :rules="locationRules"
+                                  required
+                                ></v-text-field>
+                              </v-col>
+
+                              <v-col cols="12" sm="6">
+                                <v-text-field
+                                  label="Email"
+                                  type="email"
+                                  name="email"
+                                  id="email"
+                                  v-model="email"
+                                  :rules="emailRules"
+                                  required
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" sm="6">
+                                <br />
+
+                                Data urodzenia:
+                                <input
+                                  type="date"
+                                  name="birthday"
+                                  id="birthday"
+                                  v-model="birthday"
+                                  :rules="ageRules"
+                                  required
+                                />
+                              </v-col>
+
+                              <v-col cols="12">
+                                <v-text-field
+                                  label="Hasło"
+                                  type="password"
+                                  name="password"
+                                  id="password"
+                                  v-model="password"
+                                  :rules="passwordRules"
+                                  required
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12">
+                                <v-text-field
+                                  label="Powtórz hasło"
+                                  type="password"
+                                  name="password2"
+                                  id="password2"
+                                  v-model="password2"
+                                  :rules="
+                                    password2Rules.concat(
+                                      passwordConfirmationRule
+                                    )
+                                  "
+                                  required
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" sm="6">
+                                <v-select
+                                  :items="['Mężczyzna', 'Kobieta']"
+                                  label="Płeć"
+                                  required
+                                  name="Sex"
+                                  id="Sex"
+                                  v-model="sex"
+                                  :rules="sexRules"
+                                ></v-select>
+                              </v-col>
+                              <v-col cols="12" sm="6">
+                                <!-- v-model="checked" -->
+                                <v-checkbox
+                                  label="Akceptuję regulamin serwisu"
+                                  required
+                                  type="checkbox"
+                                  id="checkbox"
+                                  :rules="checkedRules"
+                                ></v-checkbox>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                          <br />
+                        </v-card-text>
+
+                        <v-card-actions>
+                          <v-btn
+                            color="red darken-1"
+                            text
+                            outlined
+                            @click="registerDialog = false"
+                          >
+                            Zamknij
+                          </v-btn>
+
+                          <v-spacer></v-spacer>
+                          <div v-if="valid == true">
+                            <v-btn
+                              color="green darken-1"
+                              text
+                              @click="createUser()"
+                              outlined
+                            >
+                              Zarejestruj
+                            </v-btn>
+                          </div>
+                          <div v-else>
+                            <v-btn
+                              color="grey darken-1"
+                              text
+                              @click="validate()"
+                              outlined
+                            >
+                              Zarejestruj
+                            </v-btn>
+                          </div>
+                        </v-card-actions>
+                      </v-form>
+                    </v-card>
+                  </v-dialog>
+                </v-row>
+                <v-spacer></v-spacer>
+              </div>
+            </div>
+            <br />
+
+            <p></p>
+            <blockquote class="blockquote text-right">
+              <h6>
+                "Każdy powinien mieć kogoś, z kim mógłby szczerze pomówić, bo
+                choćby człowiek był nie wiadomo jak dzielny, czasami czuje się
+                bardzo samotny."
+              </h6>
+              <footer class="blockquote-footer">
+                Ernest Hemingway
+                <cite title="Source Title">"Komu bije dzwon"</cite>
+              </footer>
+            </blockquote>
+          </v-card-text>
+        </v-card>
       </v-col>
+
       <br />
-      <v-col lg="5" sm="1"></v-col>
-      <v-col cols="3">
+      <v-col lg="5" md="3" sm="1" xs="0"></v-col>
+      <v-col lg="3" sm="2" xs="0" class="hidden-sm-and-down">
         <br />
 
         <div class="card text-black mb-3 rightside" style="width: 19rem">
-          <div class="card-body no-background">
+          <div class="card-body no-background elevation-15">
             <br />
             <h3 class="card-title no-background">Nie masz konta?</h3>
             <br />
             <h6>
-              <p class="card-text no-background">
+              <p class="text--primary">
                 Dołącz do społeczności e-love zakładając darmowe konto!
               </p>
             </h6>
@@ -69,6 +268,7 @@
                     dark
                     v-bind="attrs"
                     v-on="on"
+                    elevation="5"
                   >
                     <button class="font-weight-bold">Zarejestruj się</button>
                   </v-btn>
@@ -559,26 +759,22 @@ export default {
 text {
   text-align: left;
 }
-.leftside {
+/*.leftside {
   background-color: rgba(252, 198, 225, 0.8);
-  /*padding: 20px;*/
+  
   color: #812b3b;
   border-color: blueviolet;
   border-radius: 25px;
   border-style: solid;
   border-width: 1px;
-  /*
-  border-color: #a89172;
-  background-color: #fdefddc0;
-  box-shadow: 1px 1px #a89172;
-  */
-}
+  
+}*/
 .rightside {
-  background-color: rgba(252, 198, 225, 0.8);
+  background-color: rgba(255, 198, 247, 0.85);
   /*padding: 20px;*/
   color: #812b3b;
   border-color: blueviolet;
-  border-radius: 25px;
+  border-radius: 10px;
   border-style: solid;
   border-width: 1px;
 }
@@ -602,12 +798,12 @@ text {
   font: Arial;
   font-size: 16px;
 }
-h2 {
+/*h2 {
   font-size: 20px;
-}
-h1 {
+}*/
+h2 {
   color: purple;
-  text-shadow: 1px 1px #ac0101;
+  text-shadow: 2px 2px #dd7bd5;
 }
 .card text-black bg-secondary mb-3 {
   background-color: rgba(255, 255, 255, 0.3);

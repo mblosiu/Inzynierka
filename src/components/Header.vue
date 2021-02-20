@@ -28,30 +28,30 @@
           ></v-img>
         </a>
 
-        <b-nav-form id="logo" class="ml-1 mr-2" v-if="token != null">
-        </b-nav-form>
+        <!--<b-nav-form id="logo" class="ml-1 mr-2" v-if="token != null">
+        </b-nav-form>-->
         <b-nav-form id="search" @submit.prevent="search" v-if="token != null">
-          <v-btn
-            icon
-            large
-            data-toggle="tooltip"
-            title="Wyszukaj użytkowników po ich atrybutach i cechach"
-          >
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
           <b-form-input
             id="search-input"
             size="sm"
-            class="mr-sm-2"
             v-model="searchText"
             placeholder="wyszukaj użytkowników"
             name="search"
           />
         </b-nav-form>
+        <v-btn
+          v-if="token != null"
+          icon
+          large
+          data-toggle="tooltip"
+          title="Wyszukaj użytkowników po ich atrybutach i cechach"
+        >
+          <v-icon @click="search()">mdi-magnify</v-icon>
+        </v-btn>
 
-        <v-spacer></v-spacer>
+        <v-spacer class="hide-sm-and-down"></v-spacer>
 
-        <b-nav-form v-if="token != null">
+        <b-nav-form v-if="token != null" class="hidden-sm-and-down">
           <div v-if="usersFriends.length != 0">
             <v-badge
               overlap
@@ -88,7 +88,7 @@
             </v-btn>
           </div>
         </b-nav-form>
-        <b-nav-form v-if="token != null">
+        <b-nav-form v-if="token != null" class="hidden-sm-and-down">
           <div v-if="usersWaiting.length != 0">
             <v-badge
               overlap
@@ -125,7 +125,7 @@
             </v-btn>
           </div>
         </b-nav-form>
-        <b-nav-form v-if="token != null">
+        <b-nav-form v-if="token != null" class="hidden-sm-and-down">
           <div v-if="messagesFromStrangers.length != 0">
             <v-badge
               overlap
@@ -139,7 +139,7 @@
                 icon
                 color="purple darken-4"
                 data-toggle="tooltip"
-                title="Nowe wiadomości"
+                title="Nowe wiadomości od nieznajomych"
                 x-large
                 class="ml-2 mr-2"
                 @click.stop="newMessagesDialog = true"
@@ -153,7 +153,7 @@
               icon
               color="purple darken-4"
               data-toggle="tooltip"
-              title="Nowe wiadomości"
+              title="Nowe wiadomości od nieznajomych"
               x-large
               class="ml-2 mr-2"
               @click.stop="newMessagesDialog = true"
@@ -712,7 +712,7 @@
           </b-modal>
         </b-nav-form>
 
-        <b-nav-form v-if="token != null">
+        <b-nav-form v-if="token != null" class="hidden-sm-and-down">
           <div v-if="user_likes.length != 0">
             <v-badge
               overlap
@@ -928,7 +928,7 @@
         <div v-if="token == null">
           <v-alert
             v-model="valert"
-            class="mr-3 ml-3"
+            class="mr-3 ml-3 hidden-sm-and-down"
             dense
             :type="alertType"
             transition="fade-transition"
@@ -945,7 +945,11 @@
             >{{ msg }}</b-alert
           >-->
         </div>
-        <b-nav-form @submit.prevent="login" v-if="token == null">
+        <b-nav-form
+          @submit.prevent="login"
+          v-if="token == null"
+          class="hidden-sm-and-down"
+        >
           <b-form-input
             id="username"
             size="sm"
@@ -975,6 +979,217 @@
           >
         </b-nav-form>
 
+        <v-menu transition="scroll-y-transition">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              v-if="token != null"
+              color="purple lighten-2"
+              medium
+              class="ml-5 hidden-md-and-up"
+            >
+              <v-icon class="mr-2">mdi-account-details</v-icon
+              ><button class="font-weight-bold">Menu</button>
+            </v-btn>
+          </template>
+          <v-list class="purple">
+            <v-list-item>
+              <div v-if="usersFriends.length != 0">
+                <v-badge
+                  overlap
+                  offset-x="25"
+                  offset-y="27"
+                  bottom
+                  color="green"
+                  :content="usersFriends.length"
+                >
+                  <v-btn
+                    icon
+                    color="purple darken-4"
+                    data-toggle="tooltip"
+                    title="Znajomi"
+                    x-large
+                    class="ml-2 mr-2"
+                    @click="friendlist = !friendlist"
+                  >
+                    <v-icon>mdi-account-group</v-icon>
+                  </v-btn>
+                </v-badge>
+              </div>
+              <div v-else>
+                <v-btn
+                  icon
+                  color="purple darken-4"
+                  data-toggle="tooltip"
+                  title="Znajomi"
+                  x-large
+                  class="ml-2 mr-2"
+                  @click="friendlist = !friendlist"
+                >
+                  <v-icon>mdi-account-group</v-icon>
+                </v-btn>
+              </div>
+            </v-list-item>
+          </v-list>
+          <v-list class="purple">
+            <v-list-item>
+              <div v-if="usersWaiting.length != 0">
+                <v-badge
+                  overlap
+                  offset-x="25"
+                  offset-y="27"
+                  bottom
+                  color="blue"
+                  :content="usersWaiting.length"
+                >
+                  <v-btn
+                    icon
+                    color="purple darken-4"
+                    data-toggle="tooltip"
+                    title="Zaproszenia do znajomych"
+                    v-b-modal.notifications
+                    x-large
+                    class="ml-2 mr-2"
+                  >
+                    <v-icon>mdi-account-plus</v-icon>
+                  </v-btn>
+                </v-badge>
+              </div>
+              <div v-else>
+                <v-btn
+                  icon
+                  color="purple darken-4"
+                  data-toggle="tooltip"
+                  title="Zaproszenia do znajomych"
+                  v-b-modal.notifications
+                  x-large
+                  class="ml-2 mr-2"
+                >
+                  <v-icon>mdi-account-plus</v-icon>
+                </v-btn>
+              </div>
+            </v-list-item>
+          </v-list>
+          <v-list class="purple">
+            <v-list-item>
+              <div v-if="messagesFromStrangers.length != 0">
+                <v-badge
+                  overlap
+                  offset-x="25"
+                  offset-y="27"
+                  bottom
+                  color="blue"
+                  :content="messagesFromStrangers.length"
+                >
+                  <v-btn
+                    icon
+                    color="purple darken-4"
+                    data-toggle="tooltip"
+                    title="Nowe wiadomości od nieznajomych"
+                    x-large
+                    class="ml-2 mr-2"
+                    @click.stop="newMessagesDialog = true"
+                  >
+                    <v-icon>mdi-message-text</v-icon>
+                  </v-btn>
+                </v-badge>
+              </div>
+              <div v-else>
+                <v-btn
+                  icon
+                  color="purple darken-4"
+                  data-toggle="tooltip"
+                  title="Nowe wiadomości od nieznajomych"
+                  x-large
+                  class="ml-2 mr-2"
+                  @click.stop="newMessagesDialog = true"
+                >
+                  <v-icon>mdi-message-text</v-icon>
+                </v-btn>
+              </div>
+            </v-list-item>
+          </v-list>
+          <v-list class="purple">
+            <v-list-item>
+              <div v-if="user_likes.length != 0">
+                <v-badge
+                  overlap
+                  offset-x="25"
+                  offset-y="27"
+                  bottom
+                  color="green"
+                  :content="user_likes.length"
+                >
+                  <v-btn
+                    icon
+                    color="purple darken-4"
+                    data-toggle="tooltip"
+                    title="Polubienia"
+                    x-large
+                    v-b-modal.likes
+                    class="ml-2 mr-2"
+                  >
+                    <v-icon>mdi-account-heart</v-icon>
+                  </v-btn>
+                </v-badge>
+              </div>
+              <div v-else>
+                <v-btn
+                  icon
+                  color="purple darken-4"
+                  data-toggle="tooltip"
+                  title="Polubienia"
+                  x-large
+                  v-b-modal.likes
+                  class="ml-2 mr-2"
+                >
+                  <v-icon>mdi-account-heart</v-icon>
+                </v-btn>
+              </div>
+            </v-list-item>
+          </v-list>
+          <v-list class="purple">
+            <v-list-item>
+              <div v-if="userCouples.length != 0">
+                <v-badge
+                  overlap
+                  offset-x="25"
+                  offset-y="27"
+                  bottom
+                  color="pink"
+                  :content="userCouples.length"
+                >
+                  <v-btn
+                    icon
+                    color="red darken"
+                    data-toggle="tooltip"
+                    title="Pary"
+                    x-large
+                    v-b-modal.couples
+                    class="ml-2 mr-2"
+                  >
+                    <v-icon>mdi-heart</v-icon>
+                  </v-btn>
+                </v-badge>
+              </div>
+              <div v-else>
+                <v-btn
+                  icon
+                  color="purple darken-4"
+                  data-toggle="tooltip"
+                  title="Pary"
+                  x-large
+                  v-b-modal.couples
+                  class="ml-2 mr-2"
+                >
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+              </div>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
         <b-nav-form @submit.prevent="logout" v-if="token != null">
           <v-btn
             data-toggle="tooltip"
@@ -989,6 +1204,15 @@
             ></v-btn
           >
         </b-nav-form>
+        <v-btn
+          v-if="token == null"
+          color="purple lighten-3"
+          elevation="4"
+          small
+          class="my-2 ml-2 hidden-md-and-up"
+          @click="loginDialog = true"
+          ><button class="font-weight-bold">Logowanie</button></v-btn
+        >
       </v-app-bar>
 
       <v-navigation-drawer
@@ -1021,14 +1245,7 @@
 
         <v-list class="d-flex flex-row mb-6">
           <div>
-            <v-btn
-              block
-              x-large
-              fixed
-              depressed
-              class="purple"
-              href="/mainuser"
-            >
+            <v-btn block x-large depressed class="purple" href="/mainuser">
               <div>
                 <v-icon x-large class="ml-0" color="white"
                   >mdi-card-account-details</v-icon
@@ -1047,7 +1264,6 @@
             <v-btn
               block
               x-large
-              fixed
               depressed
               class="purple"
               href="/mainuser/search"
@@ -1072,7 +1288,6 @@
                 <v-btn
                   block
                   x-large
-                  fixed
                   depressed
                   v-bind="attrs"
                   v-on="on"
@@ -1233,7 +1448,6 @@
             <v-btn
               block
               x-large
-              fixed
               depressed
               class="purple"
               href="/mainuser/gallery"
@@ -1256,7 +1470,6 @@
             <v-btn
               block
               x-large
-              fixed
               depressed
               class="purple"
               href="/mainuser/settings"
@@ -1587,6 +1800,80 @@
         </div>
       </v-navigation-drawer>
     </nav>
+    <v-row justify="center">
+      <v-dialog v-model="loginDialog" min-width="250" max-width="370">
+        <v-card>
+          <v-card-title flex class="purple">
+            <v-spacer></v-spacer>
+            <span class="headline white--text">Logowanie</span>
+            <v-spacer></v-spacer>
+          </v-card-title>
+
+          <v-card-actions>
+            <v-card flat>
+              <v-form @submit.prevent="login" v-if="token == null">
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" md="6">
+                      <v-text-field
+                        id="username"
+                        class="mr-sm-2"
+                        v-model="username"
+                        name="username"
+                        label="Nazwa użytkownika"
+                        required
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12" md="6">
+                      <v-text-field
+                        label="Hasło"
+                        id="password"
+                        class="mr-sm-2"
+                        type="password"
+                        v-model="password"
+                        name="password"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-spacer></v-spacer>
+                    <v-alert
+                      v-model="valert"
+                      class="mr-3 ml-3"
+                      dense
+                      :type="alertType"
+                      transition="fade-transition"
+                    >
+                      {{ alertMsg }}
+                    </v-alert>
+                    <v-spacer></v-spacer>
+                  </v-row>
+                  <v-row>
+                    <v-btn
+                      color="red darken-1"
+                      text
+                      @click="loginDialog = false"
+                    >
+                      Zamknij
+                    </v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="purple darken-1"
+                      text
+                      v-on:click="login"
+                      type="submit"
+                      >Zaloguj</v-btn
+                    >
+                  </v-row>
+                </v-container>
+              </v-form>
+            </v-card>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
   </v-container>
 </template>
 

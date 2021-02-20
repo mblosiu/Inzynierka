@@ -1,15 +1,16 @@
 <template>
   <v-container>
+    <br />
     <v-row>
-      <v-col lg="1"> </v-col>
-      <v-col cols="5" lg="5" md="5" sm="5" xs="5">
+      <v-col lg="1" md="1" sm="0" xs="0" > </v-col>
+      <v-col lg="5" md="5" sm="12" xs="12">
         <div>
           <v-card
             outlined
             rounded
             max-width="500"
             min-height="500"
-            class="mx-auto"
+            class="mx-auto hidden-sm-and-down"
             color="purple"
           >
             <v-img
@@ -42,10 +43,51 @@
               </h4>
             </v-card-text>
           </v-card>
+          <v-card
+            outlined
+            rounded
+            max-width="500"
+            class="mx-auto hidden-md-and-up"
+            color="purple"
+          >
+            
+              <v-row>
+                <v-col cols="8">
+                  <div>
+                    <v-card-title class="white--text"
+                      >{{ user_data.username }} ({{
+                        getAge(user_data.birthday)
+                      }})</v-card-title
+                    >
+
+                    <v-card-text class="white--text text-left">
+                      <h4 v-if="user_data.description != null">
+                        <p class="font-italic">{{ user_data.description }}</p>
+                      </h4>
+                      <h4 v-else>
+                        <p class="font-italic text-center">Brak opisu.</p>
+                      </h4>
+                    </v-card-text>
+                  </div>
+                </v-col>
+                <v-col cols="4">
+                  <v-avatar class="ma-3" size="125" tile>
+                    <v-img
+                      class="white--text align-end"
+                      :src="getUrl(user_data.profile_picture)"
+                      aspect-ratio="1"
+                    >
+                    </v-img>
+                  </v-avatar>
+                </v-col>
+              </v-row>
+            
+          </v-card>
         </div>
         <br />
       </v-col>
-      <v-col lg="5" md="6" sm="6" xs="6">
+
+      <v-col lg="5" md="12" sm="12" xs="12">
         <div>
           <v-card>
             <v-toolbar flat color="purple" dark>
@@ -425,6 +467,7 @@
       </v-col>
       <v-col lg="1"></v-col>
     </v-row>
+    <br />
   </v-container>
 </template>
 

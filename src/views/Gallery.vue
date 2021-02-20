@@ -2,8 +2,41 @@
   <v-container>
     <v-row>
       
-      <v-toolbar color="purple" fixed>
-        <v-icon color="white" class="mr-3" x-large>mdi-image-plus</v-icon>
+      <v-toolbar class="hidden-sm-and-down" color="purple" fixed>
+        <v-icon color="white" class="mr-3 " x-large>mdi-image-plus</v-icon>
+        <v-toolbar-title class="white--text">Galeria</v-toolbar-title>
+        <v-spacer></v-spacer>
+
+        <div class="fileupload">
+          <label>
+            <input
+              type="file"
+              id="file"
+              ref="file"
+              v-on:change="handleFileUpload()"
+            />
+          </label>
+          <v-btn
+            class="ml-2"
+            color="purple lighten-2"
+            dense
+            v-on:click="submitFile()"
+          >
+            <button bold class="white--text">Wyślij</button>
+          </v-btn>
+        </div>
+        <v-icon
+          color="white"
+          class="ml-3"
+          x-large
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Z racji problemów z obsługą większych zdjęć, prosimy o wybieranie plików o niedużych wymiarach (najlepiej do ok 800x600)"
+          >mdi-alert-circle-outline</v-icon
+        >
+      </v-toolbar>
+      <v-toolbar class="hidden-md-and-up" color="purple" fixed height="100">
+        <v-icon color="white" class="mr-3 hidden-sm-and-down" x-large>mdi-image-plus</v-icon>
         <v-toolbar-title class="white--text">Galeria</v-toolbar-title>
         <v-spacer></v-spacer>
 

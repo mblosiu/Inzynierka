@@ -16,12 +16,13 @@
           </v-col>
           <v-col cols="11"></v-col>
         </v-row>
-        <v-row>
-          <v-col cols="1"></v-col>
-          <v-col cols="10">
-            <form id="filters" @submit.prevent="getPageUsers">
+        <form id="filters" @submit.prevent="getPageUsers">
+          <v-row>
+            <v-col cols="1"></v-col>
+            <v-col cols="10">
+              <!--form-->
               <v-row>
-                <v-col cols="2">
+                <v-col md="2" lg="2" sm="6" xs="6">
                   <b-form-select
                     :options="sex_options"
                     class="ml-2"
@@ -32,7 +33,7 @@
                     placeholder="Płeć"
                   ></b-form-select>
                 </v-col>
-                <v-col cols="2">
+                <v-col md="2" lg="2" sm="6" xs="6">
                   <input
                     class="form-control ml-2"
                     type="text"
@@ -41,7 +42,7 @@
                     v-model="location"
                   />
                 </v-col>
-                <v-col cols="6">
+                <v-col cols="6" class="hidden-sm-and-down">
                   <v-card flat color="transparent">
                     <h5 class="white--text">
                       Przedział wiekowy: {{ age_min }} - {{ age_max }}
@@ -78,7 +79,7 @@
                   </v-card>
                 </v-col>
 
-                <v-col cols="1">
+                <v-col cols="1" class="hidden-sm-and-down">
                   <button type="submit" @click="page = 1">
                     <v-btn x-large block color="purple lighten-2">
                       <b class="white--text">Filtruj</b>
@@ -86,11 +87,57 @@
                   </button>
                 </v-col>
               </v-row>
-            </form>
-          </v-col>
-          <v-col cols="1"></v-col>
-        </v-row>
+            </v-col>
+            <v-col cols="1"></v-col>
+          </v-row>
+          <v-row class="hidden-md-and-up">
+            <v-spacer></v-spacer>
+            <v-card flat color="transparent">
+              <h5 class="white--text">
+                Przedział wiekowy: {{ age_min }} - {{ age_max }}
+              </h5>
 
+              <v-card-text>
+                <v-row>
+                  <v-col cols="1"></v-col>
+                  <v-col cols="5">
+                    <div>
+                      <b-form-input
+                        id="age_min"
+                        v-model="age_min"
+                        type="range"
+                        min="18"
+                        :max="age_max"
+                      ></b-form-input>
+                    </div>
+                  </v-col>
+                  <v-col cols="5">
+                    <div>
+                      <b-form-input
+                        id="age_max"
+                        v-model="age_max"
+                        type="range"
+                        :min="age_min"
+                        max="100"
+                      ></b-form-input>
+                    </div>
+                  </v-col>
+                  <v-col cols="1"></v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+            <v-spacer></v-spacer>
+          </v-row>
+          <v-row class="hidden-md-and-up">
+            <v-spacer></v-spacer>
+            <button type="submit" @click="page = 1">
+              <v-btn x-large block color="purple lighten-2">
+                <b class="white--text">Filtruj</b>
+              </v-btn>
+            </button>
+            <v-spacer></v-spacer>
+          </v-row>
+        </form>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn

@@ -254,7 +254,47 @@
                           <br />
                           <b-row>
                             <br />
-                            <b-col cols="12"> </b-col>
+                            <b-col cols="12">
+                              <!--<label for="special_options" class="grey-text">Znaki szczególne</label>
+                          <br />
+                          <input
+                            type="checkbox"
+                            id="glasses"
+                            value="okulary"
+                            v-model="special_options"
+                          />
+                          <label for="glasses">Okulary</label>
+                          <input
+                            type="checkbox"
+                            id="freckles"
+                            value="piegi"
+                            v-model="special_options"
+                          />
+                          <label for="freckles">Piegi</label>
+                          <input
+                            type="checkbox"
+                            id="scars"
+                            value="blizny"
+                            v-model="special_options"
+                          />
+                          <label for="scars">Blizny</label>
+                          <input
+                            type="checkbox"
+                            id="body_piercing"
+                            value="body piercing"
+                            v-model="special_options"
+                          />
+                          <label for="body_piercing">Body piercing</label>
+                          <input
+                            type="checkbox"
+                            id="tattoos"
+                            value="tatuaże"
+                            v-model="special_options"
+                          />
+                          <label for="tattoos">Tatuaże</label>
+                          <br />
+                        <span>Zaznaczono: {{ special_options }}</span>-->
+                            </b-col>
                           </b-row>
                         </ul>
                       </ul>
@@ -272,7 +312,128 @@
               </v-row>
             </v-card>
           </v-tab-item>
+          <!--<v-tab-item>
+            <v-card flat>
+              <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="10">
+                  <v-card-text>
+                    <form class="card" @submit.prevent="editUserData">-->
 
+          <!--<ul class="list-group list-group-flush">
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                          <label for="entertainment" class="grey-text">Rozrywka i hobby:</label>
+                          <br />
+                          <input type="checkbox" id="jack" value="Shopping" v-model="checkedNames" />
+                          <label for="jack">Shopping</label>
+                          <input type="checkbox" id="john" value="Netflix" v-model="checkedNames" />
+                          <label for="john">Netflix</label>
+                          <input type="checkbox" id="mike" value="Książki" v-model="checkedNames" />
+                          <label for="mike">Książki</label>
+                        </b-col>
+                        <b-col cols="6">
+                          <label for="sport" class="grey-text">Sport:</label>
+                          <br />
+                          <input
+                            type="checkbox"
+                            id="jack"
+                            value="Piłka nożna"
+                            v-model="checkedNames"
+                          />
+                          <label for="jack">Piłka nożna</label>
+                          <input
+                            type="checkbox"
+                            id="john"
+                            value="Koszykówka"
+                            v-model="checkedNames"
+                          />
+                          <label for="john">Koszykówka</label>
+                          <input type="checkbox" id="mike" value="Pływactwo" v-model="checkedNames" />
+                          <label for="mike">Pływactwo</label>
+                      </b-col>
+                          </b-row>
+                        </ul>
+                        <ul class="list-group-item">
+                          <b-row>
+                            <b-col cols="6">
+                              <label for="music" class="grey-text">Muzyka:</label>
+                          <br />
+                          <input type="checkbox" id="jack" value="Rock" v-model="checkedNames" />
+                          <label for="jack">Rock</label>
+                          <input type="checkbox" id="john" value="Jazz" v-model="checkedNames" />
+                          <label for="john">Jazz</label>
+                          <input type="checkbox" id="mike" value="Pop" v-model="checkedNames" />
+                        <label for="mike">Pop</label>
+                            </b-col>
+                            <b-col cols="6">
+                              <label for="cooking" class="grey-text">Kuchnia:</label>
+                          <br />
+                          <input type="checkbox" id="jack" value="Polska" v-model="checkedNames" />
+                          <label for="jack">Polska</label>
+                          <input
+                            type="checkbox"
+                            id="john"
+                            value="Orientalna"
+                            v-model="checkedNames"
+                          />
+                          <label for="john">Orientalna</label>
+                          <input type="checkbox" id="mike" value="Studencka" v-model="checkedNames" />
+                        <label for="mike">Studencka</label>
+                            </b-col>
+                          </b-row>
+                        </ul>-->
+          <!--<ul class="list-group-item" grow>
+                        <b-row>
+                          <b-col cols="6">
+                            <label for="favourite_place" class="white-text"
+                              >Ulubione miejsce:</label
+                            >
+                            <input
+                              type="text"
+                              id="favourite_place"
+                              v-model="user_data.favourite_place"
+                              class="form-control"
+                            />
+                          </b-col>
+                          <b-col cols="6">
+                            <label for="passion" class="white-text"
+                              >Największa pasja:</label
+                            >
+                            <input
+                              type="text"
+                              id="passion"
+                              v-model="user_data.passion"
+                              class="form-control"
+                            />
+                          </b-col>
+                        </b-row>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                      </ul>
+
+                      <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success">
+                          Zapisz
+                        </button>
+                      </div>
+                      <p></p>
+                    </form>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="1"></v-col>
+              </v-row>
+            </v-card>
+          </v-tab-item>-->
           <v-tab-item>
             <v-card flat>
               <v-row>
@@ -553,6 +714,7 @@
                         </ul>-->
                         <ul class="list-group-item">
                           <b-row>
+                            <b-col cols="3" class="hidden-md-and-up"></b-col>
                             <b-col cols="6">
                               <!--<b-form-checkbox
                                 id="hide_age"
@@ -573,7 +735,7 @@
                                 :options="hide_age"
                               ></b-form-select>
                             </b-col>
-                            <b-col cols="6">
+                            <b-col cols="6" class="hidden-sm-and-down">
                               <b-row>
                                 <b-col cols="4"></b-col>
                                 <b-col cols="4">
@@ -645,6 +807,7 @@
                                 <b-col cols="4"></b-col>
                               </b-row>
                             </b-col>
+                            <b-col cols="3" class="hidden-md-and-up"></b-col>
                           </b-row>
                         </ul>
                       </ul>
@@ -659,7 +822,21 @@
                     <br />
                     <br />
                     <b-row>
-                      <b-col cols="3"></b-col>
+                      <b-col md="3" lg="3" sm="6" xs="6">
+                        <v-btn
+                          x-large
+                          class="hidden-md-and-up"
+                          color="black"
+                          elevation="5"
+                          v-b-modal.modal-blacklist
+                          @click="getUserBlacklist()"
+                          ><button class="white--text font-weight-black">
+                            Czarna lista</button
+                          ><v-icon color="white" class="ml-2"
+                            >mdi-account-cancel</v-icon
+                          ></v-btn
+                        >
+                      </b-col>
                       <b-col cols="6">
                         <v-btn
                           block
@@ -727,7 +904,7 @@
                           </v-card>
                         </v-dialog>
                       </b-col>
-                      <b-col cols="3"></b-col>
+                      <b-col md="3" lg="3" sm="0" xs="0"></b-col>
                     </b-row>
 
                     <br />
