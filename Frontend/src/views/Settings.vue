@@ -254,47 +254,7 @@
                           <br />
                           <b-row>
                             <br />
-                            <b-col cols="12">
-                              <!--<label for="special_options" class="grey-text">Znaki szczególne</label>
-                          <br />
-                          <input
-                            type="checkbox"
-                            id="glasses"
-                            value="okulary"
-                            v-model="special_options"
-                          />
-                          <label for="glasses">Okulary</label>
-                          <input
-                            type="checkbox"
-                            id="freckles"
-                            value="piegi"
-                            v-model="special_options"
-                          />
-                          <label for="freckles">Piegi</label>
-                          <input
-                            type="checkbox"
-                            id="scars"
-                            value="blizny"
-                            v-model="special_options"
-                          />
-                          <label for="scars">Blizny</label>
-                          <input
-                            type="checkbox"
-                            id="body_piercing"
-                            value="body piercing"
-                            v-model="special_options"
-                          />
-                          <label for="body_piercing">Body piercing</label>
-                          <input
-                            type="checkbox"
-                            id="tattoos"
-                            value="tatuaże"
-                            v-model="special_options"
-                          />
-                          <label for="tattoos">Tatuaże</label>
-                          <br />
-                        <span>Zaznaczono: {{ special_options }}</span>-->
-                            </b-col>
+                            <b-col cols="12"> </b-col>
                           </b-row>
                         </ul>
                       </ul>
@@ -312,128 +272,7 @@
               </v-row>
             </v-card>
           </v-tab-item>
-          <!--<v-tab-item>
-            <v-card flat>
-              <v-row>
-                <v-col cols="1"></v-col>
-                <v-col cols="10">
-                  <v-card-text>
-                    <form class="card" @submit.prevent="editUserData">-->
 
-          <!--<ul class="list-group list-group-flush">
-                        <ul class="list-group-item">
-                          <b-row>
-                            <b-col cols="6">
-                          <label for="entertainment" class="grey-text">Rozrywka i hobby:</label>
-                          <br />
-                          <input type="checkbox" id="jack" value="Shopping" v-model="checkedNames" />
-                          <label for="jack">Shopping</label>
-                          <input type="checkbox" id="john" value="Netflix" v-model="checkedNames" />
-                          <label for="john">Netflix</label>
-                          <input type="checkbox" id="mike" value="Książki" v-model="checkedNames" />
-                          <label for="mike">Książki</label>
-                        </b-col>
-                        <b-col cols="6">
-                          <label for="sport" class="grey-text">Sport:</label>
-                          <br />
-                          <input
-                            type="checkbox"
-                            id="jack"
-                            value="Piłka nożna"
-                            v-model="checkedNames"
-                          />
-                          <label for="jack">Piłka nożna</label>
-                          <input
-                            type="checkbox"
-                            id="john"
-                            value="Koszykówka"
-                            v-model="checkedNames"
-                          />
-                          <label for="john">Koszykówka</label>
-                          <input type="checkbox" id="mike" value="Pływactwo" v-model="checkedNames" />
-                          <label for="mike">Pływactwo</label>
-                      </b-col>
-                          </b-row>
-                        </ul>
-                        <ul class="list-group-item">
-                          <b-row>
-                            <b-col cols="6">
-                              <label for="music" class="grey-text">Muzyka:</label>
-                          <br />
-                          <input type="checkbox" id="jack" value="Rock" v-model="checkedNames" />
-                          <label for="jack">Rock</label>
-                          <input type="checkbox" id="john" value="Jazz" v-model="checkedNames" />
-                          <label for="john">Jazz</label>
-                          <input type="checkbox" id="mike" value="Pop" v-model="checkedNames" />
-                        <label for="mike">Pop</label>
-                            </b-col>
-                            <b-col cols="6">
-                              <label for="cooking" class="grey-text">Kuchnia:</label>
-                          <br />
-                          <input type="checkbox" id="jack" value="Polska" v-model="checkedNames" />
-                          <label for="jack">Polska</label>
-                          <input
-                            type="checkbox"
-                            id="john"
-                            value="Orientalna"
-                            v-model="checkedNames"
-                          />
-                          <label for="john">Orientalna</label>
-                          <input type="checkbox" id="mike" value="Studencka" v-model="checkedNames" />
-                        <label for="mike">Studencka</label>
-                            </b-col>
-                          </b-row>
-                        </ul>-->
-          <!--<ul class="list-group-item" grow>
-                        <b-row>
-                          <b-col cols="6">
-                            <label for="favourite_place" class="white-text"
-                              >Ulubione miejsce:</label
-                            >
-                            <input
-                              type="text"
-                              id="favourite_place"
-                              v-model="user_data.favourite_place"
-                              class="form-control"
-                            />
-                          </b-col>
-                          <b-col cols="6">
-                            <label for="passion" class="white-text"
-                              >Największa pasja:</label
-                            >
-                            <input
-                              type="text"
-                              id="passion"
-                              v-model="user_data.passion"
-                              class="form-control"
-                            />
-                          </b-col>
-                        </b-row>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                      </ul>
-
-                      <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-success">
-                          Zapisz
-                        </button>
-                      </div>
-                      <p></p>
-                    </form>
-                  </v-card-text>
-                </v-col>
-                <v-col cols="1"></v-col>
-              </v-row>
-            </v-card>
-          </v-tab-item>-->
           <v-tab-item>
             <v-card flat>
               <v-row>
@@ -681,50 +520,11 @@
                             </b-col>
                           </b-row>
                         </ul>
-                        <!--<ul class="list-group-item">
-                          <b-row>
-                            <b-col cols="12">
-                              Otrzymywanie powiadomień:<br />
-                            </b-col>
-                          </b-row>
-                          <v-row>
-                            <v-col cols="6">
-                              <b-form-checkbox
-                                id="new_likes"
-                                v-model="new_likes"
-                                name="checkbox-1"
-                                value="true"
-                                unchecked-value="false"
-                              >
-                                Polubienia od innych użytkowników
-                              </b-form-checkbox>
-                            </v-col>
-                            <v-col cols="6">
-                              <b-form-checkbox
-                                id="new_messages"
-                                v-model="new_messages"
-                                name="checkbox-1"
-                                value="true"
-                                unchecked-value="false"
-                              >
-                                Wiadomości prywatne
-                              </b-form-checkbox>
-                            </v-col>
-                          </v-row>
-                        </ul>-->
+
                         <ul class="list-group-item">
                           <b-row>
-                            <b-col cols="3" class="hidden-md-and-up"></b-col>
+                            <b-col cols="3"></b-col>
                             <b-col cols="6">
-                              <!--<b-form-checkbox
-                                id="hide_age"
-                                v-model="user_data.settings.hide_age"
-                                name="checkbox-1"
-                                value="true"
-                                unchecked-value="false"
-                              >
-                                Ukryj mój wiek dla innych użytkowników
-                              </b-form-checkbox>-->
                               <label for="hide_age" class="grey-text"
                                 >Ukrywanie wieku:</label
                               >
@@ -735,79 +535,7 @@
                                 :options="hide_age"
                               ></b-form-select>
                             </b-col>
-                            <b-col cols="6" class="hidden-sm-and-down">
-                              <b-row>
-                                <b-col cols="4"></b-col>
-                                <b-col cols="4">
-                                  <v-btn
-                                    x-large
-                                    color="black"
-                                    elevation="5"
-                                    v-b-modal.modal-blacklist
-                                    @click="getUserBlacklist()"
-                                    ><button
-                                      class="white--text font-weight-black"
-                                    >
-                                      Czarna lista</button
-                                    ><v-icon color="white" class="ml-2"
-                                      >mdi-account-cancel</v-icon
-                                    ></v-btn
-                                  >
-                                  <b-modal
-                                    id="modal-blacklist"
-                                    scrollable
-                                    title="Czarna lista"
-                                    hide-footer
-                                  >
-                                    <h5>
-                                      Zablokowani:
-                                      {{ blacklisted_users.length }}
-                                    </h5>
-                                    <b-list-group style="max-width: 470px">
-                                      <div
-                                        class="my-3"
-                                        v-for="blacklisted_user in blacklisted_users"
-                                        v-bind:key="blacklisted_user.pk"
-                                      >
-                                        <b-list-group-item
-                                          class="d-flex align-items-center"
-                                        >
-                                          <b-avatar
-                                            rounded
-                                            :src="
-                                              getUrl(
-                                                blacklisted_user.blacklisted
-                                                  .profile_picture
-                                              )
-                                            "
-                                            class="mr-3"
-                                            size="4rem"
-                                          ></b-avatar>
-                                          <span class="mr-auto"
-                                            ><strong>{{
-                                              blacklisted_user.blacklisted
-                                                .username
-                                            }}</strong>
-                                          </span>
-                                          <b-button
-                                            squared
-                                            variant="outline-success"
-                                            @click="
-                                              unblockUser(
-                                                blacklisted_user.blacklisted.pk
-                                              )
-                                            "
-                                            >Odblokuj</b-button
-                                          >
-                                        </b-list-group-item>
-                                      </div>
-                                    </b-list-group>
-                                  </b-modal>
-                                </b-col>
-                                <b-col cols="4"></b-col>
-                              </b-row>
-                            </b-col>
-                            <b-col cols="3" class="hidden-md-and-up"></b-col>
+                            <b-col cols="3"> </b-col>
                           </b-row>
                         </ul>
                       </ul>
@@ -822,89 +550,127 @@
                     <br />
                     <br />
                     <b-row>
-                      <b-col md="3" lg="3" sm="6" xs="6">
-                        <v-btn
-                          x-large
-                          class="hidden-md-and-up"
-                          color="black"
-                          elevation="5"
-                          v-b-modal.modal-blacklist
-                          @click="getUserBlacklist()"
-                          ><button class="white--text font-weight-black">
-                            Czarna lista</button
-                          ><v-icon color="white" class="ml-2"
-                            >mdi-account-cancel</v-icon
-                          ></v-btn
-                        >
-                      </b-col>
-                      <b-col cols="6">
-                        <v-btn
-                          block
-                          color="red darken-1"
-                          x-large
-                          elevation="5"
-                          @click.stop="deleteDialog = true"
-                          ><button class="white--text font-weight-black">
-                            Usuwanie konta
-                          </button>
-                          <v-icon class="ml-2" color="white"
-                            >mdi-delete-empty</v-icon
-                          ></v-btn
-                        >
-                        <v-dialog v-model="deleteDialog" max-width="450">
-                          <v-card>
-                            <v-card-title class="headline">
-                              Czy jesteś pewien?
-                            </v-card-title>
+                      <v-spacer></v-spacer>
+
+                      <v-btn
+                        color="black"
+                        elevation="5"
+                        v-b-modal.modal-blacklist
+                        @click="getUserBlacklist()"
+                        ><button class="white--text font-weight-black">
+                          Czarna lista</button
+                        ><v-icon color="white" class="ml-2"
+                          >mdi-account-cancel</v-icon
+                        ></v-btn
+                      >
+                      <b-modal
+                        id="modal-blacklist"
+                        scrollable
+                        title="Czarna lista"
+                        hide-footer
+                      >
+                        <h5>
+                          Zablokowani:
+                          {{ blacklisted_users.length }}
+                        </h5>
+                        <b-list-group style="max-width: 470px">
+                          <div
+                            class="my-3"
+                            v-for="blacklisted_user in blacklisted_users"
+                            v-bind:key="blacklisted_user.pk"
+                          >
+                            <b-list-group-item
+                              class="d-flex align-items-center"
+                            >
+                              <b-avatar
+                                rounded
+                                :src="
+                                  getUrl(
+                                    blacklisted_user.blacklisted.profile_picture
+                                  )
+                                "
+                                class="mr-3"
+                                size="4rem"
+                              ></b-avatar>
+                              <span class="mr-auto"
+                                ><strong>{{
+                                  blacklisted_user.blacklisted.username
+                                }}</strong>
+                              </span>
+                              <b-button
+                                squared
+                                variant="outline-success"
+                                @click="
+                                  unblockUser(blacklisted_user.blacklisted.pk)
+                                "
+                                >Odblokuj</b-button
+                              >
+                            </b-list-group-item>
+                          </div>
+                        </b-list-group>
+                      </b-modal>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="red darken-1"
+                        elevation="5"
+                        @click.stop="deleteDialog = true"
+                        ><button class="white--text font-weight-black">
+                          Usuwanie konta
+                        </button>
+                        <v-icon class="ml-2" color="white"
+                          >mdi-delete-empty</v-icon
+                        ></v-btn
+                      >
+                      <v-dialog v-model="deleteDialog" max-width="450">
+                        <v-card>
+                          <v-card-title class="headline">
+                            Czy jesteś pewien?
+                          </v-card-title>
+                          <v-divider></v-divider>
+                          <v-card-text class="text-left">
+                            Czy na pewno chcesz usunąć swoje konto z portalu
+                            e-Love? Historia konta i wszystkie przypisane do
+                            niego dane zostaną usunięte bezpowrotnie!
                             <v-divider></v-divider>
-                            <v-card-text class="text-left">
-                              Czy na pewno chcesz usunąć swoje konto z portalu
-                              e-Love? Historia konta i wszystkie przypisane do
-                              niego dane zostaną usunięte bezpowrotnie!
-                              <v-divider></v-divider>
 
-                              Aby kontynuować wpisz swoje hasło.
-                            </v-card-text>
-                            <v-row>
-                              <v-col cols="3"></v-col>
-                              <v-col cols="6">
-                                <v-text-field
-                                  label="Hasło*"
-                                  type="password"
-                                  required
-                                  name="password"
-                                  id="password"
-                                  v-model="password"
-                                ></v-text-field>
-                              </v-col>
-                              <v-col cols="3"></v-col>
-                            </v-row>
+                            Aby kontynuować wpisz swoje hasło.
+                          </v-card-text>
+                          <v-row>
+                            <v-col cols="6"> </v-col>
+                            <v-col cols="6">
+                              <v-text-field
+                                label="Hasło*"
+                                type="password"
+                                required
+                                name="password"
+                                id="password"
+                                v-model="password"
+                              ></v-text-field>
+                            </v-col>
+                          </v-row>
 
-                            <v-card-actions>
-                              <v-btn
-                                color="green darken-1"
-                                x-large
-                                text
-                                @click="deleteDialog = false"
-                                ><button class="font-weight-black">
-                                  Powrót
-                                </button>
-                              </v-btn>
-                              <v-spacer></v-spacer>
-                              <v-btn
-                                color="red darken-1"
-                                x-large
-                                text
-                                @click="deleteAccount()"
-                                ><button class="font-weight-black">
-                                  Usuń konto
-                                </button>
-                              </v-btn>
-                            </v-card-actions>
-                          </v-card>
-                        </v-dialog>
-                      </b-col>
-                      <b-col md="3" lg="3" sm="0" xs="0"></b-col>
+                          <v-card-actions>
+                            <v-btn
+                              color="green darken-1"
+                              x-large
+                              text
+                              @click="deleteDialog = false"
+                              ><button class="font-weight-black">Powrót</button>
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="red darken-1"
+                              x-large
+                              text
+                              @click="deleteAccount()"
+                              ><button class="font-weight-black">
+                                Usuń konto
+                              </button>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                      <v-spacer></v-spacer>
                     </b-row>
 
                     <br />
