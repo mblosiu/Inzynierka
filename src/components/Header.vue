@@ -1188,9 +1188,31 @@
               </div>
             </v-list-item>
           </v-list>
+          <v-list class="purple">
+            <v-list-item>
+              <b-nav-form @submit.prevent="logout" v-if="token != null">
+                <v-btn
+                  data-toggle="tooltip"
+                  title="Wyloguj"
+                  color="purple"
+                  medium
+                  type="submit"
+                  class="my-2 ml-2 mx-2"
+                  depressed
+                  ><v-icon large color="purple darken-4"
+                    >mdi-logout-variant</v-icon
+                  ></v-btn
+                >
+              </b-nav-form>
+            </v-list-item>
+          </v-list>
         </v-menu>
 
-        <b-nav-form @submit.prevent="logout" v-if="token != null">
+        <b-nav-form
+          @submit.prevent="logout"
+          v-if="token != null"
+          class="hidden-sm-and-down"
+        >
           <v-btn
             data-toggle="tooltip"
             title="Wyloguj"
@@ -1204,15 +1226,93 @@
             ></v-btn
           >
         </b-nav-form>
-        <v-btn
-          v-if="token == null"
-          color="purple lighten-3"
-          elevation="4"
-          small
-          class="my-2 ml-2 hidden-md-and-up"
-          @click="loginDialog = true"
-          ><button class="font-weight-bold">Logowanie</button></v-btn
-        >
+
+        <v-dialog transition="dialog-top-transition" max-width="400">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              v-if="token == null"
+              color="purple lighten-3"
+              elevation="4"
+              small
+              class="my-2 ml-2 hidden-md-and-up"
+              ><button class="font-weight-bold">Logowanie</button></v-btn
+            >
+          </template>
+          <template v-slot:default="dialog">
+            <v-card>
+              <v-card-title flex class="purple">
+                <v-spacer></v-spacer>
+                <span class="headline white--text">Logowanie</span>
+                <v-spacer></v-spacer>
+              </v-card-title>
+
+              <v-card-actions>
+                <v-card flat>
+                  <v-form @submit.prevent="login" v-if="token == null">
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" md="6">
+                          <v-text-field
+                            id="username"
+                            class="mr-sm-2"
+                            v-model="username"
+                            name="username"
+                            label="Nazwa użytkownika"
+                            required
+                          ></v-text-field>
+                        </v-col>
+
+                        <v-col cols="12" md="6">
+                          <v-text-field
+                            label="Hasło"
+                            id="password"
+                            class="mr-sm-2"
+                            type="password"
+                            v-model="password"
+                            name="password"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-spacer></v-spacer>
+                        <v-alert
+                          v-model="valert"
+                          class="mr-3 ml-3"
+                          dense
+                          :type="alertType"
+                          transition="fade-transition"
+                        >
+                          {{ alertMsg }}
+                        </v-alert>
+                        <v-spacer></v-spacer>
+                      </v-row>
+                      <v-row>
+                        <v-btn
+                          color="red darken-1"
+                          text
+                          @click="dialog.value = false"
+                        >
+                          Zamknij
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="purple darken-1"
+                          text
+                          v-on:click="login"
+                          type="submit"
+                          >Zaloguj</v-btn
+                        >
+                      </v-row>
+                    </v-container>
+                  </v-form>
+                </v-card>
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
       </v-app-bar>
 
       <v-navigation-drawer
@@ -1800,7 +1900,7 @@
         </div>
       </v-navigation-drawer>
     </nav>
-    <v-row justify="center">
+    <!--<v-row justify="center">
       <v-dialog v-model="loginDialog" min-width="250" max-width="370">
         <v-card>
           <v-card-title flex class="purple">
@@ -1873,7 +1973,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-row>
+    </v-row>-->
   </v-container>
 </template>
 
