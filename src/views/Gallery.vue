@@ -1,12 +1,19 @@
 <template>
   <v-container>
     <v-row>
-      
-      <v-toolbar class="hidden-sm-and-down" color="purple" fixed>
-        <v-icon color="white" class="mr-3 " x-large>mdi-image-plus</v-icon>
+      <v-toolbar color="purple">
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title class="white--text">Galeria</v-toolbar-title>
         <v-spacer></v-spacer>
-
+        <v-icon
+          color="white"
+          class="ml-12 mr-2"
+          x-large
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Dodaj nowe zdjęcie"
+          >mdi-image-plus</v-icon
+        >
         <div class="fileupload">
           <label>
             <input
@@ -25,57 +32,15 @@
             <button bold class="white--text">Wyślij</button>
           </v-btn>
         </div>
-        <v-icon
-          color="white"
-          class="ml-3"
-          x-large
-          data-toggle="tooltip"
-          data-placement="bottom"
-          title="Z racji problemów z obsługą większych zdjęć, prosimy o wybieranie plików o niedużych wymiarach (najlepiej do ok 800x600)"
-          >mdi-alert-circle-outline</v-icon
-        >
       </v-toolbar>
-      <v-toolbar class="hidden-md-and-up" color="purple" fixed height="100">
-        <v-icon color="white" class="mr-3 hidden-sm-and-down" x-large>mdi-image-plus</v-icon>
-        <v-toolbar-title class="white--text">Galeria</v-toolbar-title>
-        <v-spacer></v-spacer>
-
-        <div class="fileupload">
-          <label>
-            <input
-              type="file"
-              id="file"
-              ref="file"
-              v-on:change="handleFileUpload()"
-            />
-          </label>
-          <v-btn
-            class="ml-2"
-            color="purple lighten-2"
-            dense
-            v-on:click="submitFile()"
-          >
-            <button bold class="white--text">Wyślij</button>
-          </v-btn>
-        </div>
-        <v-icon
-          color="white"
-          class="ml-3"
-          x-large
-          data-toggle="tooltip"
-          data-placement="bottom"
-          title="Z racji problemów z obsługą większych zdjęć, prosimy o wybieranie plików o niedużych wymiarach (najlepiej do ok 800x600)"
-          >mdi-alert-circle-outline</v-icon
-        >
-      </v-toolbar>
-      
     </v-row>
-    <v-row class="scroll">
-      <v-col cols="1"></v-col>
+    <b-row class="scroll">
+      <b-col cols="1"></b-col>
       <br />
-      <v-col cols="10">
-        <v-row v-for="i in Math.ceil(images.length / 4)" v-bind:key="i">
-          <v-col
+      <b-col cols="10">
+        <b-row v-for="i in Math.ceil(images.length / 4)" v-bind:key="i">
+          
+          <b-col
             cols="3"
             v-for="image in images.slice((i - 1) * 4, i * 4)"
             v-bind:key="image.id"
@@ -99,10 +64,7 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn fab x-small class="purple" v-bind="attrs" v-on="on"
-                        ><v-app-bar-nav-icon
-                          x-small
-                          color="white"
-                        ></v-app-bar-nav-icon
+                        ><v-app-bar-nav-icon x-small color="white"></v-app-bar-nav-icon
                       ></v-btn>
                     </template>
 
@@ -158,12 +120,12 @@
               />
               <br />
             </b-modal>
-          </v-col>
-        </v-row>
-      </v-col>
+          </b-col>
+        </b-row>
+      </b-col>
 
-      <v-col cols="1"></v-col>
-    </v-row>
+      <b-col cols="1"></b-col>
+    </b-row>
   </v-container>
 </template>
 
@@ -195,23 +157,26 @@ export default {
       let formData = new FormData();
       formData.append("image", this.file);
       axios
-        .post("https://elove.ml:8000/api/user/images", formData, {
+        .post("http://46.101.213.106:8000/api/user/images", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
-        .then((response) => {
-          this.$router.go();
+        .then(function () {
+          console.log("SUCCESS!!");
         })
-        .catch((errors) => console.log(errors));
+        .catch(function () {
+          console.log("FAILURE!!");
+        });
+      this.$router.go();
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
     },
     getUserImages() {
       axios
-        .get("https://elove.ml:8000/api/user/images", {
+        .get("http://46.101.213.106:8000/api/user/images", {
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
@@ -224,16 +189,17 @@ export default {
     },
     deleteImage(pk) {
       axios
-        .delete("https://elove.ml:8000/api/user/images", {
+        .delete("http://46.101.213.106:8000/api/user/images", {
           data: { pk: pk },
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
         .then((response) => {
-          console.log(response), (this.images = response.data), this.$router.go();
+          console.log(response), (this.images = response.data);
         })
         .catch((errors) => console.log(errors));
+      this.$router.go();
     },
     setAsProfilePic(pic) {
       let config = {
@@ -243,7 +209,7 @@ export default {
       };
       axios
         .patch(
-          "https://elove.ml:8000/api/user/profile-image",
+          "http://46.101.213.106:8000/api/user/profile-image",
           {
             profile_picture: pic,
           },
@@ -262,12 +228,12 @@ export default {
         .catch((errors) => console.log(errors));
     },
     getUrl(pic) {
-      if (pic != null) return "https://elove.ml" + pic;
+      if (pic != null) return "http://elove.ml" + pic;
       else return null;
     },
     getUserPicture() {
       axios
-        .get("https://elove.ml:8000/api/user/profile-picture", {
+        .get("http://46.101.213.106:8000/api/user/profile-picture", {
           headers: {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
