@@ -39,7 +39,6 @@
       <br />
       <b-col cols="10">
         <b-row v-for="i in Math.ceil(images.length / 4)" v-bind:key="i">
-          
           <b-col
             cols="3"
             v-for="image in images.slice((i - 1) * 4, i * 4)"
@@ -64,7 +63,10 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn fab x-small class="purple" v-bind="attrs" v-on="on"
-                        ><v-app-bar-nav-icon x-small color="white"></v-app-bar-nav-icon
+                        ><v-app-bar-nav-icon
+                          x-small
+                          color="white"
+                        ></v-app-bar-nav-icon
                       ></v-btn>
                     </template>
 
@@ -163,13 +165,10 @@ export default {
             Authorization: "Token " + localStorage.getItem("user-token"),
           },
         })
-        .then(function () {
-          console.log("SUCCESS!!");
+        .then((response) => {
+          this.$router.go();
         })
-        .catch(function () {
-          console.log("FAILURE!!");
-        });
-      this.$router.go();
+        .catch((errors) => console.log(errors));
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
@@ -196,10 +195,11 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response), (this.images = response.data);
+          console.log(response),
+            (this.images = response.data),
+            this.$router.go();
         })
         .catch((errors) => console.log(errors));
-      this.$router.go();
     },
     setAsProfilePic(pic) {
       let config = {

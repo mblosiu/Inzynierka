@@ -247,8 +247,8 @@
       <v-col lg="3" sm="2" xs="0" class="hidden-sm-and-down">
         <br />
 
-        <div class="card text-black mb-3 rightside" style="width: 19rem">
-          <div class="card-body no-background elevation-15">
+        <div class="card text-black mb-3 rightside elevation-15" style="width: 19rem">
+          <div class="card-body no-background">
             <br />
             <h3 class="card-title no-background">Nie masz konta?</h3>
             <br />
