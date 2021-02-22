@@ -139,7 +139,7 @@
                 icon
                 color="purple darken-4"
                 data-toggle="tooltip"
-                title="Nowe wiadomości od nieznajomych"
+                title="Konwersacje z nieznajomymi"
                 x-large
                 class="ml-2 mr-2"
                 @click.stop="newMessagesDialog = true"
@@ -153,7 +153,7 @@
               icon
               color="purple darken-4"
               data-toggle="tooltip"
-              title="Nowe wiadomości od nieznajomych"
+              title="Konwersacje z nieznajomymi"
               x-large
               class="ml-2 mr-2"
               @click.stop="newMessagesDialog = true"
@@ -167,7 +167,7 @@
                 <v-card-title flex class="purple">
                   <v-spacer></v-spacer>
                   <span class="headline white--text"
-                    >Nowe wiadomości od nieznajomych.</span
+                    >Konwersacje z nieznajomymi.</span
                   >
                   <v-spacer></v-spacer>
                 </v-card-title>
