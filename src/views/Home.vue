@@ -247,7 +247,10 @@
       <v-col lg="3" sm="2" xs="0" class="hidden-sm-and-down">
         <br />
 
-        <div class="card text-black mb-3 rightside elevation-15" style="width: 19rem">
+        <div
+          class="card text-black mb-3 rightside elevation-15"
+          style="width: 19rem"
+        >
           <div class="card-body no-background">
             <br />
             <h3 class="card-title no-background">Nie masz konta?</h3>
@@ -673,7 +676,7 @@ export default {
     };
   },
   methods: {
-    //http://46.101.213.106:8000/api/user/register
+    //https://elove.ml:8000/api/user/register
     getAge(dateString) {
       var today = new Date();
       var birthDate = new Date(dateString);
@@ -700,9 +703,11 @@ export default {
     },
     /*recaptcha() {
       this.$recaptcha('login').then((token) => {
-        console.log(token) // Will print the token
+        console.log(token) // 
       })
     },*/
+
+    //tworzenie nowego użytkownika poprzez rejestrację
     createUser() {
       if (this.birthday == "" || this.getAge(this.birthday) < 18) {
         this.registerDialog = false;
@@ -722,7 +727,6 @@ export default {
             console.log(response);
 
             if (response.status == 201) {
-              //this.$router.go();
               this.registerDialog = false;
               this.successDialog = true;
             }

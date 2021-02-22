@@ -1544,6 +1544,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //polubienie użytkownika
     likeUser() {
       const config = {
         headers: {
@@ -1564,7 +1565,7 @@ export default {
         .catch((errors) => console.log(errors));
       //this.$forceUpdate();
     },
-
+    //cofnięcie polubienia
     dislikeUser() {
       const config = {};
       axios
@@ -1601,6 +1602,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //sprawdzanie czy dany użytkownik jest przez nas polubiony
     isUserLiked() {
       var liked = false;
       for (var i = 0; i < this.user_likes.length; i++) {
@@ -1619,6 +1621,7 @@ export default {
       }
       return pk;
     },
+    //blokowanie usera
     blockUser() {
       const config = {
         headers: {
@@ -1665,6 +1668,7 @@ export default {
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
+    //zapraszanie do grona znajomych
     inviteUser() {
       //console.log("invite user");
       const config = {
@@ -1695,6 +1699,7 @@ export default {
           //console.log(errors)
         });
     },
+    //usuwanie z grona znajomych
     removeFriend(pk) {
       //console.log("removeFriend");
       //console.log(pk);
@@ -1741,6 +1746,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //status użytkownika -none==nieznajomy, friend==znajomy, waiting==oczekuje na akceptację
     userStatus() {
       var status = "none";
       for (var i = 0; i < this.user_friendlist.length; i++) {

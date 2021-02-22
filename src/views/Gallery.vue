@@ -143,6 +143,7 @@ export default {
   },
 
   methods: {
+    //generowanie modali do wyświetlania podglądu pojedynczych zdjęć
     modalId(i) {
       return "modal" + i;
     },
@@ -153,7 +154,7 @@ export default {
     hideModal(i) {
       this.$refs["modal" + i][0].hide();
     },
-
+    //wysyłanie zdjęcia
     submitFile() {
       let formData = new FormData();
       formData.append("image", this.file);
@@ -172,6 +173,7 @@ export default {
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
     },
+    //pobieranie zdjęć galerii użytkownika
     getUserImages() {
       axios
         .get("https://elove.ml:8000/api/user/images", {
@@ -185,6 +187,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //usuwanie zdjęcia
     deleteImage(pk) {
       axios
         .delete("https://elove.ml:8000/api/user/images", {
@@ -200,6 +203,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //ustawianie zdjęcia jako profilowe
     setAsProfilePic(pic) {
       let config = {
         headers: {
@@ -230,6 +234,7 @@ export default {
       if (pic != null) return "https://elove.ml" + pic;
       else return null;
     },
+    //pobieranie zdjęcia profilowego zalogowanego użytkownika
     getUserPicture() {
       axios
         .get("https://elove.ml:8000/api/user/profile-picture", {
