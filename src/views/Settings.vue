@@ -636,7 +636,7 @@
                             Aby kontynuować wpisz swoje hasło.
                           </v-card-text>
                           <v-row>
-                            <v-col cols="6"> </v-col>
+                            <v-col cols="3"> </v-col>
                             <v-col cols="6">
                               <v-text-field
                                 label="Hasło*"
@@ -647,6 +647,7 @@
                                 v-model="password"
                               ></v-text-field>
                             </v-col>
+                            <v-col cols="3"> </v-col>
                           </v-row>
 
                           <v-card-actions>
@@ -1098,7 +1099,7 @@ export default {
         });
     },
     getUrl(pic) {
-      if (pic != null) return "http://elove.ml" + pic;
+      if (pic != null) return "https://elove.ml" + pic;
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },

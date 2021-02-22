@@ -444,10 +444,10 @@
                           </v-tooltip>
                           <div
                             v-if="user.settings.hide_age == 'nobody'"
-                            class="oneline"
+                            class="oneline hidden-sm-and-down"
                           >
                             <div v-if="user.profile_picture == null">
-                              <v-card-title class="black--text hidden-sm-and-down"
+                              <v-card-title class="black--text"
                                 >{{ user.username }} ({{
                                   getAge(user.birthday)
                                 }})</v-card-title
@@ -461,9 +461,9 @@
                               >
                             </div>
                           </div>
-                          <div v-else>
+                          <div class="hidden-sm-and-down" v-else>
                             <div v-if="user.profile_picture == null">
-                              <v-card-title class="black--text hidden-sm-and-down">{{
+                              <v-card-title class="black--text">{{
                                 user.username
                               }}</v-card-title>
                             </div>
