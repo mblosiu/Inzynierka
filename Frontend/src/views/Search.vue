@@ -447,7 +447,7 @@
                             class="oneline"
                           >
                             <div v-if="user.profile_picture == null">
-                              <v-card-title class="black--text"
+                              <v-card-title class="black--text hidden-sm-and-down"
                                 >{{ user.username }} ({{
                                   getAge(user.birthday)
                                 }})</v-card-title
@@ -463,12 +463,12 @@
                           </div>
                           <div v-else>
                             <div v-if="user.profile_picture == null">
-                              <v-card-title class="black--text">{{
+                              <v-card-title class="black--text hidden-sm-and-down">{{
                                 user.username
                               }}</v-card-title>
                             </div>
                             <div v-else>
-                              <v-card-title class="white--text"
+                              <v-card-title class="white--text hidden-sm-and-down"
                                 >{{ user.username }}
                               </v-card-title>
                             </div>
@@ -553,7 +553,7 @@ export default {
         { value: "Niebieskie", text: "niebieskie" },
         { value: "Brązowe", text: "brązowe" },
         { value: "Piwne", text: "piwne" },
-        { value: "Szare", text: "zieone" },
+        { value: "Zielone", text: "zielone" },
       ],
       hair_color_options: [
         { value: null, text: "Kolor włosów" },

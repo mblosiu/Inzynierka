@@ -1,8 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-toolbar color="purple">
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar color="purple" height="100">
         <v-toolbar-title class="white--text">Galeria</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-icon

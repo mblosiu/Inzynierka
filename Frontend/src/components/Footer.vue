@@ -7,7 +7,7 @@
         text
         rounded
         class="my-2"
-        href="https://forms.gle/McQgxy2bTwmBjgXy9"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdnh5tVIxGMyQSSCXP_nPGoVUZiZT-HDwFF3r_kCogy_vtK2A/viewform"
       >
         Feedback
       </v-btn>

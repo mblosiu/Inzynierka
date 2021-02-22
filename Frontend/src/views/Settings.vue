@@ -757,7 +757,7 @@ export default {
         { value: "Niebieskie", text: "niebieskie" },
         { value: "Brązowe", text: "brązowe" },
         { value: "Piwne", text: "piwne" },
-        { value: "Szare", text: "zieone" },
+        { value: "Zielone", text: "zielone" },
       ],
       hair_color_options: [
         { value: null, text: "" },
