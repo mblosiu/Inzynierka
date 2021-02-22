@@ -499,6 +499,7 @@ export default {
     showMsg() {
       this.dismissCountDown = this.dismissSecs;
     },
+    //pobieranie danych zalogowanego użytkownika
     getUserData() {
       axios
         .get("https://elove.ml:8000/api/user/properties", {
@@ -513,6 +514,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //pobieranie preferencji zalogowanego użytkownika
     getUserPreferences() {
       axios
         .get("https://elove.ml:8000/api/user/preferences", {
@@ -527,6 +529,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //funkcja nie używana w aktualnej wersji
     editUserData() {
       let config = {
         headers: {

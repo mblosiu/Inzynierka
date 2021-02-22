@@ -834,7 +834,7 @@ export default {
   },
   methods: {
     deleteAccount() {
-      //console.log("usuwanie konta");
+      //("usuwanie konta");
       axios
         .delete("https://elove.ml:8000/api/user/delete", {
           headers: {
@@ -860,7 +860,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-
+    //pobieranie czarnej listy
     getUserBlacklist() {
       //console.log("getblacklist");
       axios
@@ -875,14 +875,11 @@ export default {
           }
         )
         .then((response) => {
-          //console.log("userblacklist:");
-          console.log(response),
-            (this.blacklisted_users =
-              response.data); /*,
-            console.log(this.blacklisted_users);*/
+          console.log(response), (this.blacklisted_users = response.data);
         })
         .catch((errors) => console.log(errors));
     },
+    //odblokowanie użytkownika
     unblockUser(pk) {
       axios
         .delete(
@@ -904,6 +901,7 @@ export default {
         .catch((errors) => console.log(errors));
       this.$router.go();
     },
+    //pobieranie danych zalogowanego użytkownika
     getUserData() {
       axios
         .get("https://elove.ml:8000/api/user/properties", {
@@ -917,6 +915,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //edycja danych zalogowanego użytkownika
     editUserData() {
       let config = {
         headers: {
@@ -968,6 +967,7 @@ export default {
           console.log(errors);
         });
     },
+    //edycja ustawień prywatności
     editUserSettings() {
       let config = {
         headers: {
@@ -1005,6 +1005,7 @@ export default {
           console.log(errors);
         });
     },
+    //edycja opisu profilu użytkownika
     editUserDescription() {
       let config = {
         headers: {
@@ -1031,6 +1032,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //funkcja aktualnie nie używana
     editUserPrivate() {
       this.toast(
         "b-toaster-bottom-right",
@@ -1038,6 +1040,7 @@ export default {
         "Zaktualizowano ustawienia prywatności!"
       );
     },
+    //pobieranie preferencji użytkownika
     getUserPreferences() {
       axios
         .get("https://elove.ml:8000/api/user/preferences", {
@@ -1051,6 +1054,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //edycja preferencji użytkownika
     editUserPreferences() {
       let config = {
         headers: {
@@ -1098,6 +1102,7 @@ export default {
           console.log(errors);
         });
     },
+    //pobiernaie url obrazków
     getUrl(pic) {
       if (pic != null) return "https://elove.ml" + pic;
       else
@@ -1117,7 +1122,6 @@ export default {
     this.getUserPreferences();
     this.getUserBlacklist();
   },
-  //computed() {},
 };
 </script>
 

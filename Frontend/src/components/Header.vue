@@ -2034,6 +2034,7 @@ export default {
     /*showMsg() {
       this.dismissCountDown = this.dismissSecs;
     },*/
+    // wysyłanie wiadomości (tresc wiadomosci, nazwa usera)
     sendMessage(message, username) {
       console.log(message + " -> " + username);
       if (message.length > 200 || message.length == 0) {
@@ -2067,6 +2068,7 @@ export default {
           });
       }
     },
+    //pobieranie x (x: this.lastmessages) ostatnich wiadomości z konwersacji z użytkownikiem o nazwie username
     getMessages(username) {
       const config = {
         headers: {
@@ -2118,6 +2120,9 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },*/
+
+
+    //pobieranie całej konwersacji z danym użytkownikiem
     getConversation(username) {
       const config = {
         headers: {
@@ -2137,6 +2142,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //pobieranie wszystkich konwersacji użytkownika z innymi użytkownikami, dzielenie ich na te ze znajomymi i nieznajomymi
     async getUserMessages() {
       await this.getUserFriends();
       return axios
@@ -2175,6 +2181,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //pobieranie danych o zalogowanym użytkowniku
     getUserData() {
       return axios
         .get("https://elove.ml:8000/api/user/properties", {
@@ -2242,6 +2249,7 @@ export default {
     getUrl(pic) {
       if (pic != null) return "https://elove.ml" + pic;
     },
+    //funkcja logowania
     login() {
       axios
         .post("https://elove.ml:8000/api/user/login", {
@@ -2275,6 +2283,7 @@ export default {
           }
         });
     },
+    //funkcja wylogowania
     logout() {
       let config = {
         headers: {
@@ -2290,6 +2299,7 @@ export default {
         (this.token = null),
         this.$router.go();
     },
+    //funkcja szybkiego wyszukiwania z nabara
     search() {
       localStorage.setItem("search-text", this.searchText);
       if (this.$route.name == "search") this.$router.go();
@@ -2300,6 +2310,7 @@ export default {
       else
         return "https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png";
     },
+    //pobieranie znajomych i ich danych zalogowanego użytkownika
     async getUserFriends() {
       await this.getUserData();
 
@@ -2317,7 +2328,7 @@ export default {
         .then((response) => {
           console.log(response),
             (this.user_friends =
-              response.data) /*, console.log(this.usersFriends = response.data.filter(element => element.status == 'friend'))*/;
+              response.data);
           this.usersFriends = this.user_friends.filter((element) => {
             return element.status == "accepted";
           });
@@ -2330,6 +2341,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //liczenie pobieranych użytkowników
     async counter() {
       await this.getUserFriends();
       console.log("onlyfriends");
@@ -2339,6 +2351,7 @@ export default {
       console.log(onlyFriends);
       this.usersFriends = onlyFriends.length;
     },
+    //akceptacja zaproszeń do grona znajomych
     acceptUser(pk) {
       let config = {
         headers: {
@@ -2358,6 +2371,7 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
+    //odrzucanie zaproszeń do grona znajomych
     rejectUser(pk) {
       axios
         .delete(

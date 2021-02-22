@@ -68,7 +68,7 @@ export default {
     };
   },
   methods: {
-    //http://46.101.213.106:8000/api/user/register
+    //pobieranie kodu weryfikacyjnego
     getVerificationCode() {
       this.code = this.$route.fullPath.slice(13);
       //console.log(this.$route.fullPath);
@@ -76,6 +76,7 @@ export default {
       console.log(this.code);
       //this.verificationDialog = true;
     },
+    //wysyłanie kodu weryfikacyjnego w celu weryfikacji
     verifyAccount() {
       this.getVerificationCode();
       axios

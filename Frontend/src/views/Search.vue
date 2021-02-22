@@ -618,6 +618,8 @@ export default {
       this.searchText = localStorage.getItem("search-text");
       localStorage.removeItem("search-text");
     },*/
+    
+    //pobieranie strony wynikowej z pakietem użytkowników
     getPageUsers() {
       axios
         .get("https://elove.ml:8000/api/user/users?page=" + this.page, {
@@ -671,6 +673,7 @@ export default {
     this.getPageUsers();
     //this.getAllUsers();
   },
+  //obliczanie wynikowej ilości stron i obsługa paginacji
   computed: {
     totalPages: function () {
       return Math.ceil(this.users_count / 20);
