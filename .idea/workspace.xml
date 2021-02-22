@@ -31,7 +31,7 @@
   <component name="ChangeListManager">
     <list default="true" id="980dfe24-6684-4861-823f-c1edbca16650" name="Default Changelist" comment="admin BannedIp">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/users/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -604,6 +604,11 @@
           <url>file://$PROJECT_DIR$/Backend/users/models.py</url>
           <line>68</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Backend/users/api/views.py</url>
+          <line>161</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
